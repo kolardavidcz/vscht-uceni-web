@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Glow Strength Showcase</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #0b0f19; color: #f8fafc; padding: 48px 32px; }
+
+    h1 { font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: #f1f5f9; margin-bottom: 8px; text-align: center; }
+    .subtitle { font-size: 13px; color: #94a3b8; margin-bottom: 48px; font-weight: 500; text-align: center; }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 32px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .showcase-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .style-num {
+      background: #f95d12;
+      color: white;
+      font-size: 10px;
+      font-weight: 900;
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .style-title { font-size: 14px; font-weight: 800; color: #f1f5f9; }
+    .style-desc { font-size: 11px; color: #94a3b8; line-height: 1.4; }
+
+    /* ── Sample Element Base ── */
+    .sample-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 0;
+      margin-top: auto;
+    }
+
+    .glow-box {
+      width: 140px;
+      height: 70px;
+      background: #0f172a;
+      border-radius: 12px;
+      border: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 800;
+      color: #94a3b8;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    /* ─── GLOW STRENGTHS & STYLES ─── */
+
+    /* 1. Subtle Constant Ambient Glow */
+    .glow-1 {
+      border-color: rgba(249, 93, 18, 0.35);
+      box-shadow: 0 0 12px rgba(249, 93, 18, 0.12), 0 0 4px rgba(139, 92, 246, 0.08);
+      color: #fda4af;
+    }
+
+    /* 2. Medium Active Glow */
+    .glow-2 {
+      border-color: rgba(249, 93, 18, 0.5);
+      box-shadow: 0 0 16px rgba(249, 93, 18, 0.25), 0 0 8px rgba(139, 92, 246, 0.15);
+      color: #fca5a5;
+    }
+
+    /* 3. Strong Neon Outline */
+    .glow-3 {
+      border-color: #f95d12;
+      box-shadow: 0 0 8px rgba(249, 93, 18, 0.4), 0 0 20px rgba(249, 93, 18, 0.25);
+      color: #fff;
+    }
+
+    /* 4. GIGA Cyber Glow (Intense Backlight) */
+    .glow-4 {
+      border-color: #c084fc;
+      box-shadow: 
+        0 0 12px rgba(249, 93, 18, 0.5), 
+        0 0 25px rgba(139, 92, 246, 0.4), 
+        0 0 50px rgba(139, 92, 246, 0.2);
+      color: #fff;
+    }
+
+    /* 5. Breathing Ambient Glow (No card resizing) */
+    @keyframes breathe-glow {
+      0%, 100% {
+        box-shadow: 0 0 12px rgba(249, 93, 18, 0.2), 0 0 4px rgba(139, 92, 246, 0.1);
+        border-color: rgba(249, 93, 18, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 24px rgba(249, 93, 18, 0.45), 0 0 15px rgba(139, 92, 246, 0.3);
+        border-color: rgba(139, 92, 246, 0.6);
+      }
+    }
+    .glow-5 {
+      animation: breathe-glow 3s ease-in-out infinite;
+      color: #fff;
+    }
+
+    /* 6. Soft Backlight Glow (Pseudo element behind card) */
+    .glow-6 {
+      border-color: #f95d12;
+      color: #fff;
+    }
+    .glow-6::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: -6px; right: -6px; bottom: -6px;
+      z-index: -1;
+      background: linear-gradient(135deg, #f95d12, #8b5cf6);
+      border-radius: 16px;
+      filter: blur(12px);
+      opacity: 0.4;
+    }
+
+    /* 7. Conic Backlight Aura (GIGA Premium) */
+    .glow-7 {
+      border: none;
+      color: #fff;
+    }
+    .glow-7::before {
+      content: '';
+      position: absolute;
+      top: -3px; left: -3px; right: -3px; bottom: -3px;
+      z-index: -1;
+      background: conic-gradient(from 0deg, #f95d12, #c084fc, #38bdf8, #f95d12);
+      border-radius: 14px;
+      filter: blur(8px);
+      opacity: 0.65;
+    }
+
+    /* 8. Interactive Hover Glow */
+    .glow-8:hover {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 25px rgba(139, 92, 246, 0.7);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* 9. Glowing Border Sweep (Moving animation) */
+    @keyframes sweep {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .glow-9 {
+      border: 1.5px solid transparent;
+      background: linear-gradient(#0f172a, #0f172a) padding-box,
+                  linear-gradient(90deg, #f95d12, #8b5cf6, #38bdf8, #f95d12) border-box;
+      background-size: 200% auto;
+      animation: sweep 3s linear infinite;
+      box-shadow: 0 0 15px rgba(249, 93, 18, 0.3);
+      color: #fff;
+    }
+
+    /* 10. Neon Edge (Thin sharp neon border) */
+    .glow-10 {
+      border-color: #f95d12;
+      box-shadow: 
+        0 0 2px #f95d12,
+        inset 0 0 2px #f95d12;
+      color: #f95d12;
+      background: rgba(249, 93, 18, 0.03);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚡ CSS Glow Strength & Style Showcase</h1>
+  <p class="subtitle">Different intensities and visual strategies to replace raw pulsing borders with premium ambient glows.</p>
+
+  <div class="grid-container">
+
+    <!-- 1. Subtle Constant Ambient -->
+    <div class="showcase-card">
+      <div class="style-num">01</div>
+      <div class="style-title">Subtle Ambient Glow</div>
+      <div class="style-desc">Soft, static colored shadows that blend into the background. Very clean and non-distracting.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-1">SUBTLE GLOW</div>
+      </div>
+    </div>
+
+    <!-- 2. Medium Active Glow -->
+    <div class="showcase-card">
+      <div class="style-num">02</div>
+      <div class="style-title">Medium Glow</div>
+      <div class="style-desc">Slightly higher intensity shadows using combined colors (orange and purple) to give a modern depth.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-2">MEDIUM GLOW</div>
+      </div>
+    </div>
+
+    <!-- 3. Strong Neon Outline -->
+    <div class="showcase-card">
+      <div class="style-num">03</div>
+      <div class="style-title">Strong Neon</div>
+      <div class="style-desc">Solid primary color outline paired with high opacity glow. Stands out clearly on the page.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-3">STRONG NEON</div>
+      </div>
+    </div>
+
+    <!-- 4. GIGA Cyber Glow -->
+    <div class="showcase-card">
+      <div class="style-num">04</div>
+      <div class="style-title">GIGA Cyber Glow</div>
+      <div class="style-desc">Triple layer backlight shadow structure mimicking a high-end glowing keyboard backlight.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-4">GIGA GLOW</div>
+      </div>
+    </div>
+
+    <!-- 5. Breathing Ambient Glow -->
+    <div class="showcase-card">
+      <div class="style-num">05</div>
+      <div class="style-title">Breathing Glow (Breathe)</div>
+      <div class="style-desc">The glow's blur and opacity expand and contract slowly, but the card size remains stable.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-5">BREATHING GLOW</div>
+      </div>
+    </div>
+
+    <!-- 6. Soft Backlight Glow -->
+    <div class="showcase-card">
+      <div class="style-num">06</div>
+      <div class="style-title">Soft Blurred Backlight</div>
+      <div class="style-desc">An absolute-positioned pseudo-element blurred behind the card creates a soft ambient spotlight.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-6">BACKLIGHT</div>
+      </div>
+    </div>
+
+    <!-- 7. Conic Backlight Aura -->
+    <div class="showcase-card">
+      <div class="style-num">07</div>
+      <div class="style-title">Conic Backlight Aura</div>
+      <div class="style-desc">Conic gradient backdrop giving a rainbow-prism neon ambient backlight. Giga Premium look.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-7">CONIC AURA</div>
+      </div>
+    </div>
+
+    <!-- 8. Interactive Hover Glow -->
+    <div class="showcase-card">
+      <div class="style-num">08</div>
+      <div class="style-title">Hover Ignition</div>
+      <div class="style-desc">Remains clean and static until hovered, where it ignites into a glowing state.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-8">HOVER ME</div>
+      </div>
+    </div>
+
+    <!-- 9. Glowing Border Sweep -->
+    <div class="showcase-card">
+      <div class="style-num">09</div>
+      <div class="style-title">Glowing Border Sweep</div>
+      <div class="style-desc">Border gradient sweep animation shifting colors around the card. High visual complexity.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-9">BORDER SWEEP</div>
+      </div>
+    </div>
+
+    <!-- 10. Neon Edge -->
+    <div class="showcase-card">
+      <div class="style-num">10</div>
+      <div class="style-title">Neon Edge</div>
+      <div class="style-desc">A sharp inner and outer glow that makes the card feel like a glowing glass plate.</div>
+      <div class="sample-container">
+        <div class="glow-box glow-10">NEON EDGE</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

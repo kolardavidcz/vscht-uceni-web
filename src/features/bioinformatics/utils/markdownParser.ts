@@ -126,7 +126,7 @@ export function parseMarkdown(md: string): string {
 
 
   // Markdown links -> HTML links
-  html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-500 font-bold underline inline-flex items-center gap-1 inline-block">$1 <span class="text-[10px] opacity-70">↗</span></a>');
+  html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-brand-orange hover:text-brand-orange-text font-bold underline inline-flex items-center gap-1 inline-block">$1 <span class="text-[10px] opacity-70">↗</span></a>');
 
   // Inline code (MUST be after fenced code blocks!)
   html = html.replace(/`(.*?)`/g, '<code class="bg-slate-100/80 text-slate-800 px-1.5 py-0.5 rounded-md font-mono text-xs border border-slate-200/50">$1</code>');

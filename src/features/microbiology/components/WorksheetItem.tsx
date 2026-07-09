@@ -42,17 +42,6 @@ const getTypeStyle = (type?: string) => {
   }
 };
 
-const getRankLineColor = (type?: string) => {
-  switch (type) {
-    case 'Kmen': return 'var(--color-brand-orange)';
-    case 'Třída': return 'var(--color-amber-500)';
-    case 'Čeleď': return 'var(--color-yellow-500)';
-    case 'Rod': return 'var(--color-brand-orange-text)';
-    case 'Zástupce': return 'var(--color-rose-500)';
-    default: return 'var(--color-slate-405)';
-  }
-};
-
 
 export function WorksheetItem({
   item,
@@ -89,7 +78,7 @@ export function WorksheetItem({
 
 
 
-  const getSelectedForField = (fieldId: string, correctList: string[]) => {
+  const getSelectedForField = (fieldId: string) => {
     const merged = emojiCategories.flatMap(cat => selectedEmojis[`${fieldId}::${cat.key}`] || []);
     if (merged.length > 0) return merged;
     return selectedEmojis[fieldId] || [];
@@ -102,7 +91,7 @@ export function WorksheetItem({
     if (hasGroups) {
       const allGroupsCorrect = item.groups!.every(g => {
         const fieldId = `${item.id}_${g.id}`;
-        const sel = getSelectedForField(fieldId, g.correctEmojis);
+        const sel = getSelectedForField(fieldId);
         const corr = g.correctEmojis || [];
         return corr.length > 0 && corr.every(e => sel.includes(e)) && sel.every(e => corr.includes(e));
       });
@@ -111,13 +100,13 @@ export function WorksheetItem({
     }
 
     if (correct.length === 0) return null;
-    const sel = getSelectedForField(item.id, correct);
+    const sel = getSelectedForField(item.id);
     const isCorrect = correct.every(e => sel.includes(e)) && sel.every(e => correct.includes(e));
     if (isCorrect) return <CheckCircle size={20} className="text-emerald-500 flex-shrink-0 animate-bounce-subtle" />;
     return <XCircle size={20} className="text-rose-500 flex-shrink-0 animate-bounce-subtle" />;
   };
 
-  const renderEmojiField = (fieldId: string, label?: string, correctList: string[] = [], categoryKey?: string) => {
+  const renderEmojiField = (fieldId: string, label?: string, correctList: string[] = []) => {
     const isActive = activeItemId === fieldId;
     const selected = selectedEmojis[fieldId] || [];
     
@@ -211,7 +200,7 @@ export function WorksheetItem({
   };
 
   const hasGroups = item.groups && item.groups.length > 0;
-  const sel = getSelectedForField(item.id, correct);
+  const sel = getSelectedForField(item.id);
   const isCorrect = !hasGroups ? (showResults && correct.length > 0 && correct.every(e => sel.includes(e)) && sel.every(e => correct.includes(e))) : false;
   const isWrong = !hasGroups ? (showResults && correct.length > 0 && !isCorrect) : false;
 

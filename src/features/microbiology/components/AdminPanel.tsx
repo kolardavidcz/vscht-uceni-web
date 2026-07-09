@@ -1,11 +1,7 @@
 import { useState, useMemo } from 'react';
 import { worksheetData as defaultWorksheetData, emojiOptions as defaultEmojiOptions, emojiCategories as defaultEmojiCategories, sortEmojis, generateHint, enrichWorksheetData } from '../data/data';
 import { WorksheetItem, EmojiOption } from '../../../types';
-import { Lock, Settings, ArrowLeft, Save, Check, Trash2, Plus, ChevronUp, ChevronDown, Edit2, List, Hash, X, CheckCircle, ExternalLink, Database, UploadCloud } from 'lucide-react';
-import { Button } from '../../../components/ui/Button';
-import { Card } from '../../../components/ui/Card';
-import { Badge } from '../../../components/ui/Badge';
-import { ProgressBar } from '../../../components/ui/ProgressBar';
+import { Lock, Settings, ArrowLeft, Save, Check, Trash2, Plus, ChevronUp, ChevronDown, Edit2, Hash, X, CheckCircle, ExternalLink, Database } from 'lucide-react';
 
 const SHOW_TEMP_PASSWORD = true; 
 

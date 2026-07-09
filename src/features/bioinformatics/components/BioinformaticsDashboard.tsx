@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Search, BookOpen, KeyRound, Menu, ChevronRight, FileText, FolderOpen, ChevronDown } from 'lucide-react';
-import { Button } from '../../../components/ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Search, Menu, FileText, FolderOpen } from 'lucide-react';
 import { Card } from '../../../components/ui/Card';
 import { Badge } from '../../../components/ui/Badge';
 import { parseMarkdown } from '../utils/markdownParser';
@@ -29,17 +28,7 @@ export function BioinformaticsDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Collapse states for sidebar sections (courses & subcategories)
-  const [collapsedFolders, setCollapsedFolders] = useState<Record<string, boolean>>({});
-  const [collapsedSubcategories, setCollapsedSubcategories] = useState<Record<string, boolean>>({});
 
-  const toggleFolder = (key: string) => {
-    setCollapsedFolders(prev => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const toggleSubcategory = (key: string) => {
-    setCollapsedSubcategories(prev => ({ ...prev, [key]: !prev[key] }));
-  };
 
   // Helper to format course URLs
   const getMaterialUrl = (item: Material) => {

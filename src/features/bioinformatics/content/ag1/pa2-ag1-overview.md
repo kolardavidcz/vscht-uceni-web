@@ -1,1 +1,1 @@
-#placeholder
+[Moje zápisky z prázdnin](https://drive.google.com/drive/u/0/folders/1cKcxsrkuBaDtKWoghZcUiU-G7Nk5MC4N)

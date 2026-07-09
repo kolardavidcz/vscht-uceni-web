@@ -1,66 +1,111 @@
-# 🏗️ VSCHT Učení - Global AI Architecture Rules
+# 🏗️ VSCHT Učení — Global Architecture & AI Rules
 
-You are working on the general architecture and shared UI system of the "VSCHT Učení" web app.
+You are working on the **VSCHT Učení** web app — a study portal for VŠCHT Prague students. This file describes the overall project structure, shared systems, and absolute design rules that apply everywhere.
 
-## Project Roots
+## Project Structure
 ```
 vscht_uceni_web/
-├── api/                   — Backend serverless functions (Vercel)
-├── src/
-│   ├── components/ui/     — Shared UI library (Card, Button, Badge, ProgressBar)
-│   ├── pages/             — Top-level pages (Home, UIShowcase)
-│   ├── features/          — Feature modules (microbiology, bioinformatics)
-│   ├── App.tsx            — Main routing hub
-│   ├── main.tsx           — React DOM root & global error catcher
-│   ├── index.css          — Global CSS, Tailwind v4 @theme, custom classes
-│   └── types.ts           — Global TypeScript definitions
-├── vite.config.ts         — Configured with react and singlefile plugins
-└── vercel.json            — Vercel config (rewrites all routes to /index.html)
+├── AI_ARCHITECTURE.md              ← You are here (global rules)
+├── api/                            ← Vercel serverless functions (backend)
+├── index.html                      ← Entry point (loads MathJax CDN, Google Fonts)
+├── package.json                    ← Vite 8 + React 19 + Tailwind 4
+├── vite.config.ts                  ← react, tailwindcss, singlefile (build-only)
+├── vercel.json                     ← Rewrites all routes → /index.html (SPA)
+├── tsconfig.json                   ← ESNext, bundler resolution, strict mode
+│
+└── src/
+    ├── main.tsx                    ← React DOM root + global error interceptors
+    ├── App.tsx                     ← BrowserRouter routing hub
+    ├── index.css                   ← Tailwind v4 @theme, all custom CSS classes
+    ├── types.ts                    ← Shared TypeScript types (WorksheetItem, EmojiOption, etc.)
+    │
+    ├── components/ui/              ← Shared UI component library
+    │   ├── Card.tsx                ← variant="light"|"dark", glassmorphic
+    │   ├── Button.tsx              ← variant="primary"|"secondary"|"ghost"|"dark"
+    │   ├── Badge.tsx               ← Semantic color tags (orange, slate, green, red, etc.)
+    │   └── ProgressBar.tsx         ← variant="orange"|"green"
+    │
+    ├── pages/
+    │   ├── Home.tsx                ← Landing portal (dark theme, 3 feature cards)
+    │   └── UIShowcase.tsx          ← Interactive component sandbox
+    │
+    └── features/                   ← Three independent feature modules
+        ├── microbiology/           ← 🦠 Emoji taxonomy quiz (has its own AI_CONTEXT.md)
+        ├── bioinformatics/         ← 🧬 Markdown wiki (has its own AI_CONTEXT.md)
+        └── python-analyzer/        ← 🐍 Python script viewer (has its own AI_CONTEXT.md)
 ```
 
-## Global State & Routing (App.tsx)
-- Uses React Router `BrowserRouter` with `<Routes>`.
-- **Top-level State**: `App.tsx` calls `useMicrobiologyData()` to fetch/load microbiology data and passes it down to all microbiology routes.
-- **Routes Map**:
-  - `/` → `<Home />` (Landing page portal)
-  - `/ui-showcase` → `<UIShowcase />` (Interactive prototyping sandbox)
-  - `/mikrobiologie/*` → Microbiology feature module
-  - `/obor-bioinformatika/*` → Bioinformatics Wiki feature module
-  - `/python-analyza` → Python script standalone page
+## Feature Modules
+Each feature is **fully independent**. Read its `AI_CONTEXT.md` for feature-specific details:
 
-## Shared UI Library (src/components/ui/)
-- **`Card`**: glassmorphic container with `variant="light" | "dark"`. Light uses `card-surface` CSS class (white/ivory gradient), Dark uses `card-surface-dark` (espresso/mocha gradient). Optional `hoverEffects`.
-- **`Button`**: `variant="primary" | "secondary" | "ghost" | "dark"`.
-- **`Badge`**: tiny semantic tags with multiple color variants (orange, slate, green, red, etc.).
-- **`ProgressBar`**: horizontal indicator with `variant="orange" | "green"`.
+| Feature | Route(s) | Theme | AI_CONTEXT.md |
+|---------|----------|-------|---------------|
+| 🦠 Microbiology | `/mikrobiologie/*` | Light (stone-50) | `src/features/microbiology/AI_CONTEXT.md` |
+| 🧬 Bioinformatics Wiki | `/obor-bioinformatika/*` | Light (slate-50) | `src/features/bioinformatics/AI_CONTEXT.md` |
+| 🐍 Python Analyzer | `/python-analyza` | Dark (espresso) | `src/features/python-analyzer/AI_CONTEXT.md` |
 
-## Styling System (Tailwind v4 + index.css)
-- Uses **Tailwind v4** syntax (no `tailwind.config.js` needed).
-- Custom variables defined in `@theme` block in `index.css`:
-  - `brand-orange` (#f95d12) and `brand-orange-text` (#c2410c)
-  - `brand-espresso` (#0f0906) for dark pages
-  - `brand-roast`, `brand-mocha`, `brand-latte`, `brand-peach`, `brand-ivory`
-- **Custom CSS Classes**:
-  - `.glass-panel`, `.card-surface` (light glassmorphism)
-  - `.glass-panel-dark`, `.card-surface-dark` (dark glassmorphism)
-  - `.page-header` (dark roast gradient, sticky, orange top line)
-  - `.page-header-dark` (transparent espresso, sticky)
+## Routing (App.tsx)
+```
+/                           → Home (landing portal)
+/ui-showcase                → UIShowcase (dev sandbox)
+/mikrobiologie              → QuizPage
+/mikrobiologie/studijni-strom    → StudyPage (tree tab)
+/mikrobiologie/samostudium       → StudyPage (flashcards tab)
+/mikrobiologie/srovnavaci-matice → StudyPage (matrix tab)
+/mikrobiologie/admin             → AdminPanel
+/obor-bioinformatika             → BioinformaticsDashboard
+/obor-bioinformatika/:key        → BioinformaticsDashboard (material view)
+/obor-bioinformatika/:c/:key     → BioinformaticsDashboard (course/material)
+/obor-bioinformatika/:c/:s/:key  → BioinformaticsDashboard (course/sub/material)
+/python-analyza                  → PythonAnalyzer
+```
+
+**Top-level state**: `App.tsx` calls `useMicrobiologyData()` hook and passes data down to all microbiology routes. Other features are stateless at the App level.
+
+## Styling System
+
+### Tailwind v4 (no config file)
+All theming is in `src/index.css` using the `@theme` block:
+- **`brand-orange`** `#f95d12` — primary accent everywhere
+- **`brand-orange-text`** `#c2410c` — darker orange for text
+- **`brand-espresso`** `#0f0906` — dark page backgrounds
+- **`brand-roast`**, **`brand-mocha`**, **`brand-latte`**, **`brand-peach`**, **`brand-ivory`** — warm palette
+
+### Custom CSS Classes
+| Class | Purpose |
+|-------|---------|
+| `.page-header` | Dark roast gradient, sticky, orange top line (for light pages) |
+| `.page-header-dark` | Transparent espresso, sticky (for dark pages) |
+| `.card-surface` | Glassmorphic white-to-ivory gradient (light cards) |
+| `.card-surface-dark` | Espresso/mocha gradient (dark cards) |
+| `.glass-panel` / `.glass-panel-dark` | Backdrop-blur glass effects |
+
+### Fonts
+Loaded via Google Fonts in `index.html`:
+- **Plus Jakarta Sans** — body text
+- **Outfit** — headings and UI elements
 
 ## Landing Page (Home.tsx)
-- Full dark theme: `bg-brand-espresso` background with animated radial gradients.
-- Renders three massive `<Card variant="dark">` items serving as portals to:
-  1. Systematika bakterií
-  2. Obor: Bioinformatika (with quick links PA1, AG1, Wiki)
-  3. Python Analyzátor
+- Full dark theme: `bg-brand-espresso` with animated radial gradient glows
+- Three `<Card variant="dark">` portals linking to each feature:
+  1. **Systematika bakterií** → `/mikrobiologie`
+  2. **Obor: Bioinformatika** → `/obor-bioinformatika` (with PA1, AG1, Wiki quick-link buttons)
+  3. **Python Analyzátor** → `/python-analyza`
 
-## Important Developer Notes
-- **Error Catcher**: `main.tsx` overrides `console.error` and `window.onerror` to capture runtime crashes and send them to a local logger endpoint (`http://localhost:9999/`).
-- **MathJax**: loaded in `index.html` via CDN. Used by Bioinformatics wiki for rendering LaTeX equations.
-- **Single File Build**: `vite-plugin-singlefile` inlists all JS and CSS into `index.html` on build.
+## Build & Deploy
+- **Dev server**: `npm run dev` (Vite, hot reload). `vite-plugin-singlefile` is disabled in dev.
+- **Production build**: `npm run build` (inlines all JS/CSS into a single `index.html`)
+- **Deployment**: Vercel, with `vercel.json` SPA rewrite
+- **Backend**: Serverless functions in `api/` folder (e.g. `get-data`, `save-data` for microbiology)
 
-## Key Design Rules (ABSOLUTE)
-1. **ONLY ORANGE** is allowed as an accent color (no blue, green, purple backgrounds).
-2. For light-themed pages, use **white** or very light warm gray (`stone-50`) backgrounds.
-3. Keep headers **dark** (brown/black) for strong contrast.
-4. **NO BLUE** backgrounds anywhere on the site.
-5. You must be obsessed with **pixel perfection** — fix anything that looks off.
+## Key Design Rules (ABSOLUTE — NEVER VIOLATE)
+1. **ONLY ORANGE** is allowed as an accent color. No blue, green, or purple backgrounds.
+2. Light-themed pages use **white** or very light warm gray (`stone-50`) backgrounds.
+3. Headers are always **dark** (brown/black gradient) for strong contrast.
+4. **NO BLUE** backgrounds anywhere on the site. Blue is only acceptable for standard hyperlink text color inside parsed markdown content.
+5. Be obsessed with **pixel perfection** — if something looks off, fix it.
+
+## Developer Notes
+- **Error interceptors**: `main.tsx` overrides `console.error`, `window.onerror`, and `unhandledrejection` to POST error details to `http://localhost:9999/` (debug only).
+- **MathJax**: Loaded in `index.html` via CDN for LaTeX rendering in wiki content.
+- **`vite-plugin-singlefile`**: Only activates during `npm run build` (controlled by `command === 'build'` check in `vite.config.ts`).

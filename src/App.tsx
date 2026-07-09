@@ -4,13 +4,12 @@ import { StudyPage } from './features/microbiology/components/StudyPage';
 import { AdminPanel } from './features/microbiology/components/AdminPanel';
 import { Home } from './pages/Home';
 import { BioinformaticsDashboard } from './features/bioinformatics/components/BioinformaticsDashboard';
-import { PythonAnalyzer } from './features/bioinformatics/components/PythonAnalyzer';
-import UIShowcase from './pages/UIShowcase';
+import { PythonAnalyzer } from './features/python-analyzer/components/PythonAnalyzer';
 import { useMicrobiologyData } from './features/microbiology/hooks/useMicrobiologyData';
 import { QuizPage } from './features/microbiology/pages/QuizPage';
 
 function App() {
-  const { currentWorksheetData, emojiOptions, emojiCategories, handleUpdateData } = useMicrobiologyData();
+  const { currentWorksheetData, emojiOptions, emojiCategories, handleUpdateData, isLocalMode } = useMicrobiologyData();
 
   return (
     <BrowserRouter>
@@ -21,7 +20,6 @@ function App() {
         <Route path="/obor-bioinformatika/:courseKey/:materialKey" element={<BioinformaticsDashboard />} />
         <Route path="/obor-bioinformatika/:courseKey/:subcategoryKey/:materialKey" element={<BioinformaticsDashboard />} />
         <Route path="/python-analyza" element={<PythonAnalyzer />} />
-        <Route path="/ui-showcase" element={<UIShowcase />} />
         
         {/* Microbiology Routes */}
         <Route path="/mikrobiologie" element={
@@ -29,16 +27,17 @@ function App() {
             currentWorksheetData={currentWorksheetData}
             emojiOptions={emojiOptions}
             emojiCategories={emojiCategories}
+            isLocalMode={isLocalMode}
           />
         } />
         <Route path="/mikrobiologie/studijni-strom" element={
-          <InternalStudyPage data={currentWorksheetData} emojiOptions={emojiOptions} emojiCategories={emojiCategories} activeTab="tree" />
+          <InternalStudyPage data={currentWorksheetData} emojiOptions={emojiOptions} activeTab="tree" />
         } />
         <Route path="/mikrobiologie/samostudium" element={
-          <InternalStudyPage data={currentWorksheetData} emojiOptions={emojiOptions} emojiCategories={emojiCategories} activeTab="flashcards" />
+          <InternalStudyPage data={currentWorksheetData} emojiOptions={emojiOptions} activeTab="flashcards" />
         } />
         <Route path="/mikrobiologie/srovnavaci-matice" element={
-          <InternalStudyPage data={currentWorksheetData} emojiOptions={emojiOptions} emojiCategories={emojiCategories} activeTab="matrix" />
+          <InternalStudyPage data={currentWorksheetData} emojiOptions={emojiOptions} activeTab="matrix" />
         } />
         <Route path="/mikrobiologie/study" element={<Navigate to="/mikrobiologie/studijni-strom" replace />} />
         <Route path="/mikrobiologie/admin" element={
@@ -56,15 +55,15 @@ function App() {
 }
 
 // Wrapper components to handle navigation internally
-function InternalStudyPage({ data, emojiOptions, emojiCategories, activeTab }: any) {
+function InternalStudyPage({ data, emojiOptions, activeTab }: any) {
   const navigate = useNavigate();
   useEffect(() => {
     document.title = "Taxonomie mikroorganizmů - Studium";
   }, []);
-  return <StudyPage onBack={() => navigate('/mikrobiologie')} data={data} emojiOptions={emojiOptions} emojiCategories={emojiCategories} activeTab={activeTab} />;
+  return <StudyPage onBack={() => navigate('/mikrobiologie')} data={data} emojiOptions={emojiOptions} activeTab={activeTab} />;
 }
 
-function InternalAdminPanel({ onBack, onUpdateData, currentData, currentEmojiOptions, currentEmojiCategories }: any) {
+function InternalAdminPanel({ onUpdateData, currentData, currentEmojiOptions, currentEmojiCategories }: any) {
   const navigate = useNavigate();
   useEffect(() => {
     document.title = "Taxonomie mikroorganizmů - Administrace";

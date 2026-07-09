@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { AlertTriangle, Layers, ChevronDown, ChevronUp, BookOpen, GraduationCap, Users, Terminal } from 'lucide-react';
 import { materialsData, SchoolMaterial, SchoolMaterialNode } from '../data/materialsData';
 import { Button } from '../../../components/ui/Button';
@@ -179,9 +179,9 @@ export function PA2ToAG1Overview() {
   // Statistics summaries
   const stats = useMemo(() => {
     const total = materialsData.length;
-    const critical = materialsData.filter(m => m.relevance === 100).length;
-    const important = materialsData.filter(m => m.relevance >= 60 && m.relevance < 100).length;
-    const lowRelevance = materialsData.filter(m => m.relevance < 60).length;
+    const critical = materialsData.filter(m => (m.relevance ?? 0) === 100).length;
+    const important = materialsData.filter(m => (m.relevance ?? 0) >= 60 && (m.relevance ?? 0) < 100).length;
+    const lowRelevance = materialsData.filter(m => (m.relevance ?? 0) < 60).length;
 
     // Quality groupings
     const badQuality = materialsData.filter(m => !m.quality).length;
@@ -193,18 +193,18 @@ export function PA2ToAG1Overview() {
   return (
     <div className="space-y-6">
       <style>{`
-        @keyframes mega-glow-pulse {
-          0% {
-            box-shadow: 0 0 4px rgba(249, 93, 18, 0.25), 0 0 2px rgba(249, 93, 18, 0.15);
-            border-color: rgba(249, 93, 18, 0.4);
-          }
-          100% {
-            box-shadow: 0 0 16px rgba(249, 93, 18, 0.6), 0 0 6px rgba(249, 93, 18, 0.35);
-            border-color: rgba(249, 93, 18, 0.95);
-          }
-        }
         .mega-epic-glow {
-          animation: mega-glow-pulse 1.8s ease-in-out infinite alternate;
+          border-color: rgba(249, 93, 18, 0.5) !important;
+          box-shadow: 0 0 16px rgba(249, 93, 18, 0.25), 0 0 8px rgba(139, 92, 246, 0.15);
+          border-width: 1.5px !important;
+        }
+        .mega-cool-week {
+          border-color: rgba(192, 132, 252, 0.45) !important;
+          box-shadow: 
+            0 0 12px rgba(249, 93, 18, 0.35), 
+            0 0 25px rgba(139, 92, 246, 0.32), 
+            0 0 50px rgba(139, 92, 246, 0.15);
+          background: linear-gradient(to bottom right, #ffffff, rgba(254, 243, 199, 0.15)) !important;
           border-width: 1.5px !important;
         }
       `}</style>
@@ -295,18 +295,32 @@ export function PA2ToAG1Overview() {
             });
           });
 
+          const isMegaCoolWeek = Object.values(weekCategories).some((list) =>
+            list.some((item) => item.tags?.includes('mega-cool') || item.tags?.includes('mega_cool'))
+          );
+
           const hasRelevant = relevantCount > 0;
           const hasWarning = warningCount > 0;
-          const stripeColor = hasRelevant
-            ? (hasWarning ? 'bg-amber-500' : 'bg-emerald-500')
-            : 'bg-slate-300';
+          const stripeColor = isMegaCoolWeek
+            ? 'bg-gradient-to-b from-brand-orange to-purple-600'
+            : hasRelevant
+              ? (hasWarning ? 'bg-amber-500' : 'bg-emerald-500')
+              : 'bg-slate-300';
 
-          const headerBg = isExpanded
-            ? 'bg-linear-to-r from-slate-50 to-white border-slate-300 shadow-xs'
-            : 'bg-white hover:bg-slate-50/50 border-slate-200 hover:border-slate-350';
+          const headerBg = isMegaCoolWeek
+            ? isExpanded
+              ? 'bg-linear-to-r from-orange-50/20 via-purple-50/10 to-white shadow-xs'
+              : 'bg-white hover:bg-orange-50/10'
+            : isExpanded
+              ? 'bg-linear-to-r from-slate-50 to-white border-slate-300 shadow-xs'
+              : 'bg-white hover:bg-slate-50/50 border-slate-200 hover:border-slate-350';
+
+          const containerClass = isMegaCoolWeek
+            ? "border rounded-2xl overflow-hidden transition-all duration-300 mega-cool-week"
+            : "border border-slate-200 rounded-2xl overflow-hidden shadow-xs transition-all duration-300 bg-white";
 
           return (
-            <div key={week.num} className="border border-slate-200 rounded-2xl overflow-hidden shadow-xs transition-all duration-300 bg-white">
+            <div key={week.num} className={containerClass}>
               {/* Clickable Week Header */}
               <div
                 onClick={() => toggleWeek(week.num)}
@@ -320,7 +334,7 @@ export function PA2ToAG1Overview() {
                     <span className="text-[10px] font-black text-brand-orange-text bg-brand-orange/10 px-2 py-0.5 rounded-lg border border-brand-orange/20 min-w-[70px] text-center">
                       {week.num}. Týden
                     </span>
-                    <h3 className="text-sm font-black text-slate-800 tracking-tight">
+                    <h3 className="text-sm font-black text-slate-800 tracking-tight flex items-center gap-1.5">
                       {week.title}
                     </h3>
                   </div>
@@ -483,7 +497,7 @@ export function PA2ToAG1Overview() {
                                           )}
                                           {node.badges?.includes('no_code') && (
                                             <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-[0.5px] rounded-sm border border-violet-500/50 text-violet-600 bg-white leading-none">
-                                              NO CODE
+                                              NO CODE NEEDED
                                             </span>
                                           )}
                                           {isLowQuality && (

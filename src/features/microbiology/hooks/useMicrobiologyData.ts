@@ -9,8 +9,34 @@ export function useMicrobiologyData() {
   const [emojiOptions, setEmojiOptions] = useState<EmojiOption[]>(initialEmojiOptions);
   const [emojiCategories, setEmojiCategories] = useState<{key: string, label: string}[]>(initialEmojiCategories);
 
+  const [isLocalMode, setIsLocalMode] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      setIsLocalMode(isLocal);
+
+      if (isLocal) {
+        console.info('Vývojový režim (Local Dev): Využívám statická data / localStorage.');
+        const saved = localStorage.getItem('microbiology_data');
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            if (parsed.worksheetData) {
+              const options = parsed.emojiOptions || initialEmojiOptions;
+              setCurrentWorksheetData(enrichWorksheetData(parsed.worksheetData, options));
+              setEmojiOptions(options);
+              setEmojiCategories(parsed.emojiCategories || initialEmojiCategories);
+            } else {
+              setCurrentWorksheetData(enrichWorksheetData(parsed, initialEmojiOptions));
+            }
+          } catch (err) {
+            console.warn('Nepodařilo se načíst lokální data z localStorage', err);
+          }
+        }
+        return;
+      }
+
       try {
         const response = await fetch('/api/get-data');
         if (response.ok) {
@@ -26,7 +52,7 @@ export function useMicrobiologyData() {
           }
         }
       } catch (e) {
-        console.error('Failed to fetch data from API', e);
+        console.warn('Načtení z API selhalo, přecházím na localStorage', e);
         const saved = localStorage.getItem('microbiology_data');
         if (saved) {
           try {
@@ -40,7 +66,7 @@ export function useMicrobiologyData() {
               setCurrentWorksheetData(enrichWorksheetData(parsed, initialEmojiOptions));
             }
           } catch (err) {
-            console.error('Failed to parse localStorage data', err);
+            console.error('Nepodařilo se zpracovat záložní data', err);
           }
         }
       }
@@ -66,6 +92,7 @@ export function useMicrobiologyData() {
     currentWorksheetData,
     emojiOptions,
     emojiCategories,
-    handleUpdateData
+    handleUpdateData,
+    isLocalMode
   };
 }

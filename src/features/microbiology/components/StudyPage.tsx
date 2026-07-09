@@ -4,40 +4,28 @@ import { useNavigate } from 'react-router-dom';
 import { sortEmojis } from '../data/data';
 import { Button } from '../../../components/ui/Button';
 import { Card } from '../../../components/ui/Card';
-import { Badge } from '../../../components/ui/Badge';
-import { ProgressBar } from '../../../components/ui/ProgressBar';
 import { 
   BookOpen, 
   ArrowLeft, 
   Search, 
   X, 
-  Check, 
   Filter, 
   Info, 
-  Layers, 
-  Tag, 
-  Award, 
   ChevronRight, 
   ChevronDown, 
   RefreshCw, 
-  Eye, 
   Brain, 
   Network, 
   HelpCircle, 
-  Trophy, 
-  Sparkles, 
   Smile, 
   Frown, 
-  Table, 
-  CheckCircle, 
-  AlertCircle
+  Table
 } from 'lucide-react';
 
 interface StudyPageProps {
   onBack: () => void;
   data: WorksheetItem[];
   emojiOptions: EmojiOption[];
-  emojiCategories: { key: string; label: string }[];
   activeTab: 'tree' | 'flashcards' | 'matrix';
 }
 
@@ -218,7 +206,7 @@ function CellMorphology({ taxonEmojis, className = "" }: { taxonEmojis: string[]
   );
 }
 
-export function StudyPage({ onBack, data, emojiOptions, emojiCategories, activeTab }: StudyPageProps) {
+export function StudyPage({ onBack, data, emojiOptions, activeTab }: StudyPageProps) {
   const navigate = useNavigate();
   // Tabs and general state
   const [searchQuery, setSearchQuery] = useState('');

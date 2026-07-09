@@ -15,12 +15,14 @@ interface QuizPageProps {
   currentWorksheetData: WorksheetItem[];
   emojiOptions: EmojiOption[];
   emojiCategories: { key: string, label: string }[];
+  isLocalMode?: boolean;
 }
 
 export function QuizPage({ 
   currentWorksheetData, 
   emojiOptions,
-  emojiCategories
+  emojiCategories,
+  isLocalMode = false
 }: QuizPageProps) {
   const navigate = useNavigate();
 
@@ -64,7 +66,14 @@ export function QuizPage({
               <h1 className="text-lg sm:text-2xl font-black tracking-tight truncate bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-200">
                 📋 Pracovní list: Systematika bakterií
               </h1>
-              <p className="text-orange-200/80 text-xs sm:text-sm font-medium tracking-wide">Doplň správné emoji vlastnosti k jednotlivým taxonům</p>
+              <div className="flex items-center gap-2 flex-wrap mt-0.5">
+                <p className="text-orange-200/80 text-xs sm:text-sm font-medium tracking-wide">Doplň správné emoji vlastnosti k jednotlivým taxonům</p>
+                {isLocalMode && (
+                  <span className="inline-flex items-center px-1.5 py-0.5 rounded-sm text-[9px] font-black uppercase tracking-wider bg-orange-500/25 text-orange-200 border border-orange-500/35">
+                    Offline vývoj (localStorage)
+                  </span>
+                )}
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button
