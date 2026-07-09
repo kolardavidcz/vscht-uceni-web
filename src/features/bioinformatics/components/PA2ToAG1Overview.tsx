@@ -108,6 +108,12 @@ export function PA2ToAG1Overview() {
       return 12;
     }
     if (item.category === 'E-learning') {
+      if (item.id === 'el-ch11-pt1') {
+        return 4;
+      }
+      if (item.id === 'el-ch11-pt2') {
+        return 5;
+      }
       const match = item.name.match(/Kapitola\s+(\d+)/i);
       if (match) {
         const cap = parseInt(match[1], 10);
@@ -130,9 +136,9 @@ export function PA2ToAG1Overview() {
           case 10:
             return 10;
           case 11:
-            return 11;
+            return 5;
           case 12:
-            return 11;
+            return 7;
           case 13:
             return 8;
           default:
@@ -473,6 +479,11 @@ export function PA2ToAG1Overview() {
                                           {node.badges?.includes('practice') && (
                                             <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-violet-500 to-purple-600 text-white leading-none">
                                               PRACTICE
+                                            </span>
+                                          )}
+                                          {node.badges?.includes('no_code') && (
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-[0.5px] rounded-sm border border-violet-500/50 text-violet-600 bg-white leading-none">
+                                              NO CODE
                                             </span>
                                           )}
                                           {isLowQuality && (

@@ -3,7 +3,7 @@ export interface SchoolMaterialNode {
   name: string;
   relevance?: number; // Optional now, since intermediate nodes don't have it
   quality?: boolean;   // Optional now, since intermediate nodes don't have it
-  badges?: ('epic' | 'insight' | 'challenge' | 'practice' | 'mega_epic')[];
+  badges?: ('epic' | 'insight' | 'challenge' | 'practice' | 'mega_epic' | 'no_code')[];
   children?: SchoolMaterialNode[];
 }
 
@@ -1874,91 +1874,91 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "el-ch05-1",
         "name": "1. Deklarace třídy",
-        "relevance": 70,
-        "quality": true,
+        "relevance": 50,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch05-2",
         "name": "2. Definice metod, konstruktorů a destruktoru",
-        "relevance": 80,
-        "quality": true,
+        "relevance": 10,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch05-3",
         "name": "3. Zviditelnění zastíněných členů v členské funkci",
-        "relevance": 30,
+        "relevance": 0,
         "quality": false,
         "children": []
       },
       {
         "id": "el-ch05-4",
         "name": "4. Inline členské funkce",
-        "relevance": 20,
+        "relevance": 10,
         "quality": false,
         "children": []
       },
       {
         "id": "el-ch05-5",
         "name": "5. Class a struct",
-        "relevance": 90,
+        "relevance": 40,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch05-6",
         "name": "6. Objekty",
-        "relevance": 60,
-        "quality": true,
+        "relevance": 40,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch05-7",
         "name": "7. Konstantní metody",
-        "relevance": 80,
+        "relevance": 50,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch05-8",
         "name": "8. Volání konstruktoru a destruktoru",
-        "relevance": 70,
+        "relevance": 50,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch05-9",
         "name": "9. Pole objektů",
-        "relevance": 80,
+        "relevance": 20,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch05-10",
         "name": "10. Implicitní konstruktor",
-        "relevance": 70,
+        "relevance": 50,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch05-11",
         "name": "11. Inicializační část konstruktoru",
-        "relevance": 90,
+        "relevance": 50,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch05-12",
         "name": "12. Lokální deklarace ve třídě",
-        "relevance": 20,
+        "relevance": 5,
         "quality": false,
         "children": []
       },
       {
         "id": "el-ch05-13",
         "name": "13. Statické členy třídy",
-        "relevance": 40,
+        "relevance": 20,
         "quality": true,
         "children": []
       }
@@ -1975,78 +1975,78 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "el-ch06-1",
         "name": "1. Aritmetika zlomků pomocí obyčejných funkcí",
-        "relevance": 30,
+        "relevance": 0,
         "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-2",
         "name": "2. Aritmetika pomocí metod",
-        "relevance": 30,
+        "relevance": 0,
         "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-3",
         "name": "3. Přetížení operátorů obyčejnými funkcemi",
-        "relevance": 80,
-        "quality": true,
+        "relevance": 0,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-4",
         "name": "4. Přetížení operátorů metodami",
-        "relevance": 90,
-        "quality": true,
+        "relevance": 0,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-5",
         "name": "5. Přetížení operátorů spřátelenými funkcemi",
-        "relevance": 80,
-        "quality": true,
+        "relevance": 15,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-6",
         "name": "6. Uživatelská konverze",
-        "relevance": 40,
+        "relevance": 0,
         "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-7",
         "name": "7. Přehled přetěžování binárních operátorů",
-        "relevance": 80,
-        "quality": true,
+        "relevance": 10,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-8",
         "name": "8. Přehled přetěžování unárních operátorů",
-        "relevance": 60,
+        "relevance": 10,
         "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-9",
         "name": "9. Přetížení operátoru indexace",
-        "relevance": 90,
-        "quality": true,
+        "relevance": 0,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-10",
         "name": "10. Přetížení operátoru volání funkce",
-        "relevance": 80,
-        "quality": true,
+        "relevance": 5,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch06-11",
         "name": "11. Přetížení unárního operátoru →",
-        "relevance": 95,
-        "quality": true,
+        "relevance": 0,
+        "quality": false,
         "children": []
       }
     ]
@@ -2062,43 +2062,43 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "el-ch07-1",
         "name": "1. Hluboká kopie",
-        "relevance": 100,
-        "quality": true,
+        "relevance": 10,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch07-2",
         "name": "2. Kopírující konstruktor",
-        "relevance": 90,
-        "quality": true,
+        "relevance": 10,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch07-3",
         "name": "3. Mělká kopie - počítané reference",
-        "relevance": 70,
+        "relevance": 10,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch07-4",
         "name": "4. Reference na pravou stranu",
-        "relevance": 80,
+        "relevance": 50,
         "quality": true,
         "children": []
       },
       {
         "id": "el-ch07-5",
         "name": "5. Přesouvací konstruktor",
-        "relevance": 100,
-        "quality": true,
+        "relevance": 0,
+        "quality": false,
         "children": []
       },
       {
         "id": "el-ch07-6",
         "name": "6. Přesouvací operátor přiřazení",
-        "relevance": 100,
-        "quality": true,
+        "relevance": 0,
+        "quality": false,
         "children": []
       }
     ]
@@ -2110,7 +2110,57 @@ export const materialsData: SchoolMaterial[] = [
     "tags": [
       "elearning"
     ],
-    "children": []
+    "children": [
+      {
+        "id": "el-ch08-1",
+        "name": "Znakové řetězce libovolné délky - třída std::string",
+        "relevance": 10,
+        "quality": false,
+        "children": []
+      }
+    ]
+  },
+  {
+  "id": "el-ch11-pt1",
+  "category": "E-learning",
+  "name": "Kapitola 11: Abstraktní datové typy, standardní knihovna",
+  "tags": [
+    "elearning"
+  ],
+  "children": [
+    {
+      "id": "el-ch11-pt1-1",
+      "name": "1. Standardní knihovna, kontejnery",
+      "relevance": 60,
+      "quality": true,
+      "badges": ["no_code", "epic"],
+      "children": []
+    },
+    {
+      "id": "el-ch11-pt1-2",
+      "name": "2. Iterátory",
+      "relevance": 35,
+      "quality": true,
+      "badges": ["epic", "no_code"],
+      "children": []
+    },
+    {
+      "id": "el-ch11-pt1-3",
+      "name": "3. Vektor (vector)",
+      "relevance": 90,
+      "quality": true,
+      "badges": ["epic", "no_code"],
+      "children": []
+    },
+    {
+      "id": "el-ch11-pt1-4",
+      "name": "4. Pole (Array)",
+      "relevance": 60,
+      "quality": true,
+      "badges": ["no_code"],
+      "children": []
+    },
+  ]
   },
   {
     "id": "el-ch09",
@@ -2130,8 +2180,9 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "el-ch09-2",
         "name": "2. Výjimky - exceptions",
-        "relevance": 0,
+        "relevance": 15,
         "quality": false,
+        "badges": ["no_code"],
         "children": []
       }
     ]
@@ -2147,158 +2198,146 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "el-ch10-1",
         "name": "1. Šablony funkcí",
-        "relevance": 80,
-        "quality": false,
+        "relevance": 60,
+        "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
         "id": "el-ch10-2",
         "name": "2. Šablony tříd",
-        "relevance": 100,
-        "quality": false,
+        "relevance": 60,
+        "quality": true,
+        "badges": ["no_code"],
         "children": []
       }
     ]
   },
   {
-    "id": "el-ch11",
+    "id": "el-ch11-pt2",
     "category": "E-learning",
-    "name": "Kapitola 11: Abstraktní datové typy, standardní knihovna",
+    "name": "Kapitola 11 - část 2: Abstraktní datové typy, standardní knihovna",
     "tags": [
       "elearning"
     ],
     "children": [
       {
-        "id": "el-ch11-1",
-        "name": "1. Standardní knihovna, kontejnery",
-        "relevance": 80,
-        "quality": true,
-        "children": []
-      },
-      {
-        "id": "el-ch11-2",
-        "name": "2. Iterátory",
-        "relevance": 90,
-        "quality": true,
-        "children": []
-      },
-      {
-        "id": "el-ch11-3",
-        "name": "3. Vektor (vector)",
-        "relevance": 100,
-        "quality": true,
-        "children": []
-      },
-      {
-        "id": "el-ch11-4",
-        "name": "4. Pole (Array)",
-        "relevance": 70,
-        "quality": true,
-        "children": []
-      },
-      {
-        "id": "el-ch11-5",
+        "id": "el-ch11-pt2-5",
         "name": "5. Oboustranná fronta (std::deque)",
         "relevance": 80,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
-        "id": "el-ch11-6",
+        "id": "el-ch11-pt2-6",
         "name": "6. Seznam (list)",
         "relevance": 80,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
-        "id": "el-ch11-7",
+        "id": "el-ch11-pt2-7",
         "name": "7. Jednosměrně zřetězený seznam (std::forward_list)",
-        "relevance": 70,
-        "quality": true,
+        "relevance": 50,
+        "quality": false,
+        "badges": ["no_code", "epic"],
         "children": []
       },
       {
-        "id": "el-ch11-8",
+        "id": "el-ch11-pt2-8",
         "name": "8. Zásobník (std::stack)",
         "relevance": 90,
         "quality": true,
+        "badges": ["no_code", "epic"],
         "children": []
       },
       {
-        "id": "el-ch11-9",
+        "id": "el-ch11-pt2-9",
         "name": "9. Fronta (queue)",
         "relevance": 100,
         "quality": true,
+        "badges": ["no_code", "epic"],
         "children": []
       },
       {
-        "id": "el-ch11-10",
+        "id": "el-ch11-pt2-10",
         "name": "10. Prioritní fronta (std::priority_queue)",
         "relevance": 100,
         "quality": true,
+        "badges": ["no_code", "epic"],
         "children": []
       },
       {
-        "id": "el-ch11-11",
+        "id": "el-ch11-pt2-11",
         "name": "11. Množina (set)",
-        "relevance": 90,
-        "quality": true,
-        "children": []
-      },
-      {
-        "id": "el-ch11-12",
-        "name": "12. Bitová množina (std::bitset)",
         "relevance": 60,
-        "quality": true,
+        "quality": false,
+          "badges": ["no_code"],
         "children": []
       },
       {
-        "id": "el-ch11-13",
+        "id": "el-ch11-pt2-12",
+        "name": "12. Bitová množina (std::bitset)",
+        "relevance": 30,
+        "quality": true,
+        "badges": ["no_code", "epic"],
+        "children": []
+      },
+      {
+        "id": "el-ch11-pt2-13",
         "name": "13. Multimnožina (std::multiset)",
-        "relevance": 80,
+        "relevance": 30,
         "quality": true,
         "children": []
       },
       {
-        "id": "el-ch11-14",
+        "id": "el-ch11-pt2-14",
         "name": "14. Tabulka (map)",
-        "relevance": 100,
+        "relevance": 70,
         "quality": true,
+        "badges": ["no_code", "epic"],
         "children": []
       },
       {
-        "id": "el-ch11-15",
+        "id": "el-ch11-pt2-15",
         "name": "15. Tabulka s opakováním klíčů (multimap)",
-        "relevance": 70,
+        "relevance": 30,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
-        "id": "el-ch11-16",
+        "id": "el-ch11-pt2-16",
         "name": "16. Neuspořádaná množina (std::unordered_set)",
-        "relevance": 100,
+        "relevance": 50,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
-        "id": "el-ch11-17",
+        "id": "el-ch11-pt2-17",
         "name": "17. Neuspořádaná multimnožina (std::unordered_multiset)",
-        "relevance": 70,
+        "relevance": 20,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
-        "id": "el-ch11-18",
+        "id": "el-ch11-pt2-18",
         "name": "18. Neuspořádaná tabulka (unordered map)",
-        "relevance": 100,
+        "relevance": 50,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
-        "id": "el-ch11-19",
+        "id": "el-ch11-pt2-19",
         "name": "19. Neuspořádaná multitabulka (std::unordered_multimap)",
-        "relevance": 70,
+        "relevance": 20,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       }
     ]
@@ -2314,8 +2353,9 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "el-ch12-1",
         "name": "1. Orientované grafy",
-        "relevance": 100,
+        "relevance": 90,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       },
       {
@@ -2323,6 +2363,7 @@ export const materialsData: SchoolMaterial[] = [
         "name": "2. Binární vyhledávací strom",
         "relevance": 100,
         "quality": true,
+        "badges": ["no_code"],
         "children": []
       }
     ]
@@ -2373,7 +2414,7 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "el-ch13-6",
         "name": "6. Přehled přetypování",
-        "relevance": 20,
+        "relevance": 10,
         "quality": false,
         "children": []
       }
