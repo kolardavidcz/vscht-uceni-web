@@ -6,7 +6,6 @@ You are working on the **VSCHT Učení** web app — a study portal for VŠCHT P
 ```
 vscht_uceni_web/
 ├── AI_ARCHITECTURE.md              ← You are here (global rules)
-├── api/                            ← Vercel serverless functions (backend)
 ├── index.html                      ← Entry point (loads MathJax CDN, Google Fonts)
 ├── package.json                    ← Vite 8 + React 19 + Tailwind 4
 ├── vite.config.ts                  ← react, tailwindcss, singlefile (build-only)
@@ -26,8 +25,7 @@ vscht_uceni_web/
     │   └── ProgressBar.tsx         ← variant="orange"|"green"
     │
     ├── pages/
-    │   ├── Home.tsx                ← Landing portal (dark theme, 3 feature cards)
-    │   └── UIShowcase.tsx          ← Interactive component sandbox
+    │   └── Home.tsx                ← Landing portal (dark theme, 3 feature cards)
     │
     └── features/                   ← Three independent feature modules
         ├── microbiology/           ← 🦠 Emoji taxonomy quiz (has its own AI_CONTEXT.md)
@@ -47,7 +45,6 @@ Each feature is **fully independent**. Read its `AI_CONTEXT.md` for feature-spec
 ## Routing (App.tsx)
 ```
 /                           → Home (landing portal)
-/ui-showcase                → UIShowcase (dev sandbox)
 /mikrobiologie              → QuizPage
 /mikrobiologie/studijni-strom    → StudyPage (tree tab)
 /mikrobiologie/samostudium       → StudyPage (flashcards tab)
@@ -96,7 +93,6 @@ Loaded via Google Fonts in `index.html`:
 - **Dev server**: `npm run dev` (Vite, hot reload). `vite-plugin-singlefile` is disabled in dev.
 - **Production build**: `npm run build` (inlines all JS/CSS into a single `index.html`)
 - **Deployment**: Vercel, with `vercel.json` SPA rewrite
-- **Backend**: Serverless functions in `api/` folder (e.g. `get-data`, `save-data` for microbiology)
 
 ## Key Design Rules (ABSOLUTE — NEVER VIOLATE)
 1. **ONLY ORANGE** is allowed as an accent color. No blue, green, or purple backgrounds.
@@ -106,6 +102,6 @@ Loaded via Google Fonts in `index.html`:
 5. Be obsessed with **pixel perfection** — if something looks off, fix it.
 
 ## Developer Notes
-- **Error interceptors**: `main.tsx` overrides `console.error`, `window.onerror`, and `unhandledrejection` to POST error details to `http://localhost:9999/` (debug only).
 - **MathJax**: Loaded in `index.html` via CDN for LaTeX rendering in wiki content.
 - **`vite-plugin-singlefile`**: Only activates during `npm run build` (controlled by `command === 'build'` check in `vite.config.ts`).
+- **Local dev mode**: `useMicrobiologyData.ts` detects `localhost` and skips the Vercel API call, falling back to static data / localStorage.

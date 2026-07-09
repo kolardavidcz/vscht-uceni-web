@@ -1,187 +1,118 @@
 # VŠCHT Učení – Web Learning Portal
 
-An interactive web portal and student resource hub developed for **UCT Prague (VŠCHT)**. Hosted on **Vercel**, this single-page application (SPA) serves as a platform for microbiology practice worksheets, python sequence analysis tools, and bioinformatics study materials.
+An interactive web portal and student resource hub developed for **UCT Prague (VŠCHT)**. Built with **React 19 + Vite 8 + Tailwind CSS 4**, hosted on **Vercel** as a single-page application (SPA).
 
 ---
 
-## 🤖 AI Agent Quick Start & System Guardrails
+## Quick Start
 
-If you are an AI Coding Agent working on this repository, you **MUST** adhere to the following architectural constraints:
-
-### 1. Build and Assets Constraint (Single-File Bundling)
-*   **The Constraint:** The application compiles to a **single static HTML file** using `vite-plugin-singlefile`.
-*   **The Rule:** All stylesheets, JS, components, and SVG assets must be inlineable. Do NOT introduce external CSS imports or large local file assets (like heavy images or fonts) that would break the single-file inline bundling limit. Prefer fetching large resources remotely or inlining them as Base64/SVG where appropriate.
-
-### 2. Database & API Synchronization
-*   **The Constraint:** Database states are stored in **Vercel KV (Redis)**.
-*   **The Rule:** Always support the fallback mechanism. If `.env` KV variables are missing (e.g. during local development), endpoints `/api/get-data.ts` and `/api/save-data.ts` must fall back to the static files in `src/features/microbiology/data/zastupci.ts` and `emojis.ts`.
-*   **State Updates:** When writing UI updates, prefer using **Delta Updates** (sending a `changes` array of delta operations) instead of full state replacements to prevent database race conditions.
-
-### 3. Custom Markdown Parser Limits
-*   **The Constraint:** The Bioinformatics Wiki uses a custom regex-based parser (`parseMarkdown` in `BioinformaticsDashboard.tsx`). It does **not** support full CommonMark spec features (e.g. complex nested lists, nested HTML divs, or advanced footnotes).
-*   **The Rule:** Only add markdown features that this parser supports:
-    *   Headers `#` through `######`
-    *   Bold (`**text**`) and Italic (`*text*`)
-    *   Standard links `[label](url)`
-    *   Bullet lists `* ` or `- ` (single-level)
-    *   Tables `| Header |`
-    *   Code blocks ` ```c ` or ` ```vba ` (custom syntax highlighted)
-    *   MathJax equations: Inline `\( ... \)` and Display `\[ ... \]`
-    *   Alerts: `> [!TIP]`, `> [!IMPORTANT]`, `> [!WARNING]`
-
-### 4. Admin Credentials & Keys
-*   *Admin Panel Password:* Hardcoded in save API and client code as `'bavi_nas_mikrobiologie'`. Do not change this unless requested.
-*   *Vercel KV Keys:* The microbiology state key is `microbiology_worksheet_data`. Other subjects map to `subject_data:${subject}`.
-
----
-
-## 1. Project Directory Structure
-
-```text
-vscht_uceni_web/
-├── api/                     # Vercel Edge API Endpoints (Backend)
-│   ├── get-data.ts          # Reads taxonomy data from Vercel KV (or defaults locally)
-│   └── save-data.ts         # Saves delta changes or full state to Vercel KV (authorized)
-├── src/                     # React App Frontend
-│   ├── components/
-│   │   └── ui/              # Reusable UI elements (Badge, Button, Card, ProgressBar)
-│   ├── features/            # Feature modules
-│   │   ├── bioinformatics/  # Wiki curriculum & Python Analyzer
-│   │   │   ├── components/  # Dashboard, Python sequence runner component
-│   │   │   └── content/     # Raw Markdown (.md) documents sorted by course folders
-│   │   └── microbiology/    # Staining worksheet tree & Study layouts
-│   │       ├── components/  # Admin panel, Interactive Tree, flashcards, comparison matrix
-│   │       └── data/        # Hardcoded fallback datasets (zastupci.ts, emojis.ts)
-│   ├── pages/               # Top-level page views (Home portal, UIShowcase)
-│   ├── App.tsx              # Main routing & application state provider
-│   ├── index.css            # Custom styling theme, Tailwind v4 imports
-│   ├── types.ts             # TypeScript definitions
-│   └── main.tsx             # DOM entry point
-├── vercel.json              # Vercel single-page router rewrites
-├── vite.config.ts           # Vite bundler options (aliases, plugins, single-file plugin)
-├── tsconfig.json            # TypeScript compile configurations
-└── package.json             # App dependencies & scripts
-```
-
----
-
-## 2. Core Feature Modules
-
-### A) Microbiology: Bacterial Taxonomy Worksheet
-An interactive quiz where students match bacterial taxons (Phylum, Class, Family, Genus) with correct physiological, morphological, and ecological properties using a pinnable emoji palette.
-
-#### TypeScript Types & Schema (`src/types.ts`)
-```typescript
-export type WorksheetItem = {
-  id: string;              // Unique identifier (e.g. 'aquificota')
-  name: string;            // Visual name (e.g. 'Rod Aquifex')
-  type?: string;           // Rank level (Kmen, Třída, Čeleď, Rod, Zástupce, Skupina)
-  description?: string;    // Text description / details
-  correctEmojis: string[]; // Correct emoji characters for this taxon level
-  hint?: string;           // Autogenerated list of English label names (from emojis)
-  children?: WorksheetItem[]; // Recursive array of sub-taxons
-  checked?: boolean;       // Checking state
-  groups?: {               // Section group properties
-    id: string;
-    label: string;
-    correctEmojis: string[];
-  }[];
-};
-
-export type EmojiOption = {
-  emoji: string;           // Emoji string (e.g. '🔴')
-  label: string;           // Label description (e.g. 'Gram-negativní')
-  category: string;        // Category group (e.g. 'Buněčná stěna')
-};
-```
-
-#### Study Layouts
-*   **Tree (Studijní strom):** Displays the full taxonomy tree with answers visible.
-*   **Flashcards (Samostudium):** Card-based interface showing name/details on front, and correct emojis on the back.
-*   **Comparison Matrix (Srovnávací matice):** Side-by-side comparative table comparing genus characteristics.
-
-#### Admin Control Panel (`/mikrobiologie/admin`)
-*   Password-protected page (`bavi_nas_mikrobiologie`).
-*   Allows live editing of the hierarchy (add, delete, reorder nodes).
-*   Allows category & emoji configuration.
-*   Supports **AI alignment exports** (Download JSON / Upload JSON) to synchronise the taxonomy state easily.
-*   Saves directly to database endpoints.
-
-### B) Bioinformatics Wiki
-A modular wiki that automatically scans and parses markdown content files.
-
-#### Glob Load Mechanism
-The wiki fetches all Markdown documents inside `/src/features/bioinformatics/content` automatically using Vite's eager glob features:
-```typescript
-const rawFiles = import.meta.glob('/src/features/bioinformatics/content/**/*.md', { query: '?raw', import: 'default', eager: true });
-```
-Adding a new markdown file into this directory automatically maps and routes the document inside the dashboard sidebar dynamically.
-
-### C) Python Analyzer
-A client-side simulated coding terminal allowing students to run sequence translations (DNA -> RNA -> Protein) and nucleotide GC content calculations, providing copyable raw Python code with no dependencies.
-
----
-
-## 3. Database APIs (`/api`)
-
-The backend consists of Vercel Edge functions communicating with Vercel KV:
-
-### 1. `GET /api/get-data`
-*   Loads key `microbiology_worksheet_data` (or defaults to parameter `subject`).
-*   If KV connection is inactive or env variables are undefined, returns data in [data.ts](file:///c:/Users/kolar/Desktop/local%20projects/vscht_uceni_web/src/features/microbiology/data/data.ts).
-*   Enforces cache headers: `Cache-Control: public, s-maxage=60, stale-while-revalidate=86400`.
-
-### 2. `POST /api/save-data`
-*   Accepts `password`, `subject`, and either `data` (overwrite payload) or `changes` (delta modifications).
-*   Requires `password === 'bavi_nas_mikrobiologie'`.
-*   Supported delta updates: `UPDATE_ITEM`, `DELETE_ITEM`, `ADD_ITEM`, `MOVE_ITEM`, `ADD_EMOJI`, `UPDATE_EMOJI`, `DELETE_EMOJI`, `ADD_CATEGORY`, `DELETE_CATEGORY`, `MOVE_CATEGORY`.
-*   Saves back to Vercel KV.
-
----
-
-## 4. Styling & Custom Theme Tokens
-
-Tailwind CSS v4 configures custom theme variables inside `@theme` in `src/index.css`:
-*   `--color-brand-orange`: `#f95d12` (Main UCT Prague corporate orange)
-*   `--color-brand-orange-text`: `#c2410c` (Dark orange for readability)
-*   `--color-brand-peach`: `#ffedd5` (Warm cream color)
-*   `--color-brand-espresso`: `#0f0906` (Primary dark background base)
-*   `--color-brand-roast`: `#1c0d06` (Secondary dark card base)
-*   `--color-brand-mocha`: `#3d1f0d` (Glow accent color)
-*   `--color-brand-latte`: `#7c3f1e` (Warm brown highlight color)
-
----
-
-## 5. Development & Deployment Workflow
-
-### Local Development
-1.  Install packages:
-    ```bash
-    npm install
-    ```
-2.  Start Vite local server:
-    ```bash
-    npm run dev
-    ```
-3.  Access the web at `http://localhost:5173`.
-4.  *Optional Database Integration:* To test KV locally, create a `.env` in the root folder with Vercel KV connection strings (`KV_REST_API_URL` and `KV_REST_API_TOKEN`). Otherwise, the app falls back to local data imports.
-
-### Adding New Wiki Content
-1.  Create a `.md` file inside `/src/features/bioinformatics/content/`.
-2.  Sort it under specific folders to structure the sidebar (e.g. `/content/pa1/prednasky/01-uvod.md`).
-3.  Ensure the first line starts with `# Article Title` (used as the menu label).
-
-### Building for Production
-Run the build script:
 ```bash
+# Install dependencies
+npm install
+
+# Start development server (hot reload)
+npm run dev
+
+# Production build (single HTML file)
 npm run build
 ```
-This generates a single `index.html` file in `dist/` containing all CSS/JS inline, which can be deployed to any static host.
-
-### Vercel Deployment
-*   Main branch changes automatically trigger a Vercel production deployment.
-*   `vercel.json` ensures all route requests fallback to `index.html` for client-side routing.
 
 ---
 
-**Contact / Support:** [kolarv@vscht.cz](mailto:kolarv@vscht.cz)
+## Project Structure
+
+```
+vscht_uceni_web/
+├── AI_ARCHITECTURE.md           ← Global AI context (design rules, routing, styling)
+├── index.html                   ← Entry point (MathJax CDN, Google Fonts, favicon)
+├── package.json                 ← React 19, Vite 8, Tailwind 4
+├── vite.config.ts               ← react + tailwindcss plugins, singlefile (build only)
+├── vercel.json                  ← SPA rewrite (all routes → /index.html)
+├── tsconfig.json                ← ESNext, bundler resolution, strict mode
+│
+└── src/
+    ├── main.tsx                 ← React DOM root
+    ├── App.tsx                  ← BrowserRouter routing hub
+    ├── index.css                ← Tailwind v4 @theme, all custom CSS classes
+    ├── types.ts                 ← Shared TypeScript types
+    │
+    ├── components/ui/           ← Shared UI library
+    │   ├── Card.tsx             ← variant="light"|"dark", glassmorphic
+    │   ├── Button.tsx           ← variant="primary"|"secondary"|"ghost"|"dark"
+    │   ├── Badge.tsx            ← Semantic color tags
+    │   └── ProgressBar.tsx      ← variant="orange"|"green"
+    │
+    ├── pages/
+    │   └── Home.tsx             ← Landing portal (dark theme, 3 feature cards)
+    │
+    └── features/                ← Three independent feature modules
+        ├── microbiology/        ← 🦠 Emoji taxonomy quiz
+        │   └── AI_CONTEXT.md    ← Feature-specific AI instructions
+        ├── bioinformatics/      ← 🧬 Markdown wiki
+        │   └── AI_CONTEXT.md    ← Feature-specific AI instructions
+        └── python-analyzer/     ← 🐍 Python script viewer
+            └── AI_CONTEXT.md    ← Feature-specific AI instructions
+```
+
+---
+
+## Feature Modules
+
+### 🦠 Microbiology — Bacterial Taxonomy Quiz
+**Route:** `/mikrobiologie`
+
+An interactive quiz where students match bacterial taxons with correct physiological properties using emoji. Features include:
+- **Quiz Page** — Fill-in worksheet with emoji palette (floating or pinned sidebar)
+- **Study Page** — Three tabs: taxonomy tree browser, spaced-repetition flashcards, comparison matrix
+- **Admin Panel** — Edit correct answers and manage emoji categories
+
+### 🧬 Bioinformatics Wiki
+**Route:** `/obor-bioinformatika`
+
+A Markdown-powered study hub that dynamically loads `.md` files via Vite's `import.meta.glob`. Features:
+- Sidebar navigation grouped by semester and course
+- Custom regex-based markdown parser with C/VBA syntax highlighting
+- Interactive PA2→AG1 curriculum matrix component
+- MathJax support for LaTeX equations
+
+### 🐍 Python Analyzer
+**Route:** `/python-analyza`
+
+A standalone code viewer displaying a Python DNA/RNA analysis script. Users can copy the script or trigger a mock execution with simulated terminal output.
+
+---
+
+## AI Agent Instructions
+
+Each feature module contains an `AI_CONTEXT.md` file with detailed instructions for AI coding agents. The root-level `AI_ARCHITECTURE.md` contains global design rules and constraints.
+
+### Key Design Rules
+1. **ONLY ORANGE** (`#f95d12`) is allowed as an accent color — no blue, green, or purple backgrounds
+2. Light pages use **white** or `stone-50` backgrounds; headers are always **dark**
+3. The app builds to a **single HTML file** via `vite-plugin-singlefile`
+4. The custom markdown parser does NOT support full CommonMark — see `markdownParser.ts` for supported features
+
+### Build Constraint
+All assets must be inlineable. Do not introduce external CSS imports or heavy local files that would break single-file bundling.
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 19 |
+| Bundler | Vite 8.1 |
+| Styling | Tailwind CSS 4 (v4 syntax, no config file) |
+| Routing | React Router 7 |
+| Icons | Lucide React |
+| Fonts | Plus Jakarta Sans, Outfit (Google Fonts) |
+| Math | MathJax 3 (CDN) |
+| Deploy | Vercel (SPA mode) |
+| Build | `vite-plugin-singlefile` (single HTML output) |
+
+---
+
+## Contact
+
+Questions and feedback: [kolarv@vscht.cz](mailto:kolarv@vscht.cz)
