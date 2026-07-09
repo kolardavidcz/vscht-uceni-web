@@ -63,8 +63,11 @@ export function QuizPage({
               <ArrowLeft size={18} />
             </button>
             <div className="flex-1 min-w-0">
-              <h1 className="text-lg sm:text-2xl font-black tracking-tight truncate bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-200">
-                📋 Pracovní list: Systematika bakterií
+              <h1 className="text-lg sm:text-2xl font-black tracking-tight truncate flex items-center gap-2">
+                <span className="shrink-0 select-none">📋</span>
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-amber-300 to-yellow-200">
+                  Pracovní list: Systematika bakterií
+                </span>
               </h1>
               <div className="flex items-center gap-2 flex-wrap mt-0.5">
                 <p className="text-orange-200/80 text-xs sm:text-sm font-medium tracking-wide">Doplň správné emoji vlastnosti k jednotlivým taxonům</p>

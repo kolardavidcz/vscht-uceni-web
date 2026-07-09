@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
-import { AlertTriangle, Layers, ChevronDown, ChevronUp, BookOpen, GraduationCap, Users, Terminal } from 'lucide-react';
+import { AlertTriangle, ChevronDown, ChevronUp, BookOpen, GraduationCap, Users, Terminal } from 'lucide-react';
 import { materialsData, SchoolMaterial, SchoolMaterialNode } from '../data/materialsData';
-import { Button } from '../../../components/ui/Button';
 import { Card } from '../../../components/ui/Card';
 import { Badge } from '../../../components/ui/Badge';
 
@@ -22,8 +21,6 @@ export function PA2ToAG1Overview() {
     );
   };
 
-  const expandAllWeeks = () => setExpandedWeeks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
-  const collapseAllWeeks = () => setExpandedWeeks([]);
 
   const weekInfo = useMemo(() => [
     { num: 1, title: "Základní konstrukce C++", desc: "Základní syntax, správa paměti, namespacy, reference, const" },
@@ -178,14 +175,15 @@ export function PA2ToAG1Overview() {
 
   // Statistics summaries
   const stats = useMemo(() => {
-    const total = materialsData.length;
-    const critical = materialsData.filter(m => (m.relevance ?? 0) === 100).length;
-    const important = materialsData.filter(m => (m.relevance ?? 0) >= 60 && (m.relevance ?? 0) < 100).length;
-    const lowRelevance = materialsData.filter(m => (m.relevance ?? 0) < 60).length;
+    const allLeafNodes = materialsData.flatMap(item => getLeafNodes(item));
+    const total = allLeafNodes.length;
+    const critical = allLeafNodes.filter(m => (m.relevance ?? 0) === 100).length;
+    const important = allLeafNodes.filter(m => (m.relevance ?? 0) >= 70 && (m.relevance ?? 0) < 100).length;
+    const lowRelevance = allLeafNodes.filter(m => (m.relevance ?? 0) < 70).length;
 
     // Quality groupings
-    const badQuality = materialsData.filter(m => !m.quality).length;
-    const highQuality = materialsData.filter(m => m.quality).length;
+    const badQuality = allLeafNodes.filter(m => m.quality === false).length;
+    const highQuality = allLeafNodes.filter(m => m.quality !== false).length;
 
     return { total, critical, important, lowRelevance, badQuality, highQuality };
   }, []);
@@ -208,21 +206,6 @@ export function PA2ToAG1Overview() {
           border-width: 1.5px !important;
         }
       `}</style>
-      {/* Header Info Banner */}
-      <div className="bg-linear-to-br from-amber-50/50 to-orange-50/40 border border-amber-200/80 rounded-2xl p-5 shadow-xs flex flex-col md:flex-row gap-4 items-start md:items-center">
-        <div className="p-3 bg-brand-orange/10 rounded-2xl border border-brand-orange/20 text-brand-orange flex-shrink-0">
-          <Layers size={28} />
-        </div>
-        <div className="space-y-1">
-          <h2 className="text-base sm:text-lg font-black text-slate-800 uppercase tracking-wide">
-            C++ PA2 → AG1 Kompatibilita (AI Přehled osnov)
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
-            Materiály byly kompletně přehodnoceny z pohledu požadavků navazujícího předmětu <strong>AG1 (Algoritmy a Grafy 1)</strong>.
-            Přehled barevně odlišuje užitečné a kvalitní pasáže od nekvalitních textů či nepodstatné teorie.
-          </p>
-        </div>
-      </div>
 
       {/* Grid of stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -244,30 +227,6 @@ export function PA2ToAG1Overview() {
         </Card>
       </div>
 
-      {/* Accordion Controls */}
-      <div className="flex justify-between items-center bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-xs">
-        <span className="text-xs font-bold text-slate-500">
-          Zobrazeno všech {materialsData.length} témat
-        </span>
-        <div className="flex gap-2">
-          <Button
-            onClick={expandAllWeeks}
-            variant="secondary"
-            size="sm"
-            className="text-[10px] font-bold px-3 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer transition-all"
-          >
-            Rozbalit vše
-          </Button>
-          <Button
-            onClick={collapseAllWeeks}
-            variant="secondary"
-            size="sm"
-            className="text-[10px] font-bold px-3 py-1 bg-white hover:bg-slate-100 border border-slate-200 rounded-lg cursor-pointer transition-all"
-          >
-            Sbalit vše
-          </Button>
-        </div>
-      </div>
 
       {/* Tree structure of Weeks Accordion */}
       <div className="space-y-4">

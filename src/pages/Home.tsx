@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ClipboardList, BookOpen, GraduationCap, ChevronRight, Terminal, Dna, Binary } from 'lucide-react';
+import { ClipboardList, BookOpen, GraduationCap, ChevronRight, Terminal, Biohazard, Binary } from 'lucide-react';
 import { Card } from '../components/ui/Card';
 
 export function Home() {
@@ -46,7 +46,7 @@ export function Home() {
             <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all duration-500" />
             
             <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform duration-500">
-              <Dna size={24} />
+              <Biohazard size={24} />
             </div>
 
             <h2 className="text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
@@ -109,7 +109,7 @@ export function Home() {
 
             <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange group-hover:text-orange-400 uppercase gap-2">
               <span className="flex items-center gap-1.5">
-                <Binary size={14} />
+                <BookOpen size={14} />
                 Markdown Wiki & Moodle
               </span>
               <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
