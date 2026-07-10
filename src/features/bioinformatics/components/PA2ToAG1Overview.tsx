@@ -247,9 +247,9 @@ export function PA2ToAG1Overview() {
           <span className="text-2xl font-black text-slate-850">{stats.total}</span>
           <span className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider mt-1">Celkem témat</span>
         </Card>
-        <Card className="p-4 flex flex-col items-center justify-center text-center bg-emerald-500/[0.03] border-emerald-500/20">
-          <span className="text-2xl font-black text-emerald-600">{stats.critical + stats.important}</span>
-          <span className="text-[10px] text-emerald-500 font-extrabold uppercase tracking-wider mt-1">Relevantní (&ge;70%)</span>
+        <Card className="p-4 flex flex-col items-center justify-center text-center bg-orange-600/[0.03] border-orange-600/20">
+          <span className="text-2xl font-black text-orange-700">{stats.critical + stats.important}</span>
+          <span className="text-[10px] text-orange-600 font-extrabold uppercase tracking-wider mt-1">Relevantní (&ge;70%)</span>
         </Card>
         <Card className="p-4 flex flex-col items-center justify-center text-center bg-orange-500/[0.02] border-amber-500/20">
           <span className="text-2xl font-black text-amber-600">{stats.badQuality}</span>
@@ -297,7 +297,7 @@ export function PA2ToAG1Overview() {
           const stripeColor = isMegaCoolWeek
             ? 'bg-gradient-to-b from-brand-orange to-purple-600'
             : hasRelevant
-              ? (hasWarning ? 'bg-amber-500' : 'bg-emerald-500')
+              ? (hasWarning ? 'bg-amber-500' : 'bg-orange-600')
               : 'bg-slate-300';
 
           const headerBg = isMegaCoolWeek
@@ -343,7 +343,7 @@ export function PA2ToAG1Overview() {
                       {totalCount} celkem
                     </Badge>
                     {relevantCount > 0 && (
-                      <Badge variant="green" className="text-[8px] font-black tracking-widest px-1.5 py-[2px] rounded uppercase bg-emerald-500/10 border-emerald-500/20 text-emerald-600">
+                      <Badge variant="orange" className="text-[8px] font-black tracking-widest px-1.5 py-[2px] rounded uppercase bg-orange-600/10 border-orange-600/20 text-orange-700">
                         {relevantCount} relevantní
                       </Badge>
                     )}
@@ -473,7 +473,7 @@ export function PA2ToAG1Overview() {
                                             </span>
                                           )}
                                           {node.badges?.includes('epic') && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-[#f95d12] to-[#ea580c] text-white leading-none">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#c2410c] text-white leading-none">
                                               EPIC
                                             </span>
                                           )}
@@ -483,22 +483,22 @@ export function PA2ToAG1Overview() {
                                             </span>
                                           )}
                                           {node.badges?.includes('challenge') && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-red-500 to-rose-600 text-white leading-none">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#9f1239] text-white leading-none">
                                               CHALLENGE
                                             </span>
                                           )}
                                           {node.badges?.includes('practice') && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-violet-500 to-purple-600 text-white leading-none">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#fae8ff] text-[#701a75] border border-[#d8b4fe] leading-none">
                                               PRACTICE
                                             </span>
                                           )}
                                           {node.badges?.includes('showcase') && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-purple-400 to-violet-400 text-white leading-none">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm border border-dashed border-[#7c3aed] text-[#6d28d9] bg-transparent leading-none">
                                               SHOWCASE
                                             </span>
                                           )}
                                           {node.badges?.includes('no_code') && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-[0.5px] rounded-sm border border-violet-500/50 text-violet-600 bg-white leading-none">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] bg-[#fffbeb] text-[#b45309] border-l-[3px] border-[#f59e0b] rounded-[2px_6px_6px_2px] leading-none">
                                               NO CODE NEEDED
                                             </span>
                                           )}
@@ -508,7 +508,7 @@ export function PA2ToAG1Overview() {
                                             </span>
                                           )}
                                           {isLowQuality && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-slate-400 to-slate-500 text-white leading-none">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-2 py-[2px] rounded-full bg-[#e2e8f0] text-[#475569] leading-none">
                                               LOW QUALITY
                                             </span>
                                           )}
