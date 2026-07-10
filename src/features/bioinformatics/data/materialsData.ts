@@ -412,7 +412,7 @@ export const materialsData: SchoolMaterial[] = [
           {
             "id": "tr-w05-l1-s1",
             "name": "Chytré členské proměné",
-            "relevance": 100,
+            "relevance": 50,
             "quality": true,
             "badges": []
           },
