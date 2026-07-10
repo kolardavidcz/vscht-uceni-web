@@ -426,10 +426,9 @@ export function PA2ToAG1Overview() {
                                 const quality = node.quality ?? true;
                                 const isMegaEpic = node.badges?.includes('mega_epic');
                                 const isLowQuality = !quality;
-                                
+
                                 const isHigh = relevance >= 90;
-                                const isMedium = relevance >= 60 && relevance < 90;
-                                const isLowMedium = relevance >= 50 && relevance < 60;
+                                const isMedium = relevance >= 70 && relevance < 90;
 
                                 let cardClass = 'w-fit max-w-[180px] p-2 rounded-lg border text-[10px] font-bold inline-flex flex-col gap-1.5 transition-all hover:scale-[1.02]';
                                 if (isMegaEpic) {
@@ -446,12 +445,17 @@ export function PA2ToAG1Overview() {
                                 } else if (isMedium) {
                                   cardClass += ' bg-amber-100/50 border-amber-300/60 text-amber-900';
                                   barColor = 'bg-amber-500';
-                                } else if (isLowMedium) {
-                                  cardClass += ' bg-yellow-100/70 border-yellow-300 text-yellow-800';
-                                  barColor = 'bg-yellow-400';
                                 } else {
-                                  cardClass += ' bg-slate-50/50 border-slate-200 text-slate-400 opacity-60';
-                                  barColor = 'bg-slate-300';
+                                  // relevance <= 70
+                                  cardClass += ' bg-slate-50/50 border-slate-200 text-slate-500';
+                                  if (relevance >= 60) {
+                                    barColor = 'bg-amber-500';
+                                  } else if (relevance >= 50) {
+                                    barColor = 'bg-yellow-400';
+                                  } else {
+                                    barColor = 'bg-slate-300';
+                                    cardClass = 'w-fit max-w-[180px] p-2 rounded-lg border text-[10px] font-bold inline-flex flex-col gap-1.5 transition-all hover:scale-[1.02] bg-slate-50/50 border-slate-200 text-slate-400 opacity-60';
+                                  }
                                 }
 
                                 return (
@@ -464,7 +468,7 @@ export function PA2ToAG1Overview() {
                                       {(node.badges || isLowQuality) && (
                                         <div className="flex flex-wrap gap-1 items-center">
                                           {node.badges?.includes('mega_epic') && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-amber-500 via-orange-500 to-[#ea580c] text-white leading-none animate-pulse">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-amber-500 via-orange-500 to-[#ea580c] text-white leading-none">
                                               MEGA EPIC
                                             </span>
                                           )}
@@ -496,6 +500,11 @@ export function PA2ToAG1Overview() {
                                           {node.badges?.includes('no_code') && (
                                             <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-[0.5px] rounded-sm border border-violet-500/50 text-violet-600 bg-white leading-none">
                                               NO CODE NEEDED
+                                            </span>
+                                          )}
+                                          {node.badges?.includes('not_checked') && (
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-black text-white leading-none">
+                                              NOT CHECKED
                                             </span>
                                           )}
                                           {isLowQuality && (

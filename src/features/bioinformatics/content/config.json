@@ -1,5 +1,24 @@
 {
   "categories": {
+    "ag1": {
+      "label": "AG1 - Algoritmy a Grafy 1 (Materiály)",
+      "order": 0,
+      "files": {
+        "pa2-ag1-overview": {
+          "title": "Přehled FIT zdrojů z PA2 na AG1",
+          "order": 1
+        },
+        "prazdniny-programovani": {
+          "title": "Prázdninové programování",
+          "order": 2
+        },
+        "dml": {
+          "title": "Diskrétní matematika a logika",
+          "order": 3
+        }
+      }
+    },
+
     "0-obecne": {
       "label": "Obecné informace",
       "order": 1,
@@ -56,24 +75,6 @@
         },
         "laboratore-pro-bioinformatiku": {
           "title": "Laboratoře pro bioinformatiku",
-          "order": 3
-        }
-      }
-    },
-    "ag1": {
-      "label": "AG1 - Algoritmy a Grafy 1 (Materiály)",
-      "order": 0,
-      "files": {
-        "pa2-ag1-overview": {
-          "title": "Přehled PA2 -> AG1",
-          "order": 1
-        },
-        "prazdniny-programovani": {
-          "title": "Prázdninové programování",
-          "order": 2
-        },
-        "dml": {
-          "title": "Diskrétní matematika a logika",
           "order": 3
         }
       }

@@ -1,1 +1,2 @@
-[Moje zápisky z prázdnin](https://drive.google.com/drive/u/0/folders/1cKcxsrkuBaDtKWoghZcUiU-G7Nk5MC4N)
+# placeholder
+to edit overview edit tree strucutre in `src\features\bioinformatics\data\materialsData.ts` 
