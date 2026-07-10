@@ -97,14 +97,14 @@ if __name__ == "__main__":
 
       <header className="page-header-dark">
         <div className="max-w-6xl mx-auto px-4 py-4 sm:py-5 flex items-center gap-3">
-          <button onClick={() => navigate('/')} className="btn-dark p-2.5 text-slate-350 shrink-0" title="Zpet na rozcestník">
+          <button onClick={() => navigate('/')} className="btn-dark p-2.5 text-slate-350 shrink-0" title="Zpět na rozcestník">
             <ArrowLeft size={18} />
           </button>
           <div>
             <h1 className="text-lg sm:text-2xl font-black tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-orange-200 to-amber-100">
-              ?? Python Bioinformatický Skript
+              🐍 Python Bioinformatický Skript
             </h1>
-            <p className="text-brand-peach text-xs font-medium tracking-wide">Analýza DNA/RNA sekvencí • Spustte lokálne nebo zkopírujte</p>
+            <p className="text-brand-peach text-xs font-medium tracking-wide">Analýza DNA/RNA sekvencí • Spusťte lokálně nebo zkopírujte</p>
           </div>
         </div>
       </header>
@@ -149,14 +149,14 @@ if __name__ == "__main__":
               <span className="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
               <span className="ml-3 text-[11px] text-brand-orange font-mono font-bold uppercase tracking-wider">Terminal Output</span>
-              {execDone && <span className="ml-auto text-emerald-400 text-[11px] font-semibold">? Dokonceno</span>}
+              {execDone && <span className="ml-auto text-emerald-400 text-[11px] font-semibold">✓ Dokončeno</span>}
             </div>
             <pre className="font-mono text-xs text-slate-300 leading-relaxed p-5">
-              {executing ? '> python analyze_sequence.py\n?' : mockOutput}
+              {executing ? '> python analyze_sequence.py\n...' : mockOutput}
             </pre>
             {execDone && (
               <p className="text-[10px] text-slate-500 px-5 pb-4 italic">
-                ?? Demonstracní výstup. Pro reálné výsledky spustte skript lokálne pres Python 3.
+                💡 Demonstrační výstup. Pro reálné výsledky spusťte skript lokálně přes Python 3.
               </p>
             )}
           </div>

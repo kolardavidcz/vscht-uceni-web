@@ -22,7 +22,7 @@ export function Home() {
         {/* Logo and Tagline */}
         <div className="text-center space-y-4 mb-16 animate-fade-in-up">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-xs font-bold text-slate-350 tracking-wider uppercase backdrop-blur-md mb-2">
-            <GraduationCap size={14} className="text-brand-orange" />
+            <BookOpen size={14} className="text-brand-orange" />
             <span>VŠCHT Praha • Studijní materiály a nástroje</span>
           </div>
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-none bg-clip-text text-transparent bg-linear-to-r from-white via-orange-200 to-amber-100">
