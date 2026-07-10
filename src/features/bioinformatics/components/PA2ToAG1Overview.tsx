@@ -12,6 +12,46 @@ function getLeafNodes(node: SchoolMaterialNode): SchoolMaterialNode[] {
   return node.children.flatMap(getLeafNodes);
 }
 
+// Helper function to parse markdown-style links [text](url) inside names
+function renderNameWithLinks(name: string) {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: (string | React.ReactNode)[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = linkRegex.exec(name)) !== null) {
+    const textBefore = name.substring(lastIndex, match.index);
+    if (textBefore) {
+      parts.push(textBefore);
+    }
+
+    const linkText = match[1];
+    const linkUrl = match[2];
+
+    parts.push(
+      <a
+        key={match.index}
+        href={linkUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-brand-orange hover:text-brand-orange-text underline"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {linkText}
+      </a>
+    );
+
+    lastIndex = linkRegex.lastIndex;
+  }
+
+  const textAfter = name.substring(lastIndex);
+  if (textAfter) {
+    parts.push(textAfter);
+  }
+
+  return parts.length > 0 ? parts : name;
+}
+
 export function PA2ToAG1Overview() {
   const [expandedWeeks, setExpandedWeeks] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
@@ -30,10 +70,10 @@ export function PA2ToAG1Overview() {
     { num: 5, title: "Pokročilejší STL", desc: "Statistiky slov, mapy, benchmarky kontejnerů v C++" },
     { num: 6, title: "Kopie a přesouvání", desc: "Hluboká kopie, Rule of Five, Move sémantika" },
     { num: 7, title: "Procházení grafů", desc: "Ošetření chyb (Exceptions) a procházení grafů (BFS/DFS/Dijkstra)" },
-    { num: 8, title: "Polymorfismus I", desc: "Dědičnost, virtuální metody, abstraktní třídy, vtabulka" },
-    { num: 9, title: "Polymorfismus II", desc: "Polymorfní kontejnery, heterogenní seznamy" },
-    { num: 10, title: "Šablony", desc: "Šablony funkcí a tříd, stack, queue, priority_queue" },
-    { num: 11, title: "Šablony II", desc: "Šablony polí, spojové seznamy, binární vyhledávací stromy" },
+    { num: 8, title: "Šablony", desc: "Šablony funkcí a tříd, stack, queue, priority_queue" },
+    { num: 9, title: "Šablony II", desc: "Šablony polí, spojové seznamy, binární vyhledávací stromy" },
+    { num: 10, title: "Polymorfismus I", desc: "Dědičnost, virtuální metody, abstraktní třídy, vtabulka" },
+    { num: 11, title: "Polymorfismus II", desc: "Polymorfní kontejnery, heterogenní seznamy" },
     { num: 12, title: "Procvičování", desc: "Vyhledávání v textu, balíčkovací systém, opakování před zkouškou" },
   ], []);
 
@@ -50,10 +90,10 @@ export function PA2ToAG1Overview() {
           case 5: return 6;
           case 6: return 5;
           case 7: return 7;
-          case 8: return 8;
-          case 9: return 9;
-          case 10: return 10;
-          case 11: return 11;
+          case 8: return 10;
+          case 9: return 11;
+          case 10: return 8;
+          case 11: return 9;
           case 12: return 12;
           default: return weekNum;
         }
@@ -71,10 +111,10 @@ export function PA2ToAG1Overview() {
           case 4: return 6;
           case 5: return 4;
           case 6: return 7;
-          case 7: return 8;
-          case 8: return 9;
-          case 9: return 10;
-          case 10: return 11;
+          case 7: return 10;
+          case 8: return 11;
+          case 9: return 8;
+          case 10: return 9;
           case 11: return 5;
           case 12: return 12;
           default: return temaNum;
@@ -89,16 +129,10 @@ export function PA2ToAG1Overview() {
         switch (semNum) {
           case 1: return 1;
           case 2: return 2;
-          case 3: return 4;
-          case 4: return 3;
-          case 5: return 6;
-          case 6: return 6;
-          case 7: return 7;
-          case 8: return 8;
-          case 9: return 9;
-          case 10: return 10;
-          case 11: return 7;
-          case 12: return 12;
+          case 3: return 3;
+          case 4: return 8;
+          case 5: return 10;
+          case 6: return 12;
           default: return semNum;
         }
       }
@@ -131,13 +165,13 @@ export function PA2ToAG1Overview() {
           case 9:
             return 7;
           case 10:
-            return 10;
+            return 8;
           case 11:
             return 5;
           case 12:
             return 7;
           case 13:
-            return 8;
+            return 10;
           default:
             return 1;
         }
@@ -375,7 +409,7 @@ export function PA2ToAG1Overview() {
                           {items.map(item => (
                             <div key={item.id} className="border-l border-slate-200 pl-2 py-0.5">
                               <p className="text-[10px] text-slate-500 font-semibold leading-tight">
-                                {item.name}
+                                {renderNameWithLinks(item.name)}
                               </p>
                             </div>
                           ))}
@@ -454,6 +488,11 @@ export function PA2ToAG1Overview() {
                                               PRACTICE
                                             </span>
                                           )}
+                                          {node.badges?.includes('showcase') && (
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-purple-400 to-violet-400 text-white leading-none">
+                                              SHOWCASE
+                                            </span>
+                                          )}
                                           {node.badges?.includes('no_code') && (
                                             <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-[0.5px] rounded-sm border border-violet-500/50 text-violet-600 bg-white leading-none">
                                               NO CODE NEEDED
@@ -467,7 +506,7 @@ export function PA2ToAG1Overview() {
                                         </div>
                                       )}
                                       <span className="leading-tight break-words">
-                                        {node.name}
+                                        {renderNameWithLinks(node.name)}
                                       </span>
                                     </div>
 

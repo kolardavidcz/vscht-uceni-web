@@ -3,7 +3,7 @@ export interface SchoolMaterialNode {
   name: string;
   relevance?: number; // Optional now, since intermediate nodes don't have it
   quality?: boolean;   // Optional now, since intermediate nodes don't have it
-  badges?: ('epic' | 'insight' | 'challenge' | 'practice' | 'mega_epic' | 'no_code')[];
+  badges?: ('epic' | 'insight' | 'challenge' | 'practice' | 'mega_epic' | 'no_code' | 'showcase')[];
   children?: SchoolMaterialNode[];
 }
 
@@ -945,64 +945,83 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "lec-week01",
     "category": "Lectures",
-    "name": "Téma 1: Od C k C++ (neobjektová rozšíření)",
+    "name": "Téma 1: Od C k C++ (neobjektová rozšíření) [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-02-18_1_3_3476742621.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t01-1",
-        "name": "První program v C++"
+        "name": "První program v C++",
+        "relevance": 40,
+        "quality": true
       },
       {
         "id": "lec-t01-2",
-        "name": "Jmenné prostory"
+        "name": "Jmenné prostory",
+        "relevance": 40,
+        "quality": true
       },
       {
         "id": "lec-t01-3",
-        "name": "Typ bool"
+        "name": "Typ bool",
+        "relevance": 10,
+        "quality": true
       },
       {
         "id": "lec-t01-4",
         "name": "Struktury",
-        "relevance": 100
+        "relevance": 10,
+        "quality": true
       },
       {
         "id": "lec-t01-5",
-        "name": "Vstup/výstup v C++"
+        "name": "Vstup/výstup v C++",
+        "relevance": 30,
+        "quality": true
       },
       {
         "id": "lec-t01-6",
         "name": "Reference",
-        "relevance": 100
+        "relevance": 50,
+        "quality": true
       },
       {
         "id": "lec-t01-7",
-        "name": "Implicitní parametry funkcí"
+        "name": "Implicitní parametry funkcí",
+        "relevance": 50,
+        "quality": true
       },
       {
         "id": "lec-t01-8",
-        "name": "Inline funkce"
+        "name": "Inline funkce",
+        "relevance": 30,
+        "quality": false
       },
       {
         "id": "lec-t01-9",
-        "name": "Přetěžování funkcí"
+        "name": "Přetěžování funkcí",
+        "relevance": 50,
+        "quality": false
       },
       {
         "id": "lec-t01-10",
         "name": "Dynamické proměnné – operátory new a delete",
-        "relevance": 100
+        "relevance": 10,
+        "quality": true
       },
       {
         "id": "lec-t01-11",
-        "name": "Některá vylepšení C++ 14 a 17"
+        "name": "Některá vylepšení C++ 14 a 17",
+        "relevance": 50,
+        "quality": true
       }
     ]
   },
   {
     "id": "lec-week02",
     "category": "Lectures",
-    "name": "Téma 2: Programovací styly a třídy",
+    "name": "Téma 2: Programovací styly a třídy [(paralelka č.3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-02-25_2_3_3476742622.html)",
     "tags": [
       "lectures"
     ],
@@ -1010,146 +1029,195 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "lec-t02-1",
         "name": "Programovací styly: naivní, procedurální, objektově orientovaný",
-        "relevance": 10
+        "relevance": 20,
+        "quality": false
       },
       {
         "id": "lec-t02-2",
-        "name": "Třídy a objekty"
+        "name": "Třídy a objekty",
+        "relevance": 20,
+        "quality": false
       },
       {
         "id": "lec-t02-3",
-        "name": "Rozdíl mezi class a struct"
+        "name": "Rozdíl mezi class a struct",
+        "relevance": 20,
+        "quality": true
       },
       {
         "id": "lec-t02-4",
-        "name": "Klíčové slovo this"
+        "name": "Klíčové slovo this",
+        "relevance": 20,
+        "quality": true
       },
       {
         "id": "lec-t02-5",
-        "name": "Konstantní (const) objekty a metody"
+        "name": "Konstantní (const) objekty a metody",
+        "relevance": 20,
+        "quality": true
       },
       {
         "id": "lec-t02-6",
-        "name": "Konstruktory, implicitní konstruktor"
+        "name": "Konstruktory, implicitní konstruktor",
+        "relevance": 35,
+        "quality": true
       },
       {
         "id": "lec-t02-7",
-        "name": "Lokální deklarace"
+        "name": "Lokální deklarace",
+        "relevance": 20,
+        "quality": true
       },
       {
         "id": "lec-t02-8",
-        "name": "Statické metody a statické proměnné"
+        "name": "Statické metody a statické proměnné",
+        "relevance": 20,
+        "quality": true
       }
     ]
   },
   {
     "id": "lec-week03",
     "category": "Lectures",
-    "name": "Téma 3: Přetížené operátory",
+    "name": "__ NOT CHECKED__ Téma 3: Přetížené operátory [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-03-04_3_3_3476742623.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t03-1",
-        "name": "Motivace pro přetěžování operátorů – racionální čísla"
+        "name": "Motivace pro přetěžování operátorů – racionální čísla",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t03-2",
-        "name": "friend funkce"
+        "name": "friend funkce",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t03-3",
-        "name": "Zapouzdření"
+        "name": "Zapouzdření",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t03-4",
-        "name": "Uživatelské konverze"
+        "name": "Uživatelské konverze",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t03-5",
-        "name": "Přehled přetížitelných operátorů"
+        "name": "Přehled přetížitelných operátorů",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t03-6",
-        "name": "Kompilační jednotky a make"
+        "name": "Kompilační jednotky a make",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week04",
     "category": "Lectures",
-    "name": "Téma 4: Kopírování objektů",
+    "name": "__ NOT CHECKED__ Téma 4: Kopírování objektů [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-03-11_4_3_3476742624.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t04-1",
-        "name": "Kopírovací konstruktor a operátor přiřazení"
+        "name": "Kopírovací konstruktor a operátor přiřazení",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t04-2",
-        "name": "Hluboká a mělká kopie"
+        "name": "Hluboká a mělká kopie",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t04-3",
         "name": "Rvalue reference, unique_ptr",
-        "relevance": 100
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t04-4",
         "name": "Přesouvací konstruktor a operátor přiřazení",
-        "relevance": 100
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t04-5",
-        "name": "Mělká kopie a shared_ptr"
+        "name": "Mělká kopie a shared_ptr",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t04-6",
-        "name": "Copy-on-write"
+        "name": "Copy-on-write",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t04-7",
-        "name": "Některé algoritmy pro práci s polem"
+        "name": "Některé algoritmy pro práci s polem",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week05",
     "category": "Lectures",
-    "name": "Téma 5: Vybrané komponenty knihovny STL",
+    "name": "__ NOT CHECKED__ Téma 5: Vybrané komponenty knihovny STL [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-03-18_5_3_3476742625.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t05-1",
-        "name": "Ukázky použití STL: vector, set, map"
+        "name": "Ukázky použití STL: vector, set, map",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t05-2",
-        "name": "Koncepty: generické třídy, iterátory, funktory"
+        "name": "Koncepty: generické třídy, iterátory, funktory",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t05-3",
-        "name": "Lambda funkce"
+        "name": "Lambda funkce",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t05-4",
-        "name": "Základní kontejnery: array, vector, deque, list, set, map"
+        "name": "Základní kontejnery: array, vector, deque, list, set, map",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t05-5",
-        "name": "Knihovna algoritmů"
+        "name": "Knihovna algoritmů",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week06",
     "category": "Lectures",
-    "name": "Téma 6: Základní grafové algoritmy",
+    "name": "Téma 6: Základní grafové algoritmy [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-03-25_6_3_3476742626.html)",
     "tags": [
       "lectures"
     ],
@@ -1157,382 +1225,427 @@ export const materialsData: SchoolMaterial[] = [
       {
         "id": "lec-t06-1",
         "name": "Algoritmy BFS a DFS",
-        "relevance": 100
+        "relevance": 60,
+        "quality": true
       },
       {
         "id": "lec-t06-2",
         "name": "Výjimky",
-        "relevance": 10
+        "relevance": 10,
+        "quality": true
       }
     ]
   },
   {
     "id": "lec-week07",
     "category": "Lectures",
-    "name": "Téma 7: Dědění a polymorfismus v C++",
+    "name": "__ NOT CHECKED__ Téma 7: Dědění a polymorfismus v C++ [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-04-01_7_3_3476742627.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t07-1",
-        "name": "Polymorfismus"
+        "name": "Polymorfismus",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t07-2",
-        "name": "Dědičnost"
+        "name": "Dědičnost",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t07-3",
-        "name": "Statická a dynamická vazba"
+        "name": "Statická a dynamická vazba",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week08",
     "category": "Lectures",
-    "name": "Téma 8: Abstraktní třídy v C++",
+    "name": "__ NOT CHECKED__ Téma 8: Abstraktní třídy v C++ [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-04-08_8_3_3476742628.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t08-1",
-        "name": "Abstraktní třídy"
+        "name": "Abstraktní třídy",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t08-2",
         "name": "Heterogenní (polymorfní) datové struktury",
-        "relevance": 100
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t08-3",
         "name": "RTTI",
-        "relevance": 10
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week09",
     "category": "Lectures",
-    "name": "Téma 9: Šablony v C++",
+    "name": "__ NOT CHECKED__ Téma 9: Šablony v C++ [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-04-15_9_3_3476742629.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t09-1",
-        "name": "Šablony"
+        "name": "Šablony",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t09-2",
-        "name": "Šablony funkcí"
+        "name": "Šablony funkcí",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t09-3",
-        "name": "Šablony tříd"
+        "name": "Šablony tříd",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t09-4",
-        "name": "constexpr"
+        "name": "constexpr",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week10",
     "category": "Lectures",
-    "name": "Téma 10: Abstraktní datové typy v C++",
+    "name": "__ NOT CHECKED__ Téma 10: Abstraktní datové typy v C++ [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-04-22_10_3_3476742630.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t10-1",
-        "name": "ADT implementované jako generické třídy"
+        "name": "ADT implementované jako generické třídy",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t10-2",
-        "name": "Zásobník (stack)"
+        "name": "Zásobník (stack)",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t10-3",
-        "name": "Fronta (queue)"
+        "name": "Fronta (queue)",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t10-4",
-        "name": "Pole (array)"
+        "name": "Pole (array)",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t10-5",
-        "name": "Binární halda (binary heap)"
+        "name": "Binární halda (binary heap)",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week11",
     "category": "Lectures",
-    "name": "Téma 11: Abstraktní datové typy v C++ II",
+    "name": "__ NOT CHECKED__ Téma 11: Abstraktní datové typy v C++ II [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-04-29_11_3_3476742631.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t11-1",
-        "name": "Množina (set)"
+        "name": "Množina (set)",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t11-2",
-        "name": "Tabulka (map)"
+        "name": "Tabulka (map)",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t11-3",
-        "name": "Binární vyhledávací strom"
+        "name": "Binární vyhledávací strom",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t11-4",
-        "name": "Hashovací tabulka"
+        "name": "Hashovací tabulka",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "lec-week12",
     "category": "Lectures",
-    "name": "Téma 12: Vyhledávání v textu",
+    "name": "__ NOT CHECKED__ Téma 12: Vyhledávání v textu [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_pre_2026-05-06_12_3_3476742632.html)",
     "tags": [
       "lectures"
     ],
     "children": [
       {
         "id": "lec-t12-1",
-        "name": "Vyhledávání v textu"
+        "name": "Vyhledávání v textu",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t12-2",
-        "name": "Rabin–Karp"
+        "name": "Rabin–Karp",
+        "relevance": 0,
+        "quality": false
       },
       {
         "id": "lec-t12-3",
-        "name": "KMP"
+        "name": "KMP",
+        "relevance": 0,
+        "quality": false
       }
     ]
   },
   {
     "id": "sem-week01",
     "category": "Seminars",
-    "name": "Proseminář 01: Vstup a výstup, GIT úvod",
+    "name": "Proseminář 01: C++ a I/O operace [(paralelka č. 1)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-02-18_1_1_3476712276.html)",
     "tags": [
       "seminars"
     ],
     "children": [
       {
         "id": "sem-p01-1",
-        "name": "Git základy"
+        "name": "Formátovaný a neformátovaný výstup",
+        "relevance": 0,
+        "quality": false,
+        "badges": []
       },
       {
         "id": "sem-p01-2",
-        "name": "Standardní streams"
+        "name": "Binární a textové soubory",
+        "relevance": 0,
+        "quality": false,
+        "badges": []
+      },
+      {
+        "id": "sem-p01-3",
+        "name": "I/O operace v C, nedostatky",
+        "relevance": 0,
+        "quality": false,
+        "badges": []
+      },
+      {
+        "id": "sem-p01-4",
+        "name": "I/O v C++, manipulátory",
+        "relevance": 25,
+        "quality": true,
+        "badges": []
+      },
+      {
+        "id": "sem-p01-5",
+        "name": "Vstup v C++, ošetření chyb",
+        "relevance": 50,
+        "quality": true,
+        "badges": ["showcase"]
+      },
+      {
+        "id": "sem-p01-6",
+        "name": "Paměťové a souborové proudy",
+        "relevance": 0,
+        "quality": false,
+        "badges": ["showcase"]
       }
     ]
   },
   {
     "id": "sem-week02",
     "category": "Seminars",
-    "name": "Proseminář 02: Objekty, třídy, zapouzdření",
+    "name": "Proseminář 02: C++ a OOP [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-03-11_2_3_3476712361.html)",
     "tags": [
       "seminars"
     ],
     "children": [
       {
         "id": "sem-p02-1",
-        "name": "Class structure"
+        "name": "Naivní řešení",
+        "relevance": 10,
+        "quality": true,
+        "badges": ["showcase"]
       },
       {
         "id": "sem-p02-2",
-        "name": "Zapouzdření"
-      }
+        "name": "Využití C struktur",
+        "relevance": 10,
+        "quality": true,
+        "badges": ["showcase"]
+      },
+      {
+        "id": "sem-p02-3",
+        "name": "Zapouzdření",
+        "relevance": 20,
+        "quality": true,
+        "badges": ["showcase"]
+      },
+      {
+        "id": "sem-p02-4",
+        "name": "Skládání",
+        "relevance": 20,
+        "quality": true,
+        "badges": ["showcase"]
+      },
     ]
   },
   {
     "id": "sem-week03",
     "category": "Seminars",
-    "name": "Proseminář 03: Iterátory, kontejnery vector/list",
+    "name": "Proseminář 03: C++ a přetěžování operátorů [(paralelka č. 1)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-03-18_3_1_3476712278.html), [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-03-25_3_3_3476712362.html)",
     "tags": [
       "seminars"
     ],
     "children": [
       {
         "id": "sem-p03-1",
-        "name": "Vector vs List"
+        "name": "Řetězce",
+        "relevance": 10,
+        "quality": true,
+        "badges": ["showcase"]
       },
       {
         "id": "sem-p03-2",
-        "name": "Iterator loops"
+        "name": "Řetězce s počítanými referencemi",
+        "relevance": 5,
+        "quality": false,
+        "badges": ["showcase"]
+      },
+      {
+        "id": "sem-p03-3",
+        "name": "Zlomky",
+        "relevance": 0,
+        "quality": false,
+        "badges": ["showcase"]
       }
     ]
   },
   {
     "id": "sem-week04",
     "category": "Seminars",
-    "name": "Proseminář 04: Přetěžování operátorů",
+    "name": "Proseminář 04: C++ a generické třídy [(paralelka č. 1)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-04-01_4_1_3476712279.html), [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-04-08_4_3_3476712363.html)",
     "tags": [
       "seminars"
     ],
     "children": [
       {
         "id": "sem-p04-1",
-        "name": "Porovnávací operátory"
+        "name": "Používání šablon, std::vector",
+        "relevance": 0,
+        "quality": false,
+        "badges": ["showcase"]
       },
       {
         "id": "sem-p04-2",
-        "name": "Zlomek třída"
+        "name": "Strom jako datová struktura",
+        "relevance": 40,
+        "quality": true,
+        "badges": ["showcase"]
+      },
+      {
+        "id": "sem-p04-3",
+        "name": "Binární vyhledávací strom",
+        "relevance": 20,
+        "quality": false,
+        "badges": ["showcase"]
+      },
+      {
+        "id": "sem-p04-4",
+        "name": "Strom jako množina",
+        "relevance": 5,
+        "quality": false,
+        "badges": ["showcase"]
+      },
+      {
+        "id": "sem-p04-5",
+        "name": "Generická třída množina realizovaná pomocí binárního vyhledávacího stromu",
+        "relevance": 10,
+        "quality": false,
+        "badges": ["showcase"]
       }
     ]
   },
   {
     "id": "sem-week05",
     "category": "Seminars",
-    "name": "Proseminář 05: Správa paměti, kopírující konstruktor",
+    "name": "Proseminář 05: Dědičnost a polymorfismus v C++ [(paralelka č. 1)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-04-15_5_1_3476712280.html)",
     "tags": [
       "seminars"
     ],
     "children": [
       {
         "id": "sem-p05-1",
-        "name": "Hluboká kopie"
+        "name": "Jednoduchý příklad na dědičnost – registr zákonného pojištění automobilů",
+        "relevance": 5,
+        "quality": false,
+        "badges": ["showcase"]
       },
       {
         "id": "sem-p05-2",
-        "name": "Paměťový layout"
+        "name": "Složitější příklad – zobrazení výrazu (část I)",
+        "relevance": 0,
+        "quality": false,
+        "badges": ["showcase"]
       }
     ]
   },
   {
     "id": "sem-week06",
     "category": "Seminars",
-    "name": "Proseminář 06: Move sémantika, přesouvání",
+    "name": "Proseminář 06: Make, Makefile, staticky a dynamicky linkované knihovny [(paralelka č. 3)](https://online.fit.cvut.cz/zaznam/B252/bi-pa2.21_cvi_2026-05-06_6_3_3487756156.html)",
     "tags": [
       "seminars"
     ],
     "children": [
       {
         "id": "sem-p06-1",
-        "name": "Move constructor"
+        "name": "Postup kompilace a linkování",
+        "relevance": 0,
+        "quality": false,
+        "badges": ["showcase"]
       },
       {
         "id": "sem-p06-2",
-        "name": "std::move"
-      }
-    ]
-  },
-  {
-    "id": "sem-week07",
-    "category": "Seminars",
-    "name": "Proseminář 07: Grafy a BFS/DFS průchod",
-    "tags": [
-      "seminars"
-    ],
-    "children": [
-      {
-        "id": "sem-p07-1",
-        "name": "BFS průchod"
+        "name": "Vytváření a používání knihoven: staticky linkované knihovny, dynamicky linkované knihovny, dynamicky linkované knihovny jako zásuvné moduly",
+        "relevance": 0,
+        "quality": false,
+        "badges": ["showcase"]
       },
       {
-        "id": "sem-p07-2",
-        "name": "DFS průchod"
-      },
-      {
-        "id": "sem-p07-3",
-        "name": "Adjacency list"
-      }
-    ]
-  },
-  {
-    "id": "sem-week08",
-    "category": "Seminars",
-    "name": "Proseminář 08: Dědění, virtuální metody",
-    "tags": [
-      "seminars"
-    ],
-    "children": [
-      {
-        "id": "sem-p08-1",
-        "name": "Dědičnost"
-      },
-      {
-        "id": "sem-p08-2",
-        "name": "Virtual methods"
-      }
-    ]
-  },
-  {
-    "id": "sem-week09",
-    "category": "Seminars",
-    "name": "Proseminář 09: Polymorfní kontejnery",
-    "tags": [
-      "seminars"
-    ],
-    "children": [
-      {
-        "id": "sem-p09-1",
-        "name": "vector of unique_ptr"
-      },
-      {
-        "id": "sem-p09-2",
-        "name": "vtable lookup"
-      }
-    ]
-  },
-  {
-    "id": "sem-week10",
-    "category": "Seminars",
-    "name": "Proseminář 10: Šablony funkcí a tříd",
-    "tags": [
-      "seminars"
-    ],
-    "children": [
-      {
-        "id": "sem-p10-1",
-        "name": "Generic class"
-      },
-      {
-        "id": "sem-p10-2",
-        "name": "Template constraints"
-      }
-    ]
-  },
-  {
-    "id": "sem-week11",
-    "category": "Seminars",
-    "name": "Proseminář 11: Výjimky (Exceptions)",
-    "tags": [
-      "seminars"
-    ],
-    "children": [
-      {
-        "id": "sem-p11-1",
-        "name": "Try/Catch"
-      },
-      {
-        "id": "sem-p11-2",
-        "name": "Throwing"
-      }
-    ]
-  },
-  {
-    "id": "sem-week12",
-    "category": "Seminars",
-    "name": "Proseminář 12: Závěrečné opakování",
-    "tags": [
-      "seminars"
-    ],
-    "children": [
-      {
-        "id": "sem-p12-1",
-        "name": "Zkouškové typy úloh"
-      },
-      {
-        "id": "sem-p12-2",
-        "name": "Common C++ bugs"
+        "id": "sem-p06-3",
+        "name": "Nástroje pro práci s knihovnami",
+        "relevance": 0,
+        "quality": false,
+        "badges": ["showcase"]
       }
     ]
   },
