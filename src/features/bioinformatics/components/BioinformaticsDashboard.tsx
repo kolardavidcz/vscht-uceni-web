@@ -447,7 +447,11 @@ export function BioinformaticsDashboard() {
                       {activeMaterial.fileName}
                     </span>
                   </div>
-                  <PA2ToAG1Overview />
+                   <div 
+                     className="markdown-body mb-6 prose prose-slate max-w-none"
+                     dangerouslySetInnerHTML={{ __html: parseMarkdown(activeMaterial.content) }}
+                   />
+                   <PA2ToAG1Overview />
                 </div>
               ) : (
                 <article className="prose prose-slate max-w-none flex-1 flex flex-col">

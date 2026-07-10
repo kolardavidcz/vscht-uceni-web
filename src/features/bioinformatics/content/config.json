@@ -5,7 +5,7 @@
       "order": 0,
       "files": {
         "pa2-ag1-overview": {
-          "title": "Přehled FIT zdrojů z PA2 na AG1",
+          "title": "Přehled FIT zdrojů z PA2 pro AG1",
           "order": 1
         },
         "prazdniny-programovani": {
@@ -15,6 +15,20 @@
         "dml": {
           "title": "Diskrétní matematika a logika",
           "order": 3
+        }
+      }
+    },
+    "pa2": {
+      "label": "PA2 - Programování a Algoritmy 2",
+      "order": 0.5,
+      "files": {
+        "week01": {
+          "title": "1. Týden: Od C k C++, Základní konstrukce",
+          "order": 1
+        },
+        "week02": {
+          "title": "2. Týden: Třídy, objekty a úvod do STL",
+          "order": 2
         }
       }
     },

@@ -503,7 +503,7 @@ export function PA2ToAG1Overview() {
                                             </span>
                                           )}
                                           {node.badges?.includes('not_checked') && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-black text-white leading-none">
+                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-white text-black leading-none">
                                               NOT CHECKED
                                             </span>
                                           )}

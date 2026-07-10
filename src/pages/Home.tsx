@@ -94,7 +94,7 @@ export function Home() {
                 PA1
               </button>
               <button
-                onClick={() => navigate('/obor-bioinformatika/ag1')}
+                onClick={() => navigate('/obor-bioinformatika/pa2-ag1-overview')}
                 className="px-2.5 py-1 bg-orange-600/10 hover:bg-orange-600/20 text-orange-400 text-[10px] font-black tracking-wider uppercase rounded-md border border-orange-600/20 hover:border-orange-600/40 active:scale-95 transition-all cursor-pointer"
               >
                 AG1
