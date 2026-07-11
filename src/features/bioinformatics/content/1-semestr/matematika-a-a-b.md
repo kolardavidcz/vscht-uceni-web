@@ -1,15 +1,12 @@
 # 📐 Matematika A + B & Diskrétní matematika
 
-Tento rozcestník pokrývá klasickou matematickou analýzu (Matematika A + B) a základy diskrétní matematiky a logiky, které jsou důležité pro navrhování algoritmů (AG1).
-
----
 
 ## 🛠️ Užitečné nástroje a kalkulačky
 
 * **[Derivative Calculator](https://www.derivative-calculator.net/)** – Vypočítá derivace včetně podrobného postupu krok za krokem.
-* **[Integral Calculator](https://www.integral-calculator.com/)** – Vypočítá neurčité i určité integrály s grafickým znázorněním a postupem.
-* **[WolframAlpha](https://www.wolframalpha.com/)** – Diferenciální rovnice, matice, limity a vlastnosti křivek.
-* **[Mathlab Graphing Calculator](https://www.mathlab.app/)** – Vizualizace 2D a 3D kuželoseček.
+* **[Integral Calculator](https://www.integral-calculator.com/)** – Vypočítá neurčité i určité integrály s postupem a grafickým znázorněním.
+* **[Mathlab Graphing Calculator](https://www.mathlab.app/)** – Vizualizace 2D a 3D funkcí.
+* **[WolframAlpha](https://www.wolframalpha.com/)** – Hlavně pro vizualizaci Diferenciálních rovnic. Později pro náročnější matice, limity a vlastnosti křivek.
 
 ---
 
@@ -20,9 +17,7 @@ Tento rozcestník pokrývá klasickou matematickou analýzu (Matematika A + B) a
   * [Druhá část – od 3:30](https://www.youtube.com/embed/ly4S0oi3Yz8)
 * **Calculus Game:** Vyzkoušejte interaktivní [Calculus Game](https://melesmath.com/calculus-game/) pro procvičení limit a derivací.
 
----
-
-<div class="bg-blue-50/80 border border-blue-200/60 border-l-4 border-blue-500 p-5 my-6 rounded-r-2xl shadow-sm text-blue-950 font-medium transition-all hover:shadow-md">
+<div class="bg-amber-100/50 border border-amber-200/00 border-l-4 border-amber-500 p-5 my-6 rounded-r-2xl shadow-sm text-amber-950 font-medium transition-all hover:shadow-md">
 
 **💻 Workshop: Diferenciální rovnice ve WolframAlpha**
 

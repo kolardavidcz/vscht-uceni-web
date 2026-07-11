@@ -1,6 +1,5 @@
 # 🧪 Fyzikální chemie
 
----
 
 ## 📚 Doporučené materiály
 
@@ -12,15 +11,13 @@ Najdete zde:
 * 🔢 **Seznam vzorečků** (vždy na začátku každé kategorie)
 * 📝 **Příklady** k procvičení
 
----
 
 <div class="bg-emerald-50/80 border border-emerald-200/60 border-l-4 border-emerald-500 p-5 my-6 rounded-r-2xl shadow-sm text-emerald-950 font-medium transition-all hover:shadow-md">
 
 **💡 Doporučený postup, jak se z toho nezbláznit:**
 
-* **Počítejte příklady** přímo z výše zmíněného Příkladníku.
-* **Využijte AI:** Narvěte příklady do Gemini a řekněte mu, ať na jejich základě vygeneruje testové otázky s možnostmi **A, B, C, D**.
-* **Počítejte samostatně:** Vedle na papír si příklad spočítejte.
-* **Zpětná vazba:** Pokud odpovíte špatně, Gemini vám detailně vysvětlí, kde jste v postupu pravděpodobně udělali chybu.
+* **Využijte AI:** Narvěte příklady do Gemini a řekněte mu, ať na jejich základě vygeneruje testové otázky s možnostmi **A, B, C, D** a tímto si počítání gamifikujte.
+* **Počítejte samostatně:** Vedle si na papír/tablet příklad spočítejte.
+* **Zpětná vazba:** Pokud odpovíte špatně, Gemini vám  vysvětlí, kde jste v postupu pravděpodobně udělali chybu. Můj oblibený prompt je: `Vysvětli mi, kde jsem udělal chybu a proč`
 
 </div>
