@@ -49,7 +49,7 @@ src/
 | `/mikrobiologie/studijni-strom` | Taxonomy tree study |
 | `/mikrobiologie/samostudium` | Flashcards |
 | `/mikrobiologie/srovnavaci-matice` | Comparison matrix |
-| `/mikrobiologie/admin` | Admin: správné odpovědi + emoji katalog (Vercel KV) |
+| `/mikrobiologie/admin` | Admin: správné odpovědi + emoji katalog (Upstash Redis) |
 | `/obor-bioinformatika/*` | Wiki |
 | `/python-analyza` | Python analyzer |
 
@@ -63,7 +63,7 @@ src/
 ## Data notes
 
 - **Microbiology**: taxonomy + emoji catalog ship in the bundle.
-- **Shared store**: Vercel KV via `GET/POST /api/get-data` and `/api/save-data`.
+- **Shared store**: Upstash Redis via `GET/POST /api/get-data` and `/api/save-data` (`@upstash/redis`; `@vercel/kv` is deprecated).
 - **Offline/admin fallback**: `localStorage` on this browser.
 - **Admin password**: UI gate + server check. Prefer env `MICROBIOLOGY_ADMIN_PASSWORD` on Vercel (legacy classroom default still accepted if unset).
 - **Wiki content**: `src/features/bioinformatics/content/**/*.md` + `config.json`.
@@ -72,7 +72,9 @@ src/
 ## Deploy (Vercel)
 
 1. Connect the repo; build `npm run build`, output `dist`.
-2. Add **Vercel KV** (Storage → KV) so `KV_REST_API_URL` / `KV_REST_API_TOKEN` are injected.
+2. Add **Redis** from [Vercel Marketplace](https://vercel.com/marketplace?category=storage&search=redis) (Upstash).  
+   Env: `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`  
+   (Legacy migrated KV still works via `KV_REST_API_URL` + `KV_REST_API_TOKEN`.)
 3. Optional: set `MICROBIOLOGY_ADMIN_PASSWORD`.
 4. SPA rewrites skip `/api/*` (see `vercel.json`).
 

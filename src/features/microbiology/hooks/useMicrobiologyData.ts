@@ -52,7 +52,7 @@ function payloadLooksCorrupted(payload: Payload): boolean {
 /**
  * Data story:
  * 1. Bundled static data (always available offline).
- * 2. Production: GET /api/get-data → Vercel KV shared store.
+ * 2. Production: GET /api/get-data → Upstash Redis shared store.
  * 3. localStorage cache / offline admin edits.
  * Admin POST /api/save-data writes KV when available, always mirrors to localStorage.
  */
@@ -119,7 +119,7 @@ export function useMicrobiologyData() {
                 Array.isArray(data) ? { worksheetData: data } : data
               );
               setKvAvailable(true);
-              setStorageLabel("Vercel KV");
+              setStorageLabel("Upstash Redis");
               setReady(true);
             }
             return;
@@ -200,8 +200,8 @@ export function useMicrobiologyData() {
           });
           if (res.ok) {
             setKvAvailable(true);
-            setStorageLabel("Vercel KV");
-            return { ok: true, message: "Uloženo do Vercel KV (+ localStorage)" };
+            setStorageLabel("Upstash Redis");
+            return { ok: true, message: "Uloženo do Redis (+ localStorage)" };
           }
           const err = await res.json().catch(() => ({}));
           return {
@@ -287,10 +287,10 @@ export function useMicrobiologyData() {
             );
           }
           setKvAvailable(true);
-          setStorageLabel("Vercel KV (vectoral merge)");
+          setStorageLabel("Redis (vectoral merge)");
           return {
             ok: true,
-            message: `Uloženo ${changes.length} změn do KV (merge)`,
+            message: `Uloženo ${changes.length} změn do Redis (merge)`,
           };
         }
 

@@ -2,11 +2,11 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import {
   createSuggestBranch,
   getGithubConfigFromEnv,
-} from "./lib/githubSuggest";
+} from "../lib/server/githubSuggest.js";
 
 /**
  * POST /api/suggest-edit
- * Creates branch + commit only (manual PR). See api/lib/githubSuggest.ts
+ * Creates branch + commit + PR (manual merge). See lib/server/githubSuggest.ts
  */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {

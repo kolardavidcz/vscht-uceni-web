@@ -1,7 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { kv } from "@vercel/kv";
+import { getRedis } from "../lib/server/redis.js";
 
-const KV_KEY = "microbiology:data";
+const DATA_KEY = "microbiology:data";
 
 type TreeItem = {
   id: string;
@@ -253,7 +253,7 @@ function applyChanges(
  *
  * Prefer vectoral mode:
  *   { password, changes: AdminChange[] }
- * reads latest KV, applies only these patches, writes back.
+ * reads latest Redis snapshot, applies only these patches, writes back.
  *
  * Full replace (seed / reset):
  *   { password, data: Payload }
@@ -265,6 +265,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const redis = getRedis();
     const body = req.body || {};
     if (!checkPassword(body.password)) {
       return res.status(401).json({ error: "Neplatné heslo" });
@@ -275,12 +276,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (Array.isArray(body.changes) && body.changes.length > 0) {
       // Always patch against the freshest shared snapshot
       const current =
-        ((await kv.get(KV_KEY)) as Payload | null) || {
+        ((await redis.get(DATA_KEY)) as Payload | null) || {
           worksheetData: [],
           emojiOptions: [],
           emojiCategories: [],
         };
-      // If KV empty but client sent baseline, seed first then patch
+      // If store empty but client sent baseline, seed first then patch
       if (
         (!current.worksheetData || current.worksheetData.length === 0) &&
         body.baseline?.worksheetData
@@ -301,12 +302,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    await kv.set(KV_KEY, payload);
+    await redis.set(DATA_KEY, payload);
     return res.status(200).json({ success: true, data: payload });
   } catch (err) {
     console.error("save-data failed", err);
     return res.status(500).json({
-      error: "Uložení do KV selhalo",
+      error: "Uložení do Redis selhalo",
       detail: err instanceof Error ? err.message : String(err),
     });
   }

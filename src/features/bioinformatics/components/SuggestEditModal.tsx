@@ -81,20 +81,22 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
         prUrl?: string;
         prNumber?: number;
       } = {};
-      if (text.trim()) {
-        try {
-          data = JSON.parse(text) as typeof data;
-        } catch {
-          setError(
-            res.ok
-              ? "Server vrátil neplatnou odpověď (ne JSON)."
-              : `API ${res.status}: prázdná/neplatná odpověď. Restartujte dev server (npm run dev) — lokální /api plugin musí běžet. Na Vercelu zkontrolujte GITHUB_TOKEN.`
-          );
-          return;
-        }
-      } else if (!res.ok) {
+
+      if (!text.trim()) {
         setError(
-          `API ${res.status}: prázdná odpověď. Restartujte \`npm run dev\` po přidání .env.local, nebo nasaďte na Vercel s GITHUB_TOKEN.`
+          `API ${res.status}: prázdná odpověď. ` +
+            `1) Zastavte a znovu spusťte \`npm run dev\` (po změně .env.local / vite pluginu). ` +
+            `2) Ověřte v Network tabu, že POST jde na /api/suggest-edit. ` +
+            `3) Token: GITHUB_TOKEN v .env.local.`
+        );
+        return;
+      }
+
+      try {
+        data = JSON.parse(text) as typeof data;
+      } catch {
+        setError(
+          `API ${res.status}: odpověď není JSON. Začátek: ${text.slice(0, 120).replace(/\s+/g, " ")}`
         );
         return;
       }
@@ -335,14 +337,17 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
   );
 }
 
-/** Map Vite module path → repo file path */
+/** Map material → repo file path (prefer segments — stable across Vite glob keys) */
 export function materialToRepoPath(material: WikiMaterial): string {
-  const cleaned = material.path
-    .replace(/^\.\.\/content\//, "")
-    .replace(/\\/g, "/");
-  // path may still be like ../content/... depending on glob keys
-  const rel = cleaned.includes("content/")
-    ? cleaned.slice(cleaned.indexOf("content/") + "content/".length)
-    : cleaned;
-  return `src/features/bioinformatics/content/${rel.replace(/^\//, "")}`;
+  if (material.segments?.length) {
+    return `src/features/bioinformatics/content/${material.segments.join("/")}.md`;
+  }
+  const cleaned = material.path.replace(/\\/g, "/");
+  const idx = cleaned.indexOf("content/");
+  const rel =
+    idx >= 0
+      ? cleaned.slice(idx + "content/".length)
+      : cleaned.replace(/^\.\.\//, "").replace(/^content\//, "");
+  const withMd = rel.endsWith(".md") ? rel : `${rel}.md`;
+  return `src/features/bioinformatics/content/${withMd.replace(/^\//, "")}`;
 }
