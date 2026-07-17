@@ -1,166 +1,223 @@
-import { useMemo, useEffect, useRef } from 'react';
-import { X, Trash2, Pin } from 'lucide-react';
-import { EmojiOption } from '../../../types';
+import { useEffect, useMemo, useRef } from "react";
+import { Pin, Trash2, X } from "lucide-react";
+import { cn } from "@/lib/cn";
+import type { EmojiCategory, EmojiOption } from "../types";
 
-interface EmojiPaletteProps {
+type Props = {
+  emojiOptions: EmojiOption[];
+  categories: EmojiCategory[];
+  currentEmojis: string[];
   onSelect: (emoji: string) => void;
   onRemove: (emoji: string) => void;
   onClearAll: () => void;
   onClose: () => void;
-  currentEmojis: string[];
-  emojiOptions: EmojiOption[];
-  emojiCategories: { key: string; label: string }[];
-  filterCategory?: string;
   isPinned?: boolean;
   onTogglePin?: () => void;
   activeItemId?: string | null;
-}
+  className?: string;
+};
 
-export function EmojiPalette({ 
-  onSelect, 
-  onRemove, 
-  onClearAll, 
-  onClose, 
-  currentEmojis,
+export function EmojiPalette({
   emojiOptions,
-  emojiCategories,
-  filterCategory,
+  categories,
+  currentEmojis,
+  onSelect,
+  onRemove,
+  onClearAll,
+  onClose,
   isPinned = false,
   onTogglePin,
-  activeItemId
-}: EmojiPaletteProps) {
+  activeItemId,
+  className,
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const emojisByCategory = useMemo(() => {
+  const byCategory = useMemo(() => {
     const map = new Map<string, EmojiOption[]>();
-    for (const option of emojiOptions) {
-      if (!map.has(option.category)) {
-        map.set(option.category, []);
-      }
-      map.get(option.category)!.push(option);
+    for (const opt of emojiOptions) {
+      if (!map.has(opt.category)) map.set(opt.category, []);
+      map.get(opt.category)!.push(opt);
     }
     return map;
   }, [emojiOptions]);
 
-  const categoriesToRender = useMemo(() => {
-    if (filterCategory) {
-      return emojiCategories.filter(c => c.key === filterCategory);
-    }
-    return emojiCategories;
-  }, [emojiCategories, filterCategory]);
-
-  // Scroll to top when active taxon/group changes, especially useful for pinned sheets
   useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = 0;
-    }
+    if (containerRef.current) containerRef.current.scrollTop = 0;
   }, [activeItemId]);
 
-  // If pinned: 2 columns on mobile, 3-4 on tablet, 2 on desktop sidebar.
-  // If unpinned: 2 on mobile, 3-4 on tablet, 5 on desktop layout.
-  const gridColsClass = isPinned 
-    ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-2 gap-2 sm:gap-2.5' 
-    : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5';
+  // Desktop pinned: compact 2-col list; floating / mobile: denser multi-col grid
+  const gridCols = isPinned
+    ? "grid-cols-1 xl:grid-cols-2 gap-1.5"
+    : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2";
 
   return (
-    <div className={`w-full mx-auto transition-all flex flex-col ${
-      isPinned 
-        ? 'bg-transparent shadow-none border-none p-0 max-w-5xl h-full' 
-        : 'bg-white shadow-2xl rounded-2xl border border-slate-200 p-5 max-w-4xl'
-    }`}>
-      {/* Header with Title and Tip aligned next to each other */}
-      <div className="flex-shrink-0 flex items-center justify-between mb-4 pb-2 border-b border-slate-100 gap-2">
-        <div className="flex items-center gap-1.5 flex-wrap sm:flex-nowrap min-w-0">
-          <div className="flex items-center gap-1 shrink-0">
-            <div className="w-1 h-3.5 bg-indigo-500 rounded-full animate-pulse" />
-            <h3 className="text-[10px] font-black text-slate-800 uppercase tracking-widest">Výběr vlastností</h3>
-          </div>
-          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider bg-slate-50 border border-slate-100 px-1.5 py-0.5 rounded-md select-none shrink-0 sm:ml-1.5">
-            💡 Tip: Kliknutím zapneš/vypneš
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5 shrink-0">
-          {onTogglePin && (
-            <button
-              onClick={(e) => { e.stopPropagation(); onTogglePin(); }}
-              className={`p-1 rounded-xl transition-all cursor-pointer border ${
-                isPinned 
-                  ? 'bg-indigo-50 border-indigo-200 text-indigo-650 hover:bg-indigo-100' 
-                  : 'bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-slate-650 border-slate-100'
-              }`}
-              title={isPinned ? "Odepnout panel" : "Připnout panel (Bok / Spodek)"}
-            >
-              <Pin size={13} className={isPinned ? 'fill-indigo-500 text-indigo-600' : ''} />
-            </button>
-          )}
-          {currentEmojis.length > 0 && (
-            <button
-              onClick={onClearAll}
-              className="flex items-center gap-1 px-2.5 py-1 text-[9px] font-black text-rose-500 hover:bg-rose-50 rounded-lg border border-rose-100 transition-all cursor-pointer"
-            >
-              <Trash2 size={11} />
-              <span>SMAZAT VŠE</span>
-            </button>
-          )}
-          <button
-            onClick={onClose}
-            className="p-1 bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-slate-600 rounded-xl transition-colors border border-slate-100 cursor-pointer"
+    <div
+      className={cn(
+        "w-full flex flex-col min-h-0 transition-all",
+        isPinned
+          ? "bg-transparent p-0 h-full"
+          : "bg-white shadow-2xl rounded-2xl border border-stone-200/90 p-4 sm:p-5",
+        className
+      )}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Header + quick tip */}
+      <div
+        className={cn(
+          "flex-shrink-0 flex items-center gap-2 mb-2.5",
+          isPinned
+            ? "pb-2 border-b border-stone-200/80"
+            : "pb-2 border-b border-stone-100"
+        )}
+      >
+        <div className="min-w-0 flex-1">
+          <p
+            className={cn(
+              "font-black tracking-tight text-stone-800 leading-none",
+              isPinned ? "text-sm" : "text-xs"
+            )}
           >
-            <X size={14} />
-          </button>
+            Vlastnosti
+          </p>
+          <p className="text-[10px] text-stone-400 font-medium mt-0.5 truncate">
+            {currentEmojis.length > 0
+              ? `${currentEmojis.length} vybráno · kliknutím přidáš nebo odebereš`
+              : "Kliknutím přidáš nebo odebereš"}
+          </p>
         </div>
+        {onTogglePin && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onTogglePin();
+            }}
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-lg border text-[10px] font-bold transition-all cursor-pointer shrink-0",
+              isPinned
+                ? "px-2.5 py-1.5 bg-brand-orange text-white border-brand-orange shadow-sm shadow-brand-orange/20"
+                : "p-1.5 bg-stone-50 text-stone-500 border-stone-200 hover:border-brand-orange/40 hover:text-brand-orange"
+            )}
+            title={
+              isPinned
+                ? "Odepnout panel"
+                : "Připnout (PC: vpravo · mobil: dole)"
+            }
+          >
+            <Pin size={13} className={isPinned ? "fill-white" : ""} />
+            {isPinned && <span className="hidden xl:inline">Připnuto</span>}
+          </button>
+        )}
+
+        {currentEmojis.length > 0 && (
+          <button
+            type="button"
+            onClick={onClearAll}
+            className="p-1.5 rounded-lg border border-rose-100 text-rose-500 hover:bg-rose-50 cursor-pointer shrink-0"
+            title="Smazat vše z tohoto pole"
+          >
+            <Trash2 size={13} />
+          </button>
+        )}
+
+        <button
+          type="button"
+          onClick={onClose}
+          className="p-1.5 rounded-lg border border-stone-200 text-stone-400 hover:text-stone-700 hover:bg-stone-50 cursor-pointer shrink-0"
+          title="Zavřít"
+        >
+          <X size={14} />
+        </button>
       </div>
 
-      {/* Emoji categories */}
-      <div 
+      {/* Selected strip on desktop pin — quick overview */}
+      {isPinned && currentEmojis.length > 0 && (
+        <div className="flex-shrink-0 flex flex-wrap gap-1 mb-3 p-2 rounded-xl bg-orange-50/80 border border-orange-100/80">
+          {currentEmojis.map((e) => (
+            <button
+              key={e}
+              type="button"
+              onClick={() => onRemove(e)}
+              className="relative group text-lg leading-none px-1.5 py-0.5 bg-white border border-orange-100 rounded-lg hover:border-rose-300 cursor-pointer"
+              title="Odebrat"
+            >
+              {e}
+              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-rose-500 text-white text-[8px] font-black rounded-full opacity-0 group-hover:opacity-100 flex items-center justify-center">
+                ×
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div
         ref={containerRef}
-        className={`pr-2 overscroll-contain overflow-y-auto scrollbar-thin ${
-          filterCategory 
-            ? 'space-y-6' 
-            : isPinned 
-              ? 'space-y-6 max-h-[25vh] sm:max-h-[35vh] lg:max-h-none lg:flex-1' 
-              : 'space-y-6 max-h-[35vh]'
-        }`}
+        className={cn(
+          "pr-1 overscroll-contain overflow-y-auto min-h-0 space-y-4",
+          isPinned
+            ? "flex-1 max-h-none"
+            : "max-h-[36vh] sm:max-h-[42vh]"
+        )}
       >
-        {categoriesToRender.map(cat => {
-          const items = emojisByCategory.get(cat.key) || [];
+        {categories.map((cat) => {
+          const items = byCategory.get(cat.key) || [];
+          if (items.length === 0) return null;
           return (
-            <div key={cat.key} className="space-y-2">
-              {!filterCategory && (
-                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 bg-slate-350 rounded-full" />
-                  {cat.label}
-                </h4>
-              )}
-              <div className={`grid ${gridColsClass}`}>
-                {items.map(opt => {
+            <section key={cat.key}>
+              <h4
+                className={cn(
+                  "font-black text-stone-400 uppercase tracking-wider mb-1.5 sticky top-0 bg-white/95 backdrop-blur-sm py-1 z-[1]",
+                  isPinned ? "text-[9px]" : "text-[10px]"
+                )}
+              >
+                {cat.label}
+              </h4>
+              <div className={cn("grid", gridCols)}>
+                {items.map((opt) => {
                   const isSelected = currentEmojis.includes(opt.emoji);
                   return (
                     <button
-                      key={opt.emoji}
-                      onClick={() => isSelected ? onRemove(opt.emoji) : onSelect(opt.emoji)}
-                      className={`
-                        group flex items-center gap-2 p-2 rounded-xl transition-all text-left text-xs cursor-pointer border
-                        ${isSelected 
-                          ? 'bg-linear-to-br from-indigo-50/70 to-indigo-100/50 border-indigo-300 text-indigo-900 shadow-xs ring-1 ring-indigo-200/20' 
-                          : 'bg-slate-50/50 hover:bg-white border-transparent hover:border-indigo-300/50 hover:shadow-xs text-slate-600'
-                        }
-                      `}
+                      key={opt.emoji + opt.label}
+                      type="button"
+                      onClick={() =>
+                        isSelected ? onRemove(opt.emoji) : onSelect(opt.emoji)
+                      }
+                      className={cn(
+                        "group flex items-center gap-2 rounded-xl transition-all text-left cursor-pointer border",
+                        isPinned ? "p-2" : "p-2 sm:p-2.5",
+                        isSelected
+                          ? "bg-brand-orange/10 border-brand-orange/35 shadow-sm ring-1 ring-brand-orange/10"
+                          : "bg-stone-50/70 border-transparent hover:bg-white hover:border-stone-200 hover:shadow-sm"
+                      )}
+                      title={opt.label}
                     >
-                      <span className="text-xl flex-shrink-0 drop-shadow-xs group-hover:scale-110 transition-transform whitespace-nowrap select-none">
+                      <span
+                        className={cn(
+                          "shrink-0 select-none leading-none group-hover:scale-110 transition-transform",
+                          isPinned ? "text-lg" : "text-xl"
+                        )}
+                      >
                         {opt.emoji}
                       </span>
-                      <span className={`text-[11px] font-bold flex-1 leading-snug whitespace-normal break-words ${isSelected ? 'text-indigo-800' : 'text-slate-655 group-hover:text-indigo-600'}`}>
+                      <span
+                        className={cn(
+                          "font-bold flex-1 leading-snug line-clamp-2",
+                          isPinned ? "text-[10px]" : "text-[11px]",
+                          isSelected
+                            ? "text-brand-orange-text"
+                            : "text-stone-600"
+                        )}
+                      >
                         {opt.label}
                       </span>
                       {isSelected && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-orange shrink-0" />
                       )}
                     </button>
                   );
                 })}
               </div>
-            </div>
+            </section>
           );
         })}
       </div>

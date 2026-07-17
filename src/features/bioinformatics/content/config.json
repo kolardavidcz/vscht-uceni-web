@@ -44,6 +44,10 @@
         "stedokolsk-chemie": {
           "title": "Středoškolská chemie",
           "order": 2
+        },
+        "zapisky": {
+          "title": "Zápisky",
+          "order": 3
         }
       }
     },
@@ -87,7 +91,7 @@
           "title": "Fyzikální chemie",
           "order": 2
         },
-        "laboratore-pro-bioinformatiku": {
+        "laboratore-pro-bioinfirmstiky-i": {
           "title": "Laboratoře pro bioinformatiku",
           "order": 3
         }

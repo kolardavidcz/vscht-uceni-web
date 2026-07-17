@@ -1,36 +1,30 @@
-import React from 'react';
+import { cn } from "@/lib/cn";
 
-interface ProgressBarProps {
-  value: number; // 0 to 100
-  label?: React.ReactNode;
-  variant?: 'orange' | 'green';
+type Props = {
+  value: number;
+  max: number;
   className?: string;
-}
+  label?: string;
+};
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({ 
-  value, 
-  label, 
-  variant = 'orange', 
-  className = '' 
-}) => {
-  
-  const barColor = variant === 'orange'
-    ? 'bg-linear-to-r from-brand-orange to-orange-500 shadow-[0_0_8px_rgba(249,93,18,0.4)]'
-    : 'bg-linear-to-r from-emerald-400 to-teal-400 shadow-[0_0_8px_rgba(52,211,153,0.4)]';
-
+export function ProgressBar({ value, max, className, label }: Props) {
+  const pct = max > 0 ? Math.min(100, Math.round((value / max) * 100)) : 0;
   return (
-    <div className={`w-full space-y-1.5 ${className}`}>
+    <div className={cn("w-full", className)}>
       {label && (
-        <div className="flex justify-between items-center text-[10px] font-bold text-slate-500 uppercase tracking-wider">
-          {label}
+        <div className="mb-1 flex justify-between text-[11px] font-semibold text-stone-500">
+          <span>{label}</span>
+          <span>
+            {value}/{max} ({pct}%)
+          </span>
         </div>
       )}
-      <div className="bg-slate-200/50 dark:bg-white/5 rounded-full p-[1px] border border-slate-300/30 dark:border-white/5 backdrop-blur-xs h-3">
-        <div 
-          className={`h-full rounded-full transition-all duration-500 ${barColor}`}
-          style={{ width: `${Math.min(Math.max(value, 0), 100)}%` }}
+      <div className="h-2 w-full overflow-hidden rounded-full bg-stone-200/80">
+        <div
+          className="h-full rounded-full bg-brand-orange transition-all duration-500"
+          style={{ width: `${pct}%` }}
         />
       </div>
     </div>
   );
-};
+}

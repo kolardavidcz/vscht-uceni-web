@@ -1,31 +1,37 @@
 {
-  "name": "react-vite-tailwind",
+  "name": "vscht-uceni",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vercel/kv": "^3.0.0",
+    "@vercel/node": "^5.8.26",
     "clsx": "2.1.1",
-    "lucide-react": "^1.23.0",
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
-    "react-router-dom": "^7.18.1",
-    "tailwind-merge": "3.6.0"
+    "highlight.js": "^11.11.1",
+    "lucide-react": "^0.511.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.6.0",
+    "rehype-highlight": "^7.0.2",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
+    "tailwind-merge": "3.3.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "4.3.2",
-    "@types/node": "26.1.0",
-    "@types/react": "19.2.17",
-    "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "6.0.3",
-    "tailwindcss": "4.3.2",
-    "typescript": "6.0.3",
-    "vite": "8.1.3",
-    "vite-plugin-singlefile": "2.3.3"
-  },
-  "allowScripts": {}
+    "@tailwindcss/vite": "^4.1.8",
+    "@types/node": "^22.20.1",
+    "@types/react": "^19.1.6",
+    "@types/react-dom": "^19.1.5",
+    "@vitejs/plugin-react": "^4.5.0",
+    "tailwindcss": "^4.1.8",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-singlefile": "^2.2.0"
+  }
 }

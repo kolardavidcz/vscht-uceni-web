@@ -1,7 +1,8 @@
 {
+  "ignoreCommand": "node scripts/vercel-ignore-build.mjs",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]

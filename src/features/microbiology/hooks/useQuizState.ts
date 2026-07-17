@@ -1,95 +1,119 @@
-import { useState, useCallback, useEffect } from 'react';
-import { EmojiOption } from '../../../types';
-import { sortEmojis } from '../data/data';
+import { useCallback, useEffect, useState } from "react";
+import { sortEmojis } from "../data/emojis";
+import type { EmojiOption } from "../types";
+
+const PIN_KEY = "microbiology_palette_pinned";
 
 export function useQuizState(emojiOptions: EmojiOption[]) {
-  const [selectedEmojis, setSelectedEmojis] = useState<Record<string, string[]>>({});
-  const [activeItemId, setActiveItemId] = useState<string | null>(null);
+  const [selectedEmojis, setSelectedEmojis] = useState<Record<string, string[]>>(
+    {}
+  );
+  const [activeFieldId, setActiveFieldId] = useState<string | null>(null);
   const [showResults, setShowResults] = useState(false);
-  const [isPalettePinned, setIsPalettePinned] = useState(() => localStorage.getItem('microbiology_palette_pinned') === 'true');
+  const [isPalettePinned, setIsPalettePinned] = useState(
+    () => localStorage.getItem(PIN_KEY) === "true"
+  );
 
-  const handleTogglePin = useCallback(() => {
-    setIsPalettePinned(prev => {
+  const togglePin = useCallback(() => {
+    setIsPalettePinned((prev) => {
       const next = !prev;
-      localStorage.setItem('microbiology_palette_pinned', String(next));
+      localStorage.setItem(PIN_KEY, String(next));
       return next;
     });
   }, []);
 
-  const handleActivate = useCallback((id: string) => {
-    setActiveItemId(prev => prev === id ? null : id);
+  const activate = useCallback((id: string) => {
+    setActiveFieldId((prev) => (prev === id ? null : id));
   }, []);
 
-  const handleSelectEmoji = useCallback((id: string, emoji: string) => {
-    setSelectedEmojis(prev => {
-      const current = prev[id] || [];
-      if (current.includes(emoji)) return prev;
-      const updated = [...current, emoji];
-      return { ...prev, [id]: sortEmojis(updated, emojiOptions) };
-    });
-  }, [emojiOptions]);
+  const closePalette = useCallback(() => {
+    setActiveFieldId(null);
+  }, []);
 
-  const handleRemoveEmoji = useCallback((id: string, emoji: string) => {
-    setSelectedEmojis(prev => {
-      const current = prev[id] || [];
-      const updated = current.filter(e => e !== emoji);
+  const selectEmoji = useCallback(
+    (fieldId: string, emoji: string) => {
+      setShowResults(false);
+      setSelectedEmojis((prev) => {
+        const current = prev[fieldId] || [];
+        if (current.includes(emoji)) return prev;
+        return {
+          ...prev,
+          [fieldId]: sortEmojis([...current, emoji], emojiOptions),
+        };
+      });
+    },
+    [emojiOptions]
+  );
+
+  const removeEmoji = useCallback((fieldId: string, emoji: string) => {
+    setShowResults(false);
+    setSelectedEmojis((prev) => {
+      const current = prev[fieldId] || [];
+      const updated = current.filter((e) => e !== emoji);
       if (updated.length === 0) {
         const next = { ...prev };
-        delete next[id];
+        delete next[fieldId];
         return next;
       }
-      return { ...prev, [id]: updated };
+      return { ...prev, [fieldId]: updated };
     });
   }, []);
 
-  const handleClearAll = useCallback((id: string) => {
-    setSelectedEmojis(prev => {
+  const toggleEmoji = useCallback(
+    (fieldId: string, emoji: string) => {
+      const current = selectedEmojis[fieldId] || [];
+      if (current.includes(emoji)) removeEmoji(fieldId, emoji);
+      else selectEmoji(fieldId, emoji);
+    },
+    [selectedEmojis, removeEmoji, selectEmoji]
+  );
+
+  const clearField = useCallback((fieldId: string) => {
+    setShowResults(false);
+    setSelectedEmojis((prev) => {
       const next = { ...prev };
-      delete next[id];
+      delete next[fieldId];
       return next;
     });
   }, []);
 
-  const handleClosePalette = useCallback(() => {
-    setActiveItemId(null);
+  const resetAll = useCallback(() => {
+    setSelectedEmojis({});
+    setShowResults(false);
+    setActiveFieldId(null);
   }, []);
 
-  // Close palette when clicking outside
-  useEffect(() => {
-    if (!activeItemId) return;
-    
-    const handleDocumentClick = () => {
-      setActiveItemId(null);
-    };
-    
-    document.addEventListener('click', handleDocumentClick);
-    return () => {
-      document.removeEventListener('click', handleDocumentClick);
-    };
-  }, [activeItemId]);
-
-  const handleCheck = useCallback(() => {
+  const checkAnswers = useCallback(() => {
     setShowResults(true);
   }, []);
 
-  const handleReset = useCallback(() => {
-    setSelectedEmojis({});
-    setActiveItemId(null);
-    setShowResults(false);
-  }, []);
+  // Close floating palette when clicking outside (pinned stays open)
+  useEffect(() => {
+    if (!activeFieldId || isPalettePinned) return;
+    const onDocClick = () => setActiveFieldId(null);
+    // Defer so the activating click doesn't immediately close
+    const t = window.setTimeout(() => {
+      document.addEventListener("click", onDocClick);
+    }, 0);
+    return () => {
+      window.clearTimeout(t);
+      document.removeEventListener("click", onDocClick);
+    };
+  }, [activeFieldId, isPalettePinned]);
 
   return {
     selectedEmojis,
-    activeItemId,
+    activeFieldId,
     showResults,
     isPalettePinned,
-    handleTogglePin,
-    handleActivate,
-    handleSelectEmoji,
-    handleRemoveEmoji,
-    handleClearAll,
-    handleClosePalette,
-    handleCheck,
-    handleReset
+    togglePin,
+    activate,
+    closePalette,
+    selectEmoji,
+    removeEmoji,
+    toggleEmoji,
+    clearField,
+    resetAll,
+    checkAnswers,
   };
 }

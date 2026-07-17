@@ -1,0 +1,223 @@
+import { useEffect, useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { BookOpen, Menu, MessageSquarePlus, Search, X } from "lucide-react";
+import { PageShell } from "@/components/layout/PageShell";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/cn";
+import { MarkdownView } from "../components/MarkdownView";
+import { PA2ToAG1Overview } from "../components/PA2ToAG1Overview";
+import {
+  SuggestEditModal,
+  materialToRepoPath,
+} from "../components/SuggestEditModal";
+import {
+  findMaterial,
+  groupByCategory,
+  loadWikiMaterials,
+  materialHref,
+  type WikiMaterial,
+} from "../lib/contentLoader";
+
+export function WikiPage() {
+  const params = useParams();
+  const splat = params["*"] || "";
+  const segments = splat ? splat.split("/").filter(Boolean) : [];
+
+  const materials = useMemo(() => loadWikiMaterials(), []);
+  const groups = useMemo(() => groupByCategory(materials), [materials]);
+  const active = findMaterial(materials, segments);
+
+  const [query, setQuery] = useState("");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [suggestOpen, setSuggestOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = active
+      ? `${active.title} — Bioinformatika`
+      : "Obor: Bioinformatika — VŠCHT Učení";
+  }, [active]);
+
+  useEffect(() => {
+    setSidebarOpen(false);
+    setSuggestOpen(false);
+  }, [splat]);
+
+  const filteredGroups = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return groups;
+    return groups
+      .map((g) => ({
+        ...g,
+        items: g.items.filter(
+          (m) =>
+            m.title.toLowerCase().includes(q) ||
+            m.key.toLowerCase().includes(q)
+        ),
+      }))
+      .filter((g) => g.items.length > 0);
+  }, [groups, query]);
+
+  const isSpecial = active?.key === "pa2-ag1-overview";
+  /** Interactive special pages aren't a single .md source for full-file PR */
+  const canSuggestMarkdown = Boolean(active && !isSpecial);
+
+  const sidebar = (
+    <aside className="flex flex-col h-full min-h-0 max-h-full">
+      <div className="p-3 border-b border-stone-200 shrink-0">
+        <div className="relative">
+          <Search
+            size={14}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400"
+          />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Hledat materiály…"
+            className="w-full rounded-xl border border-stone-200 bg-white pl-9 pr-3 py-2 text-xs"
+          />
+        </div>
+      </div>
+      <nav className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-2 space-y-3">
+        {filteredGroups.map((g) => (
+          <div key={g.key}>
+            <div className="px-2 py-1 text-[10px] font-black uppercase tracking-wider text-stone-400 sticky top-0 bg-white/95 backdrop-blur-sm z-[1]">
+              {g.label}
+            </div>
+            <ul className="space-y-0.5">
+              {g.items.map((m) => {
+                const href = materialHref(m);
+                const isActive = active?.path === m.path;
+                return (
+                  <li key={m.path}>
+                    <Link
+                      to={href}
+                      className={cn(
+                        "block rounded-lg px-2.5 py-2 text-xs font-semibold transition-colors",
+                        isActive
+                          ? "bg-brand-orange text-white shadow-sm"
+                          : "text-stone-700 hover:bg-stone-100"
+                      )}
+                    >
+                      {m.title}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+        {filteredGroups.length === 0 && (
+          <p className="text-xs text-stone-400 p-3">Nic nenalezeno.</p>
+        )}
+      </nav>
+    </aside>
+  );
+
+  const suggestFooter = (material: WikiMaterial) => (
+    <div className="mt-8 pt-5 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3">
+      <p className="text-xs text-stone-500 font-medium">
+        Našli jste chybu nebo máte doplnění k tomuto materiálu?
+      </p>
+      {canSuggestMarkdown ? (
+        <button
+          type="button"
+          onClick={() => setSuggestOpen(true)}
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-brand-orange/25 bg-brand-orange/5 text-brand-orange-text hover:bg-brand-orange/10 text-xs font-bold transition-colors cursor-pointer"
+        >
+          <MessageSquarePlus size={16} />
+          Navrhnout úpravu
+        </button>
+      ) : (
+        <a
+          href={`mailto:kolarv@vscht.cz?subject=${encodeURIComponent(
+            `Návrh úpravy: ${material.title}`
+          )}&body=${encodeURIComponent(
+            `Stránka: ${material.title}\n\nNávrh:\n`
+          )}`}
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-brand-orange/25 bg-brand-orange/5 text-brand-orange-text hover:bg-brand-orange/10 text-xs font-bold transition-colors"
+        >
+          <MessageSquarePlus size={16} />
+          Navrhnout úpravu (e-mail)
+        </a>
+      )}
+    </div>
+  );
+
+  return (
+    <PageShell
+      title="Obor: Bioinformatika"
+      subtitle="Studijní wiki · zápisky, rozcestníky, PA2→AG1"
+      theme="light"
+      maxWidth="max-w-7xl"
+      actions={
+        <Button
+          variant="dark"
+          size="sm"
+          className="lg:hidden"
+          onClick={() => setSidebarOpen(true)}
+        >
+          <Menu size={16} /> Materiály
+        </Button>
+      }
+    >
+      <div className="flex gap-6 items-start min-h-[70vh]">
+        <div className="hidden lg:flex w-72 shrink-0 flex-col rounded-2xl border border-stone-200 bg-white shadow-sm sticky top-24 self-start h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] min-h-0 overflow-hidden">
+          {sidebar}
+        </div>
+
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden">
+            <div
+              className="absolute inset-0 bg-black/40"
+              onClick={() => setSidebarOpen(false)}
+            />
+            <div className="absolute left-0 top-0 bottom-0 w-[min(20rem,90vw)] bg-white shadow-xl flex flex-col min-h-0">
+              <div className="flex items-center justify-between p-3 border-b shrink-0">
+                <span className="font-bold text-sm">Materiály</span>
+                <button
+                  type="button"
+                  className="p-2 cursor-pointer"
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
+                {sidebar}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="flex-1 min-w-0">
+          <div className="rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8">
+            {!active ? (
+              <div className="text-center py-16 text-stone-500">
+                <BookOpen className="mx-auto mb-3 text-brand-orange" size={32} />
+                <p className="font-semibold">Vyberte materiál v bočním panelu</p>
+              </div>
+            ) : isSpecial ? (
+              <>
+                <PA2ToAG1Overview />
+                {suggestFooter(active)}
+              </>
+            ) : (
+              <>
+                <MarkdownView content={active.raw} />
+                {suggestFooter(active)}
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {suggestOpen && active && canSuggestMarkdown && (
+        <SuggestEditModal
+          material={active}
+          repoFilePath={materialToRepoPath(active)}
+          onClose={() => setSuggestOpen(false)}
+        />
+      )}
+    </PageShell>
+  );
+}

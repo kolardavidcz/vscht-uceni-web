@@ -1,118 +1,144 @@
-# VŠCHT Učení – Web Learning Portal
+# VŠCHT Učení
 
-An interactive web portal and student resource hub developed for **UCT Prague (VŠCHT)**. Built with **React 19 + Vite 8 + Tailwind CSS 4**, hosted on **Vercel** as a single-page application (SPA).
+Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** — React SPA s třemi nezávislými nástroji:
 
----
+1. **Systematika bakterií** — emoji taxonomický kvíz a studijní režimy  
+2. **Obor: Bioinformatika** — Markdown wiki + MathJax + PA2→AG1 přehled  
+3. **Python Analyzátor** — anotovaný DNA/RNA skript s mock během  
 
-## Quick Start
+## Quick start
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server (hot reload)
-npm run dev
-
-# Production build (single HTML file)
-npm run build
+npm run dev      # http://localhost:5173
+npm run build    # single-file dist/index.html (+ favicon)
+npm run preview
 ```
 
----
+## Stack
 
-## Project Structure
-
-```
-vscht_uceni_web/
-├── AI_ARCHITECTURE.md           ← Global AI context (design rules, routing, styling)
-├── index.html                   ← Entry point (MathJax CDN, Google Fonts, favicon)
-├── package.json                 ← React 19, Vite 8, Tailwind 4
-├── vite.config.ts               ← react + tailwindcss plugins, singlefile (build only)
-├── vercel.json                  ← SPA rewrite (all routes → /index.html)
-├── tsconfig.json                ← ESNext, bundler resolution, strict mode
-│
-└── src/
-    ├── main.tsx                 ← React DOM root
-    ├── App.tsx                  ← BrowserRouter routing hub
-    ├── index.css                ← Tailwind v4 @theme, all custom CSS classes
-    ├── types.ts                 ← Shared TypeScript types
-    │
-    ├── components/ui/           ← Shared UI library
-    │   ├── Card.tsx             ← variant="light"|"dark", glassmorphic
-    │   ├── Button.tsx           ← variant="primary"|"secondary"|"ghost"|"dark"
-    │   ├── Badge.tsx            ← Semantic color tags
-    │   └── ProgressBar.tsx      ← variant="orange"|"green"
-    │
-    ├── pages/
-    │   └── Home.tsx             ← Landing portal (dark theme, 3 feature cards)
-    │
-    └── features/                ← Three independent feature modules
-        ├── microbiology/        ← 🦠 Emoji taxonomy quiz
-        │   └── AI_CONTEXT.md    ← Feature-specific AI instructions
-        ├── bioinformatics/      ← 🧬 Markdown wiki
-        │   └── AI_CONTEXT.md    ← Feature-specific AI instructions
-        └── python-analyzer/     ← 🐍 Python script viewer
-            └── AI_CONTEXT.md    ← Feature-specific AI instructions
-```
-
----
-
-## Feature Modules
-
-### 🦠 Microbiology — Bacterial Taxonomy Quiz
-**Route:** `/mikrobiologie`
-
-An interactive quiz where students match bacterial taxons with correct physiological properties using emoji. Features include:
-- **Quiz Page** — Fill-in worksheet with emoji palette (floating or pinned sidebar)
-- **Study Page** — Three tabs: taxonomy tree browser, spaced-repetition flashcards, comparison matrix
-- **Admin Panel** — Edit correct answers and manage emoji categories
-
-### 🧬 Bioinformatics Wiki
-**Route:** `/obor-bioinformatika`
-
-A Markdown-powered study hub that dynamically loads `.md` files via Vite's `import.meta.glob`. Features:
-- Sidebar navigation grouped by semester and course
-- Custom regex-based markdown parser with C/VBA syntax highlighting
-- Interactive PA2→AG1 curriculum matrix component
-- MathJax support for LaTeX equations
-
-### 🐍 Python Analyzer
-**Route:** `/python-analyza`
-
-A standalone code viewer displaying a Python DNA/RNA analysis script. Users can copy the script or trigger a mock execution with simulated terminal output.
-
----
-
-## AI Agent Instructions
-
-Each feature module contains an `AI_CONTEXT.md` file with detailed instructions for AI coding agents. The root-level `AI_ARCHITECTURE.md` contains global design rules and constraints.
-
-### Key Design Rules
-1. **ONLY ORANGE** (`#f95d12`) is allowed as an accent color — no blue, green, or purple backgrounds
-2. Light pages use **white** or `stone-50` backgrounds; headers are always **dark**
-3. The app builds to a **single HTML file** via `vite-plugin-singlefile`
-4. The custom markdown parser does NOT support full CommonMark — see `markdownParser.ts` for supported features
-
-### Build Constraint
-All assets must be inlineable. Do not introduce external CSS imports or heavy local files that would break single-file bundling.
-
----
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Framework | React 19 |
-| Bundler | Vite 8.1 |
-| Styling | Tailwind CSS 4 (v4 syntax, no config file) |
-| Routing | React Router 7 |
-| Icons | Lucide React |
-| Fonts | Plus Jakarta Sans, Outfit (Google Fonts) |
+| Layer | Choice |
+|-------|--------|
+| UI | React 19 + TypeScript |
+| Bundler | Vite 6 + `vite-plugin-singlefile` (prod) |
+| CSS | Tailwind CSS 4 (`@theme` tokens) |
+| Router | React Router 7 |
+| Markdown | `react-markdown` + GFM + `rehype-raw` |
 | Math | MathJax 3 (CDN) |
-| Deploy | Vercel (SPA mode) |
-| Build | `vite-plugin-singlefile` (single HTML output) |
+| Deploy | Vercel SPA (`vercel.json` rewrites) |
 
----
+## Project layout
+
+```
+src/
+  components/ui/          shared Button, Card, Badge, ProgressBar
+  components/layout/      PageShell
+  pages/HomePage.tsx
+  features/
+    microbiology/         quiz, study modes, admin + domain data
+    bioinformatics/       wiki, PA2→AG1, content/*.md
+    python-analyzer/      script viewer + mock terminal
+```
+
+## Routes
+
+| Path | Feature |
+|------|---------|
+| `/` | Landing |
+| `/mikrobiologie` | Quiz |
+| `/mikrobiologie/studijni-strom` | Taxonomy tree study |
+| `/mikrobiologie/samostudium` | Flashcards |
+| `/mikrobiologie/srovnavaci-matice` | Comparison matrix |
+| `/mikrobiologie/admin` | Admin: správné odpovědi + emoji katalog (Vercel KV) |
+| `/obor-bioinformatika/*` | Wiki |
+| `/python-analyza` | Python analyzer |
+
+## Brand
+
+- Accent: **orange only** `#f95d12` / text `#c2410c`
+- Dark surfaces: espresso `#0f0906` + warm browns
+- Fonts: Plus Jakarta Sans (body), Outfit (headings)
+- No blue/green/purple brand backgrounds
+
+## Data notes
+
+- **Microbiology**: taxonomy + emoji catalog ship in the bundle.
+- **Shared store**: Vercel KV via `GET/POST /api/get-data` and `/api/save-data`.
+- **Offline/admin fallback**: `localStorage` on this browser.
+- **Admin password**: UI gate + server check. Prefer env `MICROBIOLOGY_ADMIN_PASSWORD` on Vercel (legacy classroom default still accepted if unset).
+- **Wiki content**: `src/features/bioinformatics/content/**/*.md` + `config.json`.
+- **Archive**: previous implementation lives in `.old/` for reference only.
+
+## Deploy (Vercel)
+
+1. Connect the repo; build `npm run build`, output `dist`.
+2. Add **Vercel KV** (Storage → KV) so `KV_REST_API_URL` / `KV_REST_API_TOKEN` are injected.
+3. Optional: set `MICROBIOLOGY_ADMIN_PASSWORD`.
+4. SPA rewrites skip `/api/*` (see `vercel.json`).
+
+### Wiki „Navrhnout úpravu“ → GitHub PR (no auto-merge)
+
+In-page markdown editor posts to `POST /api/suggest-edit`, which:
+
+1. Creates a branch on [kolardavidcz/vscht-uceni-web](https://github.com/kolardavidcz/vscht-uceni-web)
+2. Commits the edited `.md`
+3. Opens a **pull request** into `main`
+4. **Does not merge** — you review and merge in the GitHub UI
+
+#### Fine-grained Personal Access Token (recommended)
+
+1. GitHub → avatar → **Settings** → **Developer settings** (left bottom)  
+   → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
+2. **Token name:** e.g. `vscht-uceni-wiki-suggest`
+3. **Expiration:** e.g. 90 days (or custom)
+4. **Resource owner:** your user (`kolardavidcz`)
+5. **Repository access:** **Only select repositories** → `vscht-uceni-web`
+6. **Permissions → Repository permissions:**
+   - **Contents:** Read and write *(branch + commit)*
+   - **Pull requests:** Read and write *(open PR; never auto-merge)*
+   - **Metadata:** Read-only *(required)*
+7. Generate → copy the token once
+8. **Local:** put in `.env.local` (gitignored):
+   ```env
+   GITHUB_TOKEN=github_pat_...
+   ```
+   Then **restart** `npm run dev` (Vite loads env only on start).  
+   Local `/api/suggest-edit` is provided by `vite-plugin-local-api.ts`.
+
+9. **Vercel:** project → **Settings → Environment Variables** → same `GITHUB_TOKEN` → Redeploy.
+
+Classic PATs also work (`repo` scope) but fine-grained is safer (one repo only).
+
+Only files under `src/features/bioinformatics/content/**/*.md` are allowed.
+
+#### Skip Vercel builds for suggestion branches
+
+`vercel.json` → `"ignoreCommand": "node scripts/vercel-ignore-build.mjs"`
+
+| Branch / commit | Vercel build? |
+|-----------------|---------------|
+| `main` | **Yes** |
+| `suggest/*` | **No** (skipped) |
+| Commit message contains `[skip vercel]` | **No** |
+
+**Where you see the skip message (not in the PR comment thread):**  
+Vercel → Project → **Deployments** → open the entry → log line like:
+
+```text
+SKIPPED because of [skip vercel] / suggest/* branch
+```
+
+GitHub PR “Conversation” will **not** show that text — only Vercel build logs (status usually **Canceled**).
+
+**Required:** push `vercel.json` + `scripts/vercel-ignore-build.mjs` to **`main`** first.  
+Until that is on GitHub `main`, suggestion PRs are based on old config → **no ignore script runs** → no skip message, and Vercel may still try to deploy.
+
+Optional dashboard mirror: Project Settings → **Git** → **Ignored Build Step** →  
+`node scripts/vercel-ignore-build.mjs`  
+(and enable **Automatically expose System Environment Variables**)
+
+**Git author:** commits use the **token owner** (`kolardavidcz`). Suggestor name is only in the PR body.
 
 ## Contact
 
-Questions and feedback: [kolarv@vscht.cz](mailto:kolarv@vscht.cz)
+[kolarv@vscht.cz](mailto:kolarv@vscht.cz)

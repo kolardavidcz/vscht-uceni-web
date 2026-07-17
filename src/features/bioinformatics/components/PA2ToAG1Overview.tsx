@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react';
 import { AlertTriangle, ChevronDown, ChevronUp, BookOpen, GraduationCap, Users, Terminal } from 'lucide-react';
 import { materialsData, SchoolMaterial, SchoolMaterialNode } from '../data/materialsData';
-import { Card } from '../../../components/ui/Card';
-import { Badge } from '../../../components/ui/Badge';
+import { Card } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
 
 // Helper function to extract all leaf topics (nodes with no children or empty children)
 function getLeafNodes(node: SchoolMaterialNode): SchoolMaterialNode[] {
