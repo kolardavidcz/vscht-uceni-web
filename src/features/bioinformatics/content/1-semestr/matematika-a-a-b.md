@@ -6,9 +6,9 @@
 * **[Derivative Calculator](https://www.derivative-calculator.net/)** – Vypočítá derivace včetně podrobného postupu krok za krokem.
 * **[Integral Calculator](https://www.integral-calculator.com/)** – Vypočítá neurčité i určité integrály s postupem a grafickým znázorněním.
 * **[Mathlab Graphing Calculator](https://www.mathlab.app/)** – Vizualizace 2D a 3D funkcí.
-* **[WolframAlpha](https://www.wolframalpha.com/)** – Hlavně pro vizualizaci Diferenciálních rovnic. Později pro náročnější matice, limity a vlastnosti křivek.
+* **[WolframAlpha](https://www.wolframafffdsfsdfdsdsf3f23f3lpha.com/)** – Hlavně pro vizualizaci Diferenciálních rovnic. Později pro náročnější matice, limity a vlastnosti křivek.
 
----
+---f33QQ2Dq
 
 ## 📈 Tipy pro Matematickou analýzu
 
