@@ -7,7 +7,7 @@ Studium zde (a obzvláště bioinformatiky, která kombinuje chemii, biologii a 
 
 ## 🚀 Rychlý rozcestník (VŠCHT 101)
 
-Abyste nemuseli složitě dohledávat základní odkazy, zde je rychlá startovací sada:
+Abyste nemuseli složitě dohledávat základní odkazy, dddddddddddzde je rychlá startovací sada:
 
 * **Informační systémy:** [SIS VŠCHT](https://sis.vscht.cz/) a [Moodle VŠCHT](https://e-learning.vscht.cz/)
 * **Studijní literatura:** [VŠCHT nakladatelství](https://vydavatelstvi.vscht.cz/) (mnoho skript je dostupných zdarma v elektronické verzi pro studenty) nebo [starší e-learningový archiv skript](https://e-learning.vscht.cz/course/view.php?id=1076).
