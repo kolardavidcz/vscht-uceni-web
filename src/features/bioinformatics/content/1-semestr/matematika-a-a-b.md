@@ -1,6 +1,6 @@
 # 📐 Matematika A + B & Diskrétní matematika
 
-
+test123
 ## 🛠️ Užitečné nástroje a kalkulačky
 
 * **[Derivative Calculator](https://www.derivative-calculator.net/)** – Vypočítá derivace včetně podrobného postupu krok za krokem.
