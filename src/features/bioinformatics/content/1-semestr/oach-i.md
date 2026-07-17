@@ -10,6 +10,8 @@
 
 ---
 
+quickfix
+
 ## 🔮 Symetrie a bodové grupy
 
 Určování symetrie molekul bylo pro mě  náročnější a zde uvádím následující pomůcky:
