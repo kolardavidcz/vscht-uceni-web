@@ -1,7 +1,7 @@
 # 🎓 Obecný průvodce studiem & Tipy (VŠCHT Survival Kit)
 
 Vítejte na VŠCHT!
-Studium zde (a obzvláště bioinformatiky, která kombinuje chemii, biologii a informatiku) je maraton, nikoli sprint. Tato stránka obsahuje základní praktické tipy, jak si usnadnit život, nezbláznit se z kvanta učiva a efektivně organizovat svůj čas a studijní materiály.
+Studium zde (a obzvláště bioinformatiky, která kombinuje chemii, biologii a informatiku) je maraton, nikoli sprint. Tato stránka obsahuje základní praktické tipy, jak si usnadnit život, nezbláznit se z kvanta učiva a efektivně organizovat svůj čas a studijní materiály.ssssssss
 
 ---
 
