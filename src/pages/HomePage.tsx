@@ -37,57 +37,63 @@ export function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full animate-[scale-in_0.35s_ease]">
-          <Link to="/mikrobiologie" className="block h-full">
-            <Card
-              variant="dark"
-              hover
-              className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all" />
-              <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform">
-                <Biohazard size={24} />
-              </div>
-              <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
-                Systematika bakterií
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
-                Procvičujte taxonomii a vlastnosti bakteriálních kmenů pomocí
-                emoji. Obsahuje studijní režim a administraci.
-              </p>
-              <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
-                <span className="flex items-center gap-1.5">
-                  <ClipboardList size={14} />
-                  Pracovní list & kvíz
-                </span>
-                <ChevronRight
-                  size={16}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </div>
-            </Card>
-          </Link>
-
+          {/* Systematika — whole card is the link */}
           <Card
             variant="dark"
             hover
             className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
           >
-            <Link to="/obor-bioinformatika" className="absolute inset-0 z-0" aria-label="Obor Bioinformatika" />
-            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all" />
-            <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform relative z-10">
+            <Link
+              to="/mikrobiologie"
+              className="absolute inset-0 z-[1] rounded-2xl"
+              aria-label="Systematika bakterií"
+            />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all pointer-events-none" />
+            <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform">
+              <Biohazard size={24} />
+            </div>
+            <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
+              Systematika bakterií
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
+              Procvičujte taxonomii a vlastnosti bakteriálních kmenů pomocí
+              emoji. Obsahuje studijní režim a administraci.
+            </p>
+            <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
+              <span className="flex items-center gap-1.5">
+                <ClipboardList size={14} />
+                Pracovní list & kvíz
+              </span>
+              <ChevronRight
+                size={16}
+                className="group-hover:translate-x-1 transition-transform"
+              />
+            </div>
+          </Card>
+
+          {/* Bioinformatika — full card + nested shortcut chips above the link */}
+          <Card
+            variant="dark"
+            hover
+            className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
+          >
+            <Link
+              to="/obor-bioinformatika"
+              className="absolute inset-0 z-[1] rounded-2xl"
+              aria-label="Obor Bioinformatika"
+            />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all pointer-events-none" />
+            <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform">
               <BookOpen size={24} />
             </div>
-            <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors relative z-10">
+            <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
               Obor: Bioinformatika
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-3 flex-1 relative z-10">
+            <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-3 flex-1">
               Studijní rozcestník, zápisky a materiály z předmětů. Markdown wiki
               s MathJax a interaktivním PA2→AG1 přehledem.
             </p>
-            <div
-              className="flex flex-wrap gap-2 mb-5 relative z-10"
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className="relative z-[2] flex flex-wrap gap-2 mb-5">
               <Link
                 to="/obor-bioinformatika/1-semestr/bi-pa-1"
                 className="px-2.5 py-1 bg-brand-orange/10 hover:bg-brand-orange/20 text-brand-orange text-[10px] font-black tracking-wider uppercase rounded-md border border-brand-orange/20"
@@ -107,44 +113,51 @@ export function HomePage() {
                 Wiki
               </Link>
             </div>
-            <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2 relative z-10 pointer-events-none">
+            <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
               <span className="flex items-center gap-1.5">
                 <Binary size={14} />
                 Markdown wiki
               </span>
-              <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              <ChevronRight
+                size={16}
+                className="group-hover:translate-x-1 transition-transform"
+              />
             </div>
           </Card>
 
-          <Link to="/python-analyza" className="block h-full">
-            <Card
-              variant="dark"
-              hover
-              className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all" />
-              <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform">
-                <Terminal size={24} />
-              </div>
-              <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
-                Python Analyzátor
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
-                Anotovaný skript pro analýzu DNA/RNA — kopírování a mock běh v
-                terminálu.
-              </p>
-              <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
-                <span className="flex items-center gap-1.5">
-                  <Terminal size={14} />
-                  Skript & demo
-                </span>
-                <ChevronRight
-                  size={16}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
-              </div>
-            </Card>
-          </Link>
+          {/* Python — whole card is the link */}
+          <Card
+            variant="dark"
+            hover
+            className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
+          >
+            <Link
+              to="/python-analyza"
+              className="absolute inset-0 z-[1] rounded-2xl"
+              aria-label="Python Analyzátor"
+            />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all pointer-events-none" />
+            <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform">
+              <Terminal size={24} />
+            </div>
+            <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
+              Python Analyzátor
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
+              Anotovaný skript pro analýzu DNA/RNA — kopírování a mock běh v
+              terminálu.
+            </p>
+            <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
+              <span className="flex items-center gap-1.5">
+                <Terminal size={14} />
+                Skript & demo
+              </span>
+              <ChevronRight
+                size={16}
+                className="group-hover:translate-x-1 transition-transform"
+              />
+            </div>
+          </Card>
         </div>
       </main>
 
