@@ -8,31 +8,12 @@
           "title": "Přehled FIT zdrojů z PA2 pro AG1",
           "order": 1
         },
-        "prazdniny-programovani": {
-          "title": "Prázdninové programování",
-          "order": 2
-        },
         "dml": {
           "title": "Diskrétní matematika a logika",
-          "order": 3
-        }
-      }
-    },
-    "pa2": {
-      "label": "PA2 - Programování a Algoritmy 2",
-      "order": 0.5,
-      "files": {
-        "week01": {
-          "title": "1. Týden: Od C k C++, Základní konstrukce",
-          "order": 1
-        },
-        "week02": {
-          "title": "2. Týden: Třídy, objekty a úvod do STL",
           "order": 2
         }
       }
     },
-
     "0-obecne": {
       "label": "Obecné informace",
       "order": 1,
@@ -55,9 +36,40 @@
       "label": "1. Semestr",
       "order": 2,
       "files": {
-        "bi-pa-1": {
-          "title": "BI-PA1 (Programování 1)",
-          "order": 1
+        "bi-pa1": {
+          "title": "BI-PA1 — Programování v C",
+          "order": 1,
+          "files": {
+            "00-jak-cist": {
+              "title": "0 ·Jak tohle číst",
+              "order": 0
+            },
+			"05-wsl-a-setup": {
+              "title": "1 · WSL a setup",
+              "order": 1
+            },
+            "01-kalendar": {
+              "title": "2 ·Kalendář co musím umět",
+              "order": 2
+            },
+            "02-jak-to-spravit": {
+              "title": "2 · Jak to spravit (debug · struktura · pasty)",
+              "order": 2
+            },
+            "03-struktura-kodu": {
+              "title": "3 · Struktura kódu",
+              "order": 3
+            },
+            "04-testovaci-skript": {
+              "title": "4 · Testovací skript",
+              "order": 4
+            },
+
+            "06-progtest-a-zkouska": {
+              "title": "06 · Progtest a zkouška (plné rady)",
+              "order": 6
+            }
+          }
         },
         "oach-i": {
           "title": "Obecná a anorganická chemie I",

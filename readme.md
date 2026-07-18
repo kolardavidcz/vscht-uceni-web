@@ -11,7 +11,7 @@ Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** — React SPA s tř
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm run build    # single-file dist/index.html (+ favicon)
+npm run build    # multi-chunk dist/ (hashed JS/CSS + index.html)
 npm run preview
 ```
 
@@ -20,7 +20,7 @@ npm run preview
 | Layer | Choice |
 |-------|--------|
 | UI | React 19 + TypeScript |
-| Bundler | Vite 6 + `vite-plugin-singlefile` (prod) |
+| Bundler | Vite 6 multi-chunk (lazy feature routes; code-split by route) |
 | CSS | Tailwind CSS 4 (`@theme` tokens) |
 | Router | React Router 7 |
 | Markdown | `react-markdown` + GFM + `rehype-raw` |

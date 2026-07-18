@@ -1,0 +1,106 @@
+Rady ke zkoušce
+Znalosti
+Základní obraty
+Dynamické pole jako struktura s pomocnými funkcemi.
+Načítání řádků ze vstupu pomocí funkce getline() a jejich zpracování.
+Průchod řetězce bez použití funkce strlen().
+Formátovací řetězec ve scanf by ideálně měl končit konverzí.
+Doporučené obraty
+Reprezentuje-li struktura nějakou část vstupu/výstupu, měla by existovat funkce na čtení/výpis struktury.
+Sklepávání pole (read a write indexy).
+Udržování seřazeného pole / seznamu.
+Binární vyhledávání v seřazeném poli (klidně umět přepsat std::lower_bound z cppreference).
+Procházení seřazených polí / seznamů najednou (algoritmus merge a jeho variace).
+Dvojhvězdičkový pointer na manipulaci seznamu / stromu.
+Memoizace u rekurze, pokud mi stačí, aby rekurze vracela nějaký jeden výsledek.
+Teorie je důležitá i v praktické části
+Když nevím, co je struktura, těžko napíšu přehledný kód.
+Když nevím, co je pointer, těžko si poznamenám místa v paměti k pozdější návštěvě.
+Když nevím, že řetězec je zakončený nulovým znakem (a že na něj potřebuji prostor), budu mít spoustu problémů s pamětí.
+Když nevím, že mezera ve formátovacím řetězci ve funkci scanf přeskočí všechny bílé znaky ze vstupu, budu místo toho vymýšlet šílenosti.
+Když nevím, že (a proč) scanf("%s") nemůže fungovat bezpečně, budu se divit, proč mi progtest padá.
+Když nevím, jak funguje dynamické pole, nebudu umět uložit vstupní data.
+Když nevím, že realokovat je potřeba geometrickou řadou, neprojdu nejspíš některou sadou testů na čas.
+Když nevím, co je asymptotická složitost algoritmu, nevím, kde zrychlit svůj program.
+Když nevím, že spoustu algoritmů zrychlím seřazením dat, budu mít zbytečně málo bodů.
+Když nevím, jak si udržovat seřazené pole bez použití řadicích funkcí, budu se také divit, proč mám málo bodů.
+Když nevím, že ve standardní knihovně existují funkce qsort a bsearch, nevím, jak rozumně řadit a jak pracovat se seřazeným polem.
+Když nevím, že rekurze potřebuje ukončovací podmínku, nebude mi fungovat.
+Když nevím, jak je organizovaná paměť, co jsou halda, zásobník, datový segment a kdy se k čemu používají, můžu se divit, proč mi padá rekurze nebo proč si nemůžu vracet pointer na lokální proměnnou.
+Funkce, které je dobré znát (o kterých je dobré vědět)
+malloc, realloc, free a jejich praktičtí kamarádi getline, strdup a strndup,
+strcmp, strcasecmp, strncmp, strchr, strspn
+isalpha, isdigit, isalnum, islower, isupper, isspace, tolower a toupper,
+printf (ok, ten většinou neobcházíte) a scanf (jeho široké schopnosti naopak obcházíte často); dále sscanf (obzvláště v kombinaci s %* a %n je to silný nástroj)
+qsort a bsearch
+
+Příprava
+Programovat, programovat, programovat
+Vyřeším na progtestu domácí úlohu z každého týdne (tzn. vždy alespoň jednu z 3b/5b dvojice); řešit mohu i po termínu.
+Projdu si úlohy na Traineru :)
+Zkusím si naprogramovat zkouškové úlohy z předchozích let.; zkusím si dát 2 hodiny na úlohu.
+Naučím se používat nástroje
+Přepínače kompilátoru g++:
+-Wall -Wextra -pedantic - nahlásí co nejvíce potenciálních problémů; doporučuji vyřešit všechny
+-g - přidá do zkompilovaného programu ladící informace (např. čísla řádků)
+-fsanitize=undefined,address - přidá do programu kontroly nedefinovaného chování (např. práce s neinicializovanou proměnnou) a kontroly práce s pamětí
+-O2 - zoptimalizuje výsledný kód; nezlepší asymptotickou složitost a nezrychlí program na progtestu, ale program může spadnout v případě některých nekorektních postupů programátora.
+Ladicí nástroj valgrind umí spoustu věcí, nás primárně zajímá memcheck (výchozí nástroj, když pustíme valgrind. valgrind nikdy nespouštím s programem, který byl zkompilován se sanitizérem; tyto dva nástroje se vzájemně vylučují.
+--leak-check=full - zjistí bližší informace k neuvolněné paměti (např. čím byla alokována)
+--track-origins=yes - detekuje práci s neinicializovanou pamětí
+
+Časté chyby
+😿 Nepoužívání funkcí
+Velice často u zkoušky vidím, že student napíše jednu dlouhou funkci main, maximálně nějakou jednu malou pomocnou k ní. V 90 procentech případů takový student nezvládne zkoušku. Funkce není nepřítel, funkce není oser (slangový výraz, na VŠ nepoužívejte), funkce je kámoš. Investujte čas do psaní ve funkcí... bohatě se vrátí v snadnějším hledání a opravování chyb, protože můžu každou funkci testovat zvlášť a každý kus kódu mám pojmenovaný.
+
+😿 Nepoužívání struktur
+Bez rozumné organizace dat se nikam nedostanete. Snad v každé zkouškové úloze spolu data nějakým způsobem souvisejí a struktury jsou přirozený způsob, jak taková data reprezentovat.
+
+Typickou střelou do nohy je nepoužití struktury pro dynamické pole... potom si napíšete funkci, která vám někde realokuje pole předané třemi argumenty... a zjistíte, že vám program nefunguje správně, protože vám někam mizí paměť a pointer ukazuje pořád na stejné místo... protože jste zapomněli na to, že pointer na pole si musíte do funkce předat jako výstupní argument (tzn. předat si např. int ** arrayPtr)... tak to uděláte, přidáte hvězdičku... a dalším nepřítelem se stane priorita operátorů, kdy zjistíte, že [], ., ->, ++ i -- mají přednost před dereferencí * a musíte hodně závorkovat. Máte na to nervy? Já ne, radši strukturu.
+
+😿 Neinicializované proměnné
+Nezapomínejte na to, že proměnné jsou v C běžně neinicializované, nemůžete pracovat s jejich hodnotou. Stejně tak paměť, kterou dostanete přidělenou... to, že je vše neinicializované, není chyba jazyka C, je to způsob, jak psát rychlé programy, kdy s proměnnými a s pamětí pracujeme až když je opravdu potřeba, ale začátečníky to může hodně drtit. Ve výše uvedených bodech o nástrojích je několik tipů, co používat.
+
+😿 Zbytečná alokace paměti
+Pokud mám např. pole slov (char ** words;), nemá smysl, abych např. při realokaci alokoval místo pro nově přidaná slova (for(int i = original_size; i < new_size; i++ { words[i] = (char*)malloc(WORD_LEN); }). V céčku je zvykem se vším pracovat až ve chvíli, kdy je to potřeba - alokuju paměť, až když vím, že ji použiju; nastavím hodnotu proměnné, až když vím, že ji potřebuju atd. Nic nezkazíte, když začnete s polem nulové délky, s nulovým pointerem... a první alokaci zařídí realloc.
+
+Pokud mám zpracovávat nějaké sekvence dat, typicky řetězce, snažím se vyhnout zbytečnému kopírování, které zpomaluje program a může vnést další chyby. Raději napíšu algoritmus tak, aby kopírovat nemusel, resp. kopíroval co nejméně.
+
+😿 Nepoužívání knihovních funkcí
+Často studenti vynalézají kolo, jednak jejich kolo může být chybné, jednak je to práce navíc. Standardní knihovna jazyka C není tak velká, aby se nedalo těch pár užitečných funkcí naučit
+
+😿 Neefektivní práce se vstupem a s řetězci
+Často vídám snahy načíst celý vstup do řetězce a zpracovat jej až z řetězce, často navíc komplikovanou cestou. Ve většině případů stačí zpracovávat vstup po částech pomocí scanf a známých konverzí na čísla a znaky.
+
+Často studenti nevyužívají toho, že scanf(" "); přeskočí bílé znaky ze vstupu.
+
+Často vídám cyklus se strlen.
+
+Někdy vidím kontrolu, zda je řetězec prázdný, pomocí strlen. Pokud potřebuju vědět jen, zda je prázdný, stačí mi zjistit, zda řetězec začíná ukončovací nulou. Nebo např. použít strcmp s prázdným řetězcem.
+
+Často by pomohlo správně pracovat s ukončovací nulou. Buď se na ni zapomíná, nebo by její vložení na vhodná místa mohlo zjednodušit některé algoritmy.
+
+Postupy
+Pozorně si přečtěte zadání. Často i v nejposlednější poznámce může být nějaká dobrá rada, nebo dokonce informace vedoucí ke zjednodušení úlohy.
+
+Využijte papír, který dostanete od dozoru. Nakreslete si situaci.
+
+Začněte od datových struktur reprezentujících zadaný problém.
+Zvýrazněte si, co se musí objevit v odpovědi programu a s čím musí pracovat.
+Zamyslete se, zda by šlo něco zjednodušit.
+Ke každé struktuře si napište operace, které s ní budete provádět. Zamyslete se nad asymptotickými složitostmi.
+Zamyslete se ještě jednou, zda by šlo něco zjednodušit.
+Pokud vás nenapadá algoritmus, zkuste popřemýšlet, zda by nešlo data nějak seřadit a zda by potom nebyl k dispozici nějaký jednodušší (snáze vymyslitelný) algoritmus.
+Až budete mít vše rozmyšleno, začněte programovat. Nejprve struktury, potom k nim funkce.
+
+Přesné pořadí, co kdy budete psát, je na vás. Někdo rád začíná zpracováním vstupu, někdo zase realokací paměti, někdo nějakým hlavním algoritmem řešení... důležité je, aby se tyto dost různorodé činnosti nenacházely na jednom místě promíchané mezi sebou a už ne ve stejné funkci.
+Otestujte na stažených vstupních datech, využijte všechny ladicí nástroje.
+
+Pokud program na progtestu padá, nebojte se jej potrápit většími vstupy.
+
+A pokud jste v půlce zkoušky neprolezli jednou úlohou, zkuste druhou.
+
+Taktika výběru úlohy:
+Nejjistější je pořádně se naučit a procvičit rekurzi a seznamy; úlohy na toto téma bývají jednodušší.
+Dynamická alokace paměti a práce s řetězci vyžadují velkou sebekázeň a důsledné dodržování zásad nestřílení se do nohy vším tím arzenálem, který jazyk C nabízí. Ačkoliv se zdá, že jde o přístupnější téma (bylo probráno ještě před velkými zápočtovkami z matematik), úlohy bývají náročnější.
+Pročtu si obě zadání. Až potom si vyberu úlohu.

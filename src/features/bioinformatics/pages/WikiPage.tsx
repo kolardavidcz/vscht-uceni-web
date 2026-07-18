@@ -1,22 +1,149 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { BookOpen, Menu, MessageSquarePlus, Search, X } from "lucide-react";
+import {
+  BookOpen,
+  ChevronDown,
+  ChevronRight,
+  Menu,
+  MessageSquarePlus,
+  Search,
+  X,
+} from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { MarkdownView } from "../components/MarkdownView";
-import { PA2ToAG1Overview } from "../components/PA2ToAG1Overview";
 import {
   SuggestEditModal,
   materialToRepoPath,
 } from "../components/SuggestEditModal";
+
+/** Heavy materialsData tree — only load when opening the PA2 overview page */
+const PA2ToAG1Overview = lazy(() =>
+  import("../components/PA2ToAG1Overview").then((m) => ({
+    default: m.PA2ToAG1Overview,
+  }))
+);
 import {
+  filterNavTree,
   findMaterial,
-  groupByCategory,
+  groupByCategoryTree,
   loadWikiMaterials,
   materialHref,
+  navNodeContainsPath,
+  type NavNode,
   type WikiMaterial,
 } from "../lib/contentLoader";
+
+function NavTreeList({
+  nodes,
+  activePath,
+  depth = 0,
+}: {
+  nodes: NavNode[];
+  activePath?: string;
+  depth?: number;
+}) {
+  return (
+    <ul className={cn("space-y-0.5", depth > 0 && "ml-2 pl-2 border-l border-stone-100")}>
+      {nodes.map((node) => (
+        <NavTreeItem
+          key={`${node.type}-${node.key}`}
+          node={node}
+          activePath={activePath}
+          depth={depth}
+        />
+      ))}
+    </ul>
+  );
+}
+
+function NavTreeItem({
+  node,
+  activePath,
+  depth,
+}: {
+  node: NavNode;
+  activePath?: string;
+  depth: number;
+}) {
+  const containsActive = navNodeContainsPath(node, activePath);
+  const [open, setOpen] = useState(containsActive || depth === 0);
+
+  useEffect(() => {
+    if (containsActive) setOpen(true);
+  }, [containsActive, activePath]);
+
+  if (node.type === "file") {
+    const href = materialHref(node.material);
+    const isActive = activePath === node.material.path;
+    return (
+      <li>
+        <Link
+          to={href}
+          className={cn(
+            "block rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
+            isActive
+              ? "bg-brand-orange text-white shadow-sm"
+              : "text-stone-700 hover:bg-stone-100"
+          )}
+        >
+          {node.title}
+        </Link>
+      </li>
+    );
+  }
+
+  const hubHref = node.hub ? materialHref(node.hub) : undefined;
+  const folderActive =
+    node.hub && activePath === node.hub.path && node.children.length > 0;
+
+  return (
+    <li>
+      <div className="flex items-stretch gap-0.5">
+        <button
+          type="button"
+          aria-expanded={open}
+          aria-label={open ? "Sbalit" : "Rozbalit"}
+          onClick={() => setOpen((v) => !v)}
+          className="shrink-0 rounded-lg px-1 text-stone-400 hover:bg-stone-100 hover:text-stone-700 cursor-pointer"
+        >
+          {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+        </button>
+        {hubHref ? (
+          <Link
+            to={hubHref}
+            className={cn(
+              "flex-1 min-w-0 rounded-lg px-2 py-1.5 text-xs font-bold transition-colors",
+              folderActive || (containsActive && !open)
+                ? "text-brand-orange-text bg-brand-orange/10"
+                : "text-stone-800 hover:bg-stone-100"
+            )}
+          >
+            {node.title}
+          </Link>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="flex-1 min-w-0 text-left rounded-lg px-2 py-1.5 text-xs font-bold text-stone-800 hover:bg-stone-100 cursor-pointer"
+          >
+            {node.title}
+          </button>
+        )}
+      </div>
+      {open && (
+        <div className="mt-0.5">
+          <NavTreeList
+            nodes={node.children}
+            activePath={activePath}
+            depth={depth + 1}
+          />
+        </div>
+      )}
+    </li>
+  );
+}
 
 export function WikiPage() {
   const params = useParams();
@@ -24,7 +151,7 @@ export function WikiPage() {
   const segments = splat ? splat.split("/").filter(Boolean) : [];
 
   const materials = useMemo(() => loadWikiMaterials(), []);
-  const groups = useMemo(() => groupByCategory(materials), [materials]);
+  const groups = useMemo(() => groupByCategoryTree(materials), [materials]);
   const active = findMaterial(materials, segments);
 
   const [query, setQuery] = useState("");
@@ -45,16 +172,22 @@ export function WikiPage() {
   const filteredGroups = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return groups;
+
     return groups
-      .map((g) => ({
-        ...g,
-        items: g.items.filter(
-          (m) =>
+      .map((g) => {
+        const byMaterial = filterNavTree(g.tree, (m) => {
+          return (
             m.title.toLowerCase().includes(q) ||
-            m.key.toLowerCase().includes(q)
-        ),
-      }))
-      .filter((g) => g.items.length > 0);
+            m.key.toLowerCase().includes(q) ||
+            m.segments.some((s) => s.toLowerCase().includes(q))
+          );
+        });
+        // Folder title match (e.g. "pa1") → whole subject subtree
+        const byFolderTitle = expandFoldersMatchingTitle(g.tree, q);
+        const tree = mergeNavTrees(byMaterial, byFolderTitle);
+        return { ...g, tree };
+      })
+      .filter((g) => g.tree.length > 0);
   }, [groups, query]);
 
   const isSpecial = active?.key === "pa2-ag1-overview";
@@ -83,27 +216,7 @@ export function WikiPage() {
             <div className="px-2 py-1 text-[10px] font-black uppercase tracking-wider text-stone-400 sticky top-0 bg-white/95 backdrop-blur-sm z-[1]">
               {g.label}
             </div>
-            <ul className="space-y-0.5">
-              {g.items.map((m) => {
-                const href = materialHref(m);
-                const isActive = active?.path === m.path;
-                return (
-                  <li key={m.path}>
-                    <Link
-                      to={href}
-                      className={cn(
-                        "block rounded-lg px-2.5 py-2 text-xs font-semibold transition-colors",
-                        isActive
-                          ? "bg-brand-orange text-white shadow-sm"
-                          : "text-stone-700 hover:bg-stone-100"
-                      )}
-                    >
-                      {m.title}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+            <NavTreeList nodes={g.tree} activePath={active?.path} />
           </div>
         ))}
         {filteredGroups.length === 0 && (
@@ -198,7 +311,15 @@ export function WikiPage() {
               </div>
             ) : isSpecial ? (
               <>
-                <PA2ToAG1Overview />
+                <Suspense
+                  fallback={
+                    <p className="text-sm text-stone-500 font-semibold py-8 text-center">
+                      Načítám PA2→AG1 přehled…
+                    </p>
+                  }
+                >
+                  <PA2ToAG1Overview />
+                </Suspense>
                 {suggestFooter(active)}
               </>
             ) : (
@@ -220,4 +341,49 @@ export function WikiPage() {
       )}
     </PageShell>
   );
+}
+
+/** If a folder title matches the query, include the full original subtree. */
+function expandFoldersMatchingTitle(nodes: NavNode[], q: string): NavNode[] {
+  const out: NavNode[] = [];
+  for (const node of nodes) {
+    if (node.type === "folder") {
+      if (node.title.toLowerCase().includes(q) || node.key.toLowerCase().includes(q)) {
+        out.push(node);
+      } else {
+        const children = expandFoldersMatchingTitle(node.children, q);
+        if (children.length > 0) {
+          out.push({ ...node, children });
+        }
+      }
+    } else if (
+      node.title.toLowerCase().includes(q) ||
+      node.key.toLowerCase().includes(q)
+    ) {
+      out.push(node);
+    }
+  }
+  return out;
+}
+
+function mergeNavTrees(a: NavNode[], b: NavNode[]): NavNode[] {
+  const byKey = new Map<string, NavNode>();
+  for (const n of [...a, ...b]) {
+    const k = `${n.type}:${n.key}`;
+    const prev = byKey.get(k);
+    if (!prev) {
+      byKey.set(k, n);
+      continue;
+    }
+    if (prev.type === "folder" && n.type === "folder") {
+      byKey.set(k, {
+        ...prev,
+        children: mergeNavTrees(prev.children, n.children),
+      });
+    }
+  }
+  return Array.from(byKey.values()).sort((x, y) => {
+    if (x.order !== y.order) return x.order - y.order;
+    return x.title.localeCompare(y.title, "cs");
+  });
 }

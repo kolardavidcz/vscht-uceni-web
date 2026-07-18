@@ -53,7 +53,8 @@ function renderNameWithLinks(name: string) {
 }
 
 export function PA2ToAG1Overview() {
-  const [expandedWeeks, setExpandedWeeks] = useState<number[]>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  // Collapse by default — expanding all 12 weeks was a large first-paint cost
+  const [expandedWeeks, setExpandedWeeks] = useState<number[]>([1]);
 
   const toggleWeek = (weekNum: number) => {
     setExpandedWeeks(prev =>

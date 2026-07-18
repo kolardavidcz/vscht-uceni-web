@@ -1,43 +1,59 @@
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "@/pages/HomePage";
-import { WikiPage } from "@/features/bioinformatics/pages/WikiPage";
-import { PythonAnalyzerPage } from "@/features/python-analyzer/pages/PythonAnalyzerPage";
-import { useMicrobiologyData } from "@/features/microbiology/hooks/useMicrobiologyData";
-import { QuizPage } from "@/features/microbiology/pages/QuizPage";
-import { StudyPage } from "@/features/microbiology/pages/StudyPage";
-import { AdminPage } from "@/features/microbiology/pages/AdminPage";
 
-function MicrobiologyRoutes() {
-  const data = useMicrobiologyData();
-
-  if (!data.ready) {
-    return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center text-stone-500 text-sm font-semibold">
-        Načítám data systematiky…
-      </div>
-    );
-  }
-
+/** Lightweight shell while a feature chunk downloads (most users land on micro). */
+function RouteFallback({ label }: { label: string }) {
   return (
-    <Routes>
-      <Route index element={<QuizPage data={data} />} />
-      <Route path="studijni-strom" element={<StudyPage data={data} />} />
-      <Route path="samostudium" element={<StudyPage data={data} />} />
-      <Route path="srovnavaci-matice" element={<StudyPage data={data} />} />
-      <Route path="admin" element={<AdminPage data={data} />} />
-      <Route path="*" element={<Navigate to="/mikrobiologie" replace />} />
-    </Routes>
+    <div className="min-h-screen bg-stone-50 flex items-center justify-center text-stone-500 text-sm font-semibold">
+      {label}
+    </div>
   );
 }
+
+const MicrobiologyRoutes = lazy(
+  () => import("@/features/microbiology/MicrobiologyRoutes")
+);
+const WikiPage = lazy(() =>
+  import("@/features/bioinformatics/pages/WikiPage").then((m) => ({
+    default: m.WikiPage,
+  }))
+);
+const PythonAnalyzerPage = lazy(() =>
+  import("@/features/python-analyzer/pages/PythonAnalyzerPage").then((m) => ({
+    default: m.PythonAnalyzerPage,
+  }))
+);
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/mikrobiologie/*" element={<MicrobiologyRoutes />} />
-        <Route path="/obor-bioinformatika/*" element={<WikiPage />} />
-        <Route path="/python-analyza" element={<PythonAnalyzerPage />} />
+        <Route
+          path="/mikrobiologie/*"
+          element={
+            <Suspense fallback={<RouteFallback label="Načítám systematiku…" />}>
+              <MicrobiologyRoutes />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/obor-bioinformatika/*"
+          element={
+            <Suspense fallback={<RouteFallback label="Načítám wiki…" />}>
+              <WikiPage />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/python-analyza"
+          element={
+            <Suspense fallback={<RouteFallback label="Načítám analyzátor…" />}>
+              <PythonAnalyzerPage />
+            </Suspense>
+          }
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
