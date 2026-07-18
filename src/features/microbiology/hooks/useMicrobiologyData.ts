@@ -50,11 +50,15 @@ function payloadLooksCorrupted(payload: Payload): boolean {
 }
 
 /**
- * Data story:
- * 1. Bundled static data (always available offline).
- * 2. Production: GET /api/get-data → Upstash Redis shared store.
- * 3. localStorage cache / offline admin edits.
- * Admin POST /api/save-data writes KV when available, always mirrors to localStorage.
+ * Data story (soft-upgrade, ~52 species catalog):
+ *
+ * 1. **Always** start from bundled static data — UI is interactive immediately
+ *    (no wait on Redis for `/mikrobiologie` deep-links).
+ * 2. **Background** `GET /api/get-data` soft-upgrades when Redis has a shared
+ *    snapshot (classroom admin edits).
+ * 3. localStorage mirrors offline / failed-API admin edits when Redis is empty.
+ *
+ * Vercel `/tmp` is NOT used (ephemeral). Bundle + optional Redis remain the stores.
  */
 export function useMicrobiologyData() {
   const [worksheetData, setWorksheetData] = useState<WorksheetItem[]>(() =>
@@ -65,8 +69,9 @@ export function useMicrobiologyData() {
     useState<EmojiCategory[]>(staticCategories);
   const [isLocalMode, setIsLocalMode] = useState(true);
   const [kvAvailable, setKvAvailable] = useState(false);
-  const [storageLabel, setStorageLabel] = useState("Balík / localStorage");
-  const [ready, setReady] = useState(false);
+  const [storageLabel, setStorageLabel] = useState("Balík (statická data)");
+  /** True immediately — never block the quiz on network */
+  const [ready] = useState(true);
 
   const applyPayload = useCallback((payload: Payload) => {
     const opts = payload.emojiOptions ?? staticEmojis;
@@ -80,10 +85,14 @@ export function useMicrobiologyData() {
   useEffect(() => {
     let cancelled = false;
 
-    const fromStorage = (): boolean => {
+    const purgeLegacy = () => {
       for (const key of LEGACY_STORAGE_KEYS) {
         localStorage.removeItem(key);
       }
+    };
+
+    const fromStorage = (): boolean => {
+      purgeLegacy();
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return false;
       try {
@@ -108,7 +117,7 @@ export function useMicrobiologyData() {
         window.location.hostname === "127.0.0.1";
       if (!cancelled) setIsLocalMode(local);
 
-      // Always try KV API first (works on Vercel prod; 404/fail → fallbacks)
+      // Soft-upgrade: Redis in background; UI already shows static data
       try {
         const res = await fetch("/api/get-data");
         if (res.ok) {
@@ -120,7 +129,6 @@ export function useMicrobiologyData() {
               );
               setKvAvailable(true);
               setStorageLabel("Upstash Redis");
-              setReady(true);
             }
             return;
           }
@@ -130,14 +138,11 @@ export function useMicrobiologyData() {
       }
 
       if (!cancelled) setKvAvailable(false);
-      fromStorage();
-      if (!cancelled) {
-        if (!localStorage.getItem(STORAGE_KEY)) {
-          setStorageLabel(
-            local ? "Dev: statická data v balíku" : "Statická data (KV prázdná)"
-          );
-        }
-        setReady(true);
+      const hadLocal = fromStorage();
+      if (!cancelled && !hadLocal) {
+        setStorageLabel(
+          local ? "Dev: statická data v balíku" : "Statická data (KV prázdná)"
+        );
       }
     };
 
@@ -226,8 +231,7 @@ export function useMicrobiologyData() {
 
   /**
    * Vectoral save: send only pending change ops.
-   * Server loads latest KV, applies patches, returns merged tree —
-   * concurrent admins don't overwrite each other's unrelated edits.
+   * Server loads latest Redis snapshot, applies patches, returns merged tree.
    */
   const saveChanges = useCallback(
     async (
@@ -243,7 +247,6 @@ export function useMicrobiologyData() {
         return { ok: true, message: "Žádné změny k uložení" };
       }
 
-      // Optimistic local preview while waiting for server merge
       if (localPreview) {
         const opts = localPreview.emojiOptions;
         const cats = localPreview.emojiCategories;
@@ -261,7 +264,6 @@ export function useMicrobiologyData() {
           body: JSON.stringify({
             password,
             changes,
-            // If KV is empty, seed from current client snapshot then patch
             baseline: {
               worksheetData: localPreview?.worksheetData ?? worksheetData,
               emojiOptions: localPreview?.emojiOptions ?? emojiOptions,
@@ -280,11 +282,7 @@ export function useMicrobiologyData() {
             const opts = body.data.emojiOptions ?? emojiOptions;
             const cats = body.data.emojiCategories ?? emojiCategories;
             const tree = body.data.worksheetData ?? worksheetData;
-            persistLocal(
-              enrichWorksheetData(tree, opts),
-              opts,
-              cats
-            );
+            persistLocal(enrichWorksheetData(tree, opts), opts, cats);
           }
           setKvAvailable(true);
           setStorageLabel("Redis (vectoral merge)");
@@ -308,13 +306,7 @@ export function useMicrobiologyData() {
         };
       }
     },
-    [
-      applyPayload,
-      emojiOptions,
-      emojiCategories,
-      worksheetData,
-      persistLocal,
-    ]
+    [applyPayload, emojiOptions, emojiCategories, worksheetData, persistLocal]
   );
 
   const resetToDefaults = useCallback(async (password?: string) => {

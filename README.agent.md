@@ -37,6 +37,15 @@ Stack (do not casually upgrade major versions without reason):
 4. **highlight.js** — only C/C++/bash/python/json grammars in `MarkdownView` (not the full language pack).
 5. Prefer growing wiki content carefully; still eager-glob MD today — async MD is a future win if content balloons.
 
+### Microbiology catalog (soft-upgrade)
+
+- **~52 species** — lives in `zastupci.ts` / `emojis.ts` (small; micro chunk).
+- **Paint first from bundle** (`ready` immediately); then **soft-upgrade** via background `GET /api/get-data` when Redis has admin edits.
+- Fallback: localStorage offline admin mirror if Redis empty/unavailable.
+- Admin: `POST /api/save-data` (vectoral patches) still works.
+- **Do not use Vercel `/tmp`** for this catalog — ephemeral, not shared. Bundle + optional Redis only.
+- Short CDN cache on get-data (`s-maxage=60`) so reads stay cheap without freezing writes.
+
 ---
 
 ## 2. Directory map (what belongs where)
