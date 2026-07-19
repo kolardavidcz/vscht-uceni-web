@@ -1,4 +1,4 @@
-# BI-PA1 — jak tohle číst
+# BI-PA1 — jak toto číst
 
 Tohle **není** náhrada odborných materiálů.Jedná se o studentský support material, který se zaměřuje na **neintuitivní části** probírané látky a na to **jak si opravit kód**, když nefunguje.
 
@@ -17,14 +17,14 @@ Tohle **není** náhrada odborných materiálů.Jedná se o studentský support 
 
 ## Jak na to
 
-1. Otevři **[Kalendář co musím umět](/obor-bioinformatika/1-semestr/bi-pa1/01-kalendar)** a skoč na svůj týden.
+1. Otevři **[Kalendář co musím umět](/obor-bioinformatika/1-semestr/bi-pa1/kalendar)** a skoč na svůj týden.
 2. U každého týdne: **co je těžké** → **tipy** (jen když dávají smysl) → **Trainer** (jen když potřebuješ jistotu / procvičení).
 3. **Jak to spravit** (debug, struktura, pasty):
-    * [Jak opravit kód](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit) 
-    * [Jak testovat kód](/obor-bioinformatika/1-semestr/bi-pa1/04-testovaci-skript) (aby prošel )
-    * [Jak psát dobrý kód](/obor-bioinformatika/1-semestr/bi-pa1/03-struktura-kodu) 
+    * [Jak opravit kód](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit) 
+    * [Jak testovat kód](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript) (aby prošel )
+    * [Jak psát dobrý kód](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) 
 
-4. **Před zkouškou / u těžkého HW:** [Progtest a zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska) (kompletní checklist, časté chyby, postup).
+4. **Před zkouškou / u těžkého HW:** [Progtest a zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) (kompletní checklist, časté chyby, postup).
 
 ## Rychlé odkazy
 
@@ -32,7 +32,7 @@ Tohle **není** náhrada odborných materiálů.Jedná se o studentský support 
 * přehled funkcí Céčka na tisk - [C cheat sheet (PDF)](https://www.math.brown.edu/johsilve/ReferenceCards/CRefCard.v2.2.pdf)
 ---
 
-* Linux ve Windows - [WSL setup](/obor-bioinformatika/1-semestr/bi-pa1/05-wsl-a-setup)
-* [Tipi na Progtesty a zkoušku](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)
+* Linux ve Windows - [WSL setup](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup)
+* [Tipi na Progtesty a zkoušku](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 ---
 * nejčastější problémy - [Progtest - tipy](https://progtest.fit.cvut.cz/index.php?X=FAQ) 

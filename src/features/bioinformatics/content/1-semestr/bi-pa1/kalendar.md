@@ -1,9 +1,7 @@
 # PA1 Kalendář co musím umět
 
-Studentský **support** kalendář (ne oficiální sylabus).  
-Osnova přednášek + „co lidi tápe“ + tipy z praxe + Trainer **jen když dává smysl**.
-
-Jak číst celý BI-PA1 support: [Jak tohle číst](/obor-bioinformatika/1-semestr/bi-pa1/00-jak-cist).
+Studentský **support** kalendář s tipy.  
+Osnova přednášek + „co lidi trápí“ + tipy z praxe + Trainer **jen když dává smysl**.
 
 ---
 
@@ -11,7 +9,7 @@ Jak číst celý BI-PA1 support: [Jak tohle číst](/obor-bioinformatika/1-semes
 
 **Co umět / na co si dát bacha**
 
-* Kompilace C: viz [WSL / setup](/obor-bioinformatika/1-semestr/bi-pa1/05-wsl-a-setup) nebo sekce v *Příručce prváka*. Poslední krátkodobá naděje je [online kompiler](https://www.onlinegdb.com/).
+* Kompilace C: viz [WSL / setup](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup) nebo sekce v *Příručce prváka*. Poslední **krátkodobá naděje je [online kompiler](https://www.onlinegdb.com/)**.
 * Naučte se **spustit** program z terminálu, ne jen „zelenou šipkou“ v IDE.
 * Zjistěte si, proč má kód tuhle základní strukturu:
 
@@ -30,17 +28,14 @@ int main() {
 g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 ```
 
-(Přesné flagy u úkolů ber z Progtestu / zadání — viz [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit).)
-
 **Tipy**
 
 * Když kompilátor řve nesmysly: zkus nejdřív *opravdu* přečíst první error shora.
-* Na Windows bez WSL se dřív nebo později u testování / valgrindu spálíš — setup udělej teď.
+* Na Windows bez WSL se dřív nebo později u testování / valgrindu spálíš — setup udělej do 4 týdnů.
 
 **Trainer** (když ti nejde ani „hello“ / kompilace)
 
-* Lekce [Kompilace, základní algoritmy](https://trainer.ksi.fit.cvut.cz/lessons/435) — série *Nefungující kompilace*
-* Volitelně: [Ciferný součet, NSD, NSM, …](https://trainer.ksi.fit.cvut.cz/lessons/438)
+* Lekce [Kompilace, základní algoritmy](https://trainer.ksi.fit.cvut.cz/lessons/435) — série *Nefungující kompilace*, která vysvětluje krok za krokem co musí kód mít
 
 ---
 
@@ -48,7 +43,7 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 
 **Co umět / na co si dát bacha**
 
-* `printf()`, `scanf()` — formátovací řetězce, `&` u `scanf` u čísel.
+* `printf()`, `scanf()` — formátovací řetězce (co a proč dáváme do `printf()` a `scanf()`), `&` (proč to u `scanf()`) a  `scanf` čísel.
 * **Debugging** — možnost se v každém kroku programu podívat, jaká hodnota je v proměnných a kudy program vlastně jde.
 * **ZEPTEJTE SE CVIČÍCÍHO / staršího studenta** — reálně jsem nenašel video, který by debugging v C dobře vysvětlovalo.
 
@@ -57,9 +52,9 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 * `scanf` vrací počet úspěšně načtených položek — kontroluj to (ne jen „načtu a doufám“).
 * Mezera ve formátovacím řetězci ve `scanf` **přeskočí bílé znaky** — `scanf(" ")` umí ušetřit šílenosti.
 * Formát u `scanf` ideálně **končí konverzí**.
-* `scanf("%s")` **nemůže být bezpečné** (buffer) — na Progtestu se to mstí. Detaily: [zkouškové rady](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska).
-* Když se `printf` v CLionu „neukáže hned“: [Jak to spravit → fflush](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit).
-* Lokální testy bez copy-paste: [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/04-testovaci-skript).
+* Když se `printf` v CLionu „neukáže hned“: [Jak to spravit → fflush](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
+* Lokální testy bez copy-paste do konzole (ale do kódu): [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript).
+* Pokorčílé (zjistíte později): `scanf("%s")` **nemůže být bezpečné** (buffer) — na Progtestu se to mstí. Detaily: [zkouškové rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska).
 
 **Trainer**
 
@@ -71,15 +66,15 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 
 **Co umět / na co si dát bacha**
 
-* `float` / `double` **nejsou** „desetinná čísla ze střední“ — mají omezenou přesnost a divné zaokrouhlování.
+* `float` / `double` **nejsou** „desetinná čísla ze střední“ — mají omezenou přesnost a **divné zaokrouhlování**.
 * Porovnávání floatů přes `==` je past.
-* Matematika začíná být těžší: hodí se googlit vzorečky, které neznáte ze střední (NSD, NSN, …).
+* Matematika začíná být těžší: hodí se **googlit vzorečky, které neznáte ze střední** (NSD, NSN, …).
 
 **Tipy**
 
 <iframe src="https://www.youtube.com/embed/bbkcEiUjehk?rel=0&wmode=transparent" class="w-full aspect-video rounded-xl my-4 border border-slate-200/85 shadow-sm" allowfullscreen></iframe>
 
-* [Interaktivní Float/Double](https://float.exposed/0x5cbf9401)
+* [Interaktivní Float/Double](https://float.exposed/0x5cbf9401) vizualizace
 * Edge cases: začněte používat **papír** a procházejte si, jak se který vstup vyhodnotí. Mohou pomoci **FlowCharts**, díky kterým si váš algoritmus nakreslíte:
 
 <iframe src="https://www.youtube.com/embed/Yq1OPs5hCt0?rel=0&wmode=transparent" class="w-full aspect-video rounded-xl my-4 border border-slate-200/85 shadow-sm" allowfullscreen></iframe>
@@ -95,13 +90,14 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 **Co umět / na co si dát bacha**
 
 * `if` / `else`, `switch`, `while`, `for`, `do while` — a hlavně **kdy který**.
-* Prozatím lze všechny algoritmy „fintou“ dostat do **dvou cyklů** (for/while) — později sami zjistíte, kdy už to není pravda.
-* Pokud se v zadání objeví slovo **„maska“**, bude to nekomfortní úkol (aka. pondělí `1000000`, úterý `0100000`, víkend `0000011`, …).
+* Prozatím lze všechny algoritmy „fintou“ dostat do **dvou cyklů** (for/while) — později sami poznáte, kdy už to není pravda.
+* Pokud se v zadání objeví slovo **„maska“**, bude to na h*vno úloha (aka. pondělí `1000000`, úterý `0100000`, víkend `0000011`, …).
+* teďka je **poslední šance zprovonznit si linux porstředí**.
 
 **Tipy**
 
 * Papír + flowchart pořád platí — u vnořených podmínek se bez toho zblázníš.
-* Přehlednost kódu je důležitější než počet proměnných nebo podmínek — viz [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/03-struktura-kodu).
+* Přehlednost kódu je důležitější než počet proměnných nebo podmínek — viz [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
 
 **Trainer**
 
@@ -117,12 +113,11 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 * Deklarace vs. definice; proč musí být **hlavička** vidět před voláním.
 * Předávání **hodnotou** vs. později ukazatelem (jablka — viz týden 7).
 * Testovatelný kód: malé funkce, jasný vstup/výstup.
-
 **Tipy**
 
 * Funkce, která „dělá všechno + tiskne + čte“ se na Progtestu a v debugování mstí.
-* U zkoušky: **jeden obří `main`** bez funkcí = častý neúspěch. Funkce = kámoš na debug. → [Struktura](/obor-bioinformatika/1-semestr/bi-pa1/03-struktura-kodu) · [zkouška](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)
-* Lokální automatické testy: [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/04-testovaci-skript).
+* U zkoušky: **jeden obří `main`** bez funkcí u zkouškové úlohy úplně neprojde. Funkce se lépe defungují debug. → [Struktura](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) · [zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
+* Lokální automatické testy: [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript).
 
 **Trainer**
 
@@ -135,19 +130,19 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 
 **Co umět / na co si dát bacha**
 
-* Úlohy začínají být **jednodušší na matematiku** a spíš testují programování.
+* Úlohy začínají být **jednodušší na matematiku** a spíš testují jestli umíte **náročnější programovací látk**u.
 * Pole = souvislé schránky; při předání do funkce jde v podstatě o **adresu prvního prvku** + délku (viz analogie v týdnu 7).
-* Řetězce v C = pole `char` s `'\0'` na konci — ne „string objekt“ z jiných jazyků.
-* Off-by-one (`i <= n` místo `i < n`) je klasika.
+* Řetězce v C = pole `char` s `'\0'` na konci.
+* "Off-by-one" je název chyby kdy zkočníte o 1 prvek poli jinde (řed koncem/za koncem) -> (`i <= n` místo `i < n`, nebo naopak).
 
 **Tipy**
 
-* V debuggeru zobrazit pole: [Jak to spravit → pole](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit).
-* Indexování 2D: buď jedno dlouhé pole s dohodou, nebo `pole[řádky][sloupce]` — viz týden 7.
+* V debuggeru zobrazit pole: [Jak to spravit → pole](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
+* Indexování 2D: buď jedno dlouhé pole s mnoho náročnýma podmínkama a indexováním, nebo `pole[řádky][sloupce]` — viz týden 7.
 * **Nepouštěj `strlen` v každém kroku cyklu** — procházej do `'\0'`.
 * Prázdný řetězec: stačí `s[0] == '\0'`, ne nutně `strlen`.
-* Na `'\0'` musíš mít **místo** v bufferu — jinak paměťové peklo.
-* Nesnaž se vždy nacpat celý vstup do jednoho stringu — často stačí `scanf` po částech. → [zkouška · vstup a řetězce](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)
+* Na `'\0'` musíš mít **místo** v poli — jinak nemůžeš (basicly) používat string knihovny.
+* Nesnaž se vždy nacpat celý vstup do jednoho stringu — často stačí `scanf` po částech. → [zkouška · vstup a řetězce](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 
 **Trainer**
 
@@ -242,8 +237,8 @@ Výhoda: nemusíš složitou syntaxi ukazatelů. Nevýhoda: indexování je otra
 ```c
 void mojeFunkce4(
     int odkazNaPrvniSchranku[100][30],
-    int vKolikaNasledujicichSuplicichMamHledatOvoce,
-    int vKolikaNasledujicichSuplicichMamHledatCeny
+    int vKolikaNasledujicichSuplicichMamHledat_Ovoce,
+    int vKolikaNasledujicichSuplicichMamHledat_Ceny
 );
 
 int main() {
@@ -258,8 +253,8 @@ int main() {
 
 void mojeFunkce4(
     int odkazNaPrvniSchranku[100][30],
-    int vKolikaNasledujicichSuplicichMamHledatOvoce,
-    int vKolikaNasledujicichSuplicichMamHledatCeny
+    int vKolikaNasledujicichSuplicichMamHledat_Ovoce,
+    int vKolikaNasledujicichSuplicichMamHledat_Ceny
 ) {
     // ...
 }
@@ -269,7 +264,7 @@ Později umíš pole, u kterého neznáš velikost dopředu — viz týden 8. (u
 
 **Tipy (zkouška / těžké HW)**
 
-* Teorie pointerů a struktur **není navíc** — bez ní praktická část bolí. → [„Když nevím…“](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)
+* Teorie pointerů a struktur **není navíc** — bez ní praktická část bolí. → [„Když nevím…“](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 * Dynamické pole dělej jako **strukturu + helper funkce**, ne tři volné argumenty + `int **` peklo.
 * **Nevracej pointer na lokální proměnnou** z funkce (zásobník vs. halda).
 
@@ -295,11 +290,15 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 **Tipy**
 
-* Sanitizer a Valgrind **vzájemně vylučují** — vyber jedno. → [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit)
+* Sanitizer a Valgrind **vzájemně vylučují** — vyber jedno. → [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit)
 * Realokuj **geometrickou řadou** (×2 apod.) — jinak často timeout na časových testech.
 * Nealokuj „dopředu na jistotu“ každé prázdné políčko; v C se alokuje, **až když potřebuješ** (klidně začni `NULL` + `realloc`).
 * Neinicializovaná paměť / proměnné — sanitizer / Valgrind s `--track-origins=yes`.
-* `NULL` vs `nullptr`: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit).
+* `NULL` vs `nullptr`: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
+    * `calloc` v paměti vynuluje bajty, což pro ukazatele **funguje jako platný `nullptr`** (tam problém není).
+    * **Pozor ale při kompilaci přes `g++`:**
+      1. `calloc`/`malloc` vrací `void*` — v C++ **musíš explicitně přetypovat** `(int*)calloc(...)`, jinak kód neprojde kompilací.
+      2. Na přednáškách se sice učí, že `0` = `NULL`, ale přímo v C++ kódu piš `nullptr` (psaní `= 0` u pointeru vyvolá varování `-pedantic`, které ti strne body).
 
 **Trainer**
 
@@ -311,7 +310,7 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 **Co umět / na co si dát bacha**
 
-* Co znamená „kolikrát se něco provede“ v závislosti na \(n\) — aspoň intuice O(n), O(n²).
+* Co znamená „kolikrát se něco provede“ v závislosti na \(n\) — intuice O(n), O(n²).
 * Lineární vs. binární vyhledávání (kdy smíš binárně).
 * Kvadratické sorty (bubble / insertion / selection — podle přednášky): umět **napsat a vysvětlit**, ne jen „znát název“.
 
@@ -319,7 +318,7 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 * Když Progtest timeoutí: často O(n²) tam, kde stačí líp, nebo zbytečná práce ve smyčce — ne hned „optimizuj mikro“.
 * Spoustu úloh **zrychlí seřazení dat**; umět udržovat seřazené pole i bez magie.
-* Ve stdlib existují **`qsort` a `bsearch`** — nemusíš vždy vynalézat kolo. → [zkouška · funkce](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)
+* Ve stdlib existují **`qsort` a `bsearch`** — nemusíš vždy vynalézat kolo. → [zkouška · funkce](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 * `-O2` **nezachrání** špatnou asymptotiku (může ale odhalit UB).
 * Playlist intuice: [Epické algoritmy](https://youtube.com/playlist?list=PLnZHgAO8ocBv6XRqZkqQjrsIJijn82UUC) (sorting část).
 
@@ -329,44 +328,42 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 ---
 
-### Týden 10 — Spojové a stromové struktury v jazyce C
+### Týden 10 — Rekurzivní algoritmy, MergeSort, úvod do QuickSortu
 
 **Co umět / na co si dát bacha**
 
-* Uzel = data + ukazatel(e) na další.
+* Rekurze a její části (nemusí být v tomto pořadí):
+    * **kontrola podmínky (base case)**
+    * **výpočty**
+    * **posunutí do nižšího stupně**  
+* MergeSort / náznak QuickSortu — idea „rozděl a spoj“, ne memorování 80 řádků bez pochopení.
+
+**Tipy**
+* U zkoušky: úlohy na **rekurzi a seznamy** bývají často jistější volba než dyn. alokace + řetězce.
+
+**Trainer**
+
+* [Rekurze — výklad + úlohy](https://trainer.ksi.fit.cvut.cz/lessons/525) - **tohle si musí každý povinně vyzkoušet**
+
+---
+
+### Týden 11 — Spojové a stromové struktury v jazyce C
+
+**Co umět / na co si dát bacha**
+
+* Uzel/Node = data + ukazatel na další uzly/nodes.
 * Průchod seznamem / stromem bez ztráty hlavy seznamu.
-* **Stromy 101** — kořen, list, dítě; rekurze sem sedí přirozeně (viz týden 11).
+* **Stromy 101** — kořen, list, potomek; rekurze sem sedí přirozeně (viz týden 11).
 
 **Tipy**
 
 * Kresli si uzly na papír. Fakt.
-* Memory: každý `malloc` uzlu má svůj `free` — [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit).
+* Memory: každý `malloc` uzlu má svůj `free` — [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
 * U seznamů/stromů se hodí **dvojhvězdičkový pointer** na manipulaci (viz zkouškové obraty).
 
 **Trainer**
 
 * [Spojové struktury](https://trainer.ksi.fit.cvut.cz/lessons/526)
-
----
-
-### Týden 11 — Rekurzivní algoritmy, MergeSort, úvod do QuickSortu
-
-**Co umět / na co si dát bacha**
-
-* Rekurze a její části: **kontrola podmínky (base case)**, **výpočty**, **posunutí do nižšího stupně** (nemusí být v tomto pořadí) + často přípravná funkce.
-* MergeSort / náznak QuickSortu — idea „rozděl a spoj“, ne memorování 80 řádků bez pochopení.
-
-**Tipy**
-
-* Bez base case = stack overflow party.
-* Nakresli strom volání na malém vstupu (n = 3, 4).
-* **Memoizace**, pokud stačí jeden výsledek z rekurze.
-* Pád rekurze / „vracím pointer na lokál“ → paměť (halda vs zásobník). → [zkouška · teorie](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)
-* U zkoušky: úlohy na **rekurzi a seznamy** bývají často jistější volba než dyn. alokace + řetězce.
-
-**Trainer**
-
-* [Rekurze — výklad + úlohy](https://trainer.ksi.fit.cvut.cz/lessons/525)
 
 ---
 
@@ -381,7 +378,7 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 **Tipy**
 
 * Nezapomeň `fclose`.
-* Modulární kód = méně „god file“ o 800 řádcích — souvisí se [strukturou kódu](/obor-bioinformatika/1-semestr/bi-pa1/03-struktura-kodu).
+* Modulární kód = méně „god file“ o 800 řádcích — souvisí se [strukturou kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
 
 **Trainer**
 
@@ -399,11 +396,11 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 **Tipy**
 
-* **Celé rady ke zkoušce (viditelně, ne zkrácené):** [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)  
+* **Celé rady ke zkoušce (viditelně, ne zkrácené):** [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)  
   — obraty, „když nevím…“, knihovní funkce, 😿 časté chyby, postup u úlohy, taktika výběru.
 * Příprava: aspoň 1 HW / týden (i po termínu), Trainer, staré zkoušky ~2 h na úlohu.
-* Nesnaž se den před zkouškou učit C od nuly — programuj a vysvětluj nahlas.
-* Pročti **obě** zadání, pak vyber; rekurze/seznamy často jistější než dyn+stringy.
+* Nesnaž se den před zkouškou učit C od nuly.
+* Pročti **obě** zadání, pak vyber; rekurze/seznamy často jistější než práce s dynamickou alokací.
 
 **Trainer**
 
@@ -416,10 +413,10 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 | Situace | Kam |
 |--------|-----|
-| Debug, flagy, paměť, pasty | [**Jak to spravit**](/obor-bioinformatika/1-semestr/bi-pa1/02-jak-to-spravit) |
-| Nestíháš se v kódu vyznat / obří main | [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/03-struktura-kodu) |
-| Manuální testování přes copy-paste | [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/04-testovaci-skript) |
-| Windows bez Linux nástrojů | [WSL](/obor-bioinformatika/1-semestr/bi-pa1/05-wsl-a-setup) |
-| Odevzdání / **zkouška (plné rady)** | [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska) |
+| Debug, flagy, paměť, pasty | [**Jak to spravit**](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit) |
+| Nestíháš se v kódu vyznat / obří main | [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) |
+| Manuální testování přes copy-paste | [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript) |
+| Windows bez Linux nástrojů | [WSL](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup) |
+| Odevzdání / **zkouška (plné rady)** | [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) |
 
 Celý Trainer kurz: [courses/81](https://trainer.ksi.fit.cvut.cz/courses/81).

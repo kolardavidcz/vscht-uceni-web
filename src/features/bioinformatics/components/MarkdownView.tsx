@@ -1,4 +1,4 @@
-import { useEffect, useRef, type ComponentPropsWithoutRef } from "react";
+import { useEffect, useRef, useMemo, type ComponentPropsWithoutRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -33,8 +33,90 @@ const highlightLanguages = {
   text: plaintext,
 };
 
+/**
+ * Normalizes lists to ensure consistent 4-space indentation for nesting.
+ * This guarantees CommonMark lists parse correctly up to 5+ levels
+ * even when using mixed delimiters like *, -, 1. or 1).
+ */
+function normalizeMarkdownLists(content: string): string {
+  const lines = content.split(/\r?\n/);
+  const result: string[] = [];
+  const stack: number[] = [0];
+  let inCodeBlock = false;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+
+    // Check for code blocks to avoid altering formatting inside them
+    if (trimmed.startsWith("```") || trimmed.startsWith("~~~")) {
+      inCodeBlock = !inCodeBlock;
+      result.push(line);
+      continue;
+    }
+
+    if (inCodeBlock) {
+      result.push(line);
+      continue;
+    }
+
+    // Blank lines: preserve as is and do not reset state
+    if (trimmed === "") {
+      result.push(line);
+      continue;
+    }
+
+    // Match list markers: *, -, +, 1., 1), 1.1., 1.1) etc.
+    const listMatch = line.match(/^(\s*)([*+-]|\d+(?:\.\d+)*[.)])(?:\s+(.*)|$)$/);
+
+    // Get current line's leading indentation
+    const matchIndent = line.match(/^(\s*)/);
+    const origIndent = matchIndent ? matchIndent[0].length : 0;
+
+    if (listMatch) {
+      const marker = listMatch[2];
+      const rest = listMatch[3] || "";
+
+      // Manage the indentation stack
+      if (origIndent > stack[stack.length - 1]) {
+        stack.push(origIndent);
+      } else {
+        while (stack.length > 1 && stack[stack.length - 1] > origIndent) {
+          stack.pop();
+        }
+        if (stack[stack.length - 1] < origIndent) {
+          stack.push(origIndent);
+        }
+      }
+
+      const level = stack.length - 1;
+      const normalizedIndent = " ".repeat(4 * level);
+      result.push(`${normalizedIndent}${marker}${rest ? " " + rest : ""}`);
+    } else {
+      // Continuation line (part of a list item) or normal paragraph
+      let i = stack.length - 1;
+      while (i > 0 && stack[i] > origIndent) {
+        i--;
+      }
+      
+      while (stack.length - 1 > i) {
+        stack.pop();
+      }
+
+      const shift = (4 * i) - stack[i];
+      const newIndentLength = Math.max(0, origIndent + shift);
+      const newIndent = " ".repeat(newIndentLength);
+      const lineContent = line.slice(origIndent);
+      result.push(`${newIndent}${lineContent}`);
+    }
+  }
+
+  return result.join("\n");
+}
+
 export function MarkdownView({ content }: Props) {
   const ref = useRef<HTMLDivElement>(null);
+
+  const processedContent = useMemo(() => normalizeMarkdownLists(content), [content]);
 
   useEffect(() => {
     const el = ref.current;
@@ -96,7 +178,7 @@ export function MarkdownView({ content }: Props) {
           },
         }}
       >
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </div>
   );

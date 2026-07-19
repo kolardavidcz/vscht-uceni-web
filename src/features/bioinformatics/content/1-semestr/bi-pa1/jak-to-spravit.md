@@ -1,13 +1,13 @@
 # Jak to spravit
 
-**Debug · struktura · pasty** — když kód nefunguje, Progtest křičí, nebo nevíš, kde začít.
+**Debug · struktura · pasty** — když kód nefunguje, Progtest nadává, nebo nevíš, kde začít.
 
 Nejde o učebnici C. Jde o **postup, jak si program opravit**: nástroje → typické pasty (dřív „SUS“) → odkazy na strukturu a testy.
 
-* [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/03-struktura-kodu) — jak psát, abys to vůbec uměl debugovat  
-* [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/04-testovaci-skript) — lokální testy bez copy-paste  
-* [Zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska) — časté chyby u zkoušky (celý seznam)  
-* [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/01-kalendar)
+* [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) — jak psát, abys to vůbec uměl debugovat  
+* [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript) — lokální testy bez copy-paste  
+* [Zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) — časté chyby u zkoušky (celý seznam)  
+* [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar)
 
 ---
 
@@ -21,33 +21,115 @@ g++ ./main -o main -Wall -Wextra -pedantic -g -std=c++20
 
 | Flag | K čemu |
 |------|--------|
-| `-Wall -Wextra -pedantic` | nahlásí co nejvíc potenciálních problémů — **vyřeš všechny** |
-| `-g` | ladicí informace (čísla řádků v debuggeru / Valgrindu) |
+| `-std=c++20` | kompiluje kód ve stejné verzi jako na Progtestu |
+| `-Wall -Wextra -pedantic` | nahlásí co nejvíc potenciálních problémů — **vyřeš všechny** (je důležité v kombinaci s `-std=c++20`, aby vám hlásil stejné chyby jako Progtest) |
+|`-lm`| pro používání matematických knihovnen |
 | `-fsanitize=undefined,address` | runtime kontroly UB (např. neinicializovaná proměnná) + paměť |
+| `-g` (pouze pro VS code, Clion to za vás řeší jinak) | ladicí informace (čísla řádků v debuggeru / Valgrindu) |
 | `-O2` | optimalizace; **nezlepší asymptotickou složitost** a na Progtestu tě „nezachrání“. Může ale program **shodit**, když děláš nekorektní věci (UB) — užitečné pro odhalení, ne jako „zrychlovač úkolu“ |
+
 
 Sanitizer (příklad):
 
 ```bash
-g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
+g++ -Wall -Wextra -pedantic -std=c++20 -g -fsanitize=undefined,address -o main main.c
 ./main
 ```
 
-### Když Progtest strhne strukturu a `g++` mlčí
+### **Zakázaná slovíčka** (ať nepadneš do C++)
 
-Zkus druhý kompilátor:
+Kromě C klíčových slov často: ***new, delete, private, public, protected***.
 
-```bash
-clang ./main -o main -pedantic -std=c23
+### Printf debugging — v případě nouze
+
+V úplně prvních hodinách není debugger komfortní volba, ze začátku tedy stačí `printf`.
+
+**Pravidlo:** Vypisuj vždy **co funkce dostala** a **co vrátí** — a uvnitř cyklu **stav v každém kroku**.
+
+```c
+TYP nazev_funkce(ARGUMENTY) {
+    printf("[DBG] vstup: ARGUMENTY=%d\n", ARGUMENTY);  // co funkce dostala
+    // KOMPILOVANÝ_KÓD
+    for (...) {
+        // KOMPILOVANÝ_KÓD
+        printf("[DBG] i=%d, PROMENA=%d\n", i, PROMENA);  // stav v každém kroku
+    }
+    // KOMPILOVANÝ_KÓD
+    printf("[DBG] vystup: HODNOTA=%d\n", HODNOTA);  // co vrátí
+    return HODNOTA;
+}
 ```
 
-Progtest má v kategorii **cvičení** kompilátor nastavený stejně jako kontroly úkolů — zkontroluj si kód tam.
+Díky prefixu `[DBG]` pak najdeš a smažeš všechny výpisy jedním vyhledáváním před odevzdáním.
 
-### Zakázaná slovíčka (ať nepadneš do C++)
+### printf se „neukáže hned"
 
-Kromě C klíčových slov často: *new, delete, private, public, protected*.
+Pokud `printf` nic nevypíše ani po spuštění, přidej `fflush(stdout);` hned za něj — CLion s tím má problém.
 
-### Paměť: sanitizer **nebo** Valgrind — ne obojí najednou
+```c
+printf("TEXT\n");
+fflush(stdout);
+```
+
+## 3. Jak číst chybu kompilátoru
+
+Kompilátor píše chyby odshora. **První chyba je ta pravá** — zbytek jsou často jen domino efekt.
+
+```
+main.c:12:5: error: use of undeclared identifier 'pocet'
+    pocet = n * 2;
+    ^
+```
+
+Čti takto: **soubor : řádek : sloupec → co se stalo → kde přesně**.
+
+Nejčastější hlášky a co znamenají:
+
+| Hláška | Příčina |
+|--------|---------|
+| `undeclared identifier` | překlep, nebo jsi zapomněl deklarovat proměnnou |
+| `expected ';'` | chybějící středník — hledej o řádek výš |
+| `implicit declaration of function` | zapomněl jsi `#include` nebo funkci deklarovat před použitím |
+| `assignment to expression with array type` | zkusil jsi přiřadit pole jako `arr = ...` — to nejde, kopíruj prvky cyklem |
+| `control reaches end of non-void function` | funkce slibuje `return` hodnotou, ale někde cesta nekončí `return` |
+| `format '%d' expects argument of type 'int*'` | špatný typ v `scanf`/`printf` — nejčastěji zapomenutý `&` |
+
+
+## Práce s alokovanou pamětí
+
+### Debugging: zobrazování polí
+
+V debuggeru vidíš pointer, ale ne celé pole — standardně ukáže jen první prvek. Takhle ho rozbalíš:
+
+**VS Code (s WSL / gcc)**
+
+V záložce *Variables* nebo *Watch* přidej výraz:
+
+```
+NAZEV_POLE, VELIKOST_CO_CHCI_ZOBRARIT
+```
+
+**CLion**
+
+V záložce *Variables* nebo *Evaluate Expression* (`Alt+F8`) použij cast:
+
+```
+(T(*)[SIZE])NAZEV_POLE
+```
+
+kde `T` = datový typ prvků (`int`, `double`, `char`, …) a `SIZE` = počet prvků, které chceš vidět.
+
+
+**Příklad** — máš `int arr[5] = {1,2,3,4,5}`:
+
+| IDE | Co napsat do Watch |
+|-----|--------------------|
+| VS Code | `arr,5` |
+| CLion | `(int(*)[5])arr` |
+
+> **Tip:** `SIZE` nemusí odpovídat deklarované délce — klidně dej větší číslo, pokud chceš vidět dál. Obsah za koncem pole je nedefinovaný, ale debugger ho ukáže (užitečné pro hledání off-by-one chyb).
+
+### Paměť: sanitizer **nebo** Valgrind — **ne obojí najednou**
 
 Tyto dva nástroje se **vzájemně vylučují**. Valgrind nespouštěj na binárce se sanitizerem.
 
@@ -59,10 +141,10 @@ Tyto dva nástroje se **vzájemně vylučují**. Valgrind nespouštěj na binár
 valgrind --leak-check=full --track-origins=yes ./main
 ```
 
-* `--leak-check=full` — blíž k neuvolněné paměti (čím byla alokována)  
-* `--track-origins=yes` — práce s neinicializovanou pamětí  
+* `--leak-check=full` — blíž k neuvolněné paměti (čím byla alokována)
+* `--track-origins=yes` — práce s neinicializovanou pamětí
 
-Kompiluj s `-g`.
+> **Pozor:** Valgrind potřebuje `-g` při kompilaci (ladicí symboly). CLion to přidá automaticky v Debug módu; ve WSL přidej `-g` ručně.
 
 ### NULL vs nullptr
 
@@ -74,46 +156,34 @@ Když kompilátor nezná `nullptr` (starší standard než C23):
 #endif
 ```
 
-### Debugging: zobrazování polí
-
-* jednoduše `ARRAY_NAME[SIZE]` (podle IDE/debuggeru)  
-* cast: `(T(*)[SIZE])ARRAY_NAME` (`T` = `int`, `double`, `char`, …)
-
-### printf se „neukáže hned“
-
-Typické v CLion — výstup až po konci programu. Vynutí *vylití*:
-
-```c
-printf("TEXT\n");
-fflush(stdout);
-```
-
 ---
 
-## 2. Rychlý postup „kód je rozbitý“
+## 4. Rychlý postup „kód je rozbitý“
 
 1. **Přečti první error kompilátoru shora** (ne poslední v cascade).  
 2. Zapni `-Wall -Wextra -pedantic` a vyčisti warningy.  
-3. Malý vstup ručně / [testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/04-testovaci-skript).  
+3. Malý vstup ručně / [testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript).  
 4. Debugger: kde se hodnoty rozcházejí s papírem.  
 5. Paměť: sanitizer **nebo** Valgrind.  
-6. Když padá jen na Progtestu — **větší vstupy** lokálně (ne jen sample).  
-7. Kód je spaghetti? → [struktura](/obor-bioinformatika/1-semestr/bi-pa1/03-struktura-kodu) (funkce + structy).
+6. Když padá jen na Progtestu — napiš si vlastní testovací vstupy
+ * **vlastní** předpočítej si vlastní testovací data, čím záludnější, tím lepší (ne jen sample)
+ * **větší vstupy** zkus nakopírovat nějaký test několikrát za/do sebe.  
+7. Kód je spaghetti? → [struktura](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) (funkce + structy).
 
 ---
 
-## 3. Typické pasty (dřív SUS checklist)
+## 5. Typické pasti
 
-* [ ] Warningy ignorované „protože to stejně běží“  
+* [ ] Ignorované warningy „protože to stejně běží“  
 * [ ] `scanf` bez kontroly návratové hodnoty  
-* [ ] `scanf("%s")` „bezpečně“ — není; buffer overflow past  
+* [ ] Zapomenutý `'\0'` / málo místa v poli na něj  
 * [ ] Cyklus se `strlen` na každém kroku  
-* [ ] Zapomenutý `'\0'` / málo místa na něj  
 * [ ] Neinicializované proměnné / paměť z `malloc`  
-* [ ] `realloc` bez geometrické řady → timeout na velkých datech  
-* [ ] Pointer na lokální proměnnou z funkce  
-* [ ] Jeden obří `main` bez funkcí → nejde debugovat  
-* [ ] Dynamické pole jako tři argumenty místo **struktury**  
+* [ ] zvětšování `realloc` lineáně (`nova_velikost = stara_velikost + 100`) a ne geometricky `nova_velikost = stara_velikost*1.5 + 10` → zbytečné zpomalování v testech s velkými daty  
+* [ ] Pointer na lokální proměnnou z funkce
+* [ ] Jeden obří `main` bez funkcí → špatně se debuguje (nebo spíš stojí nervy na debuggování)
+* [ ] Dynamické pole jako tři argumenty místo **struktury**
+---
+* [ ] `scanf("%s")` „bezpečně“ — není; buffer overflow past 
+* Podrobný seznam chyb u zkoušky: **[Zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)**
 
-Podrobně u zkoušky (včetně „když nevím…“ a 😿 chyb):  
-→ **[Zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/06-progtest-a-zkouska)**

@@ -95,7 +95,7 @@ export function HomePage() {
             </p>
             <div className="relative z-[2] flex flex-wrap gap-2 mb-5">
               <Link
-                to="/obor-bioinformatika/1-semestr/bi-pa1/00-jak-cist"
+                to="/obor-bioinformatika/1-semestr/bi-pa1/jak-cist"
                 className="px-2.5 py-1 bg-brand-orange/10 hover:bg-brand-orange/20 text-brand-orange text-[10px] font-black tracking-wider uppercase rounded-md border border-brand-orange/20"
               >
                 PA1

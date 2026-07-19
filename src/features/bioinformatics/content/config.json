@@ -1,19 +1,5 @@
 {
   "categories": {
-    "ag1": {
-      "label": "AG1 - Algoritmy a Grafy 1 (Materiály)",
-      "order": 0,
-      "files": {
-        "pa2-ag1-overview": {
-          "title": "Přehled FIT zdrojů z PA2 pro AG1",
-          "order": 1
-        },
-        "dml": {
-          "title": "Diskrétní matematika a logika",
-          "order": 2
-        }
-      }
-    },
     "0-obecne": {
       "label": "Obecné informace",
       "order": 1,
@@ -40,33 +26,32 @@
           "title": "BI-PA1 — Programování v C",
           "order": 1,
           "files": {
-            "00-jak-cist": {
-              "title": "0 ·Jak tohle číst",
+            "jak-cist": {
+              "title": "0 · Jak toto číst",
               "order": 0
             },
-			"05-wsl-a-setup": {
+            "wsl-a-setup": {
               "title": "1 · WSL a setup",
               "order": 1
             },
-            "01-kalendar": {
-              "title": "2 ·Kalendář co musím umět",
+            "kalendar": {
+              "title": "2 · Kalendář co musím umět",
               "order": 2
             },
-            "02-jak-to-spravit": {
+            "jak-to-spravit": {
               "title": "2 · Jak to spravit (debug · struktura · pasty)",
               "order": 2
             },
-            "03-struktura-kodu": {
+            "struktura-kodu": {
               "title": "3 · Struktura kódu",
               "order": 3
             },
-            "04-testovaci-skript": {
+            "testovaci-skript": {
               "title": "4 · Testovací skript",
               "order": 4
             },
-
-            "06-progtest-a-zkouska": {
-              "title": "06 · Progtest a zkouška (plné rady)",
+            "progtest-a-zkouska": {
+              "title": "5 · Progtest a zkouška (plné rady)",
               "order": 6
             }
           }
@@ -95,6 +80,20 @@
       "label": "3. Semestr",
       "order": 4,
       "files": {
+        "pre-ag1": {
+          "title": "pre-AG1 - Algoritmy a Grafy 1",
+          "order": 0,
+          "files": {
+            "pa2-ag1-overview": {
+              "title": "Přehled FIT zdrojů z PA2 pro AG1",
+              "order": 1
+            },
+            "dml": {
+              "title": "Diskrétní matematika a logika",
+              "order": 2
+            }
+          }
+        },
         "ag1": {
           "title": "Algoritmy a Grafy 1",
           "order": 1

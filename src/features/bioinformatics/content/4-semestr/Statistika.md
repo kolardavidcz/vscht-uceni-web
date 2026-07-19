@@ -1,0 +1,1 @@
+Často se doporučuje si vzít statistiku rovnou. Dá se dobře zvládnout s ostatními předměty (mě nějak chytla) a pak si ušetříe čas na AAG později.
