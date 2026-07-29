@@ -85,40 +85,12 @@
           "order": 0,
           "files": {
             "pa2-ag1-overview": {
-              "title": "1 · PA2 C++ Most k AG1",
+              "title": "Přehled FIT zdrojů z PA2 pro AG1",
               "order": 1
             },
             "dml": {
-              "title": "2 · Hub: Přehled Letní Přípravy",
+              "title": "Diskrétní matematika a logika",
               "order": 2
-            },
-            "dml-bio-grafy": {
-              "title": "3 · Modul 0: Bio-Intuice & Jazyk Grafů",
-              "order": 3
-            },
-            "dml-logicky-zaklad": {
-              "title": "4 · Modul 1: Logický & Důkazový základ",
-              "order": 4
-            },
-            "dml-indukce-na-grafech": {
-              "title": "5 · Modul 2: Indukce na Grafech & Redukční Past",
-              "order": 5
-            },
-            "dml-dukazy-sporem": {
-              "title": "6 · Modul 3: Důkazy Sporem & Extremální Princip",
-              "order": 6
-            },
-            "dml-loop-invariants": {
-              "title": "7 · Modul 4: Invarianty Cyklů (BFS & Dijkstra)",
-              "order": 7
-            },
-            "dml-konstruktivni-dukazy": {
-              "title": "8 · Modul 5: Konstruktivní Důkazy & Bio-Algoritmy",
-              "order": 8
-            },
-            "dml-zkouskovy-workshop": {
-              "title": "9 · Modul 6: Zkouškový Workshop & Šablony Důkazů",
-              "order": 9
             }
           }
         },

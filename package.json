@@ -6,8 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview",
-    "scrape:trainer": "node scripts/scrape-trainer-course.mjs --course 81"
+    "scrape:trainer": "node scripts/scrape-trainer-course.mjs --course 81",
+    "db:backup": "npx tsx scripts/export-db.ts"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

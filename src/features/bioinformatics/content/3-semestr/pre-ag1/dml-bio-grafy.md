@@ -1,0 +1,454 @@
+# Modul 0: Od Biologické Intuice k Jazyku Grafů
+
+> **[Relevance: 95%]** · **Tags:** `[INSIGHT]` `[BIO-ANALOGIE]` `[EPIC]`
+> **Cíl modulu:** Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do přísné množinové symboliky a formálního jazyka teoretické informatiky $G = (V, E)$.
+
+---
+
+## 🗺️ Co je to vlastně graf? (Opravdu, bez vzorců)
+
+Ty grafy, o kterých bude celý tento kurz, **nejsou grafy funkcí** ze střední školy ($y = x^2$ apod.). Jsou to úplně jiná zvířata.
+
+Nejsnazší způsob, jak si graf představit: **mapa metra**.
+
+```
+  Muzeum ──────── Náměstí Míru
+     |                  |
+  Muzeum Nár.      I.P. Pavlova
+     |                  |
+  Florenc ────── Hlavní nádraží
+```
+
+V téhle mapě:
+- **Stanice** = vrcholy (uzly) grafu
+- **Koleje mezi stanicemi** = hrany grafu
+
+To je vše. Graf = věci + spojení mezi nimi.
+
+Jakmile tohle pochopíš, uvidíš grafy všude:
+- **Sociální síť**: lidé = vrcholy, přátelství = hrany
+- **Metabolická dráha**: metabolity = vrcholy, enzymatické reakce = hrany  
+- **Internet**: routery = vrcholy, kabely = hrany
+- **Protein-proteinová interakce**: proteiny = vrcholy, fyzická vazba = hrana
+
+> **Intuice bez vzorce:** Graf je způsob, jak zakreslit, co je s čím spojeno. Matematický jazyk nám pak umožní o těchto spojeních přesně uvažovat a dokazovat věci.
+
+---
+
+## 1. Předmluva: Proč Bioinformatik Potřebuje Teoretickou Informatiku? `[INSIGHT]`
+
+V biologii a chemii jste zvyklí nahlížet na složité systémy vizuálně a přírodovědně:
+- Vidíte **molekulu glukózy** a chápete její prostorovou konformaci a chemické kovalentní vazby mezi atomy Uhlíku, Kyslíku a Vodíku.
+- Vidíte **metabolickou dráhu glykolýzy** a vnímáte ji jako posloupnost enzymatických přeměn jednoho substrátu v druhý.
+- Vidíte **sekvenování DNA** jako čtení milionů krátkých střípků (k-merů) z genomu organismu.
+
+Jakmile však vstoupíte do kurzu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT, akademický jazyk se radikálně promění:
+- Místo *"chemické molekuly"* pracujete s **neorientovaným grafem** $G = (V, E)$.
+- Místo *"enzymatické reakce"* pracujete s **orientovanou hranou** $e = (u, v) \in E$ v **orientovaném akalickém grafu (DAG)**.
+- Místo *"poskládat DNA ze střípků"* řešíte **problém nalezení Eulerovského tahu v de Bruijnův grafu**.
+
+Tato kapitola tvoří přirozený most. Ukážeme si, že formální matematický aparát teorie grafů není zbytečná akademická překážka, ale nesmírně elegantní a úsporný nástroj, který vám umožní nahlížet na jakýkoliv reálný biologický problém očima algoritmu.
+
+---
+
+## 2. Množinový Základ a Jazyk Relací `[Relevance: 90%]` `[EPIC]`
+
+Teorie grafů je celá vystavěna na základech **teorie množin**. Připomeňme si formální konstrukce, ze kterých grafy vznikají:
+
+### 2.1 Množiny a Kartézský Součin
+
+Nechť $V$ je konečná neprázdná množina prvků (kterým budeme říkat **vrcholy** nebo **uzly**).
+- Počet prvků množiny $V$ značíme jako $|V|$ nebo $n$.
+- **Kartézský součin** $V \times V$ je množina všech uspořádaných dvojic prvků z $V$:
+  $$V \times V = \{(u, v) \mid u \in V, v \in V\}$$
+  Velikost kartézského součinu je $|V \times V| = n^2$.
+
+- **Množina dvouprvkových podmnožin** $\binom{V}{2}$ je množina všech neuspořádaných dvojic různých prvků z $V$:
+  $$\binom{V}{2} = \{\{u, v\} \mid u, v \in V, u \neq v\}$$
+  Počet možných neuspořádaných dvojic je dán kombinačním číslem:
+  $$\left|\binom{V}{2}\right| = \frac{n(n-1)}{2} = \binom{n}{2}$$
+
+---
+
+### 2.2 Binární Relace na Množinách
+
+**Binární relace $R$** na množině $V$ je libovolná podmnožina kartézského součinu: $R \subseteq V \times V$.
+Pokud $(u, v) \in R$, říkáme, že prvek $u$ je v relaci $R$ s prvkem $v$ (zapisujeme $u R v$).
+
+Vlastnosti binárních relací na množině $V$:
+1. **Reflexivita:** $\forall x \in V: (x, x) \in R$ *(Každý prvek je v relaci sám se sebou).*
+2. **Antireflexivita:** $\forall x \in V: (x, x) \notin R$ *(Žádný prvek není v relaci sám se sebou – graf nemá smyčky).*
+3. **Symetrie:** $\forall x, y \in V: ((x, y) \in R \implies (y, x) \in R)$ *(Vazba funguje oboustranně).*
+4. **Antisymetrie:** $\forall x, y \in V: ((x, y) \in R \land (y, x) \in R \implies x = y)$ *(Vazba je jednosměrná).*
+5. **Tranzitivita:** $\forall x, y, z \in V: ((x, y) \in R \land (y, z) \in R \implies (x, z) \in R)$ *(Pokud A reaguje na B a B na C, pak A přímo ovlivňuje C).*
+
+> [!IMPORTANT]
+> **Propojení Relací a Grafů:**
+> - **Neorientovaný graf bez smyček** je matematicým vyjádřením **antireflexivní a symetrické binární relace** na množině $V$.
+> - **Orientovaný graf bez smyček** je vyjádřením obecné **antireflexivní binární relace** na množině $V$.
+
+---
+
+## 3. Katalog Biologických & Chemických Grafových Struktur `[Relevance: 95%]` `[BIO-ANALOGIE]`
+
+Propojme teoretické definice s pěti hlavními pilíři moderní bioinformatiky:
+
+```
+┌──────────────────────────────────┬────────────────────────────┬────────────────────────────┐
+│ Biologický / Chemický systém     │ Vrcholy V (Nodes)           │ Hrany E (Edges)            │
+├──────────────────────────────────┼────────────────────────────┼────────────────────────────┤
+│ 🧪 Molekula (např. Glukóza)       │ Atomy (C, H, O, N)         │ Kovalentní chemické vazby  │
+│ 🔄 Metabolická dráha (Glykolýza) │ Metabolity / Substráty     │ Enzymatické reakce (orient)│
+│ 🧬 PPI Síť (Protein-Protein)     │ Proteiny                   │ Fyzikální interakce        │
+│ 🧩 DNA de Bruijn Graf            │ (k-1)-mery nukleotidů      │ k-mery sekvenování         │
+│ 🌳 Fylogenetický strom           │ Biologické druhy / Taxony  │ Evoluční předkové (strom)  │
+└──────────────────────────────────┴────────────────────────────┴────────────────────────────┘
+```
+
+---
+
+### 3.1 Chemické Grafy Molekul (Molecular Graphs)
+
+V chemoinformatice reprezentujeme chemickou strukturní sloučeninu jako neorientovaný graf $G = (V, E)$:
+- **Množina vrcholů $V$:** Každý vrchol $v \in V$ představuje atom a nesouvisí s ním pouze jeho ID, ale i **chemický prvek** (např. Uhlík $C$, Vodík $H$, Kyslík $O$).
+- **Množina hran $E$:** Každá hrana $e = \{u, v\} \in E$ reprezentuje kovalentní vazbu mezi atomy $u$ a $v$.
+
+#### Chemická valence a stupně vrcholů $\deg(v)$:
+V chemii platí přísná pravidla valence atomů:
+- Vodík ($H$) tvoří právě 1 vazbu $\implies \deg(H) = 1$ (v grafu je Vodík **listem**!).
+- Kyslík ($O$) tvoří 2 vazby $\implies \deg(O) = 2$.
+- Dusík ($N$) tvoří 3 vazby $\implies \deg(N) = 3$.
+- Uhlík ($C$) tvoří 4 vazby $\implies \deg(C) = 4$.
+
+```
+           H
+           │
+     H ─── C ─── O ─── H      Molekula Ethanolu (C2H5OH)
+           │                  Graph: |V| = 9 atomů, |E| = 8 vazeb
+     H ─── C ─── H            Stupně: deg(H)=1, deg(O)=2, deg(C)=4
+           │
+           H
+```
+
+> [!NOTE]
+> Pro jednoduchost chemoinformatické algoritmy často používají tzv. **Hydrogen-suppressed graphs** (grafy s potlačenými vodíky), kde jsou atomy vodíku odstraněny a jejich počet je uchováván pouze jako atribut u uhlíkových uzlů.
+
+---
+
+### 3.2 Metabolické Reakční Sítě (Metabolomics & DAGs)
+
+Metabolická síť buněčného metabolismu popisuje biochemické přeměny látek katalyzované enzymy:
+- **Množina vrcholů $V$:** Chemické metabolity a substráty (glukóza, pyruvate, ATP, NADH, acetyl-CoA).
+- **Množina hran $E$:** Orientované hrany $e = (u, v) \in E$, kde hrana vedoucí z $u$ do $v$ znamená, že metabolit $u$ je přeměňován enzymatickou reakcí na produkt $v$.
+
+#### Strukturní typy metabolických drah:
+1. **Lineární dráhy (DAG - Orientované Akalické Grafy):**
+   - Příklady: Glykolýza.
+   - Neobsahují orientované cykly. Existuje jasný "vstupní substrát" (in-degree = 0) a "výstupní produkt" (out-degree = 0, tzv. slepá ulička / terminal metabolite).
+2. **Cyklické dráhy:**
+   - Příklady: Citrátový cyklus (Krebsův cyklus), Calvinův cyklus.
+   - Obsahují orientovaný cyklus $C = (v_1, v_2, \dots, v_k, v_1)$, kde se klíčový přenašeč (oxaloacetát) regeneruje.
+
+---
+
+### 3.3 Protein-Proteinové Interakční Sítě (PPI Networks)
+
+Buňka funguje díky fyzikálním kontaktům mezi proteiny, které vytvářejí molekulární stroje (např. Ribozóm, RNA polymeráza):
+- **Množina vrcholů $V$:** Proteiny kódované genomem.
+- **Množina hran $E$:** Neorientované hrany reprezentující prokázanou fyzikální vazbu (zjištěnou např. pomocí kvasinkového dvouhybridního systému Y2H nebo hmotnostní spektrometrie MS/MS).
+
+#### Topologická vlastnost: Bezškálové sítě (Scale-Free Networks) & Huby
+PPI sítě nejsou náhodné grafy! Vykazují tzv. **mocninné rozdělení stupňů** (Power-law distribution):
+- Většina proteinů má velmi malý stupeň ($\deg(v) = 1$ až $3$).
+- Malé množství proteinů tvoří tzv. **Huby (Uzly s obrovským stupněm $\deg(v) > 100$)**.
+
+> [!INSIGHT]
+> **Biologická esenciálnost hubů:**
+> Zasažení běžného proteinu s $\deg(v) = 1$ mutací buněčnou funkci neovlivní. Odstranění **huba** (proteinu s $\deg(v) = 150$) však způsobí kolaps celé PPI sítě a smrt buňky (tzv. Lethality-Centrality Lethality Rule).
+
+---
+
+### 3.4 DNA Sekvenování & de Bruijn Grafy
+
+Při čtení genomu současnými sekvenátory (Illumina, MGI) nezískáme kompletní řetězec chromozomu najednou, ale obdržíme **miliony krátkých fragmentů** (přečtení / reads) o délce $k$ nukleotidů (tzv. $k$-merů).
+
+Jak poskládat střípky zpět do celé sekvence? Použijeme **de Bruijnův graf**:
+- **Množina vrcholů $V$:** Všechny unikatní $(k-1)$-mery nalezené v biologickém vzorku.
+- **Množina hran $E$:** Orientovaná hrana vedoucí z $(k-1)$-meru $A$ do $(k-1)$-meru $B$ existuje právě tehdy, když v přečtených datech existuje $k$-mer, jehož sufix délky $k-1$ je $B$ a prefix délky $k-1$ je $A$.
+
+```
+Příklad pro k = 3 (3-mery):
+Read: ATGCAT
+
+2-mery (Vrcholy V): {AT, TG, GC, CA}
+3-mery (Hrany E):   (AT)->TG, (TG)->GC, (GC)->CA, (CA)->AT
+
+Graf:
+[AT] ────► [TG] ────► [GC] ────► [CA] ────┐
+  ▲                                       │
+  └───────────────────────────────────────┘
+```
+
+> [!MEGA EPIC]
+> **Propojení s Teorií Grafů:**
+> Rekonstrukce původního genomu odpovídá **nalezení Eulerovského tahu** (cesty procházející každou hranu grafu právě jednou) v tomto de Bruijnův grafu! Tuto tématiku podrobně zpracujeme v Modulu 5.
+
+---
+
+### 3.5 Fylogenetické Stromy (Phylogenetic Trees)
+
+Fylogenetika zkoumá evoluční příbuznost druhů nebo genových sekvencí:
+- **Zakořeněný fylogenetický strom (Rooted Tree):** Orientovaný strom, kde kořen representauje posledního společného předka (LUCA - Last Universal Common Ancestor), vnitřní uzly representaují speciation events (rozštěpení druhů) a **listy ($\deg(v) = 1$)** representaují dosud žijící zkoumané druhy (taxony).
+
+---
+
+### 3.6 Ohodnocené Biologické Grafy (Weighted Biological Graphs) `[Relevance: 90%]`
+
+V reálných biologických systémech nestačí pouhá informace, zda hrana existuje či ne ($0/1$). Hrany nesou kvantitativní fyzikální nebo chemickou hodnotu – **váhu hrany $w(e) \in \mathbb{R}$**:
+
+1. **PPI Sítě s Afinitou Vazby ($K_d$ / Confidence Scores):**
+   Váha hrany $w(e)$ reprezentuje vazebnou afinitu (disociační konstantu $K_d$) nebo spolehlivost experimentalního důkazu interakce z databáze STRING (score 0 až 1000). Hledání modulů silně vázaných proteinů odpovídá vyhledání **Heavy Subgraphs**.
+2. **Metabolické Sítě s Změnou Volné Enthalpie ($\Delta G$):**
+   Váha orientované hrany $w(e)$ vyjadřuje termodynamickou změnu Gibbsostvy volné energie reakce $\Delta G^\circ$. Záporná váha $\Delta G < 0$ značí exergonickou samovolnou reakci, zatímco kladná $\Delta G > 0$ vyžaduje spřažení s hydrolyzou ATP.
+3. **Genomické Sekvenování a Váhy Překryvů (Overlap Graphs):**
+   Váha hrany $w(u, v)$ reprezentuje délku shodného nukleotidového přesahu mezi dvěma dlouhými přečteními (reads z Oxford Nanopore). Hledání nejdelšího genomu odpovídá **Problému nejdelší cesty v ohodnoceném grafu**.
+
+---
+
+### 3.7 Bipartitní Biologické Sítě (Bipartite Biological Networks) `[Relevance: 95%]` `[BIO-ANALOGIE]`
+
+V řadě bioinformatických aplikací jsou vrcholy přirozeně rozděleny do **dvou disjunktních množin $V = V_1 \cup V_2$**, přičemž hrany existují výhradně mezi prvkem z $V_1$ a prvkem z $V_2$:
+
+```
+      Množina V1 (Enzymy)                Množina V2 (Substráty)
+     ┌──────────────────┐               ┌──────────────────┐
+     │  [Hexokináza] ───┼───────────────┼───► [Glukóza]    │
+     │                  │               │                  │
+     │  [Pyruvátkináza]─┼───────────────┼───► [PEP]        │
+     └──────────────────┘               └──────────────────┘
+```
+
+1. **Enzymaticko-Substrátové Sítě:** $V_1$ = Enzymy, $V_2$ = Substráty/Metabolity. Hrana vede z enzymu k substrátu, který tento enzym katalyzuje.
+2. **Sítě Léčivo-Terč (Drug-Target Networks):** $V_1$ = Schválená léčiva (Small molecules), $V_2$ = Bílkovinné receptory. Bipartitní párování (Bipartite Matching) pomáhá při **Drug Repurposing** (hledání nových indikací pro stávající léky).
+3. **Gen-Opatření Sítě (Gene-Disease Networks):** $V_1$ = Mutované geny, $V_2$ = Klinické diagnózy/fenotypy.
+
+---
+
+## 4. Počítačová Reprezentace Grafů v C++ (PA2 $\to$ AG1) `[Relevance: 90%]` `[EPIC]`
+
+V předmětech **PA2** a **AG1** budete grafové algoritmy zapisovat v jazyce C++. Způsob, jakým graf uložíte do paměti, rozhodne o tom, zda váš program proběhne za 0.01 sekundy, nebo vyprší časový limit (Time Limit Exceeded).
+
+Uvažujme graf $G = (V, E)$ s $n = |V|$ vrcholy a $m = |E|$ hranami. Vrcholy očíslujeme od $0$ do $n-1$.
+
+---
+
+### 4.1 Matice Sousedství (Adjacency Matrix)
+
+Graf reprezentujeme dvoudimenzionálním polem (maticí) $A$ typu $n \times n$:
+
+$$A[i][j] = \begin{cases} 1 & \text{pokud } \{v_i, v_j\} \in E \text{ (nebo } (v_i, v_j) \in E \text{)}, \\ 0 & \text{pokud hrana neexistuje.} \end{cases}$$
+
+#### Zápis v C++:
+```cpp
+#include <vector>
+
+class GraphMatrix {
+private:
+    int n;
+    std::vector<std::vector<bool>> adjMatrix;
+
+public:
+    GraphMatrix(int vertices) : n(vertices), adjMatrix(vertices, std::vector<bool>(vertices, false)) {}
+
+    void addEdge(int u, int v) {
+        adjMatrix[u][v] = true;
+        adjMatrix[v][u] = true; // Pro neorientovaný graf
+    }
+
+    bool hasEdge(int u, int v) const {
+        return adjMatrix[u][v];
+    }
+};
+```
+
+#### Vlastnosti Matice Sousedství:
+- **Paměťová složitost:** $\Theta(n^2)$ bez ohledu na počet hran $m$.
+- **Test existence hrany $\{u, v\}$:** $O(1)$ (Okamžitý přístup do pole).
+- **Procházení všech sousedů vrcholu $u$:** $\Theta(n)$ (Musíme projít celý řádek matice).
+
+---
+
+### 4.2 Seznam Sousedů (Adjacency List)
+
+Pro každý vrchol $u \in V$ uchováváme seznam (dynamické pole `std::vector`) všech vrcholů $v$, které jsou s $u$ spojeny hranou.
+
+#### Zápis v C++:
+```cpp
+#include <vector>
+
+class GraphList {
+private:
+    int n;
+    std::vector<std::vector<int>> adjList;
+
+public:
+    GraphList(int vertices) : n(vertices), adjList(vertices) {}
+
+    void addEdge(int u, int v) {
+        adjList[u].push_back(v);
+        adjList[v].push_back(u); // Pro neorientovaný graf
+    }
+
+    const std::vector<int>& getNeighbors(int u) const {
+        return adjList[u];
+    }
+};
+```
+
+#### Vlastnosti Seznamu Sousedů:
+- **Paměťová složitost:** $\Theta(n + m)$ pro neorientovaný i orientovaný graf.
+- **Test existence hrany $\{u, v\}$:** $O(\deg(u))$ (Musíme prohledat sousedy vrcholu $u$).
+- **Procházení všech sousedů vrcholu $u$:** $\Theta(\deg(u))$ (Projdeme pouze skutečné sousedy!).
+
+---
+
+### 4.3 Srovnávací Tabulka Reprezentací Grafu pro AG1
+
+| Operace / Vlastnost | Matice Sousedství (Matrix) | Seznam Sousedů (Adjacency List) | Seznam Hran (Edge List) |
+| :--- | :--- | :--- | :--- |
+| **Paměťová složitost (Space)** | $\Theta(n^2)$ *(Špatné pro řídké grafy!)* | $\Theta(n + m)$ **(OPTIMÁLNÍ pro AG1)** | $\Theta(m)$ |
+| **Existuje hrana $\{u, v\}$?** | $\mathcal{O}(1)$ | $\mathcal{O}(\deg(u))$ | $\mathcal{O}(m)$ |
+| **Procházení sousedů $u$** | $\Theta(n)$ | $\Theta(\deg(u))$ **(OPTIMÁLNÍ pro BFS/DFS)**| $\Theta(m)$ |
+| **Vložení nové hrany** | $\mathcal{O}(1)$ | $\mathcal{O}(1)$ | $\mathcal{O}(1)$ |
+| **Vhodné použití** | Husté grafy ($m \approx n^2$) | Řídké biologické grafy ($m \approx n$) | Kruskalův algoritmus MST |
+
+> [!CAUTION]
+> **Varování pro zkoušku z AG1:**
+> Reálné biologické sítě (PPI sítě, metabolické dráhy) jsou **řídké grafy** (Sparse Graphs), kde $m \ll n^2$ (typicky $m = \mathcal{O}(n)$). Pokud v zápočtovém testu z AG1 použijete pro algoritmy BFS/DFS matici sousedství, váš algoritmus poběží v čase $\mathcal{O}(n^2)$ místo $\mathcal{O}(n + m)$ a **ztratíte body za časovou složitost**!
+
+---
+
+## 5. Formální Grafová Terminologie & Definice `[Relevance: 95%]` `[EPIC]`
+
+Shrňme si přesné matematické definice všech pojmů, které budeme v dalších modulech rigorózně dokazovat:
+
+### 5.1 Stupně Vrcholů a Incidence
+- Vrchol $u$ a hrana $e$ jsou **incidentní**, pokud $u \in e$.
+- Dva vrcholy $u, v$ jsou **sousední (adjacentní)**, pokud $\{u, v\} \in E$.
+- **Stupeň vrcholu $\deg_G(v)$** v neorientovaném grafu $G$ je počet hran incidentních s $v$:
+  $$\deg_G(v) = |\{e \in E \mid v \in e\}|$$
+- v orientovaném grafu rozlišujeme:
+  - **Vstupní stupeň $\text{deg}^-(v)$:** Počet hran vstupujících do $v$: $|\{(u, v) \in E\}|$.
+  - **Výstupní stupeň $\text{deg}^+(v)$:** Počet hran vycházejících z $v$: $|\{(v, w) \in E\}|$.
+
+---
+
+### 5.2 Podgrafy a Vyvolané Podgrafy
+
+Mějme graf $G = (V, E)$.
+1. **Podgraf (Subgraph):** Graf $G' = (V', E')$ je podgrafem $G$ (zapisujeme $G' \subseteq G$), pokud $V' \subseteq V$ a $E' \subseteq E$.
+2. **Vyvolaný podgraf (Induced Subgraph):** Nechť $V' \subseteq V$ je podmnožina vrcholů. Vyvolaný podgraf $G[V']$ je graf $(V', E')$, kde $E'$ obsahuje **všechny hrany původního grafu $G$, které mají oba koncové vrcholy ve $V'$**:
+   $$E' = \{\{u, v\} \in E \mid u \in V' \land v \in V'\}$$
+
+```
+Původní graf G:                  Vyvolaný podgraf G[V'] pro V' = {A, B, C}:
+    (A) ───── (B)                    (A) ───── (B)
+     │   \     │                      │   \     │
+     │    \    │                      │    \    │
+     │     \   │                      │     \   │
+    (C) ───── (D)                    (C)       (D vynechán i s jeho hranami)
+```
+
+---
+
+### 5.3 Sledy, Tahy, Cesty a Cykly
+
+Nechť $G = (V, E)$ je neorientovaný graf.
+1. **Sled (Walk):** Střídavá posloupnost vrcholů a hran $(v_0, e_1, v_1, e_2, v_2, \dots, e_k, v_k)$, kde $e_i = \{v_{i-1}, v_i\}$. *(Vrcholy i hrany se mohou opakovat).*
+2. **Tah (Trail):** Sled, ve kterém se **neopakuje žádná hrana**. *(Vrcholy se opakovat mohou).*
+3. **Cesta (Path):** Sled, ve kterém se **neopakuje žádný vrchol** (a tedy ani hrana). Délka cesty je počet jejích hran $k$.
+4. **Cyklus (Cycle):** Uzavřený sled $(v_0, e_1, v_1, \dots, e_k, v_0)$ délky $k \ge 3$, kde $v_0, v_1, \dots, v_{k-1}$ jsou navzájem různé vrcholy.
+
+---
+
+## 🧪 Rozsáhlé Procvičovací Úlohy pro Bioinformatiky
+
+### Úloha 0.1: Analýza Proteinové Interakční Sítě (PPI)
+Mějme proteinovou síť popsanou neorientovaným grafem $G = (V, E)$ s $|V| = 6$ proteiny $\{P_1, P_2, P_3, P_4, P_5, P_6\}$ a množinou interakcí:
+$$E = \{\{P_1, P_2\}, \{P_1, P_3\}, \{P_2, P_3\}, \{P_3, P_4\}, \{P_4, P_5\}, \{P_4, P_6\}\}$$
+
+1. Určete stupně všech vrcholů $\deg(P_i)$.
+2. Identifikujte proteiny s nejvyšším stupněm (Huby) a listy.
+3. Vypište matici sousedství $A$ tohoto grafu.
+4. Ověřte Handshaking Lemma $\sum \deg(v) = 2|E|$.
+
+<details>
+<summary>🔍 Zobrazit detailní řešení Úlohy 0.1</summary>
+
+### ✍️ Řešení:
+
+1. **Stupně vrcholů:**
+   - $P_1$: Sousedí s $P_2, P_3 \implies \deg(P_1) = 2$.
+   - $P_2$: Sousedí s $P_1, P_3 \implies \deg(P_2) = 2$.
+   - $P_3$: Sousedí s $P_1, P_2, P_4 \implies \deg(P_3) = 3$.
+   - $P_4$: Sousedí s $P_3, P_5, P_6 \implies \deg(P_4) = 3$.
+   - $P_5$: Sousedí pouze s $P_4 \implies \deg(P_5) = 1$ (List).
+   - $P_6$: Sousedí pouze s $P_4 \implies \deg(P_6) = 1$ (List).
+
+2. **Huby a Listy:**
+   - Proteiny $P_3$ a $P_4$ mají nejvyšší stupeň ($\deg = 3$), představují **lokální huby** sítě.
+   - Proteiny $P_5$ a $P_6$ jsou **listy** ($\deg = 1$).
+
+3. **Matice Sousedství $A$ (velikost $6 \times 6$):**
+   $$A = \begin{pmatrix}
+   0 & 1 & 1 & 0 & 0 & 0 \\
+   1 & 0 & 1 & 0 & 0 & 0 \\
+   1 & 1 & 0 & 1 & 0 & 0 \\
+   0 & 0 & 1 & 0 & 1 & 1 \\
+   0 & 0 & 0 & 1 & 0 & 0 \\
+   0 & 0 & 0 & 1 & 0 & 0
+   \end{pmatrix}$$
+
+4. **Ověření Handshaking Lemmatu:**
+   - Počet hran $|E| = 6$. Tedy $2|E| = 2 \times 6 = 12$.
+   - Součet stupňů: $\sum_{i=1}^6 \deg(P_i) = 2 + 2 + 3 + 3 + 1 + 1 = 12$.
+   - Platí $12 = 12$. Handshaking lemma je bezchybně ověřeno! $\blacksquare$
+</details>
+
+---
+
+### Úloha 0.2: Konverze Reprezentací v C++
+Napište funkci v C++ `std::vector<std::vector<int>> matrixToList(const std::vector<std::vector<bool>>& matrix)`, která přivede graf uložený v matici sousedství na seznam sousedů. Určete časovou a prostorovou složitost této konverze.
+
+<details>
+<summary>🔍 Zobrazit kód v C++ a rozbor složitosti</summary>
+
+### ✍️ Implementace v C++:
+
+```cpp
+#include <vector>
+
+std::vector<std::vector<int>> matrixToList(const std::vector<std::vector<bool>>& matrix) {
+    int n = matrix.size();
+    std::vector<std::vector<int>> adjList(n);
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (matrix[i][j]) {
+                adjList[i].push_back(j);
+            }
+        }
+    }
+
+    return adjList;
+}
+```
+
+### 📊 Rozbor Složitosti:
+- **Časová složitost:** Musíme projít všechny buňky matice $n \times n$. Procházení trvá $\Theta(n^2)$. Vkládání do `std::vector` pomoci `push_back` má amortizovanou složitost $\mathcal{O}(1)$. Celková časová složitost je tedy **$\Theta(n^2)$**.
+- **Prostorová složitost (Paměť):** Výstupní seznam sousedů alokuje paměť pro $n$ vektorů a celkem $2m$ prvků (pro neorientovaný graf). Paměťová složitost výstupu je tedy **$\Theta(n + m)$**. $\blacksquare$
+</details>
+
+---
+
+> ➡️ **Pokračujte na další modul:** [1 · Logický & Důkazový základ pro Grafové Algoritmy](./dml-logicky-zaklad)

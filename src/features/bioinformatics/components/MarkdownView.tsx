@@ -129,21 +129,24 @@ export function MarkdownView({ content }: Props) {
         await loadMathJax();
         if (cancelled || !ref.current) return;
         if (window.MathJax?.typesetPromise) {
-          window.MathJax.typesetClear?.([ref.current]);
+          try {
+            window.MathJax.typesetClear?.([ref.current]);
+          } catch {}
           await window.MathJax.typesetPromise([ref.current]);
         }
-      } catch {
-        /* ignore MathJax race / network */
+      } catch (err) {
+        console.error("MathJax typesetting error:", err);
       }
     };
     const t = window.setTimeout(() => {
       void run();
-    }, 50);
+    }, 100);
+
     return () => {
       cancelled = true;
       window.clearTimeout(t);
     };
-  }, [content]);
+  }, [content, processedContent]);
 
   return (
     <div ref={ref} className="wiki-prose tex2jax_process">

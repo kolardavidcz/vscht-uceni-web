@@ -1,106 +1,198 @@
-# 🧠 Diskrétní matematická logika & Důkazy
+# ☀️ Letní průvodce grafovou matematikou pro bioinformatiky
 
-Tato sekce slouží jako příprava na teorii grafů a formální logiku v předmětu **AG1**.
-
-
-* Výukové video k důkazům matematické logiky:
-  <iframe src="https://www.youtube.com/embed/Rr_I0tdgubY?rel=0&wmode=transparent" class="w-full aspect-video rounded-xl my-4 border border-slate-200/85 shadow-sm" allowfullscreen></iframe>
+> **Pro koho?** Studenti Bioinformatiky na VŠCHT, kteří v září nastupují do 3. semestru a čeká je AG1 na FIT ČVUT.
+> **Vibe?** Žádné tlusté skripta, žádný stres. Letní četba u kafe — jako kdyby ti to starší spolužák vysvětloval u oběda.
 
 ---
 
-## 📐 Typy důkazů a Matematická logika
-
-Při studiu algoritmů budete muset dokazovat jejich správnost. Zde jsou základní techniky, jak k důkazům přistupovat:
-
-* **Studijní text:** [Typy důkazů (FIT ČVUT)](https://courses.fit.cvut.cz/BI-DML/@master/textbook/sec_0402_typy_dukazu.html)
-
-### ❓ Co je to Důkaz sporem?
-Důkaz sporem je jedna z nejběžnějších technik v matematické logice.
-* **Princip:** Chceme dokázat tvrzení A ⇒ B. Místo přímého postupu předpokládáme opak – tedy že platí předpoklad A, ale **neplatí** závěr B (vyjádřeno jako: A ∧ ¬B).
-* **Cíl:** Postupným logickým odvozováním z tohoto předpokladu dojdeme k zjevnému logickému nesmyslu (sporu) – např. že číslo x je zároveň sudé i liché, nebo že 1 = 0.
-* **Závěr:** Protože předpoklad opaku vedl ke sporu, původní tvrzení A ⇒ B musí platit.
+### 📺 Úvodní výukové video
+<iframe src="https://www.youtube.com/embed/Rr_I0tdgubY?rel=0&wmode=transparent" class="w-full aspect-video rounded-xl my-4 border border-slate-200/85 shadow-sm" allowfullscreen></iframe>
 
 ---
 
-## 🧠 DMA (Diskrétní matematika pro VŠCHT)
+## 👋 Hele, tohle není strašidelný kurz
 
-Zde jsou základní koncepty, které studentům na začátku často dělají potíže:
+Spousta bioinformatiků slyší „diskrétní matematika a důkazy" a dostane špatný pocit z gymplu. Nemusíš. Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce.
 
-* **Studijní text:** [Diskrétní matematika a logika (FIT ČVUT)](https://courses.fit.cvut.cz/BI-DML/@master/textbook/sec_0204_taut_kontr_splnit.html)
+Co konkrétně se naučíš? Jednoduše řečeno:
+- Jak číst a psát matematická tvrzení o grafech (aniž by to bylo strašidelné)
+- Jak dokázat, že algoritmus funguje správně (stačí 3 kroky, fakt)
+- Jak myslet jako matematik, když řešíš strukturální problémy — a to ti pomůže i v bioinformatice
 
-### 1. Nutná a postačující podmínka
-Mějme výroky E a F:
+**Co tady NENÍ:** žádné integrály, žádné matice, žádná pravděpodobnost. Jen logika, grafy a pár hezkých triků na důkazy.
 
-Pokud je implikace E ⇒ F pravdivá, pak E je postačující podmínka pro F, a F je nutná podmínka pro E.
-Pokud je ekvivalence E ⇔ F pravdivá, pak E je nutná a postačující podmínka pro F.
+> [!TIP]
+> Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika). Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.
 
-#### Příklad s dělitelností:
-Uvažujme výroky: D₂ (číslo je dělitelné 2), D₃ (dělitelné 3), D₆ (dělitelné 6).
+---
 
-Platí D₆ ⇒ D₂ a D₆ ⇒ D₃. Dělitelnost šesti je postačující podmínkou pro dělitelnost dvěma. Dělitelnost dvěma je nutnou podmínkou pro dělitelnost šesti (pokud číslo není sudé, šesti ho určitě nevydělíte).
-Platí D₆ ⇔ (D₂ ∧ D₃). Dělitelnost dvěma a třemi současně je nutnou i postačující podmínkou pro dělitelnost šesti.
 
-### 2. Kvantifikátory: Pro každé (∀) & Existuje (∃)
-* **Pro každé (∀x):** "pro všechna x platí", "každé x splňuje".
-* **Existuje (∃x):** "existuje x takové, že platí", "alespoň jedno x splňuje".
-* **Negování kvantifikátorů:** Při negaci zaměníme ∀ za ∃ (a naopak) a znegujeme samotné tvrzení.
-  * *Tvrzení:* Všichni v oranžovém saku lžou. (∀x: lže(x) = 1)
-  * *Negace:* Existuje alespoň jeden v oranžovém saku, který nelže. (∃x: lže(x) = 0)
+## 🏷️ Systém Hodnocení a Značek v Kurzu
 
-### 3. Logická implikace – Mnemotechnika
-Výsledky operace implikace (A ⇒ B) lze popsat vztahem mezi zkoušejícím (Z) a studentem (S):
-* **0** = neumí, **1** = umí.
+Každá kapitola a podkapitola obsahuje dvě klíčové značky:
+- **[Relevance: X%]**: Jak moc je dané téma zásadní přímo pro zkoušku a zápočtové testy z AG1.
+- **Štítky (Tags)**:
+  - `[EPIC]` / `[MEGA EPIC]` – Klíčový teoretický pilíř s obrovským dopadem.
+  - `[PAST U ZKOUŠKY]` – Místo, kde 80 % studentů ztratí body (např. redukční past u indukce).
+  - `[INSIGHT]` – Hlavní myšlenkový koncept a biologická analogie.
+  - `[CHALLENGE]` – Pokročilejší důkaz pro získání plného počtu bodů.
 
-<div class="overflow-x-auto my-6 border border-slate-200/80 rounded-xl shadow-xs"><table class="w-full text-left text-xs sm:text-sm border-collapse">
+---
+
+## 📊 Přehledová Tabulka 7 Modulů Kurzu
+
+<div class="overflow-x-auto my-6 border border-slate-200/80 rounded-xl shadow-xs">
+<table class="w-full text-left text-xs sm:text-sm border-collapse">
 <thead>
-<tr class="bg-slate-100/50 border-b border-slate-200">
-<th class="px-4 py-3 text-slate-700 font-semibold">Zkoušející (Z)</th>
-<th class="px-4 py-3 text-slate-700 font-semibold">Student (S)</th>
-<th class="px-4 py-3 text-slate-700 font-semibold">Z =&gt; S</th>
-<th class="px-4 py-3 text-slate-700 font-semibold">Výklad situace</th>
+<tr class="bg-slate-100/70 border-b border-slate-200">
+<th class="px-3 py-2.5 text-slate-700 font-semibold">Modul</th>
+<th class="px-3 py-2.5 text-slate-700 font-semibold">Název Kapitoly</th>
+<th class="px-3 py-2.5 text-slate-700 font-semibold">Relevance</th>
+<th class="px-3 py-2.5 text-slate-700 font-semibold">Čas Čtení</th>
+<th class="px-3 py-2.5 text-slate-700 font-semibold">Hlavní Témata & Štítky</th>
 </tr>
 </thead>
 <tbody>
 <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3">0 (neumí)</td>
-<td class="px-4 py-3">0 (neumí)</td>
-<td class="px-4 py-3 font-bold text-green-600">1</td>
-<td class="px-4 py-3">Zkoušející to sám neumí, takže nepozná, že to student taky neumí. Vše v klidu (OK).</td>
+<td class="px-3 py-2.5 font-mono font-bold">Modul 0</td>
+<td class="px-3 py-2.5"><a href="./dml-bio-grafy" class="font-bold text-orange-600 hover:underline">Bio-Intuice & Jazyk Grafů</a></td>
+<td class="px-3 py-2.5 font-bold text-emerald-600">95 %</td>
+<td class="px-3 py-2.5 font-mono text-slate-500">25 min</td>
+<td class="px-3 py-2.5">Množiny, relace, molekuly, metabolity, de Bruijn k-mery, PPI sítě, ohodnocené a bipartitní sítě, C++ matice vs. seznam. <span class="text-[10px] font-bold px-1 rounded bg-emerald-100 text-emerald-800">[BIO-ANALOGIE]</span></td>
 </tr>
 <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3">0 (neumí)</td>
-<td class="px-4 py-3">1 (umí)</td>
-<td class="px-4 py-3 font-bold text-green-600">1</td>
-<td class="px-4 py-3">Student látku umí a zkouška proběhne bez problémů (OK).</td>
+<td class="px-3 py-2.5 font-mono font-bold">Modul 1</td>
+<td class="px-3 py-2.5"><a href="./dml-logicky-zaklad" class="font-bold text-orange-600 hover:underline">Logický & Důkazový Základ</a></td>
+<td class="px-3 py-2.5 font-bold text-emerald-600">95 %</td>
+<td class="px-3 py-2.5 font-mono text-slate-500">20 min</td>
+<td class="px-3 py-2.5">Výroky, tabulka implikace (Slib zkoušejícího), De Morganovy zákony s pravdivostní tabulkou, negace ∀/∃, nutná vs. postačující. <span class="text-[10px] font-bold px-1 rounded bg-amber-100 text-amber-800">[INSIGHT]</span></td>
 </tr>
 <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3">1 (umí)</td>
-<td class="px-4 py-3">0 (neumí)</td>
-<td class="px-4 py-3 font-bold text-red-600">0</td>
-<td class="px-4 py-3 font-medium text-red-600">Zkoušející látku zná a snadno odhalí, že student neumí nic (Problém/RIP).</td>
+<td class="px-3 py-2.5 font-mono font-bold">Modul 2</td>
+<td class="px-3 py-2.5"><a href="./dml-indukce-na-grafech" class="font-bold text-orange-600 hover:underline">Indukce na Grafech & Redukční Past</a></td>
+<td class="px-3 py-2.5 font-bold text-rose-600">100 %</td>
+<td class="px-3 py-2.5 font-mono text-slate-500">20 min</td>
+<td class="px-3 py-2.5">Dekonstrukční indukce, POZOR NA REDUKČNÍ PAST, Handshaking lemma, strom $m=n-1$, DAG topological sorting. <span class="text-[10px] font-bold px-1 rounded bg-rose-500 text-white">[MEGA EPIC]</span> <span class="text-[10px] font-bold px-1 rounded bg-rose-100 text-rose-800">[PAST U ZKOUŠKY]</span></td>
 </tr>
 <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3">1 (umí)</td>
-<td class="px-4 py-3">1 (umí)</td>
-<td class="px-4 py-3 font-bold text-green-600">1</td>
-<td class="px-4 py-3">Zkoušející i student látku umí, vše proběhne hladce (OK).</td>
+<td class="px-3 py-2.5 font-mono font-bold">Modul 3</td>
+<td class="px-3 py-2.5"><a href="./dml-dukazy-sporem" class="font-bold text-orange-600 hover:underline">Důkazy Sporem & Extremální Princip</a></td>
+<td class="px-3 py-2.5 font-bold text-amber-600">90 %</td>
+<td class="px-3 py-2.5 font-mono text-slate-500">15 min</td>
+<td class="px-3 py-2.5">Šablona sporu ($A \land \neg B \implies \bot$), Bipartitnost $\iff$ bez lichých cyklů, nejkratší cesty, extremální prvek. <span class="text-[10px] font-bold px-1 rounded bg-slate-200 text-slate-700">[EPIC]</span></td>
+</tr>
+<tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+<td class="px-3 py-2.5 font-mono font-bold">Modul 4</td>
+<td class="px-3 py-2.5"><a href="./dml-loop-invariants" class="font-bold text-orange-600 hover:underline">Invarianty Cyklů (BFS & Dijkstra)</a></td>
+<td class="px-3 py-2.5 font-bold text-rose-600">100 %</td>
+<td class="px-3 py-2.5 font-mono text-slate-500">20 min</td>
+<td class="px-3 py-2.5">Tříkrokový důkaz (Inicializace, Udržování, Ukončení), BFS vlnoplocha, Dijkstra greedy invariant, obrácení pole. <span class="text-[10px] font-bold px-1 rounded bg-rose-500 text-white">[MEGA EPIC]</span></td>
+</tr>
+<tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+<td class="px-3 py-2.5 font-mono font-bold">Modul 5</td>
+<td class="px-3 py-2.5"><a href="./dml-konstruktivni-dukazy" class="font-bold text-orange-600 hover:underline">Konstruktivní Důkazy & Bio-Algoritmy</a></td>
+<td class="px-3 py-2.5 font-bold text-emerald-600">95 %</td>
+<td class="px-3 py-2.5 font-mono text-slate-500">20 min</td>
+<td class="px-3 py-2.5">Hierholzerův algoritmus na de Bruijn grafu (DNA assembly), Semi-Eulerovská cesta, Cut/Cycle Property u MST, Kruskal/Prim. <span class="text-[10px] font-bold px-1 rounded bg-emerald-100 text-emerald-800">[BIO-ANALOGIE]</span></td>
+</tr>
+<tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
+<td class="px-3 py-2.5 font-mono font-bold">Modul 6</td>
+<td class="px-3 py-2.5"><a href="./dml-zkouskovy-workshop" class="font-bold text-orange-600 hover:underline">Zkouškový Workshop & Šablony</a></td>
+<td class="px-3 py-2.5 font-bold text-rose-600">100 %</td>
+<td class="px-3 py-2.5 font-mono text-slate-500">25 min</td>
+<td class="px-3 py-2.5">6 plně vyřešených zkouškových příkladů, formální šablony důkazů, bodovací rubrika FIT ČVUT a checklist. <span class="text-[10px] font-bold px-1 rounded bg-rose-500 text-white">[MEGA EPIC]</span> <span class="text-[10px] font-bold px-1 rounded bg-blue-100 text-blue-800">[CHALLENGE]</span></td>
 </tr>
 </tbody>
-</table></div>
+</table>
+</div>
 
 ---
 
-## 📚 Doporučené studijní zdroje (DML)
+## 🗺️ Mapa Prerekvizit Mezi Moduly
 
-Pro úspěšné zvládnutí logiky a diskrétní matematiky doporučujeme tyto ověřené zdroje:
+```
+                ┌─────────────────────────────────────────┐
+                │ Modul 0: Bio-Intuice & Jazyk Grafů       │
+                └────────────────────┬────────────────────┘
+                                     │
+                                     ▼
+                ┌─────────────────────────────────────────┐
+                │ Modul 1: Logický & Důkazový Základ       │
+                └────────────────────┬────────────────────┘
+                                     │
+                 ┌───────────────────┴───────────────────┐
+                 ▼                                       ▼
+┌─────────────────────────────────┐     ┌─────────────────────────────────┐
+│ Modul 2: Indukce na Grafech      │     │ Modul 3: Důkazy Sporem          │
+│          & Redukční Past        │     │          & Extremální Princip   │
+└────────────────┬────────────────┘     └────────────────┬────────────────┘
+                 │                                       │
+                 └───────────────────┬───────────────────┘
+                                     │
+                                     ▼
+                ┌─────────────────────────────────────────┐
+                │ Modul 4: Invarianty Cyklů (BFS & Dij)   │
+                └────────────────────┬────────────────────┘
+                                     │
+                                     ▼
+                ┌─────────────────────────────────────────┐
+                │ Modul 5: Konstruktivní Důkazy (DNA & MST)│
+                └────────────────────┬────────────────────┘
+                                     │
+                                     ▼
+                ┌─────────────────────────────────────────┐
+                │ Modul 6: Zkouškový Workshop & Šablony   │
+                └─────────────────────────────────────────┘
+```
 
-* 📚 **[FIT-Wiki BI-DML](https://fit-wiki.cz/skola/predmety/dml/start)** – Nejdůležitější studentská databáze tipů, vypracovaných zkouškových příkladů a archivů starších zápočtových testů.
-* 📝 **[Matematický seminář DML (FIT ČVUT)](https://courses.fit.cvut.cz/BI-DML/)** – Oficiální portál předmětu, kde najdete cvičné materiály a minulé testy.
-* 📖 **[Diskrétní matematika (prof. Demel)](http://kmlinux.fjfi.cvut.cz/~demel/discrete.html)** – Klasická a velmi ucelená skripta prof. Demla, na kterých předmět staví. Ideální, pokud potřebujete podrobnější teoretický výklad.
-* 🎓 **[Vypracované okruhy ke zkoušce (DML)](https://fit-wiki.cz/skola/predmety/dml/zkouska)** – Strukturované shrnutí všech důležitých vět, definic a důkazů, které se objevují u zkoušky.
+---
 
-### 💡 Tipy, jak se připravit na DML testy:
-1. **Procvičujte typové příklady:** Zápočtové testy z logiky se drží stálých šablon. Zvládněte rezoluční metodu (prokazování nesplnitelnosti), převody do KNF/DNF a minimalizaci logických funkcí (např. Karnaughovy mapy).
-2. **Učte se přesné definice:** Matematická část předmětu vyžaduje naprosto přesné znění definic. Pokud zapomenete u definice ekvivalence nebo uspořádání na jedno klíčové slovo, body poletí dolů.
-3. **Grafy a relace:** Naučte se vlastnosti relací (symetrie, tranzitivita, atd.) a jak je reprezentovat maticí sousednosti nebo grafem. Ulehčí vám to i začátek kurzu AG1.
+## ❓ Často Kladené Dotazy (FAQ) Bioinformatiků `[INSIGHT]`
 
+#### 1. Musím si letní kurz projít celý před 1. týdnem semestru?
+Není to striktní nutností, ale silně to doporučujeme! Pokud si projdete alespoň Moduly 0, 1 a 2, vyhnete se počátečnímu šoku z formálních matematických důkazů.
+
+#### 2. Proč je redukční indukce ($G_n \to G_{n+1}$) hodnocena 0 body?
+Protože přidaný uzel generuje pouze speciální podtřídu grafů. Dekonstrukční indukce ($G_{n+1} \to G'$) zaručuje, že důkaz platí pro **všechny platné grafy**.
+
+#### 3. Je C++ kód v AG1 stejný jako v BI-PA2 na FIT?
+V AG1 se nepíší složité třídní hierarchie ani paměťové správy. Píšete čisté grafové algoritmy (BFS, Dijkstra, Kruskal), kde se hodnotí především **asymptotická složitost $\mathcal{O}$** a správnost.
+
+#### 4. Kdy se vyplatí dokazovat kontrapozicí místo přímo?
+Kdykoliv je negovaná vlastnost závěru $\neg B$ konstrukčně jednodušší (např. vteřinový průkaz neexistence cyklu v lesích).
+
+#### 5. Jak souvisí de Bruijn grafy s reálnou sekvenací DNA?
+Současné sekvenátory generují fragmenty ($k$-mery). de Bruijn graf z nich vytvoří uzel-hrana strukturu, kde nalezení Eulerova tahu zrekonstruuje souvislý genom.
+
+#### 6. Co je to "Triviální Pravdivost" (Vacuous Truth)?
+Implikace $A \implies B$, jejíž předpoklad $A$ je nepravdivý, platí automaticky jako pravda ($1$). Např. *"Všechny molekuly bez atomů uhlíku jsou proteiny"*.
+
+#### 7. Jak bezpečně znegovat výrok s kvantifikátory $\forall x \exists y$?
+Zaměníte $\forall \to \exists$, $\exists \to \forall$ a znegujete pouze vnitřní formuli: $\exists x \forall y \neg P(x, y)$.
+
+#### 8. Jaký je rozdíl mezi Cut Property a Cycle Property u MST?
+- **Cut Property:** Nejlehčí hrana řezu **musí** patřit do MST.
+- **Cycle Property:** Nejťažší hrana cyklu **nemůže** patřit do žádné MST.
+
+#### 9. Proč Dijkstrův algoritmus nefunguje se zápornými vahami hran?
+Protože záporná hrana může snížit délku cesty i po vyřízení uzlu v haldě, čímž poruší chování greedy invariantu.
+
+#### 10. Kolik bodů na zkoušce tvoří matematické důkazy z grafů?
+Teoretické důkazy a invarianty tvoří typicky **40–50 % celkového počtu bodů u zkoušky z AG1**.
+
+---
+
+## 💬 Citáty Velkých Počítačových Vědců
+
+> *"Informatics is no more about computers than astronomy is about telescopes."*  
+> — **Edsger W. Dijkstra**
+
+> *"Beware of bugs in the above code; I have only proved it correct, not tried it."*  
+> — **Donald E. Knuth**
+
+> *"Simplification is the first step toward mastery."*  
+> — **Leonhard Euler**
+
+---
+
+> ➡️ **Začněte studium nulovým modulem:** [0 · Biologická intuice & Jazyk grafů](./dml-bio-grafy)

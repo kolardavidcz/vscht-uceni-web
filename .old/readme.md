@@ -8,13 +8,13 @@ An interactive web portal and student resource hub developed for **UCT Prague (V
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server (hot reload)
-npm run dev
+pnpm dev
 
 # Production build (single HTML file)
-npm run build
+pnpm build
 ```
 
 ---

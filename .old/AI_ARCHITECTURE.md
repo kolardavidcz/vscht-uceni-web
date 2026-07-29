@@ -90,8 +90,8 @@ Loaded via Google Fonts in `index.html`:
   3. **Python Analyzátor** → `/python-analyza`
 
 ## Build & Deploy
-- **Dev server**: `npm run dev` (Vite, hot reload). `vite-plugin-singlefile` is disabled in dev.
-- **Production build**: `npm run build` (inlines all JS/CSS into a single `index.html`)
+- **Dev server**: `pnpm dev` (Vite, hot reload). `vite-plugin-singlefile` is disabled in dev.
+- **Production build**: `pnpm build` (inlines all JS/CSS into a single `index.html`)
 - **Deployment**: Vercel, with `vercel.json` SPA rewrite
 
 ## Key Design Rules (ABSOLUTE — NEVER VIOLATE)
@@ -103,5 +103,5 @@ Loaded via Google Fonts in `index.html`:
 
 ## Developer Notes
 - **MathJax**: Loaded in `index.html` via CDN for LaTeX rendering in wiki content.
-- **`vite-plugin-singlefile`**: Only activates during `npm run build` (controlled by `command === 'build'` check in `vite.config.ts`).
+- **`vite-plugin-singlefile`**: Only activates during `pnpm build` (controlled by `command === 'build'` check in `vite.config.ts`).
 - **Local dev mode**: `useMicrobiologyData.ts` detects `localhost` and skips the Vercel API call, falling back to static data / localStorage.
