@@ -1,146 +1,139 @@
-# VŠCHT Učení
+# 🧪 VŠCHT Učení
 
-Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** — React SPA s třemi nezávislými nástroji:
+Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** — moderní Web Application spojující interaktivní studijní moduly a nástroje:
 
-1. **Systematika bakterií** — emoji taxonomický kvíz a studijní režimy  
-2. **Obor: Bioinformatika** — Markdown wiki + MathJax + PA2→AG1 přehled  
-3. **Python Analyzátor** — anotovaný DNA/RNA skript s mock během  
+1. 🦠 **Systematika bakterií** — interaktivní emoji kvíz, pracovní list, taxonomický atlas, kartičky a srovnávací matice.
+2. 📚 **Obor: Bioinformatika** — komunitní Markdown wiki s podporou MathJax, přehledem předmětů a průvodcem studia (PA2→AG1).
+3. 🐍 **Python Analyzátor** — anotovaný skript pro bioinformatickou analýzu DNA/RNA sekvencí s živým simulovaným během.
 
-## Quick start
+---
+
+## 📸 Ukázky aplikace (Screenshots)
+
+### 🏠 Hlavní rozcestník (Landing Page)
+![VŠCHT Učení Rozcestník](docs/screenshots/home_screen.png)
+
+### 🦠 Systematika bakterií — Pracovní list a Kvíz
+![Systematika bakterií Kvíz](docs/screenshots/mikrobiology_test.png)
+
+### 🌳 Atlas bakterií — Taxonomický studijní strom
+![Taxonomický studijní strom](docs/screenshots/mikrobiology_tree_ovreview.png)
+
+### 🟨 Systematika bakterií — Kartičky (Samostudium)
+![Systematika bakterií Kartičky](docs/screenshots/mikrobiology_flashcards.png)
+
+### 📊 Systematika bakterií — Srovnávací matice
+![Systematika bakterií Srovnávací matice](docs/screenshots/mikrobiology_table.png)
+
+### 📚 Obor Bioinformatika — Studijní Wiki
+![Bioinformatická Wiki](docs/screenshots/wiki_page.png)
+
+### ⭐ Bioinformatika Wiki — Hodnocení obsahu
+![Wiki Hodnocení obsahu](docs/screenshots/wiki_content_rating.png)
+
+---
+
+## ⚡ Rychlý start (Quick Start)
+
+Před spuštěním se ujistěte, že máte nainstalovaný balíčkovací manažer **pnpm**.
 
 ```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # multi-chunk dist/ (hashed JS/CSS + index.html)
-npm run preview
+pnpm install
+pnpm dev        # Spustí vývojový server na http://localhost:5173
+pnpm build      # Provede typovou kontrolu (tsc) a produkční build do dist/
+pnpm typecheck  # Samostatná kontrola TypeScript typů
+pnpm preview    # Náhled produkčního buildu
 ```
 
-## Stack
+---
 
-| Layer | Choice |
-|-------|--------|
-| UI | React 19 + TypeScript |
-| Bundler | Vite 6 multi-chunk (lazy feature routes; code-split by route) |
-| CSS | Tailwind CSS 4 (`@theme` tokens) |
-| Router | React Router 7 |
-| Markdown | `react-markdown` + GFM + `rehype-raw` |
-| Math | MathJax 3 (CDN) |
-| Deploy | Vercel SPA (`vercel.json` rewrites) |
+## 🛠️ Technický Stack
 
-## Project layout
+| Vrstva | Technologie | Popis |
+|---|---|---|
+| **UI Framework** | React 19 + TypeScript | Komponentová architektura s typovou bezpečností |
+| **Bundler** | Vite 6 | Multi-chunk lazy loading podle tras (code splitting) |
+| **Styling** | Tailwind CSS 4 | Custom design systém s `@theme` tokeny (vřelé espresso a zářivě oranžová `#f95d12`) |
+| **Routing** | React Router 7 | Klientské směrování SPA |
+| **Databáze / Store** | Upstash Redis | Serverless KV úložiště pro sdílení dat a odpovědí kvízu |
+| **Markdown & Math** | `react-markdown` + MathJax 3 | Vykreslování matematických vzorců a studijních textů s GFM a rehype-raw |
+| **Nasazení** | Vercel | SPA rewrites, Edge API funkce a automatický build pipeline |
 
-```
+---
+
+## 📁 Struktura projektu
+
+```text
 src/
-  components/ui/          shared Button, Card, Badge, ProgressBar
-  components/layout/      PageShell
-  pages/HomePage.tsx
-  features/
-    microbiology/         quiz, study modes, admin + domain data
-    bioinformatics/       wiki, PA2→AG1, content/*.md
-    python-analyzer/      script viewer + mock terminal
+├── components/
+│   ├── ui/               # Znovupoužitelné UI komponenty (Button, Card, Badge, ProgressBar...)
+│   └── layout/           # Základní PageShell a rozvržení stránek
+├── pages/
+│   └── HomePage.tsx      # Hlavní rozcestník modulů
+└── features/
+    ├── microbiology/     # Systematika bakterií (kvíz, strom, kartičky, matice, admin)
+    ├── bioinformatics/   # Bioinformatická wiki (články v markdownu, PA2→AG1 přehled)
+    └── python-analyzer/  # Python skript prohlížeč a simulovaný terminál
 ```
 
-## Routes
+---
 
-| Path | Feature |
-|------|---------|
-| `/` | Landing |
-| `/mikrobiologie` | Quiz |
-| `/mikrobiologie/studijni-strom` | Taxonomy tree study |
-| `/mikrobiologie/samostudium` | Flashcards |
-| `/mikrobiologie/srovnavaci-matice` | Comparison matrix |
-| `/mikrobiologie/admin` | Admin: správné odpovědi + emoji katalog (Upstash Redis) |
-| `/obor-bioinformatika/*` | Wiki |
-| `/python-analyza` | Python analyzer |
+## 🗺️ Přehled tras (Routes)
 
-## Brand
+| Cesta (Path) | Modul / Funkce | Popis |
+|---|---|---|
+| `/` | Hlavní rozcestník | Přehledový portál s rychlým vstupem do modulů |
+| `/mikrobiologie` | Kvíz a Pracovní list | Procvičování taxonomických vlastností pomocí emoji |
+| `/mikrobiologie/studijni-strom` | Taxonomický atlas | Interaktivní strom bakteriálních kmenů a rodů |
+| `/mikrobiologie/samostudium` | Kartičky (Flashcards) | Samostudium a opakování vlastností mikroorganismů |
+| `/mikrobiologie/srovnavaci-matice` | Srovnávací matice | Tabulkové porovnání charakteristik jednotlivých kmenů |
+| `/mikrobiologie/admin` | Správa správných odpovědí | Administrace databáze vlastností a katalogu emoji (Upstash Redis) |
+| `/obor-bioinformatika/*` | Bioinformatická Wiki | Studijní zápisky, návody, MathJax vzorce a rady k předmětům |
+| `/python-analyza` | Python Analyzátor | Interaktivní prohlížeč skriptu pro analýzu DNA/RNA |
 
-- Accent: **orange only** `#f95d12` / text `#c2410c`
-- Dark surfaces: espresso `#0f0906` + warm browns
-- Fonts: Plus Jakarta Sans (body), Outfit (headings)
-- No blue/green/purple brand backgrounds
+---
 
-## Data notes
+## 🎨 Design a Vizuální Identita
 
-- **Microbiology**: taxonomy + emoji catalog ship in the bundle.
-- **Shared store**: Upstash Redis via `GET/POST /api/get-data` and `/api/save-data` (`@upstash/redis`; `@vercel/kv` is deprecated).
-- **Offline/admin fallback**: `localStorage` on this browser.
-- **Admin password**: UI gate + server check. Prefer env `MICROBIOLOGY_ADMIN_PASSWORD` on Vercel (legacy classroom default still accepted if unset).
-- **Wiki content**: `src/features/bioinformatics/content/**/*.md` + `config.json`.
-- **Archive**: previous implementation lives in `.old/` for reference only.
+- **Akcentní barvy**: Teplá zářivě oranžová `#f95d12` (`text-#c2410c`).
+- **Tmavé povrchy**: Espresso tmavé tóny `#0f0906` a hřejivé odstíny hnědé.
+- **Typografie**: Plus Jakarta Sans (tělo textu), Outfit (nadpisy), JetBrains Mono / monospace (kód a terminál).
+- **Styling**: Čisté mikro-animace, skleněný efekt (glassmorphism) a přehledná vizuální hierarchie.
 
-## Deploy (Vercel)
+---
 
-1. Connect the repo; build `npm run build`, output `dist`.
-2. Add **Redis** from [Vercel Marketplace](https://vercel.com/marketplace?category=storage&search=redis) (Upstash).  
-   Env: `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`  
-   (Legacy migrated KV still works via `KV_REST_API_URL` + `KV_REST_API_TOKEN`.)
-3. Optional: set `MICROBIOLOGY_ADMIN_PASSWORD`.
-4. SPA rewrites skip `/api/*` (see `vercel.json`).
+## 💾 Datová architektura a Persistence
 
-### Wiki „Navrhnout úpravu“ → GitHub PR (no auto-merge)
+- **Mikrobiologie**: Taxonomie a katalog emoji jsou součástí buildu aplikace.
+- **Sdílené úložiště**: Upstash Redis přes serverless endpointy `GET/POST /api/get-data` a `/api/save-data`.
+- **Záložní režim**: Při výpadku sítě nebo lokálním vývoji se využívá `localStorage`.
+- **Administrace**: Přístup chráněn heslem (prostřednictvím proměnné prostředí `MICROBIOLOGY_ADMIN_PASSWORD`).
 
-In-page markdown editor posts to `POST /api/suggest-edit`, which:
+---
 
-1. Creates a branch on [kolardavidcz/vscht-uceni-web](https://github.com/kolardavidcz/vscht-uceni-web)
-2. Commits the edited `.md`
-3. Opens a **pull request** into `main`
-4. **Does not merge** — you review and merge in the GitHub UI
+## 🚀 Nasazení & Vývoj (Vercel & GitHub PR Flow)
 
-#### Fine-grained Personal Access Token (recommended)
+### Vývojový server a navrhování úprav ve Wiki
 
-1. GitHub → avatar → **Settings** → **Developer settings** (left bottom)  
-   → **Personal access tokens** → **Fine-grained tokens** → **Generate new token**
-2. **Token name:** e.g. `vscht-uceni-wiki-suggest`
-3. **Expiration:** e.g. 90 days (or custom)
-4. **Resource owner:** your user (`kolardavidcz`)
-5. **Repository access:** **Only select repositories** → `vscht-uceni-web`
-6. **Permissions → Repository permissions:**
-   - **Contents:** Read and write *(branch + commit)*
-   - **Pull requests:** Read and write *(open PR; never auto-merge)*
-   - **Metadata:** Read-only *(required)*
-7. Generate → copy the token once
-8. **Local:** put in `.env.local` (gitignored):
+Portál obsahuje funkci **„Navrhnout úpravu“** přímo na stránkách Wiki:
+
+1. Uživatel klikne na úpravu návodu/zápisku a odešle změnu.
+2. Endpoint `POST /api/suggest-edit` vytvoří větev na GitHubu (`suggest/*`).
+3. Automaticky zaloguje změny a otevře **Pull Request** do větve `main` v repositáři [kolardavidcz/vscht-uceni-web](https://github.com/kolardavidcz/vscht-uceni-web).
+4. Změny se **nefúzují automaticky** — úpravu schvaluje správce v rozhraní GitHubu.
+
+#### Nastavení GitHub PAT (Personal Access Token)
+
+Pro lokální testování navrhování úprav:
+1. Vygenerujte **Fine-grained Personal Access Token** na GitHubu s oprávněními `Contents` (Read/Write) a `Pull requests` (Read/Write) pro repo `vscht-uceni-web`.
+2. Uložte token do `.env.local`:
    ```env
    GITHUB_TOKEN=github_pat_...
    ```
-   Then **restart** `npm run dev` (Vite loads env only on start).  
-   Local `/api/suggest-edit` is provided by `vite-plugin-local-api.ts`.
+3. Na Vercelu přidejte stejný `GITHUB_TOKEN` do **Settings → Environment Variables**.
 
-9. **Vercel:** project → **Settings → Environment Variables** → same `GITHUB_TOKEN` → Redeploy.
+---
 
-Classic PATs also work (`repo` scope) but fine-grained is safer (one repo only).
-
-Only files under `src/features/bioinformatics/content/**/*.md` are allowed.
-
-#### Skip Vercel builds for suggestion branches
-
-`vercel.json` → `"ignoreCommand": "node scripts/vercel-ignore-build.mjs"`
-
-| Branch / commit | Vercel build? |
-|-----------------|---------------|
-| `main` | **Yes** |
-| `suggest/*` | **No** (skipped) |
-| Commit message contains `[skip vercel]` | **No** |
-
-**Where you see the skip message (not in the PR comment thread):**  
-Vercel → Project → **Deployments** → open the entry → log line like:
-
-```text
-SKIPPED because of [skip vercel] / suggest/* branch
-```
-
-GitHub PR “Conversation” will **not** show that text — only Vercel build logs (status usually **Canceled**).
-
-**Required:** push `vercel.json` + `scripts/vercel-ignore-build.mjs` to **`main`** first.  
-Until that is on GitHub `main`, suggestion PRs are based on old config → **no ignore script runs** → no skip message, and Vercel may still try to deploy.
-
-Optional dashboard mirror: Project Settings → **Git** → **Ignored Build Step** →  
-`node scripts/vercel-ignore-build.mjs`  
-(and enable **Automatically expose System Environment Variables**)
-
-**Git author:** commits use the **token owner** (`kolardavidcz`). Suggestor name is only in the PR body.
-
-## Contact
+## 📬 Kontakt
 
 [kolarv@vscht.cz](mailto:kolarv@vscht.cz)
