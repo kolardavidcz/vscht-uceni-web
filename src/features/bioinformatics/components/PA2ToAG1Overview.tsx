@@ -102,7 +102,7 @@ function printBadgeHtml(badges: string[], lowQuality: boolean): string {
   if (badges.includes("showcase"))
     chips.push(`<span class="chip chip-showcase">SHOWCASE</span>`);
   if (badges.includes("no_code"))
-    chips.push(`<span class="chip chip-nocode">NO CODE</span>`);
+    chips.push(`<span class="chip chip-nocode">NO CODE NEEDED</span>`);
   if (badges.includes("not_checked"))
     chips.push(`<span class="chip chip-unchecked">NOT CHECKED</span>`);
   if (lowQuality)
