@@ -39,7 +39,7 @@ Před spuštěním se ujistěte, že máte nainstalovaný balíčkovací manaže
 
 ```bash
 pnpm install
-pnpm dev        # Spustí vývojový server na http://localhost:5173
+pnpm dev        # Spustí vývojový server na http://localhost:34020
 pnpm build      # Provede typovou kontrolu (tsc) a produkční build do dist/
 pnpm typecheck  # Samostatná kontrola TypeScript typů
 pnpm preview    # Náhled produkčního buildu

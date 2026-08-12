@@ -101,7 +101,7 @@ vercel.json
 
 ```bash
 pnpm install
-pnpm dev        # http://localhost:5173
+pnpm dev        # http://localhost:34020
 pnpm build      # tsc --noEmit && vite build (multi-chunk dist; no singlefile)
 pnpm typecheck  # tsc --noEmit
 pnpm preview

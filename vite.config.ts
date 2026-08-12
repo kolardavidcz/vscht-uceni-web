@@ -11,6 +11,14 @@ import { localApiPlugin } from "./vite-plugin-local-api";
  * `/mikrobiologie` entry path.
  */
 export default defineConfig({
+  server: {
+    port: 34020,
+    strictPort: true,
+  },
+  preview: {
+    port: 34024,
+    strictPort: true,
+  },
   plugins: [react(), tailwindcss(), localApiPlugin()],
   resolve: {
     alias: {
