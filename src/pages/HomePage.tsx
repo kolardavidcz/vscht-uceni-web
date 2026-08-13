@@ -10,6 +10,16 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 
+const prefetchMicrobiology = () => {
+  void import("@/features/microbiology/MicrobiologyRoutes");
+};
+const prefetchWiki = () => {
+  void import("@/features/bioinformatics/pages/WikiPage");
+};
+const prefetchPython = () => {
+  void import("@/features/python-analyzer/pages/PythonAnalyzerPage");
+};
+
 export function HomePage() {
   useEffect(() => {
     document.title = "VŠCHT Učení — Rozcestník";
@@ -41,6 +51,8 @@ export function HomePage() {
           <Card
             variant="dark"
             hover
+            onMouseEnter={prefetchMicrobiology}
+            onTouchStart={prefetchMicrobiology}
             className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
           >
             <Link
@@ -75,6 +87,8 @@ export function HomePage() {
           <Card
             variant="dark"
             hover
+            onMouseEnter={prefetchWiki}
+            onTouchStart={prefetchWiki}
             className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
           >
             <Link
@@ -129,6 +143,8 @@ export function HomePage() {
           <Card
             variant="dark"
             hover
+            onMouseEnter={prefetchPython}
+            onTouchStart={prefetchPython}
             className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
           >
             <Link

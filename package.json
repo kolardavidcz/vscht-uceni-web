@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "preview": "vite preview",
     "scrape:trainer": "node scripts/scrape-trainer-course.mjs --course 81",
     "db:backup": "npx tsx scripts/export-db.ts"
@@ -34,6 +35,7 @@
     "@vitejs/plugin-react": "^4.5.0",
     "tailwindcss": "^4.1.8",
     "typescript": "~5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vitest": "^4.1.10"
   }
 }
