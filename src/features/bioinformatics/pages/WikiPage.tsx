@@ -18,6 +18,10 @@ import {
   materialToRepoPath,
 } from "../components/SuggestEditModal";
 
+const prefetchPA2 = () => {
+  void import("../components/PA2ToAG1Overview");
+};
+
 /** Heavy materialsData tree — only load when opening the PA2 overview page */
 const PA2ToAG1Overview = lazy(() =>
   import("../components/PA2ToAG1Overview").then((m) => ({
@@ -77,10 +81,13 @@ function NavTreeItem({
   if (node.type === "file") {
     const href = materialHref(node.material);
     const isActive = activePath === node.material.path;
+    const isPA2 = node.material.path.includes("pa2-ag1-overview");
     return (
       <li>
         <Link
           to={href}
+          onMouseEnter={isPA2 ? prefetchPA2 : undefined}
+          onTouchStart={isPA2 ? prefetchPA2 : undefined}
           className={cn(
             "block rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
             isActive
