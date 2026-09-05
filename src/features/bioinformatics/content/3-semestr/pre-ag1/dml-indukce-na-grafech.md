@@ -195,56 +195,40 @@ U dekonstrukce začínáme **vždy od zadaného cílového objektu velikosti $n+
      - **Případ 2 (Nemáme dvě 3 Kč mince):** Částka $n+1 \ge 9$ se skládá převážně z pětikorun (musí mít alespoň dvě 5 Kč: $5 + 5 = 10$). Vyměníme $5 + 5 \to 3 + 3 + 3$ Kč (čistá změna $-10 + 9 = -1\text{ Kč}$, opět získáme $n$ Kč).
    - V obou případech jsme z částky $n+1$ shora dekonstruovali stav $n$, na který použijeme slabý indukční předpoklad!
 
----
-
-#### 🚀 Proč je Silná indukce shora ještě jednodušší? (Odebírání bez výměn)
-U slabé indukce jsme nuceni skákat o krok 1 ($n+1 \to n$), což u mincí vyžadovalo výměny. **Silná indukce nás od výměn zcela osvobozuje:**  
-Místo výměn prostě **jen odebereme celou minci nebo blok**:
-$$(n + 1) = \underbrace{((n + 1) - k)}_{\text{menší stav dle silného IP}} + \underbrace{k}_{\text{odebraný celek}}$$
-
----
-
-#### 🧩 1. Fundamentální rozklad libovolné platby ($3+5$, $3+3+3$ nebo $5+5$)
-Každou platnou výplatu $n \ge 8$ Kč z mincí $\{3, 5\}$ lze při dekonstrukci rozebrat na jeden ze **tří elementárních bloků**:
-
-1. **Obsahuje alespoň jednu 3 Kč a jednu 5 Kč:**  
-   Obsahuje blok **$3 + 5 = 8\text{ Kč}$**.
-2. **Neobsahuje žádnou 5 Kč (skládá se pouze z 3 Kč mincí):**  
-   Protože celková částka je $n \ge 8$, musí obsahovat alespoň tři trojky ($3 \times 3 = 9 \ge 8$).  
-   Obsahuje blok **$3 + 3 + 3 = 9\text{ Kč}$**.
-3. **Neobsahuje žádnou 3 Kč (skládá se pouze z 5 Kč mincí):**  
-   Protože $n \ge 8$, musí obsahovat alespoň dvě pětky ($2 \times 5 = 10 \ge 8$).  
-   Obsahuje blok **$5 + 5 = 10\text{ Kč}$**.
-
-> **Aha-moment:** Neexistuje žádná platná platba $n \ge 8$ Kč, ze které by nebylo možné vyjmout $3+5$, $3+3+3$ nebo $5+5$. Každou platbu lze tímto způsobem bezpečně dekonstruovat na menší platný případ!
-
----
-
-#### 📐 2. Proč velikost odebíraného kroku určuje počet bází $n_0$ (Krok o 3 vs. Krok o 6)
-Častá zkoušková otázka: *„Proč má někdy bázová množina 3 prvky a jindy 6 prvků?“*
-
-> ⚡ **Zlaté pravidlo indukce:**  
-> **O kolik kroků zpět při dekonstrukci odebíráme, přesně tolik po sobě jdoucích bázových případů musíme ověřit ručně na začátku!**
-
-- **Varianta A: Odebíráme 3 Kč ($n \to n - 3$) ➔ 3 bázové případy:**  
-  Při dekonstrukci o 3 Kč zpět potřebujeme, aby zbytek byl stále platný: $n - 3 \ge 8 \implies n \ge 11$.  
-  Indukční krok proto funguje až pro $n \ge 11$. Vše pod tím tvoří bázi:  
-  **$n_0 \in \{8, 9, 10\}$ (3 díly)**.
-  
-- **Varianta B: Odebíráme dvě trojky = 6 Kč ($n \to n - 6$) ➔ 6 bázových případů (8 až 13):**  
-  Co kdybychom chtěli dekonstruovat odebíráním dvojice tříkorun ($3 + 3 = 6\text{ Kč}$)?  
-  Aby byl zbytek $n - 6$ platnou částkou ($\ge 8\text{ Kč}$), musí být $n - 6 \ge 8 \implies n \ge 14$.  
-  Indukční krok tedy funguje až od $n = 14$ výše!  
-  Všechna čísla pod $14$ musíme ověřit ručně, čímž **bázová množina $n_0$ má přesně 6 dílů (čísla 8 až 13)**:
-  - $n = 8 = 3 + 5$
-  - $n = 9 = 3 + 3 + 3$
-  - $n = 10 = 5 + 5$
-  - $n = 11 = 3 + 3 + 5$
-  - $n = 12 = 3 + 3 + 3 + 3$
-  - $n = 13 = 3 + 5 + 5$
-  
-  Pro libovolné $n \ge 14$ pak odebereme dvě tříkoruny ($n - 6 \ge 8$), podle silného IP je zbytek vyplatitelný a vrácením $3+3$ máme $n$.  
-  **Krok o 6 zpět vyžaduje 6 bází, krok o 3 vyžaduje 3 báze, krok o 1 vyžaduje 1 bázi.**
+<details class="my-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 overflow-hidden no-print print:hidden print-hidden">
+<summary class="cursor-pointer px-4 py-3 font-semibold text-sm text-stone-800 dark:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 flex items-center justify-between select-none">
+<span class="flex items-center gap-2">
+<span>🚀</span>
+<span><strong>Proč je Silná indukce shora ještě jednodušší?</strong> (Odebírání bez výměn)</span>
+</span>
+<span class="text-xs text-stone-600 dark:text-stone-400 font-normal">Kliknutím rozbalit</span>
+</summary>
+<div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-3">
+<p class="m-0">
+Zatímco slabá indukce musí skákat o 1 ($n+1 \to n$), což u mincí vyžadovalo výměny, <strong>silná indukce výměny vůbec nepotřebuje</strong> — stačí odebrat celou minci či blok:
+$$(n + 1) = ((n + 1) - k) + k$$
+</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+<div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
+<strong class="text-stone-900 dark:text-stone-100">🧩 3 fundamentální bloky rozkladu:</strong>
+<p class="mt-1 mb-0 text-xs">Každá platba $n \ge 8$ Kč obsahuje alespoň jeden z těchto bloků k odebrání:</p>
+<ul class="list-disc pl-4 mt-1 space-y-0.5 text-xs">
+<li><strong>$3 + 5 = 8$ Kč</strong> (pokud máme 3 i 5)</li>
+<li><strong>$3 + 3 + 3 = 9$ Kč</strong> (pokud máme jen trojky)</li>
+<li><strong>$5 + 5 = 10$ Kč</strong> (pokud máme jen pětky)</li>
+</ul>
+</div>
+<div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
+<strong class="text-stone-900 dark:text-stone-100">📐 Pravidlo pro velikost báze:</strong>
+<p class="mt-1 mb-0 text-xs"><strong>O kolik kroků zpět dekonstruujeme, tolik bází musíme ověřit ručně:</strong></p>
+<ul class="list-disc pl-4 mt-1 space-y-0.5 text-xs">
+<li><strong>Odebrání 3 Kč ($n \to n - 3$):</strong> $n - 3 \ge 8 \implies n \ge 11$, vyžaduje <strong>3 báze</strong>: $\{8, 9, 10\}$.</li>
+<li><strong>Odebrání $3+3 = 6$ Kč ($n \to n - 6$):</strong> $n - 6 \ge 8 \implies n \ge 14$, vyžaduje <strong>6 bází</strong>: čísla <strong>8 až 13</strong>.</li>
+</ul>
+</div>
+</div>
+</div>
+</details>
 
 ---
 
