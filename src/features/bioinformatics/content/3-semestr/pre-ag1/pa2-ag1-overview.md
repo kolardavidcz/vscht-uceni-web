@@ -344,7 +344,7 @@ vector<int> dijkstra(int s, const vector<vector<Edge>>& adj) {
 
 Při každém výskoku vrcholu $u$ z prioritní fronty platí: $d[u] = \delta(s, u)$ (finální vzdálenost).
 
-**Proč?** Kdyby existovala kratší cesta $P'$ do $u$ dosud nenalezená, pak $P'$ prochází přes nějaký vrchol $x$ dosud ve frontě. Ale $d[x] \ge d[u]$ (jinak by byl $x$ vyskočen dříve). Cesta přes $x$ by měla délku $\ge d[x] \ge d[u]$, tedy není kratší. Spor! $\blacksquare$
+**Proč?** Kdyby existovala kratší cesta $P'$ do $u$ dosud nenalezená, pak $P'$ prochází přes nějaký vrchol $x$ dosud ve frontě. Ale $d[x] \ge d[u]$ (jinak by byl $x$ vyskočen dříve). Cesta přes $x$ by měla délku $\ge d[x] \ge d[u]$, tedy není kratší. Spor!
 
 > [!WARNING]
 > **Dijkstra + záporné hrany = katas trofa!** Pokud existuje záporná hrana $\{u,v\}$ s $w < 0$, invariant se rozbije — vrchol může být vyskočen z fronty s neoptimální vzdáleností. Pro záporné hrany použij Bellman-Ford (AG1 probírá jako bonusové téma).
