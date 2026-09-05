@@ -1,25 +1,28 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "@/pages/HomePage";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary";
+import { lazyWithRetry } from "@/lib/lazyWithRetry";
 
-/** Lightweight shell while a feature chunk downloads (most users land on micro). */
+/** Lightweight shell while a feature chunk downloads (with an active spinner so it never feels blank). */
 function RouteFallback({ label }: { label: string }) {
   return (
-    <div className="min-h-screen bg-stone-50 flex items-center justify-center text-stone-500 text-sm font-semibold">
-      {label}
+    <div className="min-h-screen bg-brand-espresso flex flex-col items-center justify-center text-slate-200 text-sm font-semibold gap-3 p-4">
+      <div className="w-8 h-8 rounded-full border-2 border-brand-orange/30 border-t-brand-orange animate-spin" />
+      <span>{label}</span>
     </div>
   );
 }
 
-const MicrobiologyRoutes = lazy(
+const MicrobiologyRoutes = lazyWithRetry(
   () => import("@/features/microbiology/MicrobiologyRoutes")
 );
-const WikiPage = lazy(() =>
+const WikiPage = lazyWithRetry(() =>
   import("@/features/bioinformatics/pages/WikiPage").then((m) => ({
     default: m.WikiPage,
   }))
 );
-const PythonAnalyzerPage = lazy(() =>
+const PythonAnalyzerPage = lazyWithRetry(() =>
   import("@/features/python-analyzer/pages/PythonAnalyzerPage").then((m) => ({
     default: m.PythonAnalyzerPage,
   }))
@@ -33,25 +36,31 @@ export default function App() {
         <Route
           path="/mikrobiologie/*"
           element={
-            <Suspense fallback={<RouteFallback label="Načítám systematiku…" />}>
-              <MicrobiologyRoutes />
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<RouteFallback label="Načítám systematiku…" />}>
+                <MicrobiologyRoutes />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route
           path="/obor-bioinformatika/*"
           element={
-            <Suspense fallback={<RouteFallback label="Načítám wiki…" />}>
-              <WikiPage />
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<RouteFallback label="Načítám wiki…" />}>
+                <WikiPage />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route
           path="/python-analyza"
           element={
-            <Suspense fallback={<RouteFallback label="Načítám analyzátor…" />}>
-              <PythonAnalyzerPage />
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<RouteFallback label="Načítám analyzátor…" />}>
+                <PythonAnalyzerPage />
+              </Suspense>
+            </ErrorBoundary>
           }
         />
         <Route path="*" element={<Navigate to="/" replace />} />

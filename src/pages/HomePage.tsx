@@ -11,13 +11,13 @@ import {
 import { Card } from "@/components/ui/Card";
 
 const prefetchMicrobiology = () => {
-  void import("@/features/microbiology/MicrobiologyRoutes");
+  void import("@/features/microbiology/MicrobiologyRoutes").catch(() => {});
 };
 const prefetchWiki = () => {
-  void import("@/features/bioinformatics/pages/WikiPage");
+  void import("@/features/bioinformatics/pages/WikiPage").catch(() => {});
 };
 const prefetchPython = () => {
-  void import("@/features/python-analyzer/pages/PythonAnalyzerPage");
+  void import("@/features/python-analyzer/pages/PythonAnalyzerPage").catch(() => {});
 };
 
 export function HomePage() {

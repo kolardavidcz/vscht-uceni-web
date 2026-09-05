@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   BookOpen,
@@ -13,6 +13,8 @@ import {
 import { PageShell } from "@/components/layout/PageShell";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary";
+import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import { MarkdownView } from "../components/MarkdownView";
 import {
   SuggestEditModal,
@@ -20,11 +22,11 @@ import {
 } from "../components/SuggestEditModal";
 
 const prefetchPA2 = () => {
-  void import("../components/PA2ToAG1Overview");
+  void import("../components/PA2ToAG1Overview").catch(() => {});
 };
 
 /** Heavy materialsData tree — only load when opening the PA2 overview page */
-const PA2ToAG1Overview = lazy(() =>
+const PA2ToAG1Overview = lazyWithRetry(() =>
   import("../components/PA2ToAG1Overview").then((m) => ({
     default: m.PA2ToAG1Overview,
   }))
@@ -345,15 +347,17 @@ export function WikiPage() {
               </div>
             ) : isSpecial ? (
               <>
-                <Suspense
-                  fallback={
-                    <p className="text-sm text-stone-500 font-semibold py-8 text-center">
-                      Načítám PA2→AG1 přehled…
-                    </p>
-                  }
-                >
-                  <PA2ToAG1Overview />
-                </Suspense>
+                <ErrorBoundary>
+                  <Suspense
+                    fallback={
+                      <p className="text-sm text-stone-500 font-semibold py-8 text-center">
+                        Načítám PA2→AG1 přehled…
+                      </p>
+                    }
+                  >
+                    <PA2ToAG1Overview />
+                  </Suspense>
+                </ErrorBoundary>
                 {suggestFooter(active)}
               </>
             ) : (
