@@ -166,54 +166,145 @@ Správný myšlenkový tok (Dekonstrukční Indukce na grafech):
 └──────────────────────────────────────────────────────────┘
 ```
 
----
+### 💡 Hlubší vhled: Proč dekonstrukce zachraňuje silnou indukci (Odebírání a velikost báze)
 
-## 3. Handshaking Lemma (Lema o Podávání Rukou) `[Relevance: 95%]` `[EPIC]`
+Podívejme se, jak tentýž princip dekonstrukce funguje v klasické indukci na číslech (např. v naší úloze o platbách mincemi 3 Kč a 5 Kč):
 
-### 📜 Věta (Handshaking Lemma):
-V každém konečném neorientovaném grafu $G = (V, E)$ platí:
-$$\sum_{v \in V} \deg(v) = 2|E|$$
+#### ❌ Konstrukční past u indukce:
+Student řekne: *„Předpokládejme, že umíme vyplatit $n$ Kč. Chceme dokázat, že umíme vyplatit $n+1$ Kč. Přidáme minci...“*  
+**Problém:** My ale nemáme minci v hodnotě 1 Kč! Student se pokouší objekt stavět odspodu přičítáním a musí vymýšlet složité výměny (např. $5 \to 3+3$), kde snadno zapomene ověřit existenci potřebné mince.
 
-*(Součet stupňů všech vrcholů je vždy roven dvojnásobku počtu hran).*
-
-#### 💡 Důsledek pro lichý stupeň:
-V každém grafu je **počet vrcholů s lichým stupněm vždy sudé číslo**.
-
----
-
-### ✍️ Způsob A: Důkaz Dvojím Započtením (Double Counting) `[INSIGHT]`
-
-Vytvořme množinu incidencí $I = \{(v, e) \in V \times E \mid v \in e\}$.
-- Pokud sčítáme podle **hran** $e \in E$: Každá neorientovaná hrana $e = \{u, v\}$ má právě 2 koncové vrcholy. Každá hrana přispěje do celkového počtu incidencí hodnotou $2$. Celkový součet je $2|E|$.
-- Pokud sčítáme podle **vrcholů** $v \in V$: Vrchol $v$ je koncovým bodem právě $\deg(v)$ hran. Celkový součet přes všechny vrcholy je $\sum_{v \in V} \deg(v)$.
-
-Jelikož obě metody počítají stejný počet prvků množiny $I$, součty se rovnají: $\sum_{v \in V} \deg(v) = 2|E|$. $\blacksquare$
+#### ✅ Dekonstrukční přístup (Silná indukce shora):
+Místo skládání začneme **od zadaného cílového stavu $n$ (nebo $n+1$)** a **odebíráme** známý celek tak, abychom zbytek našli v indukčním předpokladu:
+$$(n + 1) = \underbrace{((n + 1) - k)}_{\text{menší stav dle IP}} + \underbrace{k}_{\text{odebraný blok}}$$
 
 ---
 
-### ✍️ Způsob B: Formální Důkaz Dekonstrukční Indukcí podle $m = |E|$ `[PAST U ZKOUŠKY]`
+#### 🧩 1. Fundamentální rozklad libovolné platby ($3+5$, $3+3+3$ nebo $5+5$)
+Každou platnou výplatu $n \ge 8$ Kč z mincí $\{3, 5\}$ lze při dekonstrukci rozebrat na jeden ze **tří elementárních bloků**:
 
-#### 1. Báze indukce ($m = 0$):
-Nechť $G = (V, E)$ je graf bez hran ($|E| = 0$). Všechny vrcholy mají $\deg(v) = 0$.
-$$\sum_{v \in V} \deg(v) = 0 = 2 \cdot 0$$
-Báze pro $m = 0$ platí.
+1. **Obsahuje alespoň jednu 3 Kč a jednu 5 Kč:**  
+   Obsahuje blok **$3 + 5 = 8\text{ Kč}$**.
+2. **Neobsahuje žádnou 5 Kč (skládá se pouze z 3 Kč mincí):**  
+   Protože celková částka je $n \ge 8$, musí obsahovat alespoň tři trojky ($3 \times 3 = 9 \ge 8$).  
+   Obsahuje blok **$3 + 3 + 3 = 9\text{ Kč}$**.
+3. **Neobsahuje žádnou 3 Kč (skládá se pouze z 5 Kč mincí):**  
+   Protože $n \ge 8$, musí obsahovat alespoň dvě pětky ($2 \times 5 = 10 \ge 8$).  
+   Obsahuje blok **$5 + 5 = 10\text{ Kč}$**.
 
-#### 2. Indukční předpoklad (IP):
-Předpokládejme, že pro **libovolný** graf s $k$ hranami ($0 \le k \le m$) platí $\sum_{v \in V} \deg(v) = 2k$.
+> **Aha-moment:** Neexistuje žádná platná platba $n \ge 8$ Kč, ze které by nebylo možné vyjmout $3+5$, $3+3+3$ nebo $5+5$. Každou platbu lze tímto způsobem bezpečně dekonstruovat na menší platný případ!
 
-#### 3. Indukční krok ($m \to m + 1$):
-Vezměme **LIBOVOLNÝ** graf $G = (V, E)$ s $m + 1$ hranami.
-1. Zvolme libovolnou hranu $e = \{u, v\} \in E$.
-2. Vytvořme podgraf $G' = (V, E \setminus \{e\})$ odebráním hrany $e$. Podgraf $G'$ má přesně $m$ hran.
-3. Podle **IP** platí pro podgraf $G'$:
-   $$\sum_{w \in V} \deg_{G'}(w) = 2m$$
-4. Odebrání hrany $e = \{u, v\}$ snížilo pouze stupně koncových vrcholů $u$ a $v$ o 1:
-   $$\deg_G(u) = \deg_{G'}(u) + 1, \quad \deg_G(v) = \deg_{G'}(v) + 1$$
-   Stupně všech ostatních vrcholů $w \notin \{u, v\}$ zůstaly beze změny ($\deg_G(w) = \deg_{G'}(w)$).
-5. Dosadíme do součtu stupňů původního grafu $G$:
-   $$\sum_{w \in V} \deg_G(w) = \left(\sum_{w \in V} \deg_{G'}(w)\right) + 1 + 1 = 2m + 2 = 2(m + 1)$$
+---
 
-Tím je dekonstrukční důkaz dokončen. $\blacksquare$
+#### 📐 2. Proč velikost odebíraného kroku určuje počet bází $n_0$ (Krok o 3 vs. Krok o 6)
+Častá zkoušková otázka: *„Proč má někdy bázová množina 3 prvky a jindy 6 prvků?“*
+
+> ⚡ **Zlaté pravidlo indukce:**  
+> **O kolik kroků zpět při dekonstrukci odebíráme, přesně tolik po sobě jdoucích bázových případů musíme ověřit ručně na začátku!**
+
+- **Varianta A: Odebíráme 3 Kč ($n \to n - 3$) ➔ 3 bázové případy:**  
+  Při dekonstrukci o 3 Kč zpět potřebujeme, aby zbytek byl stále platný: $n - 3 \ge 8 \implies n \ge 11$.  
+  Indukční krok proto funguje až pro $n \ge 11$. Vše pod tím tvoří bázi:  
+  **$n_0 \in \{8, 9, 10\}$ (3 díly)**.
+  
+- **Varianta B: Odebíráme dvě trojky = 6 Kč ($n \to n - 6$) ➔ 6 bázových případů (8 až 13):**  
+  Co kdybychom chtěli dekonstruovat odebíráním dvojice tříkorun ($3 + 3 = 6\text{ Kč}$)?  
+  Aby byl zbytek $n - 6$ platnou částkou ($\ge 8\text{ Kč}$), musí být $n - 6 \ge 8 \implies n \ge 14$.  
+  Indukční krok tedy funguje až od $n = 14$ výše!  
+  Všechna čísla pod $14$ musíme ověřit ručně, čímž **bázová množina $n_0$ má přesně 6 dílů (čísla 8 až 13)**:
+  - $n = 8 = 3 + 5$
+  - $n = 9 = 3 + 3 + 3$
+  - $n = 10 = 5 + 5$
+  - $n = 11 = 3 + 3 + 5$
+  - $n = 12 = 3 + 3 + 3 + 3$
+  - $n = 13 = 3 + 5 + 5$
+  
+  Pro libovolné $n \ge 14$ pak odebereme dvě tříkoruny ($n - 6 \ge 8$), podle silného IP je zbytek vyplatitelný a vrácením $3+3$ máme $n$.  
+  **Krok o 6 zpět vyžaduje 6 bází, krok o 3 vyžaduje 3 báze, krok o 1 vyžaduje 1 bázi.**
+
+---
+
+## 3. Růst Počtu Hran při Dekonstrukci Sítě: Vrcholy Stupně 3 `[Relevance: 95%]` `[EPIC]`
+
+Místo abstraktních lemmat se podívejme na přímý, intuitivní důkaz, který se přesně hodí k pochopení dekonstrukce na grafech: **jak roste počet hran se vzrůstajícím počtem vrcholů**.
+
+---
+
+### 🧬 Motivace z bioinformatiky a chemie
+V biologických a chemických sítích často pracujeme s uzly, které mají fixní valenci (počet vazeb):
+- $sp^2$ uhlíkové atomy v aromatických kruzích a grafenu se vážou právě se **3 sousedy** ($\deg(v) = 3$).
+- Terciární větvení v molekulách RNA nebo proteinových doménách vytváří křižovatky stupně 3.
+- V informatice se sítím, kde má každý uzel stupeň 3, říká **kubické (3-regulární) sítě**.
+
+Položme si otázku: **Pokud v síti odebereme uzel stupně 3, jak přesně se změní počet hran?**
+
+---
+
+### 📜 Tvrzení (Rekurentní vztah pro počet hran):
+Nechť $G = (V, E)$ je graf o $n$ vrcholech, který obsahuje vrchol $v$ se stupněm $\deg(v) = 3$.  
+Pokud vrchol $v$ odebereme, získáme podgraf $G' = G \setminus \{v\}$ o $n - 1$ vrcholech. Mezi počtem hran původního grafu $|E(G)| = \text{edge}_n$ a podgrafu $|E(G')| = \text{edge}_{n-1}$ platí přesný vztah:
+
+$$\mathbf{\text{edge}_n = \text{edge}_{n-1} + 3}$$
+
+*(Obecně pro vrchol libovolného stupně $d$: $\text{edge}_n = \text{edge}_{n-1} + d$.)*
+
+---
+
+### ✍️ Dekonstrukční Důkaz Indukcí
+
+```
+Schéma dekonstrukce odebráním uzlu v stupně 3:
+
+       (u₁)                                        (u₁)
+      /                                             
+   (v) ──── (u₂)    ═══ Odebrání vrcholu v ═══>          (u₂)
+      \             (zaniknou přesně 3 hrany)       
+       (u₃)                                        (u₃)
+ ┌──────────────────────┐                     ┌────────────────────────┐
+ │ Graf G o n vrcholech │                     │ Podgraf G' o n-1 vrch. │
+ │ Počet hran: edge_n   │                     │ Počet hran: edge_{n-1} │
+ └──────────────────────┘                     └────────────────────────┘
+          ▲                                                │
+          │         Vrátíme v se 3 hranami                 │
+          └────────────────────────────────────────────────┘
+```
+
+#### 1. Volba libovolného grafu (Dekonstrukční start):
+Mějme **libovolný zadaný** graf $G = (V, E)$ o $n$ vrcholech, který obsahuje uzel $v$ se stupněm $\deg(v) = 3$.  
+Počet hran tohoto grafu označme $\text{edge}_n = |E|$.
+
+#### 2. Odebrání uzlu a přechod k menšímu podgrafu:
+Z grafu $G$ odebereme vrchol $v$ a všechny hrany, které do něj vstupují (jsou to právě hrany $\{v, u_1\}, \{v, u_2\}, \{v, u_3\}$).  
+Získáme podgraf $G' = G \setminus \{v\}$:
+- Počet vrcholů klesl o 1: $|V(G')| = n - 1$.
+- Počet hran klesl přesně o 3: $|E(G')| = \text{edge}_n - 3$.
+
+Označme počet hran v $G'$ jako $\text{edge}_{n-1} = |E(G')|$.
+
+#### 3. Přímé vyjádření vztahu:
+Jednoduchou úpravou rovnosti $\text{edge}_{n-1} = \text{edge}_n - 3$ dostáváme:
+$$\text{edge}_n = \text{edge}_{n-1} + 3$$
+
+#### 4. Návrat prvku a indukční závěr:
+Vrátíme-li uzel $v$ zpět do grafu $G'$, každá z jeho 3 hran se připojí k vrcholům $u_1, u_2, u_3$, které v $G'$ již existují. K existujícím $\text{edge}_{n-1}$ hranám tedy přibudou přesně 3 hrany.  
+Tím je dokázáno, že přidáním/odebráním uzlu stupně 3 se počet hran mění přesně o 3. $\blacksquare$
+
+---
+
+### 💡 Porovnání se stromy: Univerzální pravidlo dekonstrukce
+
+Tento vztah vám okamžitě odemkne celou teorii grafů:
+
+| Typ grafu / uzlu | Co odebíráme při dekonstrukci | Rekurence pro počet hran | Výsledný vzorec |
+| :--- | :--- | :--- | :--- |
+| **Strom** | List (stupeň $\deg(v) = 1$) | $\text{edge}_n = \text{edge}_{n-1} + 1$ | $m = n - 1$ |
+| **Cesta / Kružnice** | Běžný uzel (stupeň $\deg(v) = 2$) | $\text{edge}_n = \text{edge}_{n-1} + 2$ | $m = n$ (pro kružnici) |
+| **Síť s uzly stupně 3** | Uzel se 3 vazbami ($\deg(v) = 3$) | $\text{edge}_n = \text{edge}_{n-1} + 3$ | Roste o $+3$ na každý uzel |
+
+> **Zlaté pravidlo teorie grafů:**  
+> **$\mathbf{\text{edge}_n = \text{edge}_{n-1} + \deg(v)}$**  
+> Kolik hran má odebíraný vrchol, o tolik se liší počet hran mezi grafem o $n$ vrcholech a jeho podgrafem o $n - 1$ vrcholech.  
+> U stromu je to $+1$, u cyklu $+2$, u trojvazné sítě $+3$. Všechny tyto důkazy mají identickou strukturu!
 
 ---
 
@@ -392,7 +483,7 @@ Z tohoto modulu byste teď měli bezpečně zvládat:
 | Dovednost | Status |
 | :--- | :---: |
 | Dekonstrukční indukce podle $\|V\|$ a $\|E\|$ | ✅ Ovládáte |
-| Důkaz Handshaking lemmatu (dvojí započtení + indukce) | ✅ Ovládáte |
+| Růst hran v síti při dekonstrukci ($\text{edge}_n = \text{edge}_{n-1} + \deg(v)$) | ✅ Ovládáte |
 | Lema o existenci listu (přes nejdelší cestu) | ✅ Ovládáte |
 | Důkaz $m = n - 1$ pro stromy | ✅ Ovládáte |
 | Indukce pro lesy ($m = n - c$) | ✅ Ovládáte |
