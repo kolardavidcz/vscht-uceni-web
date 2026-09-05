@@ -121,27 +121,6 @@ Dokud neznáte definici, mozek tápe v mlze, protože nemá záchytný bod. Jakm
 
 ---
 
-#### ✍️ Důkaz krok za krokem z definice:
-
-1. **Definice kružnice (Klíčová znalost):**
-   > *Kružnice je množina všech bodů roviny $X[x, y]$, které mají od daného pevného bodu — **středu** kružnice $S[m, n]$ — konstantní vzdálenost, **poloměr** $r > 0$.*
-   $$|XS| = r$$
-
-2. **Převod geometrie na algebru (Pythagorova věta):**
-   Vzdálenost dvou bodů $X[x, y]$ a $S[m, n]$ v eukleidovské rovině odpovídá délce přepony pravoúhlého trojúhelníku s odvěsnami $(x - m)$ a $(y - n)$:
-   $$|XS| = \sqrt{(x - m)^2 + (y - n)^2} = r$$
-
-3. **Středová rovnice kružnice:**
-   Protože obě strany rovnice jsou nezáporné ($r > 0$), provedeme ekvivalentní umocnění na druhou:
-   $$(x - m)^2 + (y - n)^2 = r^2$$
-
-4. **Obecná rovnice kružnice:**
-   Roznásobením závorek podle vzorce $(a - b)^2 = a^2 - 2ab + b^2$:
-   $$x^2 - 2mx + m^2 + y^2 - 2ny + n^2 = r^2$$
-   $$x^2 + y^2 - 2mx - 2ny + (m^2 + n^2 - r^2) = 0$$
-   Označíme-li konstantu $p = m^2 + n^2 - r^2$, dostáváme standardní obecný tvar:
-   $$x^2 + y^2 - 2mx - 2ny + p = 0$$
-
 <div class="my-5 p-4 rounded-xl bg-stone-100/80 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs">
   <div class="flex items-center justify-between mb-3">
     <span class="text-xs text-stone-700 dark:text-stone-300 font-bold uppercase tracking-wide">📄 Ukázka z portálu Matematicko-fyzikální fakulty UK</span>
@@ -152,8 +131,6 @@ Dokud neznáte definici, mozek tápe v mlze, protože nemá záchytný bod. Jakm
     Zdroj: <a href="https://www.karlin.mff.cuni.cz/~portal/analyticka_geometrie/kuzelosecky.php?kapitola=kruznice" target="_blank" rel="noopener noreferrer" class="text-[#c2410c] dark:text-[#f95d12] underline font-medium">MFF UK – Analytická geometrie kuželoseček: Kružnice</a>
   </p>
 </div>
-
-**💡 Klíčové poučení:** Důkaz není kouzlení. Je to logické rozbalení **definice** krok za krokem. Když znáte definici, důkaz se stává přímočarou formalitou.
 
 </details>
 

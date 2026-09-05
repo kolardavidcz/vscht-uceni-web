@@ -46,7 +46,15 @@ Jakmile však vstoupíte do kurzu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT, ak
 - Místo *"enzymatické reakce"* pracujete s **orientovanou hranou** $e = (u, v) \in E$ v **orientovaném akalickém grafu (DAG)**.
 
 
-![https://cdn-images-1.medium.com/max/800/1*FKXawD27qdJy1xbE0j18Nw.png](graph showcase)
+<div class="my-6 p-4 rounded-xl bg-stone-100/80 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs">
+  <div class="flex items-center justify-between mb-3">
+    <span class="text-xs text-stone-700 dark:text-stone-300 font-bold uppercase tracking-wide">📊 Vizuální srovnání: Reprezentace neorientovaného a orientovaného grafu v paměti</span>
+  </div>
+  <img src="/images/graph-representation-showcase.png" alt="Ukázka reprezentace neorientovaného a orientovaného grafu: Seznam sousedů (Adjacency List) vs. Matice sousedství (Adjacency Matrix)" class="rounded-lg shadow-sm border border-stone-200 dark:border-stone-700 max-w-full h-auto mx-auto bg-white p-2" />
+  <p class="text-xs text-stone-500 dark:text-stone-400 mt-2 text-center">
+    Vlevo: <strong>Neorientovaný vs. Orientovaný graf</strong> · Uprostřed: <strong>Seznam sousedů (Adjacency List)</strong> · Vpravo: <strong>Matice sousedství (Adjacency Matrix)</strong>
+  </p>
+</div>
 
 ---
 
@@ -113,22 +121,6 @@ Vlastnosti binárních relací na množině $V$:
 
 ## 3. Katalog Biologických & Chemických Grafových Struktur `[Relevance: 95%]` `[BIO-ANALOGIE]`
 
-Propojme teoretické definice s pěti hlavními pilíři moderní bioinformatiky:
-
-```
-┌──────────────────────────────────┬────────────────────────────┬────────────────────────────┐
-│ Biologický / Chemický systém     │ Vrcholy V (Nodes)           │ Hrany E (Edges)            │
-├──────────────────────────────────┼────────────────────────────┼────────────────────────────┤
-│ 🧪 Molekula (např. Glukóza)       │ Atomy (C, H, O, N)         │ Kovalentní chemické vazby  │
-│ 🔄 Metabolická dráha (Glykolýza) │ Metabolity / Substráty     │ Enzymatické reakce (orient)│
-│ 🧬 PPI Síť (Protein-Protein)     │ Proteiny                   │ Fyzikální interakce        │
-│ 🧩 DNA de Bruijn Graf            │ (k-1)-mery nukleotidů      │ k-mery sekvenování         │
-│ 🌳 Fylogenetický strom           │ Biologické druhy / Taxony  │ Evoluční předkové (strom)  │
-└──────────────────────────────────┴────────────────────────────┴────────────────────────────┘
-```
-
----
-
 ### 3.1 Chemické Grafy Molekul (Molecular Graphs)
 
 V chemoinformatice reprezentujeme chemickou strukturní sloučeninu jako neorientovaný graf $G = (V, E)$:
@@ -170,50 +162,6 @@ Metabolická síť buněčného metabolismu popisuje biochemické přeměny lát
 2. **Cyklické dráhy:**
    - Příklady: Citrátový cyklus (Krebsův cyklus), Calvinův cyklus.
    - Obsahují orientovaný cyklus $C = (v_1, v_2, \dots, v_k, v_1)$, kde se klíčový přenašeč (oxaloacetát) regeneruje.
-
----
-
-### 3.3 Protein-Proteinové Interakční Sítě (PPI Networks)
-
-Buňka funguje díky fyzikálním kontaktům mezi proteiny, které vytvářejí molekulární stroje (např. Ribozóm, RNA polymeráza):
-- **Množina vrcholů $V$:** Proteiny kódované genomem.
-- **Množina hran $E$:** Neorientované hrany reprezentující prokázanou fyzikální vazbu (zjištěnou např. pomocí kvasinkového dvouhybridního systému Y2H nebo hmotnostní spektrometrie MS/MS).
-
-#### Topologická vlastnost: Bezškálové sítě (Scale-Free Networks) & Huby
-PPI sítě nejsou náhodné grafy! Vykazují tzv. **mocninné rozdělení stupňů** (Power-law distribution):
-- Většina proteinů má velmi malý stupeň ($\deg(v) = 1$ až $3$).
-- Malé množství proteinů tvoří tzv. **Huby (Uzly s obrovským stupněm $\deg(v) > 100$)**.
-
-> [!INSIGHT]
-> **Biologická esenciálnost hubů:**
-> Zasažení běžného proteinu s $\deg(v) = 1$ mutací buněčnou funkci neovlivní. Odstranění **huba** (proteinu s $\deg(v) = 150$) však způsobí kolaps celé PPI sítě a smrt buňky (tzv. Lethality-Centrality Lethality Rule).
-
----
-
-### 3.4 DNA Sekvenování & de Bruijn Grafy
-
-Při čtení genomu současnými sekvenátory (Illumina, MGI) nezískáme kompletní řetězec chromozomu najednou, ale obdržíme **miliony krátkých fragmentů** (přečtení / reads) o délce $k$ nukleotidů (tzv. $k$-merů).
-
-Jak poskládat střípky zpět do celé sekvence? Použijeme **de Bruijnův graf**:
-- **Množina vrcholů $V$:** Všechny unikatní $(k-1)$-mery nalezené v biologickém vzorku.
-- **Množina hran $E$:** Orientovaná hrana vedoucí z $(k-1)$-meru $A$ do $(k-1)$-meru $B$ existuje právě tehdy, když v přečtených datech existuje $k$-mer, jehož sufix délky $k-1$ je $B$ a prefix délky $k-1$ je $A$.
-
-```
-Příklad pro k = 3 (3-mery):
-Read: ATGCAT
-
-2-mery (Vrcholy V): {AT, TG, GC, CA}
-3-mery (Hrany E):   (AT)->TG, (TG)->GC, (GC)->CA, (CA)->AT
-
-Graf:
-[AT] ────► [TG] ────► [GC] ────► [CA] ────┐
-  ▲                                       │
-  └───────────────────────────────────────┘
-```
-
-> [!MEGA EPIC]
-> **Propojení s Teorií Grafů:**
-> Rekonstrukce původního genomu odpovídá **nalezení Eulerovského tahu** (cesty procházející každou hranu grafu právě jednou) v tomto de Bruijnův grafu! Tuto tématiku podrobně zpracujeme v Modulu 5.
 
 ---
 
