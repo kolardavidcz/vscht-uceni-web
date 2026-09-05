@@ -18,5 +18,11 @@ interface Window {
     typesetClear?: (elements?: HTMLElement[]) => void;
     tex?: Record<string, unknown>;
     options?: Record<string, unknown>;
+    startup?: {
+      document?: {
+        getMathItemsWithin?: (element: Element) => Array<{ math?: string }>;
+      };
+    };
+    [key: string]: unknown;
   };
 }

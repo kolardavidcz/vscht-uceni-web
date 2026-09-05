@@ -358,6 +358,36 @@ h4,
 }
 
 /* ==========================================================================
+   MathJax Selectable Unicode Text
+   ========================================================================== */
+mjx-container {
+  position: relative;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+.mjx-selectable-unicode {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.001;
+  pointer-events: none;
+  overflow: hidden;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  white-space: pre-wrap;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+mjx-assistive-mml {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+/* ==========================================================================
    Print Optimization Styles (Wiki & Study Materials)
    ========================================================================== */
 @media print {
@@ -519,10 +549,11 @@ h4,
     break-inside: avoid !important;
   }
 
-  /* Explicitly hide spoilers and marked interactive elements from print */
+  /* Explicitly hide spoilers, overlay selectable spans, and marked interactive elements from print */
   .print-hidden,
   .print\:hidden,
-  .spoiler-print-hidden {
+  .spoiler-print-hidden,
+  .mjx-selectable-unicode {
     display: none !important;
   }
 }
