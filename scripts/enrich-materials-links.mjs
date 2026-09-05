@@ -193,6 +193,7 @@ const trainerUrlMap = {
   // Lessons
   "tr-w01-l2": "https://trainer.ksi.fit.cvut.cz/lessons/581",
   "tr-w01-l3": "https://trainer.ksi.fit.cvut.cz",
+  "tr-w07-l1": "https://trainer.ksi.fit.cvut.cz/lessons/729",
 
   // Week 1, Lesson 581 Modules
   "tr-w01-l2-s1": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/330",
@@ -204,6 +205,29 @@ const trainerUrlMap = {
   "tr-w01-l2-s10": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/339",
   "tr-w01-l2-s11": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/340",
   "tr-w01-l2-s12": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/341",
+
+  // Week 7, Lesson 729 Modules
+  "tr-w07-l1-s1": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/676",
+  "tr-w07-l1-s2": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/677",
+  "tr-w07-l1-s3": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/678",
+  "tr-w07-l1-s4": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/679",
+};
+
+// Exact title overrides for Trainer modules
+const trainerTitleMap = {
+  "Jednodušší struktury": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/330",
+  "Jmenné prostory": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/331",
+  "Operátory new a delete": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/332",
+  "Reference": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/334",
+  "Reference na konstantu": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/336",
+  "Přetěžování funkcí": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/338",
+  "Výchozí argumenty": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/339",
+  "Řazení v C++": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/340",
+  "Vstup a výstup v C++": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/341",
+  "Orientovaný graf I (BFS)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/676",
+  "Orientovaný graf II (BFS/DFS)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/677",
+  "Orientovaný graf III (BFS/DFS/Dijkstra)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/678",
+  "Orientovaný graf IV (DFS/TopSort)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/679",
 };
 
 const TRAINER_BASE = "https://trainer.ksi.fit.cvut.cz";
@@ -263,13 +287,22 @@ for (const cat of data) {
 
     if (Array.isArray(cat.children)) {
       for (const lesson of cat.children) {
-        const lessonUrl = trainerUrlMap[lesson.id] || TRAINER_BASE;
+        let lessonUrl = trainerUrlMap[lesson.id] || TRAINER_BASE;
+        const cleanLesson = stripMd(lesson.name);
+        if (cat.id === "tr-week07" && cleanLesson.includes("Cvičení")) {
+          lessonUrl = "https://trainer.ksi.fit.cvut.cz/lessons/729";
+        }
         lesson.name = linkify(lesson.name, lessonUrl);
         trainerLinkedCount++;
 
         if (Array.isArray(lesson.children)) {
-          for (const mod of lesson.children) {
-            const modUrl = trainerUrlMap[mod.id] || lessonUrl;
+          for (let mi = 0; mi < lesson.children.length; mi++) {
+            const mod = lesson.children[mi];
+            const cleanTitle = stripMd(mod.name);
+            const modUrl =
+              trainerTitleMap[cleanTitle] ||
+              trainerUrlMap[mod.id] ||
+              lessonUrl;
             mod.name = linkify(mod.name, modUrl);
             trainerLinkedCount++;
           }

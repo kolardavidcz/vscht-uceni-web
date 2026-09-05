@@ -1235,11 +1235,11 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w07-l1",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/729)",
         "children": [
           {
             "id": "tr-w07-l1-s1",
-            "name": "[Orientovaný graf I (BFS)](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Orientovaný graf I (BFS)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/676)",
             "relevance": 100,
             "quality": true,
             "badges": [
@@ -1249,7 +1249,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w07-l1-s1",
-            "name": "[Orientovaný graf II (BFS/DFS)](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Orientovaný graf II (BFS/DFS)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/677)",
             "relevance": 100,
             "quality": true,
             "badges": [
@@ -1259,7 +1259,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w07-l1-s1",
-            "name": "[Orientovaný graf III (BFS/DFS/Dijkstra)](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Orientovaný graf III (BFS/DFS/Dijkstra)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/678)",
             "relevance": 100,
             "quality": true,
             "badges": [
@@ -1270,7 +1270,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w07-l1-s1",
-            "name": "[Orientovaný graf IV (DFS/TopSort)](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Orientovaný graf IV (DFS/TopSort)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/679)",
             "relevance": 80,
             "quality": true,
             "badges": [
