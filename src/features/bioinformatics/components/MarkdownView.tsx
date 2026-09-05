@@ -10,7 +10,7 @@ import bash from "highlight.js/lib/languages/bash";
 import python from "highlight.js/lib/languages/python";
 import json from "highlight.js/lib/languages/json";
 import plaintext from "highlight.js/lib/languages/plaintext";
-import { contentMayHaveMath, loadMathJax } from "@/lib/loadMathJax";
+import { contentMayHaveMath, loadMathJax, makeMathJaxContainerSelectable } from "@/lib/loadMathJax";
 import { latexToUnicode } from "@/lib/latexToUnicode";
 
 type Props = {
@@ -136,38 +136,9 @@ export function MarkdownView({ content }: Props) {
           await window.MathJax.typesetPromise([ref.current]);
           if (cancelled || !ref.current) return;
 
-          // Annotate each MathJax container with clean selectable Unicode text
           const containers = ref.current.querySelectorAll<HTMLElement>("mjx-container");
           containers.forEach((container) => {
-            if (container.getAttribute("data-unicode")) return;
-
-            let rawLatex = "";
-            const mathItems = window.MathJax?.startup?.document?.getMathItemsWithin?.(container) || [];
-            if (mathItems.length > 0 && mathItems[0]?.math) {
-              rawLatex = mathItems[0].math;
-            }
-
-            if (!rawLatex) {
-              const mml = container.querySelector("mjx-assistive-mml math");
-              if (mml && mml.textContent) {
-                rawLatex = mml.textContent;
-              }
-            }
-
-            const unicode = latexToUnicode(rawLatex || container.textContent || "");
-            container.setAttribute("data-unicode", unicode);
-            if (rawLatex) {
-              container.setAttribute("data-latex", rawLatex);
-            }
-
-            // Inject selectable Unicode span so selection highlighting selects clean Unicode
-            if (!container.querySelector(".mjx-selectable-unicode")) {
-              const span = document.createElement("span");
-              span.className = "mjx-selectable-unicode";
-              span.textContent = unicode;
-              span.setAttribute("aria-hidden", "true");
-              container.appendChild(span);
-            }
+            makeMathJaxContainerSelectable(container);
           });
         }
       } catch (err) {

@@ -698,7 +698,7 @@ export function PA2ToAG1Overview() {
             <div key={week.num} className={containerClass}>
               <div
                 onClick={() => toggleWeek(week.num)}
-                className={`p-4 flex items-center justify-between gap-4 cursor-pointer select-none transition-all duration-200 relative ${headerBg}`}
+                className={`p-4 flex items-center justify-between gap-4 cursor-pointer transition-all duration-200 relative ${headerBg}`}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {

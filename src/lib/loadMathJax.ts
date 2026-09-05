@@ -73,6 +73,75 @@ export function setupMathJaxCopyListener(): void {
   });
 }
 
+const SUPER_MAP: Record<string, string> = {
+  "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴",
+  "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹",
+  "+": "⁺", "-": "⁻", "=": "⁼", "(": "⁽", ")": "⁾",
+  "n": "ⁿ", "i": "ⁱ", "x": "ˣ", "y": "ʸ", "k": "ᵏ", "m": "ᵐ"
+};
+
+const SUB_MAP: Record<string, string> = {
+  "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄",
+  "5": "₅", "6": "₆", "7": "₇", "8": "₈", "9": "₉",
+  "+": "₊", "-": "₋", "=": "₌", "(": "₍", ")": "₎",
+  "a": "ₐ", "e": "ₑ", "i": "ᵢ", "j": "ⱼ", "k": "ₖ", "m": "ₘ",
+  "n": "ₙ", "o": "ₒ", "p": "ₚ", "r": "ᵣ", "s": "ₛ", "t": "ₜ",
+  "u": "ᵤ", "v": "ᵥ", "x": "ₓ"
+};
+
+export function makeMathJaxContainerSelectable(container: HTMLElement): void {
+  // Remove assistive MathML which MathJax marks unselectable="on" with user-select: none
+  container.querySelectorAll("mjx-assistive-mml").forEach((a) => a.remove());
+
+  // Allow browser selection on container and math elements
+  container.style.userSelect = "text";
+  const math = container.querySelector("mjx-math");
+  if (math) {
+    math.removeAttribute("aria-hidden");
+    (math as HTMLElement).style.userSelect = "text";
+  }
+
+  // Populate each mjx-c with its corresponding Unicode character
+  const chars = container.querySelectorAll<HTMLElement>("mjx-c");
+  chars.forEach((c) => {
+    c.style.userSelect = "text";
+    if (c.textContent) return;
+
+    const match = c.className.match(/mjx-c([0-9A-Fa-f]+)/);
+    let ch = "";
+    if (match) {
+      let code = parseInt(match[1], 16);
+      // Map italic letters (0x1D44E-0x1D467 -> a-z, 0x1D434-0x1D44D -> A-Z) to standard ASCII
+      if (code >= 0x1D44E && code <= 0x1D467) {
+        code = 97 + (code - 0x1D44E); // a-z
+      } else if (code >= 0x1D434 && code <= 0x1D44D) {
+        code = 65 + (code - 0x1D434); // A-Z
+      }
+      try {
+        ch = String.fromCodePoint(code);
+      } catch {}
+    }
+
+    if (!ch) {
+      const before = window.getComputedStyle(c, "::before").content;
+      if (before && before !== "none" && before !== '""') {
+        ch = before.replace(/^["']|["']$/g, "");
+      }
+    }
+
+    if (ch) {
+      if (c.closest("mjx-script")) {
+        if (c.closest("mjx-msup") && SUPER_MAP[ch]) ch = SUPER_MAP[ch];
+        if (c.closest("mjx-msub") && SUB_MAP[ch]) ch = SUB_MAP[ch];
+      }
+      c.textContent = ch;
+    }
+  });
+
+  const fullText = container.textContent || "";
+  container.setAttribute("data-unicode", fullText);
+}
+
 function ensureConfig() {
   if (typeof window === "undefined") return;
   if (!window.MathJax) {
@@ -106,6 +175,7 @@ function ensureConfig() {
   current.options = {
     ignoreHtmlClass: "tex2jax_ignore",
     processHtmlClass: "tex2jax_process",
+    enableAssistiveMml: false,
     ...(current.options || {}),
   };
 }
