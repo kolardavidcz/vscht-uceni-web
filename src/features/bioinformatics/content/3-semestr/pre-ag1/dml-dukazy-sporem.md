@@ -326,7 +326,66 @@ Graf: $V = \{1,2,3,4,5\}$, hrany: $\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{5,1\},\{1,3
 
 ---
 
-## 5. 🌊 Bipartitní Grafy & BFS Obarvení (Charakterizace Lichých Cyklů) `[Relevance: 85%]`
+## 5. 🏗️ Konstruktivní vs. Nekonstruktivní Důkazy Existence `[INSIGHT]` `[Relevance: 95%]`
+
+V matematice i informatice se neustále ptáme: *„Existuje v tomto grafu řešení?“* (např. existuje cesta, existuje 2-obarvení, existuje kostra grafu, existuje vrchol se specifickou vlastností?).
+
+<div class="my-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-[#1c130d] shadow-xs">
+    <div class="flex items-center gap-2 font-bold text-stone-900 dark:text-stone-100 text-sm mb-2">
+      <span class="text-base">🔮</span> <span>Nekonstruktivní důkaz existence</span>
+    </div>
+    <ul class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 space-y-1.5 list-disc pl-4">
+      <li><strong>Prokáže, že hledaný objekt MUSÍ existovat</strong> (např. sporem vyvrátí jeho neexistenci).</li>
+      <li>Typicky využívá <strong>důkaz sporem</strong>, <strong>Dirichletův princip</strong> nebo <strong>extremální princip</strong>.</li>
+      <li><strong>Neposkytuje žádný návod ani algoritmus</strong>, jak objekt v datech najít či sestrojit.</li>
+      <li><em>Metafora:</em> „Kdyby poklad na ostrově nebyl, ostrov by se potopil.“</li>
+    </ul>
+  </div>
+  <div class="p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-[#1c130d] shadow-xs">
+    <div class="flex items-center gap-2 font-bold text-stone-900 dark:text-stone-100 text-sm mb-2">
+      <span class="text-base">🛠️</span> <span>Konstruktivní důkaz existence</span>
+    </div>
+    <ul class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 space-y-1.5 list-disc pl-4">
+      <li><strong>Prokáže existenci tím, že předloží přesný algoritmus</strong> (recept).</li>
+      <li>Pro libovolný platný vstup krok za krokem objekt bezchybně zkonstruuje.</li>
+      <li><strong>Po skončení algoritmu držíme hotový objekt v ruce</strong> (v poli, struktuře, souboru).</li>
+      <li><em>Metafora:</em> „Tady je mapa s křížkem a přesné GPS souřadnice, kde kopat.“</li>
+    </ul>
+  </div>
+</div>
+
+### 🔮 Nekonstruktivní důkazy v praxi (Důkaz sporem & Dirichlet)
+
+V předchozích kapitolách jsme viděli typické nekonstruktivní postupy:
+1. **Dirichletův přihrádkový princip:** V kapitole 3 jsme dokázali, že v libovolném grafu s alespoň 2 vrcholy **musí existovat dva vrcholy se stejným stupněm**.
+   - Důkaz je stoprocentně neprůstřelný.
+   - Dirichlet nám však **ani náznakem neřekl, které dva konkrétní vrcholy to jsou**! Pokud bychom je chtěli zjistit, museli bychom graf projít a stupně otestovat.
+2. **Důkaz sporem:** Předpokládáme, že hledaný objekt neexistuje. Z tohoto předpokladu dovodíme logický spor ($\bot$). Objekt tedy existovat musí, ale nemáme žádný algoritmus na jeho sestavení.
+3. **Extremální princip:** Zvolíme „nejkratší cestu“ nebo „vrchol s minimálním stupněm“. Z konečnosti grafu víme, že takový prvek zaručeně existuje, ale jak ho v grafu s milionem uzlů efektivně najít, to už řeší až samostatný algoritmus.
+
+---
+
+### 🛠️ Konstruktivní důkazy v informatice (Algoritmus jako důkaz)
+
+V programování a bioinformatice nestačí vědět, že řešení hypoteticky existuje. Potřebujeme spustit kód v C++, který nám výsledek spočítá a vrátí:
+> **Princip Konstruktivního Důkazu:** Prokazujeme existenci matematického objektu tím, že **předložíme explicitní algoritmus**, který pro libovolný platný vstup tento objekt v konečném počtu kroků bezchybně zkonstruuje.
+
+- **Příklad z bioinformatiky:** Chceme dokázat, že z krátkých přečtených fragmentů DNA lze poskládat původní chromozom.
+  - Nekonstruktivní věta: *„Pokud jsou stupně uzlů v de Bruijn grafu vyvážené, Eulerovský tah existuje.“* (Hezké vědět, ale sekvenci chromozomu v souboru ještě nemáme).
+  - Konstruktivní důkaz: **Hierholzerův algoritmus** — vezme graf a cyklus po cyklu nám skutečnou sekvenci DNA znak po znaku poskládá!
+
+---
+
+### 🌉 Krásný most do další kapitoly: Dva světy v jediné větě
+
+Následující kapitola o **bipartitních grafech** je pro studenty AG1 fascinující právě tím, že v jednom jediném zkouškovém tvrzení propojuje **oba světy**:
+- **Směr $\implies$ (Bipartitní $\implies$ Bez lichých cyklů):** Dokážeme **nekonstruktivně sporem** (ukážeme, že existence lichého cyklu by okamžitě vedla k logickému rozporu).
+- **Směr $\impliedby$ (Bez lichých cyklů $\implies$ Bipartitní):** Dokážeme **konstruktivně**! Předložíme algoritmus **BFS (prohledávání do šířky)**, který projde graf po vrstvách a sám přímo vygeneruje rozdělení vrcholů do dvou partit.
+
+---
+
+## 6. 🌊 Bipartitní Grafy & BFS Obarvení (Charakterizace Lichých Cyklů) `[Relevance: 85%]`
 
 *(Tento oddíl shrnuje pokročilejší zkouškovou větu propojující důkazy sporem s prohledáváním do šířky.)*
 
@@ -434,5 +493,5 @@ Dokažte sporem, že v každém konečném orientovaném acyklickém grafu exist
 
 ---
 
-> ➡️ **Pokračujte na modul algoritmické korektnosti:** [4 · Invarianty Cyklů (BFS & Dijkstra)](./dml-loop-invariants)
+> ➡️ **Pokračujte na závěrečný zkouškový workshop:** [4 · Zkouškový Workshop & Šablony Důkazů z AG1](./dml-zkouskovy-workshop)
 

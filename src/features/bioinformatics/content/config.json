@@ -112,17 +112,9 @@
               "title": "7 · Modul 3: Důkazy Sporem & Extremální Princip",
               "order": 7
             },
-            "dml-loop-invariants": {
-              "title": "8 · Modul 4: Invarianty Cyklů (BFS & Dijkstra)",
-              "order": 8
-            },
-            "dml-konstruktivni-dukazy": {
-              "title": "9 · Modul 5: Konstruktivní Důkazy & Bio-Algoritmy",
-              "order": 9
-            },
             "dml-zkouskovy-workshop": {
-              "title": "10 · Modul 6: Zkouškový Workshop & Šablony Důkazů",
-              "order": 10
+              "title": "8 · Modul 4: Zkouškový Workshop & Šablony Důkazů",
+              "order": 8
             }
           }
         },

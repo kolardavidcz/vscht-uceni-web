@@ -1,4 +1,4 @@
-# Modul 6: Zkouškový Workshop & Šablony Důkazů z AG1
+# Modul 4: Zkouškový Workshop & Šablony Důkazů z AG1
 
 > **[Relevance: 100%]** · **Tags:** `[MEGA EPIC]` `[PAST U ZKOUŠKY]` `[CHALLENGE]`
 > **Cíl modulu:** Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.
@@ -116,7 +116,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-### 🧪 Příklad 6.1: Rozklad Sudého Grafu na Cykly (Dekonstrukční Indukce)
+### 🧪 Příklad 4.1: Rozklad Sudého Grafu na Cykly (Dekonstrukční Indukce)
 
 > **Zadání:** Dokážeme dekonstrukční indukcí podle počtu hran $m = |E|$, že každý souvislý neorientovaný graf $G = (V, E)$, ve kterém má každý vrchol sudý stupeň ($\forall v \in V: \deg(v) \ge 2 \text{ je sudé}$), lze rozložit na hranově disjunktní cykly.
 
@@ -143,7 +143,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-### 🧪 Příklad 6.2: Extremální Princip & Nejdélší Cesta (Důkaz Sporem)
+### 🧪 Příklad 4.2: Extremální Princip & Nejdélší Cesta (Důkaz Sporem)
 
 > **Zadání:** Dokážeme sporem, že v každém konečném grafu $G = (V, E)$ s minimálním stupněm $\delta(G) \ge 2$ existuje jednoduchá cesta délky alespoň $\delta(G)$.
 
@@ -171,7 +171,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-### 🧪 Příklad 6.3: Unikátnost Minimální Kostry (Cut Property)
+### 🧪 Příklad 4.3: Unikátnost Minimální Kostry (Cut Property)
 
 > **Zadání:** Dokážeme sporem, že pokud jsou všechny váhy hran v souvislém grafu $G = (V, E, w)$ navzájem **různé (unikátní)**, pak má graf $G$ **právě jednu (jednoznačnou) minimální kostru (MST)**.
 
@@ -202,7 +202,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-### 🧪 Příklad 6.4: Počet Hran v Lese se $c$ Komponentami (Indukce podle $|E|$)
+### 🧪 Příklad 4.4: Počet Hran v Lese se $c$ Komponentami (Indukce podle $|E|$)
 
 > **Zadání:** Dokážeme dekonstrukční indukcí podle počtu hran $m = |E|$, že každý neorientovaný acyklický graf (les) $G = (V, E)$ s $n = |V|$ vrcholy a $c$ komponentami souvislosti má přesně $m = n - c$ hran.
 
@@ -231,7 +231,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-### 🧪 Příklad 6.5: Bipartitnost a Liché Cykly (Důkaz Sporem)
+### 🧪 Příklad 4.5: Bipartitnost a Liché Cykly (Důkaz Sporem)
 
 > **Zadání:** Dokážeme sporem, že pokud graf $G = (V, E)$ obsahuje lichý cyklus $C_k$ (délky $k = 2r+1$), pak graf $G$ **není bipartitní**.
 
@@ -253,7 +253,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-### 🧪 Příklad 6.6: Správnost BFS (Nemonotónnost Fronty a Vzdálenost)
+### 🧪 Příklad 4.6: Správnost BFS (Nemonotónnost Fronty a Vzdálenost)
 
 > **Zadání:** Dokážeme invariantem cyklu, že ve FIFO frontě $Q = \langle v_1, v_2, \dots, v_r \rangle$ algoritmu BFS platí $d[v_r] \le d[v_1] + 1$.
 

@@ -362,7 +362,7 @@ export function WikiPage() {
               </>
             ) : (
               <>
-                <MarkdownView content={active.raw} />
+                <MarkdownView key={active.path} content={active.raw} />
                 {suggestFooter(active)}
               </>
             )}
