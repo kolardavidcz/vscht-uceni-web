@@ -202,6 +202,7 @@ function ensureConfig() {
     macros: {
       thus: "\\mathrel{\\vert\\mkern-3mu{=}}",
       logi: "\\mathrel{\\vert\\mkern-3mu{=}\\mkern-3mu\\vert}",
+      coloneqq: "\\mathrel{:=}",
       ...existingMacros,
     },
   };

@@ -148,6 +148,22 @@ h4,
   margin: 1rem 0 0.4rem;
 }
 
+.dark .wiki-prose h1,
+.dark .wiki-prose h2,
+.dark .wiki-prose h3,
+.dark .wiki-prose h4,
+@media (prefers-color-scheme: dark) {
+  .wiki-prose h1,
+  .wiki-prose h2,
+  .wiki-prose h3,
+  .wiki-prose h4 {
+    color: #f8fafc;
+  }
+  .wiki-prose h2 {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
 .wiki-prose p {
   margin: 0.75rem 0;
 }

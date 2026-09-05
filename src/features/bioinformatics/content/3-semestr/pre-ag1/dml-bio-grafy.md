@@ -56,6 +56,85 @@ Jakmile však vstoupíte do kurzu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT, ak
   </p>
 </div>
 
+<div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="p-5 rounded-2xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-base font-bold text-stone-900 dark:text-stone-100 m-0! flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#db2777] inline-block"></span>
+DFS
+</h3>
+<span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-[#db2777]/10 text-[#db2777] dark:text-[#f472b6]">Hloubkové prohledávání</span>
+</div>
+<div class="bg-white dark:bg-[#0f0906] p-4 rounded-xl border border-stone-200/80 dark:border-stone-800/80 flex items-center justify-center shadow-2xs">
+<svg viewBox="0 0 360 200" class="w-full max-w-[320px] h-auto" xmlns="http://www.w3.org/2000/svg">
+<line x1="68" y1="75" x2="135" y2="75" stroke="#cbd5e1" class="stroke-stone-300 dark:stroke-stone-700" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round" />
+<line x1="68" y1="75" x2="68" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="68" y1="155" x2="135" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="135" y1="155" x2="205" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="205" y1="155" x2="205" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="205" y1="75" x2="135" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="205" y1="75" x2="275" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="275" y1="75" x2="280" y2="25" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="275" y1="75" x2="275" y2="130" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<circle cx="68" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="135" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="205" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="205" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="135" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="275" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="280" cy="25" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="68" cy="75" r="11" fill="#db2777" />
+<text x="24" y="87" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
+<circle cx="275" cy="130" r="11" fill="#db2777" />
+<text x="302" y="142" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
+</svg>
+</div>
+</div>
+<p class="text-xs text-stone-600 dark:text-stone-400 mt-3 mb-0 leading-relaxed">
+<strong>Prohledávání do hloubky (DFS):</strong> Algoritmus se slepě vnoří podél první větve. Obejde celý spodní cyklus, uzel nahoře navštíví jako slepou uličku a k cíli <strong>C</strong> dorazí dlouhou oklikou (6 hran). <em>Nezaručuje nejkratší cestu!</em>
+</p>
+</div>
+<div class="p-5 rounded-2xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-base font-bold text-stone-900 dark:text-stone-100 m-0! flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+BFS
+</h3>
+<span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">Šířkové prohledávání</span>
+</div>
+<div class="bg-white dark:bg-[#0f0906] p-4 rounded-xl border border-stone-200/80 dark:border-stone-800/80 flex items-center justify-center shadow-2xs">
+<svg viewBox="0 0 360 200" class="w-full max-w-[320px] h-auto" xmlns="http://www.w3.org/2000/svg">
+<line x1="68" y1="75" x2="135" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="135" y1="75" x2="205" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="205" y1="75" x2="275" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="275" y1="75" x2="275" y2="130" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="275" y1="75" x2="280" y2="25" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="68" y1="75" x2="68" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="68" y1="155" x2="135" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="135" y1="155" x2="205" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<line x1="205" y1="155" x2="205" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
+<circle cx="68" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="135" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="205" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="205" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="135" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="275" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="280" cy="25" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
+<circle cx="68" cy="75" r="11" fill="#db2777" />
+<text x="24" y="87" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
+<circle cx="275" cy="130" r="11" fill="#db2777" />
+<text x="302" y="142" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
+</svg>
+</div>
+</div>
+<p class="text-xs text-stone-600 dark:text-stone-400 mt-3 mb-0 leading-relaxed">
+<strong>Prohledávání do šířky (BFS):</strong> Postupuje po vlnoplochách (vrstvách vzdálenosti od <strong>S</strong>). K cíli <strong>C</strong> okamžitě nalezne <strong>nejkratší cestu</strong> po horní větvi (pouhé 4 hrany).
+</p>
+</div>
+</div>
+
 ---
 
 ## 2. Množinový Základ a Jazyk Relací `[Relevance: 90%]` `[EPIC]`
@@ -77,30 +156,7 @@ Nechť $V$ je konečná neprázdná množina prvků (kterým budeme říkat **vr
 
 ---
 
-### 2.2 Přehled Matematického Značení a Logických Symbolů (BI-DML) `[INSIGHT]`
-
-Před formálním zavedením vlastností binárních relací si přehledně shrňme matematické a logické značení používané v kurzu **BI-DML (Diskrétní matematika a logika)** na FIT ČVUT. Toto formální značení se prolíná celou diskrétní matematikou, teorií grafů i analýzou algoritmů v AG1:
-
-| Zavedený symbol | Význam zavedeného symbolu (BI-DML) | Formální popis & Příklad |
-| :---: | :--- | :--- |
-| $:=$ (nebo $\coloneqq$) | **definice**, symbol na levé straně je definován výrazem na straně pravé | Označuje zavedení nového objektu či zkratky, např. $f(x) := x^2 + 1$ nebo $V := \{v_1, \dots, v_n\}$ |
-| $\neg A$ | **negace formule** $A$ | Obrací pravdivostní hodnotu: výrok je pravdivý právě tehdy, když formule $A$ je nepravdivá ($\neg 1 = 0$, $\neg 0 = 1$) |
-| $\forall$ | **obecný (univerzální, velký) kvantifikátor** | $\forall x \in V : P(x)$ znamená „pro každý (všechny) prvek $x$ z množiny $V$ platí vlastnost $P(x)$“ |
-| $\exists$ | **existenční (malý) kvantifikátor** | $\exists x \in V : P(x)$ znamená „existuje alespoň jeden prvek $x$ z množiny $V$, pro který platí vlastnost $P(x)$“ |
-| $A \Rightarrow B$ | **implikace mezi formulemi** $A$ a $B$ | Čteme „z $A$ plyne $B$“ ($A \implies B$); neplatí pouze v případě, kdy předpoklad $A$ platí a závěr $B$ neplatí ($1 \Rightarrow 0$) |
-| $A \Leftrightarrow B$ | **ekvivalence mezi formulemi** $A$ a $B$ | Čteme „$A$ právě tehdy, když $B$“ ($A \iff B$); pravdivá právě tehdy, když obě formule mají shodnou pravdivostní hodnotu |
-| $A \land B$ | **konjunkce formulí** $A$ a $B$ | Logické „A ZÁROVEŇ“; pravdivá pouze tehdy, když platí obě formule $A$ i $B$ současně |
-| $A \lor B$ | **disjunkce formulí** $A$ a $B$ | Logické „NEBO“; pravdivá, pokud platí alespoň jedna z formulí $A$ nebo $B$ |
-| $\top$ | **tautologie** | Výroková formule, která je vždy pravdivá (nabývá hodnoty 1) při libovolném pravdivostním ohodnocení proměnných (např. $A \lor \neg A$) |
-| $\bot$ | **kontradikce** | Výroková formule, která je vždy nepravdivá (nabývá hodnoty 0) při libovolném pravdivostním ohodnocení proměnných (např. $A \land \neg A$) |
-| $\sum_{k=d}^h a(k)$ | **suma (součet) výrazů** $a(d) + a(d+1) + a(d+2) + \dots + a(h)$ | Součet konečné řady výrazů se sčítacím indexem $k$ od dolní meze $d$ do horní meze $h$ (např. součet stupňů vrcholů $\sum_{v \in V} \deg(v) = 2\|E\|$) |
-| $\prod_{k=d}^h a(k)$ | **produkt (součin) výrazů** $a(d) \cdot a(d+1) \cdot a(d+2) \cdot \dots \cdot a(h)$ | Součin posloupnosti činitelů se součinovým indexem $k$ od dolní meze $d$ do horní meze $h$ (např. faktoriál $n! = \prod_{k=1}^n k$) |
-| $E \models F$ | **logický důsledek mezi formulemi** $E$ a $F$ | Formule $F$ je logickým důsledkem formule $E$ (v BI-DML značeno též $E \mathrel{\vert{=}} F$); každý model formule $E$ je i modelem $F$ |
-| $E \mathrel{\vert{=}\vert} F$ | **logická ekvivalence mezi formulemi** $E$ a $F$ | Formule $E$ a $F$ jsou sémanticky ekvivalentní (v literatuře též $E \equiv F$); obě formule mají stejné pravdivostní ohodnocení ve všech modelech |
-
----
-
-### 2.3 Binární Relace na Množinách
+### 2.2 Binární Relace na Množinách
 
 **Binární relace $R$** na množině $V$ je libovolná podmnožina kartézského součinu: $R \subseteq V \times V$.
 Pokud $(u, v) \in R$, říkáme, že prvek $u$ je v relaci $R$ s prvkem $v$ (zapisujeme $u R v$).
