@@ -518,4 +518,11 @@ h4,
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
+
+  /* Explicitly hide spoilers and marked interactive elements from print */
+  .print-hidden,
+  .print\:hidden,
+  .spoiler-print-hidden {
+    display: none !important;
+  }
 }
