@@ -356,3 +356,166 @@ h4,
   max-width: 100%;
   border-radius: 0.75rem;
 }
+
+/* ==========================================================================
+   Print Optimization Styles (Wiki & Study Materials)
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 1.5cm 1.2cm;
+    size: auto;
+  }
+
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide navigation, sidebar, and non-printable interactive elements */
+  header,
+  aside,
+  nav,
+  footer,
+  .print\:hidden,
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Maximize usable page space and remove card borders & shadows */
+  main,
+  .wiki-prose {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  /* Typography & Headings */
+  .wiki-prose h1 {
+    font-size: 1.6rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.75rem !important;
+    color: #0f172a !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .wiki-prose h2 {
+    font-size: 1.3rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    padding-bottom: 0.25rem !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  .wiki-prose h3,
+  .wiki-prose h4 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .wiki-prose p,
+  .wiki-prose li {
+    font-size: 10.5pt !important;
+    line-height: 1.55 !important;
+    color: #1e293b !important;
+  }
+
+  .wiki-prose a {
+    color: #c2410c !important;
+    text-decoration: underline !important;
+  }
+
+  /* Code blocks & listings in print: wrap instead of clipping */
+  .wiki-prose pre {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 4px !important;
+    padding: 0.6rem 0.8rem !important;
+    margin: 0.75rem 0 !important;
+    font-size: 9.5pt !important;
+    line-height: 1.4 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow: visible !important;
+  }
+
+  .wiki-prose code {
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+    font-size: 9.5pt !important;
+    padding: 0.1rem 0.3rem !important;
+    border-radius: 3px !important;
+  }
+
+  .wiki-prose pre code {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    color: inherit !important;
+  }
+
+  /* Tables in print */
+  .wiki-prose table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 1rem 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    font-size: 9.5pt !important;
+  }
+
+  .wiki-prose th,
+  .wiki-prose td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 0.4rem 0.6rem !important;
+    color: #1e293b !important;
+  }
+
+  .wiki-prose th {
+    background: #f1f5f9 !important;
+    font-weight: 700 !important;
+  }
+
+  /* Blockquotes & Callouts */
+  .wiki-prose blockquote {
+    border-left: 3px solid #f97316 !important;
+    background: #fff7ed !important;
+    color: #334155 !important;
+    padding: 0.5rem 0.8rem !important;
+    margin: 0.75rem 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Images */
+  .wiki-prose img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

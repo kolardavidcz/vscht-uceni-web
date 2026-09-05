@@ -6,6 +6,7 @@ import {
   ChevronRight,
   Menu,
   MessageSquarePlus,
+  Printer,
   Search,
   X,
 } from "lucide-react";
@@ -234,32 +235,45 @@ export function WikiPage() {
   );
 
   const suggestFooter = (material: WikiMaterial) => (
-    <div className="mt-8 pt-5 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3">
+    <div className="mt-8 pt-5 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3 print:hidden">
       <p className="text-xs text-stone-500 font-medium">
         Našli jste chybu nebo máte doplnění k tomuto materiálu?
       </p>
-      {canSuggestMarkdown ? (
-        <button
-          type="button"
-          onClick={() => setSuggestOpen(true)}
-          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-brand-orange/25 bg-brand-orange/5 text-brand-orange-text hover:bg-brand-orange/10 text-xs font-bold transition-colors cursor-pointer"
-        >
-          <MessageSquarePlus size={16} />
-          Navrhnout úpravu
-        </button>
-      ) : (
-        <a
-          href={`mailto:kolarv@vscht.cz?subject=${encodeURIComponent(
-            `Návrh úpravy: ${material.title}`
-          )}&body=${encodeURIComponent(
-            `Stránka: ${material.title}\n\nNávrh:\n`
-          )}`}
-          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-brand-orange/25 bg-brand-orange/5 text-brand-orange-text hover:bg-brand-orange/10 text-xs font-bold transition-colors"
-        >
-          <MessageSquarePlus size={16} />
-          Navrhnout úpravu (e-mail)
-        </a>
-      )}
+      <div className="flex items-center gap-2">
+        {canSuggestMarkdown && (
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 text-xs font-bold transition-colors cursor-pointer"
+            title="Vytisknout stránku nebo uložit do PDF"
+          >
+            <Printer size={16} />
+            Tisk / PDF
+          </button>
+        )}
+        {canSuggestMarkdown ? (
+          <button
+            type="button"
+            onClick={() => setSuggestOpen(true)}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-brand-orange/25 bg-brand-orange/5 text-brand-orange-text hover:bg-brand-orange/10 text-xs font-bold transition-colors cursor-pointer"
+          >
+            <MessageSquarePlus size={16} />
+            Navrhnout úpravu
+          </button>
+        ) : (
+          <a
+            href={`mailto:kolarv@vscht.cz?subject=${encodeURIComponent(
+              `Návrh úpravy: ${material.title}`
+            )}&body=${encodeURIComponent(
+              `Stránka: ${material.title}\n\nNávrh:\n`
+            )}`}
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-brand-orange/25 bg-brand-orange/5 text-brand-orange-text hover:bg-brand-orange/10 text-xs font-bold transition-colors"
+          >
+            <MessageSquarePlus size={16} />
+            Navrhnout úpravu (e-mail)
+          </a>
+        )}
+      </div>
     </div>
   );
 
@@ -270,23 +284,36 @@ export function WikiPage() {
       theme="light"
       maxWidth="max-w-7xl"
       actions={
-        <Button
-          variant="dark"
-          size="sm"
-          className="lg:hidden"
-          onClick={() => setSidebarOpen(true)}
-        >
-          <Menu size={16} /> Materiály
-        </Button>
+        <div className="flex items-center gap-2">
+          {active && !isSpecial && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => window.print()}
+              title="Vytisknout nebo uložit do PDF"
+              className="text-xs font-semibold gap-1.5 hidden sm:inline-flex border-white/20 hover:bg-white/15 text-white cursor-pointer"
+            >
+              <Printer size={15} /> Tisk / PDF
+            </Button>
+          )}
+          <Button
+            variant="dark"
+            size="sm"
+            className="lg:hidden"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <Menu size={16} /> Materiály
+          </Button>
+        </div>
       }
     >
       <div className="flex gap-6 items-start min-h-[70vh]">
-        <div className="hidden lg:flex w-72 shrink-0 flex-col rounded-2xl border border-stone-200 bg-white shadow-sm sticky top-24 self-start h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] min-h-0 overflow-hidden">
+        <div className="hidden lg:flex w-72 shrink-0 flex-col rounded-2xl border border-stone-200 bg-white shadow-sm sticky top-24 self-start h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] min-h-0 overflow-hidden print:hidden">
           {sidebar}
         </div>
 
         {sidebarOpen && (
-          <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="fixed inset-0 z-50 lg:hidden print:hidden">
             <div
               className="absolute inset-0 bg-black/40"
               onClick={() => setSidebarOpen(false)}
@@ -309,8 +336,8 @@ export function WikiPage() {
           </div>
         )}
 
-        <div className="flex-1 min-w-0">
-          <div className="rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8">
+        <div className="flex-1 min-w-0 print:w-full">
+          <div className="rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8 print:border-none print:shadow-none print:p-0 print:m-0 print:rounded-none">
             {!active ? (
               <div className="text-center py-16 text-stone-500">
                 <BookOpen className="mx-auto mb-3 text-brand-orange" size={32} />

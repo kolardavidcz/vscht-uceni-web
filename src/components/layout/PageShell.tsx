@@ -29,12 +29,12 @@ export function PageShell({
   return (
     <div
       className={cn(
-        "min-h-screen flex flex-col",
+        "min-h-screen flex flex-col print:min-h-0 print:bg-white print:text-black",
         isDark ? "bg-brand-espresso text-slate-100" : "bg-stone-50 text-stone-900",
         className
       )}
     >
-      <header className={isDark ? "page-header-dark" : "page-header"}>
+      <header className={cn(isDark ? "page-header-dark" : "page-header", "print:hidden")}>
         <div
           className={cn(
             maxWidth,
@@ -78,7 +78,12 @@ export function PageShell({
           {actions && <div className="shrink-0 flex items-center gap-2">{actions}</div>}
         </div>
       </header>
-      <main className={cn(maxWidth, "w-full mx-auto px-4 py-6 sm:py-8 flex-1")}>
+      <main
+        className={cn(
+          maxWidth,
+          "w-full mx-auto px-4 py-6 sm:py-8 flex-1 print:p-0 print:m-0 print:max-w-none print:w-full"
+        )}
+      >
         {children}
       </main>
     </div>
