@@ -52,7 +52,7 @@ DŮKAZ DEKONSTRUKČNÍ INDUKCÍ PODLE POČTU VRCHOLŮ n = |V|
    - Vrátíme odebraný prvek v a dokážeme, že platnost tvrzení se přenese na původní G:
      [Zapsat algebraické / logické spojení G' a v pro G].
 
-Tím je důkaz indukcí dokončen. Q.E.D. (■)
+Tím je důkaz indukcí dokončen. Q.E.D.
 ================================================================================
 ```
 
@@ -78,7 +78,7 @@ DŮKAZ SPOREM
 
 4. ZÁVĚR:
    - "Náš předpoklad pro spor (A ∧ ¬B) byl tedy chybný."
-   - "Proto původní tvrzení A => B platí." Q.E.D. (■)
+   - "Proto původní tvrzení A => B platí." Q.E.D.
 ================================================================================
 ```
 
@@ -106,7 +106,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 4. UKONČENÍ (Po skončení cyklu):
    - Cyklus skončí na základě podmínky C.
    - Zkombinujeme invariant I platný po skončení cyklu s podmínkou C.
-   - Ukážeme, že algoritmus vrátil přesně požadovaný výsledek. Q.E.D. (■)
+   - Ukážeme, že algoritmus vrátil přesně požadovaný výsledek. Q.E.D.
 ================================================================================
 ```
 

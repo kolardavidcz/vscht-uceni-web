@@ -153,7 +153,7 @@ Nechť $S \subset V$ je libovolná neprázdná vlastní podmnožina vrcholů ($S
 6. **💥 SPOR ($\bot$):**
    Našli jsme kostru $T'$ s **přísně menší celkovou vahou** než měla kostra $T$. To je v přímém **SPORU** s předpokladem, že $T$ byla minimální kostra (MST)!
 7. **Závěr:**
-   Každá minimální kostra (MST) musí obsahovat nejlehčí hranu každého řezu. $\blacksquare$
+   Každá minimální kostra (MST) musí obsahovat nejlehčí hranu každého řezu.
 
 ---
 
@@ -195,7 +195,7 @@ Duálním protějškem k vlastnosti řezu je vlastnost cyklu, která nám řík�
 6. **💥 SPOR ($\bot$):**
    Našli jsme kostru $T''$ s **přísně menší celkovou vahou** než měla kostra $T$. To je SPOR s minimalitou $T$!
 7. **Závěr:**
-   Nejťažší hrana libovolného cyklu nemůže patřit do žádné minimální kostry (MST). $\blacksquare$
+   Nejťažší hrana libovolného cyklu nemůže patřit do žádné minimální kostry (MST).
 
 ---
 
@@ -242,7 +242,7 @@ Dokážeme větu:
 
 4. **Odstranění virtuální hrany $e_{virt}$:**
    Odebráním hrany $e_{virt} = (t, s)$ z cyklu $C^*$ se uzavřená smyčka rozpojí v bodě $t \to s$.
-   Získáme platný **otevřený (Semi-Eulerovský) tah**, který začíná v uzlu $s$, projde každou hranu původního grafu $G$ právě jednou a skončí v uzlu $t$. $\blacksquare$
+   Získáme platný **otevřený (Semi-Eulerovský) tah**, který začíná v uzlu $s$, projde každou hranu původního grafu $G$ právě jednou a skončí v uzlu $t$.
 </details>
 
 ---

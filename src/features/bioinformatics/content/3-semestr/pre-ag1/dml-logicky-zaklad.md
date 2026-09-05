@@ -256,7 +256,7 @@ Kdy student zkouškou projde (**GOOD / 1**) a kdy dostane **0**?
 </table>
 </div>
 
-Sloupce $\neg(A \land B)$ a $\neg A \lor \neg B$ mají ve všech řádcích **identickou pravdivostní hodnotu**. Ekvivalence je dokázána! $\blacksquare$
+Sloupce $\neg(A \land B)$ a $\neg A \lor \neg B$ mají ve všech řádcích **identickou pravdivostní hodnotu**. Ekvivalence je dokázána!
 
 ---
 
@@ -492,7 +492,7 @@ $$V = \forall x \in \mathcal{E} \; \exists y \in \mathcal{S} : (V(x, y) \implies
 
 $$\neg V = \exists x \in \mathcal{E} \; \forall y \in \mathcal{S} : (V(x, y) \land \neg A(x))$$
 
-4. **Slovní překlad:** *"Existuje enzym $x$ takový, že pro všechny substráty $y$ platí, že se na ně enzym $x$ váže a zároveň není aktivní."* $\blacksquare$
+4. **Slovní překlad:** *"Existuje enzym $x$ takový, že pro všechny substráty $y$ platí, že se na ně enzym $x$ váže a zároveň není aktivní."*
 </details>
 
 ---
@@ -522,7 +522,7 @@ Dokážeme tvrzení pro libovolnou konečnou síť (graf) $G = (V, E)$, kde $V$ 
 4. Protože v síti nejsou žádné smyčky, krajní uzel trasy $v_1$ nemůže mít žádného souseda mimo trasu $P$ (to by se trasa dala ještě prodloužit a $P$ by nebyla nejdelší), ani žádného souseda $v_j$ (pro $j \ge 3$) uvnitř trasy (to by vytvořilo uzavřenou smyčku).
 5. Jediným sousedem koncového uzlu $v_1$ proto může být pouze sousední uzel $v_2$ na trase. Z uzlu $v_1$ tedy vychází přesně 1 spojnice ($\deg(v_1) = 1 < 2$).
 6. Nalezli jsme uzel s $\deg(v) \le 1$, čímž jsme dokázali $\neg A$.
-7. Podle principu kontrapozice ($\neg B \implies \neg A$) tím bezpečně platí i původní tvrzení $A \implies B$. $\blacksquare$
+7. Podle principu kontrapozice ($\neg B \implies \neg A$) tím bezpečně platí i původní tvrzení $A \implies B$.
 
 ---
 
@@ -562,7 +562,7 @@ Tvrzení lze dokázat také **zcela přímo** ($A \implies B$) bez přechodu k n
    Posloupnost hran podél trasy z $v_i$ do $v_k$ spolu se zpětnou spojnicí $\{v_k, v_i\}$ tvoří uzavřený cyklus:
    $$(v_i, v_{i+1}, \dots, v_{k-1}, v_k, v_i)$$
    Stejná úvaha platí i pro vrchol $v_1$ nejvíce nalevo: jeho druhý soused musí mířit doprava zpět do řady.
-5. **Závěr:** V síti nutně existuje cyklus. Tvrzení je dokázáno přímo. $\blacksquare$
+5. **Závěr:** V síti nutně existuje cyklus. Tvrzení je dokázáno přímo.
 </details>
 
 ---

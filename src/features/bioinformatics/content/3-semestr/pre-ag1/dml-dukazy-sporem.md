@@ -64,7 +64,7 @@ FORMÁLNÍ ŠABLONA ZÁPISU DŮKAZU SPOREM:
    - "To je ale SPOR (⚡) s [definicí Z / předpokladem A / dokázanou větou]!"
 
 4. ZÁVĚR:
-   - "Proto náš předpoklad pro spor nemohl platit, a tedy původní tvrzení A => B platí. Q.E.D. (■)"
+   - "Proto náš předpoklad pro spor nemohl platit, a tedy původní tvrzení A => B platí. Q.E.D."
 ```
 
 ---

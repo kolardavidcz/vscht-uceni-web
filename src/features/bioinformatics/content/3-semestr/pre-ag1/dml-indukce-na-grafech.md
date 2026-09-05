@@ -5,7 +5,7 @@
 
 ---
 
-## 🁢 Dominová analogie (vážně, takhle to funguje)
+## 🎯 Dominová analogie (vážně, takhle to funguje)
 
 Znáš dominový efekt? Postavíš řadu kostek a první padne na druhou, druhá na třetí... Matematická indukce je přesně tohle:
 
@@ -79,32 +79,33 @@ Vezmeme tyto tři tříkoruny a nahradíme je <strong>dvěma pětikorunami</stro
 </div>
 </div>
 </li>
-<li><strong>Závěr:</strong> Ve všech případech jsme z libovolné platné výplaty $n$ Kč sestrojili výplatu $n + 1$ Kč. Podle principu slabé indukce tvrzení platí pro všechna celá čísla $n \ge 8$. $\blacksquare$</li>
+<li><strong>Závěr:</strong> Ve všech případech jsme z libovolné platné výplaty $n$ Kč sestrojili výplatu $n + 1$ Kč. Podle principu slabé indukce tvrzení platí pro všechna celá čísla $n \ge 8$.</li>
 </ol>
 </div>
 <div>
 <h4 class="text-sm font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-2">
-<span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>
-Metoda 2: Důkaz Silnou Indukcí (Krok o 3 Kč zpět s 3 bázemi)
+<span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>
+Metoda 2: Důkaz Silnou Indukcí (Pravidlo kroku o 3 Kč zpět: n+1 z n-2)
 </h4>
 <p class="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mb-2">
-Tato metoda využívá fakt, že přidáním jedné 3 Kč mince získáme z částky $k$ částku $k + 3$. Abychom pokryli všechna čísla, potřebujeme <strong>3 po sobě jdoucí bázové případy</strong>:
+Zde si vystačíme bez jakékoliv výměny mincí v peněžence — stačí nám <strong>3 základní bázové případy</strong> a v indukčním kroku se vždy odvoláme na stav o <strong>3 Kč menší</strong>:
 </p>
-<ol class="text-xs sm:text-sm space-y-1.5 pl-5 list-decimal text-stone-800 dark:text-stone-200">
-<li><strong>Báze indukce (3 počáteční konfigurace):</strong>
-<ul class="list-disc pl-4 space-y-0.5 mt-1">
-<li>$V(8)$: $8 = 3 + 5$ Kč ✅</li>
-<li>$V(9)$: $9 = 3 + 3 + 3$ Kč ✅</li>
-<li>$V(10)$: $10 = 5 + 5$ Kč ✅</li>
+<ol class="text-xs sm:text-sm space-y-2 pl-5 list-decimal text-stone-800 dark:text-stone-200">
+<li><strong>Báze indukce (3 po sobě jdoucí částky):</strong>
+<ul class="list-disc pl-5 mt-1 space-y-1">
+<li>Pro $n = 8$: $8 = 3 + 5$ Kč. Platí $V(8)$ ✅.</li>
+<li>Pro $n = 9$: $9 = 3 + 3 + 3$ Kč. Platí $V(9)$ ✅.</li>
+<li>Pro $n = 10$: $10 = 5 + 5$ Kč. Platí $V(10)$ ✅.</li>
 </ul>
 </li>
-<li><strong>Indukční krok:</strong> Nechť $n \ge 10$. Předpokládejme, že tvrzení platí pro všechna $k \in \{8, 9, \dots, n\}$ (Silný indukční předpoklad). Potřebujeme ukázat, že platí i pro $n + 1$.</li>
-<li><strong>Odvození:</strong>
-Jelikož $n \ge 10$, platí $(n + 1) - 3 = n - 2 \ge 8$.
-Podle indukčního předpokladu tedy dokážeme bez vracení vyplatit částku <strong>$(n - 2)$ Kč</strong>.
+<li><strong>Indukční krok (od $n + 1 \ge 11$):</strong>
+Předpokládejme, že <strong>všechny částky</strong> od $8$ do $n$ Kč již umíme vyplatit (Silný IP).<br>
+Chceme vyplatit částku $n + 1$ Kč (kde $n + 1 \ge 11$).<br>
+Vezmeme částku o 3 Kč menší, tedy $(n + 1) - 3 = n - 2$ Kč.<br>
+Protože $n + 1 \ge 11$, platí $n - 2 \ge 8$. Dle silného indukčního předpokladu tedy částku $n - 2$ Kč už umíme vyplatit.<br>
 K této sestavě mincí nyní stačí <strong>přidat jednu tříkorunu (+3 Kč)</strong>:
 $$(n - 2) + 3 = n + 1 \text{ Kč}$$
-Tím jsme přesně vyplatili $n + 1$ Kč, což jsme potřebovali dokázat! $\blacksquare$
+Tím jsme přesně vyplatili $n + 1$ Kč, což jsme potřebovali dokázat!
 </li>
 </ol>
 </div>
@@ -123,7 +124,10 @@ V klasické algebře dokazujeme tvrzení $P(n)$ závislá na přirozeném čísl
    - Předpoklad $P(k)$ nazýváme **Indukční předpoklad (IP)**.
 
 V teoretické informatice a teorii grafů častěji využíváme **Silnou Matematickou Indukci**:
-> **Princip Silné Indukce:** Předpokládáme, že tvrzení platí pro **všechny menší objekty** velikosti $i \in \{n_0, n_0+1, \dots, k\}$, a dokážeme platnost pro objekt velikosti $k+1$:
+
+> 💡 **Poznámka k zápisu (neučte se nazpaměť!):**  
+> Tuto formuli se v žádném případě **neučte zpaměti** — u zkoušky ji po vás nikdo nebude chtít odříkat. Je to jen test, jestli dokážete číst formální matematické symboly, co jste dříve znali jen napůl (např. $\bigwedge_{i=n_0}^k$ je jen velká konjunkce AND pro všechny mezistavy od $n_0$ do $k$, stejně jako $\sum$ je velký součet):
+>
 > $$\left( P(n_0) \land \forall k \ge n_0 : \left( \bigwedge_{i=n_0}^k P(i) \implies P(k+1) \right) \right) \implies \forall n \ge n_0 : P(n)$$
 
 Při aplikaci na grafy nepředstavuje induktivní proměnná $n$ pouhé číslo, ale **velikost grafové struktury**:
@@ -295,7 +299,7 @@ $$E(n) = E(n-1) + 3$$
 
 #### 4. Návrat prvku a indukční závěr:
 Vrátíme-li uzel $v$ zpět do grafu $G'$, každá z jeho 3 hran se připojí k vrcholům $u_1, u_2, u_3$, které v $G'$ již existují. K existujícím $E(n-1)$ hranám tedy přibudou přesně 3 hrany.  
-Tím je dokázáno, že přidáním/odebráním uzlu stupně 3 se počet hran mění přesně o 3. $\blacksquare$
+Tím je dokázáno, že přidáním/odebráním uzlu stupně 3 se počet hran mění přesně o 3.
 
 ---
 
@@ -369,7 +373,7 @@ V kurzu AG1 dostanete těchto 5 vlastností jako hotové věty. Pro libovolný k
 <div class="p-3 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800 mt-2">
 <strong class="text-stone-900 dark:text-stone-100">🍃 Důkaz existence listu (Tree Leaf Lemma):</strong>
 <p class="mt-1 mb-0 text-xs leading-relaxed">
-Zvolme ve stromu nejdelší možnou cestu $P = (v_0, v_1, \dots, v_k)$. Koncový vrchol $v_k$ nemůže mít souseda mimo cestu (jinak by cesta nebyla nejdelší) ani jiného souseda na cestě (jinak by vznikl cyklus). Jediným sousedem $v_k$ je tedy předchozí vrchol $v_{k-1}$, což znamená $\deg(v_k) = 1$ — uzel $v_k$ je list! Ze stejného důvodu je listem i $v_0$. Strom má tedy alespoň 2 listy. $\blacksquare$
+Zvolme ve stromu nejdelší možnou cestu $P = (v_0, v_1, \dots, v_k)$. Koncový vrchol $v_k$ nemůže mít souseda mimo cestu (jinak by cesta nebyla nejdelší) ani jiného souseda na cestě (jinak by vznikl cyklus). Jediným sousedem $v_k$ je tedy předchozí vrchol $v_{k-1}$, což znamená $\deg(v_k) = 1$ — uzel $v_k$ je list! Ze stejného důvodu je listem i $v_0$. Strom má tedy alespoň 2 listy.
 </p>
 </div>
 </div>
@@ -408,13 +412,13 @@ Díky tomu lze celou metabolickou dráhu **seřadit v čase zleva doprava** — 
 <div class="p-3 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
 <strong class="text-stone-900 dark:text-stone-100">1. Důkaz existence zdroje přes nejdelší orientovanou cestu:</strong>
 <p class="mt-1 mb-0 text-xs leading-relaxed">
-Zvolme v DAGu $G$ nejdelší orientovanou cestu $P = (v_0, v_1, \dots, v_k)$. Počáteční uzel $v_0$ nemůže mít předchůdce mimo cestu (spor s maximalitou délky) ani na cestě (vznikl by orientovaný cyklus, spor s DAGem). Proto do $v_0$ nevstupuje žádná hrana ($\text{deg}^-(v_0) = 0$) a uzel $v_0$ je zdrojem. $\blacksquare$
+Zvolme v DAGu $G$ nejdelší orientovanou cestu $P = (v_0, v_1, \dots, v_k)$. Počáteční uzel $v_0$ nemůže mít předchůdce mimo cestu (spor s maximalitou délky) ani na cestě (vznikl by orientovaný cyklus, spor s DAGem). Proto do $v_0$ nevstupuje žádná hrana ($\text{deg}^-(v_0) = 0$) a uzel $v_0$ je zdrojem.
 </p>
 </div>
 <div class="p-3 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
 <strong class="text-stone-900 dark:text-stone-100">2. Důkaz existence Topologického uspořádání dekonstrukční indukcí:</strong>
 <p class="mt-1 mb-0 text-xs leading-relaxed">
-Vezmeme libovolný DAG $G$ o $n+1$ vrcholech. Najdeme zdroj $u$ ($\text{deg}^-(u) = 0$), odebereme ho a získáme menší DAG $G'$ o $n$ vrcholech. Dle indukčního předpokladu (IP) lze $G'$ seřadit do posloupnosti $(v_1', \dots, v_n')$. Zdroj $u$ předřadíme na 1. místo: $(u, v_1', \dots, v_n')$. Protože do $u$ nic nevstupovalo, všechny jeho hrany vedou doprava. Tím je topologické řazení hotové. $\blacksquare$
+Vezmeme libovolný DAG $G$ o $n+1$ vrcholech. Najdeme zdroj $u$ ($\text{deg}^-(u) = 0$), odebereme ho a získáme menší DAG $G'$ o $n$ vrcholech. Dle indukčního předpokladu (IP) lze $G'$ seřadit do posloupnosti $(v_1', \dots, v_n')$. Zdroj $u$ předřadíme na 1. místo: $(u, v_1', \dots, v_n')$. Protože do $u$ nic nevstupovalo, všechny jeho hrany vedou doprava. Tím je topologické řazení hotové.
 </p>
 </div>
 </div>
@@ -454,17 +458,4 @@ Z tohoto modulu vám pro letní přípravu bohatě stačí:
 | Velikost báze podle kroku odebírání (krok o 3 ➔ 3 báze; krok o 6 ➔ 6 bází) | ✅ Zvládáte |
 | Pravidlo růstu hran při dekonstrukci: $E(n) = E(n-1) + \deg(v)$ | ✅ Zvládáte |
 | Proč má strom $m = n - 1$ hran (odebírání listů stupně 1) | ✅ Zvládáte |
-
-### Co přijde v semestru v AG1 (nemusíte se učit nazpaměť, dostanete jako hotové věty):
-- **5 ekvivalentních definic stromu** — V AG1 je dostanete jako hotové věty, budete je pouze aplikovat v algoritmech.
-- **Topologické uspořádání DAGu** — Naučíte se algoritmus pro jeho nalezení (pomocí DFS za $O(n + m)$).
-- **Existence minimální kostry** — Plyne přímo z hladových algoritmů (Kruskal, Jarník/Prim).
-
-> [!TIP]
-> **Základ pro AG1 máte v kapse!** Pokud rozumíte dekonstrukčnímu toku shora a tomu, jak se při odebrání vrcholu mění počet hran o $\deg(v)$, zkouškové pasti z indukce se vám vyhnou obloukem.
-
----
-
-> ➡️ **Pokračujte na další modul:** [6 · Modul 3: Důkazy Sporem & Extremální Princip](./dml-dukazy-sporem)
-
 
