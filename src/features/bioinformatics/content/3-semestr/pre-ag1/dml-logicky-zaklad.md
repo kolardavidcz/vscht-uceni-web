@@ -13,8 +13,7 @@ Odpověď závisí přesně na tom, **jak přečteme implikaci** „pokud A, pak
 
 Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AG1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů.
 
-> [!TIP]
-> **Příslib tohoto modulu:** Po přečtení budeš umět přečíst jakékoliv matematické tvrzení o grafu, bezchybně ho znegovat a zvolit správnou strategii důkazu. Žádná „vyšší matematika" se nevyžaduje — jen přesné myšlení.
+> 💡 **Příslib tohoto modulu:** Po přečtení budeš umět přesně přečíst jakékoliv matematické tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Žádná předchozí znalost teorie grafů se nevyžaduje — všechny potřebné pojmy (síť, uzly, spojnice, stromy) si srozumitelně zavedeme přímo na místě!
 
 ---
 
@@ -22,12 +21,13 @@ Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zk
 
 V běžném jazyce bývají biologická a chemická tvrzení často mnohoznačná. V počítačové vědě a teoretické informatice však musíme formulovat myšlenky tak, aby neexistovala žádná pochybnost o jejich pravdivosti.
 
-Matematická logika pracuej s **výroky**:
+Matematická logika pracuje s **výroky**:
 > **Definice Výroku:** Výrok je oznamovací věta, o níž má smysl prohlásit, zda je **pravdivá (značíme 1, True, T)** nebo **nepravdivá (značíme 0, False, F)**.
 
-### Příklady v Bioinformatice:
+### Příklady v Bioinformatice & Matematice:
 - *"Molekula vody obsahuje 2 atomy vodíku."* $\implies$ **Výrok (Pravdivý = 1)**.
-- *"Graf $K_5$ má 10 hran."* $\implies$ **Výrok (Pravdivý = 1)**.
+- *"Síť s 5 uzly, kde je každý uzel propojen s každým (úplný graf $K_5$), má přesně 10 spojnic."* $\implies$ **Výrok (Pravdivý = 1)**.
+- *"Číslo 17 je prvočíslo."* $\implies$ **Výrok (Pravdivý = 1)**.
 - *"Tento kód v C++ je pěkný."* $\implies$ **NENÍ výrok** (subjektivní hodnocení, nelze jednoznačně určit 0 nebo 1).
 - *"Kolik prvků má množina $V$?"* $\implies$ **NENÍ výrok** (otázka).
 
@@ -147,7 +147,7 @@ Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B
 <tr>
 <td class="py-1.5 px-2.5 font-mono font-medium">$\sum_{k=d}^h a(k)$</td>
 <td class="py-1.5 px-2.5 font-medium"><strong>suma (součet) výrazů</strong> $a(d) + \dots + a(h)$</td>
-<td class="py-1.5 px-2.5">Součet konečné řady výrazů se sčítacím indexem $k$ od $d$ do $h$ (např. součet stupňů vrcholů $\sum_{v \in V} \deg(v) = 2|E|$)</td>
+<td class="py-1.5 px-2.5">Součet konečné řady výrazů se sčítacím indexem $k$ od $d$ do $h$ (např. součet čísel $\sum_{i=1}^n i = \frac{n(n+1)}{2}$, nebo součet počtu spojnic uzlů v síti $\sum_{v \in V} \deg(v) = 2|E|$)</td>
 </tr>
 <tr>
 <td class="py-1.5 px-2.5 font-mono font-medium">$\prod_{k=d}^h a(k)$</td>
@@ -361,14 +361,71 @@ Sloupce $\neg(A \land B)$ a $\neg A \lor \neg B$ mají ve všech řádcích **id
 
 ---
 
-#### 🧬 Grafové Aplikace De Morganových Zákonů v Bioinformatice:
+#### 💻 De Morganovy Zákony v Jazyce C (Podmínky `if`)
 
-1. **Definice Stromu (Souvislý $\land$ Acyklický):**
-   - Věta: *"Graf $G$ je strom, pokud je souvislý ($A$) a zároveň acyklický ($B$)."*
-   - Negace De Morganovým zákonem: *"Graf $G$ NENÍ strom ($\neg (A \land B)$), právě když $G$ není souvislý ($\neg A$), nebo $G$ obsahuje cyklus ($\neg B$)."*
-2. **Kritérium Bipartitnosti Grafu:**
-   - Nechť výrok $A$ značí *"Graf lze 2-obarvit"* a $B$ značí *"Graf neobsahuje liché cykly"*.
-   - Porušení bipartitnosti znamenající $\neg (A \land B)$ se podle De Morgana rozpadne na vyhledání uzlu porušujícího 2-obarvení nebo existenci lichého cyklu.
+V programování (BI-PA1) používáte De Morganovy zákony neustále při zjednodušování a bezchybném negování složených podmínek v příkazech `if`. V jazyce C odpovídají logickým spojkám tyto operátory:
+- Logické „A ZÁROVEŇ“ ($\land$) $\longleftrightarrow$ `&&`
+- Logické „NEBO“ ($\lor$) $\longleftrightarrow$ `||`
+- Logická negace ($\neg$) $\longleftrightarrow$ `!`
+
+##### 1. Negace konjunkce: `!(A && B)` $\equiv$ `(!A || !B)`
+Představme si ošetření chybového stavu: funkce smí pracovat pouze tehdy, když ukazatel na data není `NULL` **a zároveň** je velikost pole kladná ($A \land B$). Chceme napsat podmínku pro **chybový stav** $\neg(A \land B)$:
+
+```c
+// Neohrabaný zápis s vnější negací celé závorky:
+if (!(ptr != NULL && size > 0)) {
+    // Podle De Morgana !(A && B) == (!A || !B)
+    // Ekvivalentní a v C mnohem čitelnější zápis:
+    // if (ptr == NULL || size <= 0)
+    return -1; // Neplatný vstup
+}
+```
+
+##### 2. Negace disjunkce: `!(A || B)` $\equiv$ `(!A && !B)`
+Představme si kontrolu uživatelského vstupu: program má pokračovat, pokud uživatel zadal znak `'a'` **nebo** znak `'b'` ($A \lor B$). Chceme zachytit jakýkoliv **nepovolený znak** $\neg(A \lor B)$:
+
+```c
+// Zápis s vnější negací:
+if (!(choice == 'a' || choice == 'b')) {
+    // Podle De Morgana !(A || B) == (!A && !B)
+    // Ekvivalentní zápis bez zbytečných závorek:
+    // if (choice != 'a' && choice != 'b')
+    printf("Chyba: Zadejte pouze 'a' nebo 'b'!\n");
+}
+```
+
+> 💡 **Programátorská past v PA1:**  
+> Při roznásobení negace `!` dovnitř závorky musíte nejen zaměnit spojky (`&&` $\longleftrightarrow$ `||`), ale **otočit i relační operátory** samotných proměnných:  
+> `!(x >= 0 && y != 5)` $\quad \equiv \quad$ `(x < 0 || y == 5)`.
+
+---
+
+#### 🌲 Příklad z Bioinformatiky & Sítí: Kdy struktura NENÍ strom?
+
+*(Nemusíte znát teorii grafů — strom intuitivně znáte z biologie, např. fylogenetický evoluční strom nebo větvení cév).*
+
+V informatice i bioinformatice je **strom** definován jako propojená síť, která splňuje dvě vlastnosti současně:
+1. **Je souvislá ($A$):** Všechny prvky jsou propojeny do jednoho celku (neexistují žádné oddělené „ostrovy").
+2. **Je acyklická ($B$):** Síť neobsahuje žádné uzavřené smyčky / okruhy (z žádného místa se nelze po spojnicích vrátit oklikou zpět do výchozího bodu).
+
+Formální definice stromu:
+$$G \text{ je strom} \quad \iff \quad A \land B$$
+*(kde výrok $A$ znamená „síť je souvislá" a výrok $B$ znamená „síť je bez uzavřených smyček / acyklická")*
+
+Co to znamená podle De Morganova zákona, když chceme otestovat, že zkoumaná síť **NENÍ strom** ($\neg(A \land B)$)?
+$$\neg (A \land B) \quad \equiv \quad \neg A \lor \neg B$$
+
+> 💡 **Klíčový didaktický aha-moment:**  
+> K vyvrácení toho, že síť je strom, **nemusíte** hledat obě vady současně!  
+> Podle De Morgana vám **stačí nalézt alespoň jednu chybu**:
+> - Buď ukážete, že se síť rozpadá na oddělené nepropojené části ($\neg A$, není souvislá),
+> - **NEBO** v síti odhalíte alespoň jednu uzavřenou smyčku ($\neg B$, obsahuje cyklus).  
+> Jakmile nastane alespoň jedna z těchto dvou situací, objekt stromem být nemůže!
+
+#### 🧬 Příklad s Párováním Molekul (Bipartitní Síť)
+Představme si biochemickou síť dvou skupin molekul — např. **enzymy** a **substráty**. Vazby vedou výhradně mezi enzymem a substrátem (nikdy enzym–enzym ani substrát–substrát).
+- Takové síti se říká **bipartitní** (dvoustranná, $A$) a platí pro ni věta, že **neobsahuje žádné uzavřené smyčky s lichým počtem spojnic** ($B$).
+- Porušení bipartitnosti $\neg(A \land B)$ se podle De Morgana rozpadne na dvě nezávislé možnosti: buď najdeme vazbu spojující molekuly stejné skupiny ($\neg A$), **nebo** odhalíme lichou smyčku ($\neg B$).
 
 ---
 
@@ -394,28 +451,28 @@ Uvažujme implikaci $A \Rightarrow B$:
 - **$A$ je POSTAČUJÍCÍ podmínka pro $B$:** Platnost $A$ nám **zcela stačí** k tomu, abychom zaručili platnost $B$. (Jakmile nastane A, automaticky platí B).
 - **$B$ je NUTNÁ podmínka pro $A$:** Bez platnosti $B$ nemůže $A$ vůbec nastat. Pokud neplatí $B$, je vyloučeno, aby platilo $A$ ($\neg B \implies \neg A$).
 
-### 🧬 Biologicko-Chemické a Grafové Srovnání:
+### 🧬 Biologicko-Chemické a Síťové Srovnání:
 
 ```
-┌──────────────────────────────────────┬──────────────────────────────────────┬──────────────────────────────────────┐
-│ Vztah A ⇒ B                          │ Postačující podmínka (A)             │ Nutná podmínka (B)                   │
-├──────────────────────────────────────┼──────────────────────────────────────┼──────────────────────────────────────┤
-│ Glukóza ⇒ Obsahuje Uhlík             │ Být glukózou STAČÍ k obsahu uhlíku.  │ Obsahovat uhlík je NUTNÉ pro glukózu.│
-│ Enzymatická kaskáda ⇒ Přítomnost ATP │ Aktivace kaskády STAČÍ pro spotřebu. │ ATP je NUTNÉ pro průběh kaskády.     │
-│ Graf je Strom ⇒ Graf je Souvislý     │ Být stromem STAČÍ pro souvislost.    │ Souvislost je NUTNÁ pro strom.       │
-│ deg(v) je liché ⇒ Graf má hrany      │ Liché deg(v) STAČÍ pro existenci hrany.│ Existuje hrana je NUTNÉ pro deg > 0. │
-└──────────────────────────────────────┴──────────────────────────────────────┴──────────────────────────────────────┘
+┌──────────────────────────────────────────────┬──────────────────────────────────────┬──────────────────────────────────────┐
+│ Vztah A ⇒ B                                  │ Postačující podmínka (A)             │ Nutná podmínka (B)                   │
+├──────────────────────────────────────────────┼──────────────────────────────────────┼──────────────────────────────────────┤
+│ Glukóza ⇒ Obsahuje Uhlík                     │ Být glukózou STAČÍ k obsahu uhlíku.  │ Obsahovat uhlík je NUTNÉ pro glukózu.│
+│ Enzymatická kaskáda ⇒ Přítomnost ATP         │ Aktivace kaskády STAČÍ pro spotřebu. │ ATP je NUTNÉ pro průběh kaskády.     │
+│ Strom ⇒ Síť je propojená (souvislá)          │ Být stromem STAČÍ pro souvislost.    │ Souvislost je NUTNÁ pro strom.       │
+│ Uzel má sousedy (deg > 0) ⇒ Síť má spojnice  │ Mít sousedy STAČÍ pro existenci hran. │ Existence hran je NUTNÁ pro sousedy. │
+└──────────────────────────────────────────────┴──────────────────────────────────────┴──────────────────────────────────────┘
 ```
 
-> [!NOTE]
-> Pokud platí **ekvivalence $A \Leftrightarrow B$**, říkáme, že $A$ je **nutnou A ZÁROVEŇ postačující podmínkou** pro $B$ (a naopak).
-> *Příklad z AG1:* Graf je bipartitní **právě tehdy, když** neobsahuje žádné liché cykly.
+> 💡 **Ekvivalence ($A \Leftrightarrow B$):**  
+> Pokud platí **ekvivalence $A \Leftrightarrow B$**, říkáme, že $A$ je **nutnou A ZÁROVEŇ postačující podmínkou** pro $B$ (a naopak).  
+> *Příklad:* Síť lze rozdělit do dvou oddělených skupin bez vnitřních vazeb (tzv. bipartitní síť, např. enzymy vs. substráty) **právě tehdy, když** v ní neexistuje žádná lichá uzavřená smyčka.
 
 ---
 
 ## 4. Kvantifikátory ($\forall, \exists, \exists!$) a Jejich Negace `[Relevance: 95%]` `[MEGA EPIC]`
 
-V teorii grafů popisujeme vlastnosti celých množin prvků pomocí kvantifikátorů:
+V matematice, bioinformatice i algoritmických sítích popisujeme vlastnosti celých množin prvků pomocí kvantifikátorů:
 
 - **$\forall$ (Všeobecný kvantifikátor):** *"Pro všechny..."*, *"Pro každý..."*.
 - **$\exists$ (Existenční kvantifikátor):** *"Existuje alespoň jeden..."*, *"Lze najít takový..."*.
@@ -438,23 +495,25 @@ $$\neg (\exists x \in M : P(x)) \quad \equiv \quad \forall x \in M : \neg P(x)$$
 
 V reálných testech z AG1 potkáte výroky s více vrstvami kvantifikátorů. Pojďme si je nacvičit:
 
-#### Případ 1: Souvislost Grafu
-- **Původní tvrzení $S$ (Graf je souvislý):**
+#### Případ 1: Souvislost Sítě (Grafu)
+Představme si síť uzlů $V$ (např. biochemické metabolity propojené enzymovými reakcemi nebo servery na internetu):
+- **Původní tvrzení $S$ (Síť je souvislá — ze všeho se lze dostat všude):**
   $$\forall u, v \in V : (u \neq v \implies \exists \text{ cesta } P \text{ z } u \text{ do } v)$$
-- **Formální Negace $\neg S$ (Graf je nesouvislý):**
+- **Formální Negace $\neg S$ (Síť je nesouvislá — rozpadlá na oddělené části):**
   Aplikujeme pravidlo negace zvenčí dovnitř:
   1. Zaměníme $\forall u, v$ za $\exists u, v$.
   2. Znegujeme implikaci $\neg (A \implies B) \equiv A \land \neg B$.
   3. Zaměníme $\exists P$ za $\forall P$ a znegujeme existenci cesty.
   $$\exists u, v \in V : (u \neq v \land \forall \text{ cestu } P : P \text{ NESPOJUJE } u \text{ a } v)$$
-- **Slovní překlad:** *"Existuje dvojice různých vrcholů $u, v$ v grafu taková, že mezi nimi neexistuje žádná cesta."*
+- **Slovní překlad:** *"Existuje dvojice různých uzlů $u, v$ v síti taková, že mezi nimi neexistuje žádná spojující cesta (síť je rozpojená)."*
 
 #### Případ 2: Slepá Ulička v Reakční Síti (Terminal Metabolite)
+Nechť $V$ je množina molekul a $(v, w) \in E$ značí existenci chemické reakce přeměňující molekulu $v$ na molekulu $w$:
 - **Původní tvrzení $R$ (Z každého metabolitu vedou reakce dál):**
   $$\forall v \in V \; \exists w \in V : (v, w) \in E$$
-- **Formální Negace $\neg R$ (Existuje slepá ulička):**
+- **Formální Negace $\neg R$ (Existuje slepá ulička syntézy):**
   $$\exists v \in V \; \forall w \in V : (v, w) \notin E$$
-- **Slovní překlad:** *"Existuje metabolit $v$ takový, že z něj nevedou reakce do žádného metabolitu $w$."*
+- **Slovní překlad:** *"Existuje metabolit $v$ takový, že z něj nevede biochemická reakce do žádné jiné molekuly $w$."*
 
 ---
 
@@ -511,28 +570,32 @@ $$V = \forall x \in \text{Enzymy} \; \exists y \in \text{Substráty} : (\text{V�
 
 ---
 
-### Úloha 1.2: Důkaz Kontrapozicí
-Dokážeme kontrapozicí tvrzení pro konečný graf $G = (V, E)$:
-*"Pokud pro každý vrchol $v \in V$ platí $\deg(v) \ge 2$, pak graf $G$ obsahuje alespoň jeden cyklus."*
+### Úloha 1.2: Důkaz Kontrapozicí v Sítích
+Dokážeme kontrapozicí tvrzení pro libovolnou konečnou síť (graf) $G = (V, E)$, kde $V$ jsou uzly a $E$ jsou spojnice mezi nimi (přičemž $\deg(v)$ značí stupeň uzlu = počet spojnic vycházejících z uzlu $v$):  
+*"Pokud z každého uzlu $v \in V$ vycházejí alespoň 2 spojnice ($\deg(v) \ge 2$), pak síť $G$ nutně obsahuje alespoň jednu uzavřenou smyčku (cyklus)."*
+
+> 💡 **Intuitivní představa před formálním důkazem:**  
+> Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře ($\deg(v) \ge 2$), nikdy nemůžete uvíznout ve slepé uličce. Když budete bludištěm procházet stále kupředu a nikdy se nevrátíte stejnými dveřmi zpět, v konečném počtu místností musíte dříve či později narazit do místnosti, kde už jste jednou byli — a tím jste uzavřeli kruh (cyklus)!
 
 <details>
 <summary>🔍 Zobrazit vzorový důkaz kontrapozicí</summary>
 
 ### ✍️ Řešení Kontrapozicí:
-- **Tvrzení $A \implies B$:**
-  - $A$: $\forall v \in V: \deg(v) \ge 2$
-  - $B$: Graf $G$ obsahuje cyklus.
+- **Původní tvrzení $A \implies B$:**
+  - $A$: Každý uzel má alespoň 2 sousedy ($\forall v \in V: \deg(v) \ge 2$).
+  - $B$: Síť obsahuje uzavřenou smyčku (cyklus).
 - **Obměněné tvrzení $\neg B \implies \neg A$:**
-  - $\neg B$: Graf $G$ **neobsahuje žádný cyklus** (G je les / soubor stromů).
-  - $\neg A$: Existuje vrchol $v \in V$ takový, že $\deg(v) < 2$ (tj. $\deg(v) \le 1$).
+  - $\neg B$: Síť **neobsahuje žádnou uzavřenou smyčku** (je to strom nebo soubor stromů).
+  - $\neg A$: Existuje uzel $v \in V$, ze kterého vychází méně než 2 spojnice ($\deg(v) < 2$, tj. $\deg(v) \le 1$).
 
 #### ✍️ Důkaz obměněného tvrzení $\neg B \implies \neg A$:
-1. Předpokládejme, že graf $G$ neobsahuje žádné cykly.
-2. Pokud $G$ nemá hrany ($m=0$), pak všechny vrcholy mají $\deg(v) = 0 < 2$, tedy $\neg A$ platí.
-3. Pokud $G$ obsahuje alespoň jednu hranu, pak každá komponenta $G$ je strom.
-4. Pokud $G$ obsahuje alespoň jednu hranu, zvolme nejdelší jednoduchou cestu $P = (v_1, v_2, \dots, v_k)$ v $G$. Protože $G$ neobsahuje cykly, krajní vrchol $v_1$ nemůže mít souseda mimo cestu $P$ (to by cestu prodloužilo) ani souseda $v_j$ s $j \ge 3$ uvnitř $P$ (to by vytvořilo cyklus). Jediným sousedem $v_1$ proto může být $v_2$, tedy $\deg(v_1) = 1 < 2$.
-5. Nalezli jsme vrchol $v_1$ s $\deg(v_1) \le 1$, čímž platí $\neg A$.
-6. Kontrapozice je dokázána, a tedy původní tvrzení $A \implies B$ platí. $\blacksquare$
+1. Předpokládejme, že síť neobsahuje žádné uzavřené smyčky ($\neg B$).
+2. Pokud síť nemá vůbec žádné spojnice ($m=0$), pak všechny uzly mají $\deg(v) = 0 < 2$, tedy $\neg A$ triviálně platí.
+3. Pokud síť obsahuje alespoň jednu spojnici, zvolme v ní nejdelší možnou trasu bez opakování $P = (v_1, v_2, \dots, v_k)$.
+4. Protože v síti nejsou žádné smyčky, krajní uzel trasy $v_1$ nemůže mít žádného souseda mimo trasu $P$ (to by se trasa dala ještě prodloužit a $P$ by nebyla nejdelší), ani žádného souseda $v_j$ (pro $j \ge 3$) uvnitř trasy (to by vytvořilo uzavřenou smyčku).
+5. Jediným sousedem koncového uzlu $v_1$ proto může být pouze sousední uzel $v_2$ na trase. Z uzlu $v_1$ tedy vychází přesně 1 spojnice ($\deg(v_1) = 1 < 2$).
+6. Nalezli jsme uzel s $\deg(v) \le 1$, čímž jsme dokázali $\neg A$.
+7. Podle principu kontrapozice ($\neg B \implies \neg A$) tím bezpečně platí i původní tvrzení $A \implies B$. $\blacksquare$
 </details>
 
 ---
