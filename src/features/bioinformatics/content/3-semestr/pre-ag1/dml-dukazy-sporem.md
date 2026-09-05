@@ -69,232 +69,227 @@ FORMÁLNÍ ŠABLONA ZÁPISU DŮKAZU SPOREM:
 
 ---
 
-## 3. Bipartitní Grafy & Liché Cykly `[Relevance: 95%]` `[EPIC]`
+## 3. 🐦 Dirichletův princip v Teorii Grafů (Holubi, Škatulky & Sítě) `[Relevance: 95%]` `[EPIC]`
 
-Jedním z nejdůležitějších strukturních charakteristik v grafové teorii je **bipartitnost**.
+Tento princip (v angličtině *Pigeonhole Principle*) je jedním z nejmocnějších nástrojů diskrétní matematiky a teorie grafů. Jeho základní znění zní téměř banálně:
 
-> **Definice Bipartitního Grafu:** Graf $G = (V, E)$ je bipartitní, pokud lze jeho množinu vrcholů $V$ rozložit na dvě disjunktní podmnožiny $V_1, V_2$ ($V = V_1 \cup V_2$ a $V_1 \cap V_2 = \emptyset$) tak, že každá hrana $e = \{u, v\} \in E$ má jeden koncový vrchol ve $V_1$ a druhý koncový vrchol ve $V_2$. Žádná hrana nespojuje dva vrcholy uvnitř téže množiny.
+> **Dirichletův princip (Pigeonhole Principle):**  
+> Pokud máme $n$ předmětů (holubů) a chceme je umístit do $k$ přihrádek (škatułek), přičemž počet předmětů je větší než počet přihrádek ($n > k$), pak **alespoň v jedné přihrádce musí skončit dva nebo více předmětů**.
 
-### 📜 Věta (Charakterizace Bipartitních Grafů):
-Graf $G = (V, E)$ je bipartitní **právě tehdy, když** neobsahuje žádný lichý cyklus.
+```text
+  Škatulka 1     Škatulka 2     Škatulka 3     Škatulka 4
+ ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐
+ │   🕊️ 🕊️   │  │    🕊️     │  │    🕊️     │  │    🕊️     │
+ └───────────┘  └───────────┘  └───────────┘  └───────────┘
+       ▲
+       └────── 5 holubů do 4 škatulek ➔ Kolize je NEVYHNUTELNÁ!
+```
 
----
-
-### 3.1 Důkaz Snazšího Směru ($\implies$): Bipartitní $\implies$ Nemá Liché Cykly
-
-Dokážeme sporem implikaci: *"Pokud je $G$ bipartitní, pak neobsahuje žádný lichý cyklus."*
-
-#### ✍️ Formální Důkaz Sporem `[PAST U ZKOUŠKY]`:
-1. **Předpoklad pro spor:**
-   Předpokládejme pro spor, že graf $G = (V, E)$ **je bipartitní** (s rozložením $V = V_1 \cup V_2$) a **ZÁROVEŇ obsahuje lichý cyklus** $C = (v_1, v_2, \dots, v_k, v_1)$ délky $k$, kde $k$ je liché číslo ($k = 2r + 1$).
-2. **Krok 1 (Bipartitní obarvení vrcholů cyklu):**
-   Bez újmy na obecnosti zařaďme první vrchol cyklu $v_1$ do množiny $V_1$.
-   - Protože hrana $\{v_1, v_2\} \in E$ spojuje $V_1$ s $V_2$, musí vrchol $v_2 \in V_2$.
-   - Hrana $\{v_2, v_3\} \in E$ vynucuje $v_3 \in V_1$.
-   - Obecně pro každý vrchol $v_i$ cyklu platí:
-     $$v_i \in V_1 \iff i \text{ je liché (tj. } i = 1, 3, 5, \dots)$$
-     $$v_i \in V_2 \iff i \text{ je sudé (tj. } i = 2, 4, 6, \dots)$$
-3. **Krok 2 (Analýza posledního vrcholu cyklu):**
-   Délka cyklu $k$ je **liché číslo**. Proto podle našeho pravidla platí:
-   $$v_k \in V_1$$
-   Nicméně cyklus je uzavřen hranou $\{v_k, v_1\} \in E$.
-4. **💥 SPOR ($\bot$):**
-   Oba koncové vrcholy hrany $\{v_k, v_1\}$ (tedy jak $v_k$, tak $v_1$) patří do **stejné množiny $V_1$**!
-   To je v přímém **SPORU** s definicí bipartitního grafu, která striktně zakazuje hrany mezi vrcholy uvnitř téže množiny $V_1$.
-5. **Závěr:**
-   Předpoklad pro spor nemohl platit. Bipartitní graf nemůže obsahovat žádný lichý cyklus.
+### Proč to funguje? (Důkaz sporem za 10 sekund)
+Předpokládejme opak: v každé z $k$ přihrádek je **nanejvýš 1 holub**.  
+Pak celkový počet holubů je nejvýše $1 \times k = k$.  
+My však máme $n > k$ holubů, což je okamžitý **SPOR**! Opak tedy nemůže platit a alespoň v jedné přihrádce musí být alespoň dva holubi.
 
 ---
 
-### 3.2 Důkaz Těžšího Směru ($\impliedby$): Nemá Liché Cykly $\implies$ Bipartitní
+### 🔬 Příklad 1: Dva vrcholy se stejným stupněm v každém grafu
 
-Pro úplnost si ukažme i druhý směr implikace: *"Pokud $G$ neobsahuje žádný lichý cyklus, pak je $G$ bipartitní."*
+Tohle je absolutní klasika zkouškových testů na FIT i VŠCHT.
 
-#### ✍️ Konstruktivní Důkaz pomocí BFS Vrstev `[INSIGHT]`:
-1. Zvolme libovolný počáteční vrchol $s \in V$.
-2. Rozdělme vrcholy grafu do **hladin (vrstev) $L_i$** podle jejich vzdálenosti $\delta(s, v)$ od zdrojového vrcholu $s$:
-   $$L_i = \{v \in V \mid \delta(s, v) = i\}$$
-3. Definujme rozložení vrcholů $V = V_1 \cup V_2$:
-   - $V_1 = \bigcup_{i \text{ je sudé}} L_i$ (všechny hladiny se sudou vzdáleností 0, 2, 4...).
-   - $V_2 = \bigcup_{i \text{ je liché}} L_i$ (všechny hladiny s lichou vzdáleností 1, 3, 5...).
-4. Může existovat hrana $\{u, v\}$ spojující dva vrcholy uvnitř téže hladiny $L_i$?
-   - Pokud by existovala hrana $\{u, v\}$ s $u, v \in L_i$, pak cesty z $s$ do $u$ (délky $i$) a z $s$ do $v$ (délky $i$) společně s hranou $\{u, v\}$ by vytvořily cyklus celkové délky $i + i + 1 = 2i + 1$, což je **lichý cyklus**!
-   - Jelikož $G$ neobsahuje žádné liché cykly, hrany uvnitř téže hladiny nemohou existovat!
-5. Tedy každá hrana spojuje vrchol ze sudé hladiny ($V_1$) s vrcholem z liché hladiny ($V_2$). Graf $G$ je bipartitní.
+> **Věta:** V každém jednoduchém neorientovaném grafu $G = (V, E)$ s $n \ge 2$ vrcholy **vždy existují alespoň dva vrcholy se stejným stupněm**.
 
----
+#### 🐢 Pomalý rozbor krok za krokem:
 
-## 4. Extremální Princip & Rozbor Vzorových Případů `[Relevance: 95%]` `[MEGA EPIC]`
+1. **Kdo jsou „holubi"?**
+   - Holubi jsou **vrcholy grafu**. Máme jich celkem $n$ (označme je $v_1, v_2, \dots, v_n$).
 
-**Extremální princip (Extremal Principle)** je nejoblíbenější vyšetřovací technikou v grafových důkazech:
-> **Myšlenka Extremálního Principu:** Místo uvažování obecného objektu zvolíme v grafu **extremální prvek** – např. nejkratší cestu, nejdelší cestu $P_{max}$, vrchol s největším stupněm $\Delta(G)$ nebo nejlehčí hranu. Vlastnosti tohoto extremálního prvku pak vedou k okamžitému odhalení sporu!
+2. **Co jsou „škatulky"?**
+   - Škatulky jsou **možné hodnoty stupňů** vrcholů $\deg(v)$.
+   - Jaký stupeň může mít vrchol v jednoduchém grafu o $n$ vrcholech?
+     - Minimální stupeň je $0$ (vrchol je izolovaný, nemá žádnou hranu).
+     - Maximální stupeň je $n - 1$ (vrchol je spojen hranou se všemi ostatními $n - 1$ vrcholy).
+   - Teoreticky máme stupně z množiny:
+     $$\{0, 1, 2, \dots, n - 1\}$$
+   - To je celkem **$n$ různých možných stupňů**. 
+   - *Pozor:* Máme $n$ vrcholů a $n$ hodnot. Na první pohled by se zdálo, že Dirichlet selže, protože počet holubů se rovná počtu škatułek!
 
----
+3. **Klíčový grafový trik (Vzájemné vyloučení):**
+   - Může v jednom grafu existovat **izolovaný vrchol** (stupeň $0$) a **současně vrchol spojený se všemi** (stupeň $n - 1$)?
+   - **Předpokládejme pro spor, že ano:**
+     - Nechť vrchol $u$ má stupeň $n - 1$. To znamená, že $u$ je spojen hranou s **úplně všemi** ostatními vrcholy v grafu!
+     - Nechť vrchol $w$ má stupeň $0$. To znamená, že $w$ není spojen s **vůbec nikým**.
+     - Ale $u$ musí být spojen i s $w$! Hrana $\{u, w\}$ tedy nutně existuje.
+     - Tím pádem má vrchol $w$ stupeň alespoň $1$, což je **SPOR** s tím, že má stupeň $0$!
+   - **Důsledek:** Hodnoty $0$ a $n - 1$ se **vzájemně vylučují** a nemohou se v tomtéž grafu potkat!
 
-### 4.1 Vzorový Případ 1: Graf s $\delta(G) \ge 2$ Obsahuje Cyklus `[PAST U ZKOUŠKY]`
+4. **Aplikace Dirichletova principu:**
+   V libovolném grafu o $n$ vrcholech tedy nastává právě jedna ze dvou situací:
+   - **Situace A (Graf obsahuje izolovaný vrchol):** Pak v grafu není žádný vrchol stupně $n - 1$. Možné hodnoty stupňů jsou pouze z množiny $\{0, 1, 2, \dots, n - 2\}$. To je přesně **$n - 1$ škatułek**.
+   - **Situace B (Graf neobsahuje izolovaný vrchol):** Pak všechny vrcholy mají stupeň alespoň 1. Možné hodnoty stupňů jsou z množiny $\{1, 2, \dots, n - 1\}$. To je opět přesně **$n - 1$ škatułek**.
 
-> **Věta:** Každý konečný neorientovaný graf $G = (V, E)$, ve kterém má každý vrchol stupeň $\deg(v) \ge 2$, obsahuje alespoň jeden cyklus.
+V obou případech máme **$n$ vrcholů (holubů)** a nanejvýš **$n - 1$ možných stupňů (škatułek)**.  
+Protože $n > n - 1$, podle Dirichletova principu musí existovat alespoň jedna hodnota stupně, kterou sdílí **dva nebo více vrcholů**.
 
-#### ✍️ Důkaz přes Nejdelší Cestu $P_{max}$ a Extremální Princip:
+```text
+Vizuální znázornění pro graf se 4 vrcholy (n = 4, situace bez izolovaného uzlu):
 
-1. **Konstrukce extremálního objektu:**
-   Protože graf $G$ je konečný, existuje v něm **nejdelší jednoduchá cesta** $P = (v_0, v_1, v_2, \dots, v_k)$ o $k$ hranách.
-2. **Předpoklad pro spor:**
-   Předpokládejme pro spor, že $G$ **neobsahuje žádný cyklus** (graf $G$ je les).
-3. **Analýza sousedů koncového vrcholu $v_k$:**
-   Podle předpokladu věty platí $\deg(v_k) \ge 2$. Vrchol $v_k$ je spojen hranami s alespoň 2 různými vrcholy.
-   - **Případ A (Soused mimo cestu $P$):** Pokud by existoval uzel $w \notin P$ spojený s $v_k$ hranou $\{v_k, w\}$, mohli bychom cestu $P$ prodloužit o uzel $w$ na cestu $(v_0, \dots, v_k, w)$ délky $k+1$. To je v přímém **SPORU** s maximalitou cesty $P$!
-   - **Případ B (Sousedé leží na cestě $P$):** Proto všichni sousedé vrcholu $v_k$ musí ležet na cestě $P$. Jedním sousedem je předchůdce $v_{k-1}$. Jelikož $\deg(v_k) \ge 2$, musí mít $v_k$ druhého souseda $v_i$ na cestě $P$, kde $i \le k - 2$.
-4. **💥 SPOR ($\bot$):**
-   Úsek cesty od $v_i$ do $v_k$ spojený hranou $\{v_k, v_i\}$ tvoří uzavřený **cyklus** $(v_i, v_{i+1}, \dots, v_k, v_i)$!
-   To je v přímém **SPORU** s předpokladem sporu, že $G$ neobsahuje žádný cyklus!
-5. **Závěr:**
-   Náš předpoklad pro spor byl chybný. Graf $G$ s $\delta(G) \ge 2$ musí obsahovat alespoň jeden cyklus.
+Vrcholy (holubi):      (A)          (B)          (C)          (D)
+                        │            │            │            │
+                        ▼            ▼            ▼            ▼
+Možné stupně (boxy): ┌──────┐     ┌──────┐     ┌──────┐
+                     │ deg 1│     │ deg 2│     │ deg 3│
+                     ├──────┤     ├──────┤     ├──────┤
+                     │ (A)  │     │ (B)  │     │ (D)  │
+                     │      │     │ (C) ◄┼─────┼──────┴── KOLIZE! Vrcholy B a C
+                     └──────┘     └──────┘     └──────┘   mají shodně stupeň 2!
+```
 
----
-
-### 4.2 Vzorový Případ 2: Nejkratší Cesta v Grafu s Nezápornými Vahami
-
-> **Věta:** V grafu $G = (V, E, w)$ s nezápornými vahami hran ($w(e) \ge 0$) neobsahuje žádná nejkratší **jednoduchá cesta** mezi $s$ a $t$ žádný cyklus.
-
-#### ✍️ Důkaz Sporem:
-1. **Předpoklad pro spor:** Předpokládejme pro spor, že nejkratší cesta $P$ z $s$ do $t$ obsahuje cyklus $C$.
-2. **Rozklad cesty:** Cestu $P$ zapíšeme jako $s \xrightarrow{P_1} u \xrightarrow{C} u \xrightarrow{P_2} t$ s vahou $w(P) = w(P_1) + w(C) + w(P_2)$.
-3. **Vynechání cyklu:** Uvažujme zkrácenou cestu $P': s \xrightarrow{P_1} u \xrightarrow{P_2} t$ bez cyklu $C$.
-4. **Porovnání vah:** Jelikož $w(e) \ge 0$, váha cyklu $w(C) \ge 0$. Tedy $w(P') = w(P) - w(C) \le w(P)$.
-   - Pokud $w(C) > 0$, dostaneme $w(P') < w(P)$, což je **SPOR** s tím, že $P$ byla nejkratší cesta.
-   - Pokud $w(C) = 0$, nová cesta $P'$ má stejnou váhu, ale striktně **méně hran**, což je **SPOR** s minimálním počtem hran nejkratší cesty.
-5. Nejkratší cesta neobsahuje žádný cyklus.
+*Bioinformatická interpretace:* V protein-proteinové interakční síti (PPI síť) o $n$ proteinech vždy existují alespoň dva proteiny, které mají navlas stejný počet interakčních partnerů.
 
 ---
 
-## 🧪 Procvičovací Úlohy pro Bioinformatiky
+### 🧬 Příklad 2: Cesta délky $n$ v grafu o $n$ vrcholech nutně tvoří cyklus
 
-### Úloha 3.1: Graf s Nejvýše 2 Listy Je Cesta
-Dokážeme sporem, že každý souvislý graf $G = (V, E)$, ve kterém má každý vrchol stupeň $\deg(v) \le 2$, je buď jednoduchá cesta ($P_n$), nebo cyklus ($C_n$).
+Uvažujme orientovanou síť enzymatických reakcí nebo signální dráhu.
 
-<details>
-<summary>🔍 Zobrazit vzorový důkaz sporem</summary>
+> **Tvrzení:** Pokud v grafu $G = (V, E)$ o $n$ vrcholech existuje orientovaná posloupnost kroků (sled) procházející $n$ hranami, pak tato posloupnost nutně obsahuje alespoň jeden **cyklus (smyčku)**.
 
-### ✍️ Řešení Důkazem Sporem:
-1. **Předpoklad pro spor:** Nechť $G$ je souvislý graf s $\Delta(G) \le 2$. Předpokládejme pro spor, že $G$ není cesta ani cyklus.
-2. Zvolme v $G$ nejdelší jednoduchou cestu $P = (v_0, v_1, \dots, v_k)$.
-3. Jelikož $G$ je souvislý a není cestou, musí v $G$ existovat vrchol $u \notin P$ spojený hranou s něčím na cestě $P$.
-4. Jelikož $\deg(v) \le 2$ pro všechny vrcholy, vnitřní vrcholy cesty $v_1, \dots, v_{k-1}$ již mají stupeň 2 (spojují sousedy na cestě) a nemohou mít žádnou další hranu k $u$.
-5. Tedy vrchol $u$ by musel být spojen s koncovým vrcholem $v_0$ nebo $v_k$. To však umožňuje cestu $P$ prodloužit o uzel $u$, což je SPOR s maximalitou cesty $P$!
-6. Souvislý graf s $\Delta(G) \le 2$ je tedy jedině cesta nebo cyklus.
-</details>
+#### 🐢 Pomalý rozbor:
+1. Sled délky $n$ hran navštíví celkem **$n + 1$ vrcholů**:
+   $$(u_0 \xrightarrow{e_1} u_1 \xrightarrow{e_2} u_2 \to \dots \xrightarrow{e_n} u_n)$$
+2. Naši „holubi“ jsou navštívené pozice na trase: máme jich **$n + 1$**.
+3. Naše „škatulky“ jsou skutečné existující vrcholy grafu: máme jich jen **$n$** ($V = \{v_1, \dots, v_n\}$).
+4. Dle Dirichletova principu ($n+1 > n$) musel být alespoň jeden vrchol grafu **navštíven alespoň dvakrát**:
+   $$u_i = u_j \quad \text{pro nějaké } 0 \le i < j \le n$$
+5. Úsek trasy mezi těmito indexy tvoří uzavřený cyklus:
+   $$(u_i \to u_{i+1} \to \dots \to u_j = u_i)$$
 
----
+```text
+Trasa se 4 hranami v grafu s 4 uzly:
 
-### Úloha 3.2: Nerovinnost Bipartitního Grafu $K_{3,3}$
-Dokážeme sporem s využitím Eulerovy formule pro bipartitní rovinné grafy ($e \le 2v - 4$), že kompletní bipartitní graf $K_{3,3}$ (s 6 vrcholy a 9 hranami) **nelze nakreslit v rovině bez křížení hran**.
+Navštívené uzly:   u₀ ─────> u₁ ─────> u₂ ─────> u₃ ─────> u₄ (5 návštěv)
+                                       │                   ▲
+                                       │  u₂ a u₄ jsou     │
+                                       │  TÝŽ UZEL!        │
+                                       └───────────────────┘
+                                         Vzniká cyklus: u₂ ➔ u₃ ➔ u₂
+```
 
-<details>
-<summary>🔍 Zobrazit vzorový důkaz sporem</summary>
-
-### ✍️ Řešení Důkazem Sporem:
-1. **Předpoklad pro spor:** Předpokládejme pro spor, že $K_{3,3}$ **je rovinný graf**.
-2. **Krok 1 (Bipartitní ohraničení stěn):** V bipartitním grafu neexistují liché cykly (všechny cykly mají délku alespoň 4). Proto každá stěna v rovinném nakreslení musí být ohraničena alespoň 4 hranami.
-3. **Krok 2 (Formulace nerovnosti):**
-   Vztah mezi počtem hran $e$ a stěn $f$ dává: $2e \ge 4f \implies f \le \frac{e}{2}$.
-   Dosazením do Eulerovy formule $v - e + f = 2$ získáme:
-   $$v - e + \frac{e}{2} \ge 2 \implies e \le 2v - 4$$
-4. **Krok 3 (Dosazení hodnot pro $K_{3,3}$):**
-   Graf $K_{3,3}$ má $v = 6$ a $e = 3 \times 3 = 9$. Dosadíme do vzorce:
-   $$9 \le 2(6) - 4 \implies 9 \le 12 - 4 \implies 9 \le 8$$
-5. **💥 SPOR ($\bot$):** Dostali jsme nerovnost $9 \le 8$, což je aritmetický rozpor!
-6. Graf $K_{3,3}$ není rovinný.
-</details>
+*Algoritmický význam:* Toto je teoretický základ pro Floydův algoritmus detekce cyklů (želva a zajíc) i pro důkaz korektnosti Bellman-Fordova algoritmu (nejdelší jednoduchá cesta má nanejvýš $n-1$ hran).
 
 ---
 
-## 4. 🐦 Dirichletův princip (aneb Holubi a škatulky) `[Relevance: 80%]` `[INSIGHT]`
+### 🎨 Příklad 3: Monochromatický trojúhelník v síti 6 proteinů ($K_6$)
 
-Tenhle princip je možná nejkrásnější trick v celé kombinatorice — a přitom je tak jednoduchý, že ho pochopí každý:
+Tento slavný výsledek pochází z Ramseyovy teorie a ukazuje, jak Dirichlet odhaluje skrytý řád i v zdánlivě chaotických sítích.
 
-> **Dirichletův princip (Pigeonhole Principle):** Pokud rozmístíme $n+1$ holubů do $n$ škatulek, aspoň jedna škatulka musí obsahovat alespoň 2 holuby.
+> **Věta:** Mějme kompletní síť 6 proteinů ($K_6$, kde každý protein interaguje se všemi 5 ostatními). Předpokládejme, že každá vazba je buď **aktivační** (zelená), nebo **inhibiční** (červená). Pak v síti **vždy existuje trojice proteinů spojená stejným typem vazby** (tzv. monochromatický trojúhelník — buď 3 vzájemné aktivace, nebo 3 vzájemné inhibice).
 
-To je vše. Zní triviálně, ale aplikace jsou překvapivě silné.
+#### 🐢 Pomalý rozbor:
+1. Zvolme jeden libovolný protein, označme ho $A$.
+2. Z proteinu $A$ vychází do zbývajících 5 proteinů přesně **5 vazeb**.
+3. Máme **2 typy vazeb (škatulky)**: zelená (aktivace) a červená (inhibice).
+4. Rozdělujeme 5 vazeb do 2 barev. Podle Dirichletova principu:
+   $$\left\lceil \frac{5}{2} \right\rceil = 3$$
+   Alespoň **3 vazby** vycházející z proteinu $A$ musí mít **shodnou barvu**!
+5. Bez újmy na obecnosti předpokládejme, že tyto 3 vazby jsou **zelené**, a vedou k proteinům $B, C, D$.
 
-### Proč to funguje? (důkaz sporem za 10 sekund)
+```text
+               ( A )
+              /  |  \
+    zelená   /   |   \  zelená
+            / zelená  \
+           ▼     ▼     ▼
+         ( B ) ( C ) ( D )
+```
 
-Předpokládej opak: každá škatulka má **nejvýše 1** holuba. Pak celkový počet holubů je nejvýše $1 \times n = n$. Ale máme $n+1$ holubů. Spor! ✅
+6. Nyní prozkoumejme vazby mezi trojicí $\{B, C, D\}$:
+   - **Situace 1 (Alespoň jedna vazba je zelená):**  
+     Pokud je např. vazba mezi $B$ a $C$ zelená, pak trojice $A, B, C$ tvoří **zelený trojúhelník** (vazby $A-B, A-C, B-C$ jsou všechny zelené).
+   - **Situace 2 (Žádná vazba mezi nimi není zelená):**  
+     Pokud žádná z vazeb $\{B, C\}, \{C, D\}, \{B, D\}$ není zelená, pak **všechny tři musí být červené**! Tím okamžitě vzniká **červený trojúhelník** $(B, C, D)$.
 
----
-
-### 🧬 Tři biologické aplikace
-
-#### Aplikace 1: Dva vrcholy stejného stupně v každém grafu
-
-> **Tvrzení:** V každém prostém neorientovaném grafu $G = (V, E)$ s $n \ge 2$ vrcholy existují **alespoň dva vrcholy se stejným stupněm**.
-
-**Důkaz:** Stupně vrcholů jsou čísla z množiny $\{0, 1, 2, \ldots, n-1\}$ — celkem $n$ možností (škatulky). Ale pozor: nemůže nastat, aby jeden vrchol měl stupeň $0$ (izolovaný, žádný soused) a zároveň jiný měl stupeň $n-1$ (spojen se všemi) — to by byl spor. Takže efektivně máme jen $n-1$ různých možností pro stupně. Máme $n$ vrcholů (holubů) a $n-1$ škatulek → aspoň dva vrcholy mají stejný stupeň.
-
-*Bioinformatická interpretace:* V PPI síti s $n$ proteiny vždy existují alespoň dva proteiny se stejným počtem interakčních partnerů.
-
-#### Aplikace 2: Opakující se zbytek v DNA sekvenci
-
-> **Tvrzení:** V jakékoli posloupnosti $n+1$ celých čísel existují dvě čísla se stejným zbytkem po dělení $n$.
-
-**Důkaz:** Zbytky po dělení $n$ jsou $\{0, 1, \ldots, n-1\}$ — $n$ škatulek. Máme $n+1$ čísel (holubů). Dirichlet garantuje kolizi.
-
-*Bioinformatická interpretace:* Při hashování $k$-merů do tabulky délky $n$ se s $n+1$ různými $k$-mery kolize nevyhnutelně stane.
-
-#### Aplikace 3: Monochromatická hrana v 2-obarveném $K_6$
-
-> **Tvrzení:** Pokud obarvíme hrany úplného grafu $K_6$ dvěma barvami (červená/modrá), vždy existuje monochromatický trojúhelník (3 vrcholy vzájemně spojené hranami téže barvy).
-
-**Intuice:** Zvolme libovolný vrchol $v$. Má $5$ hran. Pigeon: 5 hran do 2 barev → aspoň $\lceil 5/2 \rceil = 3$ hrany stejné barvy (řekněme červené) vedou k vrcholům $a, b, c$. Pokud je aspoň jedna hrana $\{a,b\}, \{b,c\}, \{a,c\}$ červená, máme červený trojúhelník. Pokud žádná není červená, všechny tři jsou modré → modrý trojúhelník $\{a,b,c\}$. V každém případě trojúhelník existuje.
+V každém možném případě nutně vznikne jednobarevný trojúhelník!
 
 ---
 
-## 5. 🔬 Extremální princip — krok za krokem na konkrétním grafu `[Relevance: 85%]` `[EPIC]`
+### 🧩 Příklad 4: Kolize v enzymatickém párování (Bipartitní alokace)
+
+Představme si biochemický model: máme $m$ enzymů a $k$ dostupných aktivních vazebných míst na membráně.
+- Pokud se $m$ enzymů naváže na $k$ míst a platí $m > k$, Dirichlet zaručuje, že **alespoň jedno místo váže 2 nebo více enzymů**.
+- Tento jednoduchý princip je základem pro odvozování kompetitivní inhibice a modelování saturace receptorů v enzymové kinetice.
+
+```text
+Enzymy (m = 5):                 (E₁)  (E₂)  (E₃)  (E₄)  (E₅)
+                                  \    │     /     │     /
+                                   ▼   ▼    ▼      ▼    ▼
+Vazebná místa (k = 4):           [M₁] [M₂]       [M₃] [M₄]
+                                       ▲
+                                       └─ Kolize! 2 enzymy (E₂, E₃)
+                                          soutěží o vazebné místo M₂!
+```
+
+---
+
+## 4. 🔬 Extremální Princip v Grafech — Krok za Krokem `[Relevance: 90%]` `[MEGA EPIC]`
 
 ### Princip
 
-> **Extremální princip:** Když chceš najít spor, zvolíme **extrémní objekt** (nejdelší cestu, nejmenší cyklus, vrchol s maximálním/minimálním stupněm) a zkoumáme, co z jeho extremality plyne.
+> **Extremální princip (Extremal Principle):** Když chceš najít spor, zvolíme **extrémní objekt** (např. nejdelší jednoduchou cestu $P_{max}$, nejmenší cyklus, vrchol s maximálním či minimálním stupněm nebo nejlehčí hranu) a zkoumáme, co z jeho extremality plyne.
 
-Klíčová myšlenka: Extrémní objekt **nemůže mít určitou vlastnost** (jinak by existoval ještě extrémnější). To nám dá spor.
+Klíčová myšlenka: Extrémní objekt **už z principu nemůže mít vlastnost, která by ho ještě více zvětšila či zmenšila** (jinak by existoval ještě extrémnější, což je spor s jeho volbou). To nám dá okamžitý a čistý spor.
 
 ---
 
-### Pracovaný příklad: Pokud $\delta(G) \ge 2$, pak $G$ obsahuje cyklus
+### Pracovaný příklad 1: Pokud $\delta(G) \ge 2$, pak $G$ obsahuje cyklus
 
 **Tvrzení:** Nechť $G = (V, E)$ je konečný neorientovaný graf s minimálním stupněm $\delta(G) \ge 2$. Pak $G$ obsahuje alespoň jeden cyklus.
 
 **Konkrétní příklad pro ilustraci:** Uvažuj graf s vrcholy $\{1, 2, 3, 4, 5\}$ a hranami tak, že každý vrchol má stupeň alespoň 2:
 
-```
+```text
 1 ──── 2 ──── 3
 |             |
 5 ──── 4 ────┘
 ```
 
-Zde každý vrchol má stupeň 2. Cyklus $1 \to 2 \to 3 \to 4 \to 5 \to 1$ zjevně existuje. Jak to dokázat obecně?
+Zde každý vrchol má stupeň 2. Cyklus $1 \to 2 \to 3 \to 4 \to 5 \to 1$ zjevně existuje. Jak to dokázat obecně pro libovolný takový graf?
 
 ---
 
 ### ✍️ Formální důkaz extremálním principem
 
-**Krok 1 — Zvolíme nejdelší jednoduchou cestu:**
-Nechť $P = (v_0, v_1, v_2, \ldots, v_k)$ je **nejdelší jednoduchá cesta** v $G$. (Existuje, protože $G$ je konečný.)
+1. **Krok 1 — Zvolíme nejdelší jednoduchou cestu:**  
+   Nechť $P = (v_0, v_1, v_2, \ldots, v_k)$ je **nejdelší jednoduchá cesta** v grafu $G$. (Takový extremální objekt v konečném grafu zaručeně existuje.)
 
-**Krok 2 — Zkoumáme krajní vrchol $v_0$:**
-Stupeň $\deg(v_0) \ge 2$ (z předpokladu $\delta(G) \ge 2$). Vrchol $v_0$ tedy má alespoň 2 sousedy.
+2. **Krok 2 — Zkoumáme krajní vrchol $v_0$:**  
+   Stupeň $\deg(v_0) \ge 2$ (z předpokladu $\delta(G) \ge 2$). Vrchol $v_0$ tedy má alespoň 2 sousedy.
 
-**Krok 3 — Sousedé $v_0$ musí být na cestě $P$:**
-Předpokládej, že $v_0$ má souseda $u \notin \{v_1, v_2, \ldots, v_k\}$ (mimo cestu). Pak $(u, v_0, v_1, \ldots, v_k)$ je jednoduchá cesta délky $k+1$ — delší než $P$. Spor s maximalitou $P$!
+3. **Krok 3 — Sousedé $v_0$ musí být na cestě $P$:**  
+   Předpokládejme pro spor, že $v_0$ má souseda $u \notin \{v_1, v_2, \ldots, v_k\}$ (mimo cestu $P$).  
+   Pak $(u, v_0, v_1, \ldots, v_k)$ je jednoduchá cesta délky $k+1$ — delší než $P$.  
+   To je **💥 SPOR s maximalitou cesty $P$**!  
+   Tedy **všichni sousedé $v_0$ leží přímo na cestě $P$**: $v_0$ sousedí pouze s vrcholy $v_1, v_2, \ldots, v_k$.
 
-Tedy **všichni sousedé $v_0$ leží na $P$**: $v_0$ sousedí pouze s vrcholy $v_1, v_2, \ldots, v_k$.
-
-**Krok 4 — Najdeme cyklus:**
-Víme, že $v_0$ má alespoň 2 sousedy a všichni leží na $P$. Jeden soused je $v_1$ (hrana $\{v_0, v_1\}$ je součástí $P$). Druhý soused $v_j$ (pro $j \ge 2$) dá hranu $\{v_0, v_j\}$.
-
-Hrana $\{v_0, v_j\}$ spolu s úsekem cesty $v_0, v_1, \ldots, v_j$ tvoří **cyklus** délky $j \ge 2$:
-$$v_0 \to v_1 \to v_2 \to \cdots \to v_j \to v_0$$
+4. **Krok 4 — Najdeme cyklus:**  
+   Víme, že $v_0$ má alespoň 2 sousedy a všichni leží na $P$.  
+   Jeden soused je $v_1$ (hrana $\{v_0, v_1\}$ je součástí $P$). Druhý soused $v_j$ (pro $j \ge 2$) dává hranu $\{v_0, v_j\}$.  
+   Hrana $\{v_0, v_j\}$ spolu s úsekem cesty $v_0, v_1, \ldots, v_j$ tvoří **cyklus**:
+   $$v_0 \to v_1 \to v_2 \to \cdots \to v_j \to v_0$$
 
 **Závěr:** $G$ obsahuje cyklus.
+
+```text
+Vizuální schéma extremálního důkazu:
+
+             Hrana {v₀, vj} vytváří CYKLUS!
+        ┌───────────────────────────────────────┐
+        ▼                                       │
+      ( v₀ ) ───> ( v₁ ) ───> ( v₂ ) ───> ... ───> ( vj ) ───> ... ───> ( vk )
+        ▲
+        │  Pokus o souseda u ∉ P selže:
+        └─── ✖ (u) by prodloužil cestu na délku k+1 (SPOR s maximalitou P)
+```
 
 ---
 
@@ -302,7 +297,7 @@ $$v_0 \to v_1 \to v_2 \to \cdots \to v_j \to v_0$$
 
 Graf: $V = \{1,2,3,4,5\}$, hrany: $\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{5,1\},\{1,3\}$. Každý vrchol má stupeň $\ge 2$.
 
-```
+```text
     1
    /|\
   5 | 3
@@ -310,100 +305,131 @@ Graf: $V = \{1,2,3,4,5\}$, hrany: $\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{5,1\},\{1,3
   4─┘ 2
 ```
 
-**Nejdelší jednoduchá cesta:** $P = (4, 3, 1, 5, ...)$ nebo $P = (2, 3, 4, 5, 1, 3)$... zkusme $P = (2, 1, 5, 4, 3)$ — délka 4.
-
-**Krajní vrchol $v_0 = 2$:** Sousedé vrcholu 2 jsou $\{1, 3\}$. Oba leží na $P$ (vrchol 1 je $v_1$, vrchol 3 je $v_4$).
-
-**Cyklus:** Hrana $\{2, 3\}$ + úsek cesty $2 \to 1 \to 5 \to 4 \to 3$ dává cyklus $2 \to 1 \to 5 \to 4 \to 3 \to 2$ délky 5. ✅
+1. **Nejdelší jednoduchá cesta:** Zvolme např. $P = (2, 1, 5, 4, 3)$ o délce 4.
+2. **Krajní vrchol $v_0 = 2$:** Sousedé vrcholu 2 jsou $\{1, 3\}$. Oba leží na $P$ (vrchol 1 je $v_1$, vrchol 3 je $v_4$).
+3. **Nalezený cyklus:** Hrana $\{2, 3\}$ + úsek cesty $2 \to 1 \to 5 \to 4 \to 3$ dává cyklus $2 \to 1 \to 5 \to 4 \to 3 \to 2$ délky 5.
 
 ---
 
-## 6. 🌊 BFS a Bipartitnost — opačný směr důkazu `[Relevance: 90%]` `[EPIC]`
+### 🛣️ Pracovaný příklad 2: Nejkratší cesta s nezápornými vahami neobsahuje cyklus
 
-V AG1 se dokazuje bipartitnost ve dvou směrech. Jeden je snadný (bipartitní $\Rightarrow$ žádný lichý cyklus, Modul 3.3 výše). Druhý — **žádný lichý cyklus $\Rightarrow$ bipartitní** — je zajímavější.
+> **Věta:** V grafu $G = (V, E, w)$ s nezápornými vahami ($w(e) \ge 0$) neobsahuje žádná nejkratší cesta z $s$ do $t$ žádný cyklus.
 
-### Intuice: BFS obarvení vrstvami
+**Důkaz sporem:**
+1. Předpokládejme pro spor, že nejkratší cesta $P$ z $s$ do $t$ obsahuje cyklus $C$.
+2. Rozložme cestu na úseky: $s \xrightarrow{P_1} u \xrightarrow{C} u \xrightarrow{P_2} t$.  
+   Celková váha je $w(P) = w(P_1) + w(C) + w(P_2)$.
+3. Vynecháním cyklu $C$ získáme novou cestu $P': s \xrightarrow{P_1} u \xrightarrow{P_2} t$.
+4. Protože váhy jsou nezáporné, platí $w(C) \ge 0$.  
+   - Je-li $w(C) > 0$, pak $w(P') < w(P)$, což je **SPOR** s tím, že $P$ byla nejkratší.
+   - Je-li $w(C) = 0$, nová cesta $P'$ má stejnou váhu, ale striktně méně hran — což vylučuje nutnost cyklu na nejkratší jednoduché trase.
 
-Spusť BFS z libovolného vrcholu $s$. BFS přirozeně rozdělí vrcholy do **vrstev** podle vzdálenosti od $s$:
-- $L_0 = \{s\}$ — vzdálenost 0
-- $L_1 = \{$ sousedé $s$ $\}$ — vzdálenost 1
-- $L_2 = \{$ sousedé $L_1$ ještě nenavštívení $\}$ — vzdálenost 2
-- ...
+---
 
+## 5. 🌊 Bipartitní Grafy & BFS Obarvení (Charakterizace Lichých Cyklů) `[Relevance: 85%]`
+
+*(Tento oddíl shrnuje pokročilejší zkouškovou větu propojující důkazy sporem s prohledáváním do šířky.)*
+
+> **Definice Bipartitního Grafu:**  
+> Graf $G = (V, E)$ je **bipartitní**, pokud lze jeho množinu vrcholů rozdělit na dvě disjunktní skupiny $V_1, V_2$ ($V = V_1 \cup V_2, V_1 \cap V_2 = \emptyset$) tak, že každá hrana vede **mezi** těmito skupinami. Žádná hrana nespojuje dva uzly uvnitř téže skupiny.
+
+```text
+Partita V₁ (např. Enzymy):      (E₁)     (E₂)     (E₃)
+                                  \       / \       │
+                                   \     /   \      │   Hrany vedou POUZE
+                                    \   /     \     │   mezi partitami!
+                                     ▼ ▼       ▼    ▼
+Partita V₂ (např. Substráty):   (S₁)     (S₂)     (S₃)
 ```
-        s          ← L₀ (barva A)
-       / \
-      a   b        ← L₁ (barva B)
-     / \   \
-    c   d   e      ← L₂ (barva A)
+
+### 📜 Věta: Graf $G$ je bipartitní $\iff$ neobsahuje žádný lichý cyklus.
+
+Tato ekvivalence se skládá ze dvou směrů:
+
+#### 1. Snadný směr ($\implies$): Bipartitní $\implies$ Nemá liché cykly (Důkaz sporem)
+1. **Předpoklad pro spor:** Nechť $G$ je bipartitní ($V = V_1 \cup V_2$) a ZÁROVEŇ obsahuje lichý cyklus $(v_1, v_2, \dots, v_k, v_1)$ o liché délce $k = 2r + 1$.
+2. Zařaďme $v_1 \in V_1$.
+3. Protože hrany střídají partity: $v_2 \in V_2, v_3 \in V_1, v_4 \in V_2, \dots$
+4. Poslední vrchol cyklu $v_k$ má lichý index $k$, proto nutně $v_k \in V_1$.
+5. **💥 SPOR:** Cyklus je uzavřen hranou $\{v_k, v_1\}$. Oba její konce leží uvnitř téže partity $V_1$, což je spor s definicí bipartitnosti! Bipartitní graf tedy nemůže obsahovat lichý cyklus.
+
+#### 2. Konstruktivní směr ($\impliedby$): Nemá liché cykly $\implies$ Bipartitní (BFS Vrstvy)
+Jak graf bez lichých cyklů rozdělit na 2 partity? Spustíme **BFS (prohledávání do šířky)** ze startovního vrcholu $s$:
+- $L_0 = \{s\}$ — nultá vrstva (barva 1)
+- $L_1 = \{$ sousedé $s$ $\}$ — první vrstva (barva 2)
+- $L_2 = \{$ sousedé $L_1$ ještě nenavštívení $\}$ — druhá vrstva (barva 1)
+- Obecně: sudé vrstvy přiřadíme do $V_1$, liché vrstvy do $V_2$.
+
+```text
+        ( s )         ← Vrstva L₀ (Barva 1)
+        /   \
+      (a)   (b)       ← Vrstva L₁ (Barva 2)
+      / \     \
+    (c) (d)   (e)     ← Vrstva L₂ (Barva 1)
 ```
 
-Intuice: Hrany BFS stromu vždy vedou mezi sousedními vrstvami $L_i \leftrightarrow L_{i+1}$, tedy mezi různými barvami. ✅
-
-Problém nastane pouze u **zpětných hran** — hran mimo BFS strom, které spojují dva vrcholy **stejné vrstvy** $L_i \leftrightarrow L_i$. Ty by vytvořily lichý cyklus.
-
----
-
-### ✍️ Formální důkaz sporem
-
-**Tvrzení:** Pokud $G$ neobsahuje žádný lichý cyklus, pak je $G$ bipartitní.
-
-**Předpokladem pro spor:** Předpokládej, že BFS obarvení selže — existuje hrana $\{u, v\}$ taková, že $u$ a $v$ mají **stejnou barvu** (obě v sudé nebo obě v liché vrstvě).
-
-Nechť $\delta(s, u) = p$ a $\delta(s, v) = q$. Oba mají stejnou paritu ($p \equiv q \pmod{2}$).
-
-Délka cyklu přes $s$: $p + q + 1$ (cesta $s \to \cdots \to u$, hrana $\{u,v\}$, cesta $v \to \cdots \to s$).
-
-Protože $p$ a $q$ mají stejnou paritu, $p + q$ je sudé, tedy $p + q + 1$ je **liché**. Máme lichý cyklus!
-
-To je spor s předpokladem, že $G$ žádný lichý cyklus neobsahuje.
-
-Tedy BFS obarvení **nikdy neselhalo** → $G$ je bipartitní.
+**Důkaz sporem:** Kdyby BFS obarvení selhalo, musela by existovat hrana $\{u, v\}$ mezi dvěma uzly v téže vrstvě $L_i$ (nebo se stejnou barvou).  
+Pak cesta ze společného předka $s$ do $u$ (délky $i$), cesta z $s$ do $v$ (délky $i$) a příčná hrana $\{u, v\}$ dohromady vytvoří cyklus délky:
+$$i + i + 1 = 2i + 1 \quad \text{(LICHÉ ČÍSLO!)}$$
+To je však **SPOR** s tím, že graf neobsahuje žádné liché cykly! Proto žádná taková hrana neexistuje a graf je bipartitní.
 
 ---
 
-### Úloha 3.3: Dirichlet v grafu — dva vrcholy stejného stupně `[CHALLENGE]`
-
-> **Zadání:** Dokažte Dirichletovým principem, že v každém prostém neorientovaném grafu $G$ s $n \ge 2$ vrcholy existují alespoň dva vrcholy se stejným stupněm.
-
-<details>
-<summary>🔍 Zobrazit vzorové řešení</summary>
-
-### ✍️ Řešení:
-
-Stupně vrcholů leží v množině $\{0, 1, 2, \ldots, n-1\}$ — celkem $n$ hodnot.
-
-Klíčové pozorování: V prostém grafu **nemohou nastat zároveň** hodnota $0$ (izolovaný vrchol) a hodnota $n-1$ (vrchol spojený se všemi ostatními), protože vrchol stupně $n-1$ by byl spojen i s izolovaným vrcholem, a ten by pak neměl stupeň $0$.
-
-Tedy reálný rozsah stupňů je buď $\{0,1,\ldots,n-2\}$ nebo $\{1,2,\ldots,n-1\}$ — vždy jen $n-1$ různých hodnot.
-
-Aplikujeme Dirichletův princip: $n$ vrcholů (holubů) a $n-1$ možných hodnot stupně (škatulek) → alespoň dva vrcholy mají stejný stupeň.
-
+<details class="my-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 overflow-hidden">
+<summary class="cursor-pointer px-4 py-3 font-semibold text-sm text-stone-800 dark:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 select-none">
+🔍 Zobrazit zkouškovou aplikaci: Nerovinnost bipartitního grafu $K_{3,3}$
+</summary>
+<div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-2">
+<p>
+<strong>Úloha:</strong> Dokažte sporem, že kompletní bipartitní graf $K_{3,3}$ (se 6 vrcholy a 9 hranami) nelze nakreslit v rovině bez křížení hran.
+</p>
+<ol class="list-decimal pl-5 space-y-1">
+<li>Předpokládejme pro spor, že $K_{3,3}$ je rovinný.</li>
+<li>Jelikož je bipartitní, neobsahuje liché cykly — nejkratší cyklus má délku alespoň 4. Každá stěna v rovinném nakreslení je proto ohraničena alespoň 4 hranami: $2e \ge 4f \implies f \le \frac{e}{2}$.</li>
+<li>Dosazením do Eulerovy formule ($v - e + f = 2$) dostáváme nerovnost: $e \le 2v - 4$.</li>
+<li>Pro $K_{3,3}$ máme $v = 6$ a $e = 9$. Dosadíme: $9 \le 2(6) - 4 = 8$.</li>
+<li><strong>💥 SPOR:</strong> Nerovnost $9 \le 8$ je aritmetický rozpor! Graf $K_{3,3}$ tedy není rovinný.</li>
+</ol>
+</div>
 </details>
 
 ---
 
-### Úloha 3.4: DAG má vždy source `[CHALLENGE]`
+## 🧪 Procvičovací Úlohy
 
-> **Zadání:** Dokažte sporem, že každý konečný orientovaný acyklický graf (DAG) s alespoň jedním vrcholem obsahuje alespoň jeden **source** — vrchol s vstupním stupněm $\text{deg}^-(v) = 0$ (žádná hrana do něj nevede).
+### Úloha 1: Graf s maximálním stupněm $\Delta(G) \le 2$ je cesta nebo cyklus
+Dokážeme sporem, že každý souvislý graf $G$, ve kterém má každý vrchol $\deg(v) \le 2$, je buď cesta ($P_n$), nebo kružnice ($C_n$).
 
 <details>
 <summary>🔍 Zobrazit vzorové řešení</summary>
+<div class="p-4 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-2">
+<ol class="list-decimal pl-5 space-y-1">
+<li>Zvolme v $G$ nejdelší jednoduchou cestu $P = (v_0, v_1, \dots, v_k)$.</li>
+<li>Předpokládejme pro spor, že $G$ obsahuje uzel $u \notin P$.</li>
+<li>Protože $G$ je souvislý, musí existovat hrana spojující uzel $u$ s nějakým vrcholem cesty $P$.</li>
+<li>Vnitřní vrcholy $v_1, \dots, v_{k-1}$ již mají stupeň 2 (hrany k předchůdci a následníkovi na cestě). Nemohou se tedy spojit s $u$, protože maximální stupeň v grafu je $\le 2$.</li>
+<li>Hrana z $u$ by proto musela vést do krajního vrcholu $v_0$ nebo $v_k$. To by však umožnilo prodloužit cestu $P$ o uzel $u$, což je <strong>SPOR s maximalitou cesty $P$</strong>!</li>
+<li>Žádný uzel mimo $P$ tedy neexistuje a graf je buď cestou (pokud $v_0$ a $v_k$ nejsou spojeny), nebo kružnicí (pokud jsou spojeny).</li>
+</ol>
+</div>
+</details>
 
-### ✍️ Řešení:
+---
 
-**Předpoklad pro spor:** Předpokládej, že DAG $G$ **neobsahuje žádný source** — tedy každý vrchol má alespoň jednu příchozí hranu ($\text{deg}^-(v) \ge 1$ pro všechna $v$).
+### Úloha 2: Každý konečný DAG má alespoň jeden zdroj (Source)
+Dokažte sporem, že v každém konečném orientovaném acyklickém grafu existuje uzel se vstupním stupněm $\deg^-(v) = 0$.
 
-**Konstrukce nekonečné cesty:** Začneme v libovolném vrcholu $v_0$. Protože $\text{deg}^-(v_0) \ge 1$, existuje hrana $(v_{-1}, v_0)$, tedy předchůdce $v_{-1}$. Ten také má předchůdce $v_{-2}$. A tak dál...
-
-Formálně: konstruujeme cestu $\cdots \to v_{-2} \to v_{-1} \to v_0$ nekonečně dozadu.
-
-Ale $G$ je **konečný** — má jen $n$ vrcholů. Nekonečná posloupnost vrcholů z konečné množiny musí mít opakování: existuje $i \ne j$ s $v_i = v_j$. To znamená, že existuje orientovaný cyklus.
-
-**Spor:** $G$ je DAG (acyklický), ale nalezli jsme cyklus. Tedy předpoklad byl špatný — DAG musí mít alespoň jeden source.
-
-*Bioinformatická aplikace:* V metabolické dráze modelované jako DAG vždy existuje alespoň jeden „vstupní metabolit" (source), který není produktem žádné jiné reakce v síti.
-
+<details>
+<summary>🔍 Zobrazit vzorové řešení</summary>
+<div class="p-4 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-2">
+<ol class="list-decimal pl-5 space-y-1">
+<li>Předpokládejme pro spor, že DAG neobsahuje žádný zdroj — tedy každý uzel má $\deg^-(v) \ge 1$.</li>
+<li>Vybereme libovolný uzel $u_0$. Protože má vstupní hranu, má předchůdce $u_1$, ten má předchůdce $u_2$, a tak dále.</li>
+<li>Vytváříme nekonečnou posloupnost kroků dozadu: $\dots \to u_2 \to u_1 \to u_0$.</li>
+<li>Protože graf má pouze $n$ vrcholů (konečná množina), podle Dirichletova principu se po nejvýše $n+1$ krocích musí alespoň jeden vrchol zopakovat: $u_i = u_j$.</li>
+<li>Tím vzniká orientovaný cyklus, což je <strong>SPOR</strong> s definicí DAGu (acyklický graf)! V DAGu tedy vždy musí existovat zdroj.</li>
+</ol>
+</div>
 </details>
 
 ---
