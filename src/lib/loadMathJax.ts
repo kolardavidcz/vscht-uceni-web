@@ -17,6 +17,9 @@ function ensureConfig() {
   }
   const current = window.MathJax;
   if (!current) return;
+  const existingTex = current.tex || {};
+  const existingMacros = (existingTex.macros as Record<string, unknown> | undefined) || {};
+
   current.tex = {
     inlineMath: [
       ["$", "$"],
@@ -28,7 +31,12 @@ function ensureConfig() {
     ],
     processEscapes: true,
     processEnvironments: true,
-    ...(current.tex || {}),
+    ...existingTex,
+    macros: {
+      thus: "\\mathrel{\\vert\\mkern-3mu{=}}",
+      logi: "\\mathrel{\\vert\\mkern-3mu{=}\\mkern-3mu\\vert}",
+      ...existingMacros,
+    },
   };
   current.options = {
     ignoreHtmlClass: "tex2jax_ignore",

@@ -16,7 +16,7 @@ interface Window {
   MathJax?: {
     typesetPromise?: (elements?: HTMLElement[]) => Promise<void>;
     typesetClear?: (elements?: HTMLElement[]) => void;
-    tex?: unknown;
-    options?: unknown;
+    tex?: Record<string, unknown>;
+    options?: Record<string, unknown>;
   };
 }

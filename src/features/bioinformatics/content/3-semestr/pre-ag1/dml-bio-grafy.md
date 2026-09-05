@@ -70,7 +70,30 @@ Nechť $V$ je konečná neprázdná množina prvků (kterým budeme říkat **vr
 
 ---
 
-### 2.2 Binární Relace na Množinách
+### 2.2 Přehled Matematického Značení a Logických Symbolů (BI-DML) `[INSIGHT]`
+
+Před formálním zavedením vlastností binárních relací si přehledně shrňme matematické a logické značení používané v kurzu **BI-DML (Diskrétní matematika a logika)** na FIT ČVUT. Toto formální značení se prolíná celou diskrétní matematikou, teorií grafů i analýzou algoritmů v AG1:
+
+| Zavedený symbol | Význam zavedeného symbolu (BI-DML) | Formální popis & Příklad |
+| :---: | :--- | :--- |
+| $:=$ (nebo $\coloneqq$) | **definice**, symbol na levé straně je definován výrazem na straně pravé | Označuje zavedení nového objektu či zkratky, např. $f(x) := x^2 + 1$ nebo $V := \{v_1, \dots, v_n\}$ |
+| $\neg A$ | **negace formule** $A$ | Obrací pravdivostní hodnotu: výrok je pravdivý právě tehdy, když formule $A$ je nepravdivá ($\neg 1 = 0$, $\neg 0 = 1$) |
+| $\forall$ | **obecný (univerzální, velký) kvantifikátor** | $\forall x \in V : P(x)$ znamená „pro každý (všechny) prvek $x$ z množiny $V$ platí vlastnost $P(x)$“ |
+| $\exists$ | **existenční (malý) kvantifikátor** | $\exists x \in V : P(x)$ znamená „existuje alespoň jeden prvek $x$ z množiny $V$, pro který platí vlastnost $P(x)$“ |
+| $A \Rightarrow B$ | **implikace mezi formulemi** $A$ a $B$ | Čteme „z $A$ plyne $B$“ ($A \implies B$); neplatí pouze v případě, kdy předpoklad $A$ platí a závěr $B$ neplatí ($1 \Rightarrow 0$) |
+| $A \Leftrightarrow B$ | **ekvivalence mezi formulemi** $A$ a $B$ | Čteme „$A$ právě tehdy, když $B$“ ($A \iff B$); pravdivá právě tehdy, když obě formule mají shodnou pravdivostní hodnotu |
+| $A \land B$ | **konjunkce formulí** $A$ a $B$ | Logické „A ZÁROVEŇ“; pravdivá pouze tehdy, když platí obě formule $A$ i $B$ současně |
+| $A \lor B$ | **disjunkce formulí** $A$ a $B$ | Logické „NEBO“; pravdivá, pokud platí alespoň jedna z formulí $A$ nebo $B$ |
+| $\top$ | **tautologie** | Výroková formule, která je vždy pravdivá (nabývá hodnoty 1) při libovolném pravdivostním ohodnocení proměnných (např. $A \lor \neg A$) |
+| $\bot$ | **kontradikce** | Výroková formule, která je vždy nepravdivá (nabývá hodnoty 0) při libovolném pravdivostním ohodnocení proměnných (např. $A \land \neg A$) |
+| $\sum_{k=d}^h a(k)$ | **suma (součet) výrazů** $a(d) + a(d+1) + a(d+2) + \dots + a(h)$ | Součet konečné řady výrazů se sčítacím indexem $k$ od dolní meze $d$ do horní meze $h$ (např. součet stupňů vrcholů $\sum_{v \in V} \deg(v) = 2\|E\|$) |
+| $\prod_{k=d}^h a(k)$ | **produkt (součin) výrazů** $a(d) \cdot a(d+1) \cdot a(d+2) \cdot \dots \cdot a(h)$ | Součin posloupnosti činitelů se součinovým indexem $k$ od dolní meze $d$ do horní meze $h$ (např. faktoriál $n! = \prod_{k=1}^n k$) |
+| $E \models F$ | **logický důsledek mezi formulemi** $E$ a $F$ | Formule $F$ je logickým důsledkem formule $E$ (v BI-DML značeno též $E \mathrel{\vert{=}} F$); každý model formule $E$ je i modelem $F$ |
+| $E \mathrel{\vert{=}\vert} F$ | **logická ekvivalence mezi formulemi** $E$ a $F$ | Formule $E$ a $F$ jsou sémanticky ekvivalentní (v literatuře též $E \equiv F$); obě formule mají stejné pravdivostní ohodnocení ve všech modelech |
+
+---
+
+### 2.3 Binární Relace na Množinách
 
 **Binární relace $R$** na množině $V$ je libovolná podmnožina kartézského součinu: $R \subseteq V \times V$.
 Pokud $(u, v) \in R$, říkáme, že prvek $u$ je v relaci $R$ s prvkem $v$ (zapisujeme $u R v$).
@@ -84,7 +107,7 @@ Vlastnosti binárních relací na množině $V$:
 
 > [!IMPORTANT]
 > **Propojení Relací a Grafů:**
-> - **Neorientovaný graf bez smyček** je matematicým vyjádřením **antireflexivní a symetrické binární relace** na množině $V$.
+> - **Neorientovaný graf bez smyček** je matematickým vyjádřením **antireflexivní a symetrické binární relace** na množině $V$.
 > - **Orientovaný graf bez smyček** je vyjádřením obecné **antireflexivní binární relace** na množině $V$.
 
 ---
