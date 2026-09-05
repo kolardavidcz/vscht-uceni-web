@@ -431,16 +431,21 @@ Nechť $V$ je množina molekul a $(v, w) \in E$ značí existenci chemické reak
 Abychom dokázali matematické tvrzení $T$, používáme v algoritmické informatice 4 přístupy:
 
 ```
-                  ┌────────────────────────────────────────┐
-                  │   Jak dokázat tvrzení v logice & AG1   │
-                  └───────────────────┬────────────────────┘
-                                      │
-       ┌──────────────────┬───────────┴───────────┬──────────────────┐
-       ▼                  ▼                       ▼                  ▼
-┌──────────────┐   ┌──────────────┐       ┌──────────────┐   ┌──────────────┐
-│  Přímý důkaz │   │ Kontrapozice │       │ Důkaz sporem │   │  Matematická │
-│ (A ⇒ ... ⇒ B)│   │(¬B ⇒ ... ⇒¬A)│       │ (A ∧ ¬B ⇒ 💥)│   │   indukce    │
-└──────────────┘   └──────────────┘       └──────────────┘   └──────────────┘
+                                ┌─────────────────────────────────────────────┐
+                                │     4 ZÁKLADNÍ DŮKAZOVÉ TECHNIKY V AG1      │
+                                │      Jak dokázat matematické tvrzení T      │
+                                └──────────────────────┬──────────────────────┘
+                                                       │
+            ┌───────────────────────────┬──────────────┴──────────────┬───────────────────────────┐
+            ▼                           ▼                             ▼                           ▼
+┌───────────────────────┐   ┌───────────────────────┐     ┌───────────────────────┐   ┌───────────────────────┐
+│      PŘÍMÝ DŮKAZ      │   │     KONTRAPOZICE      │     │     DŮKAZ SPOREM      │   │  MATEMATICKÁ INDUKCE  │
+│ A => A1 => ... => B   │   │    !B => ... => !A    │     │   (A && !B) => SPOR   │   │   1. Báze + 2. Krok   │
+├───────────────────────┤   ├───────────────────────┤     ├───────────────────────┤   ├───────────────────────┤
+│ - Postupná dedukce    │   │ - Obměněná implikace  │     │ - Předpoklad opaku    │   │ - Pro n prvků / uzlů  │
+│ - Přímo od A k B      │   │ - Ekvivalentní tvar   │     │ - Dovedení ke sporu   │   │ - Krok n -> n+1       │
+│ - Přirozený postup    │   │ - Když je !B snazší   │     │ - Spor s větou / def. │   │ - Dekonstrukce grafu  │
+└───────────────────────┘   └───────────────────────┘     └───────────────────────┘   └───────────────────────┘
 ```
 
 ### 1. Přímý důkaz ($A \Rightarrow B$)
