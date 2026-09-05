@@ -376,10 +376,34 @@ mjx-container.MJX-DISPLAY {
   display: block !important;
 }
 
+/* Visually hide underlying selectable text inside mjx-c to prevent ghosting/double letters */
+mjx-c {
+  color: transparent !important;
+}
+
+/* Ensure MathJax rendered pseudo-glyph ::before is visible with crisp theme-aware color */
+mjx-c::before {
+  color: #1e293b !important;
+}
+
+.dark mjx-c::before {
+  color: #f1f5f9 !important;
+}
+
+@media print {
+  mjx-c::before {
+    color: #000000 !important;
+  }
+}
+
+mjx-c::selection {
+  background: rgba(249, 93, 18, 0.25) !important;
+  color: transparent !important;
+}
+
 mjx-container::selection,
 mjx-container *::selection {
   background: rgba(249, 93, 18, 0.25) !important;
-  color: inherit !important;
 }
 
 /* Universal selectability across wiki and app */

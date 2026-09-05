@@ -40,14 +40,13 @@ Jakmile tohle pochopíš, uvidíš grafy všude:
 V biologii a chemii jste zvyklí nahlížet na složité systémy vizuálně a přírodovědně:
 - Vidíte **molekulu glukózy** a chápete její prostorovou konformaci a chemické kovalentní vazby mezi atomy Uhlíku, Kyslíku a Vodíku.
 - Vidíte **metabolickou dráhu glykolýzy** a vnímáte ji jako posloupnost enzymatických přeměn jednoho substrátu v druhý.
-- Vidíte **sekvenování DNA** jako čtení milionů krátkých střípků (k-merů) z genomu organismu.
 
 Jakmile však vstoupíte do kurzu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT, akademický jazyk se radikálně promění:
 - Místo *"chemické molekuly"* pracujete s **neorientovaným grafem** $G = (V, E)$.
 - Místo *"enzymatické reakce"* pracujete s **orientovanou hranou** $e = (u, v) \in E$ v **orientovaném akalickém grafu (DAG)**.
-- Místo *"poskládat DNA ze střípků"* řešíte **problém nalezení Eulerovského tahu v de Bruijnův grafu**.
 
-Tato kapitola tvoří přirozený most. Ukážeme si, že formální matematický aparát teorie grafů není zbytečná akademická překážka, ale nesmírně elegantní a úsporný nástroj, který vám umožní nahlížet na jakýkoliv reálný biologický problém očima algoritmu.
+
+![https://cdn-images-1.medium.com/max/800/1*FKXawD27qdJy1xbE0j18Nw.png](graph showcase)
 
 ---
 
@@ -335,21 +334,6 @@ public:
 
 ---
 
-### 4.3 Srovnávací Tabulka Reprezentací Grafu pro AG1
-
-| Operace / Vlastnost | Matice Sousedství (Matrix) | Seznam Sousedů (Adjacency List) | Seznam Hran (Edge List) |
-| :--- | :--- | :--- | :--- |
-| **Paměťová složitost (Space)** | $\Theta(n^2)$ *(Špatné pro řídké grafy!)* | $\Theta(n + m)$ **(OPTIMÁLNÍ pro AG1)** | $\Theta(m)$ |
-| **Existuje hrana $\{u, v\}$?** | $\mathcal{O}(1)$ | $\mathcal{O}(\deg(u))$ | $\mathcal{O}(m)$ |
-| **Procházení sousedů $u$** | $\Theta(n)$ | $\Theta(\deg(u))$ **(OPTIMÁLNÍ pro BFS/DFS)**| $\Theta(m)$ |
-| **Vložení nové hrany** | $\mathcal{O}(1)$ | $\mathcal{O}(1)$ | $\mathcal{O}(1)$ |
-| **Vhodné použití** | Husté grafy ($m \approx n^2$) | Řídké biologické grafy ($m \approx n$) | Kruskalův algoritmus MST |
-
-> [!CAUTION]
-> **Varování pro zkoušku z AG1:**
-> Reálné biologické sítě (PPI sítě, metabolické dráhy) jsou **řídké grafy** (Sparse Graphs), kde $m \ll n^2$ (typicky $m = \mathcal{O}(n)$). Pokud v zápočtovém testu z AG1 použijete pro algoritmy BFS/DFS matici sousedství, váš algoritmus poběží v čase $\mathcal{O}(n^2)$ místo $\mathcal{O}(n + m)$ a **ztratíte body za časovou složitost**!
-
----
 
 ## 5. Formální Grafová Terminologie & Definice `[Relevance: 95%]` `[EPIC]`
 

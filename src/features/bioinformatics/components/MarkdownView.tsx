@@ -11,7 +11,6 @@ import python from "highlight.js/lib/languages/python";
 import json from "highlight.js/lib/languages/json";
 import plaintext from "highlight.js/lib/languages/plaintext";
 import { contentMayHaveMath, loadMathJax, makeMathJaxContainerSelectable } from "@/lib/loadMathJax";
-import { latexToUnicode } from "@/lib/latexToUnicode";
 
 type Props = {
   content: string;
@@ -149,77 +148,9 @@ export function MarkdownView({ content }: Props) {
       void run();
     }, 100);
 
-    const handleCopy = (e: ClipboardEvent) => {
-      const selection = window.getSelection();
-      if (!selection || selection.rangeCount === 0 || selection.isCollapsed) return;
-
-      const range = selection.getRangeAt(0);
-      const containerNode = ref.current;
-      if (!containerNode || !containerNode.contains(range.commonAncestorContainer)) return;
-
-      try {
-        const cloned = range.cloneContents();
-        const mathContainers = cloned.querySelectorAll("mjx-container");
-
-        if (mathContainers.length > 0) {
-          mathContainers.forEach((cnt) => {
-            const unicode =
-              cnt.getAttribute("data-unicode") ||
-              cnt.querySelector(".mjx-selectable-unicode")?.textContent ||
-              cnt.querySelector("mjx-assistive-mml")?.textContent ||
-              latexToUnicode(cnt.getAttribute("data-latex") || "") ||
-              cnt.textContent ||
-              "";
-            const isDisplay = cnt.getAttribute("display") === "true" || cnt.classList.contains("MJX-DISPLAY");
-            const replacement = document.createTextNode(isDisplay ? `\n${unicode.trim()}\n` : ` ${unicode.trim()} `);
-            cnt.parentNode?.replaceChild(replacement, cnt);
-          });
-
-          cloned.querySelectorAll(".mjx-selectable-unicode").forEach((s) => s.remove());
-
-          let plainText = cloned.textContent || "";
-          plainText = plainText.replace(/ {2,}/g, " ");
-
-          if (e.clipboardData) {
-            e.clipboardData.setData("text/plain", plainText);
-            e.preventDefault();
-          }
-        } else {
-          const targetEl =
-            range.commonAncestorContainer.nodeType === Node.ELEMENT_NODE
-              ? (range.commonAncestorContainer as Element)
-              : range.commonAncestorContainer.parentElement;
-          const enclosing = targetEl?.closest("mjx-container");
-          if (enclosing) {
-            const unicode =
-              enclosing.getAttribute("data-unicode") ||
-              enclosing.querySelector(".mjx-selectable-unicode")?.textContent ||
-              enclosing.querySelector("mjx-assistive-mml")?.textContent ||
-              latexToUnicode(enclosing.getAttribute("data-latex") || "") ||
-              enclosing.textContent ||
-              "";
-            if (unicode && e.clipboardData) {
-              e.clipboardData.setData("text/plain", unicode.trim());
-              e.preventDefault();
-            }
-          }
-        }
-      } catch {
-        // Fallback to default copy if clone failed
-      }
-    };
-
-    const host = ref.current;
-    if (host) {
-      host.addEventListener("copy", handleCopy);
-    }
-
     return () => {
       cancelled = true;
       window.clearTimeout(t);
-      if (host) {
-        host.removeEventListener("copy", handleCopy);
-      }
     };
   }, [content, processedContent]);
 

@@ -11,6 +11,15 @@ const MATHJAX_SRC =
 let loadPromise: Promise<void> | null = null;
 let copyListenerRegistered = false;
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 export function setupMathJaxCopyListener(): void {
   if (typeof document === "undefined" || copyListenerRegistered) return;
   copyListenerRegistered = true;
@@ -34,17 +43,36 @@ export function setupMathJaxCopyListener(): void {
             cnt.textContent ||
             "";
           const isDisplay = cnt.getAttribute("display") === "true" || cnt.classList.contains("MJX-DISPLAY");
-          const replacement = document.createTextNode(isDisplay ? `\n${unicode.trim()}\n` : ` ${unicode.trim()} `);
-          cnt.parentNode?.replaceChild(replacement, cnt);
+          const clean = unicode.trim();
+
+          // Replace mjx-container with clean visible span in the cloned DOM.
+          // Explicit color: inherit and fontFamily: inherit guarantee that
+          // rich-text note apps (Apple Notes, OneNote, Word, Google Docs)
+          // will never paste transparent or white text.
+          const span = document.createElement("span");
+          span.style.color = "inherit";
+          span.style.fontFamily = "inherit";
+          span.textContent = isDisplay ? `\n${clean}\n` : ` ${clean} `;
+          cnt.parentNode?.replaceChild(span, cnt);
         });
 
-        cloned.querySelectorAll(".mjx-selectable-unicode").forEach((s) => s.remove());
+        cloned.querySelectorAll(".mjx-selectable-unicode, mjx-assistive-mml").forEach((s) => s.remove());
 
-        let plainText = cloned.textContent || "";
+        // Normalize any transparent inline styling in the cloned tree
+        cloned.querySelectorAll<HTMLElement>("[style*='transparent']").forEach((el) => {
+          el.style.color = "inherit";
+        });
+
+        const wrapper = document.createElement("div");
+        wrapper.appendChild(cloned);
+
+        let plainText = wrapper.textContent || "";
         plainText = plainText.replace(/ {2,}/g, " ");
+        const html = wrapper.innerHTML;
 
         if (e.clipboardData) {
           e.clipboardData.setData("text/plain", plainText);
+          e.clipboardData.setData("text/html", html);
           e.preventDefault();
         }
       } else {
@@ -61,8 +89,13 @@ export function setupMathJaxCopyListener(): void {
             latexToUnicode(enclosing.getAttribute("data-latex") || "") ||
             enclosing.textContent ||
             "";
-          if (unicode && e.clipboardData) {
-            e.clipboardData.setData("text/plain", unicode.trim());
+          const clean = unicode.trim();
+          if (clean && e.clipboardData) {
+            e.clipboardData.setData("text/plain", clean);
+            e.clipboardData.setData(
+              "text/html",
+              `<span style="color: inherit; font-family: inherit;">${escapeHtml(clean)}</span>`
+            );
             e.preventDefault();
           }
         }
