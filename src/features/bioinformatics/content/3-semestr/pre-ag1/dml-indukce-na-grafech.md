@@ -172,17 +172,35 @@ Správný myšlenkový tok (Dekonstrukční Indukce na grafech):
 └──────────────────────────────────────────────────────────┘
 ```
 
-### 💡 Hlubší vhled: Proč dekonstrukce zachraňuje silnou indukci (Odebírání a velikost báze)
+### 💡 Hlubší vhled: Dekonstrukční přístup u slabé i silné indukce
 
-Podívejme se, jak tentýž princip dekonstrukce funguje v klasické indukci na číslech (např. v naší úloze o platbách mincemi 3 Kč a 5 Kč):
+Podívejme se, jak princip dekonstrukce funguje v klasické indukci na grafech i číslech:
 
-#### ❌ Konstrukční past u indukce:
-Student řekne: *„Předpokládejme, že umíme vyplatit $n$ Kč. Chceme dokázat, že umíme vyplatit $n+1$ Kč. Přidáme minci...“*  
-**Problém:** My ale nemáme minci v hodnotě 1 Kč! Student se pokouší objekt stavět odspodu přičítáním a musí vymýšlet složité výměny (např. $5 \to 3+3$), kde snadno zapomene ověřit existenci potřebné mince.
+#### ❌ Konstrukční past u indukce (zdola nahoru):
+Student řekne: *„Předpokládejme, že tvrzení platí pro $n$. Nyní z něj postavíme $n+1$ tím, že něco přidáme...“*  
+- **V grafech:** Přidá vrchol k $G_n$ a doufá, že tak získá všechny grafy $G_{n+1}$ (obrovská zkoušková chyba, pomine celou řadu struktur!).
+- **V mincích:** Zkouší přidat 1 Kč k částce $n$, ale 1 Kč minci nemá, takže musí vymýšlet konstrukční triky s výměnami mincí.
 
-#### ✅ Dekonstrukční přístup (Silná indukce shora):
-Místo skládání začneme **od zadaného cílového stavu $n$ (nebo $n+1$)** a **odebíráme** známý celek tak, abychom zbytek našli v indukčním předpokladu:
-$$(n + 1) = \underbrace{((n + 1) - k)}_{\text{menší stav dle IP}} + \underbrace{k}_{\text{odebraný blok}}$$
+#### ✅ Dekonstrukční přístup (slabá indukce shora: $n+1 \to n$):
+U dekonstrukce začínáme **vždy od zadaného cílového objektu velikosti $n+1$ shora** a zmenšujeme ho na velikost $n$:
+1. **V grafech (krystalicky čistá slabá indukce):**
+   - Vezmeme libovolný graf $G$ o $n+1$ vrcholech.
+   - Odebereme 1 prvek (např. list $\deg(v) = 1$ u stromu).
+   - Získáme podgraf $G'$ o přesně **$n$ vrcholech**.
+   - Na podgraf $G'$ aplikujeme **slabý indukční předpoklad $P(n)$**.
+   - Prvek vrátíme a dokážeme, že vlastnost platí pro původní $G$.
+2. **V mincích (dekonstrukce z $n+1$ shora na $n$):**
+   - Máme cílovou částku $n+1$ Kč ($n+1 \ge 9$). Chceme z ní odebráním/výměnou získat částku $n$ Kč (změna $-1\text{ Kč}$), abychom mohli použít slabý IP $P(n)$:
+     - **Případ 1 (Máme alespoň dvě 3 Kč mince):** Vyměníme $3 + 3 \to 5$ Kč (čistá změna $-6 + 5 = -1\text{ Kč}$, získáme částku $n$ Kč).
+     - **Případ 2 (Nemáme dvě 3 Kč mince):** Částka $n+1 \ge 9$ se skládá převážně z pětikorun (musí mít alespoň dvě 5 Kč: $5 + 5 = 10$). Vyměníme $5 + 5 \to 3 + 3 + 3$ Kč (čistá změna $-10 + 9 = -1\text{ Kč}$, opět získáme $n$ Kč).
+   - V obou případech jsme z částky $n+1$ shora dekonstruovali stav $n$, na který použijeme slabý indukční předpoklad!
+
+---
+
+#### 🚀 Proč je Silná indukce shora ještě jednodušší? (Odebírání bez výměn)
+U slabé indukce jsme nuceni skákat o krok 1 ($n+1 \to n$), což u mincí vyžadovalo výměny. **Silná indukce nás od výměn zcela osvobozuje:**  
+Místo výměn prostě **jen odebereme celou minci nebo blok**:
+$$(n + 1) = \underbrace{((n + 1) - k)}_{\text{menší stav dle silného IP}} + \underbrace{k}_{\text{odebraný celek}}$$
 
 ---
 
