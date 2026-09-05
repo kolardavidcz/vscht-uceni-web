@@ -379,7 +379,7 @@ $$E = \lbrace \lbrace P_1, P_2 \rbrace, \lbrace P_1, P_3 \rbrace, \lbrace P_2, P
 4. **Ověření Handshaking Lemmatu:**
    - Počet hran $|E| = 6$. Tedy $2|E| = 2 \times 6 = 12$.
    - Součet stupňů: $\sum_{i=1}^6 \deg(P_i) = 2 + 2 + 3 + 3 + 1 + 1 = 12$.
-   - Platí $12 = 12$. Handshaking lemma je bezchybně ověřeno! $\blacksquare$
+   - Platí $12 = 12$. Handshaking lemma je bezchybně ověřeno!
 </details>
 
 ---
@@ -413,7 +413,7 @@ std::vector<std::vector<int>> matrixToList(const std::vector<std::vector<bool>>&
 
 ### 📊 Rozbor Složitosti:
 - **Časová složitost:** Musíme projít všechny buňky matice $n \times n$. Procházení trvá $\Theta(n^2)$. Vkládání do `std::vector` pomocí `push_back` má amortizovanou složitost $\mathcal{O}(1)$. Celková časová složitost je tedy **$\Theta(n^2)$**.
-- **Prostorová složitost (Paměť):** Výstupní seznam sousedů alokuje paměť pro $n$ vektorů a celkem $2m$ prvků (pro neorientovaný graf). Paměťová složitost výstupu je tedy **$\Theta(n + m)$**. $\blacksquare$
+- **Prostorová složitost (Paměť):** Výstupní seznam sousedů alokuje paměť pro $n$ vektorů a celkem $2m$ prvků (pro neorientovaný graf). Paměťová složitost výstupu je tedy **$\Theta(n + m)$**.
 </details>
 
 ---

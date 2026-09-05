@@ -102,7 +102,7 @@ Dokážeme sporem implikaci: *"Pokud je $G$ bipartitní, pak neobsahuje žádný
    Oba koncové vrcholy hrany $\{v_k, v_1\}$ (tedy jak $v_k$, tak $v_1$) patří do **stejné množiny $V_1$**!
    To je v přímém **SPORU** s definicí bipartitního grafu, která striktně zakazuje hrany mezi vrcholy uvnitř téže množiny $V_1$.
 5. **Závěr:**
-   Předpoklad pro spor nemohl platit. Bipartitní graf nemůže obsahovat žádný lichý cyklus. $\blacksquare$
+   Předpoklad pro spor nemohl platit. Bipartitní graf nemůže obsahovat žádný lichý cyklus.
 
 ---
 
@@ -120,7 +120,7 @@ Pro úplnost si ukažme i druhý směr implikace: *"Pokud $G$ neobsahuje žádn�
 4. Může existovat hrana $\{u, v\}$ spojující dva vrcholy uvnitř téže hladiny $L_i$?
    - Pokud by existovala hrana $\{u, v\}$ s $u, v \in L_i$, pak cesty z $s$ do $u$ (délky $i$) a z $s$ do $v$ (délky $i$) společně s hranou $\{u, v\}$ by vytvořily cyklus celkové délky $i + i + 1 = 2i + 1$, což je **lichý cyklus**!
    - Jelikož $G$ neobsahuje žádné liché cykly, hrany uvnitř téže hladiny nemohou existovat!
-5. Tedy každá hrana spojuje vrchol ze sudé hladiny ($V_1$) s vrcholem z liché hladiny ($V_2$). Graf $G$ je bipartitní. $\blacksquare$
+5. Tedy každá hrana spojuje vrchol ze sudé hladiny ($V_1$) s vrcholem z liché hladiny ($V_2$). Graf $G$ je bipartitní.
 
 ---
 
@@ -149,7 +149,7 @@ Pro úplnost si ukažme i druhý směr implikace: *"Pokud $G$ neobsahuje žádn�
    Úsek cesty od $v_i$ do $v_k$ spojený hranou $\{v_k, v_i\}$ tvoří uzavřený **cyklus** $(v_i, v_{i+1}, \dots, v_k, v_i)$!
    To je v přímém **SPORU** s předpokladem sporu, že $G$ neobsahuje žádný cyklus!
 5. **Závěr:**
-   Náš předpoklad pro spor byl chybný. Graf $G$ s $\delta(G) \ge 2$ musí obsahovat alespoň jeden cyklus. $\blacksquare$
+   Náš předpoklad pro spor byl chybný. Graf $G$ s $\delta(G) \ge 2$ musí obsahovat alespoň jeden cyklus.
 
 ---
 
@@ -164,7 +164,7 @@ Pro úplnost si ukažme i druhý směr implikace: *"Pokud $G$ neobsahuje žádn�
 4. **Porovnání vah:** Jelikož $w(e) \ge 0$, váha cyklu $w(C) \ge 0$. Tedy $w(P') = w(P) - w(C) \le w(P)$.
    - Pokud $w(C) > 0$, dostaneme $w(P') < w(P)$, což je **SPOR** s tím, že $P$ byla nejkratší cesta.
    - Pokud $w(C) = 0$, nová cesta $P'$ má stejnou váhu, ale striktně **méně hran**, což je **SPOR** s minimálním počtem hran nejkratší cesty.
-5. Nejkratší cesta neobsahuje žádný cyklus. $\blacksquare$
+5. Nejkratší cesta neobsahuje žádný cyklus.
 
 ---
 
@@ -182,7 +182,7 @@ Dokážeme sporem, že každý souvislý graf $G = (V, E)$, ve kterém má každ
 3. Jelikož $G$ je souvislý a není cestou, musí v $G$ existovat vrchol $u \notin P$ spojený hranou s něčím na cestě $P$.
 4. Jelikož $\deg(v) \le 2$ pro všechny vrcholy, vnitřní vrcholy cesty $v_1, \dots, v_{k-1}$ již mají stupeň 2 (spojují sousedy na cestě) a nemohou mít žádnou další hranu k $u$.
 5. Tedy vrchol $u$ by musel být spojen s koncovým vrcholem $v_0$ nebo $v_k$. To však umožňuje cestu $P$ prodloužit o uzel $u$, což je SPOR s maximalitou cesty $P$!
-6. Souvislý graf s $\Delta(G) \le 2$ je tedy jedině cesta nebo cyklus. $\blacksquare$
+6. Souvislý graf s $\Delta(G) \le 2$ je tedy jedině cesta nebo cyklus.
 </details>
 
 ---
@@ -204,7 +204,7 @@ Dokážeme sporem s využitím Eulerovy formule pro bipartitní rovinné grafy (
    Graf $K_{3,3}$ má $v = 6$ a $e = 3 \times 3 = 9$. Dosadíme do vzorce:
    $$9 \le 2(6) - 4 \implies 9 \le 12 - 4 \implies 9 \le 8$$
 5. **💥 SPOR ($\bot$):** Dostali jsme nerovnost $9 \le 8$, což je aritmetický rozpor!
-6. Graf $K_{3,3}$ není rovinný. $\blacksquare$
+6. Graf $K_{3,3}$ není rovinný.
 </details>
 
 ---
@@ -229,7 +229,7 @@ Předpokládej opak: každá škatulka má **nejvýše 1** holuba. Pak celkový 
 
 > **Tvrzení:** V každém prostém neorientovaném grafu $G = (V, E)$ s $n \ge 2$ vrcholy existují **alespoň dva vrcholy se stejným stupněm**.
 
-**Důkaz:** Stupně vrcholů jsou čísla z množiny $\{0, 1, 2, \ldots, n-1\}$ — celkem $n$ možností (škatulky). Ale pozor: nemůže nastat, aby jeden vrchol měl stupeň $0$ (izolovaný, žádný soused) a zároveň jiný měl stupeň $n-1$ (spojen se všemi) — to by byl spor. Takže efektivně máme jen $n-1$ různých možností pro stupně. Máme $n$ vrcholů (holubů) a $n-1$ škatulek → aspoň dva vrcholy mají stejný stupeň. $\blacksquare$
+**Důkaz:** Stupně vrcholů jsou čísla z množiny $\{0, 1, 2, \ldots, n-1\}$ — celkem $n$ možností (škatulky). Ale pozor: nemůže nastat, aby jeden vrchol měl stupeň $0$ (izolovaný, žádný soused) a zároveň jiný měl stupeň $n-1$ (spojen se všemi) — to by byl spor. Takže efektivně máme jen $n-1$ různých možností pro stupně. Máme $n$ vrcholů (holubů) a $n-1$ škatulek → aspoň dva vrcholy mají stejný stupeň.
 
 *Bioinformatická interpretace:* V PPI síti s $n$ proteiny vždy existují alespoň dva proteiny se stejným počtem interakčních partnerů.
 
@@ -237,7 +237,7 @@ Předpokládej opak: každá škatulka má **nejvýše 1** holuba. Pak celkový 
 
 > **Tvrzení:** V jakékoli posloupnosti $n+1$ celých čísel existují dvě čísla se stejným zbytkem po dělení $n$.
 
-**Důkaz:** Zbytky po dělení $n$ jsou $\{0, 1, \ldots, n-1\}$ — $n$ škatulek. Máme $n+1$ čísel (holubů). Dirichlet garantuje kolizi. $\blacksquare$
+**Důkaz:** Zbytky po dělení $n$ jsou $\{0, 1, \ldots, n-1\}$ — $n$ škatulek. Máme $n+1$ čísel (holubů). Dirichlet garantuje kolizi.
 
 *Bioinformatická interpretace:* Při hashování $k$-merů do tabulky délky $n$ se s $n+1$ různými $k$-mery kolize nevyhnutelně stane.
 
@@ -245,7 +245,7 @@ Předpokládej opak: každá škatulka má **nejvýše 1** holuba. Pak celkový 
 
 > **Tvrzení:** Pokud obarvíme hrany úplného grafu $K_6$ dvěma barvami (červená/modrá), vždy existuje monochromatický trojúhelník (3 vrcholy vzájemně spojené hranami téže barvy).
 
-**Intuice:** Zvolme libovolný vrchol $v$. Má $5$ hran. Pigeon: 5 hran do 2 barev → aspoň $\lceil 5/2 \rceil = 3$ hrany stejné barvy (řekněme červené) vedou k vrcholům $a, b, c$. Pokud je aspoň jedna hrana $\{a,b\}, \{b,c\}, \{a,c\}$ červená, máme červený trojúhelník. Pokud žádná není červená, všechny tři jsou modré → modrý trojúhelník $\{a,b,c\}$. V každém případě trojúhelník existuje. $\blacksquare$
+**Intuice:** Zvolme libovolný vrchol $v$. Má $5$ hran. Pigeon: 5 hran do 2 barev → aspoň $\lceil 5/2 \rceil = 3$ hrany stejné barvy (řekněme červené) vedou k vrcholům $a, b, c$. Pokud je aspoň jedna hrana $\{a,b\}, \{b,c\}, \{a,c\}$ červená, máme červený trojúhelník. Pokud žádná není červená, všechny tři jsou modré → modrý trojúhelník $\{a,b,c\}$. V každém případě trojúhelník existuje.
 
 ---
 
@@ -294,7 +294,7 @@ Víme, že $v_0$ má alespoň 2 sousedy a všichni leží na $P$. Jeden soused j
 Hrana $\{v_0, v_j\}$ spolu s úsekem cesty $v_0, v_1, \ldots, v_j$ tvoří **cyklus** délky $j \ge 2$:
 $$v_0 \to v_1 \to v_2 \to \cdots \to v_j \to v_0$$
 
-**Závěr:** $G$ obsahuje cyklus. $\blacksquare$
+**Závěr:** $G$ obsahuje cyklus.
 
 ---
 
@@ -358,7 +358,7 @@ Protože $p$ a $q$ mají stejnou paritu, $p + q$ je sudé, tedy $p + q + 1$ je *
 
 To je spor s předpokladem, že $G$ žádný lichý cyklus neobsahuje.
 
-Tedy BFS obarvení **nikdy neselhalo** → $G$ je bipartitní. $\blacksquare$
+Tedy BFS obarvení **nikdy neselhalo** → $G$ je bipartitní.
 
 ---
 
@@ -377,7 +377,7 @@ Klíčové pozorování: V prostém grafu **nemohou nastat zároveň** hodnota $
 
 Tedy reálný rozsah stupňů je buď $\{0,1,\ldots,n-2\}$ nebo $\{1,2,\ldots,n-1\}$ — vždy jen $n-1$ různých hodnot.
 
-Aplikujeme Dirichletův princip: $n$ vrcholů (holubů) a $n-1$ možných hodnot stupně (škatulek) → alespoň dva vrcholy mají stejný stupeň. $\blacksquare$
+Aplikujeme Dirichletův princip: $n$ vrcholů (holubů) a $n-1$ možných hodnot stupně (škatulek) → alespoň dva vrcholy mají stejný stupeň.
 
 </details>
 
@@ -400,7 +400,7 @@ Formálně: konstruujeme cestu $\cdots \to v_{-2} \to v_{-1} \to v_0$ nekonečn�
 
 Ale $G$ je **konečný** — má jen $n$ vrcholů. Nekonečná posloupnost vrcholů z konečné množiny musí mít opakování: existuje $i \ne j$ s $v_i = v_j$. To znamená, že existuje orientovaný cyklus.
 
-**Spor:** $G$ je DAG (acyklický), ale nalezli jsme cyklus. Tedy předpoklad byl špatný — DAG musí mít alespoň jeden source. $\blacksquare$
+**Spor:** $G$ je DAG (acyklický), ale nalezli jsme cyklus. Tedy předpoklad byl špatný — DAG musí mít alespoň jeden source.
 
 *Bioinformatická aplikace:* V metabolické dráze modelované jako DAG vždy existuje alespoň jeden „vstupní metabolit" (source), který není produktem žádné jiné reakce v síti.
 
