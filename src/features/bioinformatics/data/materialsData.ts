@@ -174,49 +174,49 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w01-l2-s3",
-            "name": "[Operátory new a delete](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/332)",
+            "name": "[Operátory new a delete](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/329)",
             "relevance": 60,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w01-l2-s5",
-            "name": "[Reference](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/334)",
+            "name": "[Reference](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/333)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w01-l2-s7",
-            "name": "[Reference na konstantu](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/336)",
+            "name": "[Reference na konstantu](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/335)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w01-l2-s9",
-            "name": "[Přetěžování funkcí](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/338)",
+            "name": "[Přetěžování funkcí](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/337)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w01-l2-s10",
-            "name": "[Výchozí argumenty](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/339)",
+            "name": "[Výchozí argumenty](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/353)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w01-l2-s11",
-            "name": "[Řazení v C++](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/340)",
+            "name": "[Řazení v C++](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/354)",
             "relevance": 70,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w01-l2-s12",
-            "name": "[Vstup a výstup v C++](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/341)",
+            "name": "[Vstup a výstup v C++](https://trainer.ksi.fit.cvut.cz/lessons/581/modules/357)",
             "relevance": 50,
             "quality": true,
             "badges": []
@@ -225,11 +225,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w01-l3",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/582)",
         "children": [
           {
             "id": "tr-w01-l3-s1",
-            "name": "[Unikátní kvádry](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Unikátní kvádry](https://trainer.ksi.fit.cvut.cz/lessons/582/modules/360)",
             "relevance": 70,
             "quality": true,
             "badges": [
@@ -355,53 +355,53 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w02-l1",
-        "name": "[Lekce: Třídy, úvod do OOP](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Třídy, úvod do OOP](https://trainer.ksi.fit.cvut.cz/lessons/603)",
         "children": [
           {
             "id": "tr-w02-l1-s1",
-            "name": "[Metody](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Metody](https://trainer.ksi.fit.cvut.cz/lessons/603/modules/831)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l1-s5",
-            "name": "[Statické členy](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Statické členy](https://trainer.ksi.fit.cvut.cz/lessons/603/modules/830)",
             "relevance": 65,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l1-s8",
-            "name": "[Konstruktory](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Konstruktory](https://trainer.ksi.fit.cvut.cz/lessons/603/modules/837)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l1-s12",
-            "name": "[Zapouzdření](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Zapouzdření](https://trainer.ksi.fit.cvut.cz/lessons/603/modules/841)",
             "relevance": 70,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l1-s15",
-            "name": "[Rozhraní](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Rozhraní](https://trainer.ksi.fit.cvut.cz/lessons/603/modules/844)",
             "relevance": 55,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l1-s16",
-            "name": "[Gettery a settery](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Gettery a settery](https://trainer.ksi.fit.cvut.cz/lessons/603/modules/845)",
             "relevance": 50,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l1-s17",
-            "name": "[Řetězení volání metod](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Řetězení volání metod](https://trainer.ksi.fit.cvut.cz/lessons/603/modules/846)",
             "relevance": 40,
             "quality": true,
             "badges": []
@@ -410,32 +410,32 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w02-l2",
-        "name": "[Lekce: Úvod do STL](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Úvod do STL](https://trainer.ksi.fit.cvut.cz/lessons/605)",
         "children": [
           {
             "id": "tr-w02-l2-s1",
-            "name": "[Dynamické pole std::vector](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Dynamické pole std::vector](https://trainer.ksi.fit.cvut.cz/lessons/605/modules/416)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l2-s2",
-            "name": "[Chytré řetězce std::string](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Chytré řetězce std::string](https://trainer.ksi.fit.cvut.cz/lessons/605/modules/417)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l2-s3",
-            "name": "[Základy iterátorů](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Základy iterátorů](https://trainer.ksi.fit.cvut.cz/lessons/605/modules/851)",
             "relevance": 85,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w02-l2-s4",
-            "name": "[Základní porovnávací funkce](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Základní porovnávací funkce](https://trainer.ksi.fit.cvut.cz/lessons/605/modules/852)",
             "relevance": 70,
             "quality": true,
             "badges": []
@@ -444,11 +444,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w02-l3",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/604)",
         "children": [
           {
             "id": "tr-w02-l3-s2",
-            "name": "[Databáze studentů](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Databáze studentů](https://trainer.ksi.fit.cvut.cz/lessons/604/modules/847)",
             "relevance": 80,
             "quality": true,
             "badges": [
@@ -570,25 +570,25 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w03-l1",
-        "name": "[Lekce: Iterátory (základní použití)](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Iterátory (základní použití)](https://trainer.ksi.fit.cvut.cz/lessons/631)",
         "children": [
           {
             "id": "tr-w03-l1-s1",
-            "name": "[Výpis vectoru pozpátku](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Výpis vectoru pozpátku](https://trainer.ksi.fit.cvut.cz/lessons/631/modules/853)",
             "relevance": 90,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w03-l1-s2",
-            "name": "[Vyhledávání ve vectoru](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Vyhledávání ve vectoru](https://trainer.ksi.fit.cvut.cz/lessons/631/modules/854)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w03-l1-s3",
-            "name": "[Mazání z vectoru](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Mazání z vectoru](https://trainer.ksi.fit.cvut.cz/lessons/631/modules/855)",
             "relevance": 90,
             "quality": true,
             "badges": []
@@ -597,11 +597,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w03-l2",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/632)",
         "children": [
           {
             "id": "tr-w03-l2-s1",
-            "name": "[Galerie](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Galerie](https://trainer.ksi.fit.cvut.cz/lessons/632/modules/856)",
             "relevance": 70,
             "quality": true,
             "badges": [
@@ -751,60 +751,60 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w04-l1",
-        "name": "[Lekce: Přetěžování operátorů](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Přetěžování operátorů](https://trainer.ksi.fit.cvut.cz/lessons/633)",
         "children": [
           {
             "id": "tr-w04-l1-s1",
-            "name": "[Metoda versus funkce](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Metoda versus funkce](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/865)",
             "relevance": 80,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w04-l1-s2",
-            "name": "[Porovnávání](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Porovnávání](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/866)",
             "relevance": 80,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w04-l1-s3",
-            "name": "[Uspořádání](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Uspořádání](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/867)",
             "relevance": 100,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w04-l1-s4",
-            "name": "[Podpora logických výrazů](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Podpora logických výrazů](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/868)",
             "relevance": 70,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w04-l1-s5",
-            "name": "[Aritmetické operace](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Aritmetické operace](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/869)",
             "relevance": 55,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w04-l1-s6",
-            "name": "[Vstup a výstup](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Vstup a výstup](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/870)",
             "relevance": 50,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w04-l1-s7",
-            "name": "[Přístup k datům](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Přístup k datům](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/871)",
             "relevance": 40,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w04-l1-s8",
-            "name": "[Další operátory](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Další operátory](https://trainer.ksi.fit.cvut.cz/lessons/633/modules/872)",
             "relevance": 40,
             "quality": true,
             "badges": []
@@ -813,11 +813,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w04-l2",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/634)",
         "children": [
           {
             "id": "tr-w04-l2-s1",
-            "name": "[Komplexní čísla](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Komplexní čísla](https://trainer.ksi.fit.cvut.cz/lessons/634/modules/459)",
             "relevance": 80,
             "quality": true,
             "badges": [
@@ -826,7 +826,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w04-l2-s4",
-            "name": "[Unikátní kvádry VII](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Unikátní kvádry VII](https://trainer.ksi.fit.cvut.cz/lessons/634/modules/874)",
             "relevance": 60,
             "quality": true,
             "badges": [
@@ -837,11 +837,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w04-l3",
-        "name": "[Lekce: Samostatná práce](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Samostatná práce](https://trainer.ksi.fit.cvut.cz/lessons/635)",
         "children": [
           {
             "id": "tr-w04-l3-s1",
-            "name": "[Iterátor Fibonacciho posloupnosti](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Iterátor Fibonacciho posloupnosti](https://trainer.ksi.fit.cvut.cz/lessons/635/modules/464)",
             "relevance": 50,
             "quality": true,
             "badges": [
@@ -850,7 +850,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w04-l3-s2",
-            "name": "[Bitové pole](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Bitové pole](https://trainer.ksi.fit.cvut.cz/lessons/635/modules/873)",
             "relevance": 35,
             "quality": false,
             "badges": [
@@ -955,18 +955,18 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w05-l1",
-        "name": "[Lekce: Kopírování objektů](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Kopírování objektů](https://trainer.ksi.fit.cvut.cz/lessons/670)",
         "children": [
           {
             "id": "tr-w05-l1-s1",
-            "name": "[Chytré členské proměné](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Chytré členské proměné](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/876)",
             "relevance": 50,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w05-l1-s2",
-            "name": "[Pravidlo tří](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Pravidlo tří](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/893)",
             "relevance": 10,
             "quality": true,
             "badges": [
@@ -975,14 +975,14 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w05-l1-s3",
-            "name": "[Zakázaná kopie](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Zakázaná kopie](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/879)",
             "relevance": 10,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w05-l1-s4",
-            "name": "[Copy and swap](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Copy and swap](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/880)",
             "relevance": 30,
             "quality": true,
             "badges": [
@@ -991,14 +991,14 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w05-l1-s5",
-            "name": "[Hluboká kopie](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Hluboká kopie](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/882)",
             "relevance": 30,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w05-l1-s6",
-            "name": "[Počítání referencí](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Počítání referencí](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/883)",
             "relevance": 10,
             "quality": true,
             "badges": [
@@ -1007,7 +1007,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w05-l1-s7",
-            "name": "[Copy on write](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Copy on write](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/884)",
             "relevance": 10,
             "quality": true,
             "badges": [
@@ -1016,7 +1016,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w05-l1-s8",
-            "name": "[Proxy](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Proxy](https://trainer.ksi.fit.cvut.cz/lessons/670/modules/885)",
             "relevance": 0,
             "quality": true,
             "badges": []
@@ -1025,11 +1025,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w05-l2",
-        "name": "[Lekce: Přesouvání objektů](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Přesouvání objektů](https://trainer.ksi.fit.cvut.cz/lessons/671)",
         "children": [
           {
             "id": "tr-w05-l2-s1",
-            "name": "[Reference na pravou stranu](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Reference na pravou stranu](https://trainer.ksi.fit.cvut.cz/lessons/671/modules/886)",
             "relevance": 50,
             "quality": true,
             "badges": [
@@ -1038,7 +1038,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w05-l2-s2",
-            "name": "[Přesouvací sémantika](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Přesouvací sémantika](https://trainer.ksi.fit.cvut.cz/lessons/671/modules/887)",
             "relevance": 20,
             "quality": true,
             "badges": [
@@ -1047,14 +1047,14 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w05-l2-s3",
-            "name": "[Pravidlo pěti](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Pravidlo pěti](https://trainer.ksi.fit.cvut.cz/lessons/671/modules/892)",
             "relevance": 5,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w05-l2-s4",
-            "name": "[Move and swap](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Move and swap](https://trainer.ksi.fit.cvut.cz/lessons/671/modules/888)",
             "relevance": 10,
             "quality": true,
             "badges": [
@@ -1063,21 +1063,21 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w05-l2-s5",
-            "name": "[Specifikátor noexcept](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Specifikátor noexcept](https://trainer.ksi.fit.cvut.cz/lessons/671/modules/901)",
             "relevance": 45,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w05-l2-s6",
-            "name": "[Sjednocující přiřazení](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Sjednocující přiřazení](https://trainer.ksi.fit.cvut.cz/lessons/671/modules/889)",
             "relevance": 15,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w05-l2-s7",
-            "name": "[Příklady z STL](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Příklady z STL](https://trainer.ksi.fit.cvut.cz/lessons/671/modules/891)",
             "relevance": 20,
             "quality": true,
             "badges": [
@@ -1088,11 +1088,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w05-l3",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/673)",
         "children": [
           {
             "id": "tr-w05-l3-s1",
-            "name": "[C++ řetězce](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[C++ řetězce](https://trainer.ksi.fit.cvut.cz/lessons/673/modules/894)",
             "relevance": 20,
             "quality": false,
             "badges": [
@@ -1172,11 +1172,11 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w06-l1",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/703)",
         "children": [
           {
             "id": "tr-w06-l1-s1",
-            "name": "[Statistika slov](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Statistika slov](https://trainer.ksi.fit.cvut.cz/lessons/703/modules/532)",
             "relevance": 50,
             "quality": true,
             "badges": [
@@ -1249,7 +1249,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w07-l1-s1",
-            "name": "[Orientovaný graf II (BFS/DFS)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/677)",
+            "name": "[Orientovaný graf II (BFS/DFS)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/681)",
             "relevance": 100,
             "quality": true,
             "badges": [
@@ -1259,7 +1259,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w07-l1-s1",
-            "name": "[Orientovaný graf III (BFS/DFS/Dijkstra)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/678)",
+            "name": "[Orientovaný graf III (BFS/DFS/Dijkstra)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/685)",
             "relevance": 100,
             "quality": true,
             "badges": [
@@ -1270,7 +1270,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w07-l1-s1",
-            "name": "[Orientovaný graf IV (DFS/TopSort)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/679)",
+            "name": "[Orientovaný graf IV (DFS/TopSort)](https://trainer.ksi.fit.cvut.cz/lessons/729/modules/687)",
             "relevance": 80,
             "quality": true,
             "badges": [
@@ -1283,11 +1283,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w07-l2",
-        "name": "[Lekce: Samostatná práce](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Samostatná práce](https://trainer.ksi.fit.cvut.cz/lessons/733)",
         "children": [
           {
             "id": "tr-w07-l2-s1",
-            "name": "[Bludiště I](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Bludiště I](https://trainer.ksi.fit.cvut.cz/lessons/733/modules/909)",
             "relevance": 100,
             "quality": true,
             "badges": [
@@ -1297,7 +1297,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w07-l2-s1",
-            "name": "[Bludiště II](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Bludiště II](https://trainer.ksi.fit.cvut.cz/lessons/733/modules/910)",
             "relevance": 50,
             "quality": true,
             "badges": [
@@ -1357,18 +1357,18 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w08-l1",
-        "name": "[Lekce: Základní myšlenka polymorfismu](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Základní myšlenka polymorfismu](https://trainer.ksi.fit.cvut.cz/lessons/735)",
         "children": [
           {
             "id": "tr-w08-l1-s1",
-            "name": "[Motivace](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Motivace](https://trainer.ksi.fit.cvut.cz/lessons/735/modules/587)",
             "relevance": 25,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w08-l1-s3",
-            "name": "[Polymorfismus](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Polymorfismus](https://trainer.ksi.fit.cvut.cz/lessons/735/modules/591)",
             "relevance": 50,
             "quality": true,
             "badges": [
@@ -1377,7 +1377,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w08-l1-s4",
-            "name": "[Motivace - Řešení](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Motivace - Řešení](https://trainer.ksi.fit.cvut.cz/lessons/735/modules/592)",
             "relevance": 25,
             "quality": true,
             "badges": []
@@ -1386,11 +1386,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w08-l2",
-        "name": "[Lekce: Polymorfismus v C++](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Polymorfismus v C++](https://trainer.ksi.fit.cvut.cz/lessons/739)",
         "children": [
           {
             "id": "tr-w08-l2-s1",
-            "name": "[Dědičnost](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Dědičnost](https://trainer.ksi.fit.cvut.cz/lessons/739/modules/594)",
             "relevance": 40,
             "quality": true,
             "badges": [
@@ -1399,21 +1399,21 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w08-l2-s2",
-            "name": "[Virtuální metody a dynamická vazba](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Virtuální metody a dynamická vazba](https://trainer.ksi.fit.cvut.cz/lessons/739/modules/595)",
             "relevance": 10,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w08-l2-s5",
-            "name": "[Abstraktní třída](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Abstraktní třída](https://trainer.ksi.fit.cvut.cz/lessons/739/modules/598)",
             "relevance": 10,
             "quality": true,
             "badges": []
           },
           {
             "id": "tr-w08-l2-s6",
-            "name": "[Chytré pointery](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Chytré pointery](https://trainer.ksi.fit.cvut.cz/lessons/739/modules/599)",
             "relevance": 20,
             "quality": true,
             "badges": [
@@ -1423,7 +1423,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w08-l2-s7",
-            "name": "[A je to k něčemu dobrý?](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[A je to k něčemu dobrý?](https://trainer.ksi.fit.cvut.cz/lessons/739/modules/600)",
             "relevance": 10,
             "quality": true,
             "badges": []
@@ -1432,11 +1432,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w08-l3",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/740)",
         "children": [
           {
             "id": "tr-w08-l3-s1",
-            "name": "[Aritmetický výraz](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Aritmetický výraz](https://trainer.ksi.fit.cvut.cz/lessons/740/modules/912)",
             "relevance": 30,
             "quality": true,
             "badges": [
@@ -1449,11 +1449,11 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "tr-w08-l4",
-        "name": "[Lekce: Samostatná práce](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Samostatná práce](https://trainer.ksi.fit.cvut.cz/lessons/741)",
         "children": [
           {
             "id": "tr-w08-l4-s1",
-            "name": "[Grep](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Grep](https://trainer.ksi.fit.cvut.cz/lessons/741/modules/611)",
             "relevance": 30,
             "quality": true,
             "badges": [
@@ -1522,11 +1522,11 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w09-l1",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/736)",
         "children": [
           {
             "id": "tr-w09-l1-s1",
-            "name": "[Sklad výbušnin](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Sklad výbušnin](https://trainer.ksi.fit.cvut.cz/lessons/736/modules/915)",
             "relevance": 15,
             "quality": true,
             "badges": [
@@ -1603,11 +1603,11 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w10-l1",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/737)",
         "children": [
           {
             "id": "tr-w10-l1-s1",
-            "name": "[Spojový seznam I](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Spojový seznam I](https://trainer.ksi.fit.cvut.cz/lessons/737/modules/701)",
             "relevance": 50,
             "quality": true,
             "badges": [
@@ -1618,7 +1618,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w10-l1-s1",
-            "name": "[Spojový seznam I+ & II & II+](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Spojový seznam I+ & II & II+](https://trainer.ksi.fit.cvut.cz/lessons/737/modules/702)",
             "relevance": 10,
             "quality": true,
             "badges": [
@@ -1629,7 +1629,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w10-l1-s5",
-            "name": "[Součet argumentů](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Součet argumentů](https://trainer.ksi.fit.cvut.cz/lessons/737/modules/706)",
             "relevance": 10,
             "quality": true,
             "badges": [
@@ -1697,11 +1697,11 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w11-l1",
-        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Cvičení](https://trainer.ksi.fit.cvut.cz/lessons/747)",
         "children": [
           {
             "id": "tr-w11-l1-s1",
-            "name": "[Šablona pole I](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Šablona pole I](https://trainer.ksi.fit.cvut.cz/lessons/747/modules/918)",
             "relevance": 60,
             "quality": true,
             "badges": [
@@ -1712,7 +1712,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w11-l1-s1",
-            "name": "[Šablona pole II & III](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Šablona pole II & III](https://trainer.ksi.fit.cvut.cz/lessons/747/modules/920)",
             "relevance": 20,
             "quality": true,
             "badges": [
@@ -1723,7 +1723,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w11-l1-s4",
-            "name": "[Funkce jako parametr](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Funkce jako parametr](https://trainer.ksi.fit.cvut.cz/lessons/747/modules/922)",
             "relevance": 10,
             "quality": true,
             "badges": [
@@ -1782,11 +1782,11 @@ export const materialsData: SchoolMaterial[] = [
     "children": [
       {
         "id": "tr-w12-l1",
-        "name": "[Lekce: Procvičování ke zkoušce](https://trainer.ksi.fit.cvut.cz)",
+        "name": "[Lekce: Procvičování ke zkoušce](https://trainer.ksi.fit.cvut.cz/lessons/748)",
         "children": [
           {
             "id": "tr-w12-l1-s1",
-            "name": "[Šablona množiny](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Šablona množiny](https://trainer.ksi.fit.cvut.cz/lessons/748/modules/924)",
             "relevance": 60,
             "quality": true,
             "badges": [
@@ -1796,7 +1796,7 @@ export const materialsData: SchoolMaterial[] = [
           },
           {
             "id": "tr-w12-l1-s2",
-            "name": "[Balíčkovací systém](https://trainer.ksi.fit.cvut.cz)",
+            "name": "[Balíčkovací systém](https://trainer.ksi.fit.cvut.cz/lessons/748/modules/925)",
             "relevance": 20,
             "quality": true,
             "badges": [

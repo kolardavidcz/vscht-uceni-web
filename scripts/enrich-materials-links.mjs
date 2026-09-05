@@ -188,47 +188,12 @@ const elearningUrlMap = {
   "el-ch13-6": "https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/castsurvey.html",
 };
 
-// Trainer Map for Lessons and Specific Modules
-const trainerUrlMap = {
-  // Lessons
-  "tr-w01-l2": "https://trainer.ksi.fit.cvut.cz/lessons/581",
-  "tr-w01-l3": "https://trainer.ksi.fit.cvut.cz",
-  "tr-w07-l1": "https://trainer.ksi.fit.cvut.cz/lessons/729",
-
-  // Week 1, Lesson 581 Modules
-  "tr-w01-l2-s1": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/330",
-  "tr-w01-l2-s2": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/331",
-  "tr-w01-l2-s3": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/332",
-  "tr-w01-l2-s5": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/334",
-  "tr-w01-l2-s7": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/336",
-  "tr-w01-l2-s9": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/338",
-  "tr-w01-l2-s10": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/339",
-  "tr-w01-l2-s11": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/340",
-  "tr-w01-l2-s12": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/341",
-
-  // Week 7, Lesson 729 Modules
-  "tr-w07-l1-s1": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/676",
-  "tr-w07-l1-s2": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/677",
-  "tr-w07-l1-s3": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/678",
-  "tr-w07-l1-s4": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/679",
-};
-
-// Exact title overrides for Trainer modules
-const trainerTitleMap = {
-  "Jednodušší struktury": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/330",
-  "Jmenné prostory": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/331",
-  "Operátory new a delete": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/332",
-  "Reference": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/334",
-  "Reference na konstantu": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/336",
-  "Přetěžování funkcí": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/338",
-  "Výchozí argumenty": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/339",
-  "Řazení v C++": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/340",
-  "Vstup a výstup v C++": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/341",
-  "Orientovaný graf I (BFS)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/676",
-  "Orientovaný graf II (BFS/DFS)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/677",
-  "Orientovaný graf III (BFS/DFS/Dijkstra)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/678",
-  "Orientovaný graf IV (DFS/TopSort)": "https://trainer.ksi.fit.cvut.cz/lessons/729/modules/679",
-};
+// Load full scraped Trainer URLs from trainer_urls.json
+const trainerUrlsPath = path.join(__dirname, "trainer_urls.json");
+let scrapedTrainerUrls = {};
+if (fs.existsSync(trainerUrlsPath)) {
+  scrapedTrainerUrls = JSON.parse(fs.readFileSync(trainerUrlsPath, "utf8"));
+}
 
 const TRAINER_BASE = "https://trainer.ksi.fit.cvut.cz";
 
@@ -243,6 +208,44 @@ function stripMd(s) {
 function linkify(text, url) {
   const clean = stripMd(text);
   return `[${clean}](${url})`;
+}
+
+function findTrainerModuleUrl(rawModName) {
+  const clean = stripMd(rawModName);
+
+  // 1. Direct match in scraped URLs
+  if (scrapedTrainerUrls[clean]) return scrapedTrainerUrls[clean];
+
+  // 2. Strip parentheses, e.g. "Orientovaný graf I (BFS)" -> "Orientovaný graf I"
+  const withoutParen = clean.replace(/\s*\([^)]*\)/g, "").trim();
+  if (scrapedTrainerUrls[withoutParen]) return scrapedTrainerUrls[withoutParen];
+
+  // 3. Composite titles with "&", e.g. "Spojový seznam I+ & II & II+" -> "Spojový seznam I+"
+  if (clean.includes("&")) {
+    const firstPart = clean.split("&")[0].trim();
+    if (scrapedTrainerUrls[firstPart]) return scrapedTrainerUrls[firstPart];
+  }
+
+  // 4. "Motivace - Řešení" -> "Motivace I - Řešení"
+  if (clean.includes("Motivace") && clean.includes("Řešení")) {
+    if (scrapedTrainerUrls["Motivace I - Řešení"]) return scrapedTrainerUrls["Motivace I - Řešení"];
+  }
+
+  // 5. Try suffix " I" or " I - Základ", e.g. "Metody" -> "Metody I"
+  if (scrapedTrainerUrls[clean + " I"]) return scrapedTrainerUrls[clean + " I"];
+  if (scrapedTrainerUrls[withoutParen + " I"]) return scrapedTrainerUrls[withoutParen + " I"];
+  if (scrapedTrainerUrls[clean + " I - Základ"]) return scrapedTrainerUrls[clean + " I - Základ"];
+
+  // 6. Fuzzy prefix / substring in module URLs
+  for (const [title, url] of Object.entries(scrapedTrainerUrls)) {
+    if (url.includes("/modules/")) {
+      if (title.startsWith(clean + " ") || title.startsWith(withoutParen + " ")) {
+        return url;
+      }
+    }
+  }
+
+  return null;
 }
 
 // Read raw materialsData.ts
@@ -287,23 +290,50 @@ for (const cat of data) {
 
     if (Array.isArray(cat.children)) {
       for (const lesson of cat.children) {
-        let lessonUrl = trainerUrlMap[lesson.id] || TRAINER_BASE;
-        const cleanLesson = stripMd(lesson.name);
-        if (cat.id === "tr-week07" && cleanLesson.includes("Cvičení")) {
-          lessonUrl = "https://trainer.ksi.fit.cvut.cz/lessons/729";
-        }
-        lesson.name = linkify(lesson.name, lessonUrl);
-        trainerLinkedCount++;
+        const rawLessonName = stripMd(lesson.name);
+        const cleanLesson = rawLessonName.replace(/^Lekce:\s*/, "");
 
+        // 1. Resolve children modules first so we can accurately infer the exact lesson ID
+        const modUrls = [];
         if (Array.isArray(lesson.children)) {
           for (let mi = 0; mi < lesson.children.length; mi++) {
             const mod = lesson.children[mi];
             const cleanTitle = stripMd(mod.name);
-            const modUrl =
-              trainerTitleMap[cleanTitle] ||
-              trainerUrlMap[mod.id] ||
-              lessonUrl;
-            mod.name = linkify(mod.name, modUrl);
+            const modUrl = findTrainerModuleUrl(cleanTitle);
+            if (modUrl) {
+              modUrls.push(modUrl);
+              mod.name = linkify(mod.name, modUrl);
+            }
+          }
+        }
+
+        // 2. Determine lesson URL:
+        // Prioritize inferring from child modules because generic lesson names
+        // ("Cvičení", "Samostatná práce") recur across multiple weeks.
+        let lessonUrl = null;
+        if (modUrls.length > 0) {
+          const match = modUrls[0].match(/^(https:\/\/trainer\.ksi\.fit\.cvut\.cz\/lessons\/\d+)/);
+          if (match) lessonUrl = match[1];
+        }
+
+        if (!lessonUrl) {
+          lessonUrl =
+            scrapedTrainerUrls["Lekce: " + cleanLesson] ||
+            scrapedTrainerUrls[cleanLesson] ||
+            scrapedTrainerUrls[rawLessonName];
+        }
+
+        lessonUrl = lessonUrl || TRAINER_BASE;
+        lesson.name = linkify(lesson.name, lessonUrl);
+        trainerLinkedCount++;
+
+        // 3. Any module without a specific module URL falls back to its own lesson's URL
+        if (Array.isArray(lesson.children)) {
+          for (let mi = 0; mi < lesson.children.length; mi++) {
+            const mod = lesson.children[mi];
+            if (!mod.name.startsWith("[")) {
+              mod.name = linkify(mod.name, lessonUrl);
+            }
             trainerLinkedCount++;
           }
         }
