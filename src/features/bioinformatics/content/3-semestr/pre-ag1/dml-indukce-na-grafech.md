@@ -23,7 +23,7 @@ Na grafech to funguje stejně — jen místo „kostky č. $k$" říkáme „gra
 <div class="px-5 py-3.5 bg-amber-500/15 dark:bg-amber-900/40 border-b border-amber-300/80 dark:border-amber-800/80 flex items-center justify-between">
 <div class="flex items-center gap-2.5 font-bold text-amber-950 dark:text-amber-200 text-sm sm:text-base">
 <span>☕</span>
-<span>Příklad: Platba mincemi (3 Kč a 5 Kč) — Silná vs. Slabá Indukce</span>
+<span>Příklad: Platba mincemi (3 Kč a 5 Kč) — Slabá vs. Silná Indukce</span>
 </div>
 <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200">Klasika ze zkoušek</span>
 </div>
@@ -37,13 +37,55 @@ Pro všechna n ≥ 8 dokazujeme tvrzení V(n):<br>
 </div>
 <details class="mt-4" open>
 <summary class="cursor-pointer font-bold text-amber-700 dark:text-amber-400 hover:text-amber-800 select-none py-1">
-🔍 Zobrazit 2 způsoby důkazu: Silná indukce vs. Slabá indukce
+🔍 Zobrazit 2 způsoby důkazu: Slabá indukce vs. Silná indukce
 </summary>
 <div class="mt-4 space-y-6 pt-2 border-t border-amber-200/60 dark:border-amber-900/40">
 <div>
 <h4 class="text-sm font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+Metoda 1: Důkaz Slabou Indukcí (Pravidlo výměny mincí: 5 ➔ 3+3 nebo 3+3+3 ➔ 5+5)
+</h4>
+<p class="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mb-2">
+Zde nám stačí <strong>jediný bázový případ</strong> a krok $n \implies n + 1$ provedeme chytrou výměnou mincí v peněžence:
+</p>
+<ol class="text-xs sm:text-sm space-y-2 pl-5 list-decimal text-stone-800 dark:text-stone-200">
+<li><strong>Báze indukce:</strong> Pro $n = 8$ máme $8 = 3 + 5$ Kč. Platí $V(8)$ ✅.</li>
+<li><strong>Indukční krok ($n \implies n + 1$):</strong>
+Předpokládejme, že částku $n$ Kč (kde $n \ge 8$) máme vyplacenu v mincích 3 Kč a 5 Kč (IP). Chceme z ní vytvořit částku $n + 1$ Kč.
+Nahlédneme do peněženky a rozlišíme 3 situace podle toho, jaké mince máme k dispozici:
+<div class="mt-2 space-y-2">
+<div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
+<strong class="text-stone-900 dark:text-stone-100">Případ A (V peněžence máme jen 5 Kč mince — žádnou 3 Kč):</strong><br>
+Jednu 5 Kč minci odebereme a nahradíme ji <strong>dvěma 3 Kč mincemi</strong> ($5 \to 3 + 3$).<br>
+<div class="my-1 font-mono text-xs text-amber-700 dark:text-amber-400 font-bold">
+5 Kč ➔ 3 Kč + 3 Kč &nbsp; (např. 10 Kč = 5+5 ➔ 5+3+3 = 11 Kč, čistá změna: -5 + 6 = +1 Kč)
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
+<strong class="text-stone-900 dark:text-stone-100">Případ B (V peněžence je 5 Kč i 3 Kč — máme obě mince):</strong><br>
+Pětikorunu vyměníme za dvě tříkoruny ($5 \to 3 + 3$). Spolu s existující původní 3 Kč mincí tak vznikne <strong>trojice tříkorun 3 + 3 + 3</strong>:<br>
+<div class="my-1 font-mono text-xs text-blue-700 dark:text-blue-400 font-bold">
+(5 Kč) + 3 Kč ➔ (3 Kč + 3 Kč) + 3 Kč = 3 + 3 + 3 &nbsp; (např. 8 Kč = 5+3 ➔ 3+3+3 = 9 Kč, čistá změna: +1 Kč)
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
+<strong class="text-stone-900 dark:text-stone-100">Případ C (V peněžence není žádná 5 Kč mince — máme jen 3 Kč mince):</strong><br>
+Protože celková částka je $n \ge 8$ a skládá se výhradně z tříkorun, musíme mít <strong>alespoň tři tříkoruny</strong> ($3 \times 3 = 9$ Kč; dvě dávají jen 6 Kč &lt; 8).
+Vezmeme tyto tři tříkoruny a nahradíme je <strong>dvěma pětikorunami</strong>:
+<div class="my-1 font-mono text-xs text-emerald-700 dark:text-emerald-400 font-bold">
+3 Kč + 3 Kč + 3 Kč ➔ 5 Kč + 5 Kč &nbsp; (např. 9 Kč = 3+3+3 ➔ 5+5 = 10 Kč, čistá změna: -9 + 10 = +1 Kč)
+</div>
+Částka vzrostla přesně na $n + 1$ Kč!
+</div>
+</div>
+</li>
+<li><strong>Závěr:</strong> Ve všech případech jsme z libovolné platné výplaty $n$ Kč sestrojili výplatu $n + 1$ Kč. Podle principu slabé indukce tvrzení platí pro všechna celá čísla $n \ge 8$. $\blacksquare$</li>
+</ol>
+</div>
+<div>
+<h4 class="text-sm font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-2">
 <span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span>
-Metoda 1: Důkaz Silnou Indukcí (Krok o 3 Kč zpět s 3 bázemi)
+Metoda 2: Důkaz Silnou Indukcí (Krok o 3 Kč zpět s 3 bázemi)
 </h4>
 <p class="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mb-2">
 Tato metoda využívá fakt, že přidáním jedné 3 Kč mince získáme z částky $k$ částku $k + 3$. Abychom pokryli všechna čísla, potřebujeme <strong>3 po sobě jdoucí bázové případy</strong>:
@@ -62,44 +104,8 @@ Jelikož $n \ge 10$, platí $(n + 1) - 3 = n - 2 \ge 8$.
 Podle indukčního předpokladu tedy dokážeme bez vracení vyplatit částku <strong>$(n - 2)$ Kč</strong>.
 K této sestavě mincí nyní stačí <strong>přidat jednu tříkorunu (+3 Kč)</strong>:
 $$(n - 2) + 3 = n + 1 \text{ Kč}$$
-Tím jsme přesně vyplatili $n + 1$ Kč, což jsme potřebovali dokázat!
+Tím jsme přesně vyplatili $n + 1$ Kč, což jsme potřebovali dokázat! $\blacksquare$
 </li>
-</ol>
-</div>
-<div>
-<h4 class="text-sm font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider mb-2 flex items-center gap-2">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
-Metoda 2: Důkaz Slabou Indukcí (Pravidlo výměny mincí: 5 ➔ 3+3 nebo 3+3+3 ➔ 5+5)
-</h4>
-<p class="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mb-2">
-Zde nám stačí <strong>jediný bázový případ</strong> a krok $n \implies n + 1$ provedeme chytrou výměnou mincí v peněžence:
-</p>
-<ol class="text-xs sm:text-sm space-y-2 pl-5 list-decimal text-stone-800 dark:text-stone-200">
-<li><strong>Báze indukce:</strong> Pro $n = 8$ máme $8 = 3 + 5$ Kč. Platí $V(8)$ ✅.</li>
-<li><strong>Indukční krok ($n \implies n + 1$):</strong>
-Předpokládejme, že částku $n$ Kč (kde $n \ge 8$) máme vyplacenu v mincích 3 Kč a 5 Kč (IP). Chceme z ní vytvořit částku $n + 1$ Kč.
-Nahlédneme do peněženky a rozlišíme právě dvě vzájemně se vylučující situace:
-<div class="mt-2 space-y-2">
-<div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
-<strong class="text-stone-900 dark:text-stone-100">Případ A (V peněžence je alespoň jedna 5 Kč mince):</strong><br>
-Tuto pětikorunu odebereme a nahradíme ji <strong>dvěma tříkorunami</strong>:
-<div class="my-1 font-mono text-xs text-amber-700 dark:text-amber-400 font-bold">
-5 Kč ➔ 3 Kč + 3 Kč &nbsp; (čistá změna: -5 + 6 = +1 Kč)
-</div>
-Částka vzrostla přesně na $n + 1$ Kč!
-</div>
-<div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
-<strong class="text-stone-900 dark:text-stone-100">Případ B (V peněžence není žádná 5 Kč mince — máme jen tříkoruny):</strong><br>
-Protože celková částka je $n \ge 8$ a skládá se výhradně z tříkorun, musíme mít <strong>alespoň tři tříkoruny</strong> ($3 \times 3 = 9$ Kč; dvě tříkoruny dávají jen 6 Kč, což je méně než 8).
-Vezmeme tyto tři tříkoruny a nahradíme je <strong>dvěma pětikorunami</strong>:
-<div class="my-1 font-mono text-xs text-emerald-700 dark:text-emerald-400 font-bold">
-3 Kč + 3 Kč + 3 Kč ➔ 5 Kč + 5 Kč &nbsp; (čistá změna: -9 + 10 = +1 Kč)
-</div>
-Částka vzrostla přesně na $n + 1$ Kč!
-</div>
-</div>
-</li>
-<li><strong>Závěr:</strong> V obou případech jsme z libovolné platné výplaty $n$ Kč sestrojili výplatu $n + 1$ Kč. Podle principu indukce tvrzení platí pro všechna celá čísla $n \ge 8$. $\blacksquare$</li>
 </ol>
 </div>
 </div>
