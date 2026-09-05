@@ -13,7 +13,7 @@ Odpověď závisí přesně na tom, **jak přečteme implikaci** „pokud A, pak
 
 Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AG1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů.
 
-> 💡 **Příslib tohoto modulu:** Po přečtení budeš umět přesně přečíst jakékoliv matematické tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Žádná předchozí znalost teorie grafů se nevyžaduje — všechny potřebné pojmy (síť, uzly, spojnice, stromy) si srozumitelně zavedeme přímo na místě!
+> 💡 **Příslib tohoto modulu:** Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C — žádná teorie grafů není předem potřeba!
 
 ---
 
@@ -26,7 +26,7 @@ Matematická logika pracuje s **výroky**:
 
 ### Příklady v Bioinformatice & Matematice:
 - *"Molekula vody obsahuje 2 atomy vodíku."* $\implies$ **Výrok (Pravdivý = 1)**.
-- *"Síť s 5 uzly, kde je každý uzel propojen s každým (úplný graf $K_5$), má přesně 10 spojnic."* $\implies$ **Výrok (Pravdivý = 1)**.
+- *"Kofein má sumární chemický vzorec $C_8H_{10}N_4O_2$."* $\implies$ **Výrok (Pravdivý = 1)**.
 - *"Číslo 17 je prvočíslo."* $\implies$ **Výrok (Pravdivý = 1)**.
 - *"Tento kód v C++ je pěkný."* $\implies$ **NENÍ výrok** (subjektivní hodnocení, nelze jednoznačně určit 0 nebo 1).
 - *"Kolik prvků má množina $V$?"* $\implies$ **NENÍ výrok** (otázka).
@@ -103,11 +103,6 @@ Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B
 <td class="py-2 px-3.5 text-slate-800">Množina všech uspořádaných dvojic $\{(a, b) \mid a \in A \land b \in B\}$; mohutnost je $|A \times B| = |A| \cdot |B|$</td>
 </tr>
 <tr class="hover:bg-slate-50/70 transition-colors">
-<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$\mathcal{P}(A)$ (nebo $2^A$)</td>
-<td class="py-2 px-3.5 font-medium text-slate-900"><strong>potenční množina</strong></td>
-<td class="py-2 px-3.5 text-slate-800">Množina všech podmnožin množiny $A$: $\mathcal{P}(A) = \{X \mid X \subseteq A\}$; mohutnost je $|\mathcal{P}(A)| = 2^{|A|}$</td>
-</tr>
-<tr class="hover:bg-slate-50/70 transition-colors">
 <td class="py-2 px-3.5 font-mono font-bold text-slate-900">$\emptyset$ (nebo $\{\}$)</td>
 <td class="py-2 px-3.5 font-medium text-slate-900"><strong>prázdná množina</strong></td>
 <td class="py-2 px-3.5 text-slate-800">Množina neobsahující žádný prvek; $|\emptyset| = 0$, je podmnožinou každé množiny ($\emptyset \subseteq A$)</td>
@@ -123,7 +118,7 @@ Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B
 
 ---
 
-### 2.1 Mnemotechnika Implikace ($A \Rightarrow B$) & Slib Zkoušejícího `[PAST U ZKOUŠKY]`
+### 2.1 Mnemotechnika Implikace ($A \Rightarrow B$): Student vs. Učitel `[PAST U ZKOUŠKY]`
 
 Studenti VŠCHT nejčastěji chybují v pravdivosti **implikace**, pokud je předpoklad nepravdivý. Jak si to okamžitě a bezpečně zapamatovat do konce života?
 
@@ -186,15 +181,6 @@ Kdy student zkouškou projde (**GOOD / 1**) a kdy dostane **0**?
 > Ve formální logice je implikace $A \Rightarrow B$ **nepravdivá (0) POUZE v případě $1 \Rightarrow 0$** (předpoklad platí, ale závěr nenastal).
 > - Pokud je předpoklad $A = 0$ (nepravdivý), je celá implikace **VŽDY PRAVDIVÁ (1)**, bez ohledu na to, zda závěr $B$ platí či ne (**triviální pravdivost / vacuous truth**).
 > - V naší zkouškové mnemotechnice klade požadavky zkoušející učitel ($U \Rightarrow S$): jediná nula nastane, když učitel látku vyžaduje ($U=1$), ale student ji neumí ($S=0$).
-
-#### Formální mnemotechnika: Slib zkoušejícího ($A \Rightarrow B$)
-Pokud si chcete implikaci představit jako smlouvu, podívejte se na oficiální slib cvičícího:
-> *"Slib zkoušejícího: Pokud student správně vyřeší dekonstrukční indukci ($A=1$), pak dostane zápočet ($B=1$)."*
-
-Kdy zkoušející svůj slib **porušil (lhal $\Rightarrow 0$)**?
-- **Student indukci vyřešil ($A=1$), ale zápočet nedostal ($B=0$)**: $1 \Rightarrow 0 = \mathbf{0}$. Zkoušející byl podrazák a slib porušil!
-- **Student indukci nenapsal ($A=0$), ale zápočet přesto dostal ($B=1$)**: $0 \Rightarrow 1 = \mathbf{1}$. Zkoušející slib neporušil (byl benevolentní a dal zápočet např. za aktivitu).
-- **Student indukci nenapsal ($A=0$) a zápočet nedostal ($B=0$)**: $0 \Rightarrow 0 = \mathbf{1}$. Férová situace, slib nebyl porušen.
 
 > 💡 **Triviální Pravdivost (Vacuous Truth):**  
 > Pokud je předpoklad $A$ **nepravdivý ($A=0$)**, je implikace $A \Rightarrow B$ **VŽDY PRAVDIVÁ**, bez ohledu na to, zda $B$ platí nebo ne!  
@@ -276,69 +262,57 @@ Sloupce $\neg(A \land B)$ a $\neg A \lor \neg B$ mají ve všech řádcích **id
 
 #### 💻 De Morganovy Zákony v Jazyce C (Podmínky `if`)
 
-V programování (BI-PA1) používáte De Morganovy zákony neustále při zjednodušování a bezchybném negování složených podmínek v příkazech `if`. V jazyce C odpovídají logickým spojkám tyto operátory:
-- Logické „A ZÁROVEŇ“ ($\land$) $\longleftrightarrow$ `&&`
-- Logické „NEBO“ ($\lor$) $\longleftrightarrow$ `||`
-- Logická negace ($\neg$) $\longleftrightarrow$ `!`
-
-##### 1. Negace konjunkce: `!(A && B)` $\equiv$ `(!A || !B)`
-Představme si ošetření chybového stavu: funkce smí pracovat pouze tehdy, když ukazatel na data není `NULL` **a zároveň** je velikost pole kladná ($A \land B$). Chceme napsat podmínku pro **chybový stav** $\neg(A \land B)$:
+V programování (BI-PA1) v různých situacích dává smysl použít obě formy zápisu:
 
 ```c
-// Neohrabaný zápis s vnější negací celé závorky:
-if (!(ptr != NULL && size > 0)) {
-    // Podle De Morgana !(A && B) == (!A || !B)
-    // Ekvivalentní a v C mnohem čitelnější zápis:
-    // if (ptr == NULL || size <= 0)
-    return -1; // Neplatný vstup
-}
+// 1. Negace konjunkce: !(A && B)  ===>  (!A || !B)
+// Kontrola rozsahu: hodnota nesmí být mimo povolený interval 0 až 100
+if (!(score >= 0 && score <= 100))     // Intuitivní: „když NENÍ uvnitř platného intervalu"
+if (score < 0 || score > 100)          // De Morgan: „když je menší než min NEBO větší než max"
+
+// 2. Negace disjunkce: !(A || B)  ===>  (!A && !B)
+// Kontrola volby: uživatel nepotvrdil pokračování volbou 'a' ani 'y'
+if (!(ans == 'a' || ans == 'y'))       // Intuitivní: „když nezvolil ani jednu z povolených možností"
+if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁROVEŇ nezadal 'y'"
+
+// 3. Kontrola rozměrů: obrazec musí mít kladnou šířku i výšku
+if (!(width > 0 && height > 0))        // Intuitivní: „když neplatí, že jsou oba rozměry kladné"
+if (width <= 0 || height <= 0)         // De Morgan: „když je neplatná šířka NEBO neplatná výška"
 ```
-
-##### 2. Negace disjunkce: `!(A || B)` $\equiv$ `(!A && !B)`
-Představme si kontrolu uživatelského vstupu: program má pokračovat, pokud uživatel zadal znak `'a'` **nebo** znak `'b'` ($A \lor B$). Chceme zachytit jakýkoliv **nepovolený znak** $\neg(A \lor B)$:
-
-```c
-// Zápis s vnější negací:
-if (!(choice == 'a' || choice == 'b')) {
-    // Podle De Morgana !(A || B) == (!A && !B)
-    // Ekvivalentní zápis bez zbytečných závorek:
-    // if (choice != 'a' && choice != 'b')
-    printf("Chyba: Zadejte pouze 'a' nebo 'b'!\n");
-}
-```
-
-> 💡 **Programátorská past v PA1:**  
-> Při roznásobení negace `!` dovnitř závorky musíte nejen zaměnit spojky (`&&` $\longleftrightarrow$ `||`), ale **otočit i relační operátory** samotných proměnných:  
-> `!(x >= 0 && y != 5)` $\quad \equiv \quad$ `(x < 0 || y == 5)`.
 
 ---
 
-#### 🌲 Příklad z Bioinformatiky & Sítí: Kdy struktura NENÍ strom?
+#### 🧪 Příklad z Reálného Života: Vstup do Laboratoře na VŠCHT (1. Zákon: Negace Konjunkce)
 
-*(Nemusíte znát teorii grafů — strom intuitivně znáte z biologie, např. fylogenetický evoluční strom nebo větvení cév).*
+Představte si pravidla pro práci v biochemické laboratoři na VŠCHT. Student smí vstoupit do laboratoře a pracovat pouze tehdy, když splňuje dvě podmínky současně:
+1. **Má ochranné pomůcky ($A$):** Má oblečený laboratorní plášť a nasazené ochranné brýle.
+2. **Má bezpečnostní test ($B$):** Má podepsané školení a úspěšně splněný vstupní test bezpečnosti.
 
-V informatice i bioinformatice je **strom** definován jako propojená síť, která splňuje dvě vlastnosti současně:
-1. **Je souvislá ($A$):** Všechny prvky jsou propojeny do jednoho celku (neexistují žádné oddělené „ostrovy").
-2. **Je acyklická ($B$):** Síť neobsahuje žádné uzavřené smyčky / okruhy (z žádného místa se nelze po spojnicích vrátit oklikou zpět do výchozího bodu).
+Vstup do laboratoře je povolen právě tehdy, když platí obě podmínky:
+$$A \land B$$
 
-Formální definice stromu:
-$$G \text{ je strom} \quad \iff \quad A \land B$$
-*(kde výrok $A$ znamená „síť je souvislá" a výrok $B$ znamená „síť je bez uzavřených smyček / acyklická")*
-
-Co to znamená podle De Morganova zákona, když chceme otestovat, že zkoumaná síť **NENÍ strom** ($\neg(A \land B)$)?
+Co to znamená podle 1. De Morganova zákona, když vás cvičící **do laboratoře NEPUSTÍ** ($\neg(A \land B)$)?
 $$\neg (A \land B) \quad \equiv \quad \neg A \lor \neg B$$
 
-> 💡 **Klíčový didaktický aha-moment:**  
-> K vyvrácení toho, že síť je strom, **nemusíte** hledat obě vady současně!  
-> Podle De Morgana vám **stačí nalézt alespoň jednu chybu**:
-> - Buď ukážete, že se síť rozpadá na oddělené nepropojené části ($\neg A$, není souvislá),
-> - **NEBO** v síti odhalíte alespoň jednu uzavřenou smyčku ($\neg B$, obsahuje cyklus).  
-> Jakmile nastane alespoň jedna z těchto dvou situací, objekt stromem být nemůže!
+> 💡 **Didaktický aha-moment z reálného života:**  
+> K tomu, aby vás vyučující poslal pryč ode dveří, **nemusíte porušit obě podmínky najednou**!  
+> Podle De Morgana vám **stačí udělat jedinou chybu**:
+> - Buď jste si doma zapomněli plášť či brýle ($\neg A$),
+> - **NEBO** jste nenapsali test bezpečnosti ($\neg B$).  
+> Jakmile nastane alespoň jedno z toho (stačí zapomenout brýle, i když test máte na 100 bodů), do laborky nesmíte!
 
-#### 🧬 Příklad s Párováním Molekul (Bipartitní Síť)
-Představme si biochemickou síť dvou skupin molekul — např. **enzymy** a **substráty**. Vazby vedou výhradně mezi enzymem a substrátem (nikdy enzym–enzym ani substrát–substrát).
-- Takové síti se říká **bipartitní** (dvoustranná, $A$) a platí pro ni věta, že **neobsahuje žádné uzavřené smyčky s lichým počtem spojnic** ($B$).
-- Porušení bipartitnosti $\neg(A \land B)$ se podle De Morgana rozpadne na dvě nezávislé možnosti: buď najdeme vazbu spojující molekuly stejné skupiny ($\neg A$), **nebo** odhalíme lichou smyčku ($\neg B$).
+#### 🚆 Příklad z Běžného Života: Studentská Sleva na Jízdenku (2. Zákon: Negace Disjunkce)
+
+Druhý De Morganův zákon ($\neg(A \lor B) \equiv \neg A \land \neg B$) si představte na studentské slevě na vlak či autobus. Nárok na slevu máte, pokud:
+- Je vám méně než 18 let ($A$), **NEBO** předložíte platný průkaz ISIC ($B$).
+
+Nárok na slevu platí právě tehdy, když:
+$$A \lor B$$
+
+Kdy na slevu **NEMÁTE nárok** a musíte zaplatit plné jízdné ($\neg(A \lor B)$)?
+$$\neg (A \lor B) \quad \equiv \quad \neg A \land \neg B$$
+- Plnou cenu platíte právě tehdy, když **je vám 18 a více ($\neg A$) A ZÁROVEŇ u sebe nemáte platný ISIC ($\neg B$)**.  
+  Pokud by platila alespoň jedna z výhod (např. je vám 21 let, ale máte ISIC), slevu bez potíží dostanete. O slevu přijdete pouze při selhání obou podmínek naráz!
 
 ---
 
@@ -364,22 +338,23 @@ Uvažujme implikaci $A \Rightarrow B$:
 - **$A$ je POSTAČUJÍCÍ podmínka pro $B$:** Platnost $A$ nám **zcela stačí** k tomu, abychom zaručili platnost $B$. (Jakmile nastane A, automaticky platí B).
 - **$B$ je NUTNÁ podmínka pro $A$:** Bez platnosti $B$ nemůže $A$ vůbec nastat. Pokud neplatí $B$, je vyloučeno, aby platilo $A$ ($\neg B \implies \neg A$).
 
-### 🧬 Biologicko-Chemické a Síťové Srovnání:
+### 🧬 Příklady ze Života, Chemie a Univerzity:
 
 ```
-┌──────────────────────────────────────────────┬──────────────────────────────────────┬──────────────────────────────────────┐
-│ Vztah A ⇒ B                                  │ Postačující podmínka (A)             │ Nutná podmínka (B)                   │
-├──────────────────────────────────────────────┼──────────────────────────────────────┼──────────────────────────────────────┤
-│ Glukóza ⇒ Obsahuje Uhlík                     │ Být glukózou STAČÍ k obsahu uhlíku.  │ Obsahovat uhlík je NUTNÉ pro glukózu.│
-│ Enzymatická kaskáda ⇒ Přítomnost ATP         │ Aktivace kaskády STAČÍ pro spotřebu. │ ATP je NUTNÉ pro průběh kaskády.     │
-│ Strom ⇒ Síť je propojená (souvislá)          │ Být stromem STAČÍ pro souvislost.    │ Souvislost je NUTNÁ pro strom.       │
-│ Uzel má sousedy (deg > 0) ⇒ Síť má spojnice  │ Mít sousedy STAČÍ pro existenci hran. │ Existence hran je NUTNÁ pro sousedy. │
-└──────────────────────────────────────────────┴──────────────────────────────────────┴──────────────────────────────────────┘
+┌──────────────────────────────────────────────┬──────────────────────────────────────────┬──────────────────────────────────────────┐
+│ Vztah A ⇒ B                                  │ Postačující podmínka (A)                 │ Nutná podmínka (B)                       │
+├──────────────────────────────────────────────┼──────────────────────────────────────────┼──────────────────────────────────────────┤
+│ Glukóza ⇒ Obsahuje Uhlík                     │ Být glukózou STAČÍ k obsahu uhlíku.      │ Obsahovat uhlík je NUTNÉ pro glukózu.    │
+│ Student VŠCHT ⇒ Vysokoškolák                 │ Studovat na VŠCHT STAČÍ být vysokoškolák.│ Být vysokoškolákem je NUTNÉ pro VŠCHT.   │
+│ Řízení auta na silnici ⇒ Věk alespoň 18 let  │ Být legálním řidičem STAČÍ k věku ≥ 18.  │ Věk ≥ 18 je NUTNÝ pro řízení auta.       │
+│ Získat červený diplom ⇒ Složit státnice      │ Červený diplom STAČÍ k úspěšným státnicím│ Složit státnice je NUTNÉ pro diplom.     │
+└──────────────────────────────────────────────┴──────────────────────────────────────────┴──────────────────────────────────────────┘
 ```
 
 > 💡 **Ekvivalence ($A \Leftrightarrow B$):**  
 > Pokud platí **ekvivalence $A \Leftrightarrow B$**, říkáme, že $A$ je **nutnou A ZÁROVEŇ postačující podmínkou** pro $B$ (a naopak).  
-> *Příklad:* Síť lze rozdělit do dvou oddělených skupin bez vnitřních vazeb (tzv. bipartitní síť, např. enzymy vs. substráty) **právě tehdy, když** v ní neexistuje žádná lichá uzavřená smyčka.
+> *Příklad z chemie:* Voda v otevřené kádince za normálního atmosférického tlaku vře ($A$) **právě tehdy, když** její teplota dosáhla 100 °C ($B$).  
+> *Příklad z univerzity:* Student získá zápočet z tělocviku ($A$) **právě tehdy, když** má splněno alespoň 10 docházek ($B$).
 
 ---
 
