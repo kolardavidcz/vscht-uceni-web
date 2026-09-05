@@ -35,6 +35,11 @@ function getLeafNodes(node: SchoolMaterialNode): SchoolMaterialNode[] {
   return node.children.flatMap(getLeafNodes);
 }
 
+function getFirstUrl(name: string): string | null {
+  const match = /\[([^\]]+)\]\(([^)]+)\)/.exec(name);
+  return match ? match[2] : null;
+}
+
 function renderNameWithLinks(name: string) {
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
   const parts: (string | React.ReactNode)[] = [];
@@ -809,16 +814,33 @@ export function PA2ToAG1Overview() {
                             {categoryIcon}
                             <span>{categoryLabel}</span>
                           </div>
-                          {items.map((item) => (
-                            <div
-                              key={item.id}
-                              className="border-l border-slate-200 pl-2 py-0.5"
-                            >
-                              <p className="text-[10px] text-slate-500 font-semibold leading-tight">
-                                {renderNameWithLinks(item.name)}
-                              </p>
-                            </div>
-                          ))}
+                          {items.map((item) => {
+                            const subLessons = item.children?.filter(
+                              (child) => child.children && child.children.length > 0
+                            );
+                            return (
+                              <div
+                                key={item.id}
+                                className="border-l border-slate-200 pl-2 py-0.5 space-y-1"
+                              >
+                                <p className="text-[10px] text-slate-600 font-bold leading-tight">
+                                  {renderNameWithLinks(item.name)}
+                                </p>
+                                {subLessons && subLessons.length > 0 && (
+                                  <div className="pl-1.5 space-y-0.5 border-l border-slate-200/80">
+                                    {subLessons.map((lesson) => (
+                                      <p
+                                        key={lesson.id}
+                                        className="text-[9px] text-slate-500 font-semibold leading-tight"
+                                      >
+                                        {renderNameWithLinks(lesson.name)}
+                                      </p>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
                         </div>
 
                         <div className="flex-1">
@@ -837,10 +859,14 @@ export function PA2ToAG1Overview() {
                                 const isHigh = relevance >= 90;
                                 const isMedium =
                                   relevance >= 70 && relevance < 90;
+                                const nodeUrl = getFirstUrl(node.name);
 
                                 let cardClass =
                                   "w-fit max-w-[180px] p-2 rounded-lg border text-[10px] font-bold inline-flex flex-col gap-1.5 transition-all hover:scale-[1.02]";
                                 if (isMegaEpic) cardClass += " mega-epic-glow";
+                                if (nodeUrl) {
+                                  cardClass += " cursor-pointer hover:border-brand-orange/60 hover:shadow-xs";
+                                }
                                 let barColor = "";
 
                                 if (isLowQuality) {
@@ -865,6 +891,9 @@ export function PA2ToAG1Overview() {
                                     barColor = "bg-slate-300";
                                     cardClass =
                                       "w-fit max-w-[180px] p-2 rounded-lg border text-[10px] font-bold inline-flex flex-col gap-1.5 transition-all hover:scale-[1.02] bg-slate-50/50 border-slate-200 text-slate-400 opacity-60";
+                                    if (nodeUrl) {
+                                      cardClass += " cursor-pointer hover:border-brand-orange/60 hover:shadow-xs";
+                                    }
                                   }
                                 }
 
@@ -872,7 +901,17 @@ export function PA2ToAG1Overview() {
                                   <div
                                     key={node.id}
                                     className={cardClass}
-                                    title={`${node.name} (Relevance: ${relevance}%, Quality: ${quality ? "Good" : "Bad"})`}
+                                    onClick={
+                                      nodeUrl
+                                        ? () =>
+                                            window.open(
+                                              nodeUrl,
+                                              "_blank",
+                                              "noopener,noreferrer"
+                                            )
+                                        : undefined
+                                    }
+                                    title={`${stripMarkdownLinks(node.name)} (Relevance: ${relevance}%, Quality: ${quality ? "Good" : "Bad"})${nodeUrl ? " — Kliknutím otevřete" : ""}`}
                                   >
                                     <div className="flex flex-col gap-1.5 flex-1 min-w-0">
                                       {(node.badges || isLowQuality) && (

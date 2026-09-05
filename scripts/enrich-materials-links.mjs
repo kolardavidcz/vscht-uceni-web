@@ -188,11 +188,32 @@ const elearningUrlMap = {
   "el-ch13-6": "https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/castsurvey.html",
 };
 
-// Trainer Weeks URL (KSI Trainer course)
+// Trainer Map for Lessons and Specific Modules
+const trainerUrlMap = {
+  // Lessons
+  "tr-w01-l2": "https://trainer.ksi.fit.cvut.cz/lessons/581",
+  "tr-w01-l3": "https://trainer.ksi.fit.cvut.cz",
+
+  // Week 1, Lesson 581 Modules
+  "tr-w01-l2-s1": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/330",
+  "tr-w01-l2-s2": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/331",
+  "tr-w01-l2-s3": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/332",
+  "tr-w01-l2-s5": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/334",
+  "tr-w01-l2-s7": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/336",
+  "tr-w01-l2-s9": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/338",
+  "tr-w01-l2-s10": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/339",
+  "tr-w01-l2-s11": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/340",
+  "tr-w01-l2-s12": "https://trainer.ksi.fit.cvut.cz/lessons/581/modules/341",
+};
+
 const TRAINER_BASE = "https://trainer.ksi.fit.cvut.cz";
 
 function stripMd(s) {
-  return String(s || "").replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
+  return String(s || "")
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1")
+    .replace(/\s*\(Trainer\)\s*/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function linkify(text, url) {
@@ -236,10 +257,24 @@ for (const cat of data) {
       }
     }
   } else if (cat.category === "Trainer") {
-    // Link the week header if not already linked
-    if (!cat.name.includes("](http")) {
-      cat.name = `${stripMd(cat.name)} [(Trainer)](${TRAINER_BASE})`;
-      trainerLinkedCount++;
+    // Week header link
+    cat.name = `${stripMd(cat.name)} [(Trainer)](${TRAINER_BASE})`;
+    trainerLinkedCount++;
+
+    if (Array.isArray(cat.children)) {
+      for (const lesson of cat.children) {
+        const lessonUrl = trainerUrlMap[lesson.id] || TRAINER_BASE;
+        lesson.name = linkify(lesson.name, lessonUrl);
+        trainerLinkedCount++;
+
+        if (Array.isArray(lesson.children)) {
+          for (const mod of lesson.children) {
+            const modUrl = trainerUrlMap[mod.id] || lessonUrl;
+            mod.name = linkify(mod.name, modUrl);
+            trainerLinkedCount++;
+          }
+        }
+      }
     }
   }
 }
