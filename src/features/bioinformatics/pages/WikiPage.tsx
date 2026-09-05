@@ -287,13 +287,13 @@ export function WikiPage() {
         <div className="flex items-center gap-2">
           {active && !isSpecial && (
             <Button
-              variant="secondary"
+              variant="dark"
               size="sm"
               onClick={() => window.print()}
               title="Vytisknout nebo uložit do PDF"
-              className="text-xs font-semibold gap-1.5 hidden sm:inline-flex border-white/20 hover:bg-white/15 text-white cursor-pointer"
+              className="text-xs font-bold gap-1.5 hidden sm:inline-flex border-white/20 bg-white/10 text-white hover:bg-white/15 hover:border-brand-orange/50 hover:text-brand-orange cursor-pointer"
             >
-              <Printer size={15} /> Tisk / PDF
+              <Printer size={15} className="text-brand-orange" /> Tisk / PDF
             </Button>
           )}
           <Button

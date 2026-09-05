@@ -40,7 +40,10 @@ function getFirstUrl(name: string): string | null {
   return match ? match[2] : null;
 }
 
-function renderNameWithLinks(name: string) {
+function renderNameWithLinks(
+  name: string,
+  linkClass = "text-brand-orange hover:text-brand-orange-text underline"
+) {
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
   const parts: (string | React.ReactNode)[] = [];
   let lastIndex = 0;
@@ -55,7 +58,7 @@ function renderNameWithLinks(name: string) {
         href={match[2]}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-brand-orange hover:text-brand-orange-text underline"
+        className={linkClass}
         onClick={(e) => e.stopPropagation()}
       >
         {match[1]}
@@ -973,8 +976,11 @@ export function PA2ToAG1Overview() {
                                           )}
                                         </div>
                                       )}
-                                      <span className="leading-tight break-words">
-                                        {renderNameWithLinks(node.name)}
+                                      <span className="leading-tight break-words text-black">
+                                        {renderNameWithLinks(
+                                          node.name,
+                                          "text-black hover:text-black no-underline"
+                                        )}
                                       </span>
                                     </div>
                                     <div className="h-1 w-28 bg-slate-200/50 rounded-full overflow-hidden shrink-0 mt-auto">
