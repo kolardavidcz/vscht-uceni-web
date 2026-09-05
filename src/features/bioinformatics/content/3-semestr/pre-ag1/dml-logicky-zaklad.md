@@ -489,6 +489,20 @@ Při negování výroků s kvantifikátory platí dvě neúprosná pravidla:
 $$\neg (\forall x \in M : P(x)) \quad \equiv \quad \exists x \in M : \neg P(x)$$
 $$\neg (\exists x \in M : P(x)) \quad \equiv \quad \forall x \in M : \neg P(x)$$
 
+#### 🧠 Mnemotechnika z univerzitního života (Studenti & Chytrost):
+
+1. **Negace obecného kvantifikátoru ($\forall \longrightarrow \exists$):**
+   - **Původní tvrzení:** *„Každý student je chytrý."* ($\forall x \in \text{Studenti} : P(x)$)
+   - **Negace tvrzení:** *„Není pravda, že (každý student je chytrý)."*
+   - **Logicky ekvivalentní tvar:** $\iff$ *„Existuje alespoň 1 student, který **není chytrý**."* ($\exists x \in \text{Studenti} : \neg P(x)$)
+   - 💡 *K vyvrácení tvrzení, že jsou všichni chytří, nepotřebujete, aby byli všichni hloupí — stačí vám najít jediného studenta, který chytrý není!*
+
+2. **Negace existenčního kvantifikátoru ($\exists \longrightarrow \forall$):**
+   - **Původní tvrzení:** *„Existuje chytrý student."* ($\exists x \in \text{Studenti} : P(x)$)
+   - **Negace tvrzení:** *„Není pravda, že (existuje chytrý student)."*
+   - **Logicky ekvivalentní tvar:** $\iff$ *„Každý student je ne-chytrý (všichni jsou blbí)."* ($\forall x \in \text{Studenti} : \neg P(x)$)
+   - 💡 *Pokud není pravda, že by existoval byť jediný chytrý student, pak nutně všichni do jednoho chytří nejsou.*
+
 ---
 
 ### 4.2 Složité Řetězené Negace v Bioinformatice
