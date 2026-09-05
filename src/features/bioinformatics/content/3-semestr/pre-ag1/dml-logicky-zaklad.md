@@ -282,6 +282,11 @@ if (width <= 0 || height <= 0)         // De Morgan: „když je neplatná ší�
 
 ---
 
+<details class="wiki-spoiler-box">
+<summary class="wiki-spoiler-summary">
+  <span>💡 Příklady z Reálného Života: Vstup do Laborky na VŠCHT & Studentská Sleva (Rozbalit)</span>
+</summary>
+
 #### 🧪 Příklad z Reálného Života: Vstup do Laboratoře na VŠCHT (1. Zákon: Negace Konjunkce)
 
 Představte si pravidla pro práci v biochemické laboratoři na VŠCHT. Student smí vstoupit do laboratoře a pracovat pouze tehdy, když splňuje dvě podmínky současně:
@@ -313,6 +318,8 @@ Kdy na slevu **NEMÁTE nárok** a musíte zaplatit plné jízdné ($\neg(A \lor 
 $$\neg (A \lor B) \quad \equiv \quad \neg A \land \neg B$$
 - Plnou cenu platíte právě tehdy, když **je vám 18 a více ($\neg A$) A ZÁROVEŇ u sebe nemáte platný ISIC ($\neg B$)**.  
   Pokud by platila alespoň jedna z výhod (např. je vám 21 let, ale máte ISIC), slevu bez potíží dostanete. O slevu přijdete pouze při selhání obou podmínek naráz!
+
+</details>
 
 ---
 
