@@ -37,172 +37,85 @@ Matematická logika pracuje s **výroky**:
 
 Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B, C$) pomocí **výrokových spojek**:
 
-| Spojka | Název | Zápis | Význam v češtině | Pravdivostní pravidlo |
+| Symbol / Spojka | Název | Zápis | Význam v češtině | Pravdivostní pravidlo / Definice |
 | :--- | :--- | :--- | :--- | :--- |
 | $\neg$ | **Negace** | $\neg A$ | *"Není pravda, že A"* | Obrátí pravdivostní hodnotu ($1 \to 0, 0 \to 1$). |
 | $\land$ | **Konjunkce** | $A \land B$ | *"A a zároveň B"* | Pravda pouze v případě, že **oba** výroky A i B platí. |
 | $\lor$ | **Disjunkce** | $A \lor B$ | *"A nebo B"* | Pravda, pokud platí **alespoň jeden** z výroků A, B. |
-| $\Rightarrow$ | **Implikace** | $A \Rightarrow B$ | *"Jestliže A, pak B"* | Nepravda pouze v případě, že **A platí a B neplatí**. |
+| $\Rightarrow$ | **Implikace** | $A \Rightarrow B$ | *"Jestliže A, pak B"* | Nepravda pouze v případě, že **A platí a B neplatí** ($1 \Rightarrow 0$). |
 | $\Leftrightarrow$ | **Ekvivalence** | $A \Leftrightarrow B$ | *"A právě tehdy, když B"* | Pravda, pokud mají A i B **stejnou** pravdivostní hodnotu. |
+| $\forall$ | **Všeobecný kvantifikátor** | $\forall x \in M : P(x)$ | *"Pro každý prvek x..."* | Pravda, pokud vlastnost $P(x)$ platí pro **všechny** prvky množiny $M$. |
+| $\exists$ | **Existenční kvantifikátor** | $\exists x \in M : P(x)$ | *"Existuje alespoň jedno x..."* | Pravda, pokud vlastnost $P(x)$ platí pro **alespoň jeden** prvek z $M$. |
+| $\exists!$ | **Kvantifikátor jednoznačné existence** | $\exists! x \in M : P(x)$ | *"Existuje právě jedno x..."* | Pravda, pokud v $M$ existuje **přesně jeden (jediný)** prvek splňující $P(x)$. |
 
-<div class="my-6 p-4 rounded-xl bg-stone-100/60 dark:bg-[#1a120c]/60 border border-stone-200/60 dark:border-stone-800/60 opacity-60 hover:opacity-100 transition-opacity duration-300">
-<div class="flex items-center justify-between mb-2">
-<span class="text-xs text-stone-600 dark:text-stone-400 font-bold uppercase tracking-wide">📐 Rozšířený přehled matematického značení a logických symbolů (BI-DML reference)</span>
-<span class="text-[11px] text-stone-600 dark:text-stone-400 italic">Doplňkový přehled z přednášek</span>
+<div class="my-6 border border-slate-300 rounded-xl overflow-x-auto shadow-xs bg-white">
+<div class="py-2.5 px-4 bg-slate-100 border-b border-slate-300 flex items-center justify-between">
+<span class="text-xs text-slate-800 font-bold uppercase tracking-wide">📐 Doplňkové symboly (Množiny & Formální logika v BI-DML)</span>
+<span class="text-[11px] text-slate-600 font-medium">BI-DML Reference</span>
 </div>
-<table class="w-full text-left text-xs border-collapse">
+<table class="w-full text-left text-xs sm:text-sm border-collapse">
 <thead>
-<tr class="border-b border-stone-200 dark:border-stone-700 text-stone-700 dark:text-stone-300">
-<th class="py-2 px-2.5 font-semibold">Zavedený symbol</th>
-<th class="py-2 px-2.5 font-semibold">Význam zavedeného symbolu (BI-DML)</th>
-<th class="py-2 px-2.5 font-semibold">Formální popis & Příklad</th>
+<tr class="bg-slate-50 border-b border-slate-300 text-slate-800">
+<th class="py-2.5 px-3.5 font-bold">Symbol</th>
+<th class="py-2.5 px-3.5 font-bold">Význam symbolu</th>
+<th class="py-2.5 px-3.5 font-bold">Formální popis & Definice</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-stone-200/50 dark:divide-stone-800/50 text-stone-600 dark:text-stone-400">
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$:=$ (nebo $\coloneqq$)</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>definice</strong>, symbol na levé straně je definován výrazem na straně pravé</td>
-<td class="py-1.5 px-2.5">Označuje zavedení nového objektu či zkratky, např. $f(x) := x^2 + 1$ nebo $V := \{v_1, \dots, v_n\}$</td>
+<tbody class="divide-y divide-slate-200 text-slate-800">
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$\top$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>tautologie</strong></td>
+<td class="py-2 px-3.5 text-slate-800">Výroková formule, která je vždy pravdivá (hodnota 1) při libovolném ohodnocení (např. $A \lor \neg A$)</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\neg A$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>negace formule</strong> $A$</td>
-<td class="py-1.5 px-2.5">Obrací pravdivostní hodnotu: výrok je pravdivý právě tehdy, když formule $A$ je nepravdivá ($\neg 1 = 0$, $\neg 0 = 1$)</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$\bot$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>kontradikce</strong></td>
+<td class="py-2 px-3.5 text-slate-800">Výroková formule, která je vždy nepravdivá (hodnota 0) při libovolném ohodnocení (např. $A \land \neg A$)</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\forall$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>obecný (univerzální, velký) kvantifikátor</strong></td>
-<td class="py-1.5 px-2.5">$\forall x \in V : P(x)$ znamená „pro každý (všechny) prvek $x$ z množiny $V$ platí vlastnost $P(x)$“</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$E \models F$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>logický důsledek</strong> mezi formulemi $E$ a $F$</td>
+<td class="py-2 px-3.5 text-slate-800">Formule $F$ je sémantickým důsledkem $E$ (v BI-DML též $E \mathrel{\vert{=}} F$); každý model formule $E$ je i modelem $F$</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\exists$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>existenční (malý) kvantifikátor</strong></td>
-<td class="py-1.5 px-2.5">$\exists x \in V : P(x)$ znamená „existuje alespoň jeden prvek $x$ z množiny $V$, pro který platí vlastnost $P(x)$“</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$E \equiv F$ (nebo $E \mathrel{\vert{=}\vert} F$)</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>logická ekvivalence</strong> formulí $E$ a $F$</td>
+<td class="py-2 px-3.5 text-slate-800">Formule $E$ a $F$ jsou sémanticky ekvivalentní; mají shodné pravdivostní ohodnocení ve všech modelech</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\exists!$ (nebo $\exists_{1}$)</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>kvantifikátor jednoznačné existence</strong></td>
-<td class="py-1.5 px-2.5">$\exists! x \in V : P(x)$ znamená „existuje právě jeden (jediný) prvek $x$ z množiny $V$, pro který platí $P(x)$“</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$x \in M$, $x \notin M$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>náležení / nenáležení prvku</strong> do množiny</td>
+<td class="py-2 px-3.5 text-slate-800">$x \in M$ znamená, že prvek $x$ je prvkem množiny $M$; $x \notin M \iff \neg(x \in M)$</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \Rightarrow B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>implikace mezi formulemi</strong> $A$ a $B$</td>
-<td class="py-1.5 px-2.5">Čteme „z $A$ plyne $B$“ ($A \implies B$); neplatí pouze v případě, kdy předpoklad $A$ platí a závěr $B$ neplatí ($1 \Rightarrow 0$)</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$A \subseteq B$, $A \subsetneq B$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>podmnožina a vlastní podmnožina</strong></td>
+<td class="py-2 px-3.5 text-slate-800">$A \subseteq B \iff (\forall x: x \in A \implies x \in B)$; vlastní podmnožina navíc vyžaduje $A \neq B$</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \Leftrightarrow B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>ekvivalence mezi formulemi</strong> $A$ a $B$</td>
-<td class="py-1.5 px-2.5">Čteme „$A$ právě tehdy, když $B$“ ($A \iff B$); pravdivá právě tehdy, když obě formule mají shodnou pravdivostní hodnotu</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$A \cup B$, $A \cap B$, $A \setminus B$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>sjednocení, průnik a rozdíl množin</strong></td>
+<td class="py-2 px-3.5 text-slate-800">$A \cup B = \{x \mid x \in A \lor x \in B\}$, $A \cap B = \{x \mid x \in A \land x \in B\}$, $A \setminus B = \{x \mid x \in A \land x \notin B\}$</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \land B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>konjunkce formulí</strong> $A$ a $B$</td>
-<td class="py-1.5 px-2.5">Logické „A ZÁROVEŇ“; pravdivá pouze tehdy, když platí obě formule $A$ i $B$ současně</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$A \times B$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>kartézský součin množin</strong></td>
+<td class="py-2 px-3.5 text-slate-800">Množina všech uspořádaných dvojic $\{(a, b) \mid a \in A \land b \in B\}$; mohutnost je $|A \times B| = |A| \cdot |B|$</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \lor B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>disjunkce formulí</strong> $A$ a $B$</td>
-<td class="py-1.5 px-2.5">Logické „NEBO“; pravdivá, pokud platí alespoň jedna z formulí $A$ nebo $B$</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$\mathcal{P}(A)$ (nebo $2^A$)</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>potenční množina</strong></td>
+<td class="py-2 px-3.5 text-slate-800">Množina všech podmnožin množiny $A$: $\mathcal{P}(A) = \{X \mid X \subseteq A\}$; mohutnost je $|\mathcal{P}(A)| = 2^{|A|}$</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \oplus B$ (nebo $A \veebar B$)</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>exkluzivní disjunkce (XOR)</strong></td>
-<td class="py-1.5 px-2.5">„Buď $A$, nebo $B$ (ale ne obojí současně)“; pravdivá právě tehdy, když mají formule $A$ a $B$ různou pravdivostní hodnotu</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$\emptyset$ (nebo $\{\}$)</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>prázdná množina</strong></td>
+<td class="py-2 px-3.5 text-slate-800">Množina neobsahující žádný prvek; $|\emptyset| = 0$, je podmnožinou každé množiny ($\emptyset \subseteq A$)</td>
 </tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \uparrow B$ (nebo $A \mid B$)</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>Shefferův operátor (NAND)</strong></td>
-<td class="py-1.5 px-2.5">Negace konjunkce $\neg(A \land B)$; tvoří funkcionálně úplný systém jediné spojky (vše lze vyjádřit jen pomocí NAND)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \downarrow B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>Peirceův operátor (NOR)</strong></td>
-<td class="py-1.5 px-2.5">Negace disjunkce $\neg(A \lor B)$; rovněž tvoří funkcionálně úplný systém jediné spojky</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\top$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>tautologie</strong></td>
-<td class="py-1.5 px-2.5">Výroková formule, která je vždy pravdivá (hodnota 1) při libovolném pravdivostním ohodnocení (např. $A \lor \neg A$)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\bot$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>kontradikce</strong></td>
-<td class="py-1.5 px-2.5">Výroková formule, která je vždy nepravdivá (hodnota 0) při libovolném pravdivostním ohodnocení (např. $A \land \neg A$)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$E \models F$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>logický důsledek mezi formulemi</strong> $E$ a $F$</td>
-<td class="py-1.5 px-2.5">Formule $F$ je sémantickým důsledkem $E$ (v BI-DML značeno též $E \mathrel{\vert{=}} F$); každý model formule $E$ je i modelem $F$</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$E \mathrel{\vert{=}\vert} F$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>logická ekvivalence mezi formulemi</strong> $E$ a $F$</td>
-<td class="py-1.5 px-2.5">Formule $E$ a $F$ jsou sémanticky ekvivalentní (též $E \equiv F$); mají shodné pravdivostní ohodnocení ve všech modelech</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$E \vdash F$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>syntaktická odvoditelnost (dokazatelnost)</strong></td>
-<td class="py-1.5 px-2.5">Formule $F$ je formálně dokazatelná z předpokladů $E$ dedukčními pravidly (např. rezoluční metodou či Hilbertovským kalkulem)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\sum_{k=d}^h a(k)$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>suma (součet) výrazů</strong> $a(d) + \dots + a(h)$</td>
-<td class="py-1.5 px-2.5">Součet konečné řady výrazů se sčítacím indexem $k$ od $d$ do $h$ (např. součet čísel $\sum_{i=1}^n i = \frac{n(n+1)}{2}$, nebo součet počtu spojnic uzlů v síti $\sum_{v \in V} \deg(v) = 2|E|$)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\prod_{k=d}^h a(k)$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>produkt (součin) výrazů</strong> $a(d) \cdot \dots \cdot a(h)$</td>
-<td class="py-1.5 px-2.5">Součin posloupnosti činitelů se součinovým indexem $k$ od $d$ do $h$ (např. faktoriál $n! = \prod_{k=1}^n k$)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$x \in M$, $x \notin M$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>náležení / nenáležení prvku do množiny</strong></td>
-<td class="py-1.5 px-2.5">$x \in M$ znamená, že prvek $x$ je prvkem množiny $M$; $x \notin M \iff \neg(x \in M)$</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \subseteq B$, $A \subsetneq B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>podmnožina a vlastní podmnožina</strong></td>
-<td class="py-1.5 px-2.5">$A \subseteq B \iff (\forall x: x \in A \implies x \in B)$; vlastní podmnožina navíc vyžaduje $A \neq B$</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \cup B$, $A \cap B$, $A \setminus B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>sjednocení, průnik a rozdíl množin</strong></td>
-<td class="py-1.5 px-2.5">$A \cup B = \{x \mid x \in A \lor x \in B\}$, $A \cap B = \{x \mid x \in A \land x \in B\}$, $A \setminus B = \{x \mid x \in A \land x \notin B\}$</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$A \times B$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>kartézský součin množin</strong></td>
-<td class="py-1.5 px-2.5">Množina všech uspořádaných dvojic $\{(a, b) \mid a \in A \land b \in B\}$; velikost $|A \times B| = |A| \cdot |B|$</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\mathcal{P}(A)$ (nebo $2^A$)</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>potenční množina</strong></td>
-<td class="py-1.5 px-2.5">Množina všech podmnožin množiny $A$: $\mathcal{P}(A) = \{X \mid X \subseteq A\}$; mohutnost je $|\mathcal{P}(A)| = 2^{|A|}$</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\emptyset$ (nebo $\{\}$)</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>prázdná množina</strong></td>
-<td class="py-1.5 px-2.5">Množina neobsahující žádný prvek; $|\emptyset| = 0$, je podmnožinou každé množiny ($\emptyset \subseteq A$)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{R}$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>standardní číselné obory</strong></td>
-<td class="py-1.5 px-2.5">Přirozená čísla ($\mathbb{N}$), celá čísla ($\mathbb{Z}$), racionální čísla ($\mathbb{Q}$) a reálná čísla ($\mathbb{R}$)</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$\binom{n}{k}$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>kombinační číslo</strong> („$n$ nad $k$“)</td>
-<td class="py-1.5 px-2.5">Počet všech $k$-prvkových podmnožin $n$-prvkové množiny: $\binom{n}{k} = \frac{n!}{k!(n-k)!}$</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$a \mid b$, $a \nmid b$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>relace dělitelnosti</strong></td>
-<td class="py-1.5 px-2.5">$a \mid b \iff (\exists k \in \mathbb{Z}: b = k \cdot a)$ („$a$ dělí $b$“); $a \nmid b$ značí negaci</td>
-</tr>
-<tr>
-<td class="py-1.5 px-2.5 font-mono font-medium">$a \equiv b \pmod m$</td>
-<td class="py-1.5 px-2.5 font-medium"><strong>kongruence modulo $m$</strong></td>
-<td class="py-1.5 px-2.5">Čísla $a$ a $b$ dávají po dělení číslem $m$ stejný zbytek $\iff m \mid (a - b)$</td>
+<tr class="hover:bg-slate-50/70 transition-colors">
+<td class="py-2 px-3.5 font-mono font-bold text-slate-900">$\binom{n}{k}$</td>
+<td class="py-2 px-3.5 font-medium text-slate-900"><strong>kombinační číslo</strong> („$n$ nad $k$“)</td>
+<td class="py-2 px-3.5 text-slate-800">Počet všech $k$-prvkových podmnožin $n$-prvkové množiny: $\binom{n}{k} = \frac{n!}{k!(n-k)!}$</td>
 </tr>
 </tbody>
 </table>
