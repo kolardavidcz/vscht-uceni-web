@@ -69,12 +69,12 @@ JAK VE SKUTEČNOSTI VZNIKÁ MATEMATICKÝ A ALGORITMICKÝ OBJEV:
 
 ---
 
-### 3.2 Role Znalostí: „Dokažte, že toto je kružnice!“ `[CHALLENGE]`
+### 3.2 Role Znalostí: První Setkání s Profesorem u Tabule `[CHALLENGE]`
 
-Rozdíl mezi **znalostmi (definicemi)** a **algoritmickým postupem** si předveďme na klasické zkouškové situaci.
+Představte si své první cvičení z diskrétní matematiky na univerzitě. Vstoupí vyučující, beze slova vezme křídu, nakreslí na tabuli obrázek níže, otočí se do ztichlé učebny a položí zdánlivě nevinnou otázku:
 
-Představte si následující zadání:
-> **Zkoušková otázka:** *„Je dán geometrický útvar v kartézské rovině (viz obrázek níže). Dokažte, že se jedná o kružnici!“*
+> **Otázka od tabule:**  
+> *„Je dán geometrický útvar v kartézské rovině (viz obrázek). Dokažte, že se jedná o kružnici!“*
 
 <div class="my-4 flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">
   <svg viewBox="0 0 320 220" class="w-72 max-w-full h-auto" xmlns="http://www.w3.org/2000/svg">
@@ -105,13 +105,27 @@ Představte si následující zadání:
   <span class="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium">Obrázek: Bod X[x, y] na obvodu geometrického útvaru se středem S[m, n] a poloměrem r</span>
 </div>
 
-Mnoho studentů v této chvíli znejistí: *„Jak mám dokázat, že kružnice je kružnice? Vždyť to vidím očima!“*  
-Jenže v exaktní vědě zrak nestačí. Abyste mohli cokoliv dokázat, **musíte mít přesné ZNALOSTI — konkrétně přesnou DEFINICI.** Bez znalosti definice není co dokazovat.
+<div class="print-tablet-workspace" data-label="✍️ Místo pro vaše řešení a odvození (pro psaní stylusem na tabletu / v tisku):"></div>
 
-<details class="my-4 p-4 rounded-xl border border-sky-200 bg-sky-50/50 dark:bg-sky-950/20 dark:border-sky-800/40">
+<details class="spoiler-print-hidden print:hidden my-4 p-4 rounded-xl border border-sky-200 bg-sky-50/50 dark:bg-sky-950/20 dark:border-sky-800/40">
 <summary class="cursor-pointer font-bold text-sky-900 dark:text-sky-300">
-  🔍 Zobrazit formální odvození a důkaz z definice
+  🔍 Cítíte se ztraceni? Rozklikněte nápovědu a rozbor, proč vás ta otázka vykolejila
 </summary>
+
+#### 🤯 Proč se v této chvíli cítíte ztraceni?
+V téhle jediné vteřině zažije naprosté ticho a prázdno v hlavě 95 % studentů v aule:
+> *„Co po mně proboha chce?! Vždyť to vidím na vlastní oči — je to kulaté, je to kružnice, co na tom mám dokazovat?! Mám vytáhnout kružítko a pravítko a změřit to?“*
+
+**Proč tento pocit bezmoci vzniká?**  
+Náš lidský mozek je ze střední školy i běžného života zvyklý spoléhat se na **vizuální intuici**. Jenže exaktní matematika a teoretická informatika nejsou o tom, co *vypadá kulatě*. Zrak může snadno klamat (může to být elipsa s poloosami $a = 60.0$ a $b = 59.9$, nebo pravidelný 128-úhelník).
+
+Vyučující od vás nechtěl vizuální popis. Chtěl **formální matematickou obhajobu**.  
+A zde přichází ten nejdůležitější aha-moment celého studia:  
+**Bez znalosti přesné DEFINICE nemáte VŮBEC CO dokazovat!**  
+
+Dokud neznáte definici, mozek tápe v mlze, protože nemá záchytný bod. Jakmile si však vybavíte exaktní definici pojmu, celý důkaz se stane přímočarým rozbalením této definice krok za krokem.
+
+---
 
 #### ✍️ Důkaz krok za krokem z definice:
 
@@ -148,9 +162,9 @@ Jenže v exaktní vědě zrak nestačí. Abyste mohli cokoliv dokázat, **musít
 
 ---
 
-### 3.3 Role Postupu: Rychlé Umocňování ($x^n$) & Zákon Vyloučeného Třetího `[EPIC]` `[BIO-ANALOGIE]`
+### 3.3 Role Postupu: Rychlé Umocňování ($x^n$) & Formální Logika `[EPIC]` `[LOGIKA-IN-ACTION]`
 
-Zatímco v geometrii rozhodují **statické znalosti (definice)**, v programování a předmětu AG1 rozhoduje **dynamický postup (algoritmus)**.
+Zatímco kružnice demonstrovala sílu **statických znalostí (definic)**, v programování a předmětu AG1 rozhoduje **dynamický postup (algoritmus)** opřený o zákony **formální matematické logiky**.
 
 Představme si typickou algoritmickou výzvu:
 > **Algoritmická Výzva:**  
@@ -160,34 +174,56 @@ Představme si typickou algoritmickou výzvu:
 - **Naivní postup ($O(n)$):**  
   Budeme postupně násobit $x \cdot x \cdot x \dots \cdot x$. To vyžaduje $n - 1$ násobení.  
   Pro $n = 1\,000\,000$ (např. při šifrování RSA nebo počítání cest v rozsáhlých biologických sítích) provede procesor **milion operací**. To je v praxi zbytečně pomalé.
-- **Otázka:** Lze to udělat řádově rychleji? Jaký myšlenkový postup zvolit?
+- **Výzva k zamyšlení:** Lze to udělat řádově rychleji? Jaký myšlenkový postup zvolit a jakou roli v tom hraje formální logika?
+
+<div class="print-tablet-workspace" data-label="✍️ Místo pro návrh vašeho algoritmu a logický rozbor případů (pro tablet / stylus / tisk):"></div>
 
 <details class="spoiler-print-hidden print:hidden my-4 p-4 rounded-xl border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-800/40">
 <summary class="cursor-pointer font-bold text-amber-900 dark:text-amber-300">
-  🔍 Zobrazit optimální postup a rozbor (skryto v tisku)
+  🔍 Zobrazit optimální postup a logický rozbor (skryto v tisku)
 </summary>
 
-#### ⚡ Řešení: Rychlé umocňování (Exponentiation by Squaring)
+#### ⚡ Řešení: Rychlé umocňování (Exponentiation by Squaring) a Formální Logika
 
-Tento elegantní postup se opírá o základní kámen formální logiky: **Zákon vyloučeného třetího (*Law of Excluded Middle* / *Tertium non datur*)**.
+Tento elegantní postup se opírá o základní axiomy formální výrokové a predikátové logiky:
 
-V klasické dvouhodnotové logice platí, že každé celé číslo $n$ je **buď sudé, nebo liché** — žádná třetí možnost neexistuje:
+##### 1. Zákon vyloučeného třetího (*Law of Excluded Middle* / *Tertium non datur*)
+V klasické bivalentní (dvouhodnotové) logice platí, že každý výrok $A$ je buď pravdivý, nebo nepravdivý. Neexistuje žádný třetí mezistav.
+Formálně je to tautologie:
+$$\models A \lor \neg A$$
+A současně platí zákon sporu (žádný výrok nemůže být zároveň pravdivý i nepravdivý):
+$$\models \neg(A \land \neg A)$$
+
+Aplikujeme-li tuto logiku na vlastnost dělitelnosti celých čísel dvěma:
 $$\forall n \in \mathbb{N}: \text{sudé}(n) \lor \text{liché}(n)$$
+Každé číslo $n$ musí bezpodmínečně spadnout do jedné ze dvou kategorií — žádné číslo nemůže být „napůl sudé“, ani nemůže existovat číslo, které není ani jedno.
+
+##### 2. Důkaz a algoritmus rozborem případů (*Proof by Cases / Exhaustion*)
+Ve formální logice máme dedukční pravidlo:
+$$((P \lor Q) \land (P \implies R) \land (Q \implies R)) \implies R$$
+V informatice a algoritmech to znamená: pokud navrhneme postup, který správně vyřeší sudá čísla ($P$) i lichá čísla ($Q$), a víme, že každé číslo je buď sudé, nebo liché ($P \lor Q$), **algoritmus je zaručeně korektní pro všechna myslitelná čísla**. Žádný případ nemůže propadnout.
 
 Díky tomu můžeme algoritmus rozdělit na dvě dokonale vyčerpávající větve (technika *Divide & Conquer*):
 
 1. **Případ 1: Exponent $n$ je SUDÝ ($n \pmod 2 = 0$):**
    - Exponent vydělíme dvěma a výsledek umocníme na druhou:
      $$x^n = (x^{n/2})^2 = (x^{n/2}) \cdot (x^{n/2})$$
-   - **Trik pro úsporu:** Hodnotu $y = x^{n/2}$ spočítáme rekurzivně **pouze jednou** a pak ji jednou vynásobíme samu se sebou ($y \cdot y$)! Tím ušetříme polovinu násobení v jediném kroku.
+   - **Trik pro úsporu:** Hodnotu $y = x^{n/2}$ spočítáme rekurzivně **pouze jednou** a pak ji jednou vynásobíme samu se sebou ($y \cdot y$)! Tím ušetříme celou polovinu násobení v jediném kroku.
 
 2. **Případ 2: Exponent $n$ je LICHÝ ($n \pmod 2 = 1$):**
    - Exponent snížíme o 1, čímž vznikne sudé číslo $n - 1$:
      $$x^n = x \cdot x^{n - 1}$$
-   - Vynásobíme základ $x$ hodnotou $x^{n-1}$, která v dalším kroku spadne do případu 1 (sudé číslo).
+   - Vynásobíme základ $x$ hodnotou $x^{n-1}$, která v dalším kroku spadne do super-rychlého Případu 1 (sudé číslo).
 
-3. **Báze algoritmu:**
-   - Pro $n = 0$ platí $x^0 = 1$.
+3. **Báze algoritmu (Indukční základ pro $n = 0$):**
+   - Pro $n = 0$ platí neutrální prvek operace násobení:
+     $$x^0 = 1$$
+
+##### 3. Důkaz terminace (Dobré uspořádání $\mathbb{N}$ a matematická indukce)
+Proč si můžeme být 100% jistí, že se algoritmus nezacyklí v nekonečné smyčce?
+- V sudé větvi: pro $n \ge 2$ platí $n/2 < n$.
+- V liché větvi: pro $n \ge 1$ platí $n - 1 < n$.
+V každém rekurzivním kroku hodnota exponentu **ostře klesá** ($n' < n$). Množina přirozených čísel $\mathbb{N}$ je **dobře uspořádaná** (*well-founded set*) — neexistuje v ní žádná nekonečná klesající posloupnost. Algoritmus tedy v konečném počtu kroků nevyhnutelně narazí na bázi $n = 0$ a korektně skončí.
 
 ---
 
