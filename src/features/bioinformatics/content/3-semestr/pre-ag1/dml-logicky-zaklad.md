@@ -212,57 +212,79 @@ Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B
 
 ### 2.1 Mnemotechnika Implikace ($A \Rightarrow B$) & Slib Zkoušejícího `[PAST U ZKOUŠKY]`
 
-Studenti VŠCHT nejčastěji chybují v pravdivosti **implikace** $A \Rightarrow B$, pokud je předpoklad $A$ nepravdivý.
-- **$A$** = předpoklad (antecedent),
-- **$B$** = závěr (konsekvent).
+Studenti VŠCHT nejčastěji chybují v pravdivosti **implikace**, pokud je předpoklad nepravdivý. Jak si to okamžitě a bezpečně zapamatovat do konce života?
 
-Proč je implikace $0 \Rightarrow 0$ pravdivá (1) a $0 \Rightarrow 1$ je také pravdivá (1)?
+#### Zkoušková mnemotechnika: Kdo z koho (1. Student vs. 2. Učitel)
+Představte si ústní zkoušku, kde se střetnou znalosti studenta a zkoušejícího profesora:
+- **1. Student** ($S$): $1 = \text{umí}$, $0 = \text{neumí}$
+- **2. Učitel** ($U$): $1 = \text{umí}$ (zkouší, vyžaduje, ví všechno), $0 = \text{neumí}$ (nevyzná se / neví, na co se zeptat)
 
-Představme si oficiální slib cvičícího v kurzu AG1:
-> *"Slib vyučujícího: Pokud student správně vyřeší dekonstrukční indukci ($A=1$), pak dostane zápočet z AG1 ($B=1$)."*
+Kdy student zkouškou projde (**GOOD / 1**) a kdy dostane **0**?
+- **Jestli umí student a neumí učitel $\implies$ GOOD (1)**: Student látku ovládá, zkoušející ho nedokáže zaskočit. Student s přehledem projde!
+- **Jestli neumí student a umí učitel $\implies$ 0 (0)**: Student tápe a zkoušející je kapacita, co ví každý detail. Student okamžitě letí s nulou!
 
-<div class="overflow-x-auto my-6 border border-slate-200/80 rounded-xl shadow-xs">
+<div class="overflow-x-auto my-6 border border-slate-300 rounded-xl shadow-xs bg-white">
 <table class="w-full text-left text-xs sm:text-sm border-collapse">
 <thead>
-<tr class="bg-slate-100/70 border-b border-slate-200">
-<th class="px-4 py-3 text-slate-700 font-semibold">Předpoklad A (Student napsal indukci)</th>
-<th class="px-4 py-3 text-slate-700 font-semibold">Závěr B (Student dostal zápočet)</th>
-<th class="px-4 py-3 text-slate-700 font-semibold">A =&gt; B</th>
-<th class="px-4 py-3 text-slate-700 font-semibold">Didaktické zhodnocení situace</th>
+<tr class="bg-slate-100 border-b border-slate-300">
+<th class="px-4 py-3 text-slate-800 font-bold">1. Student ($S$)</th>
+<th class="px-4 py-3 text-slate-800 font-bold">2. Učitel ($U$)</th>
+<th class="px-4 py-3 text-slate-800 font-bold">Výsledek pro studenta</th>
+<th class="px-4 py-3 text-slate-800 font-bold">Logická vazba ($U \Rightarrow S$)</th>
+<th class="px-4 py-3 text-slate-800 font-bold">Didaktické zhodnocení situace</th>
 </tr>
 </thead>
 <tbody>
-<tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3 font-mono">0 (Nenapsal)</td>
-<td class="px-4 py-3 font-mono">0 (Nedostal)</td>
-<td class="px-4 py-3 font-bold text-emerald-600">1 (Pravda)</td>
-<td class="px-4 py-3">Student důkaz nepsal a zápočet nedostal. Vyučující svůj slib NEPORUŠIL (Férová situace / OK).</td>
+<tr class="border-b border-slate-200 hover:bg-slate-50/70 transition-colors">
+<td class="px-4 py-3 font-mono font-bold text-emerald-700">1 (Umí)</td>
+<td class="px-4 py-3 font-mono font-bold text-emerald-700">1 (Umí)</td>
+<td class="px-4 py-3 font-bold text-emerald-700">1 (GOOD)</td>
+<td class="px-4 py-3 font-mono text-slate-700 font-medium">1 ⇒ 1 = 1</td>
+<td class="px-4 py-3 text-slate-800">Student umí, učitel umí. Proběhne férová debata, student látku obhájí a má zkoušku v kapse (OK).</td>
 </tr>
-<tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3 font-mono">0 (Nenapsal)</td>
-<td class="px-4 py-3 font-mono">1 (Dostal)</td>
-<td class="px-4 py-3 font-bold text-emerald-600">1 (Pravda)</td>
-<td class="px-4 py-3">Student důkaz nepsal, ale dostal zápočet za jiné aktivity. Vyučující slib NEPORUŠIL (OK).</td>
+<tr class="border-b border-slate-200 hover:bg-slate-50/70 transition-colors">
+<td class="px-4 py-3 font-mono font-bold text-emerald-700">1 (Umí)</td>
+<td class="px-4 py-3 font-mono font-semibold text-slate-500">0 (Neumí)</td>
+<td class="px-4 py-3 font-bold text-emerald-700">1 (GOOD)</td>
+<td class="px-4 py-3 font-mono text-slate-700 font-medium">0 ⇒ 1 = 1</td>
+<td class="px-4 py-3 text-slate-800"><strong>Student umí a učitel neumí</strong> (neví, na co se zeptat). Student situaci s přehledem ovládne a exceluje (GOOD / Prošel).</td>
 </tr>
-<tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3 font-mono">1 (Napsal)</td>
-<td class="px-4 py-3 font-mono">0 (Nedostal)</td>
-<td class="px-4 py-3 font-bold text-rose-600 font-bold">0 (NEPRAVDA)</td>
-<td class="px-4 py-3 text-rose-600 font-medium">Student bezchybně vyřešil indukci, ale zápočet NEDOSTAL! Slib byl porušen. (JEDINÝ PŘÍPAD NEPRAVDY!)</td>
+<tr class="border-b border-slate-200 hover:bg-slate-50/70 transition-colors">
+<td class="px-4 py-3 font-mono font-semibold text-slate-500">0 (Neumí)</td>
+<td class="px-4 py-3 font-mono font-semibold text-slate-500">0 (Neumí)</td>
+<td class="px-4 py-3 font-bold text-emerald-700">1 (GOOD)</td>
+<td class="px-4 py-3 font-mono text-slate-700 font-medium">0 ⇒ 0 = 1</td>
+<td class="px-4 py-3 text-slate-800">Student neumí a učitel látku taky neumí (nebo na to kašle a dá to všem). Nikdo nic neodhalil $\to$ student bez problému projde (GOOD). Triviální pravdivost.</td>
 </tr>
-<tr class="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-<td class="px-4 py-3 font-mono">1 (Napsal)</td>
-<td class="px-4 py-3 font-mono">1 (Dostal)</td>
-<td class="px-4 py-3 font-bold text-emerald-600">1 (Pravda)</td>
-<td class="px-4 py-3">Student důkaz vyřešil a zápočet dostal. Vše proběhlo přesně podle slibu (OK).</td>
+<tr class="border-b border-slate-200 hover:bg-rose-100/50 transition-colors bg-rose-50/70">
+<td class="px-4 py-3 font-mono font-bold text-rose-700">0 (Neumí)</td>
+<td class="px-4 py-3 font-mono font-bold text-emerald-700">1 (Umí)</td>
+<td class="px-4 py-3 font-bold text-rose-700">0 (KATASTROFA)</td>
+<td class="px-4 py-3 font-mono font-bold text-rose-700">1 ⇒ 0 = 0</td>
+<td class="px-4 py-3 text-rose-800 font-medium"><strong>Student neumí a učitel umí.</strong> Zkoušející studenta okamžitě nachytá a vyrazí ho s nulou! <strong>JEDINÝ PŘÍPAD NULY (NEPRAVDY)!</strong></td>
 </tr>
 </tbody>
 </table>
 </div>
 
-> [!IMPORTANT]
-> **Triviální Pravdivost (Vacuous Truth):**
-> Pokud je předpoklad $A$ **nepravdivý ($A=0$)**, je implikace $A \Rightarrow B$ **VŽDY PRAVDIVÁ**, bez ohledu na to, zda $B$ platí nebo ne!
+> ⚠️ **Past u zkoušky z DML: Pozor na směr implikace ($A \Rightarrow B$ vs. $B \Rightarrow A$)!**  
+> Implikace **NENÍ komutativní**:
+> $$A \Rightarrow B \quad \not\equiv \quad B \Rightarrow A$$
+> Ve formální logice je implikace $A \Rightarrow B$ **nepravdivá (0) POUZE v případě $1 \Rightarrow 0$** (předpoklad platí, ale závěr nenastal).
+> - Pokud je předpoklad $A = 0$ (nepravdivý), je celá implikace **VŽDY PRAVDIVÁ (1)**, bez ohledu na to, zda závěr $B$ platí či ne (**triviální pravdivost / vacuous truth**).
+> - V naší zkouškové mnemotechnice klade požadavky zkoušející učitel ($U \Rightarrow S$): jediná nula nastane, když učitel látku vyžaduje ($U=1$), ale student ji neumí ($S=0$).
+
+#### Formální mnemotechnika: Slib zkoušejícího ($A \Rightarrow B$)
+Pokud si chcete implikaci představit jako smlouvu, podívejte se na oficiální slib cvičícího:
+> *"Slib zkoušejícího: Pokud student správně vyřeší dekonstrukční indukci ($A=1$), pak dostane zápočet ($B=1$)."*
+
+Kdy zkoušející svůj slib **porušil (lhal $\Rightarrow 0$)**?
+- **Student indukci vyřešil ($A=1$), ale zápočet nedostal ($B=0$)**: $1 \Rightarrow 0 = \mathbf{0}$. Zkoušející byl podrazák a slib porušil!
+- **Student indukci nenapsal ($A=0$), ale zápočet přesto dostal ($B=1$)**: $0 \Rightarrow 1 = \mathbf{1}$. Zkoušející slib neporušil (byl benevolentní a dal zápočet např. za aktivitu).
+- **Student indukci nenapsal ($A=0$) a zápočet nedostal ($B=0$)**: $0 \Rightarrow 0 = \mathbf{1}$. Férová situace, slib nebyl porušen.
+
+> 💡 **Triviální Pravdivost (Vacuous Truth):**  
+> Pokud je předpoklad $A$ **nepravdivý ($A=0$)**, je implikace $A \Rightarrow B$ **VŽDY PRAVDIVÁ**, bez ohledu na to, zda $B$ platí nebo ne!  
 > *Příklad:* Tvrzení *"Každá molekula s 0 atomy uhlíku je bílkovina"* je matematicky pravdivý výrok, protože předpoklad (molekula s 0 uhlíky tvořící bílkovinu) je prázdný.
 
 ---
