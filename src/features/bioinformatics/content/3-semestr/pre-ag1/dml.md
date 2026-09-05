@@ -76,40 +76,34 @@ Představte si své první cvičení z diskrétní matematiky na univerzitě. Vs
 > **Otázka od tabule:**  
 > *„Je dán geometrický útvar v kartézské rovině (viz obrázek). Dokažte, že se jedná o kružnici!“*
 
-<div class="my-4 flex flex-col items-center justify-center p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">
-  <svg viewBox="0 0 320 220" class="w-72 max-w-full h-auto" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <marker id="axis-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#94a3b8" />
-      </marker>
-    </defs>
-    <!-- Axes -->
-    <line x1="20" y1="180" x2="290" y2="180" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#axis-arrow)" />
-    <text x="295" y="184" fill="#64748b" font-size="12" font-family="sans-serif">x</text>
-    <line x1="50" y1="200" x2="50" y2="20" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#axis-arrow)" />
-    <text x="46" y="15" fill="#64748b" font-size="12" font-family="sans-serif">y</text>
-    
-    <!-- Circle -->
-    <circle cx="160" cy="100" r="60" fill="rgba(59, 130, 246, 0.08)" stroke="#2563eb" stroke-width="2.5" />
-    
-    <!-- Center S[m, n] -->
-    <circle cx="160" cy="100" r="4.5" fill="#ef4444" />
-    <text x="145" y="118" fill="#ef4444" font-size="12" font-weight="bold" font-family="sans-serif">S[m, n]</text>
-    
-    <!-- Radius line to boundary point X[x, y] -->
-    <line x1="160" y1="100" x2="202" y2="58" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3" />
-    <circle cx="202" cy="58" r="4.5" fill="#10b981" />
-    <text x="210" y="55" fill="#10b981" font-size="12" font-weight="bold" font-family="sans-serif">X[x, y]</text>
-    <text x="186" y="86" fill="#f59e0b" font-size="12" font-weight="bold" font-family="sans-serif">r</text>
-  </svg>
-  <span class="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium">Obrázek: Bod X[x, y] na obvodu geometrického útvaru se středem S[m, n] a poloměrem r</span>
+<div class="my-6 flex flex-col items-center justify-center p-6 bg-stone-100/70 dark:bg-[#18110c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+<svg viewBox="0 0 340 240" class="w-80 max-w-full h-auto" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="axis-arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#78716c" />
+</marker>
+</defs>
+<line x1="25" y1="190" x2="310" y2="190" stroke="#78716c" stroke-width="1.5" marker-end="url(#axis-arrow)" />
+<text x="315" y="194" fill="#78716c" font-size="13" font-family="sans-serif" font-weight="600">x</text>
+<line x1="60" y1="215" x2="60" y2="25" stroke="#78716c" stroke-width="1.5" marker-end="url(#axis-arrow)" />
+<text x="56" y="18" fill="#78716c" font-size="13" font-family="sans-serif" font-weight="600">y</text>
+<circle cx="175" cy="110" r="65" fill="rgba(249, 93, 18, 0.08)" stroke="#f95d12" stroke-width="2.5" />
+<circle cx="175" cy="110" r="5" fill="#c2410c" />
+<text x="154" y="132" fill="#c2410c" font-size="13" font-weight="bold" font-family="sans-serif">S[m, n]</text>
+<line x1="175" y1="110" x2="221" y2="64" stroke="#c2410c" stroke-width="2" stroke-dasharray="5,3" />
+<circle cx="221" cy="64" r="5" fill="#f95d12" />
+<text x="230" y="60" fill="#f95d12" font-size="13" font-weight="bold" font-family="sans-serif">X[x, y]</text>
+<text x="202" y="96" fill="#f95d12" font-size="14" font-weight="bold" font-family="sans-serif">r</text>
+</svg>
+<p class="text-xs text-stone-500 dark:text-stone-400 mt-3 font-medium text-center">Obrázek: Geometrický útvar se středem S[m, n], poloměrem r a bodem X[x, y] na obvodu</p>
 </div>
 
 <div class="print-tablet-workspace" data-label="✍️ Místo pro vaše řešení a odvození (pro psaní stylusem na tabletu / v tisku):"></div>
 
-<details class="spoiler-print-hidden print:hidden my-4 p-4 rounded-xl border border-sky-200 bg-sky-50/50 dark:bg-sky-950/20 dark:border-sky-800/40">
-<summary class="cursor-pointer font-bold text-sky-900 dark:text-sky-300">
-  🔍 Cítíte se ztraceni? Rozklikněte nápovědu a rozbor, proč vás ta otázka vykolejila
+<details class="wiki-spoiler-box">
+<summary class="wiki-spoiler-summary">
+  <span class="flex items-center gap-2">🔍 <span>Cítíte se ztraceni? Rozklikněte nápovědu a rozbor u tabule</span></span>
+  <span class="badge-print-hidden">🔒 skryto v tisku</span>
 </summary>
 
 #### 🤯 Proč se v této chvíli cítíte ztraceni?
@@ -148,11 +142,14 @@ Dokud neznáte definici, mozek tápe v mlze, protože nemá záchytný bod. Jakm
    Označíme-li konstantu $p = m^2 + n^2 - r^2$, dostáváme standardní obecný tvar:
    $$x^2 + y^2 - 2mx - 2ny + p = 0$$
 
-<div class="spoiler-print-hidden print:hidden my-4 p-3 rounded-xl bg-white dark:bg-slate-900 border border-sky-100 dark:border-slate-800 shadow-sm">
-  <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 font-semibold">📄 Ukázka z portálu Matematicko-fyzikální fakulty UK (skryto v tisku):</p>
-  <img src="/images/kruznice-mff.png" alt="Ukázka definice a rovnic kružnice z MFF UK" class="rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 max-w-full h-auto mx-auto" />
-  <p class="text-xs text-slate-400 mt-2 text-center">
-    Zdroj: <a href="https://www.karlin.mff.cuni.cz/~portal/analyticka_geometrie/kuzelosecky.php?kapitola=kruznice" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 underline">MFF UK – Analytická geometrie kuželoseček: Kružnice</a>
+<div class="my-5 p-4 rounded-xl bg-stone-100/80 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs">
+  <div class="flex items-center justify-between mb-3">
+    <span class="text-xs text-stone-700 dark:text-stone-300 font-bold uppercase tracking-wide">📄 Ukázka z portálu Matematicko-fyzikální fakulty UK</span>
+    <span class="badge-print-hidden">🔒 skryto v tisku</span>
+  </div>
+  <img src="/images/kruznice-mff.png" alt="Ukázka definice a rovnic kružnice z MFF UK" class="rounded-lg shadow-sm border border-stone-200 dark:border-stone-700 max-w-full h-auto mx-auto" />
+  <p class="text-xs text-stone-500 dark:text-stone-400 mt-2 text-center">
+    Zdroj: <a href="https://www.karlin.mff.cuni.cz/~portal/analyticka_geometrie/kuzelosecky.php?kapitola=kruznice" target="_blank" rel="noopener noreferrer" class="text-[#c2410c] dark:text-[#f95d12] underline font-medium">MFF UK – Analytická geometrie kuželoseček: Kružnice</a>
   </p>
 </div>
 
@@ -178,9 +175,10 @@ Představme si typickou algoritmickou výzvu:
 
 <div class="print-tablet-workspace" data-label="✍️ Místo pro návrh vašeho algoritmu a logický rozbor případů (pro tablet / stylus / tisk):"></div>
 
-<details class="spoiler-print-hidden print:hidden my-4 p-4 rounded-xl border border-amber-200 bg-amber-50/50 dark:bg-amber-950/20 dark:border-amber-800/40">
-<summary class="cursor-pointer font-bold text-amber-900 dark:text-amber-300">
-  🔍 Zobrazit optimální postup a logický rozbor (skryto v tisku)
+<details class="wiki-spoiler-box">
+<summary class="wiki-spoiler-summary">
+  <span class="flex items-center gap-2">⚡ <span>Zobrazit optimální postup a logický rozbor</span></span>
+  <span class="badge-print-hidden">🔒 skryto v tisku</span>
 </summary>
 
 #### ⚡ Řešení: Rychlé umocňování (Exponentiation by Squaring) a Formální Logika
