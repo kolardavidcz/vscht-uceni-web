@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
@@ -151,17 +152,11 @@ h4,
 .dark .wiki-prose h1,
 .dark .wiki-prose h2,
 .dark .wiki-prose h3,
-.dark .wiki-prose h4,
-@media (prefers-color-scheme: dark) {
-  .wiki-prose h1,
-  .wiki-prose h2,
-  .wiki-prose h3,
-  .wiki-prose h4 {
-    color: #f8fafc;
-  }
-  .wiki-prose h2 {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-  }
+.dark .wiki-prose h4 {
+  color: #f8fafc;
+}
+.dark .wiki-prose h2 {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .wiki-prose p {
@@ -404,6 +399,14 @@ mjx-c::before {
 
 .dark mjx-c::before {
   color: #f1f5f9 !important;
+}
+
+/* Clean styling for MathJax unknown text characters (accents, unicode) */
+mjx-utext {
+  font-family: inherit !important;
+  font-size: 100% !important;
+  vertical-align: baseline !important;
+  padding: 0 !important;
 }
 
 @media print {

@@ -93,32 +93,36 @@
               "order": 2
             },
             "dml-bio-grafy": {
-              "title": "3 · Modul 0: Bio-Intuice & Jazyk Grafů",
+              "title": "3 · Modul 0A: Bio-Intuice & Co je Graf",
               "order": 3
             },
-            "dml-logicky-zaklad": {
-              "title": "4 · Modul 1: Logický & Důkazový základ",
+            "dml-bio-grafy-b": {
+              "title": "4 · Modul 0B: Formální Jazyk Grafů & C++",
               "order": 4
             },
-            "dml-indukce-na-grafech": {
-              "title": "5 · Modul 2: Indukce na Grafech & Redukční Past",
+            "dml-logicky-zaklad": {
+              "title": "5 · Modul 1: Logický & Důkazový základ",
               "order": 5
             },
-            "dml-dukazy-sporem": {
-              "title": "6 · Modul 3: Důkazy Sporem & Extremální Princip",
+            "dml-indukce-na-grafech": {
+              "title": "6 · Modul 2: Indukce na Grafech & Redukční Past",
               "order": 6
             },
-            "dml-loop-invariants": {
-              "title": "7 · Modul 4: Invarianty Cyklů (BFS & Dijkstra)",
+            "dml-dukazy-sporem": {
+              "title": "7 · Modul 3: Důkazy Sporem & Extremální Princip",
               "order": 7
             },
-            "dml-konstruktivni-dukazy": {
-              "title": "8 · Modul 5: Konstruktivní Důkazy & Bio-Algoritmy",
+            "dml-loop-invariants": {
+              "title": "8 · Modul 4: Invarianty Cyklů (BFS & Dijkstra)",
               "order": 8
             },
-            "dml-zkouskovy-workshop": {
-              "title": "9 · Modul 6: Zkouškový Workshop & Šablony Důkazů",
+            "dml-konstruktivni-dukazy": {
+              "title": "9 · Modul 5: Konstruktivní Důkazy & Bio-Algoritmy",
               "order": 9
+            },
+            "dml-zkouskovy-workshop": {
+              "title": "10 · Modul 6: Zkouškový Workshop & Šablony Důkazů",
+              "order": 10
             }
           }
         },

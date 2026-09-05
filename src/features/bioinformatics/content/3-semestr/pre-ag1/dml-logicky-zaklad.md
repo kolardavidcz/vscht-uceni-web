@@ -468,7 +468,14 @@ Pro dokazování tvrzení závislých na velikosti grafu $n = |V|$ nebo $m = |E|
 
 ### Úloha 1.1: Bezchybná Negace Složité Formule
 Znegujte následující výrok reprezentující vlastnost biologického enzymu $E$:
-$$V = \forall x \in \text{Enzymy} \; \exists y \in \text{Substráty} : (\text{Váže}(x, y) \implies \text{Aktivní}(x))$$
+
+<div class="my-4 p-4 rounded-xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 text-center font-mono text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-wide shadow-2xs">
+  V = ∀x ∈ Enzymy ∃y ∈ Substráty : (Váže(x, y) ⟹ Aktivní(x))
+</div>
+
+Formální zápis v predikátové logice (matematická notace):
+$$V = \forall x \in \mathcal{E} \; \exists y \in \mathcal{S} : (V(x, y) \implies A(x))$$
+*(kde $\mathcal{E}$ značí enzymy, $\mathcal{S}$ substráty, predikát $V(x, y)$ vyjadřuje „$x$ se váže na $y$“ a $A(x)$ „$x$ je aktivní“)*
 
 <details>
 <summary>🔍 Zobrazit detailní řešení</summary>
@@ -476,25 +483,31 @@ $$V = \forall x \in \text{Enzymy} \; \exists y \in \text{Substráty} : (\text{V�
 ### ✍️ Řešení:
 1. Zaměníme kvantifikátory: $\forall x$ se změní na $\exists x$, a $\exists y$ se změní na $\forall y$.
 2. Znegujeme vnitřní implikaci podle pravidla $\neg (A \implies B) \equiv A \land \neg B$:
-   $$\neg (\text{Váže}(x, y) \implies \text{Aktivní}(x)) \quad \equiv \quad \text{Váže}(x, y) \land \neg \text{Aktivní}(x)$$
+   $$\neg (V(x, y) \implies A(x)) \quad \equiv \quad V(x, y) \land \neg A(x)$$
 3. Výsledná znegovaná formule $\neg V$:
-   $$\neg V = \exists x \in \text{Enzymy} \; \forall y \in \text{Substráty} : (\text{Váže}(x, y) \land \neg \text{Aktivní}(x))$$
+
+<div class="my-4 p-4 rounded-xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 text-center font-mono text-base sm:text-lg font-bold text-stone-900 dark:text-stone-100 tracking-wide shadow-2xs">
+  ¬V = ∃x ∈ Enzymy ∀y ∈ Substráty : (Váže(x, y) ∧ ¬Aktivní(x))
+</div>
+
+$$\neg V = \exists x \in \mathcal{E} \; \forall y \in \mathcal{S} : (V(x, y) \land \neg A(x))$$
+
 4. **Slovní překlad:** *"Existuje enzym $x$ takový, že pro všechny substráty $y$ platí, že se na ně enzym $x$ váže a zároveň není aktivní."* $\blacksquare$
 </details>
 
 ---
 
-### Úloha 1.2: Důkaz Kontrapozicí v Sítích
-Dokážeme kontrapozicí tvrzení pro libovolnou konečnou síť (graf) $G = (V, E)$, kde $V$ jsou uzly a $E$ jsou spojnice mezi nimi (přičemž $\deg(v)$ značí stupeň uzlu = počet spojnic vycházejících z uzlu $v$):  
+### Úloha 1.2: Důkaz v Sítích: Kontrapozice vs. Přímý Důkaz
+Dokážeme tvrzení pro libovolnou konečnou síť (graf) $G = (V, E)$, kde $V$ jsou uzly a $E$ jsou spojnice mezi nimi (přičemž $\deg(v)$ značí stupeň uzlu = počet spojnic vycházejících z uzlu $v$):  
 *"Pokud z každého uzlu $v \in V$ vycházejí alespoň 2 spojnice ($\deg(v) \ge 2$), pak síť $G$ nutně obsahuje alespoň jednu uzavřenou smyčku (cyklus)."*
 
 > 💡 **Intuitivní představa před formálním důkazem:**  
 > Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře ($\deg(v) \ge 2$), nikdy nemůžete uvíznout ve slepé uličce. Když budete bludištěm procházet stále kupředu a nikdy se nevrátíte stejnými dveřmi zpět, v konečném počtu místností musíte dříve či později narazit do místnosti, kde už jste jednou byli — a tím jste uzavřeli kruh (cyklus)!
 
 <details>
-<summary>🔍 Zobrazit vzorový důkaz kontrapozicí</summary>
+<summary>🔍 Zobrazit vzorový důkaz (Kontrapozicí i Přímým způsobem)</summary>
 
-### ✍️ Řešení Kontrapozicí:
+### Metoda A: Řešení Kontrapozicí ($\neg B \implies \neg A$)
 - **Původní tvrzení $A \implies B$:**
   - $A$: Každý uzel má alespoň 2 sousedy ($\forall v \in V: \deg(v) \ge 2$).
   - $B$: Síť obsahuje uzavřenou smyčku (cyklus).
@@ -510,6 +523,46 @@ Dokážeme kontrapozicí tvrzení pro libovolnou konečnou síť (graf) $G = (V,
 5. Jediným sousedem koncového uzlu $v_1$ proto může být pouze sousední uzel $v_2$ na trase. Z uzlu $v_1$ tedy vychází přesně 1 spojnice ($\deg(v_1) = 1 < 2$).
 6. Nalezli jsme uzel s $\deg(v) \le 1$, čímž jsme dokázali $\neg A$.
 7. Podle principu kontrapozice ($\neg B \implies \neg A$) tím bezpečně platí i původní tvrzení $A \implies B$. $\blacksquare$
+
+---
+
+### Metoda B: Přímý Důkaz (Řada Vrcholů & Zpětná Hrana)
+
+Tvrzení lze dokázat také **zcela přímo** ($A \implies B$) bez přechodu k negacím:
+
+1. **Předpoklad:** Síť $G$ je konečná ($|V| = n$) a každý uzel má stupeň alespoň 2 ($\deg(v) \ge 2$).
+2. **Sestavení nejdelší cesty do řady:**
+   Zvolme v grafu nejdelší možnou prostou trasu (cestu bez opakování vrcholů) a seřaďme její vrcholy zleva doprava do řady:
+   $$v_1 - v_2 - v_3 - \dots - v_{k-1} - v_k$$
+   Jelikož je graf konečný, taková nejdelší prostá cesta musí mít konečnou délku $k \le n$.
+
+3. **Proč uzel nejvíce napravo musí ukázat zpět do řady?**
+   Podívejme se na vrchol **nejvíce napravo** ($v_k$):
+   - Ze zadání víme, že má $\deg(v_k) \ge 2$ (musí mít alespoň 2 různé sousedy).
+   - Prvním sousedem je uzel bezprostředně nalevo na trase ($v_{k-1}$).
+   - **Kde leží jeho druhý soused?**
+     - Nemůže ležet vně trasy jako nový vrchol $v_{k+1}$ doprava — to by byla trasa delší, což odporuje tomu, že $P$ byla zvolena jako nejdelší možná.
+     - Nemůže být „na kraji“ bez napojení, protože má $\deg(v_k) \ge 2$.
+     - Druhý soused vrcholu $v_k$ proto **nutně musí být některý z již navštívených vrcholů $v_i$ nalevo na trase** ($1 \le i \le k-2$).
+     - V krajním případě tato hrana vede z $v_k$ přímo zpět do počátečního uzlu $v_1$!
+
+```
+      ┌────────────────────────────────────────────────────────┐
+      │                                                        │ (zpětná hrana uzavírá cyklus!)
+      ▼                                                        │
+   ┌──────┐        ┌──────┐               ┌────────┐        ┌──┴───┐
+   │  v₁  ├────────┤  v₂  ├─── ... ───────┤  vk-1  ├────────┤  vk  │
+   └──────┘        └──────┘               └────────┘        └──────┘
+   (začátek řady)                                           (nejvíce napravo:
+                                                             nemůže pokračovat doprava,
+                                                             musí se napojit zpět doleva!)
+```
+
+4. **Uzavření cyklu:**
+   Posloupnost hran podél trasy z $v_i$ do $v_k$ spolu se zpětnou spojnicí $\{v_k, v_i\}$ tvoří uzavřený cyklus:
+   $$(v_i, v_{i+1}, \dots, v_{k-1}, v_k, v_i)$$
+   Stejná úvaha platí i pro vrchol $v_1$ nejvíce nalevo: jeho druhý soused musí mířit doprava zpět do řady.
+5. **Závěr:** V síti nutně existuje cyklus. Tvrzení je dokázáno přímo. $\blacksquare$
 </details>
 
 ---
