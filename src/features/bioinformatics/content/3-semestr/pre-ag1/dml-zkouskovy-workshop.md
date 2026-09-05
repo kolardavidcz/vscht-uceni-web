@@ -133,7 +133,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
    - Odebrání cyklu $C$ snížilo stupeň každého vrcholu cyklu přesně o 2. Tedy všechny vrcholy v $G'$ mají **stále sudý stupeň**.
    - Podgraf $G'$ má $m - |E(C)| < m$ hran.
    - Aplikujeme **IP** na jednotlivé komponenty souvislosti podgrafu $G'$. Podle IP lze $G'$ rozložit na hranově disjunktní cykly.
-   - Přidáním cyklu $C$ zpět získáme kompletní rozklad původního grafu $G$ na hranově disjunktní cykly. $\blacksquare$
+   - Přidáním cyklu $C$ zpět získáme kompletní rozklad původního grafu $G$ na hranově disjunktní cykly.
 
 #### 📊 Rozbor Hodnocení (Rubrika):
 - **100 % bodů:** Libovolný graf $G(m)$, dekonstrukce odebráním cyklu $C$, ověření sudosti stupňů v $G'$, správné použití IP.
@@ -162,7 +162,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
    Protože vrcholy cesty jsou $v_0, v_1, \dots, v_k$, nejvzdálenější soused $v_k$ musí být vzdálen alespoň $\delta(G)$ hran po cestě.
    Odtud délka cesty $k$ splňuje:
    $$k \ge \delta(G)$$
-4. Tím je důkaz dokončen. $\blacksquare$
+4. Tím je důkaz dokončen.
 
 #### 📊 Rozbor Hodnocení (Rubrika):
 - **100 % bodů:** Výběr nejdelší jednoduché cesty $P$, odvození, že všichni sousedé koncového vrcholu $v_k$ leží na $P$, algebraické srovnání s $\delta(G)$.
@@ -193,7 +193,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
    Váha nové kostry je $w(T_2') = w(T_2) + w(e) - w(e') < w(T_2)$.
 5. **💥 SPOR ($\bot$):**
    Našli jsme kostru $T_2'$ s váhou přísně menší než minimální kostra $T_2$! To je SPOR s minimalitou $T_2$.
-6. Minimální kostra s unikátními vahami je tedy jedinečná. $\blacksquare$
+6. Minimální kostra s unikátními vahami je tedy jedinečná.
 
 #### 📊 Rozbor Hodnocení (Rubrika):
 - **100 % bodů:** Správný výběr nejlehčí hranové symetrické diference $e \in T_1 \triangle T_2$, vložení do $T_2$, vznik cyklu a konstrukce $T_2'$, spor $w(T_2') < w(T_2)$.
@@ -222,7 +222,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
      $$|E(G')| = n - c' \implies m - 1 = n - (c + 1) = n - c - 1$$
    - Přičtením 1 k oběma stranám rovnosti dostáváme:
      $$m = n - c$$
-4. Les o $n$ vrcholech a $c$ komponentách má $n - c$ hran. $\blacksquare$
+4. Les o $n$ vrcholech a $c$ komponentách má $n - c$ hran.
 
 #### 📊 Rozbor Hodnocení (Rubrika):
 - **100 % bodů:** Dekonstrukční odebrání hrany $e$, zdůvodnění změny počtu komponent $c' = c + 1$ díky acykličnosti, korektní algebra a IP.
@@ -245,7 +245,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
    - Obecně $v_i \in V_1 \iff i \text{ je liché}$, a $v_i \in V_2 \iff i \text{ je sudé}$.
 3. **Krok 2 (Poslední vrchol):** Jelikož $k$ je liché číslo, platí $v_k \in V_1$.
 4. **💥 SPOR ($\bot$):** Cyklus uzavírá hrana $\{v_k, v_1\}$. Oba její koncové vrcholy $v_k \in V_1$ i $v_1 \in V_1$ leží ve stejné množině $V_1$! To je v přímém SPORU s definicí bipartitního grafu!
-5. Bipartitní graf neobsahuje liché cykly. $\blacksquare$
+5. Bipartitní graf neobsahuje liché cykly.
 
 #### 📊 Rozbor Hodnocení (Rubrika):
 - **100 % bodů:** Přesný předpoklad sporu, dokázání alternace prvků cyklu, odvození konfliktu na uzavírací hraně $\{v_k, v_1\}$.
@@ -267,7 +267,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
    - Vyjmutím $u$ z čela fronty zůstane posloupnost $\langle v_2, \dots, v_r \rangle$, která podmínku neporuší.
    - Procházíme sousedy $v$ vrcholu $u$ a vkládáme je s $d[v] = d[u] + 1$ na konec fronty.
    - Jelikož na čele původní fronty bylo $d[u]$ nebo $d[u]+1$, nově vkládané prvků na konec s hodnotou $d[u]+1$ zachovají maximální rozdíl 1 od nového čela. Invariant drží.
-4. **Ukončení:** Po skončení cyklu jsou všechny vzdálenosti správně určeny. $\blacksquare$
+4. **Ukončení:** Po skončení cyklu jsou všechny vzdálenosti správně určeny.
 
 #### 📊 Rozbor Hodnocení (Rubrika):
 - **100 % bodů:** Všechny 3 fáze (Inicializace, Udržování, Ukončení), správný rozbor operací `push` a `pop`.

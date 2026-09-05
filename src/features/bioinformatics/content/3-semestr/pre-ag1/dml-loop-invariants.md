@@ -133,7 +133,7 @@ Předpokládejme, že invariant platí před odebráním prvku z fronty.
 
 #### 3. Ukončení (Po cyklu):
 Cyklus skončí, když je fronta $Q$ **prázdná**.
-Protože algoritmus prozkoumal graf vlna po vlně od nejmenší vzdálenosti $d=0$ po $d_{max}$, z vlastnosti invariantu a z trojúhelníkové nerovnosti plyne, že pro každý dosažitelný vrchol $v$ platí přesně $d[v] = \delta(s, v)$ (kde $\delta(s, v)$ je reálná délka nejkratší cesty). BFS je KOREKTNÍ. $\blacksquare$
+Protože algoritmus prozkoumal graf vlna po vlně od nejmenší vzdálenosti $d=0$ po $d_{max}$, z vlastnosti invariantu a z trojúhelníkové nerovnosti plyne, že pro každý dosažitelný vrchol $v$ platí přesně $d[v] = \delta(s, v)$ (kde $\delta(s, v)$ je reálná délka nejkratší cesty). BFS je KOREKTNÍ.
 
 ---
 
@@ -202,7 +202,7 @@ Dokážeme sporem, že pro tento nově přidávaný vrchol $u$ platí $d[u] = \d
 Tedy i pro nově přidaný vrchol $u$ platí $d[u] = \delta(s, u)$ a invariant zůstává zachován pro $S \cup \{u\}$.
 
 #### 3. Ukončení:
-Po skončení cyklu byly zpracovány všechny dosáhlé vrcholy $v \in V$. Pro každý vrchol platí $d[v] = \delta(s, v)$. Dijkstrův algoritmus je KOREKTNÍ. $\blacksquare$
+Po skončení cyklu byly zpracovány všechny dosáhlé vrcholy $v \in V$. Pro každý vrchol platí $d[v] = \delta(s, v)$. Dijkstrův algoritmus je KOREKTNÍ.
 
 ---
 
@@ -245,7 +245,7 @@ int findMin(int arr[], int n) {
 <summary>🔍 Zobrazit vzorový důkaz invariantem</summary>
 
 ### ✍️ Řešení 3-krokovým postupem (Úloha 4.1):
-Viz pseudokód výše — invariant je $\text{minVal} = \min(a[0], \dots, a[i-1])$ před $i$-tou iterací. Inicializace: $\text{minVal} = a[0]$ pro $i=1$. Udržování: každá iterace porovná $a[i]$ a aktualizuje $\text{minVal}$. Ukončení: po $i=n$ platí $\text{minVal} = \min(a[0], \dots, a[n-1])$. $\blacksquare$
+Viz pseudokód výše — invariant je $\text{minVal} = \min(a[0], \dots, a[i-1])$ před $i$-tou iterací. Inicializace: $\text{minVal} = a[0]$ pro $i=1$. Udržování: každá iterace porovná $a[i]$ a aktualizuje $\text{minVal}$. Ukončení: po $i=n$ platí $\text{minVal} = \min(a[0], \dots, a[n-1])$.
 
 </details>
 
@@ -291,7 +291,7 @@ void reverseArray(int arr[], int n) {
 4. **Ukončení (Po skončení cyklu):**
    Cyklus skončí, jakmile $left \ge right$.
    - Pokud $n$ bylo sudé, cyklus skončí při $left = right + 1$. Vnitřní neprohozený úsek je prázdný, celé pole `arr[0 ... n-1]` je zrcadlově obráceno.
-   - Pokud $n$ bylo liché, cyklus skončí při $left = right$. Prostřední prvek pole se nemusí prohazovat sám se sebou, celé pole je obráceno. Algoritmus je KOREKTNÍ. $\blacksquare$
+   - Pokud $n$ bylo liché, cyklus skončí při $left = right$. Prostřední prvek pole se nemusí prohazovat sám se sebou, celé pole je obráceno. Algoritmus je KOREKTNÍ.
 </details>
 
 ---
