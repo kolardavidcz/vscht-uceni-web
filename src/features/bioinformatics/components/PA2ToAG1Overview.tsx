@@ -23,6 +23,7 @@ import {
   PlanTopic,
   LVL1_WEEKS,
   printPlanDocument,
+  stripMarkdownLinks,
 } from "./overview/printPlanDocument";
 
 type PlanLevel = 1 | 2 | 3 | 4;
@@ -62,9 +63,7 @@ function renderNameWithLinks(name: string) {
   return parts.length > 0 ? parts : name;
 }
 
-function stripMarkdownLinks(name: string): string {
-  return name.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
-}
+
 
 export function PA2ToAG1Overview() {
   // Default: LVL1 weeks expanded (1 & 7)

@@ -47,6 +47,10 @@ export function printBadgeHtml(badges: string[], lowQuality: boolean): string {
   return chips.length ? `<span class="chips">${chips.join("")}</span>` : "";
 }
 
+export function stripMarkdownLinks(s: string): string {
+  return s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
@@ -81,11 +85,11 @@ export function printPlanDocument(title: string, topics: PlanTopic[]) {
   <span class="check" aria-hidden="true">☐</span>
   <div class="item-body">
     <div class="item-main">
-      <span class="topic">${escapeHtml(t.topic)}</span>
+      <span class="topic">${escapeHtml(stripMarkdownLinks(t.topic))}</span>
       ${printBadgeHtml(t.badges, t.quality === false)}
     </div>
     <div class="item-sub">
-      <span class="meta">${escapeHtml(t.category)} · ${escapeHtml(t.source)}</span>
+      <span class="meta">${escapeHtml(stripMarkdownLinks(t.category))} · ${escapeHtml(stripMarkdownLinks(t.source))}</span>
       <span class="rel">
         <span class="pct ${rel.pct}">${t.relevance}%</span>
         <span class="bar-track"><span class="bar ${rel.bar}" style="width:${Math.max(t.relevance, 5)}%"></span></span>

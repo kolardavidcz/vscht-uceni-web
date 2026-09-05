@@ -148,7 +148,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week01",
     "category": "Trainer",
-    "name": "Týden 01: Základní konstrukce C++",
+    "name": "Týden 01: Základní konstrukce C++ [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer",
       "mega-cool"
@@ -348,7 +348,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week02",
     "category": "Trainer",
-    "name": "Týden 02: Úvod do OOP",
+    "name": "Týden 02: Úvod do OOP [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -563,7 +563,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week03",
     "category": "Trainer",
-    "name": "Týden 03: Základní kontejnery",
+    "name": "Týden 03: Základní kontejnery [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -744,7 +744,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week04",
     "category": "Trainer",
-    "name": "Týden 04: Operátory",
+    "name": "Týden 04: Operátory [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -948,7 +948,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week05",
     "category": "Trainer",
-    "name": "Týden 05: Kopie a přesouvání",
+    "name": "Týden 05: Kopie a přesouvání [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -1165,7 +1165,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week06",
     "category": "Trainer",
-    "name": "Týden 06: Pokročilejší STL",
+    "name": "Týden 06: Pokročilejší STL [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -1227,7 +1227,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week07",
     "category": "Trainer",
-    "name": "Týden 07: Procházení grafů",
+    "name": "Týden 07: Procházení grafů [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer",
       "mega-cool"
@@ -1350,7 +1350,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week08",
     "category": "Trainer",
-    "name": "Týden 08: Polymorfismus",
+    "name": "Týden 08: Polymorfismus [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -1515,7 +1515,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week09",
     "category": "Trainer",
-    "name": "Týden 09: Polymorfismus II",
+    "name": "Týden 09: Polymorfismus II [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -1596,7 +1596,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week10",
     "category": "Trainer",
-    "name": "Týden 10: Šablony",
+    "name": "Týden 10: Šablony [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -1690,7 +1690,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week11",
     "category": "Trainer",
-    "name": "Týden 11: Šablony II",
+    "name": "Týden 11: Šablony II [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -1775,7 +1775,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "tr-week12",
     "category": "Trainer",
-    "name": "Týden 12: Procvičování",
+    "name": "Týden 12: Procvičování [(Trainer)](https://trainer.ksi.fit.cvut.cz)",
     "tags": [
       "trainer"
     ],
@@ -1810,7 +1810,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch01",
     "category": "E-learning",
-    "name": "Kapitola 01: Třídy a objekty",
+    "name": "Kapitola 01: [Třídy a objekty](https://courses.fit.cvut.cz/BI-PA2/elearning/oop.html)",
     "tags": [
       "elearning"
     ]
@@ -1818,7 +1818,7 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch02",
     "category": "E-learning",
-    "name": "Kapitola 02: Základní pojmy objektově orientovaného programování",
+    "name": "Kapitola 02: [Základní pojmy objektově orientovaného programování](https://courses.fit.cvut.cz/BI-PA2/elearning/oopbasic.html)",
     "tags": [
       "elearning"
     ]
@@ -1826,38 +1826,38 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch03",
     "category": "E-learning",
-    "name": "Kapitola 03: Rozšíření C → C++",
+    "name": "Kapitola 03: [Rozšíření C → C++](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch03-1",
-        "name": "1. První program v jazyce C++",
+        "name": "[1. První program v jazyce C++](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/intro.html)",
         "relevance": 10,
         "quality": true
       },
       {
         "id": "el-ch03-2",
-        "name": "2. Jmenné prostory",
+        "name": "[2. Jmenné prostory](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/namespace.html)",
         "relevance": 50,
         "quality": true
       },
       {
         "id": "el-ch03-3",
-        "name": "3. Typ bool",
+        "name": "[3. Typ bool](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/bool.html)",
         "relevance": 30,
         "quality": true
       },
       {
         "id": "el-ch03-4",
-        "name": "4. Standardní vstup a výstup",
+        "name": "[4. Standardní vstup a výstup](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/stdio.html)",
         "relevance": 10,
         "quality": true
       },
       {
         "id": "el-ch03-5",
-        "name": "5. Výstup, I/O manipulátory",
+        "name": "[5. Výstup, I/O manipulátory](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/omanip.html)",
         "relevance": 15,
         "quality": true,
         "badges": [
@@ -1866,7 +1866,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch03-6",
-        "name": "6. Vstup, I/O manipulátory",
+        "name": "[6. Vstup, I/O manipulátory](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/imanip.html)",
         "relevance": 15,
         "quality": true,
         "badges": [
@@ -1875,61 +1875,61 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch03-7",
-        "name": "7. Typ reference",
+        "name": "[7. Typ reference](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/reference.html)",
         "relevance": 30,
         "quality": false
       },
       {
         "id": "el-ch03-8",
-        "name": "8. Konstanty, klíčové slovo const",
+        "name": "[8. Konstanty, klíčové slovo const](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/const.html)",
         "relevance": 50,
         "quality": false
       },
       {
         "id": "el-ch03-9",
-        "name": "9. Konstantní reference",
+        "name": "[9. Konstantní reference](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/constref.html)",
         "relevance": 40,
         "quality": false
       },
       {
         "id": "el-ch03-10",
-        "name": "10. Konstantní ukazatel a ukazatel na konstantu",
+        "name": "[10. Konstantní ukazatel a ukazatel na konstantu](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/constptr.html)",
         "relevance": 40,
         "quality": false
       },
       {
         "id": "el-ch03-11",
-        "name": "11. Deklarace jako příkaz",
+        "name": "[11. Deklarace jako příkaz](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/declaration.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch03-12",
-        "name": "12. Struktury",
+        "name": "[12. Struktury](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/struct.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch03-13",
-        "name": "13. Dynamické proměnné",
+        "name": "[13. Dynamické proměnné](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/dynvar.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch03-14",
-        "name": "14. Inline funkce",
+        "name": "[14. Inline funkce](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/inline.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch03-15",
-        "name": "15. Implicitní parametry funkcí",
+        "name": "[15. Implicitní parametry funkcí](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/implicitparams.html)",
         "relevance": 50,
         "quality": true
       },
       {
         "id": "el-ch03-16",
-        "name": "16. Přetěžování funkcí",
+        "name": "[16. Přetěžování funkcí](https://courses.fit.cvut.cz/BI-PA2/elearning/extensions/funcoverload.html)",
         "relevance": 20,
         "quality": true,
         "badges": [
@@ -1941,32 +1941,32 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch04",
     "category": "E-learning",
-    "name": "Kapitola 04: Programátorský styl",
+    "name": "Kapitola 04: [Programátorský styl](https://courses.fit.cvut.cz/BI-PA2/elearning/progstyle/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch04-1",
-        "name": "1. Naivní styl",
+        "name": "[1. Naivní styl](https://courses.fit.cvut.cz/BI-PA2/elearning/progstyle/naive.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch04-2",
-        "name": "2. Procedurální styl",
+        "name": "[2. Procedurální styl](https://courses.fit.cvut.cz/BI-PA2/elearning/progstyle/proc.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch04-3",
-        "name": "3. Objektově",
+        "name": "[3. Objektově](https://courses.fit.cvut.cz/BI-PA2/elearning/progstyle/class.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch04-4",
-        "name": "4. Zásobník jako třída",
+        "name": "[4. Zásobník jako třída](https://courses.fit.cvut.cz/BI-PA2/elearning/progstyle/stack.html)",
         "relevance": 0,
         "quality": false
       }
@@ -1975,86 +1975,86 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch05",
     "category": "E-learning",
-    "name": "Kapitola 05: Třídy a objekty",
+    "name": "Kapitola 05: [Třídy a objekty](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch05-1",
-        "name": "1. Deklarace třídy",
+        "name": "[1. Deklarace třídy](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/declaration.html)",
         "relevance": 50,
         "quality": false
       },
       {
         "id": "el-ch05-2",
-        "name": "2. Definice metod, konstruktorů a destruktoru",
+        "name": "[2. Definice metod, konstruktorů a destruktoru](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/define.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch05-3",
-        "name": "3. Zviditelnění zastíněných členů v členské funkci",
+        "name": "[3. Zviditelnění zastíněných členů v členské funkci](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/shadow.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch05-4",
-        "name": "4. Inline členské funkce",
+        "name": "[4. Inline členské funkce](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/inline.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch05-5",
-        "name": "5. Class a struct",
+        "name": "[5. Class a struct](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/struct.html)",
         "relevance": 40,
         "quality": true
       },
       {
         "id": "el-ch05-6",
-        "name": "6. Objekty",
+        "name": "[6. Objekty](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/objects.html)",
         "relevance": 40,
         "quality": false
       },
       {
         "id": "el-ch05-7",
-        "name": "7. Konstantní metody",
+        "name": "[7. Konstantní metody](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/const.html)",
         "relevance": 50,
         "quality": true
       },
       {
         "id": "el-ch05-8",
-        "name": "8. Volání konstruktoru a destruktoru",
+        "name": "[8. Volání konstruktoru a destruktoru](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/constrcall.html)",
         "relevance": 50,
         "quality": true
       },
       {
         "id": "el-ch05-9",
-        "name": "9. Pole objektů",
+        "name": "[9. Pole objektů](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/array.html)",
         "relevance": 20,
         "quality": true
       },
       {
         "id": "el-ch05-10",
-        "name": "10. Implicitní konstruktor",
+        "name": "[10. Implicitní konstruktor](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/implic.html)",
         "relevance": 50,
         "quality": true
       },
       {
         "id": "el-ch05-11",
-        "name": "11. Inicializační část konstruktoru",
+        "name": "[11. Inicializační část konstruktoru](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/init.html)",
         "relevance": 50,
         "quality": true
       },
       {
         "id": "el-ch05-12",
-        "name": "12. Lokální deklarace ve třídě",
+        "name": "[12. Lokální deklarace ve třídě](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/localdecl.html)",
         "relevance": 5,
         "quality": false
       },
       {
         "id": "el-ch05-13",
-        "name": "13. Statické členy třídy",
+        "name": "[13. Statické členy třídy](https://courses.fit.cvut.cz/BI-PA2/elearning/classes/static.html)",
         "relevance": 20,
         "quality": true
       }
@@ -2063,74 +2063,74 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch06",
     "category": "E-learning",
-    "name": "Kapitola 06: Přetěžování operátorů, třída Zlomek, uživatelská konverze",
+    "name": "Kapitola 06: [Přetěžování operátorů, třída Zlomek, uživatelská konverze](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch06-1",
-        "name": "1. Aritmetika zlomků pomocí obyčejných funkcí",
+        "name": "[1. Aritmetika zlomků pomocí obyčejných funkcí](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/arifce.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch06-2",
-        "name": "2. Aritmetika pomocí metod",
+        "name": "[2. Aritmetika pomocí metod](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/arimet.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch06-3",
-        "name": "3. Přetížení operátorů obyčejnými funkcemi",
+        "name": "[3. Přetížení operátorů obyčejnými funkcemi](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/operfce.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch06-4",
-        "name": "4. Přetížení operátorů metodami",
+        "name": "[4. Přetížení operátorů metodami](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/opermet.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch06-5",
-        "name": "5. Přetížení operátorů spřátelenými funkcemi",
+        "name": "[5. Přetížení operátorů spřátelenými funkcemi](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/operfriend.html)",
         "relevance": 15,
         "quality": false
       },
       {
         "id": "el-ch06-6",
-        "name": "6. Uživatelská konverze",
+        "name": "[6. Uživatelská konverze](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/userconv.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch06-7",
-        "name": "7. Přehled přetěžování binárních operátorů",
+        "name": "[7. Přehled přetěžování binárních operátorů](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/surveybin.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch06-8",
-        "name": "8. Přehled přetěžování unárních operátorů",
+        "name": "[8. Přehled přetěžování unárních operátorů](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/surveyunary.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch06-9",
-        "name": "9. Přetížení operátoru indexace",
+        "name": "[9. Přetížení operátoru indexace](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/indexop.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch06-10",
-        "name": "10. Přetížení operátoru volání funkce",
+        "name": "[10. Přetížení operátoru volání funkce](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/funccall.html)",
         "relevance": 5,
         "quality": false
       },
       {
         "id": "el-ch06-11",
-        "name": "11. Přetížení unárního operátoru →",
+        "name": "[11. Přetížení unárního operátoru →](https://courses.fit.cvut.cz/BI-PA2/elearning/operatoroverload/smartpoi.html)",
         "relevance": 0,
         "quality": false
       }
@@ -2139,44 +2139,44 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch07",
     "category": "E-learning",
-    "name": "Kapitola 07: Přiřazení, mělká a hluboká kopie",
+    "name": "Kapitola 07: [Přiřazení, mělká a hluboká kopie](https://courses.fit.cvut.cz/BI-PA2/elearning/copy/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch07-1",
-        "name": "1. Hluboká kopie",
+        "name": "[1. Hluboká kopie](https://courses.fit.cvut.cz/BI-PA2/elearning/copy/deepcopy.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch07-2",
-        "name": "2. Kopírující konstruktor",
+        "name": "[2. Kopírující konstruktor](https://courses.fit.cvut.cz/BI-PA2/elearning/copy/copyconstr.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch07-3",
-        "name": "3. Mělká kopie - počítané reference",
+        "name": "[3. Mělká kopie - počítané reference](https://courses.fit.cvut.cz/BI-PA2/elearning/copy/shallowcopy.html)",
         "relevance": 10,
         "quality": true
       },
       {
         "id": "el-ch07-4",
-        "name": "4. Reference na pravou stranu",
+        "name": "[4. Reference na pravou stranu](https://courses.fit.cvut.cz/BI-PA2/elearning/copy/rvalueref.html)",
         "relevance": 50,
         "quality": true
       },
       {
         "id": "el-ch07-5",
-        "name": "5. Přesouvací konstruktor",
+        "name": "[5. Přesouvací konstruktor](https://courses.fit.cvut.cz/BI-PA2/elearning/copy/moveconstructor.html)",
         "relevance": 0,
         "quality": false
       },
       {
         "id": "el-ch07-6",
-        "name": "6. Přesouvací operátor přiřazení",
+        "name": "[6. Přesouvací operátor přiřazení](https://courses.fit.cvut.cz/BI-PA2/elearning/copy/moveopassign.html)",
         "relevance": 0,
         "quality": false
       }
@@ -2185,14 +2185,14 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch08",
     "category": "E-learning",
-    "name": "Kapitola 08: Znakové řetězce libovolné délky - třída std::string",
+    "name": "Kapitola 08: [Znakové řetězce libovolné délky - třída std::string](https://courses.fit.cvut.cz/BI-PA2/elearning/string/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch08-1",
-        "name": "Znakové řetězce libovolné délky - třída std::string",
+        "name": "[Znakové řetězce libovolné délky - třída std::string](https://courses.fit.cvut.cz/BI-PA2/elearning/string/index.html)",
         "relevance": 10,
         "quality": false
       }
@@ -2201,14 +2201,14 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch11-pt1",
     "category": "E-learning",
-    "name": "Kapitola 11: Abstraktní datové typy, standardní knihovna",
+    "name": "Kapitola 11: [Abstraktní datové typy, standardní knihovna](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch11-pt1-1",
-        "name": "1. Standardní knihovna, kontejnery",
+        "name": "[1. Standardní knihovna, kontejnery](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/stdlib.html)",
         "relevance": 60,
         "quality": true,
         "badges": [
@@ -2218,7 +2218,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt1-2",
-        "name": "2. Iterátory",
+        "name": "[2. Iterátory](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/iterator.html)",
         "relevance": 35,
         "quality": true,
         "badges": [
@@ -2228,7 +2228,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt1-3",
-        "name": "3. Vektor (vector)",
+        "name": "[3. Vektor (vector)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/vector.html)",
         "relevance": 90,
         "quality": true,
         "badges": [
@@ -2238,7 +2238,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt1-4",
-        "name": "4. Pole (Array)",
+        "name": "[4. Pole (Array)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/array.html)",
         "relevance": 60,
         "quality": true,
         "badges": [
@@ -2250,20 +2250,20 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch09",
     "category": "E-learning",
-    "name": "Kapitola 09: Ošetření chyb, výjimky",
+    "name": "Kapitola 09: [Ošetření chyb, výjimky](https://courses.fit.cvut.cz/BI-PA2/elearning/errors/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch09-1",
-        "name": "1. Ošetření chyb v jazyce C",
+        "name": "[1. Ošetření chyb v jazyce C](https://courses.fit.cvut.cz/BI-PA2/elearning/errors/cerr.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch09-2",
-        "name": "2. Výjimky - exceptions",
+        "name": "[2. Výjimky - exceptions](https://courses.fit.cvut.cz/BI-PA2/elearning/errors/exceptions.html)",
         "relevance": 15,
         "quality": false,
         "badges": [
@@ -2275,14 +2275,14 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch10",
     "category": "E-learning",
-    "name": "Kapitola 10: Šablony - template",
+    "name": "Kapitola 10: [Šablony - template](https://courses.fit.cvut.cz/BI-PA2/elearning/template/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch10-1",
-        "name": "1. Šablony funkcí",
+        "name": "[1. Šablony funkcí](https://courses.fit.cvut.cz/BI-PA2/elearning/template/templfce.html)",
         "relevance": 60,
         "quality": true,
         "badges": [
@@ -2291,7 +2291,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch10-2",
-        "name": "2. Šablony tříd",
+        "name": "[2. Šablony tříd](https://courses.fit.cvut.cz/BI-PA2/elearning/template/templclass.html)",
         "relevance": 60,
         "quality": true,
         "badges": [
@@ -2303,14 +2303,14 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch11-pt2",
     "category": "E-learning",
-    "name": "Kapitola 11 - část 2: Abstraktní datové typy, standardní knihovna",
+    "name": "Kapitola 11 - část 2: [Abstraktní datové typy, standardní knihovna](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch11-pt2-5",
-        "name": "5. Oboustranná fronta (std::deque)",
+        "name": "[5. Oboustranná fronta (std::deque)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/deque.html)",
         "relevance": 80,
         "quality": true,
         "badges": [
@@ -2319,7 +2319,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-6",
-        "name": "6. Seznam (list)",
+        "name": "[6. Seznam (list)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/list.html)",
         "relevance": 80,
         "quality": true,
         "badges": [
@@ -2328,7 +2328,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-7",
-        "name": "7. Jednosměrně zřetězený seznam (std::forward_list)",
+        "name": "[7. Jednosměrně zřetězený seznam (std::forward_list)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/forwardlist.html)",
         "relevance": 50,
         "quality": false,
         "badges": [
@@ -2338,7 +2338,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-8",
-        "name": "8. Zásobník (std::stack)",
+        "name": "[8. Zásobník (std::stack)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/stack.html)",
         "relevance": 90,
         "quality": true,
         "badges": [
@@ -2348,7 +2348,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-9",
-        "name": "9. Fronta (queue)",
+        "name": "[9. Fronta (queue)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/queue.html)",
         "relevance": 100,
         "quality": true,
         "badges": [
@@ -2358,7 +2358,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-10",
-        "name": "10. Prioritní fronta (std::priority_queue)",
+        "name": "[10. Prioritní fronta (std::priority_queue)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/priorqueue.html)",
         "relevance": 100,
         "quality": true,
         "badges": [
@@ -2368,7 +2368,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-11",
-        "name": "11. Množina (set)",
+        "name": "[11. Množina (set)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/set.html)",
         "relevance": 60,
         "quality": false,
         "badges": [
@@ -2377,7 +2377,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-12",
-        "name": "12. Bitová množina (std::bitset)",
+        "name": "[12. Bitová množina (std::bitset)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/bitset.html)",
         "relevance": 30,
         "quality": true,
         "badges": [
@@ -2387,13 +2387,13 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-13",
-        "name": "13. Multimnožina (std::multiset)",
+        "name": "[13. Multimnožina (std::multiset)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/multiset.html)",
         "relevance": 30,
         "quality": true
       },
       {
         "id": "el-ch11-pt2-14",
-        "name": "14. Tabulka (map)",
+        "name": "[14. Tabulka (map)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/map.html)",
         "relevance": 70,
         "quality": true,
         "badges": [
@@ -2403,7 +2403,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-15",
-        "name": "15. Tabulka s opakováním klíčů (multimap)",
+        "name": "[15. Tabulka s opakováním klíčů (multimap)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/multimap.html)",
         "relevance": 30,
         "quality": true,
         "badges": [
@@ -2412,7 +2412,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-16",
-        "name": "16. Neuspořádaná množina (std::unordered_set)",
+        "name": "[16. Neuspořádaná množina (std::unordered_set)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/unordered_set.html)",
         "relevance": 50,
         "quality": true,
         "badges": [
@@ -2421,7 +2421,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-17",
-        "name": "17. Neuspořádaná multimnožina (std::unordered_multiset)",
+        "name": "[17. Neuspořádaná multimnožina (std::unordered_multiset)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/unordered_multiset.html)",
         "relevance": 20,
         "quality": true,
         "badges": [
@@ -2430,7 +2430,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-18",
-        "name": "18. Neuspořádaná tabulka (unordered map)",
+        "name": "[18. Neuspořádaná tabulka (unordered map)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/unordered_map.html)",
         "relevance": 50,
         "quality": true,
         "badges": [
@@ -2439,7 +2439,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch11-pt2-19",
-        "name": "19. Neuspořádaná multitabulka (std::unordered_multimap)",
+        "name": "[19. Neuspořádaná multitabulka (std::unordered_multimap)](https://courses.fit.cvut.cz/BI-PA2/elearning/adt/unordered_multimap.html)",
         "relevance": 20,
         "quality": true,
         "badges": [
@@ -2451,14 +2451,14 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch12",
     "category": "E-learning",
-    "name": "Kapitola 12: Stromy",
+    "name": "Kapitola 12: [Stromy](https://courses.fit.cvut.cz/BI-PA2/elearning/trees/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch12-1",
-        "name": "1. Orientované grafy",
+        "name": "[1. Orientované grafy](https://courses.fit.cvut.cz/BI-PA2/elearning/trees/intro.html)",
         "relevance": 90,
         "quality": true,
         "badges": [
@@ -2467,7 +2467,7 @@ export const materialsData: SchoolMaterial[] = [
       },
       {
         "id": "el-ch12-2",
-        "name": "2. Binární vyhledávací strom",
+        "name": "[2. Binární vyhledávací strom](https://courses.fit.cvut.cz/BI-PA2/elearning/trees/bst.html)",
         "relevance": 100,
         "quality": true,
         "badges": [
@@ -2479,44 +2479,44 @@ export const materialsData: SchoolMaterial[] = [
   {
     "id": "el-ch13",
     "category": "E-learning",
-    "name": "Kapitola 13: Dědičnost (inheritance), dynamicky vázané metody, polymorfizmus",
+    "name": "Kapitola 13: [Dědičnost (inheritance), dynamicky vázané metody, polymorfizmus](https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/index.html)",
     "tags": [
       "elearning"
     ],
     "children": [
       {
         "id": "el-ch13-1",
-        "name": "1. Dědičnost",
+        "name": "[1. Dědičnost](https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/intro.html)",
         "relevance": 20,
         "quality": false
       },
       {
         "id": "el-ch13-2",
-        "name": "2. Dynamická (pozdní) vazba",
+        "name": "[2. Dynamická (pozdní) vazba](https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/latebinding.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch13-3",
-        "name": "3. Abstraktní třídy",
+        "name": "[3. Abstraktní třídy](https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/abstrclass.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch13-4",
-        "name": "4. Polymorfní datové struktury",
+        "name": "[4. Polymorfní datové struktury](https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/polymorphism.html)",
         "relevance": 20,
         "quality": false
       },
       {
         "id": "el-ch13-5",
-        "name": "5. Identifikace typu za běhu programu - RTTI",
+        "name": "[5. Identifikace typu za běhu programu - RTTI](https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/rtti.html)",
         "relevance": 10,
         "quality": false
       },
       {
         "id": "el-ch13-6",
-        "name": "6. Přehled přetypování",
+        "name": "[6. Přehled přetypování](https://courses.fit.cvut.cz/BI-PA2/elearning/inheritance/castsurvey.html)",
         "relevance": 10,
         "quality": false
       }
