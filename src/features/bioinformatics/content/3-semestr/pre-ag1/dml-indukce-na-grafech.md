@@ -250,11 +250,11 @@ Položme si otázku: **Pokud v síti odebereme uzel stupně 3, jak přesně se z
 
 ### 📜 Tvrzení (Rekurentní vztah pro počet hran):
 Nechť $G = (V, E)$ je graf o $n$ vrcholech, který obsahuje vrchol $v$ se stupněm $\deg(v) = 3$.  
-Pokud vrchol $v$ odebereme, získáme podgraf $G' = G \setminus \{v\}$ o $n - 1$ vrcholech. Mezi počtem hran původního grafu $|E(G)| = \text{edge}_n$ a podgrafu $|E(G')| = \text{edge}_{n-1}$ platí přesný vztah:
+Pokud vrchol $v$ odebereme, získáme podgraf $G' = G \setminus \{v\}$ o $n - 1$ vrcholech. Mezi počtem hran původního grafu $|E(G)| = E(n)$ a podgrafu $|E(G')| = E(n-1)$ platí přesný vztah:
 
-$$\mathbf{\text{edge}_n = \text{edge}_{n-1} + 3}$$
+$$\mathbf{E(n) = E(n-1) + 3}$$
 
-*(Obecně pro vrchol libovolného stupně $d$: $\text{edge}_n = \text{edge}_{n-1} + d$.)*
+*(V bioinformatických textech se často píše $\text{edge}(n) = \text{edge}(n-1) + 3$, obecně pro vrchol libovolného stupně $d$: $E(n) = E(n-1) + d$.)*
 
 ---
 
@@ -270,7 +270,7 @@ Schéma dekonstrukce odebráním uzlu v stupně 3:
        (u₃)                                        (u₃)
  ┌──────────────────────┐                     ┌────────────────────────┐
  │ Graf G o n vrcholech │                     │ Podgraf G' o n-1 vrch. │
- │ Počet hran: edge_n   │                     │ Počet hran: edge_{n-1} │
+ │ Počet hran: E(n)     │                     │ Počet hran: E(n-1)     │
  └──────────────────────┘                     └────────────────────────┘
           ▲                                                │
           │         Vrátíme v se 3 hranami                 │
@@ -279,22 +279,22 @@ Schéma dekonstrukce odebráním uzlu v stupně 3:
 
 #### 1. Volba libovolného grafu (Dekonstrukční start):
 Mějme **libovolný zadaný** graf $G = (V, E)$ o $n$ vrcholech, který obsahuje uzel $v$ se stupněm $\deg(v) = 3$.  
-Počet hran tohoto grafu označme $\text{edge}_n = |E|$.
+Počet hran tohoto grafu označme $E(n) = |E|$.
 
 #### 2. Odebrání uzlu a přechod k menšímu podgrafu:
 Z grafu $G$ odebereme vrchol $v$ a všechny hrany, které do něj vstupují (jsou to právě hrany $\{v, u_1\}, \{v, u_2\}, \{v, u_3\}$).  
 Získáme podgraf $G' = G \setminus \{v\}$:
 - Počet vrcholů klesl o 1: $|V(G')| = n - 1$.
-- Počet hran klesl přesně o 3: $|E(G')| = \text{edge}_n - 3$.
+- Počet hran klesl přesně o 3: $|E(G')| = E(n) - 3$.
 
-Označme počet hran v $G'$ jako $\text{edge}_{n-1} = |E(G')|$.
+Označme počet hran v $G'$ jako $E(n-1) = |E(G')|$.
 
 #### 3. Přímé vyjádření vztahu:
-Jednoduchou úpravou rovnosti $\text{edge}_{n-1} = \text{edge}_n - 3$ dostáváme:
-$$\text{edge}_n = \text{edge}_{n-1} + 3$$
+Jednoduchou úpravou rovnosti $E(n-1) = E(n) - 3$ dostáváme:
+$$E(n) = E(n-1) + 3$$
 
 #### 4. Návrat prvku a indukční závěr:
-Vrátíme-li uzel $v$ zpět do grafu $G'$, každá z jeho 3 hran se připojí k vrcholům $u_1, u_2, u_3$, které v $G'$ již existují. K existujícím $\text{edge}_{n-1}$ hranám tedy přibudou přesně 3 hrany.  
+Vrátíme-li uzel $v$ zpět do grafu $G'$, každá z jeho 3 hran se připojí k vrcholům $u_1, u_2, u_3$, které v $G'$ již existují. K existujícím $E(n-1)$ hranám tedy přibudou přesně 3 hrany.  
 Tím je dokázáno, že přidáním/odebráním uzlu stupně 3 se počet hran mění přesně o 3. $\blacksquare$
 
 ---
@@ -305,206 +305,166 @@ Tento vztah vám okamžitě odemkne celou teorii grafů:
 
 | Typ grafu / uzlu | Co odebíráme při dekonstrukci | Rekurence pro počet hran | Výsledný vzorec |
 | :--- | :--- | :--- | :--- |
-| **Strom** | List (stupeň $\deg(v) = 1$) | $\text{edge}_n = \text{edge}_{n-1} + 1$ | $m = n - 1$ |
-| **Cesta / Kružnice** | Běžný uzel (stupeň $\deg(v) = 2$) | $\text{edge}_n = \text{edge}_{n-1} + 2$ | $m = n$ (pro kružnici) |
-| **Síť s uzly stupně 3** | Uzel se 3 vazbami ($\deg(v) = 3$) | $\text{edge}_n = \text{edge}_{n-1} + 3$ | Roste o $+3$ na každý uzel |
+| **Strom** | List (stupeň $\deg(v) = 1$) | $E(n) = E(n-1) + 1$ | $m = n - 1$ |
+| **Cesta / Kružnice** | Běžný uzel (stupeň $\deg(v) = 2$) | $E(n) = E(n-1) + 2$ | $m = n$ (pro kružnici) |
+| **Síť s uzly stupně 3** | Uzel se 3 vazbami ($\deg(v) = 3$) | $E(n) = E(n-1) + 3$ | Roste o $+3$ na každý uzel |
 
 > **Zlaté pravidlo teorie grafů:**  
-> **$\mathbf{\text{edge}_n = \text{edge}_{n-1} + \deg(v)}$**  
+> **$\mathbf{E(n) = E(n-1) + \deg(v)}$**  
 > Kolik hran má odebíraný vrchol, o tolik se liší počet hran mezi grafem o $n$ vrcholech a jeho podgrafem o $n - 1$ vrcholech.  
 > U stromu je to $+1$, u cyklu $+2$, u trojvazné sítě $+3$. Všechny tyto důkazy mají identickou strukturu!
 
 ---
 
-## 4. Teorie Stromů & Ekvivalentní Definice `[Relevance: 100%]` `[MEGA EPIC]`
+## 4. Stromy v Letní Přípravě: Proč má strom $m = n - 1$ hran `[Relevance: 100%]` `[MEGA EPIC]`
 
-Stromy jsou vůben nejdůležitější grafovou strukturou v bioinformatice (fylogenetické stromy, rozhodovací stromy, kostry sítí).
+Stromy jsou nejčastější grafovou strukturou v bioinformatice (fylogenetické evoluční stromy, hierarchie taxonomií, kostry molekulárních sítí).
 
-> **Základní Definice Stromu:** Strom je souvislý neorientovaný graf bez cyklů.
-
----
-
-### 4.1 5 Ekvivalentních Definic Stromu
-
-Pro libovolný konečný neorientovaný graf $G = (V, E)$ s $n = |V|$ vrcholy jsou následující tvrzení **zcela ekvivalentní**:
-
-1. $G$ je **strom** (je souvislý a nemá cykly).
-2. $G$ je **acyklický** a má přesně $m = n - 1$ hran.
-3. $G$ je **souvislý** a má přesně $m = n - 1$ hran.
-4. Mezi každou dvojicí různých vrcholů $u, v \in V$ existuje **právě jedna jednoduchá cesta**.
-5. $G$ je **minimální souvislý graf** (přidáním libovolné hrany vznikne cyklus, odebráním libovolné hrany se graf stane nesouvislým).
+> 🌲 **Základní intuitivní definice:**  
+> **Strom je souvislý graf, který neobsahuje žádné cykly.**
 
 ---
 
-### 4.2 Tree Leaf Lemma (Lema o Existenci Listu v Keři)
-
-> 🍃 **Věta (Tree Leaf Lemma):** Každý strom $T = (V, E)$ s $n \ge 2$ vrcholy obsahuje alespoň 2 **listy** (vrcholy stupně 1).
-
-#### ✍️ Rigorózní 3-řádkový Důkaz Lemmatu přes Extremální Cestu `[INSIGHT]`:
-1. Zvolme ve stromu $T$ **nejdelší jednoduchou cestu** $P = (v_0, v_1, \dots, v_k)$. Jelikož $n \ge 2$, cesta obsahuje alespoň 1 hranu ($k \ge 1$).
-2. Uvažujme koncový vrchol $v_k$. Vrchol $v_k$ nemůže mít žádného souseda mimo cestu $P$ (jinak bychom cestu prodloužili, což je spor s maximalitou $P$).
-3. Vrchol $v_k$ nemůže mít ani žádného souseda na cestě $P$ s výjimkou $v_{k-1}$ (jinak by v $T$ vznikl cyklus, což je spor s definicí stromu).
-4. Proto jediným sousedem vrcholu $v_k$ je $v_{k-1}$, čímž $\deg(v_k) = 1$. Ze stejné logiky je i $v_0$ listem stupně 1. Strom $T$ obsahuje alespoň 2 listy. $\blacksquare$
+### 🍃 Klíčová vlastnost pro indukci: Listy stromu
+Každá konečná větev stromu musí někde skončit. Koncovým vrcholům říkáme **listy**:
+- **List** je vrchol se stupněm $\deg(v) = 1$ (vede z něj právě jedna jediná hrana).
+- Každý strom s alespoň 2 vrcholy má **minimálně dva listy**. *(Představte si klacík nebo větev – vždy má alespoň dva konce!)*
 
 ---
 
-### 4.3 Vzorový Důkaz: Počet Hran ve Stromu ($m = n - 1$)
+### ✍️ Proč má strom o $n$ vrcholech přesně $m = n - 1$ hran?
+Tento slavný vzorec není žádná magie — je to přímý důsledek našeho **pravidla dekonstrukce**:
 
-### 📜 Věta:
-Každý strom $T = (V, E)$ o $n \ge 1$ vrcholech má přesně $m = n - 1$ hran.
-
----
-
-### ✍️ Rigorózní Důkaz Dekonstrukční Indukcí podle $n = |V|$ `[MEGA EPIC]`:
-
-#### 1. Báze indukce ($n = 1$):
-Strom s 1 vrcholem nemá žádné hrany ($m = 0$).
-$$m = 0 = 1 - 1 = n - 1$$
-Báze pro $n = 1$ platí.
-
-#### 2. Indukční předpoklad (IP):
-Předpokládejme, že **každý** strom s $k$ vrcholy (kde $1 \le k \le n$) má přesně $k - 1$ hran.
-
-#### 3. Indukční krok ($n \to n + 1$):
-Vezměme **LIBOVOLNÝ** strom $T = (V, E)$ s $n + 1$ vrcholy ($n + 1 \ge 2$).
-*(Nezakládáme nový strom přidáváním vrcholu – dekonstruujeme zadaný strom $T$ s $n+1$ vrcholy!)*
-
-1. Protože $T$ má $n + 1 \ge 2$ vrcholů, podle **Tree Leaf Lemmatu** obsahuje alespoň jeden list $v \in V$ s $\deg(v) = 1$.
-2. Budiž $e = \{v, u\} \in E$ jediná hrana incidentní s listem $v$.
-3. Vytvořme podgraf $T' = (V \setminus \{v\}, E \setminus \{e\})$, který vznikne odebráním listu $v$ a jeho hrany $e$.
-4. **Ověření předpokladů pro IP na podgrafu $T'$:**
-   - Podgraf $T'$ má přesně $(n+1) - 1 = n$ vrcholů.
-   - Podgraf $T'$ je stále souvislý (odebráním listu stupně 1 nevznikne nespojitost).
-   - Podgraf $T'$ nemá cykly (odebráním prvků nové cykly nevzniknou).
-   - Tedy $T'$ je platný strom o $n$ vrcholech!
-5. Aplikujeme **Indukční předpoklad (IP)** na $T'$:
-   $$|E(T')| = n - 1$$
-6. Původní strom $T$ měl o 1 hranu více než $T'$:
-   $$|E(T)| = |E(T')| + 1 = (n - 1) + 1 = n = (n + 1) - 1$$
-
-Dokázali jsme, že libovolný strom s $n+1$ vrcholy má přesně $(n+1) - 1$ hran. $\blacksquare$
+1. **Začátek (Dekonstrukce shora):** Vezměme libovolný strom $T$ s $n$ vrcholy ($n \ge 2$).
+2. **Odebrání listu:** Najdeme koncový list $v$ (který má $\deg(v) = 1$) a odebereme ho i s jeho jedinou hranou.
+3. **Co se stane s grafem:**
+   - Počet vrcholů klesne o 1: $n \to n - 1$.
+   - Počet hran klesne přesně o 1: $m \to m - 1$ (podle pravidla $E(n) = E(n-1) + 1$).
+   - Zbytek je stále souvislý strom bez cyklů!
+4. **Závěr:** Pokud budeme listy odebírat dál a dál, v každém kroku ubude přesně 1 vrchol a 1 hrana, až nám na konci zbude **1 jediný vrchol a 0 hran**.  
+   Proto má strom vždy **o 1 hranu méně než vrcholů**:
+   $$\mathbf{m = n - 1}$$
 
 ---
 
----
-
-## 5. Indukce na Orientovaných Akalických Grafech (DAGs) `[Relevance: 95%]` `[BIO-ANALOGIE]`
-
-V bioinformatických aplikacích (metabolické dráhy glykolýzy, enzymatické reakční kaskády, gene regulatory networks) se neobcházíme bez **Orientovaných Acyklických Grafů (DAG - Directed Acyclic Graphs)**.
-
-> **Lema o Existenci Zdroje v DAGu:** Každý konečný orientovaný acyklický graf $G = (V, E)$ s $|V| \ge 1$ obsahuje alespoň jeden **zdrojový uzel (source)** $u \in V$, pro který platí:
-> $$\text{deg}^-(u) = 0$$
-> *(Existuje uzel, do kterého nevstupuje žádná orientovaná hrana).*
-
----
-
-### ✍️ Rigorózní Důkaz Lemmatu o Zdroji přes Extremální Orientovanou Cestu `[INSIGHT]`:
-1. Zvolme v DAGu $G$ **nejdelší orientovanou jednoduchou cestu** $P = (v_0, v_1, \dots, v_k)$.
-2. Uvažujme počáteční uzel $v_0$. Pokud by existovala orientovaná hrana $(w, v_0) \in E$, pak:
-   - Pokud $w \notin P$, mohli bychom cestu $P$ prodloužit zlevo na $(w, v_0, \dots, v_k)$, což je SPOR s maximalitou $P$.
-   - Pokud $w \in P$, hrana $(w, v_0)$ by společně s úsekem cesty vytvořila orientovaný cyklus, což je SPOR s tím, že $G$ je acyklický DAG!
-3. Proto do $v_0$ nevstupuje žádná hrana $\implies \text{deg}^-(v_0) = 0$. Uzel $v_0$ je zdrojem. $\blacksquare$
-
----
-
-### 📜 Věta (Existencie Topologického Uspořádání v DAGu):
-Každý konečný orientovaný acyklický graf $G = (V, E)$ s $n = |V|$ vrcholy lze **topologicky uspořádat**, tj. jeho vrcholy lze seřadit do posloupnosti $(v_1, v_2, \dots, v_n)$ tak, že všechny orientované hrany vedou pouze zlevo doprava:
-$$\forall (v_i, v_j) \in E \implies i < j$$
-
-#### ✍️ Důkaz Dekonstrukční Indukcí podle $n = |V|$ `[MEGA EPIC]`:
-
-1. **Báze ($n = 1$):** DAG s 1 vrcholem má triviální topologické uspořádání $(v_1)$. Báze platí.
-2. **Indukční předpoklad (IP):** Předpokládejme, že každý DAG s $k \le n$ vrcholy lze topologicky uspořádat.
-3. **Indukční krok ($n \to n + 1$):** Vezměme **LIBOVOLNÝ** DAG $G = (V, E)$ s $n + 1$ vrcholy.
-   - Podle Lemmatu o zdroji obsahuje $G$ alespoň jeden uzel $u \in V$ s $\text{deg}^-(u) = 0$.
-   - Odeberme uzel $u$ a všechny z něj vycházející hrany a získáme podgraf $G' = G \setminus \{u\}$.
-   - Podgraf $G'$ má $n$ vrcholů a je stále platným DAGem (odebráním uzlu cykly nevzniknou).
-   - Aplikujeme **IP** na podgraf $G'$: Vrcholy $G'$ lze topologicky uspořádat do posloupnosti $(v_1', v_2', \dots, v_n')$.
-   - Jelikož $\text{deg}^-(u) = 0$ v původním $G$, do $u$ nevedly žádné hrany. Můžeme tedy uzel $u$ bezpečně předřadit na 1. místo celkového uspořádání:
-     $$\text{Topologické Uspořádání } G = (u, v_1', v_2', \dots, v_n')$$
-   - Všechny hrany vycházející z $u$ směřují doprava do $v_j'$. Podmínka $i < j$ drží. $\blacksquare$
-
----
-
-## 🧪 Procvičovací Úlohy pro Bioinformatiky
-
-### Úloha 2.1: 2-Obarvení Stromu (Bipartitnost Stromů)
-Dokážete dekonstrukční indukcí podle počtu vrcholů $n = |V|$, že každý strom $T = (V, E)$ je **bipartitní** (jeho vrcholy lze obarvit 2 barvami tak, že žádné dva sousední vrcholy nemají stejnou barvu).
-
-<details>
-<summary>🔍 Zobrazit vzorový zkouškový důkaz</summary>
-
-### ✍️ Řešení Dekonstrukční Indukcí:
-1. **Báze ($n = 1$):** Strom s 1 vrcholem obarvíme 1 barvou. Tvrzení platí.
-2. **IP:** Předpokládejme, že každý strom s $k$ vrcholy ($1 \le k \le n$) lze obarvit 2 barvami (Červená a Modrá).
-3. **Indukční krok ($n \to n + 1$):** Vezměme **libovolný** strom $T$ s $n+1$ vrcholy.
-   - Podle Tree Leaf Lemmatu má $T$ list $v \in V$ s $\deg(v) = 1$ a hranou $\{v, u\}$.
-   - Odebereme list $v$ a získáme strom $T'$ o $n$ vrcholech.
-   - Podle **IP** lze strom $T'$ obarvit 2 barvami. Nechť $u$ dostal např. Červenou barvu.
-   - Navrátíme list $v$ a přiřadíme mu druhou barvu (Modrou).
-   - Jediná nová hrana v $T$ je $\{v, u\}$, která spojuje Červený uzel $u$ a Modrý uzel $v$.
-   - Strom $T$ o $n+1$ vrcholech je platně 2-obarven. $\blacksquare$
+<details class="my-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 overflow-hidden no-print print:hidden print-hidden">
+<summary class="cursor-pointer px-4 py-3 font-semibold text-sm text-stone-800 dark:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 flex items-center justify-between select-none">
+<span class="flex items-center gap-2">
+<span>🎓</span>
+<span><strong>Pro zájemce do AG1:</strong> 5 ekvivalentních definic stromu & Důkaz Tree Leaf Lemmatu</span>
+</span>
+<span class="text-xs text-stone-600 dark:text-stone-400 font-normal">Kliknutím rozbalit</span>
+</summary>
+<div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-3">
+<p class="m-0 font-medium text-stone-900 dark:text-stone-100">
+V kurzu AG1 dostanete těchto 5 vlastností jako hotové věty. Pro libovolný konečný graf $G = (V, E)$ s $n = |V|$ vrcholy jsou následující tvrzení <strong>zcela ekvivalentní</strong>:
+</p>
+<ol class="list-decimal pl-5 space-y-1">
+<li>$G$ je <strong>strom</strong> (je souvislý a nemá cykly).</li>
+<li>$G$ je <strong>acyklický</strong> a má přesně $m = n - 1$ hran.</li>
+<li>$G$ je <strong>souvislý</strong> a má přesně $m = n - 1$ hran.</li>
+<li>Mezi každou dvojicí různých vrcholů $u, v \in V$ existuje <strong>právě jedna jednoduchá cesta</strong>.</li>
+<li>$G$ je <strong>minimální souvislý graf</strong> (odebráním libovolné hrany se graf rozpadne).</li>
+</ol>
+<div class="p-3 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800 mt-2">
+<strong class="text-stone-900 dark:text-stone-100">🍃 Důkaz existence listu (Tree Leaf Lemma):</strong>
+<p class="mt-1 mb-0 text-xs leading-relaxed">
+Zvolme ve stromu nejdelší možnou cestu $P = (v_0, v_1, \dots, v_k)$. Koncový vrchol $v_k$ nemůže mít souseda mimo cestu (jinak by cesta nebyla nejdelší) ani jiného souseda na cestě (jinak by vznikl cyklus). Jediným sousedem $v_k$ je tedy předchozí vrchol $v_{k-1}$, což znamená $\deg(v_k) = 1$ — uzel $v_k$ je list! Ze stejného důvodu je listem i $v_0$. Strom má tedy alespoň 2 listy. $\blacksquare$
+</p>
+</div>
+</div>
 </details>
 
 ---
 
-### Úloha 2.2: Počet Hran v Lese (Les s $c$ Komponentami)
-Dokážte dekonstrukční indukcí podle počtu hran $m$, že každý neorientovaný acyklický graf (les) $G = (V, E)$ s $n = |V|$ vrcholy a $c$ komponentami souvislosti má přesně:
-$$m = n - c \text{ hran}$$
+## 5. 💡 Propojení s Bioinformatikou: Orientované Sítě bez Cyklů (DAGy) `[Relevance: 80%]`
 
-<details>
-<summary>🔍 Zobrazit vzorový zkouškový důkaz</summary>
+V bioinformatice často nestudujeme jen obousměrné vztahy, ale **procesy, které tečou jedním směrem**:
+- **Metabolické dráhy:** Glykolýza začíná glukózou a přes sérii nevratných enzymatických reakcí končí pyruvátem.
+- **Signální a regulační kaskády:** Aktivace receptoru $\to$ fosforylace kinázy $\to$ exprese genu.
 
-### ✍️ Řešení Dekonstrukční Indukcí podle $m$:
-1. **Báze ($m = 0$):** Graf bez hran má $n$ izolovaných vrcholů, tedy $c = n$ komponent. $m = 0 = n - n = n - c$. Báze platí.
-2. **IP:** Předpokládejme, že pro les s $k < m$ hranami platí $k = n - c_k$.
-3. **Indukční krok ($m$ hran):** Vezměme **libovolný** les $G$ s $m$ hranami a $c$ komponentami.
-   - Zvolme libovolnou hranu $e = \{u, v\} \in E$.
-   - Odeberme hranu $e$ a získáme les $G' = (V, E \setminus \{e\})$ s $m - 1$ hranami.
-   - Protože $G$ neobsahoval cykly, hrana $e$ byla jediným spojením mezi $u$ a $v$. Jejím odebráním se komponenta rozpadla na 2 nové komponenty!
-   - Počet komponent v $G'$ je tedy $c' = c + 1$.
-   - Aplikujeme **IP** na $G'$: $|E(G')| = n - c' \implies m - 1 = n - (c + 1) = n - c - 1$.
-   - Přičtením 1 k oběma stranám dostáváme $m = n - c$. Les má $n - c$ hran. $\blacksquare$
+Pokud v takovém procesu nedochází k nekonečným smyčkám (zpětným cyklům), nazýváme ho v informatice **DAG** (*Directed Acyclic Graph* — orientovaný acyklický graf).
+
+---
+
+### 🌊 Klíčová bio-intuice: Zdroj a Výtok
+V každé reálné jednosměrné dráze bez smyček musí existovat:
+1. **Zdroj (Source):** Počáteční metabolit, do kterého žádná reakce nevstupuje ($\text{deg}^-(u) = 0$, např. vstupní glukóza).
+2. **Výtok (Sink):** Finální metabolit, ze kterého už žádná reakce nepokračuje ($\text{deg}^+(w) = 0$, např. finální odpadní produkt / pyruvát).
+
+Díky tomu lze celou metabolickou dráhu **seřadit v čase zleva doprava** — tomu se v informatice říká **Topologické uspořádání**.
+
+---
+
+<details class="my-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 overflow-hidden no-print print:hidden print-hidden">
+<summary class="cursor-pointer px-4 py-3 font-semibold text-sm text-stone-800 dark:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 flex items-center justify-between select-none">
+<span class="flex items-center gap-2">
+<span>🎓</span>
+<span><strong>Pokročilé pro zájemce:</strong> Rigorózní důkaz existence zdroje a Topologické řazení</span>
+</span>
+<span class="text-xs text-stone-600 dark:text-stone-400 font-normal">Kliknutím rozbalit</span>
+</summary>
+<div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-3">
+<div class="p-3 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
+<strong class="text-stone-900 dark:text-stone-100">1. Důkaz existence zdroje přes nejdelší orientovanou cestu:</strong>
+<p class="mt-1 mb-0 text-xs leading-relaxed">
+Zvolme v DAGu $G$ nejdelší orientovanou cestu $P = (v_0, v_1, \dots, v_k)$. Počáteční uzel $v_0$ nemůže mít předchůdce mimo cestu (spor s maximalitou délky) ani na cestě (vznikl by orientovaný cyklus, spor s DAGem). Proto do $v_0$ nevstupuje žádná hrana ($\text{deg}^-(v_0) = 0$) a uzel $v_0$ je zdrojem. $\blacksquare$
+</p>
+</div>
+<div class="p-3 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
+<strong class="text-stone-900 dark:text-stone-100">2. Důkaz existence Topologického uspořádání dekonstrukční indukcí:</strong>
+<p class="mt-1 mb-0 text-xs leading-relaxed">
+Vezmeme libovolný DAG $G$ o $n+1$ vrcholech. Najdeme zdroj $u$ ($\text{deg}^-(u) = 0$), odebereme ho a získáme menší DAG $G'$ o $n$ vrcholech. Dle indukčního předpokladu (IP) lze $G'$ seřadit do posloupnosti $(v_1', \dots, v_n')$. Zdroj $u$ předřadíme na 1. místo: $(u, v_1', \dots, v_n')$. Protože do $u$ nic nevstupovalo, všechny jeho hrany vedou doprava. Tím je topologické řazení hotové. $\blacksquare$
+</p>
+</div>
+</div>
 </details>
 
 ---
 
-### Úloha 2.3: Existencie Výtokového Uzlu (Sink) v DAGu
-Dokážete duální lema k Lemmatu o zdroji, že každý konečný DAG s $|V| \ge 1$ obsahuje alespoň jeden **výtokový uzel (sink)** $w \in V$, pro který platí:
-$$\text{deg}^+(w) = 0$$
-
-<details>
-<summary>🔍 Zobrazit vzorové řešení přes extremální cestu</summary>
-
-### ✍️ Řešení:
-Zvolme v DAGu $G$ nejdelší orientovanou cestu $P = (v_0, v_1, \dots, v_k)$. Uvažujme koncový uzel $v_k$.
-Pokud by existovala hrana $(v_k, z) \in E$, pak $z \notin P$ by prodloužilo cestu $P$ doprava (spor s maximalitou $P$) a $z \in P$ by vytvořilo orientovaný cyklus (spor s acykličností DAGu).
-Tedy $\text{deg}^+(v_k) = 0$, uzel $v_k$ je výtokem (sink). $\blacksquare$
+<details class="my-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 overflow-hidden no-print print:hidden print-hidden">
+<summary class="cursor-pointer px-4 py-3 font-semibold text-sm text-stone-800 dark:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 flex items-center justify-between select-none">
+<span class="flex items-center gap-2">
+<span>🧪</span>
+<span><strong>Bonusové procvičovací úlohy:</strong> Bipartitnost stromů a Lesy</span>
+</span>
+<span class="text-xs text-stone-600 dark:text-stone-400 font-normal">Kliknutím rozbalit</span>
+</summary>
+<div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-4">
+<div>
+<strong class="text-stone-900 dark:text-stone-100">Úloha 1: 2-Obarvení stromu (Bipartitnost):</strong>
+<p class="mt-1 text-xs">Každý strom lze obarvit 2 barvami tak, že žádní sousedé nemají stejnou barvu. Důkaz dekonstrukcí: odebereme list $v$, zbylý strom $T'$ o $n$ vrcholech obarvíme dle IP 2 barvami. List $v$ vrátíme a obarvíme opačnou barvou, než má jeho jediný soused.</p>
+</div>
+<div>
+<strong class="text-stone-900 dark:text-stone-100">Úloha 2: Počet hran v lese ($m = n - c$):</strong>
+<p class="mt-1 text-xs">Les s $n$ vrcholy a $c$ stromy (komponentami) má přesně $m = n - c$ hran. Důkaz dekonstrukcí podle hran: odebráním hrany $e$ se jedna komponenta rozpadne na dvě ($c' = c + 1$). Dle IP má menší les $m - 1 = n - (c + 1) = n - c - 1 \implies m = n - c$.</p>
+</div>
+</div>
 </details>
 
 ---
 
-## 6. Přehled: Co víte o Stromech a Co přijde v AG1 `[Relevance: 80%]` `[INSIGHT]`
+## 6. Přehled: Co je základ letní přípravy a co přijde v AG1 `[Relevance: 80%]` `[INSIGHT]`
 
-Z tohoto modulu byste teď měli bezpečně zvládat:
+Z tohoto modulu vám pro letní přípravu bohatě stačí:
 
-| Dovednost | Status |
+| Dovednost pro letní přípravu | Status |
 | :--- | :---: |
-| Dekonstrukční indukce podle $\|V\|$ a $\|E\|$ | ✅ Ovládáte |
-| Růst hran v síti při dekonstrukci ($\text{edge}_n = \text{edge}_{n-1} + \deg(v)$) | ✅ Ovládáte |
-| Lema o existenci listu (přes nejdelší cestu) | ✅ Ovládáte |
-| Důkaz $m = n - 1$ pro stromy | ✅ Ovládáte |
-| Indukce pro lesy ($m = n - c$) | ✅ Ovládáte |
+| Rozdíl mezi dekonstrukcí (shora) a konstrukcí (zdola) | ✅ Zvládáte |
+| Velikost báze podle kroku odebírání (krok o 3 ➔ 3 báze; krok o 6 ➔ 6 bází) | ✅ Zvládáte |
+| Pravidlo růstu hran při dekonstrukci: $E(n) = E(n-1) + \deg(v)$ | ✅ Zvládáte |
+| Proč má strom $m = n - 1$ hran (odebírání listů stupně 1) | ✅ Zvládáte |
 
-### Co přijde v AG1 (budete mít k dispozici, nemusíte dokazovat od nuly):
-- **5 ekvivalentních definic stromu** — V AG1 je dostanete jako hotové věty, budete je používat (ne dokazovat jejich ekvivalenci navzájem).
-- **Existence kostry** — Plyne přímo z algoritmů (Kruskal, Prim), které AG1 prezentuje jako hotové.
-- **Bipartitnost stromů** — Zajímavá vlastnost, ale v přípravném kurzu ji necháme stranou. Pozor — bipartitní grafy obecně jsou klíčové téma AG1 (viz modul Důkazy Sporem).
+### Co přijde v semestru v AG1 (nemusíte se učit nazpaměť, dostanete jako hotové věty):
+- **5 ekvivalentních definic stromu** — V AG1 je dostanete jako hotové věty, budete je pouze aplikovat v algoritmech.
+- **Topologické uspořádání DAGu** — Naučíte se algoritmus pro jeho nalezení (pomocí DFS za $O(n + m)$).
+- **Existence minimální kostry** — Plyne přímo z hladových algoritmů (Kruskal, Jarník/Prim).
 
 > [!TIP]
-> **Letní příprava hotova!** Pokud zvládáte dekonstrukční indukci a výše uvedené důkazy, máte solidní základ pro první přednášku AG1. Stromy budou průběžným motivačním příkladem celého semestru.
+> **Základ pro AG1 máte v kapse!** Pokud rozumíte dekonstrukčnímu toku shora a tomu, jak se při odebrání vrcholu mění počet hran o $\deg(v)$, zkouškové pasti z indukce se vám vyhnou obloukem.
 
 ---
 
 > ➡️ **Pokračujte na další modul:** [6 · Modul 3: Důkazy Sporem & Extremální Princip](./dml-dukazy-sporem)
+
 

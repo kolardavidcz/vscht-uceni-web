@@ -113,10 +113,37 @@ function normalizeMarkdownLists(content: string): string {
   return result.join("\n");
 }
 
+/**
+ * Escapes unescaped underscores and preserves escaped braces inside LaTeX math ($...$ and $$...$$)
+ * so that CommonMark does not mistakenly parse subscripts as <em> emphasis tags
+ * or strip backslashes from \{ and \} before MathJax runs in the DOM.
+ */
+function protectMathSyntax(content: string): string {
+  const protect = (math: string) => {
+    return math
+      .replace(/(?<!\\)_/g, "\\_")
+      .replace(/(?<!\\)\\{/g, "\\\\{")
+      .replace(/(?<!\\)\\}/g, "\\\\}");
+  };
+
+  // 1. Display math $$ ... $$
+  let res = content.replace(/\$\$([\s\S]*?)\$\$/g, (_match, math) => {
+    return "$$" + protect(math) + "$$";
+  });
+  // 2. Inline math $ ... $ (excluding escaped \$)
+  res = res.replace(/(?<!\\)\$([^\$\n]+?)(?<!\\)\$/g, (_match, math) => {
+    return "$" + protect(math) + "$";
+  });
+  return res;
+}
+
 export function MarkdownView({ content }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
-  const processedContent = useMemo(() => normalizeMarkdownLists(content), [content]);
+  const processedContent = useMemo(
+    () => protectMathSyntax(normalizeMarkdownLists(content)),
+    [content]
+  );
 
   useEffect(() => {
     const el = ref.current;
