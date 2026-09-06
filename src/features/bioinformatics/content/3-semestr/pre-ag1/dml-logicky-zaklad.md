@@ -32,6 +32,32 @@ Matematická logika pracuje s **výroky**:
 
 ---
 
+### 🏛️ Proč Vlastně Vznikly Matematické Symboly? (Od Básní k Úspornému Zápisu)
+
+Než se vrhneme na samotné tabulky a pravidla spojek, položme si zásadní otázku: **Proč matematici a informatici používají tolik podivných značek ($\neg, \land, \lor, \forall, \exists$) a nepíšou všechno v běžném jazyce?**
+
+Důvodem není snaha předmět zkomplikovat, ale přesný opak: **přirozený lidský jazyk je pro exaktní logiku zoufale nejednoznačný a neúsporný.**
+
+Ještě v 16. století dnešní algebraické a logické symboly prakticky neexistovaly. Když italský matematik Niccolò Tartaglia v roce 1535 objevil obecný postup pro řešení kubických rovnic, musel svůj objev zašifrovat do rýmované básně v italštině:
+
+<div class="my-6 flex flex-col items-center justify-center p-6 bg-stone-100/70 dark:bg-[#18110c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
+  <img src="/images/tartaglia-kubicka-rovnice.png" alt="Dobový zápis Tartagliovy básně a moderní algebraická notace" class="w-96 max-w-full h-auto rounded-lg shadow-sm border border-stone-200 dark:border-stone-700" />
+  <p class="text-xs text-stone-500 dark:text-stone-400 mt-3 font-medium text-center">Obrázek: Dobový italský text Tartagliovy básně (vlevo) a jeho ekvivalent v moderní symbolické notaci (vpravo)</p>
+</div>
+
+> „Máš-li kubickou rovnici bez kvadratického členu, kde se součet třetí mocniny neznámé a jejího násobku rovná zadané konstantě, rozděl si tuto konstantu na rozdíl dvou pomocných proměnných.
+>
+> Zvol je tak, aby jejich součin odpovídal třetí mocnině jedné třetiny koeficientu u neznámé.
+>
+> Výsledné řešení pak získáš jako rozdíl třetích odmocnin těchto dvou proměnných.“
+
+Všimněte si, jakou úlevu přináší moderní symbolický jazyk — celou tuto básnickou sloku dnes zapíšeme do jediného algebraického řádku:
+$$x^3 + px = q \implies x = \sqrt[3]{u} - \sqrt[3]{v}, \quad \text{kde } u - v = q \ \land \ uv = \left(\frac{p}{3}\right)^3$$
+
+**Matematické symboly nevznikly jako překážka, ale jako záchrana před slovní mlhou.** Šetří kognitivní kapacitu, zamezují víceznačnosti a umožňují okamžitou kontrolu správnosti. Nyní se podívejme na základní symboly, se kterými budeme v AG1 pracovat:
+
+---
+
 ## 2. Výrokové Spojky a Pravdivostní Tabulky
 
 Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B, C$) pomocí **výrokových spojek**:

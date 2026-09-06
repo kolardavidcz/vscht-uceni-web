@@ -35,18 +35,11 @@ export function addModule2Slides(pres) {
 
     y = renderDocHeading(pres, slide, "☀️ Letní průvodce grafovou matematikou pro bioinformatiky", { level: 1, y });
 
-    y = renderDocCallout(pres, slide, {
-      type: "note",
-      title: "Pro koho je tento kurz?",
-      text: "Studenti Bioinformatiky na VŠCHT, kteří v září nastupují do 3. semestru a čeká je AG1 na FIT ČVUT.",
-      y: y + 0.1,
-    });
-
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "tip",
-      title: "Jaký je vibe kurzu?",
-      text: "Žádné tlusté skripta, žádný stres. Letní četba u kafe — jako kdyby ti to starší spolužák vysvětloval u oběda.",
-      y: y + 0.1,
+      title: "Přípravný letní materiál:",
+      text: "Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce.\n\nStudenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.",
+      y: y + 0.15,
     });
   }
 
@@ -63,50 +56,7 @@ export function addModule2Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 2.3a: 👋 Hele, tohle není strašidelný kurz
-  // --------------------------------------------------------------------------
-  {
-    const slide = createDocSlide(pres, { breadcrumb });
-    let y = 0.85;
-
-    y = renderDocHeading(pres, slide, "👋 Hele, tohle není strašidelný kurz", { level: 2, y, showUnderline: true });
-
-    y = renderDocParagraph(slide,
-      "Spousta bioinformatiků slyší „diskrétní matematika a důkazy\" a dostane špatný pocit z gymplu. Nemusíš. Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce.",
-      { y }
-    );
-
-    y = renderDocParagraph(slide, "Co konkrétně se naučíš? Jednoduše řečeno:", { y });
-
-    renderDocList(slide, [
-      "Jak číst a psát matematická tvrzení o grafech (aniž by to bylo strašidelné)",
-      "Jak dokázat, že algoritmus funguje správně (stačí 3 kroky, fakt)",
-      "Jak myslet jako matematik, když řešíš strukturální problémy — a to ti pomůže i v bioinformatice"
-    ], { y });
-  }
-
-  // --------------------------------------------------------------------------
-  // Slide 2.3b: Co tady není & Srovnání s FIT BI-DML
-  // --------------------------------------------------------------------------
-  {
-    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "👋 Hele, tohle není strašidelný kurz" });
-    let y = 0.85;
-
-    y = renderDocParagraph(slide,
-      "**Co tady NENÍ:** žádné integrály, žádné matice, žádná pravděpodobnost. Jen logika, grafy a pár hezkých triků na důkazy.",
-      { y }
-    );
-
-    renderDocCallout(pres, slide, {
-      type: "tip",
-      title: "",
-      text: "[!TIP] Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.",
-      y: y + 0.1,
-    });
-  }
-
-  // --------------------------------------------------------------------------
-  // Slide 2.4a: 3. Myšlení v Důkazech
+  // Slide 2.3: 3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek?
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -115,7 +65,7 @@ export function addModule2Slides(pres) {
     y = renderDocHeading(pres, slide, "3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek?", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "Častý mýtus mezi studenty 1. ročníku zní: *„Matematici a teoretičtí informatici milují složité řecké značky a píší důkazy jen proto, aby potrápili studenty u zkoušky.“*",
+      "Důkazy a diskrétní matematika nevznikla kvůli lásce k matematickým symbolům.",
       { y }
     );
 
@@ -126,7 +76,7 @@ export function addModule2Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 2.4b: 3.1 Role Znalostí: První Setkání s Profesorem u Tabule
+  // Slide 2.4: 3.1 Role Znalostí: První Setkání s Profesorem u Tabule
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "3. Myšlení v Důkazech" });
@@ -142,7 +92,7 @@ export function addModule2Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Otázka od tabule:",
-      text: "„Je dán geometrický útvar v kartézské rovině (viz následující snímek). Dokažte, že se jedná o kružnici!“",
+      text: "„Dokažte, že se jedná o kružnici!“",
       y: y + 0.1,
     });
   }

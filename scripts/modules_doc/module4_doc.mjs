@@ -2,6 +2,8 @@
  * Module 4: Logický & Důkazový základ
  * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml-logicky-zaklad.md
  */
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   createDocSlide,
   renderDocHeading,
@@ -10,10 +12,16 @@ import {
   renderDocCallout,
   renderDocCode,
   renderDocTable,
+  renderDocImage,
   renderSolutionBanner,
   colors,
+  fonts,
   fs
 } from "../pptx_document_engine.mjs";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.resolve(__dirname, "../..");
 
 export function addModule4Slides(pres) {
   const breadcrumb = "MODUL 4 · 📐 LOGICKÝ & DŮKAZOVÝ ZÁKLAD";
@@ -95,6 +103,139 @@ export function addModule4Slides(pres) {
       "„Tento kód v C++ je pěkný.“ ➔ **NENÍ výrok** (subjektivní hodnocení, nelze jednoznačně určit 0 nebo 1).",
       "„Kolik prvků má množina V?“ ➔ **NENÍ výrok** (otázka)."
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.2c: 🏛️ Proč Vlastně Vznikly Matematické Symboly? (Od Básní k Úspornému Zápisu)
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "🏛️ Proč Vlastně Vznikly Matematické Symboly?", { level: 2, y, showUnderline: true });
+
+    // Left Column: Historical Image
+    const imgPath = path.join(rootDir, "public", "images", "tartaglia-kubicka-rovnice.png");
+    const imgW = 4.2;
+    const imgH = 4.9;
+    renderDocImage(slide, imgPath, {
+      x: 0.8,
+      y: 1.35,
+      w: imgW,
+      h: imgH,
+      caption: "Niccolò Tartaglia (1535) · Dobový veršovaný zápis vs. algebra",
+    });
+
+    // Right Column: Text & Quote
+    const rightX = 5.35;
+    const rightW = 7.18;
+
+    slide.addText("V 16. století moderní symboly neexistovaly. Když Niccolò Tartaglia v roce 1535 objevil řešení kubické rovnice, musel postup zašifrovat do rýmované básně:", {
+      x: rightX,
+      y: 1.35,
+      w: rightW,
+      h: 0.55,
+      fontFace: fonts.sans,
+      fontSize: fs(9.5),
+      color: colors.textSecondary,
+      lineSpacingMultiple: 1.18,
+      margin: 0,
+    });
+
+    // Callout with the exact quote (combined text runs to eliminate overlap)
+    const quoteBoxY = 1.98;
+    const quoteBoxH = 3.12;
+    slide.addShape(pres.ShapeType.roundRect, {
+      x: rightX,
+      y: quoteBoxY,
+      w: rightW,
+      h: quoteBoxH,
+      rectRadius: 0.08,
+      fill: { color: "FFF7ED" },
+      line: { color: colors.brandOrange, width: 1.5 },
+    });
+
+    slide.addText([
+      {
+        text: "📜 Tartagliův básnický návod (1535):\n\n",
+        options: {
+          fontFace: fonts.heading,
+          fontSize: fs(10.5),
+          bold: true,
+          color: colors.brandOrangeDark,
+        }
+      },
+      {
+        text: "„Máš-li kubickou rovnici bez kvadratického členu, kde se součet třetí mocniny neznámé a jejího násobku rovná zadané konstantě, rozděl si tuto konstantu na rozdíl dvou pomocných proměnných.\n\n" +
+              "Zvol je tak, aby jejich součin odpovídal třetí mocnině jedné třetiny koeficientu u neznámé.\n\n" +
+              "Výsledné řešení pak získáš jako rozdíl třetích odmocnin těchto dvou proměnných.“",
+        options: {
+          fontFace: fonts.sans,
+          fontSize: fs(8.2),
+          italic: true,
+          color: colors.textPrimary,
+          lineSpacingMultiple: 1.18,
+        }
+      }
+    ], {
+      x: rightX + 0.25,
+      y: quoteBoxY + 0.16,
+      w: rightW - 0.5,
+      h: quoteBoxH - 0.32,
+      valign: "top",
+      margin: 0,
+    });
+
+    // Modern comparison box below quote
+    const modBoxY = 5.2;
+    const modBoxH = 1.55;
+    slide.addShape(pres.ShapeType.roundRect, {
+      x: rightX,
+      y: modBoxY,
+      w: rightW,
+      h: modBoxH,
+      rectRadius: 0.08,
+      fill: { color: "F8FAFC" },
+      line: { color: colors.borderSubtle, width: 1 },
+    });
+
+    slide.addText([
+      {
+        text: "Moderní symbolický zápis (přesně totéž ve 2 řádcích vzorce):\n",
+        options: {
+          fontFace: fonts.heading,
+          fontSize: fs(9.5),
+          bold: true,
+          color: colors.brandNavy,
+        }
+      },
+      {
+        text: "x³ + px = q   ⟹   x = ∛u - ∛v\nkde  u - v = q   ∧   uv = (p/3)³\n\n",
+        options: {
+          fontFace: "Consolas",
+          fontSize: fs(10.5),
+          bold: true,
+          color: colors.brandOrangeDark,
+          lineSpacingMultiple: 1.15,
+        }
+      },
+      {
+        text: "💡 Symboly nevznikly jako překážka, ale jako záchrana před slovní mlhou!",
+        options: {
+          fontFace: fonts.sans,
+          fontSize: fs(9),
+          bold: true,
+          color: colors.textSecondary,
+        }
+      }
+    ], {
+      x: rightX + 0.25,
+      y: modBoxY + 0.14,
+      w: rightW - 0.5,
+      h: modBoxH - 0.28,
+      valign: "top",
+      margin: 0,
+    });
   }
 
   // --------------------------------------------------------------------------

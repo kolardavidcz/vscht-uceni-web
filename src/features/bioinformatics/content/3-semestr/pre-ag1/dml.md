@@ -11,7 +11,7 @@
 
 ## 3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek?
 
-Důkazy a dsikrétní matematika nevznikla kvůli lásce k matematickým symbolům
+Důkazy a diskrétní matematika nevznikla kvůli lásce k matematickým symbolům.
 
 Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi **znalostmi** a **postupem** a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AG1.
 
