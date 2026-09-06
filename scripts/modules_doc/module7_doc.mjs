@@ -26,7 +26,7 @@ export function addModule7Slides(pres) {
   const breadcrumb = "MODUL 7 · 💻 GRAFY V C++ & REPREZENTACE V PAMĚTI";
 
   // --------------------------------------------------------------------------
-  // Slide 7.1: Titul & 0. Minimum z Grafových Pojmů
+  // Slide 7.1a: Titul & 0. Minimum z Grafových Pojmů
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -41,19 +41,44 @@ export function addModule7Slides(pres) {
       { y }
     );
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Incidence:** Vrchol $u$ a hrana $e$ jsou incidentní, pokud $u \\in e$.",
       "**Adjacence (sousedství):** Dva vrcholy $u, v$ jsou sousední, pokud $\\{u, v\\} \\in E$.",
       "**Stupeň vrcholu deg(v):** Počet hran incidentních s vrcholem $v$.",
-      "**Handshaking Lemma:** $\\sum_{v \\in V} \\deg(v) = 2|E|$ (součet všech stupňů je dvojnásobek počtu hran).",
-      "**Sled (Walk):** Střídavá posloupnost vrcholů a hran $(v_0, e_1, v_1, \\dots, v_k)$, kde se vrcholy i hrany mohou opakovat.",
-      "**Cesta (Path):** Sled, ve kterém se **neopakuje žádný vrchol** (a tedy ani hrana).",
-      "**Cyklus (Cycle):** Uzavřený sled délky $k \\ge 3$, kde jsou všechny vnitřní vrcholy navzájem různé."
+      "**Handshaking Lemma:** $\\sum_{v \\in V} \\deg(v) = 2|E|$ (součet všech stupňů je dvojnásobek počtu hran)."
     ], { y });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 7.2: Vizuální srovnání reprezentací grafu v paměti
+  // Slide 7.1b: Sled, Cesta a Cyklus v Paměti C++
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "0. Minimum z Grafových Pojmů pro C++" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Sled, Cesta a Cyklus v Algoritmech", { level: 2, y, showUnderline: true });
+
+    y = renderDocParagraph(slide,
+      "Rozlišení posloupností vrcholů a hran je základem pro implementaci grafových algoritmů (BFS, DFS):",
+      { y }
+    );
+
+    y = renderDocList(slide, [
+      "**Sled (Walk):** Střídavá posloupnost vrcholů a hran $(v_0, e_1, v_1, \\dots, v_k)$, kde se vrcholy i hrany mohou opakovat.",
+      "**Cesta (Path):** Sled, ve kterém se **neopakuje žádný vrchol** (a tedy ani hrana).",
+      "**Cyklus (Cycle):** Uzavřený sled délky $k \\ge 3$, kde jsou všechny vnitřní vrcholy navzájem různé."
+    ], { y });
+
+    renderDocCallout(pres, slide, {
+      type: "note",
+      title: "Poznámka k reprezentaci v C++:",
+      text: "V jednoduchém grafu jednoznačně určuje sled pouze posloupnost vrcholů (v₀, v₁, …, vₖ) ukládaná standardně do std::vector<int>.",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 7.2a: Vizuální srovnání reprezentací grafu v paměti
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -62,23 +87,40 @@ export function addModule7Slides(pres) {
     y = renderDocHeading(pres, slide, "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "V předmětech **PA2** a **AG1** budete grafové algoritmy zapisovat v C++. Způsob uložení do paměti rozhodne, zda program proběhne za 0.01 s, nebo skončí chybou Time Limit Exceeded (TLE):",
+      "V předmětech **PA2** a **AG1** budete grafové algoritmy zapisovat v C++. Způsob uložení do paměti rozhodne o složitosti i spotřebě RAM:",
       { y }
     );
 
     const imgPath = path.join(rootDir, "public", "images", "graph-representation-showcase.png");
-    y = renderDocImage(slide, imgPath, {
+    renderDocImage(slide, imgPath, {
       x: 1.6,
       y,
       w: 10.133,
-      h: 3.5,
+      h: 3.7,
       caption: "Vlevo: Neorientovaný vs. Orientovaný graf · Uprostřed: Seznam sousedů · Vpravo: Matice sousedství",
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 7.2b: Indexování a Paměťové Chování v C++
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "1. Počítačová Reprezentace Grafů v C++" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Indexování Vrcholů a Paměťové Limity", { level: 2, y, showUnderline: true });
+
+    y = renderDocCallout(pres, slide, {
+      type: "note",
+      title: "Indexování vrcholů v C++:",
+      text: "V C++ standardně číslujeme vrcholy od 0 do n - 1. Vždy si ujasněte, zda vstupní data ze zadání začínají od 0 nebo od 1 (častá off-by-one chyba při indexaci pole)!",
+      y,
     });
 
     renderDocCallout(pres, slide, {
-      type: "note",
-      title: "Indexování vrcholů:",
-      text: "V C++ standardně číslujeme vrcholy od 0 do n - 1. Vždy si ujasněte, zda vstupní data začínají od 0 nebo od 1 (off-by-one chyba)!",
+      type: "tip",
+      title: "Paměťový profil v testovacím systému ProgTest:",
+      text: "Nesprávná volba matice sousedství pro graf s n = 100 000 uzly alokuje 10¹⁰ bajtů (~10 GB RAM) a způsobí Memory Limit Exceeded (MLE). Seznam sousedů zabere pouze Θ(n + m) paměti.",
       y,
     });
   }
@@ -116,7 +158,7 @@ export function addModule7Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 7.4: Srovnávací tabulka reprezentací v C++
+  // Slide 7.4a: Srovnávací tabulka reprezentací v C++
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -124,7 +166,7 @@ export function addModule7Slides(pres) {
 
     y = renderDocHeading(pres, slide, "📊 Detailní Srovnání Grafových Reprezentací v C++", { level: 2, y, showUnderline: true });
 
-    y = renderDocTable(slide, {
+    renderDocTable(slide, {
       headers: ["Operace v C++", "Matice sousedství", "Seznam sousedů", "Doporučení pro AG1"],
       rows: [
         ["Paměťová náročnost", "Θ(n²)", "Θ(n + m)", "Seznam sousedů pro m ≪ n²"],
@@ -137,28 +179,42 @@ export function addModule7Slides(pres) {
       colWidths: [3.2, 2.8, 3.0, 2.733],
       y,
     });
+  }
 
-    renderDocCallout(pres, slide, {
+  // --------------------------------------------------------------------------
+  // Slide 7.4b: Doporučení pro AG1 & Paměťové Chování
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "📊 Detailní Srovnání Reprezentací" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Zlaté Pravidlo Volby Reprezentace v AG1", { level: 2, y, showUnderline: true });
+
+    y = renderDocCallout(pres, slide, {
       type: "tip",
       title: "Zlaté pravidlo AG1:",
       text: "Pokud není výslovně řečeno jinak, v AG1 VŽDY implementujeme graf pomocí Seznamu sousedů (std::vector<vector<int>>)! Šetří paměť a dává optimální čas O(n + m) pro BFS a DFS.",
       y,
     });
+
+    renderDocCallout(pres, slide, {
+      type: "note",
+      title: "Výjimky z pravidla:",
+      text: "Matici sousedství volíme pouze pro extrémně husté grafy (m ≈ n²) nebo v situacích, kdy algoritmus vyžaduje provádět miliony dotazů na existenci konkrétní hrany v čase O(1).",
+      y,
+    });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 7.5: C++ Třída Graph se seznamem sousedů
+  // Slide 7.5a: C++ Třída Graph: Konstruktor & addEdge
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "💻 Implementace Grafu v C++ (STL std::vector)", { level: 3, y });
+    y = renderDocHeading(pres, slide, "💻 Implementace Grafu v C++: Struktura a Konstruktor", { level: 2, y, showUnderline: true });
 
-    const cppGraphCode = `#include <iostream>
-#include <vector>
-
-class Graph {
+    const cppGraphCode1 = `class Graph {
 private:
     int n; // Počet vrcholů
     std::vector<std::vector<int>> adj; // Seznam sousedů
@@ -169,20 +225,36 @@ public:
     // Přidání neorientované hrany mezi u a v
     void addEdge(int u, int v) {
         adj[u].push_back(v);
-        adj[v].push_back(u); // Obousměrná vazba
-    }
-
-    const std::vector<int>& getNeighbors(int u) const {
-        return adj[u];
+        adj[v].push_back(u); // Obousměrná vazba pro neorientovaný graf
     }
 };`;
 
-    y = renderDocCode(pres, slide, cppGraphCode, { lang: "C++ (Základní grafová struktura)", y });
+    renderDocCode(pres, slide, cppGraphCode1, { lang: "C++ (Základní grafová struktura)", y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 7.5b: C++ Třída Graph: getNeighbors & Orientované hrany
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "💻 Implementace Grafu v C++" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Iterace Přes Sousedé a Orientované Grafy", { level: 2, y, showUnderline: true });
+
+    const cppGraphCode2 = `// Získání konstantní reference na seznam sousedů vrcholu u
+const std::vector<int>& getNeighbors(int u) const {
+    return adj[u];
+}
+
+// Příklad iterace v BFS / DFS:
+// for (int v : graph.getNeighbors(u)) { ... }`;
+
+    y = renderDocCode(pres, slide, cppGraphCode2, { lang: "C++ (Metoda getNeighbors)", y });
 
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Orientovaný graf:",
-      text: "V orientovaném grafu voláme pouze adj[u].push_back(v); (hrana vede pouze jednosměrně z u do v).",
+      text: "V orientovaném grafu voláme pouze adj[u].push_back(v); (hrana vede pouze jednosměrně z u do v, bez zpětného přidání do adj[v]).",
       y,
     });
   }

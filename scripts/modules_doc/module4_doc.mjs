@@ -19,7 +19,7 @@ export function addModule4Slides(pres) {
   const breadcrumb = "MODUL 4 · 📐 LOGICKÝ & DŮKAZOVÝ ZÁKLAD";
 
   // --------------------------------------------------------------------------
-  // Slide 4.1: Titul & Proč se biologové učí logiku?
+  // Slide 4.1a: Titul & Cíl kapitoly
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -27,12 +27,20 @@ export function addModule4Slides(pres) {
 
     y = renderDocHeading(pres, slide, "Logický & Důkazový základ", { level: 1, y });
 
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "note",
       title: "Cíl kapitoly:",
       text: "Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků (∀, ∃, ∃!), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AG1 na FIT ČVUT.",
-      y,
+      y: y + 0.1,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.1b: 🌱 Než začneme: Proč se biologové učí logiku?
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Úvod" });
+    let y = 0.85;
 
     y = renderDocHeading(pres, slide, "🌱 Než začneme: Proč se biologové učí logiku?", { level: 2, y, showUnderline: true });
 
@@ -45,12 +53,12 @@ export function addModule4Slides(pres) {
       type: "tip",
       title: "Příslib této kapitoly:",
       text: "Matematická logika odstraňuje nejednoznačnost přirozeného jazyka. Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu.",
-      y,
+      y: y + 0.1,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.2: 1. Úvod do Matematické Logiky & Definice Výroku
+  // Slide 4.2a: 1. Úvod do Matematické Logiky & Definice Výroku
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -63,16 +71,24 @@ export function addModule4Slides(pres) {
       { y }
     );
 
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "note",
       title: "Definice Výroku:",
       text: "Výrok je oznamovací věta, o níž má smysl prohlásit, zda je **pravdivá (značíme 1, True, T)** nebo **nepravdivá (značíme 0, False, F)**.",
-      y,
+      y: y + 0.1,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.2b: Příklady výroků v Bioinformatice & Matematice
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "1. Úvod do Logiky" });
+    let y = 0.85;
 
     y = renderDocHeading(pres, slide, "Příklady v Bioinformatice & Matematice:", { level: 3, y });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "„Molekula vody obsahuje 2 atomy vodíku.“ ➔ **Výrok (Pravdivý = 1)**.",
       "„Kofein má sumární chemický vzorec C₈H₁₀N₄O₂.“ ➔ **Výrok (Pravdivý = 1)**.",
       "„Číslo 17 je prvočíslo.“ ➔ **Výrok (Pravdivý = 1)**.",
@@ -169,7 +185,7 @@ export function addModule4Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.6: 2.2 De Morganovy Zákony a Klíčové Logické Ekvivalence
+  // Slide 4.6a: 2.2 De Morganovy Zákony
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -182,15 +198,23 @@ export function addModule4Slides(pres) {
       { y }
     );
 
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "note",
       title: "De Morganovy formulace:",
       items: [
         "1. Negace konjunkce: ¬(A ∧ B) ≡ ¬A ∨ ¬B  („Není pravda, že platí A i B zároveň ⇔ Neplatí A, nebo neplatí B.“)",
         "2. Negace disjunkce: ¬(A ∨ B) ≡ ¬A ∧ ¬B  („Není pravda, že platí A nebo B ⇔ Neplatí A a zároveň neplatí B.“)"
       ],
-      y,
+      y: y + 0.1,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.6b: Důkaz De Morganova Zákona Pravdivostní Tabulkou
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "2.2 De Morganovy Zákony" });
+    let y = 0.85;
 
     y = renderDocHeading(pres, slide, "📊 Důkaz De Morganova Zákona Pravdivostní Tabulkou:", { level: 3, y });
 
@@ -210,18 +234,18 @@ export function addModule4Slides(pres) {
       type: "tip",
       title: "Závěr tabulky:",
       text: "Sloupce ¬(A ∧ B) a ¬A ∨ ¬B mají ve všech 4 řádcích identickou pravdivostní hodnotu. Ekvivalence je matematicky dokázána!",
-      y,
+      y: y + 0.1,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.7: De Morgan v Jazyce C a Reálném Životě
+  // Slide 4.7a: De Morgan v Jazyce C
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "De Morganovy Zákony v Jazyce C a Reálném Životě", { level: 3, y });
+    y = renderDocHeading(pres, slide, "De Morganovy Zákony v Jazyce C (BI-PA1 / PA2)", { level: 3, y });
 
     const cCode = `// 1. Negace konjunkce: !(A && B) ===> (!A || !B)
 // Kontrola rozsahu: hodnota nesmí být mimo povolený interval 0 až 100
@@ -233,7 +257,15 @@ if (score < 0 || score > 100)          // De Morgan: „když je menší než mi
 if (!(ans == 'a' || ans == 'y'))       // Intuitivní: „když nezvolil ani jednu možnost"
 if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁROVEŇ nezadal 'y'"`;
 
-    y = renderDocCode(pres, slide, cCode, { lang: "C (BI-PA1 / PA2)", y });
+    renderDocCode(pres, slide, cCode, { lang: "C (Podmínky a negace)", y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.7b: De Morgan v Reálném Životě na VŠCHT
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "De Morganovy Zákony v Praxi" });
+    let y = 0.85;
 
     y = renderDocCallout(pres, slide, {
       type: "note",
@@ -246,12 +278,12 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
       type: "tip",
       title: "🚆 Studentská Sleva na Jízdenku (Negace Disjunkce):",
       text: "Sleva platí když: Věk < 18 (A) ∨ Průkaz ISIC (B). Plnou cenu platíte (¬(A ∨ B)) právě když: Věk ≥ 18 (¬A) ∧ Nemáte ISIC (¬B). O slevu přijdete pouze při selhání obou podmínek naráz!",
-      y,
+      y: y + 0.1,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.8: 3. Nutná vs. Postačující Podmínka
+  // Slide 4.8a: 3. Nutná vs. Postačující Podmínka
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -269,7 +301,24 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
       "**B je NUTNÁ podmínka pro A:** Bez platnosti B nemůže A vůbec nastat. Pokud neplatí B, je vyloučeno, aby platilo A ($\\neg B \\implies \\neg A$)."
     ], { y });
 
-    y = renderDocTable(slide, {
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Ekvivalence (A ⇔ B):",
+      text: "Pokud platí A ⇔ B, říkáme, že A je nutnou A ZÁROVEŇ postačující podmínkou pro B (a naopak). Příklad: Voda v kádince vře právě tehdy, když její teplota dosáhla 100 °C.",
+      y: y + 0.1,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.8b: Srovnávací tabulka implikací a podmínek
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "3. Nutná vs. Postačující Podmínka" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Srovnání na konkrétních vztazích:", { level: 3, y });
+
+    renderDocTable(slide, {
       headers: ["Vztah A ⇒ B", "Postačující podmínka (A)", "Nutná podmínka (B)"],
       rows: [
         ["Glukóza ⇒ Obsahuje Uhlík", "Být glukózou STAČÍ k obsahu uhlíku.", "Obsahovat uhlík je NUTNÉ pro glukózu."],
@@ -278,13 +327,6 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
         ["Červený diplom ⇒ Složit státnice", "Červený diplom STAČÍ k úspěšným státnicím.", "Složit státnice je NUTNÉ pro diplom."]
       ],
       colWidths: [3.8, 3.9, 4.033],
-      y,
-    });
-
-    renderDocCallout(pres, slide, {
-      type: "tip",
-      title: "Ekvivalence (A ⇔ B):",
-      text: "Pokud platí A ⇔ B, říkáme, že A je nutnou A ZÁROVEŇ postačující podmínkou pro B (a naopak). Příklad: Voda v kádince vře právě tehdy, když její teplota dosáhla 100 °C.",
       y,
     });
   }
@@ -323,7 +365,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.10: 4.2 Složité Řetězené Negace v Bioinformatice
+  // Slide 4.10a: 4.2 Složité Řetězené Negace: Souvislost Sítě
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -332,15 +374,23 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
     y = renderDocHeading(pres, slide, "4.2 Složité Řetězené Negace v Bioinformatice", { level: 3, y });
 
     y = renderDocHeading(pres, slide, "Případ 1: Souvislost Sítě (Grafu)", { level: 4, y, showUnderline: false });
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Původní tvrzení S (Síť je souvislá):** $\\forall u, v \\in V : (u \\neq v \\implies \\exists \\text{ cesta } P \\text{ z } u \\text{ do } v)$",
       "**Postup negace:** 1. Zaměníme $\\forall u, v$ za $\\exists u, v$. 2. Znegujeme implikaci: $A \\land \\neg B$. 3. Zaměníme $\\exists P$ za $\\forall P$.",
       "**Formální Negace ¬S:** $\\exists u, v \\in V : (u \\neq v \\land \\forall \\text{ cestu } P : P \\text{ NESPOJUJE } u \\text{ a } v)$",
       "**Slovní překlad:** *„Existuje dvojice různých uzlů u, v v síti taková, že mezi nimi neexistuje žádná spojující cesta (síť je rozpojená).“*"
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.10b: Slepá Ulička v Reakční Síti
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "4.2 Složité Řetězené Negace" });
+    let y = 0.85;
 
     y = renderDocHeading(pres, slide, "Případ 2: Slepá Ulička v Reakční Síti (Terminal Metabolite)", { level: 4, y, showUnderline: false });
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Původní tvrzení R (Z každého metabolitu vedou reakce dál):** $\\forall v \\in V \\; \\exists w \\in V : (v, w) \\in E$",
       "**Formální Negace ¬R:** $\\exists v \\in V \\; \\forall w \\in V : (v, w) \\notin E$",
       "**Slovní překlad:** *„Existuje metabolit v takový, že z něj nevede biochemická reakce do žádné jiné molekuly w.“*"
@@ -382,7 +432,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.12: 5.2 Čtyři Základní Důkazové Techniky v AG1
+  // Slide 4.12a: 5.2 Čtyři Základní Důkazové Techniky v AG1 (Přehled)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -392,7 +442,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
 
     // ASCII 4 techniky box
     const boxW = 11.733;
-    const boxH = 2.4;
+    const boxH = 4.2;
     slide.addShape(pres.ShapeType.roundRect, {
       x: 0.8,
       y,
@@ -406,18 +456,25 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
       "┌───────────────────────┐   ┌───────────────────────┐   ┌───────────────────────┐   ┌───────────────────────┐\n│      PŘÍMÝ DŮKAZ      │   │     KONTRAPOZICE      │   │     DŮKAZ SPOREM      │   │  MATEMATICKÁ INDUKCE  │\n│ A => A1 => ... => B   │   │    !B => ... => !A    │   │   (A && !B) => SPOR   │   │   1. Báze + 2. Krok   │\n├───────────────────────┤   ├───────────────────────┤   ├───────────────────────┤   ├───────────────────────┤\n│ - Postupná dedukce    │   │ - Obměněná implikace  │   │ - Předpoklad opaku    │   │ - Pro n prvků / uzlů  │\n│ - Přímo od A k B      │   │ - Ekvivalentní tvar   │   │ - Dovedení ke sporu   │   │ - Krok n -> n+1       │\n│ - Přirozený postup    │   │ - Když je !B snazší   │   │ - Spor s větou / def. │   │ - Dekonstrukce grafu  │\n└───────────────────────┘   └───────────────────────┘   └───────────────────────┘   └───────────────────────┘",
       {
         x: 0.95,
-        y: y + 0.15,
+        y: y + 0.3,
         w: boxW - 0.3,
-        h: boxH - 0.3,
+        h: boxH - 0.6,
         fontFace: "Courier New",
-        fontSize: fs(9),
+        fontSize: fs(10),
         color: colors.textPrimary,
-        lineSpacingMultiple: 1.15,
+        lineSpacingMultiple: 1.2,
       }
     );
-    y += boxH + 0.15;
+  }
 
-    y = renderDocList(slide, [
+  // --------------------------------------------------------------------------
+  // Slide 4.12b: Popis 4 Základních Důkazových Technik
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "5.2 Čtyři Základní Důkazové Techniky" });
+    let y = 0.85;
+
+    renderDocList(slide, [
       "**1. Přímý důkaz (A ⇒ B):** Posloupností ekvivalentních úprav a definic přímo odvodíme B: $A \\implies A_1 \\implies A_2 \\implies \\dots \\implies B$.",
       "**2. Důkaz Kontrapozicí (¬B ⇒ ¬A):** Dokážeme logicky ekvivalentní obměněnou implikaci. Použijeme, když je negovaný závěr $\\neg B$ snazší uchopit.",
       "**3. Důkaz Sporem (A ∧ ¬B ⇒ ⊥):** Předpokládáme platnost A a současně $\\neg B$. Odvozováním dojdeme ke sporu ($\\bot$) s definicí či větou.",
@@ -559,7 +616,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.16: 💡 Vzorové Řešení Úlohy 1.2: Metoda A (Kontrapozice)
+  // Slide 4.16a: 💡 Vzorové Řešení Úlohy 1.2: Metoda A (Kontrapozice - Princip)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Úloha 1.2" });
@@ -572,14 +629,22 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
       { y }
     );
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**¬B:** Síť **neobsahuje žádný cyklus** (je to strom nebo soubor stromů).",
       "**¬A:** Existuje uzel $v \\in V$, ze kterého vychází méně než 2 spojnice ($\\deg(v) < 2$, tj. $\\deg(v) \\le 1$)."
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 4.16b: Důkaz obměněného tvrzení ¬B ⇒ ¬A
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Úloha 1.2 · Kontrapozice" });
+    let y = 0.85;
 
     y = renderDocHeading(pres, slide, "✍️ Důkaz obměněného tvrzení ¬B ⇒ ¬A:", { level: 4, y, showUnderline: false });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. Předpokládejme, že síť neobsahuje žádné cykly ($\\neg B$). Pokud nemá žádné hrany ($m=0$), všechny uzly mají $\\deg(v) = 0 < 2$ (platí triviálně).",
       "2. Zvolme v síti nejdelší možnou trasu bez opakování $P = (v_1, v_2, \\dots, v_k)$.",
       "3. Krajní uzel $v_1$ nemůže mít souseda mimo trasu $P$ (jinak by $P$ nebyla nejdelší), ani souseda $v_j$ ($j \\ge 3$) uvnitř trasy (to by vytvořilo cyklus!).",

@@ -13,21 +13,20 @@
 import nodeFs from "node:fs";
 
 // ============================================================================
-// GLOBAL CONFIGURATION: FONT SIZING DELTA
-// Change FONT_DELTA to adjust all font sizes across the entire presentation:
-// 0 = default 1:1 readable size
-// +1, +2 = larger
-// -1, -2 = smaller
+// GLOBAL CONFIGURATION: FONT SIZING (1.5x - 2x BIGGER)
+// FONT_SCALE: Overall scale multiplier (1.6 = ~1.6x bigger, 1.0 = standard)
+// FONT_DELTA: Incremental point adjustment (+1, +2, -1, -2, ...)
 // ============================================================================
+export const FONT_SCALE = 1.6;
 export const FONT_DELTA = 0;
 
 /**
- * Responsive font size calculation.
+ * Responsive font size calculation based on FONT_SCALE and FONT_DELTA.
  * @param {number} base Base font size in points
  * @returns {number} Scaled font size
  */
 export function fs(base) {
-  return Math.max(8, Math.round(base + FONT_DELTA));
+  return Math.max(9, Math.round(base * FONT_SCALE + FONT_DELTA));
 }
 
 // ============================================================================
@@ -297,31 +296,33 @@ export function renderDocHeading(pres, slide, text, { level = 2, y = 0.85, showU
   const clean = cleanText(text);
 
   if (level === 1) {
-    const h = 0.58;
+    const fontSize = fs(20);
+    const h = Math.max(0.65, (fontSize * 1.3) / 72);
     slide.addText(clean, {
       x: 0.8,
       y,
       w: 11.733,
       h,
       fontFace: fonts.heading,
-      fontSize: fs(21),
+      fontSize,
       color: colors.textPrimary,
       bold: true,
       valign: "middle",
       margin: 0,
     });
-    return y + h + 0.18;
+    return y + h + 0.16;
   }
 
   if (level === 2) {
-    const h = 0.44;
+    const fontSize = fs(15);
+    const h = Math.max(0.50, (fontSize * 1.3) / 72);
     slide.addText(clean, {
       x: 0.8,
       y,
       w: 11.733,
       h,
       fontFace: fonts.heading,
-      fontSize: fs(16.5),
+      fontSize,
       color: colors.textPrimary,
       bold: true,
       valign: "middle",
@@ -338,18 +339,19 @@ export function renderDocHeading(pres, slide, text, { level = 2, y = 0.85, showU
       });
     }
 
-    return y + h + 0.18;
+    return y + h + 0.16;
   }
 
   if (level === 3) {
-    const h = 0.36;
+    const fontSize = fs(13);
+    const h = Math.max(0.42, (fontSize * 1.3) / 72);
     slide.addText(clean, {
       x: 0.8,
       y,
       w: 11.733,
       h,
       fontFace: fonts.heading,
-      fontSize: fs(14.5),
+      fontSize,
       color: colors.textPrimary,
       bold: true,
       valign: "middle",
@@ -359,14 +361,15 @@ export function renderDocHeading(pres, slide, text, { level = 2, y = 0.85, showU
   }
 
   // Level 4
-  const h = 0.32;
+  const fontSize = fs(11.5);
+  const h = Math.max(0.36, (fontSize * 1.3) / 72);
   slide.addText(clean, {
     x: 0.8,
     y,
     w: 11.733,
     h,
     fontFace: fonts.heading,
-    fontSize: fs(13),
+    fontSize,
     color: colors.textSecondary,
     bold: true,
     valign: "middle",
@@ -379,7 +382,7 @@ export function renderDocHeading(pres, slide, text, { level = 2, y = 0.85, showU
  * Renders a full-width paragraph with inline bold/italic/code support.
  * Returns the Y position for the next element.
  */
-export function renderDocParagraph(slide, textOrRuns, { y = 0.85, fontSize = fs(12.5), color = colors.textSecondary, lineSpacing = 1.25 } = {}) {
+export function renderDocParagraph(slide, textOrRuns, { y = 0.85, fontSize = fs(10.5), color = colors.textSecondary, lineSpacing = 1.25 } = {}) {
   let runs;
   let rawText = "";
 
@@ -395,9 +398,11 @@ export function renderDocParagraph(slide, textOrRuns, { y = 0.85, fontSize = fs(
     });
   }
 
-  // Estimate height: ~120 chars per line at 11.733" width
-  const lineCount = Math.max(1, Math.ceil(rawText.length / 115));
-  const h = Math.max(0.28, lineCount * 0.25);
+  // Responsive character wrap and line height based on scaled fontSize
+  const charsPerLine = Math.max(50, Math.floor(115 / FONT_SCALE));
+  const lineCount = Math.max(1, Math.ceil(rawText.length / charsPerLine));
+  const lineHeight = Math.max(0.28, (fontSize * 1.25) / 72);
+  const h = Math.max(0.32, lineCount * lineHeight);
 
   slide.addText(runs, {
     x: 0.8,
@@ -419,7 +424,7 @@ export function renderDocParagraph(slide, textOrRuns, { y = 0.85, fontSize = fs(
  * Renders a bulleted list matching the website.
  * Returns the Y position for the next element.
  */
-export function renderDocList(slide, items, { y = 0.85, fontSize = fs(12.5), spacing = 0.08 } = {}) {
+export function renderDocList(slide, items, { y = 0.85, fontSize = fs(10.5), spacing = 0.08 } = {}) {
   let currentY = y;
 
   items.forEach((item) => {
@@ -430,15 +435,17 @@ export function renderDocList(slide, items, { y = 0.85, fontSize = fs(12.5), spa
       color: colors.textSecondary,
     });
 
-    const lineCount = Math.max(1, Math.ceil((rawText.length + 4) / 110));
-    const h = Math.max(0.26, lineCount * 0.25);
+    const charsPerLine = Math.max(48, Math.floor(110 / FONT_SCALE));
+    const lineCount = Math.max(1, Math.ceil((rawText.length + 4) / charsPerLine));
+    const lineHeight = Math.max(0.28, (fontSize * 1.25) / 72);
+    const h = Math.max(0.30, lineCount * lineHeight);
 
     // Bullet symbol
     slide.addText("•", {
       x: 0.8,
       y: currentY,
       w: 0.25,
-      h: 0.26,
+      h: 0.30,
       fontFace: fonts.sans,
       fontSize,
       color: colors.brandOrangeDark,
@@ -464,12 +471,12 @@ export function renderDocList(slide, items, { y = 0.85, fontSize = fs(12.5), spa
     currentY += h + spacing;
   });
 
-  return currentY + 0.08;
+  return currentY + 0.06;
 }
 
 /**
- * Renders a full-width callout box ([!NOTE], [!TIP], [!WARNING]).
- * Background #FFF7ED, left solid line #F95D12 (thickness 3.5pt).
+ * Renders a callout box ([!NOTE], [!TIP], [!WARNING], [!INFO]) matching the website.
+ * Full-width warm background (#FFF7ED) with a prominent 3.5pt left orange accent bar (#F95D12).
  * Returns the Y position for the next element.
  */
 export function renderDocCallout(pres, slide, {
@@ -503,8 +510,10 @@ export function renderDocCallout(pres, slide, {
   if (text) combinedChars += text.length;
   if (items.length > 0) combinedChars += items.join(" ").length + 20;
 
-  const lineCount = Math.max(2, Math.ceil(combinedChars / 110));
-  const boxH = Math.max(0.72, lineCount * 0.24 + (title ? 0.3 : 0.2));
+  const charsPerLine = Math.max(48, Math.floor(105 / FONT_SCALE));
+  const lineCount = Math.max(2, Math.ceil(combinedChars / charsPerLine));
+  const lineHeight = Math.max(0.28, (fs(10.5) * 1.25) / 72);
+  const boxH = Math.max(0.85, lineCount * lineHeight + (title ? 0.42 : 0.28));
 
   // Background box
   slide.addShape(pres.ShapeType.rect, {
@@ -536,7 +545,7 @@ export function renderDocCallout(pres, slide, {
       text: headerText + (text ? "\n" : ""),
       options: {
         fontFace: fonts.sans,
-        fontSize: fs(12.5),
+        fontSize: fs(11.5),
         bold: true,
         color: colors.brandOrangeDark,
       },
@@ -547,7 +556,7 @@ export function renderDocCallout(pres, slide, {
   if (text) {
     const textRuns = mdToRuns(text, {
       fontFace: fonts.sans,
-      fontSize: fs(12),
+      fontSize: fs(10.5),
       color: colors.textSecondary,
     });
     innerRuns.push(...textRuns);
@@ -561,7 +570,7 @@ export function renderDocCallout(pres, slide, {
         text: `• ${cleanText(texToUnicode(item))}${idx < items.length - 1 ? "\n" : ""}`,
         options: {
           fontFace: fonts.sans,
-          fontSize: fs(11.5),
+          fontSize: fs(10),
           color: colors.textSecondary,
         },
       });
@@ -574,7 +583,7 @@ export function renderDocCallout(pres, slide, {
     w: 11.333,
     h: boxH - 0.2,
     fontFace: fonts.sans,
-    fontSize: fs(12),
+    fontSize: fs(10.5),
     color: colors.textSecondary,
     lineSpacingMultiple: 1.2,
     valign: "top",
@@ -596,7 +605,9 @@ export function renderDocCode(pres, slide, code, {
   const lines = code.trim().split("\n");
   const lineCount = lines.length;
   const hasHeader = Boolean(title || lang);
-  const codeH = Math.max(0.9, lineCount * 0.21 + (hasHeader ? 0.45 : 0.28));
+  const codeFontSize = fs(9.5);
+  const lineHeight = Math.max(0.26, (codeFontSize * 1.42) / 72);
+  const codeH = Math.max(1.0, lineCount * lineHeight + (hasHeader ? 0.65 : 0.35));
 
   // Dark container
   slide.addShape(pres.ShapeType.roundRect, {
@@ -628,11 +639,11 @@ export function renderDocCode(pres, slide, code, {
   // Code body
   slide.addText(code.trim(), {
     x: 1.1,
-    y: y + (hasHeader ? 0.36 : 0.15),
+    y: y + (hasHeader ? 0.38 : 0.15),
     w: 11.133,
-    h: codeH - (hasHeader ? 0.46 : 0.25),
+    h: codeH - (hasHeader ? 0.48 : 0.25),
     fontFace: fonts.mono,
-    fontSize: fs(10.5),
+    fontSize: codeFontSize,
     color: colors.codeText,
     lineSpacingMultiple: 1.18,
     valign: "top",
@@ -693,7 +704,41 @@ export function renderDocTable(slide, {
     );
   });
 
-  const totalH = Math.max(1.0, (rows.length + 1) * 0.38);
+  // Accurate table height calculation based on font size & character wrap
+  const cellFontSize = fs(10.5);
+  const headerFontSize = fs(11);
+  const cellLineH = Math.max(0.24, (cellFontSize * 1.3) / 72);
+  const headerLineH = Math.max(0.26, (headerFontSize * 1.3) / 72);
+  const avgCharWidth = (cellFontSize * 0.55) / 72; // in inches
+
+  // Compute header height
+  let headerH = headerLineH + 0.22;
+  if (headers.length > 0 && colWidths.length === headers.length) {
+    let maxHeaderLines = 1;
+    headers.forEach((h, i) => {
+      const colW = colWidths[i] - 0.22;
+      const charsPerLine = Math.max(8, Math.floor(colW / avgCharWidth));
+      const lines = Math.ceil(cleanText(h).length / charsPerLine);
+      if (lines > maxHeaderLines) maxHeaderLines = lines;
+    });
+    headerH = maxHeaderLines * headerLineH + 0.22;
+  }
+
+  // Compute data rows heights
+  let totalDataH = 0;
+  rows.forEach(row => {
+    let maxLines = 1;
+    row.forEach((cell, i) => {
+      const colW = (colWidths[i] || (11.733 / row.length)) - 0.22;
+      const charsPerLine = Math.max(8, Math.floor(colW / avgCharWidth));
+      const lines = Math.ceil(cleanText(cell).length / charsPerLine);
+      if (lines > maxLines) maxLines = lines;
+    });
+    const rowH = Math.max(0.36, maxLines * cellLineH + 0.18);
+    totalDataH += rowH;
+  });
+
+  const totalH = headerH + totalDataH;
 
   slide.addTable(tableRows, {
     x: 0.8,
@@ -897,7 +942,7 @@ export function renderDocConnectingLine(pres, slide, x1, y1, x2, y2, {
  * Creates the Master Title Slide for pre-AG1 presentation.
  */
 export function createDocMasterTitleSlide(pres, {
-  title = "pre-AG1: Letní Průvodce Grafovou Matematikou",
+  title = "pre-AG1: Příprava na Algoritmy a Grafy",
   subtitle = "Kompletní 1:1 příprava pro bioinformatiky na Algoritmy a Grafy 1 (FIT ČVUT)",
   author = "VŠCHT Učení · Obor Bioinformatika",
   date = "2026"
@@ -908,7 +953,7 @@ export function createDocMasterTitleSlide(pres, {
   // Subtle warm top accent border line
   slide.addShape(pres.ShapeType.rect, {
     x: 0.8,
-    y: 0.8,
+    y: 0.5,
     w: 11.733,
     h: 0.08,
     fill: { color: colors.brandOrange },
@@ -918,11 +963,11 @@ export function createDocMasterTitleSlide(pres, {
   // Breadcrumb / Category
   slide.addText("OBOR BIOINFORMATIKA · PŘEDMĚT AG1 · FIT ČVUT", {
     x: 0.8,
-    y: 1.2,
+    y: 0.75,
     w: 11.733,
     h: 0.35,
     fontFace: fonts.heading,
-    fontSize: fs(12),
+    fontSize: fs(10),
     color: colors.brandOrangeDark,
     bold: true,
     charSpacing: 1.5,
@@ -932,11 +977,11 @@ export function createDocMasterTitleSlide(pres, {
   // Title
   slide.addText(cleanText(title), {
     x: 0.8,
-    y: 1.7,
+    y: 1.25,
     w: 11.733,
     h: 1.2,
     fontFace: fonts.heading,
-    fontSize: fs(28),
+    fontSize: fs(24),
     color: colors.textPrimary,
     bold: true,
     lineSpacingMultiple: 1.15,
@@ -946,7 +991,7 @@ export function createDocMasterTitleSlide(pres, {
   // Horizontal divider
   slide.addShape(pres.ShapeType.line, {
     x: 0.8,
-    y: 3.1,
+    y: 2.65,
     w: 11.733,
     h: 0,
     line: { color: colors.borderSubtle, width: 1.5 },
@@ -955,22 +1000,22 @@ export function createDocMasterTitleSlide(pres, {
   // Subtitle
   slide.addText(cleanText(subtitle), {
     x: 0.8,
-    y: 3.4,
+    y: 2.85,
     w: 11.733,
-    h: 0.8,
+    h: 0.65,
     fontFace: fonts.sans,
-    fontSize: fs(15),
+    fontSize: fs(13),
     color: colors.textSecondary,
-    lineSpacingMultiple: 1.25,
+    lineSpacingMultiple: 1.2,
     margin: 0,
   });
 
   // Overview box
   slide.addShape(pres.ShapeType.roundRect, {
     x: 0.8,
-    y: 4.5,
+    y: 3.75,
     w: 11.733,
-    h: 1.8,
+    h: 2.8,
     rectRadius: 0.1,
     fill: { color: colors.calloutWarmBg },
     line: { color: colors.brandOrangeLight, width: 1 },
@@ -978,11 +1023,11 @@ export function createDocMasterTitleSlide(pres, {
 
   slide.addText("OBSAH KURZU (MODULY 2 AŽ 8):", {
     x: 1.1,
-    y: 4.7,
+    y: 3.95,
     w: 11.1,
-    h: 0.3,
+    h: 0.35,
     fontFace: fonts.heading,
-    fontSize: fs(11.5),
+    fontSize: fs(11),
     color: colors.brandOrangeDark,
     bold: true,
     margin: 0,
@@ -1003,36 +1048,36 @@ export function createDocMasterTitleSlide(pres, {
 
   slide.addText(col1, {
     x: 1.1,
-    y: 5.1,
+    y: 4.45,
     w: 5.4,
-    h: 1.0,
+    h: 1.9,
     fontFace: fonts.sans,
-    fontSize: fs(11),
+    fontSize: fs(10),
     color: colors.textSecondary,
-    lineSpacingMultiple: 1.2,
+    lineSpacingMultiple: 1.25,
     margin: 0,
   });
 
   slide.addText(col2, {
     x: 6.7,
-    y: 5.1,
+    y: 4.45,
     w: 5.4,
-    h: 1.0,
+    h: 1.9,
     fontFace: fonts.sans,
-    fontSize: fs(11),
+    fontSize: fs(10),
     color: colors.textSecondary,
-    lineSpacingMultiple: 1.2,
+    lineSpacingMultiple: 1.25,
     margin: 0,
   });
 
   // Footer
   slide.addText(`${author} · ${date}`, {
     x: 0.8,
-    y: 6.9,
+    y: 6.8,
     w: 11.733,
-    h: 0.3,
+    h: 0.25,
     fontFace: fonts.sans,
-    fontSize: fs(10),
+    fontSize: fs(8.5),
     color: colors.textLightMuted,
     margin: 0,
   });

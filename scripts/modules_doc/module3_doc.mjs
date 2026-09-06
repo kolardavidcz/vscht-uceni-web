@@ -34,7 +34,7 @@ export function addModule3Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 3.2: Co je to vlastně graf? (Metafora metra)
+  // Slide 3.2a: Co je to vlastně graf? (Metafora metra)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -48,8 +48,8 @@ export function addModule3Slides(pres) {
     );
 
     // ASCII mapa metra box
-    const mapBoxW = 6.5;
-    const mapBoxH = 1.3;
+    const mapBoxW = 7.5;
+    const mapBoxH = 1.6;
     slide.addShape(pres.ShapeType.roundRect, {
       x: 0.8,
       y,
@@ -63,21 +63,29 @@ export function addModule3Slides(pres) {
       "  Muzeum ──────── Náměstí Míru\n     │                  │\n  Muzeum Nár.      I.P. Pavlova\n     │                  │\n  Florenc ────── Hlavní nádraží",
       {
         x: 1.0,
-        y: y + 0.1,
+        y: y + 0.12,
         w: mapBoxW - 0.4,
-        h: mapBoxH - 0.2,
+        h: mapBoxH - 0.24,
         fontFace: "Courier New",
         fontSize: fs(10),
         color: colors.textPrimary,
         lineSpacingMultiple: 1.15,
       }
     );
-    y += mapBoxH + 0.15;
+    y += mapBoxH + 0.2;
 
-    y = renderDocParagraph(slide,
+    renderDocParagraph(slide,
       "V téhle mapě: **Stanice** = vrcholy (uzly) grafu, **Koleje mezi stanicemi** = hrany grafu. To je vše. Graf = věci + spojení mezi nimi.",
       { y }
     );
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 3.2b: Příklady grafů ze světa bioinformatiky a sítí
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🗺️ Co je to vlastně graf?" });
+    let y = 0.85;
 
     y = renderDocList(slide, [
       "**Sociální síť:** lidé = vrcholy, přátelství = hrany",
@@ -90,7 +98,7 @@ export function addModule3Slides(pres) {
       type: "tip",
       title: "Intuice bez vzorce:",
       text: "Graf je způsob, jak zakreslit, co je s čím spojeno. Matematický jazyk nám pak umožní o těchto spojeních přesně uvažovat a dokazovat věci.",
-      y,
+      y: y + 0.1,
     });
   }
 
@@ -127,12 +135,12 @@ export function addModule3Slides(pres) {
       type: "note",
       title: "Klíčový most pro studenta:",
       text: "Není to jiná látka — je to tentýž reálný svět zapsaný precizním matematickým jazykem, který umožňuje dokázat korektnost algoritmů.",
-      y,
+      y: y + 0.05,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 3.4: 🧬 Molekula Glukózy jako Neorientovaný Graf
+  // Slide 3.4a: 🧬 Molekula Glukózy jako Neorientovaný Graf
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -150,9 +158,26 @@ export function addModule3Slides(pres) {
       "**Hrany E (Kovalentní vazby):** Sdílený elektronový pár tvoří neorientovanou hranu $\\{u, v\\}$. Vazba působí vzájemně — nemá žádný „směr šipky“: $E = \\{e_1, e_2, \\dots, e_{12}\\}$."
     ], { y });
 
+    renderDocCallout(pres, slide, {
+      type: "note",
+      title: "Formální popis:",
+      text: "Množina vrcholů V = {v₁, v₂, …, v₁₂}, množina neorientovaných hran E = {e₁, e₂, …, e₁₂}. Žádná hrana nemá preferovaný směr.",
+      y: y + 0.1,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 3.4b: Vektorové schéma kruhu glukózy
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🧬 Molekula Glukózy" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Vektorové schéma: Šestičlenný kruh glukózy", { level: 3, y });
+
     // Schéma glukózy (vektorové vykreslení)
     const boxW = 8.5;
-    const boxH = 2.4;
+    const boxH = 4.0;
     const boxX = (13.333 - boxW) / 2;
 
     slide.addShape(pres.ShapeType.roundRect, {
@@ -168,12 +193,12 @@ export function addModule3Slides(pres) {
     // Six-ring carbon atoms + Oxygen
     const cLabels = ["O (v₁)", "C₁ (v₂)", "C₂ (v₃)", "C₃ (v₄)", "C₄ (v₅)", "C₅ (v₆)"];
     const pts = [
-      { x: boxX + 4.25, y: y + 0.35, color: "E11D48" }, // O
-      { x: boxX + 5.5, y: y + 0.8, color: "1E293B" },  // C1
-      { x: boxX + 5.5, y: y + 1.6, color: "1E293B" },  // C2
-      { x: boxX + 4.25, y: y + 2.05, color: "1E293B" }, // C3
-      { x: boxX + 3.0, y: y + 1.6, color: "1E293B" },  // C4
-      { x: boxX + 3.0, y: y + 0.8, color: "1E293B" },  // C5
+      { x: boxX + 4.25, y: y + 0.7, color: "E11D48" }, // O
+      { x: boxX + 5.8, y: y + 1.4, color: "1E293B" },  // C1
+      { x: boxX + 5.8, y: y + 2.7, color: "1E293B" },  // C2
+      { x: boxX + 4.25, y: y + 3.4, color: "1E293B" }, // C3
+      { x: boxX + 2.7, y: y + 2.7, color: "1E293B" },  // C4
+      { x: boxX + 2.7, y: y + 1.4, color: "1E293B" },  // C5
     ];
 
     // Ring bonds
@@ -189,37 +214,28 @@ export function addModule3Slides(pres) {
     // Draw atom nodes
     pts.forEach((pt, idx) => {
       slide.addShape(pres.ShapeType.ellipse, {
-        x: pt.x - 0.28,
-        y: pt.y - 0.28,
-        w: 0.56,
-        h: 0.56,
+        x: pt.x - 0.35,
+        y: pt.y - 0.35,
+        w: 0.7,
+        h: 0.7,
         fill: { color: pt.color },
         line: { color: pt.color, width: 1 },
       });
       slide.addText(cLabels[idx], {
-        x: pt.x - 0.6,
-        y: pt.y - 0.15,
-        w: 1.2,
-        h: 0.3,
-        fontSize: fs(7.5),
+        x: pt.x - 0.7,
+        y: pt.y - 0.18,
+        w: 1.4,
+        h: 0.36,
+        fontSize: fs(9),
         bold: true,
         color: "FFFFFF",
         align: "center",
       });
     });
-
-    y += boxH + 0.12;
-
-    renderDocCallout(pres, slide, {
-      type: "note",
-      title: "Formální popis:",
-      text: "Množina vrcholů V = {v₁, v₂, …, v₁₂}, množina neorientovaných hran E = {e₁, e₂, …, e₁₂}. Žádná hrana nemá preferovaný směr.",
-      y,
-    });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 3.5: ⚡ Metabolická Dráha Glykolýzy jako Orientovaný Graf (DAG)
+  // Slide 3.5a: ⚡ Metabolická Dráha Glykolýzy jako Orientovaný Graf (DAG)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -232,15 +248,23 @@ export function addModule3Slides(pres) {
       { y }
     );
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Vrcholy V (Metabolity):** Chemické látky v buňce: Glukóza (v₁), Glukóza-6-P (v₂), Fruktóza-6-P (v₃), Fruktóza-1,6-bisP (v₄).",
       "**Hrany E (Enzymatické reakce):** Orientované šipky $(u, v) \\in V \\times V$. Reakce jde ze substrátu $u$ do produktu $v$: $e_1 = (v_1, v_2), e_2 = (v_2, v_3), e_3 = (v_3, v_4)$.",
       "**Acykličnost (DAG):** Glykolýza je přímá energetická dráha — metabolity se v ní netočí dokola, ale směřují k pyruvátu."
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 3.5b: Schéma Glykolýzy & Vlastnosti DAGu
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "⚡ Metabolická Dráha Glykolýzy" });
+    let y = 0.85;
 
     // DAG schéma (vektorové vykreslení)
-    const boxW = 10.5;
-    const boxH = 1.4;
+    const boxW = 11.0;
+    const boxH = 2.0;
     const boxX = (13.333 - boxW) / 2;
 
     slide.addShape(pres.ShapeType.roundRect, {
@@ -261,22 +285,22 @@ export function addModule3Slides(pres) {
     ];
 
     metabolites.forEach((m, idx) => {
-      const nodeX = boxX + 0.5 + idx * 2.5;
+      const nodeX = boxX + 0.6 + idx * 2.6;
       slide.addShape(pres.ShapeType.roundRect, {
         x: nodeX,
-        y: y + 0.35,
-        w: 1.8,
-        h: 0.7,
+        y: y + 0.65,
+        w: 1.9,
+        h: 0.85,
         rectRadius: 0.08,
         fill: { color: "FFFFFF" },
         line: { color: "059669", width: 1.5 },
       });
       slide.addText(m.name, {
         x: nodeX,
-        y: y + 0.45,
-        w: 1.8,
-        h: 0.4,
-        fontSize: fs(8.5),
+        y: y + 0.8,
+        w: 1.9,
+        h: 0.5,
+        fontSize: fs(9.5),
         bold: true,
         color: "0F172A",
         align: "center",
@@ -284,21 +308,21 @@ export function addModule3Slides(pres) {
 
       if (idx < 3) {
         slide.addText("➔", {
-          x: nodeX + 1.85,
-          y: y + 0.45,
+          x: nodeX + 1.95,
+          y: y + 0.8,
           w: 0.6,
-          h: 0.4,
-          fontSize: fs(14),
+          h: 0.5,
+          fontSize: fs(16),
           bold: true,
           color: "059669",
           align: "center",
         });
         slide.addText(metabolites[idx + 1].sub, {
-          x: nodeX + 1.6,
-          y: y + 0.15,
-          w: 1.1,
-          h: 0.25,
-          fontSize: fs(7.5),
+          x: nodeX + 1.7,
+          y: y + 0.35,
+          w: 1.2,
+          h: 0.3,
+          fontSize: fs(8.5),
           bold: true,
           color: "047857",
           align: "center",
@@ -306,7 +330,7 @@ export function addModule3Slides(pres) {
       }
     });
 
-    y += boxH + 0.12;
+    y += boxH + 0.3;
 
     renderDocCallout(pres, slide, {
       type: "note",
@@ -317,7 +341,7 @@ export function addModule3Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 3.6: 2. Co je to Strom v Grafu?
+  // Slide 3.6a: 2. Co je to Strom v Grafu?
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -327,17 +351,25 @@ export function addModule3Slides(pres) {
 
     y = renderDocHeading(pres, slide, "🌲 Strom (Acyklický souvislý graf)", { level: 3, y, showUnderline: false });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Definice:** Souvislý graf, který **neobsahuje žádný cyklus**.",
       "**Unikátní vlastnost:** Mezi libovolnými dvěma vrcholy existuje **právě jedna jediná cesta**!",
       "**Biologický příklad:** Fylogenetický strom taxonů $V = \\{v_1, \\dots, v_7\\}$ propojených evolučními větvemi $E = \\{e_1, \\dots, e_6\\}$ od společného předka (LUCA)."
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 3.6b: Schéma stromu & Zlaté pravidlo
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "2. Co je to Strom v Grafu?" });
+    let y = 0.85;
 
     // Strom ASCII / Box
-    const boxW = 8.5;
-    const boxH = 1.8;
+    const boxW = 10.0;
+    const boxH = 2.4;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 0.8,
+      x: 1.666,
       y,
       w: boxW,
       h: boxH,
@@ -348,17 +380,17 @@ export function addModule3Slides(pres) {
     slide.addText(
       "             ( LUCA / v₁ )\n             /           \\\n        ( v₂ )           ( v₃ )\n        /    \\           /    \\\n     ( v₄ )  ( v₅ )   ( v₆ )  ( v₇ )   <-- Listy stromu (současné druhy)",
       {
-        x: 1.0,
-        y: y + 0.15,
+        x: 1.866,
+        y: y + 0.2,
         w: boxW - 0.4,
-        h: boxH - 0.3,
+        h: boxH - 0.4,
         fontFace: "Courier New",
-        fontSize: fs(10),
+        fontSize: fs(10.5),
         color: "047857",
-        lineSpacingMultiple: 1.15,
+        lineSpacingMultiple: 1.2,
       }
     );
-    y += boxH + 0.15;
+    y += boxH + 0.25;
 
     renderDocCallout(pres, slide, {
       type: "tip",
@@ -369,7 +401,7 @@ export function addModule3Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 3.7: 🔄 Cyklus (Uzavřený okruh)
+  // Slide 3.7a: 🔄 Cyklus (Uzavřený okruh)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -377,17 +409,25 @@ export function addModule3Slides(pres) {
 
     y = renderDocHeading(pres, slide, "🔄 Cyklus (Uzavřený okruh v grafu)", { level: 3, y, showUnderline: true });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Definice:** Uzavřená posloupnost hran, kde z libovolného uzlu vyrazíte a **vrátíte se do něj zpět** bez opakování vrcholů.",
       "**Důsledek:** Umožňuje opakování, zpětnou vazbu a oscilace. Vede k existenci více různých cest mezi uzly.",
       "**Biologický příklad:** Krebsův citrátový cyklus $V = \\{v_1, \\dots, v_5\\}$ (OAA, Citrát, αKG, Sukcinát, Malát) s orientovanými reakcemi $E = \\{(v_1, v_2), (v_2, v_3), (v_3, v_4), (v_4, v_5), (v_5, v_1)\\}$."
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 3.7b: Schéma cyklu & Shrnutí rozdílu pro AG1
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🔄 Cyklus" });
+    let y = 0.85;
 
     // Cyklus ASCII / Box
-    const boxW = 8.5;
-    const boxH = 1.8;
+    const boxW = 10.0;
+    const boxH = 2.4;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 0.8,
+      x: 1.666,
       y,
       w: boxW,
       h: boxH,
@@ -398,17 +438,17 @@ export function addModule3Slides(pres) {
     slide.addText(
       "         ( OAA / v₁ ) ────> ( Citrát / v₂ )\n              ▲                     │\n              │                     ▼\n         ( Malát / v₅ )        ( αKG / v₃ )\n              ▲                     │\n              └──── ( Sukcinát / v₄ ) ◄┘",
       {
-        x: 1.0,
-        y: y + 0.15,
+        x: 1.866,
+        y: y + 0.2,
         w: boxW - 0.4,
-        h: boxH - 0.3,
+        h: boxH - 0.4,
         fontFace: "Courier New",
-        fontSize: fs(10),
+        fontSize: fs(10.5),
         color: "BE123C",
-        lineSpacingMultiple: 1.15,
+        lineSpacingMultiple: 1.2,
       }
     );
-    y += boxH + 0.15;
+    y += boxH + 0.25;
 
     renderDocCallout(pres, slide, {
       type: "note",

@@ -155,7 +155,7 @@ export function addModule8Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.5: Příklad 4.1: Rozklad Sudého Grafu na Cykly (Zadání & Řešení)
+  // Slide 8.5a: Příklad 4.1: Rozklad Sudého Grafu na Cykly (Zadání)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -170,17 +170,51 @@ export function addModule8Slides(pres) {
       y,
     });
 
-    y = renderSolutionBanner(pres, slide, { title: "Formální Zkouškové Řešení", y });
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Strategie dekonstrukčního postupu:",
+      text: "Využijeme indukci shora dolů podle počtu hran m. Zvolíme libovolný cyklus C (který v grafu s deg(v) ≥ 2 zaručeně existuje) a odebereme jeho hrany. Důležité je ukázat, že všechny uzly podgrafu si zachovají sudý stupeň!",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 8.5b: Příklad 4.1: Báze indukce a Indukční předpoklad
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.1: Rozklad Sudého Grafu" });
+    let y = 0.85;
+
+    y = renderSolutionBanner(pres, slide, { title: "Formální Zkouškové Řešení: Báze & IP", y });
 
     y = renderDocList(slide, [
       "1. **Báze indukce (m = 3):** Nejmenší souvislý graf se sudými stupni $\\ge 2$ je trojúhelník $K_3$ ($n=3, m=3$). Graf sám tvoří 1 cyklus, tvrzení platí.",
-      "2. **Indukční předpoklad (IP):** Předpokládejme, že každý graf s $k < m$ hranami splňující podmínky sudých stupňů lze rozložit na hranově disjunktní cykly.",
-      "3. **Indukční krok (m hran):**",
-      "   • Vezměme **LIBOVOLNÝ** graf $G$ s $m$ hranami se sudými stupni. Protože $\\deg(v) \\ge 2$, $G$ obsahuje alespoň jeden jednoduchý cyklus $C$.",
-      "   • Odebereme z $G$ všechny hrany cyklu $C$ a získáme podgraf $G' = (V, E \\setminus E(C))$.",
-      "   • Odebrání cyklu $C$ snížilo stupeň každého vrcholu cyklu přesně o 2. Všechny vrcholy v $G'$ mají **stále sudý stupeň**!",
-      "   • Podgraf $G'$ má $m - |E(C)| < m$ hran. Aplikujeme **IP** na jednotlivé komponenty $G'$.",
-      "   • Přidáním cyklu $C$ zpět získáme kompletní rozklad původního grafu $G$."
+      "2. **Indukční předpoklad (IP):** Předpokládejme, že každý graf s $k < m$ hranami splňující podmínky sudých stupňů lze rozložit na hranově disjunktní cykly."
+    ], { y });
+
+    renderDocCallout(pres, slide, {
+      type: "note",
+      title: "Příprava na indukční krok:",
+      text: "V indukčním kroku musíme postupovat striktně shora dolů (dekonstrukce): začneme z libovolného grafu G o m hranách a odebráním cyklu vytvoříme podgraf s menším počtem hran pro aplikaci IP.",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 8.5c: Příklad 4.1: Indukční krok (Dekonstrukce shora dolů)
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.1: Rozklad Sudého Grafu" });
+    let y = 0.85;
+
+    y = renderSolutionBanner(pres, slide, { title: "Indukční Krok (Dekonstrukce shora dolů)", y });
+
+    renderDocList(slide, [
+      "Vezměme **LIBOVOLNÝ** graf $G$ s $m$ hranami se sudými stupni. Protože $\\deg(v) \\ge 2$, $G$ obsahuje alespoň jeden jednoduchý cyklus $C$.",
+      "Odebereme z $G$ všechny hrany cyklu $C$ a získáme podgraf $G' = (V, E \\setminus E(C))$.",
+      "Odebrání cyklu $C$ snížilo stupeň každého vrcholu cyklu přesně o 2. Všechny vrcholy v $G'$ mají **stále sudý stupeň**!",
+      "Podgraf $G'$ má $m - |E(C)| < m$ hran. Aplikujeme **IP** na jednotlivé komponenty $G'$.",
+      "Přidáním cyklu $C$ zpět získáme kompletní rozklad původního grafu $G$. Q.E.D."
     ], { y });
   }
 
@@ -213,7 +247,7 @@ export function addModule8Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.7: Příklad 4.2: Extremální Princip & Nejdelší Cesta
+  // Slide 8.7a: Příklad 4.2: Extremální Princip & Nejdelší Cesta (Zadání)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -228,9 +262,24 @@ export function addModule8Slides(pres) {
       y,
     });
 
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Strategie extremálního principu:",
+      text: "Zvolíme v grafu nejdelší jednoduchou cestu P délky k. Klíčovým krokem je dokázat sporem, že koncový vrchol této cesty nemůže mít žádného souseda ležícího mimo ni (jinak bychom cestu okamžitě prodloužili).",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 8.7b: Příklad 4.2: Formální Zkouškové Řešení
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.2: Extremální Princip" });
+    let y = 0.85;
+
     y = renderSolutionBanner(pres, slide, { title: "Formální Zkouškové Řešení", y });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. **Konstrukce extremálního objektu:** Zvolme v grafu $G$ **nejdelší jednoduchou cestu** $P = (v_0, v_1, v_2, \\dots, v_k)$ délky $k$ (počet hran je $k$).",
       "2. **Analýza koncového vrcholu vk:** Uvažujme sousedy koncového vrcholu $v_k$:",
       "   • Nemůže mít žádného souseda $w \\notin P$ mimo cestu $P$ (jinak bychom prodloužili cestu o $w$ na délku $k+1$, což je spor s maximalitou $P$).",
@@ -240,15 +289,15 @@ export function addModule8Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.8: Příklad 4.2: Rozbor Hodnocení a Rubrika
+  // Slide 8.8a: Příklad 4.2: Rozbor Hodnocení a Rubrika
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.2" });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "📊 Rozbor Hodnocení a Rubrika: Příklad 4.2", { level: 3, y });
+    y = renderDocHeading(pres, slide, "📊 Rozbor Hodnocení a Rubrika: Příklad 4.2", { level: 2, y, showUnderline: true });
 
-    y = renderDocTable(slide, {
+    renderDocTable(slide, {
       headers: ["Bodové hodnocení", "Kritéria vyučujících na FIT ČVUT", "Doporučení"],
       rows: [
         ["100 % bodů", "Výběr nejdelší jednoduché cesty P, odvození, že všichni sousedé koncového vrcholu vk leží na P (důkaz sporem), algebraické srovnání s δ(G).", "Plný počet bodů."],
@@ -258,17 +307,34 @@ export function addModule8Slides(pres) {
       colWidths: [2.8, 5.8, 3.133],
       y,
     });
+  }
 
-    renderDocCallout(pres, slide, {
+  // --------------------------------------------------------------------------
+  // Slide 8.8b: Příklad 4.2: Klíčový trik extremálního principu
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.2: Rozbor Hodnocení" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Klíčový Trik Extremálního Důkazu", { level: 2, y, showUnderline: true });
+
+    y = renderDocCallout(pres, slide, {
       type: "tip",
       title: "Klíčový trik extremálního principu:",
       text: "Krajní vrchol nejdelší cesty už nemá kam pokračovat! Všichni jeho sousedé jsou nuceni ležet na trase. Kolik má sousedů, tolik minimálně musí mít cesta vrcholů.",
       y,
     });
+
+    renderDocCallout(pres, slide, {
+      type: "note",
+      title: "Pozor na časté chyby v písemce:",
+      text: "Výběr náhodné cesty místo nejdelší extremální cesty znehodnotí celý důkaz sporem (0 bodů). Vždy explicitně definujte P jako nejdelší cestu a uveďte spor s její maximalitou!",
+      y,
+    });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.9: Příklad 4.3: Unikátnost Minimální Kostry (Cut Property)
+  // Slide 8.9a: Příklad 4.3: Unikátnost Minimální Kostry (Zadání)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -283,9 +349,24 @@ export function addModule8Slides(pres) {
       y,
     });
 
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Strategie důkazu sporem:",
+      text: "Předpokládáme dvě různé minimální kostry T₁ ≠ T₂. Zvolíme nejlehčí hranu symetrické diference e ∈ T₁ △ T₂. Její vložením do druhé kostry vytvoříme cyklus a záměnou hran odvodíme ostrou nerovnost odporující minimalitě!",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 8.9b: Příklad 4.3: Formální Zkouškové Řešení
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.3: Unikátnost Minimální Kostry" });
+    let y = 0.85;
+
     y = renderSolutionBanner(pres, slide, { title: "Formální Zkouškové Řešení", y });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. **Předpoklad pro spor:** Předpokládejme, že existují dvě různé minimální kostry $T_1 \\neq T_2$ se stejnou minimální vahou $w(T_1) = w(T_2)$.",
       "2. **Krok 1 (Nejlehčí rozdílná hrana):** Zvolme nejlehčí hranu $e = \\{u, v\\} \\in E(T_1) \\triangle E(T_2)$. Bez újmy na obecnosti nechť $e \\in T_1$ a $e \\notin T_2$.",
       "3. **Krok 2 (Přidání e do T₂):** Vložením $e$ do $T_2$ vznikne cyklus $C$. V cyklu $C$ musí ležet jiná hrana $e' \\notin T_1$. Z volby $e$ jako nejlehčí rozdílné hrany plyne: $w(e) < w(e')$.",
@@ -316,7 +397,7 @@ export function addModule8Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.11: Příklad 4.4: Počet Hran v Lese se c Komponentami
+  // Slide 8.11a: Příklad 4.4: Počet Hran v Lese se c Komponentami (Zadání)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -331,9 +412,24 @@ export function addModule8Slides(pres) {
       y,
     });
 
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Strategie dekonstrukce hran lesa:",
+      text: "Odebereme libovolnou hranu e. Protože les neobsahuje cykly, odebraná hrana byla jediným spojením mezi svými vrcholy. Komponenta se tím rozpadne na dvě, což zvýší celkový počet komponent o 1: c' = c + 1.",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 8.11b: Příklad 4.4: Formální Zkouškové Řešení
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.4: Počet Hran v Lese" });
+    let y = 0.85;
+
     y = renderSolutionBanner(pres, slide, { title: "Formální Zkouškové Řešení", y });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. **Báze indukce (m = 0):** Graf bez hran má $n$ izolovaných vrcholů, tedy $c = n$ komponent. Platí $m = 0 = n - n = n - c$. Báze platí ✅.",
       "2. **Indukční předpoklad (IP):** Předpokládejme, že pro každý les s $k < m$ hranami platí vzorec $k = n - c_k$.",
       "3. **Indukční krok (m hran):**",
@@ -367,7 +463,7 @@ export function addModule8Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.13: Příklad 4.5: Bipartitnost a Liché Cykly (Důkaz Sporem)
+  // Slide 8.13a: Příklad 4.5: Bipartitnost a Liché Cykly (Zadání)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -382,9 +478,24 @@ export function addModule8Slides(pres) {
       y,
     });
 
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Strategie 2-obarvení:",
+      text: "Předpokládáme pro spor, že graf je bipartitní (lze jej rozložit do dvou nezávislých množin V₁ a V₂). Projdeme lichý cyklus vrchol po vrcholu a ukážeme, že uzavírací hrana musí mít oba konce ve stejné partitě.",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 8.13b: Příklad 4.5: Formální Zkouškové Řešení & Rubrika
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.5: Bipartitnost a Liché Cykly" });
+    let y = 0.85;
+
     y = renderSolutionBanner(pres, slide, { title: "Formální Zkouškové Řešení & Rubrika", y });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. **Předpoklad pro spor:** Předpokládejme, že graf $G$ obsahuje lichý cyklus $C = (v_1, v_2, \\dots, v_k, v_1)$ a ZÁROVEŇ **je bipartitní** s rozkladem $V = V_1 \\cup V_2$.",
       "2. **Alternace množin:** Zařaďme $v_1 \\in V_1$. Protože $\\{v_1, v_2\\} \\in E$, musí $v_2 \\in V_2$. Obecně: $v_i \\in V_1 \\iff i$ je liché, a $v_i \\in V_2 \\iff i$ je sudé.",
       "3. **Poslední vrchol:** Jelikož $k$ je liché číslo ($k = 2r+1$), platí $v_k \\in V_1$.",
@@ -394,7 +505,7 @@ export function addModule8Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.14: Příklad 4.6: Správnost BFS Pomocí Invariantu Cyklu
+  // Slide 8.14a: Příklad 4.6: Správnost BFS Pomocí Invariantu Cyklu (Zadání)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -409,9 +520,24 @@ export function addModule8Slides(pres) {
       y,
     });
 
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Strategie 3-fázového důkazu invariantu:",
+      text: "Důkaz postupuje podle šablony invariantu cyklu: 1. Inicializace (dokázat pro počáteční frontu s jedním prvkem s), 2. Udržování (rozebrat operace pop z čela a push sousedů na konec), 3. Ukončení.",
+      y,
+    });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 8.14b: Příklad 4.6: Formální Zkouškové Řešení & Rubrika
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Příklad 4.6: Správnost BFS" });
+    let y = 0.85;
+
     y = renderSolutionBanner(pres, slide, { title: "Formální Zkouškové Řešení & Rubrika", y });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. **Definice Invariantu:** V každé iteraci cyklu platí ve frontě $Q$: $d[v_r] \\le d[v_1] + 1$ a $d[v_1] \\le d[v_2] \\le \\dots \\le d[v_r]$.",
       "2. **Inicializace:** Na začátku $Q = \\langle s \\rangle$. $d[s] = 0 \\le 0 + 1$. Invariant platí ✅.",
       "3. **Udržování:** Předpokládejme, že invariant platí před vyjmutím $u = v_1$ (`pop`). Vyjmutím $u$ zůstane seřazená fronta. Procházíme sousedy $v$ vrcholu $u$ a vkládáme je s $d[v] = d[u] + 1$ na konec fronty (`push`). Jelikož na čele bylo $d[u]$ nebo $d[u]+1$, nově vkládané prvky s hodnotou $d[u]+1$ zachovají maximální rozdíl 1 od nového čela. Invariant drží ✅.",

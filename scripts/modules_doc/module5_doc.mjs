@@ -17,7 +17,7 @@ export function addModule5Slides(pres) {
   const breadcrumb = "MODUL 5 · 🎯 INDUKCE NA GRAFECH & REDUKČNÍ PAST";
 
   // --------------------------------------------------------------------------
-  // Slide 5.1: Titul & Dominová analogie
+  // Slide 5.1a: Titul & Cíl kapitoly
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -25,12 +25,20 @@ export function addModule5Slides(pres) {
 
     y = renderDocHeading(pres, slide, "Indukce na Grafech & Redukční Past", { level: 1, y });
 
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "note",
       title: "Cíl kapitoly:",
       text: "Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky z AG1.",
-      y,
+      y: y + 0.1,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 5.1b: 🎯 Dominová analogie
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Úvod" });
+    let y = 0.85;
 
     y = renderDocHeading(pres, slide, "🎯 Dominová analogie (vážně, takhle to funguje)", { level: 2, y, showUnderline: true });
 
@@ -49,12 +57,12 @@ export function addModule5Slides(pres) {
       type: "tip",
       title: "Intuice pro grafy:",
       text: "Na grafech to funguje stejně — jen místo „kostky č. k“ říkáme „graf s k vrcholy“. A klíčový trik je, že nestavíme grafy od nuly nahoru, ale ROZEBÍRÁME JE OD VĚTŠÍCH K MENŠÍM (dekonstrukce)!",
-      y,
+      y: y + 0.05,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.2: Příklad s mincemi 3 Kč a 5 Kč (Slabá Indukce)
+  // Slide 5.2a: Příklad: Platba mincemi (3 Kč a 5 Kč) — Báze a Krok
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -67,11 +75,25 @@ export function addModule5Slides(pres) {
       { y }
     );
 
-    y = renderDocHeading(pres, slide, "Metoda 1: Důkaz Slabou Indukcí (Pravidla výměny mincí)", { level: 3, y });
+    y = renderDocHeading(pres, slide, "Metoda 1: Důkaz Slabou Indukcí", { level: 3, y });
+
+    renderDocList(slide, [
+      "**Báze indukce (n = 8):** $8 = 3 + 5$ Kč. Tvrzení platí ✅.",
+      "**Indukční předpoklad (IP):** Předpokládejme, že částku $n$ Kč již máme vyplacenu v mincích 3 a 5 Kč.",
+      "**Indukční krok (n ➔ n + 1):** Sestrojíme výplatu pro částku $n + 1$ Kč výměnou mincí v peněžence (rozborem 3 situací)."
+    ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 5.2b: Slabá Indukce: Rozbor výměny mincí
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "☕ Příklad: Platba mincemi" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Rozbor 3 situací výměny mincí:", { level: 3, y });
 
     y = renderDocList(slide, [
-      "**Báze indukce (n = 8):** $8 = 3 + 5$ Kč. Tvrzení platí ✅.",
-      "**Indukční krok (n ➔ n + 1):** Předpokládejme, že částku $n$ Kč již máme vyplacenu v mincích 3 a 5 Kč (IP). Podle obsahu peněženky rozlišíme 3 situace:",
       "• **Případ A (V peněžence je 5 Kč):** Jednu 5 Kč odebereme a nahradíme dvěma 3 Kč ($5 \\to 3 + 3$). Čistá změna: $-5 + 6 = +1$ Kč.",
       "• **Případ B (Máme 5 Kč i 3 Kč):** Pětikorunu vyměníme za dvě tříkoruny ($5 \\to 3+3$), získáme trojici $3+3+3$. Čistá změna: $+1$ Kč.",
       "• **Případ C (Máme jen 3 Kč mince):** Protože $n \\ge 8$, musíme mít alespoň tři 3 Kč ($3 \\times 3 = 9$). Nahradíme je dvěma pětikorunami ($3+3+3 \\to 5+5$). Čistá změna: $-9 + 10 = +1$ Kč!"
@@ -81,29 +103,40 @@ export function addModule5Slides(pres) {
       type: "tip",
       title: "Závěr slabé indukce:",
       text: "Ve všech případech jsme z libovolné výplaty n Kč sestrojili výplatu n + 1 Kč. Tvrzení platí pro všechna n ≥ 8.",
-      y,
+      y: y + 0.1,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.3: Metoda 2: Důkaz Silnou Indukcí (Krok o 3 Kč zpět)
+  // Slide 5.3a: Metoda 2: Důkaz Silnou Indukcí (Báze)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "Metoda 2: Důkaz Silnou Indukcí (Krok o 3 Kč zpět: n+1 z n-2)", { level: 3, y });
+    y = renderDocHeading(pres, slide, "Metoda 2: Důkaz Silnou Indukcí (Krok o 3 Kč zpět)", { level: 3, y });
 
     y = renderDocParagraph(slide,
       "Zde si vystačíme bez jakékoliv výměny mincí v peněžence — stačí nám **3 základní bázové případy** a v indukčním kroku se vždy odvoláme na stav o **3 Kč menší**:",
       { y }
     );
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Báze indukce (3 po sobě jdoucí částky):**",
       "• Pro $n = 8$: $8 = 3 + 5$ Kč ✅.",
       "• Pro $n = 9$: $9 = 3 + 3 + 3$ Kč ✅.",
-      "• Pro $n = 10$: $10 = 5 + 5$ Kč ✅.",
+      "• Pro $n = 10$: $10 = 5 + 5$ Kč ✅."
+    ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 5.3b: Silná Indukce: Indukční krok & Výhoda
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Metoda 2: Silná Indukce" });
+    let y = 0.85;
+
+    y = renderDocList(slide, [
       "**Indukční krok (od n + 1 ≥ 11):**",
       "• Předpokládejme, že **všechny částky** od 8 do $n$ Kč již umíme vyplatit (Silný IP).",
       "• Chceme vyplatit částku $n + 1$ Kč (kde $n + 1 \\ge 11$).",
@@ -115,12 +148,12 @@ export function addModule5Slides(pres) {
       type: "note",
       title: "Proč je Silná indukce elegantnější?",
       text: "Nevyžaduje žádná složitá pravidla výměny mincí. Pravidlo báze: o kolik kroků zpět dekonstruujeme (krok o 3), tolik bází musíme ověřit ručně (3 báze: 8, 9, 10).",
-      y,
+      y: y + 0.1,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.4: 1. Peano Axiomy a Princip Indukce na Grafech
+  // Slide 5.4a: 1. Peano Axiomy a Princip Indukce na Grafech
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -138,18 +171,26 @@ export function addModule5Slides(pres) {
       "**Počet hran m = |E|:** Počet chemických vazeb, metabolických reakcí, síťových spojení."
     ], { y });
 
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "note",
       title: "Formální zápis silné indukce (neučte se nazpaměť!):",
       text: "(P(n₀) ∧ ∀k ≥ n₀ : (⋀ᵢ=n₀ᵏ P(i) ⇒ P(k+1))) ⇒ ∀n ≥ n₀ : P(n). Velký symbol ⋀ je jen konjunkce AND pro všechny mezistavy od n₀ do k (stejně jako ∑ je velký součet).",
-      y,
+      y: y + 0.05,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 5.4b: Klíčový rozdíl indukce na grafech
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "1. Princip Indukce na Grafech" });
+    let y = 0.85;
 
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "Klíčový rozdíl při aplikaci na grafy:",
       text: "Číslo n+1 vznikne prostým přičtením jedničky (n + 1). Ale graf o n+1 vrcholech má obrovské množství různých topologií! Proto u grafů musíme postupovat dekonstrukcí shora!",
-      y,
+      y: y + 0.2,
     });
   }
 
@@ -178,14 +219,14 @@ export function addModule5Slides(pres) {
 
     y = renderDocHeading(pres, slide, "💥 Proč vyučující udělují okamžitých 0 bodů?", { level: 4, y, showUnderline: false });
 
-    y = renderDocParagraph(slide,
+    renderDocParagraph(slide,
       "Pokud začnete od grafu $G_n$ a **přidáte** nový prvek, dokázali jste tvrzení **POUZE pro ty grafy o n+1 vrcholech, které lze vytvořit tímto konkrétním přidáním**! Neověřili jste, zda každý obecný graf s n+1 vrcholy lze takto vybudovat. Opomněli jste celou třídu grafů! Váš důkaz neplatí pro všechny platné grafy.",
       { y }
     );
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.6: ✅ Správný postup: Dekonstrukční Indukce z Podgrafů
+  // Slide 5.6a: ✅ Správný postup: Dekonstrukční Indukce z Podgrafů
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -193,16 +234,24 @@ export function addModule5Slides(pres) {
 
     y = renderDocHeading(pres, slide, "✅ Správný postup: Dekonstrukční Indukce z Podgrafů", { level: 3, y });
 
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "tip",
       title: "Zlatá formulace pro zkoušku z AG1:",
       text: "„Vezměme LIBOVOLNÝ ZADANÝ graf G = (V, E) o n+1 vrcholech splňující předpoklady. Najdeme v něm vhodný prvek (list či uzel min stupně), odebereme ho a získáme podgraf G' o n vrcholech. Ověříme, že G' stále splňuje předpoklady. Použijeme Indukční předpoklad (IP) na G'. Nakonec prvek vrátíme a dokážeme platnost pro původní G.“",
-      y,
+      y: y + 0.1,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 5.6b: Schéma Dekonstrukce shora
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "✅ Dekonstrukční Indukce" });
+    let y = 0.85;
 
     // ASCII myšlenkový tok
     const boxW = 11.0;
-    const boxH = 2.2;
+    const boxH = 3.2;
     slide.addShape(pres.ShapeType.roundRect, {
       x: 1.166,
       y,
@@ -216,16 +265,16 @@ export function addModule5Slides(pres) {
       "┌──────────────────────────────────────────────────────────┐\n│ LIBOVOLNÝ Graf G o velikosti (n+1)                       │ ◄─── ZAČÍNÁME ZDE! (Libovolný objekt)\n└────────────────────────────┬─────────────────────────────┘\n                             │ 1. Odebereme prvek / list / hranu\n                             ▼\n┌──────────────────────────────────────────────────────────┐\n│ Podgraf G' o velikosti (n)                               │ ◄─── APLIKUJEME INDUKČNÍ PŘEDPOKLAD!\n└────────────────────────────┬─────────────────────────────┘\n                             │ 2. Dle IP tvrzení na G' platí\n                             ▼\n┌──────────────────────────────────────────────────────────┐\n│ Vrátíme odebraný prvek a dokážeme platnost pro původní G │ ◄─── ZÁVĚR pro G(n+1)\n└──────────────────────────────────────────────────────────┘",
       {
         x: 1.366,
-        y: y + 0.15,
+        y: y + 0.25,
         w: boxW - 0.4,
-        h: boxH - 0.3,
+        h: boxH - 0.5,
         fontFace: "Courier New",
-        fontSize: fs(9),
+        fontSize: fs(10),
         color: "047857",
-        lineSpacingMultiple: 1.15,
+        lineSpacingMultiple: 1.2,
       }
     );
-    y += boxH + 0.15;
+    y += boxH + 0.25;
 
     renderDocCallout(pres, slide, {
       type: "note",
@@ -284,7 +333,7 @@ export function addModule5Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.8: Zlaté pravidlo teorie grafů: E(n) = E(n-1) + deg(v)
+  // Slide 5.8a: Zlaté pravidlo teorie grafů: E(n) = E(n-1) + deg(v)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -297,7 +346,7 @@ export function addModule5Slides(pres) {
       { y }
     );
 
-    y = renderDocTable(slide, {
+    renderDocTable(slide, {
       headers: ["Typ grafu / uzlu", "Co odebíráme při dekonstrukci", "Rekurence pro počet hran", "Výsledný vzorec"],
       rows: [
         ["Strom", "List (stupeň deg(v) = 1)", "E(n) = E(n-1) + 1", "m = n - 1"],
@@ -307,17 +356,34 @@ export function addModule5Slides(pres) {
       colWidths: [3.0, 3.4, 3.2, 2.133],
       y,
     });
+  }
 
-    renderDocCallout(pres, slide, {
+  // --------------------------------------------------------------------------
+  // Slide 5.8b: Univerzální princip dekonstrukce
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Zlaté Pravidlo Teorie Grafů" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Univerzální Princip Dekonstrukce v AG1", { level: 2, y, showUnderline: true });
+
+    y = renderDocCallout(pres, slide, {
       type: "tip",
       title: "Univerzální princip dekonstrukce:",
       text: "Kolik hran má odebíraný vrchol deg(v), o tolik se liší počet hran mezi grafem o n vrcholech a jeho podgrafem o n - 1 vrcholech. U stromu je to +1, u cyklu +2, u trojvazné sítě +3. Všechny tyto důkazy mají identickou strukturu!",
       y,
     });
+
+    renderDocCallout(pres, slide, {
+      type: "note",
+      title: "Strategie pro zkouškové úlohy:",
+      text: "Kdykoliv v zadání zkouškového příkladu vidíte novou síť či graf, hledejte uzel s pevným nebo minimálním stupněm. Jeho odebráním snadno stanovíte vztah mezi E(n) a E(n-1) pro indukční krok.",
+      y,
+    });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.9: 4. Stromy v Letní Přípravě: Proč má strom m = n - 1 hran
+  // Slide 5.9a: 4. Stromy v Letní Přípravě: Proč má strom m = n - 1 hran
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -325,16 +391,29 @@ export function addModule5Slides(pres) {
 
     y = renderDocHeading(pres, slide, "4. Stromy v Letní Přípravě: Proč má strom m = n - 1 hran", { level: 2, y, showUnderline: true });
 
-    y = renderDocCallout(pres, slide, {
+    y = renderDocParagraph(slide,
+      "V AG1 se stromy definují jako souvislé acyklické grafy a věta o počtu hran $m = n - 1$ je jedním z nejčastějších důkazů v testech. Správný postup využívá právě **indukci shora dolů**:",
+      { y }
+    );
+
+    renderDocCallout(pres, slide, {
       type: "note",
       title: "Základní intuitivní definice:",
       text: "Strom je souvislý graf, který neobsahuje žádné cykly. Koncovým vrcholům se stupněm deg(v) = 1 říkáme listy. Každý strom s alespoň 2 vrcholy má minimálně dva listy.",
       y,
     });
+  }
 
-    y = renderDocHeading(pres, slide, "✍️ Důkaz dekonstrukcí shora:", { level: 3, y });
+  // --------------------------------------------------------------------------
+  // Slide 5.9b: 4. Stromy v Letní Přípravě: Důkaz dekonstrukcí shora
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "4. Stromy v Letní Přípravě: Proč má strom m = n - 1 hran" });
+    let y = 0.85;
 
-    y = renderDocList(slide, [
+    y = renderDocHeading(pres, slide, "✍️ Důkaz dekonstrukcí shora:", { level: 2, y, showUnderline: true });
+
+    renderDocList(slide, [
       "1. **Začátek (Dekonstrukce shora):** Vezměme libovolný strom $T$ s $n$ vrcholy ($n \\ge 2$).",
       "2. **Odebrání listu:** Najdeme koncový list $v$ (který má $\\deg(v) = 1$) a odebereme ho i s jeho jedinou hranou.",
       "3. **Co se stane s grafem:**",
@@ -346,7 +425,7 @@ export function addModule5Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.10: 5 Ekvivalentních definic stromu & Tree Leaf Lemma
+  // Slide 5.10a: 5 Ekvivalentních definic stromu
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -359,18 +438,33 @@ export function addModule5Slides(pres) {
       { y }
     );
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. G je **strom** (je souvislý a nemá cykly).",
       "2. G je **acyklický** a má přesně **m = n - 1** hran.",
       "3. G je **souvislý** a má přesně **m = n - 1** hran.",
       "4. Mezi každou dvojicí různých vrcholů existuje **právě jedna jednoduchá cesta**.",
       "5. G je **minimální souvislý graf** (odebráním libovolné hrany se graf rozpadne na dvě komponenty)."
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 5.10b: Tree Leaf Lemma
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🎓 Pro zájemce do AG1: 5 Ekvivalentních Definic Stromu" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "🍃 Důkaz existence listu (Tree Leaf Lemma)", { level: 2, y, showUnderline: true });
+
+    y = renderDocParagraph(slide,
+      "Každý netriviální strom obsahuje alespoň dva vrcholy stupně 1 (listy). Tento klíčový fakt se dokazuje extremálním principem:",
+      { y }
+    );
 
     renderDocCallout(pres, slide, {
       type: "tip",
-      title: "🍃 Důkaz existence listu (Tree Leaf Lemma):",
-      text: "Zvolme ve stromu nejdelší cestu P = (v₀, v₁, …, vₖ). Koncový vrchol vₖ nemůže mít souseda mimo cestu (spor s maximalitou P) ani jiného souseda na cestě (jinak cyklus!). Jediným sousedem vₖ je tedy vₖ₋₁, což znamená deg(vₖ) = 1 — uzel vₖ je list! Strom má alespoň 2 listy (v₀ a vₖ).",
+      title: "Formální znění a důkaz:",
+      text: "Zvolme ve stromu nejdelší jednoduchou cestu P = (v₀, v₁, …, vₖ). Koncový vrchol vₖ nemůže mít souseda mimo cestu (spor s maximalitou P) ani jiného souseda na cestě než vₖ₋₁ (jinak by vznikl cyklus!). Jediným sousedem vₖ je tedy vₖ₋₁, což znamená deg(vₖ) = 1 — uzel vₖ je list! Strom má alespoň 2 listy (v₀ a vₖ).",
       y,
     });
   }
@@ -404,7 +498,7 @@ export function addModule5Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.12: Bonusové úlohy & Shrnutí modulu
+  // Slide 5.12a: 6. Přehled: Co je Základ Letní Přípravy pro AG1
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -412,7 +506,7 @@ export function addModule5Slides(pres) {
 
     y = renderDocHeading(pres, slide, "6. Přehled: Co je Základ Letní Přípravy pro AG1", { level: 2, y, showUnderline: true });
 
-    y = renderDocTable(slide, {
+    renderDocTable(slide, {
       headers: ["Dovednost pro letní přípravu", "Status"],
       rows: [
         ["Rozdíl mezi dekonstrukcí (shora dolů) a konstrukcí (zdola nahoru)", "✅ Zvládáte (vyhnete se 0 bodům)"],
@@ -423,6 +517,16 @@ export function addModule5Slides(pres) {
       colWidths: [8.5, 3.233],
       y,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 5.12b: Bonusové procvičovací úlohy
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "6. Přehled: Co je Základ Letní Přípravy pro AG1" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Bonusové Procvičovací Úlohy pro AG1", { level: 2, y, showUnderline: true });
 
     renderDocCallout(pres, slide, {
       type: "tip",

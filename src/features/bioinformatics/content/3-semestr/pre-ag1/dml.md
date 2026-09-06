@@ -1,8 +1,7 @@
 # ☀️ Letní průvodce grafovou matematikou pro bioinformatiky
 
-> **Pro koho?** Studenti Bioinformatiky na VŠCHT, kteří v září nastupují do 3. semestru a čeká je AG1 na FIT ČVUT.
-> **Vibe?** Žádné tlusté skripta, žádný stres. Letní četba u kafe — jako kdyby ti to starší spolužák vysvětloval u oběda.
-
+> Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce.  
+> Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.
 ---
 
 ### 📺 Úvodní výukové video
@@ -10,25 +9,9 @@
 
 ---
 
-## 👋 Hele, tohle není strašidelný kurz
-
-Spousta bioinformatiků slyší „diskrétní matematika a důkazy" a dostane špatný pocit z gymplu. Nemusíš. Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce.
-
-Co konkrétně se naučíš? Jednoduše řečeno:
-- Jak číst a psát matematická tvrzení o grafech (aniž by to bylo strašidelné)
-- Jak dokázat, že algoritmus funguje správně (stačí 3 kroky, fakt)
-- Jak myslet jako matematik, když řešíš strukturální problémy — a to ti pomůže i v bioinformatice
-
-**Co tady NENÍ:** žádné integrály, žádné matice, žádná pravděpodobnost. Jen logika, grafy a pár hezkých triků na důkazy.
-
-> [!TIP]
-> Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.
-
----
-
 ## 3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek?
 
-Častý mýtus mezi studenty 1. ročníku zní: *„Matematici a teoretičtí informatici milují složité řecké značky a píší důkazy jen proto, aby potrápili studenty u zkoušky.“*
+Důkazy a dsikrétní matematika nevznikla kvůli lásce k matematickým symbolům
 
 Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi **znalostmi** a **postupem** a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AG1.
 
@@ -38,8 +21,7 @@ Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec
 
 Představte si své první cvičení z diskrétní matematiky na univerzitě. Vstoupí vyučující, beze slova vezme křídu, nakreslí na tabuli obrázek níže, otočí se do ztichlé učebny a položí zdánlivě nevinnou otázku:
 
-> **Otázka od tabule:**  
-> *„Je dán geometrický útvar v kartézské rovině (viz obrázek). Dokažte, že se jedná o kružnici!“*
+> **Otázka od tabule:** Dokažte, že se jedná o kružnici!“
 
 <div class="my-6 flex flex-col items-center justify-center p-6 bg-stone-100/70 dark:bg-[#18110c] rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm">
 <svg viewBox="0 0 340 240" class="w-80 max-w-full h-auto" xmlns="http://www.w3.org/2000/svg">

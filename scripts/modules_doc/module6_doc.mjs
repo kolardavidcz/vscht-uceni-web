@@ -17,7 +17,7 @@ export function addModule6Slides(pres) {
   const breadcrumb = "MODUL 6 · 🕵️ DŮKAZY SPOREM & EXTREMÁLNÍ PRINCIP";
 
   // --------------------------------------------------------------------------
-  // Slide 6.1: Titul & Detektivní přístup
+  // Slide 6.1a: Titul & Detektivní přístup
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -35,16 +35,9 @@ export function addModule6Slides(pres) {
     y = renderDocHeading(pres, slide, "🕵️ Detektivní přístup k matematice", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "Sherlock Holmes říká: *„Když vyloučíš vše nemožné, co zbude — i kdyby to bylo sebenepravděpodobnější — musí to být pravda.“*\nDůkaz sporem funguje přesně takhle:",
+      "Sherlock Holmes říká: *„Když vyloučíš vše nemožné, co zbude — i kdyby to bylo sebenepravděpodobnější — musí to být pravda.“*",
       { y }
     );
-
-    y = renderDocList(slide, [
-      "1. Chceš dokázat, že tvrzení **B** platí.",
-      "2. Předpokládej, že **B neplatí** (tedy předpokládej opak).",
-      "3. Z tohoto předpokladu logicky odvoď **nesmysl** — něco, co je zjevně nepravdivé (spor s tím, co víš).",
-      "4. Protože opak B vedl k nesmyslu, **B musí platit**."
-    ], { y });
 
     renderDocCallout(pres, slide, {
       type: "tip",
@@ -52,6 +45,28 @@ export function addModule6Slides(pres) {
       text: "Chceš dokázat, že v místnosti s 13 lidmi musí aspoň dva sdílet narozeninový měsíc. Předpokládej opak — každý má jiný měsíc. Ale měsíců je jen 12. To je spor — 13 lidí se do 12 měsíců nevejde po jednom. Opak neplatí, takže dva lidé sdílí měsíc!",
       y,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 6.1b: Jak funguje důkaz sporem ve 4 krocích
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Důkazy Sporem & Extremální Princip" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Jak Funguje Důkaz Sporem", { level: 2, y, showUnderline: true });
+
+    y = renderDocParagraph(slide,
+      "Logický algoritmus důkazu sporem postupuje ve 4 krocích:",
+      { y }
+    );
+
+    renderDocList(slide, [
+      "1. Chceš dokázat, že tvrzení **B** platí.",
+      "2. Předpokládej, že **B neplatí** (tedy předpokládej opak).",
+      "3. Z tohoto předpokladu logicky odvoď **nesmysl** — něco, co je zjevně nepravdivé (spor s tím, co víš).",
+      "4. Protože opak B vedl k nesmyslu, **B musí platit**."
+    ], { y });
   }
 
   // --------------------------------------------------------------------------
@@ -76,10 +91,10 @@ export function addModule6Slides(pres) {
     });
 
     // ASCII myšlenkový tok sporu
-    const boxW = 8.5;
-    const boxH = 2.4;
+    const boxW = 9.2;
+    const boxH = 2.6;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 2.416,
+      x: 2.066,
       y,
       w: boxW,
       h: boxH,
@@ -90,12 +105,12 @@ export function addModule6Slides(pres) {
     slide.addText(
       "        Předpoklad A  ∧  Negovaný závěr ¬B\n                         │\n                         ▼ (Logické odvozování krok za krokem)\n                         │\n                         ▼\n        💥 SPOR (Rozpor s faktem, definicí nebo A = 1)\n                         │\n                         ▼\n    ZÁVĚR: Náš předpoklad ¬B byl chybný, tedy platí B! Q.E.D.",
       {
-        x: 2.616,
+        x: 2.266,
         y: y + 0.15,
         w: boxW - 0.4,
         h: boxH - 0.3,
         fontFace: "Courier New",
-        fontSize: fs(9.5),
+        fontSize: fs(8),
         color: colors.textPrimary,
         align: "center",
         lineSpacingMultiple: 1.15,
@@ -196,13 +211,13 @@ export function addModule6Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 6.5: Příklad 1: Dva vrcholy se stejným stupněm v každém grafu
+  // Slide 6.5a: Příklad 1: Dva vrcholy se stejným stupněm v každém grafu
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "🔬 Příklad 1: Dva vrcholy se stejným stupněm v každém grafu", { level: 3, y });
+    y = renderDocHeading(pres, slide, "🔬 Příklad 1: Dva vrcholy se stejným stupněm v každém grafu", { level: 2, y, showUnderline: true });
 
     y = renderDocCallout(pres, slide, {
       type: "note",
@@ -211,18 +226,38 @@ export function addModule6Slides(pres) {
       y,
     });
 
-    y = renderDocHeading(pres, slide, "🐢 Pomalý rozbor krok za krokem:", { level: 4, y, showUnderline: false });
+    y = renderDocHeading(pres, slide, "🐢 Kdo jsou holubi a škatulky:", { level: 3, y });
+
+    renderDocList(slide, [
+      "**1. Kdo jsou holubi?** Holubi jsou **vrcholy grafu**. Máme jich celkem $n$ ($v_1, v_2, \\dots, v_n$).",
+      "**2. Co jsou škatulky?** Škatulky jsou **možné hodnoty stupňů** $\\deg(v)$. Minimální stupeň je 0 (izolovaný vrchol), maximální je $n - 1$ (spojen se všemi). Teoreticky: $\\{0, 1, 2, \\dots, n - 1\\}$, což je $n$ různých hodnot."
+    ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 6.5b: Příklad 1: Vzájemné vyloučení stupňů 0 a n - 1
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🔬 Příklad 1: Dva vrcholy se stejným stupněm" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Klíčový Grafový Trik: Vzájemné Vyloučení", { level: 2, y, showUnderline: true });
+
+    y = renderDocParagraph(slide,
+      "Může v jednom grafu existovat uzel stupně 0 a současně uzel stupně $n-1$?",
+      { y }
+    );
 
     y = renderDocList(slide, [
-      "**1. Kdo jsou holubi?** Holubi jsou **vrcholy grafu**. Máme jich celkem $n$ ($v_1, v_2, \\dots, v_n$).",
-      "**2. Co jsou škatulky?** Škatulky jsou **možné hodnoty stupňů** $\\deg(v)$. Minimální stupeň je 0 (izolovaný vrchol), maximální je $n - 1$ (spojen se všemi). Teoreticky: $\\{0, 1, 2, \\dots, n - 1\\}$, což je $n$ různých hodnot.",
-      "**3. Klíčový grafový trik (Vzájemné vyloučení):** Může v jednom grafu existovat uzel stupně 0 a současně uzel stupně $n-1$? **Předpokládejme pro spor, že ano:** Uzel $u$ stupně $n-1$ musí být spojen se všemi ostatními (i s uzlem $w$). Ale uzel $w$ má stupeň 0 (nemá žádnou hranu). Hrana $\\{u, w\\}$ existuje i neexistuje ➔ **SPOR (⚡)!**"
+      "**Předpokládejme pro spor, že ano:** Uzel $u$ stupně $n-1$ musí být spojen se všemi ostatními (i s uzlem $w$).",
+      "Ale uzel $w$ má stupeň 0 (nemá žádnou hranu do žádného vrcholu).",
+      "Hrana $\\{u, w\\}$ tedy současně existuje i neexistuje ➔ **SPOR (⚡)!**"
     ], { y });
 
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "Důsledek pro počet škatułek:",
-      text: "Hodnoty 0 a n - 1 se vzájemně vylučují! V každém grafu je tedy nanejvýš n - 1 možných hodnot stupňů. Máme n vrcholů a n - 1 škatułek!",
+      text: "Hodnoty 0 a n - 1 se vzájemně vylučují! V každém grafu je tedy nanejvýš n - 1 možných hodnot stupňů. Máme n vrcholů a pouze n - 1 škatułek ➔ alespoň dva vrcholy musí mít stejný stupeň!",
       y,
     });
   }
@@ -282,13 +317,13 @@ export function addModule6Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 6.7: Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus
+  // Slide 6.7a: Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "🧬 Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus", { level: 3, y });
+    y = renderDocHeading(pres, slide, "🧬 Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus", { level: 2, y, showUnderline: true });
 
     y = renderDocCallout(pres, slide, {
       type: "note",
@@ -297,18 +332,33 @@ export function addModule6Slides(pres) {
       y,
     });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "1. Sled délky $n$ hran navštíví celkem **n + 1 vrcholů**: $(u_0 \\xrightarrow{e_1} u_1 \\to \\dots \\xrightarrow{e_n} u_n)$.",
       "2. Naši „holubi“ jsou navštívené pozice na trase: máme jich **n + 1**.",
       "3. Naše „škatulky“ jsou skutečné existující vrcholy grafu: máme jich jen **n** ($V = \\{v_1, \\dots, v_n\\}$).",
       "4. Dle Dirichletova principu ($n+1 > n$) musel být alespoň jeden vrchol **navštíven alespoň dvakrát**: $u_i = u_j$ pro nějaké $i < j$. Úsek trasy mezi nimi tvoří uzavřený cyklus!"
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 6.7b: Schéma vzniku cyklu v orientované síti
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🧬 Příklad 2: Cesta délky n nutně tvoří cyklus" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Schéma Vzniku Cyklu na Trase Délky n", { level: 2, y, showUnderline: true });
+
+    y = renderDocParagraph(slide,
+      "Pokud trasa projde více hranami, než je počet unikátních vrcholů, nutně dojde ke kolizi a uzavření smyčky:",
+      { y }
+    );
 
     // ASCII cyklus sled
-    const boxW = 9.5;
-    const boxH = 1.3;
+    const boxW = 10.5;
+    const boxH = 1.6;
     slide.addShape(pres.ShapeType.roundRect, {
-      x: 1.916,
+      x: 1.416,
       y,
       w: boxW,
       h: boxH,
@@ -319,20 +369,28 @@ export function addModule6Slides(pres) {
     slide.addText(
       "Navštívené uzly:   u₀ ─────> u₁ ─────> u₂ ─────> u₃ ─────> u₄ (5 návštěv)\n                                       │                   ▲\n                                       │  u₂ a u₄ jsou     │\n                                       │  TÝŽ UZEL!        │\n                                       └───────────────────┘\n                                         Vzniká cyklus: u₂ ➔ u₃ ➔ u₂",
       {
-        x: 2.116,
-        y: y + 0.1,
+        x: 1.616,
+        y: y + 0.15,
         w: boxW - 0.4,
-        h: boxH - 0.2,
+        h: boxH - 0.3,
         fontFace: "Courier New",
-        fontSize: fs(9),
+        fontSize: fs(9.5),
         color: "BE123C",
         lineSpacingMultiple: 1.15,
       }
     );
+    y += boxH + 0.2;
+
+    renderDocCallout(pres, slide, {
+      type: "tip",
+      title: "Bioinformatická interpretace:",
+      text: "V metabolické dráze o n metabolitech: pokud řetězec reakcí překročí n kroků, nutně obsahuje feedback smyčku (regulační cyklus)!",
+      y,
+    });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 6.8: 4. Extremální Princip v Grafech — Krok za Krokem
+  // Slide 6.8a: 4. Extremální Princip v Grafech — Krok za Krokem
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -347,7 +405,20 @@ export function addModule6Slides(pres) {
       y,
     });
 
-    y = renderDocHeading(pres, slide, "Pracovaný příklad 1: Pokud δ(G) ≥ 2, pak G obsahuje cyklus", { level: 3, y });
+    renderDocParagraph(slide,
+      "Extremální princip je v teorii grafů a v kurzu AG1 jednou z nejefektivnějších heuristik: místo náhodného hledání zkoumáme hranice možného.",
+      { y }
+    );
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 6.8b: Pracovaný příklad 1: Pokud δ(G) ≥ 2, pak G obsahuje cyklus
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "4. 🔬 Extremální Princip v Grafech" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "Pracovaný příklad 1: Pokud δ(G) ≥ 2, pak G obsahuje cyklus", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
       "**Tvrzení:** Nechť $G = (V, E)$ je konečný neorientovaný graf s minimálním stupněm $\\delta(G) \\ge 2$. Pak $G$ obsahuje alespoň jeden cyklus.\nUvažujme konkrétní graf se stupni 2:",

@@ -63,7 +63,7 @@ export function addModule2Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 2.3: 👋 Hele, tohle není strašidelný kurz (1:1 shoda s referenčním obr. 1)
+  // Slide 2.3a: 👋 Hele, tohle není strašidelný kurz
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -78,11 +78,19 @@ export function addModule2Slides(pres) {
 
     y = renderDocParagraph(slide, "Co konkrétně se naučíš? Jednoduše řečeno:", { y });
 
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "Jak číst a psát matematická tvrzení o grafech (aniž by to bylo strašidelné)",
       "Jak dokázat, že algoritmus funguje správně (stačí 3 kroky, fakt)",
       "Jak myslet jako matematik, když řešíš strukturální problémy — a to ti pomůže i v bioinformatice"
     ], { y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 2.3b: Co tady není & Srovnání s FIT BI-DML
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "👋 Hele, tohle není strašidelný kurz" });
+    let y = 0.85;
 
     y = renderDocParagraph(slide,
       "**Co tady NENÍ:** žádné integrály, žádné matice, žádná pravděpodobnost. Jen logika, grafy a pár hezkých triků na důkazy.",
@@ -93,12 +101,12 @@ export function addModule2Slides(pres) {
       type: "tip",
       title: "",
       text: "[!TIP] Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.",
-      y: y + 0.05,
+      y: y + 0.1,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 2.4: 3. Myšlení v Důkazech & 3.1 Role Znalostí (1:1 shoda s referenčním obr. 2)
+  // Slide 2.4a: 3. Myšlení v Důkazech
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -111,20 +119,18 @@ export function addModule2Slides(pres) {
       { y }
     );
 
-    y = renderDocParagraph(slide,
+    renderDocParagraph(slide,
       "Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi **znalostmi** a **postupem** a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AG1.",
       { y }
     );
+  }
 
-    // Subtle horizontal divider between 3 and 3.1
-    slide.addShape(pres.ShapeType.line, {
-      x: 0.8,
-      y: y + 0.02,
-      w: 11.733,
-      h: 0,
-      line: { color: colors.borderSubtle, width: 0.75 },
-    });
-    y += 0.15;
+  // --------------------------------------------------------------------------
+  // Slide 2.4b: 3.1 Role Znalostí: První Setkání s Profesorem u Tabule
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "3. Myšlení v Důkazech" });
+    let y = 0.85;
 
     y = renderDocHeading(pres, slide, "3.1 Role Znalostí: První Setkání s Profesorem u Tabule", { level: 3, y });
 
@@ -137,7 +143,7 @@ export function addModule2Slides(pres) {
       type: "note",
       title: "Otázka od tabule:",
       text: "„Je dán geometrický útvar v kartézské rovině (viz následující snímek). Dokažte, že se jedná o kružnici!“",
-      y: y + 0.05,
+      y: y + 0.1,
     });
   }
 
@@ -311,10 +317,10 @@ export function addModule2Slides(pres) {
 
     const imgPath = path.join(rootDir, "public", "images", "kruznice-mff.png");
     y = renderDocImage(slide, imgPath, {
-      x: 1.8,
+      x: 2.916,
       y,
-      w: 9.733,
-      h: 3.5,
+      w: 7.5,
+      h: 2.3,
       caption: "Zdroj: MFF UK – Analytická geometrie kuželoseček: Kružnice",
     });
 
@@ -322,12 +328,12 @@ export function addModule2Slides(pres) {
       type: "note",
       title: "Závěr pro studenta bioinformatiky:",
       text: "Důkaz kružnice nespočívá v kreslení, ale v ověření rovnice (x - m)² + (y - n)² = r². V AG1 to bude navlas stejné: dokázat, že graf je strom, znamená ověřit formální definici stromu!",
-      y,
+      y: y + 0.1,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 2.8: 3.2 Role Postupu: Rychlé Umocňování (x^n) & Formální Logika
+  // Slide 2.8a: 3.2 Role Postupu: Rychlé Umocňování (x^n) & Formální Logika
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -340,12 +346,20 @@ export function addModule2Slides(pres) {
       { y }
     );
 
-    y = renderDocCallout(pres, slide, {
+    renderDocCallout(pres, slide, {
       type: "note",
       title: "Algoritmická Výzva:",
       text: "Chceme spočítat hodnotu mocniny x^n (pro libovolné přirozené číslo n ∈ ℕ) výhradně za pomoci operace násobení. Cíl: provést co nejmenší možný počet násobení.",
-      y,
+      y: y + 0.1,
     });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 2.8b: Naivní postup vs. Výzva k zamyšlení
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "3.2 Role Postupu" });
+    let y = 0.85;
 
     y = renderDocList(slide, [
       "**Naivní postup (O(n)):** Budeme postupně násobit x · x · x ... · x. To vyžaduje n - 1 násobení. Pro n = 1 000 000 (např. při šifrování RSA nebo počítání cest v rozsáhlých biologických sítích) provede procesor milion operací. V praxi zbytečně pomalé.",
@@ -356,7 +370,7 @@ export function addModule2Slides(pres) {
       type: "tip",
       title: "✍️ Místo pro návrh vašeho algoritmu a logický rozbor:",
       text: "Zamyslete se: co se stane, když je exponent sudý? Lze využít vlastnosti mocnin ze základní školy?",
-      y,
+      y: y + 0.1,
     });
   }
 
@@ -376,7 +390,7 @@ export function addModule2Slides(pres) {
     );
 
     y = renderDocHeading(pres, slide, "2. Důkaz a algoritmus rozborem případů (Divide & Conquer)", { level: 4, y, showUnderline: false });
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Případ 1: Exponent n je SUDÝ (n mod 2 = 0):** $x^n = (x^{n/2})^2 = (x^{n/2}) \\cdot (x^{n/2})$. Trik: hodnotu $y = x^{n/2}$ spočítáme rekurzivně **pouze jednou** a pak ji vynásobíme samu se sebou ($y \\cdot y$)! Ušetříme polovinu násobení v jediném kroku.",
       "**Případ 2: Exponent n je LICHÝ (n mod 2 = 1):** $x^n = x \\cdot x^{n-1}$. Exponent snížíme o 1 a hodnota $x^{n-1}$ v dalším kroku spadne do super-rychlého Případu 1 (sudé číslo).",
       "**Báze algoritmu (pro n = 0):** Neutrální prvek násobení: $x^0 = 1$."
@@ -397,20 +411,20 @@ export function addModule2Slides(pres) {
     );
 
     y = renderDocHeading(pres, slide, "🧪 Porovnání na konkrétních číslech:", { level: 4, y, showUnderline: false });
-    y = renderDocList(slide, [
+    renderDocList(slide, [
       "**Příklad A: Výpočet x¹⁶ (čistě sudá větev):** Naivně: 15 násobení. Rychle: x² = x·x (1.), x⁴ = (x²)² (2.), x⁸ = (x⁴)² (3.), x¹⁶ = (x⁸)² (4.) ➔ **Pouhá 4 násobení místo 15!** ($4 = \\log_2 16$).",
       "**Příklad B: Výpočet x¹³ (střídání větví):** 13 liché: x·x¹² (1.), 12 sudé: (x⁶)² (2.), 6 sudé: (x³)² (3.), 3 liché: x·x² (4.), 2 sudé: x·x (5.) ➔ **Pouhých 5 násobení místo 12!**"
     ], { y });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 2.11: Implementace v C++, Srovnání složitostí a Význam pro AG1
+  // Slide 2.11a: Implementace v C++
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "3.2 Role Postupu" });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "💻 Jak to vypadá v C++ a srovnání složitosti:", { level: 3, y });
+    y = renderDocHeading(pres, slide, "💻 Implementace v C++: Rychlé Umocňování", { level: 3, y });
 
     const cppCode = `// Rychlé umocňování v čase O(log n)
 long long power(long long x, unsigned int n) {
@@ -423,7 +437,17 @@ long long power(long long x, unsigned int n) {
     }
 }`;
 
-    y = renderDocCode(pres, slide, cppCode, { lang: "C++ (Divide & Conquer)", y });
+    renderDocCode(pres, slide, cppCode, { lang: "C++ (Divide & Conquer)", y });
+  }
+
+  // --------------------------------------------------------------------------
+  // Slide 2.11b: Srovnání složitostí a Význam pro AG1
+  // --------------------------------------------------------------------------
+  {
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "3.2 Role Postupu" });
+    let y = 0.85;
+
+    y = renderDocHeading(pres, slide, "📊 Srovnání Složitostí & Význam pro AG1", { level: 3, y });
 
     y = renderDocTable(slide, {
       headers: ["Exponent n", "Naivní přístup (n - 1 násobení)", "Rychlé umocňování (≈ log₂ n)", "Zrychlení v praxi"],
@@ -440,7 +464,7 @@ long long power(long long x, unsigned int n) {
       type: "tip",
       title: "Algoritmický význam pro AG1 a Bioinformatiku:",
       text: "Tento princip je základem moderní kryptografie (RSA) i rychlého umocňování matice sousedství grafu A^k v bioinformatice pro zjištění počtu cest délky k mezi biomolekulami v síti!",
-      y,
+      y: y + 0.05,
     });
   }
 }
