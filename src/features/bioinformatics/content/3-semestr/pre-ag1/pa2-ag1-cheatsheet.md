@@ -1,7 +1,34 @@
-# 💻 PA2 → AG1: Kompaktní Kódovací Tahák (Týdny 1–8)
+# 💻 PA2 → AG1: Kompaktní Kódovací Tahák (Týdny 0–8)
 
 > **Vyvážený rychlotahák zaměřený na psaní kódu** (vychází z nejrelevantnějších témat z Traineru a STL e-learningu s relevancí 60%+).
 > Každé téma obsahuje **1–2 věty principu**, klíčovou past a **pouze nezbytný minimalistický kód s důrazem na maximální čitelnost**. U kontejnerů jsou metody a diagramy umístěny vedle sebe.
+
+---
+
+## 📅 Týden 0: Rekurze (Základní šablona)
+
+### 0. Univerzální šablona rekurzivní funkce (Backtracking & Průchod)
+- **Princip**: Každý rekurzivní algoritmus (např. DFS nebo stavové prohledávání) stojí na 2 krocích:
+  1. **Kontrola konce**: Test, zda jsme nedosáhli cíle či limitu (bázový stav).
+  2. **Cyklus přes dílčí možnosti**: Procházení všech podvoleb a rekurzivní zanoření.
+- **Kód**:
+```cpp
+void backtrack(int step, State &state) {
+    // 1. Kontrola, zda nejsme na konci (bázový případ / nalezené řešení):
+    if (step == TARGET_STEP) {
+        saveSolution(state);
+        return; // Důležité: ukončit větev
+    }
+
+    // 2. Cyklus pro dílčí možnosti (větvení do podproblémů):
+    for (const auto &subOption : getSubOptions(step)) {
+        apply(subOption, state);    // Proveď volbu
+        backtrack(step + 1, state); // Rekurzivní zanoření
+        undo(subOption, state);     // Návrat stavu (backtracking)
+    }
+}
+```
+- ⚠️ **Past**: Chybějící nebo špatně otestovaná koncová podmínka způsobí nekonečné zanoření a přetečení zásobníku (*stack overflow* / segfault).
 
 ---
 
