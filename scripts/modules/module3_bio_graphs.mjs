@@ -1,11 +1,11 @@
 /**
  * Module 3: Bio-Intuice & Co je Graf
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-bio-grafy.md
+ * Exact 1:1 text fidelity with website markdown.
  */
 import {
   createLectureDividerSlide,
-  createTwoCardSlide,
-  createSingleCardSlide,
-  createThreeCardSlide
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule3Slides(pres) {
@@ -15,210 +15,156 @@ export function addModule3Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 3,
     title: "Bio-Intuice & Co je Graf",
-    goal: "Přeložit přirozenou chemickou a biologickou intuici (molekuly, metabolické kaskády, fylogenetické stromy) do formálního matematického jazyka neorientovaných grafů G = (V, E), orientovaných DAGů, stromů a cyklů.",
+    goal: "Cíl kapitoly: Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů G = (V, E), abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AG1 na FIT ČVUT.",
     topics: [
-      "Co je to vlastně graf bez vzorců (mapa metra)",
-      "Formální definice grafu G = (V, E)",
-      "Molekula glukózy jako neorientovaný graf vazeb",
-      "Kovalentní vazby, stupně vrcholů deg(v) a chemická valence",
-      "Metabolická dráha glykolýzy jako orientovaný acyklický graf (DAG)",
-      "Enzymy jako orientované hrany kaskády",
-      "Klíčový rozdíl: Strom (žádné smyčky) vs. Cyklus (zpětná vazba)",
-      "Biologické paralely: Fylogenetický strom (LUCA) vs. Krebsův cyklus"
+      "🗺️ Co je to vlastně graf? (Opravdu, bez vzorců)",
+      "Představa mapy metra: Stanice (vrcholy) a Koleje (hrany)",
+      "Grafy kolem nás: Sociální síť, metabolická dráha, internet, PPI",
+      "1. Předmluva: Proč Bioinformatik Potřebuje Teoretickou Informatiku?",
+      "🧬 Molekula Glukózy jako Neorientovaný Graf G = (V, E)",
+      "Vrcholy V (Atomy O, C₁–C₆, OH) a Hrany E (Kovalentní vazby)",
+      "⚡ Metabolická Dráha Glykolýzy jako Orientovaný Graf (DAG)",
+      "Metabolity, enzymatické reakce a jednosměrnost bez cyklů",
+      "2. Co je to Strom a co je to Cyklus v Grafu? [KLÍČOVÝ ROZDÍL]",
+      "🌲 Strom (Fylogeneze LUCA) vs. 🔄 Cyklus (Krebsův cyklus)"
     ]
   });
 
-  // 2. What is a Graph: Subway Map Intuition
+  // 2. Section: Co je to vlastně graf? (Opravdu, bez vzorců)
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Co je to Vlastně Graf? (Intuice bez Vzorců)",
+    title: "🗺️ Co je to Vlastně Graf? (Opravdu, bez Vzorců)",
     leftCard: {
-      title: "Grafy v AG1 Nejsou Funkce y = f(x)",
+      title: "Mapa Metra (Představa bez Vzorců)",
       badge: "INTUICE",
       type: "neutral",
       items: [
-        { bold: "Zapomeňte na grafy funkcí:", text: "V AG1 graf neznamená křivku paraboly y = x² ze střední školy." },
-        { bold: "Nejjednodušší představa:", text: "Mapa pražského metra (např. Muzeum – Můstek – Florenc)." },
-        { bold: "Stanice:", text: "Představují vrcholy (uzly / vertices V) grafu." },
-        { bold: "Koleje mezi stanicemi:", text: "Představují hrany (spojnice / edges E) grafu." },
-        { bold: "Základní princip:", text: "Graf = množina objektů + relace propojení mezi nimi." }
+        { bold: "Nejsou to funkce ze střední školy:", text: "Ty grafy, o kterých bude celý tento kurz, nejsou grafy funkcí ze střední školy (y = x² apod.). Jsou to úplně jiná zvířata." },
+        { bold: "Nejsnazší způsob představy:", text: "Mapa metra (Muzeum ── Náměstí Míru / Florenc ── Hlavní nádraží)." },
+        { bold: "Stanice:", text: "= vrcholy (uzly) grafu." },
+        { bold: "Koleje mezi stanicemi:", text: "= hrany grafu." },
+        { bold: "Podstata:", text: "To je vše. Graf = věci + spojení mezi nimi." }
       ]
     },
     rightCard: {
-      title: "Grafy Kolem Nás v Přírodě a Technice",
-      badge: "PŘÍKLADY SÍTÍ",
+      title: "Jakmile Tohle Pochopíš, Uvidíš Grafy Všude",
+      badge: "PŘÍKLADY",
       type: "warm",
       items: [
-        { bold: "Proteinové interakce (PPI):", text: "Proteiny = vrcholy, fyzická biochemická vazba = hrana." },
-        { bold: "Metabolická dráha:", text: "Metabolity = vrcholy, enzymatické konverze = orientované hrany." },
-        { bold: "Sociální sítě:", text: "Uživatelé = vrcholy, vzájemné přátelství / sledování = hrana." },
-        { bold: "Počítačová síť / Internet:", text: "Servery a routery = vrcholy, optické kabely = hrany." }
+        { bold: "Sociální síť:", text: "lidé = vrcholy, přátelství = hrany." },
+        { bold: "Metabolická dráha:", text: "metabolity = vrcholy, enzymatické reakce = hrany." },
+        { bold: "Internet:", text: "routery = vrcholy, kabely = hrany." },
+        { bold: "Protein-proteinová interakce:", text: "proteiny = vrcholy, fyzická vazba = hrana." },
+        { bold: "Intuice bez vzorce:", text: "Graf je způsob, jak zakreslit, co je s čím spojeno. Matematický jazyk nám pak umožní o těchto spojeních přesně uvažovat a dokazovat věci." }
       ]
     }
   });
 
-  // 3. Formal Definition G = (V, E)
+  // 3. Section 1: Proč Bioinformatik Potřebuje Teoretickou Informatiku?
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Formální Matematická Definice: G = (V, E)",
+    title: "1. Proč Bioinformatik Potřebuje Teoretickou Informatiku?",
     leftCard: {
-      title: "1. Neorientovaný Graf",
+      title: "Vizuální a Přírodovědný Pohled",
+      badge: "BIOLOGIE & CHEMIE",
+      type: "neutral",
+      items: [
+        { bold: "V biologii a chemii jste zvyklí:", text: "nahlížet na složité systémy vizuálně a přírodovědně." },
+        { bold: "Molekula glukózy:", text: "Vidíte molekulu glukózy a chápete její prostorovou konformaci a chemické kovalentní vazby mezi atomy Uhlíku, Kyslíku a Vodíku." },
+        { bold: "Metabolická dráha:", text: "Vidíte metabolickou dráhu glykolýzy a vnímáte ji jako posloupnost enzymatických přeměn jednoho substrátu v druhý." }
+      ]
+    },
+    rightCard: {
+      title: "Radikální Proměna Akademického Jazyka",
+      badge: "KURZ AG1 FIT ČVUT",
+      type: "warm",
+      items: [
+        { bold: "Vstup do kurzu AG1:", text: "Jakmile vstoupíte do kurzu AG1 (Algoritmy a Grafy 1) na FIT ČVUT, akademický jazyk se radikálně promění:" },
+        { bold: "Místo chemické molekuly:", text: "pracujete s neorientovaným grafem G = (V, E)." },
+        { bold: "Místo enzymatické reakce:", text: "pracujete s orientovanou hranou e = (u, v) ∈ E v orientovaném acyklickém grafu (DAG)." }
+      ]
+    }
+  });
+
+  // 4. Section: Molekula Glukózy jako Neorientovaný Graf
+  createTwoCardSlide(pres, {
+    breadcrumb,
+    title: "🧬 Molekula Glukózy jako Neorientovaný Graf",
+    leftCard: {
+      title: "V Chemii C₆H₁₂O₆, v Informatice G = (V, E)",
       badge: "NEORIENTOVANÝ GRAF",
       type: "warm",
       items: [
-        { bold: "Definice:", text: "Uspořádaná dvojice G = (V, E), kde V je neprázdná konečná množina vrcholů." },
-        { bold: "Množina hran E:", text: "Množina dvouprvkových podmnožin V: E ⊆ {{u, v} | u, v ∈ V, u ≠ v}." },
-        { bold: "Symetrie vazby:", text: "Hrana {u, v} je identická s {v, u}. Nemá žádný směr ani šipku." },
-        { bold: "Příklady:", text: "Kovalentní vazby v molekule, silnice s obousměrným provozem." }
+        { bold: "Vrcholy V (Atomy):", text: "Jednotlivé atomy tvoří uzly sítě (C₁, …, C₆, O_kruh, …)." },
+        { bold: "Hrany E (Kovalentní vazby):", text: "Sdílený elektronový pár mezi dvěma atomy tvoří neorientovanou hranu {u, v}. Vazba působí vzájemně — nemá žádný „směr šipky“." },
+        { bold: "Formální popis:", text: "Množina vrcholů V = {v₁, v₂, …, v₁₂} (atomy O, C₁–C₆ a OH), množina neorientovaných hran E = {e₁, e₂, …, e₁₂} (kovalentní vazby: e₁ = {v₁, v₂}, e₂ = {v₂, v₃}, …)." }
       ]
     },
     rightCard: {
-      title: "2. Orientovaný Graf (Digraf)",
-      badge: "ORIENTOVANÝ GRAF",
-      type: "emerald",
-      items: [
-        { bold: "Definice:", text: "Uspořádaná dvojice G = (V, E), kde hrany jsou uspořádané dvojice." },
-        { bold: "Množina hran E:", text: "E ⊆ V × V = {(u, v) | u, v ∈ V}. Zde záleží na pořadí!" },
-        { bold: "Směr šipky:", text: "Hrana e = (u, v) vede z počátečního uzlu u do koncového uzlu v." },
-        { bold: "Příklady:", text: "Metabolické reakce přeměny substrátu na produkt, jednosměrné toky energie." }
-      ]
-    }
-  });
-
-  // 4. Glucose as Undirected Graph
-  createTwoCardSlide(pres, {
-    breadcrumb,
-    title: "Molekula Glukózy jako Neorientovaný Graf",
-    leftCard: {
-      title: "Chemický Pohled: C₆H₁₂O₆",
-      badge: "CHEMIE",
+      title: "Rozpad Vrcholů a Vazeb Molekuly",
+      badge: "STRUKTURA VAZEB",
       type: "neutral",
       items: [
-        { bold: "Molekulární struktura:", text: "Cyklická pyranózová forma glukózy tvoří šestičlenný kruh." },
-        { bold: "Atomy:", text: "6 atomů uhlíku C₁ až C₆ a kruhový kyslík O." },
-        { bold: "Kovalentní vazby:", text: "Jednoduché vazby C–C, C–O a hydroxylové skupiny –OH." },
-        { bold: "Symetrie sdílení elektronů:", text: "Elektronový pár je sdílen mezi atomy vzájemně (nemá směr šipky)." }
-      ]
-    },
-    rightCard: {
-      title: "Grafový Překlad v AG1: G = (V, E)",
-      badge: "AG1 PŘEKLAD",
-      type: "warm",
-      items: [
-        { bold: "Množina vrcholů V:", text: "V = {v₁, v₂, ..., v₁₂}, kde v₁ je kyslík O, v₂–v₇ jsou uhlíky C₁–C₆ a v₈–v₁₂ jsou substituenty OH." },
-        { bold: "Množina hran E:", text: "E = {e₁, e₂, ..., e₁₂}, kde každá hrana je neuspořádaná dvojice {u, v}." },
-        { bold: "Struktura kruhu:", text: "Uzly v₁ až v₆ tvoří kružnici C₆ o délce 6." },
-        { bold: "Substituenty:", text: "Skupiny OH visí z kruhu jako listy stromu se stupněm 1." }
+        { bold: "Vrchol v₁:", text: "Kruhový atom kyslíku O." },
+        { bold: "Vrcholy v₂ až v₇:", text: "Uhlíky kruhu C₁ až C₆ propojené vazbami e₁ až e₇." },
+        { bold: "Vrcholy v₈ až v₁₂:", text: "Hydroxylové substituenty OH napojené vazbami e₈ až e₁₂." },
+        { bold: "Symetrie vazeb:", text: "Hrana {v₁, v₂} je neuspořádaná dvojice, vazba působí obousměrně." }
       ]
     }
   });
 
-  // 5. Valence vs Vertex Degree
+  // 5. Section: Metabolická Dráha Glykolýzy jako Orientovaný Graf (DAG)
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Chemická Valence a Stupeň Vrcholu deg(v)",
+    title: "⚡ Metabolická Dráha Glykolýzy jako Orientovaný Graf (DAG)",
     leftCard: {
-      title: "Definice Stupně Vrcholu v AG1",
-      badge: "MATEMATIKA",
-      type: "warm",
-      items: [
-        { bold: "Značení:", text: "deg(v) značí počet incidentních hran napojených na vrchol v." },
-        { bold: "Izolovaný uzel:", text: "Vrchol s deg(v) = 0 nemá žádné sousedy." },
-        { bold: "List (Pendant vertex):", text: "Vrchol s deg(v) = 1 (v biologii např. koncový substituent či atom vodíku)." },
-        { bold: "Handshaking Lemma:", text: "Součet stupňů všech vrcholů ∑ deg(v) je vždy přesně roven 2|E|." }
-      ]
-    },
-    rightCard: {
-      title: "Přímá Paralela s Chemickou Valencí",
-      badge: "CHEMICKÁ ANALOGIE",
+      title: "Kaskáda Enzymatických Reakcí",
+      badge: "ORIENTOVANÝ GRAF (DAG)",
       type: "emerald",
       items: [
-        { bold: "Uhlík (C):", text: "Čtyřvazný prvek → v plném molekulárním grafu má uzel C vždy deg(v) = 4." },
-        { bold: "Kyslík (O):", text: "Dvojvazný prvek → v etherové vazbě kruhu má deg(v) = 2." },
-        { bold: "Vodík (H):", text: "Jednovazný prvek → v grafu vystupuje striktně jako list s deg(v) = 1." },
-        { bold: "Konzistence:", text: "Pravidla chemických valencí jsou přesně pravidly stupňů uzlů v grafové teorii!" }
+        { bold: "Jednosměrnost reakcí:", text: "Při odbourávání cukru v buňce probíhá kaskáda enzymatických reakcí. Každá reakce je jednosměrná (spotřebovává energii či uvolňuje teplo)." },
+        { bold: "Vrcholy V (Metabolity):", text: "Chemické látky v buňce (Glukóza, Glukóza-6-fosfát, Fruktóza-6-fosfát, Fruktóza-1,6-bisP, Pyruvát)." },
+        { bold: "Hrany E (Enzymatické reakce):", text: "Orientované šipky (u, v) ∈ V × V. Reakce jde z výchozího substrátu u do výsledného produktu v." },
+        { bold: "Acykličnost (DAG):", text: "Glykolýza je přímá energetická dráha — metabolity se v ní netočí dokola, ale směřují k pyruvátu." }
       ]
-    }
-  });
-
-  // 6. Glycolysis as Directed Acyclic Graph (DAG)
-  createTwoCardSlide(pres, {
-    breadcrumb,
-    title: "Metabolická Kaskáda Glykolýzy jako DAG",
-    leftCard: {
-      title: "Biochemická Podstata Kaskády",
-      badge: "BIOCHEMIE",
+    },
+    rightCard: {
+      title: "Orientovaný Graf (DAG) Začátku Glykolýzy",
+      badge: "FORMÁLNÍ POPIS",
       type: "neutral",
       items: [
-        { bold: "Jednosměrnost reakcí:", text: "Při odbourávání cukru dochází ke štěpení ATP a uvolňování Gibbsovy volné energie ΔG < 0." },
-        { bold: "Klíčové enzymy:", text: "Hexokináza, Fosfoglukoizomeráza (PGI), Fosfofruktokináza (PFK-1)." },
-        { bold: "Nevratnost:", text: "Metabolity proudí přísně jedním směrem od Glukózy k Pyruvátu." },
-        { bold: "Acykličnost:", text: "V glykolýze se molekula netočí dokola v uzavřeném kruhu." }
-      ]
-    },
-    rightCard: {
-      title: "Orientovaný Acyklický Graf (DAG) v AG1",
-      badge: "AG1 DAG",
-      type: "emerald",
-      items: [
-        { bold: "Množina metabolitů V:", text: "v₁ = Glukóza, v₂ = Glukóza-6-P, v₃ = Fruktóza-6-P, v₄ = Fruktóza-1,6-bisP." },
-        { bold: "Orientované hrany E:", text: "E = {(v₁, v₂), (v₂, v₃), (v₃, v₄)} reprezentují enzymy." },
-        { bold: "Topologické uspořádání:", text: "V každém DAGu lze vrcholy seřadit do lineární fronty tak, že všechny šipky směřují zleva doprava." },
-        { bold: "Zdroje a Stoky:", text: "v₁ je zdroj (vstupní stupeň 0), finální pyruvát je stok (výstupní stupeň 0)." }
+        { bold: "Množina vrcholů:", text: "V = {v₁, v₂, v₃, v₄} (Glukóza v₁, Glukóza-6-P v₂, Fruktóza-6-P v₃, Fruktóza-1,6-bisP v₄)." },
+        { bold: "Množina orientovaných hran:", text: "E = {e₁, e₂, e₃} = {(v₁, v₂), (v₂, v₃), (v₃, v₄)}." },
+        { bold: "Enzymatické kroky:", text: "e₁ (Hexokináza, -1 ATP), e₂ (PGI), e₃ (PFK-1, -1 ATP)." },
+        { bold: "Klíčová vlastnost:", text: "V DAGu nelze po šipkách obejít kolečko zpět!" }
       ]
     }
   });
 
-  // 7. Tree vs Cycle Comparison
+  // 6. Section 2: Co je to Strom a co je to Cyklus v Grafu?
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Klíčový Rozdíl: Strom vs. Cyklus v Grafu",
+    title: "2. Co je Strom a co Cyklus? [KLÍČOVÝ ROZDÍL]",
     leftCard: {
       title: "🌲 Strom (Acyklický Souvislý Graf)",
       badge: "ŽÁDNÉ SMYČKY",
       type: "emerald",
       items: [
-        { bold: "Formální definice:", text: "Souvislý graf, který neobsahuje žádný cyklus." },
+        { bold: "Definice:", text: "Souvislý graf, který neobsahuje žádný cyklus." },
         { bold: "Unikátní vlastnost:", text: "Mezi libovolnými dvěma vrcholy existuje právě jedna jediná cesta!" },
-        { bold: "Vzorec pro počet hran:", text: "Pro strom s n vrcholy platí vždy přesně |E| = n - 1." },
-        { bold: "Biologický příklad:", text: "Fylogenetický strom taxonů od společného předka (LUCA) po současné druhy." }
+        { bold: "Biologický příklad:", text: "Fylogenetický strom taxonů V = {v₁, …, v₇} propojených evolučními větvemi E = {e₁, …, e₆} od kořene LUCA (v₁)." },
+        { bold: "Vlastnost:", text: "Žádné smyčky — větve se rozbíhají a nikdy se zpětně nespojují." }
       ]
     },
     rightCard: {
       title: "🔄 Cyklus (Uzavřený Okruh)",
-      badge: "ZPĚTNÁ VAZBA",
+      badge: "NÁVRAT DO VÝCHOZÍHO BODU",
       type: "rose",
       items: [
-        { bold: "Formální definice:", text: "Uzavřená posloupnost hran, kde z výchozího vrcholu vyrazíme a vrátíme se do něj zpět." },
-        { bold: "Důsledek:", text: "Umožňuje existenci alternativních cest, redundanci a oscilace." },
-        { bold: "Vzorec pro kružnici:", text: "Jednoduchá kružnice C_n o n vrcholech má přesně n hran (|E| = |V|)." },
-        { bold: "Biologický příklad:", text: "Krebsův citrátový cyklus (OAA → Citrát → αKG → Sukcinát → Malát → OAA)." }
-      ]
-    }
-  });
-
-  // 8. Graph Isomorphism
-  createTwoCardSlide(pres, {
-    breadcrumb,
-    title: "Izomorfismus Grafů: Stejná Struktura pod Jiným Jménem",
-    leftCard: {
-      title: "Proč Geometrický Nákres Klame?",
-      badge: "STRUKTURA GRAFU",
-      type: "warm",
-      items: [
-        { bold: "Nezávislost na souřadnicích:", text: "Graf nezávisí na tom, kde v rovině vrcholy nakreslíte ani jak dlouhé čáry zvolíte." },
-        { bold: "Podstata grafu:", text: "Záleží výhradně na tom, které dvojice vrcholů jsou propojeny hranou." },
-        { bold: "Příklad:", text: "Kružnici C₄ můžete nakreslit jako čtverec, kosočtverec, kruh nebo přesýpací hodiny – pořád je to tentýž graf!" }
-      ]
-    },
-    rightCard: {
-      title: "Formální Definice Izomorfismu",
-      badge: "AG1 DEFINICE",
-      type: "neutral",
-      items: [
-        { bold: "Bijekce vrcholů:", text: "Grafy G₁ = (V₁, E₁) a G₂ = (V₂, E₂) jsou izomorfní (G₁ ≅ G₂), pokud existuje bijekce f: V₁ → V₂." },
-        { bold: "Zachování hran:", text: "Pro každé u, v ∈ V₁ platí: {u, v} ∈ E₁ ⇔ {f(u), f(v)} ∈ E₂." },
-        { bold: "Význam pro bioinformatiku:", text: "Hledání izomorfismu podgrafů odpovídá vyhledávání chemických funkčních motivů v databázích molekul." }
+        { bold: "Definice:", text: "Uzavřená posloupnost hran, kde z libovolného uzlu vyrazíte a vrátíte se do něj zpět." },
+        { bold: "Důsledek:", text: "Umožňuje opakování, zpětnou vazbu a oscilace. Vede k existenci více různých cest." },
+        { bold: "Biologický příklad:", text: "Krebsův citrátový cyklus V = {v₁, …, v₅} (OAA, Cit, αKG, Suc, Mal) s orientovanými reakcemi E = {e₁, …, e₅} = {(v₁, v₂), (v₂, v₃), (v₃, v₄), (v₄, v₅), (v₅, v₁)}." },
+        { bold: "Vlastnost:", text: "Návrat do výchozího bodu regeneruje oxalacetát pro další cyklus oxidace." }
       ]
     }
   });

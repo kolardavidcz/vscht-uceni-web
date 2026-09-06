@@ -1,13 +1,12 @@
 /**
  * Module 6: Důkazy Sporem & Extremální Princip
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-dukazy-sporem.md
+ * Exact 1:1 text fidelity with website markdown.
  */
 import {
   createLectureDividerSlide,
   createTwoCardSlide,
-  createSingleCardSlide,
-  createCodeSlide,
-  createThreeCardSlide,
-  createProofSlide
+  createSingleCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule6Slides(pres) {
@@ -17,405 +16,346 @@ export function addModule6Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 6,
     title: "Důkazy Sporem & Extremální Princip",
-    goal: "Naučit se elegantní techniku důkazu sporem (Sherlock Holmes metoda), Dirichletův přihrádkový princip na grafech i sítích a extremální princip výběrem nejdelší cesty, kterým bezchybně dokážete existenci cyklů a zdrojů v AG1.",
+    goal: "Cíl kapitoly: Naučit se elegantní techniku důkazu, kde místo přímého dokazování ukážeš, že opak by vedl k nesmyslu.",
     topics: [
-      "Detektivní přístup: Vyloučení nemožného a logika sporu",
-      "Logická podstata důkazu sporem: ¬(A ⇒ B) ≡ (A ∧ ¬B)",
-      "Zkoušková šablona FIT ČVUT pro formální zápis důkazu sporem",
-      "Dirichletův princip (Pigeonhole Principle) a 10sekundový důkaz",
-      "Klasická věta: Dva vrcholy se stejným stupněm v každém grafu",
-      "Klíčový trik: Vzájemné vyloučení stupně 0 a n - 1",
-      "Dirichlet na trasách: Sled délky n v grafu o n uzlech tvoří cyklus",
-      "Extremální princip: Výběr nejdelší cesty a nemožnost prodloužení",
-      "Důkaz věty: Pokud minimální stupeň δ(G) ≥ 2, pak graf obsahuje cyklus",
-      "Nejkratší cesta s nezápornými vahami nikdy neobsahuje cyklus",
-      "Důležitý vhled: Konstruktivní vs. Nekonstruktivní existence v informatice",
-      "Zkouškové úlohy: Graf s Δ(G) ≤ 2 a existence zdroje v každém DAGu"
+      "🕵️ Detektivní přístup k matematice (Sherlock Holmes)",
+      "1. Logická Podstata Důkazu Sporem (A ∧ ¬B ⇒ ⊥)",
+      "2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1",
+      "3. 🐦 Dirichletův princip v Teorii Grafů (Pigeonhole Principle)",
+      "Příklad 1: Dva vrcholy se stejným stupněm v každém grafu",
+      "Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus",
+      "4. 🔬 Extremální Princip v Grafech — Krok za Krokem",
+      "Pracovaný příklad 1: Pokud δ(G) ≥ 2, pak G obsahuje cyklus",
+      "Pracovaný příklad 2: Nejkratší cesta s nezápornými vahami neobsahuje cyklus",
+      "Konstruktivní vs. Nekonstruktivní existence v informatice",
+      "Procvičovací úlohy: Stupeň Δ(G) ≤ 2 a Zdroj v DAGu"
     ]
   });
 
-  // 2. Detective Approach to Mathematics
+  // 2. Sherlock Holmes & Birthday Example
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Detektivní Přístup k Matematice",
+    title: "🕵️ Detektivní Přístup k Matematice",
     leftCard: {
-      title: "Sherlock Holmes Metoda",
-      badge: "INTUICE SPOREM",
-      type: "orange",
+      title: "Sherlock Holmes a Důkaz Sporem",
+      badge: "PRINCIP",
+      type: "neutral",
       items: [
-        { bold: "Citát klasika:", text: "'Když vyloučíš vše nemožné, co zbude – i kdyby to bylo sebenepravděpodobnější – musí to být pravda.'" },
-        { bold: "1. Cíl:", text: "Chceme dokázat, že tvrzení B platí." },
-        { bold: "2. Předpoklad:", text: "Předpokládáme opak, tedy že B neplatí (platí ¬B)." },
-        { bold: "3. Odvození nesmyslu:", text: "Z tohoto předpokladu logicky odvodíme spor (rozpor se známým faktem či zadáním)." },
-        { bold: "4. Závěr:", text: "Protože opak vedl k nemožnosti, tvrzení B nutně musí platit!" }
+        { bold: "Sherlock Holmes říká:", text: "„Když vyloučíš vše nemožné, co zbude — i kdyby to bylo sebenepravděpodobnější — musí to být pravda.“" },
+        { bold: "1. Krok:", text: "Chceš dokázat, že tvrzení B platí." },
+        { bold: "2. Krok:", text: "Předpokládej, že B neplatí (tedy předpokládej opak)." },
+        { bold: "3. Krok:", text: "Z tohoto předpokladu logicky odvoď nesmysl — něco, co je zjevně nepravdivé (spor s tím, co víš)." },
+        { bold: "4. Krok:", text: "Protože opak B vedl k nesmyslu, B musí platit." }
       ]
     },
     rightCard: {
-      title: "Příklad ze Života: Narozeninový Měsíc",
-      badge: "REÁLNÝ PŘÍKLAD",
-      type: "emerald",
+      title: "Příklad z Reálného Světa: 13 Lidí a Měsíce",
+      badge: "PŘÍKLAD",
+      type: "warm",
       items: [
-        { bold: "Tvrzení:", text: "V místnosti se 13 lidmi musí alespoň dva sdílet stejný měsíc narození." },
-        { bold: "Předpoklad pro spor:", text: "Předpokládejme opak: každý člověk v místnosti má jiný měsíc narození." },
-        { bold: "Nesmysl (Spor):", text: "V kalendářním roce je pouze 12 měsíců. Třináct lidí nelze rozdělit do 12 měsíců po jednom!" },
-        { bold: "Závěr:", text: "Předpoklad byl chybný, alespoň dva lidé se narodili ve stejném měsíci." }
+        { bold: "Zadání:", text: "Chceš dokázat, že v místnosti s 13 lidmi musí aspoň dva sdílet narozeninový měsíc." },
+        { bold: "Předpoklad opaku:", text: "Každý má jiný měsíc." },
+        { bold: "Dosažení sporu:", text: "Ale měsíců je jen 12. To je spor — 13 lidí se do 12 měsíců nevejde jeden do každého." },
+        { bold: "Závěr:", text: "Předpoklad byl špatný, takže dva lidi sdílí měsíc. ✅" },
+        { bold: "Intuice bez vzorce:", text: "Důkaz sporem = „řeknu opak, a pak ukážu, proč to nemůže být pravda.“" }
       ]
     }
   });
 
-  // 3. Logic of Proof by Contradiction
+  // 3. Section 1: Logická Podstata Důkazu Sporem
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Logická Podstata Důkazu Sporem",
+    title: "1. Logická Podstata Důkazu Sporem",
     leftCard: {
-      title: "Formální Logický Základ",
-      badge: "¬(A ⇒ B) ≡ (A ∧ ¬B)",
-      type: "orange",
+      title: "Princip Důkazu Sporem",
+      badge: "LOGICKÝ PRINCIP",
+      type: "neutral",
       items: [
-        { bold: "Dokazovaná implikace:", text: "Chceme dokázat tvrzení ve tvaru A ⇒ B (předpoklad A implikuje závěr B)." },
-        { bold: "Negace implikace:", text: "Implikace je nepravdivá právě tehdy, když předpoklad platí a závěr neplatí: A ∧ ¬B." },
-        { bold: "Co je spor (⊥):", text: "Stav, kdy v důkazu vyjde současně výrok C i jeho negace ¬C (např. x > 0 a současně x ≤ 0)." },
-        { bold: "Logický princip:", text: "Z nepravdivého předpokladu lze odvodit jakýkoliv spor. Odvozením sporu vyvracíme výchozí hypotézu." }
+        { bold: "Negace implikace:", text: "¬(A ⇒ B) ≡ (A ∧ ¬B)." },
+        { bold: "Princip:", text: "Chceme-li dokázat, že platí implikace A ⇒ B, předpokládáme její negaci (tj. předpokládáme, že předpoklad A platí a ZÁROVEŇ závěr B neplatí)." },
+        { bold: "Odvození sporu:", text: "Pokud z tohoto spojení posloupností platných matematických kroků odvodíme spor (rozpor / ⊥) s definicí, předpokladem A nebo dříve dokázaným faktem, pak náš předpoklad pro spor nemohl platit a původní tvrzení A ⇒ B je pravdivé!" }
       ]
     },
     rightCard: {
-      title: "Myšlenkový Tok Důkazu Sporem",
-      badge: "SCHÉMA POSTUPU",
-      type: "emerald",
+      title: "Schéma Myšlenkového Toku",
+      badge: "SCHÉMA",
+      type: "warm",
       items: [
-        { bold: "1. Krok:", text: "Vezmeme platný předpoklad A a připojíme negovaný závěr ¬B." },
-        { bold: "2. Krok:", text: "Korektními logickými dedukcemi odvozujeme mezivýsledky X, Y, Z." },
-        { bold: "3. Krok (💥 SPOR):", text: "Narazíme na přímý rozpor s definicí, předpokladem A nebo dokázanou větou." },
-        { bold: "4. Krok (Závěr):", text: "Předpoklad ¬B je vyloučen. Původní implikace A ⇒ B platí." }
+        { bold: "1. Východisko:", text: "Předpoklad A  ∧  Negovaný závěr ¬B." },
+        { bold: "2. Dedukce:", text: "Logické odvozování krok za krokem." },
+        { bold: "3. 💥 SPOR:", text: "Rozpor s faktem, definicí nebo A = 1." },
+        { bold: "4. ZÁVĚR:", text: "Náš předpoklad ¬B byl chybný, tedy platí B!" }
       ]
     }
   });
 
-  // 4. Formal Exam Template AG1
+  // 4. Section 2: Šablona Zápisu Důkazu Sporem
   createSingleCardSlide(pres, {
     breadcrumb,
-    title: "Šablona Zápisu Důkazu Sporem u Zkoušky AG1",
-    card: {
-      title: "Formální Struktura Hodnocená Plným Počtem Bodů",
-      badge: "ZÁVAZNÁ ŠABLONA",
-      type: "orange",
-      items: [
-        { bold: "1. PŘEDPOKLAD PRO SPOR:", text: "'Předpokládejme pro spor, že platí předpoklad A a ZÁROVEŇ NEPLATÍ závěr B (tedy platí ¬B).'" },
-        { bold: "2. LOGICKÉ ODVOZOVÁNÍ:", text: "'Z neplatnosti B plyne vlastnost X. Z vlastnosti X a předpokladu A odvodíme vlastnost Y...'" },
-        { bold: "3. DOSAŽENÍ SPORU (💥 / ⊥):", text: "'To je však SPOR (rozpor) s [předpokladem A / definicí grafu / dříve dokázanou větou]!'" },
-        { bold: "4. ZÁVĚR DŮKAZU:", text: "'Proto náš předpoklad pro spor (¬B) nemohl platit, a tedy původní tvrzení A ⇒ B platí. Q.E.D.'" }
-      ]
-    }
+    title: "2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1",
+    cardTitle: "Formální Šablona Zápisu Důkazu Sporem",
+    badge: "ZKOUŠKOVÁ ŠABLONA",
+    type: "warm",
+    items: [
+      { bold: "1. PŘEDPOKLAD PRO SPOR:", text: "„Předpokládejme pro spor, že platí předpoklad A a ZÁROVEŇ NEPLATÍ závěr B (platí ¬B).“" },
+      { bold: "2. LOGICKÉ ODVOZOVÁNÍ:", text: "„Z platnosti ¬B plyne vlastnost X… Z vlastnosti X a předpokladu A odvodíme vlastnost Y…“" },
+      { bold: "3. DOSAŽENÍ SPORU (⚡ / 💥 / ⊥):", text: "„To je ale SPOR (⚡) s [definicí Z / předpokladem A / dokázanou větou]!“" },
+      { bold: "4. ZÁVĚR:", text: "„Proto náš předpoklad pro spor nemohl platit, a tedy původní tvrzení A ⇒ B platí. Q.E.D.“" }
+    ]
   });
 
-  // 5. Pigeonhole Principle (Dirichlet)
+  // 5. Section 3: Dirichletův Princip v Teorii Grafů
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Dirichletův Princip (Pigeonhole Principle)",
+    title: "3. 🐦 Dirichletův Princip v Teorii Grafů",
     leftCard: {
-      title: "Formulace Principu",
-      badge: "HOLUBI A ŠKATULKY",
-      type: "blue",
+      title: "Znění Dirichletova Principu",
+      badge: "PIGEONHOLE PRINCIPLE",
+      type: "neutral",
       items: [
-        { bold: "Znění věty:", text: "Máme-li n předmětů (holubů) a k přihrádek (škatułek), kde n > k, pak alespoň v jedné přihrádce musí skončit dva nebo více předmětů." },
-        { bold: "Vizuální představa:", text: "5 holubů letí do 4 holubníků. I kdyby se 4 rozmístili po jednom, 5. holub musí ke někomu přisednout!" },
-        { bold: "Zobecněný princip:", text: "Při rozdělení n předmětů do k přihrádek je v alespoň jedné přihrádce alespoň ⌈n / k⌉ předmětů." }
+        { bold: "Definice:", text: "Pokud máme n předmětů (holubů) a chceme je umístit do k přihrádek (škatułek), přičemž počet předmětů je větší než počet přihrádek (n > k), pak alespoň v jedné přihrádce musí skončit dva nebo více předmětů." },
+        { bold: "Schéma kolize:", text: "5 holubů do 4 škatulek ➔ Kolize je NEVYHNUTELNÁ!" }
       ]
     },
     rightCard: {
-      title: "10sekundový Důkaz Sporem",
-      badge: "PROČ TO PLATÍ",
-      type: "emerald",
+      title: "Proč to Funguje? (Důkaz Sporem)",
+      badge: "DŮKAZ ZA 10 SEKUND",
+      type: "warm",
       items: [
-        { bold: "Předpoklad pro spor:", text: "Předpokládejme opak: v každé z k přihrádek je nanejvýš 1 holub." },
-        { bold: "Odvození kapacity:", text: "Pak celkový počet holubů ve všech přihrádkách je nejvýše 1 × k = k." },
-        { bold: "Dosažení sporu:", text: "My však máme n > k holubů, což je okamžitý SPOR s celkovým počtem!" },
-        { bold: "Závěr:", text: "Opak neplatí. Alespoň jedna přihrádka obsahuje 2 a více holubů." }
+        { bold: "Předpokládejme opak:", text: "V každé z k přihrádek je nanejvýš 1 holub." },
+        { bold: "Počet holubů:", text: "Pak celkový počet holubů je nejvýše 1 × k = k." },
+        { bold: "Okamžitý SPOR:", text: "My však máme n > k holubů, což je okamžitý SPOR!" },
+        { bold: "Závěr:", text: "Opak tedy nemůže platit a alespoň v jedné přihrádce musí být alespoň dva holubi." }
       ]
     }
   });
 
-  // 6. Example 1: Two vertices with same degree (Setup)
+  // 6. Příklad 1: Dva vrcholy se stejným stupněm
   createTwoCardSlide(pres, {
     breadcrumb,
     title: "Příklad 1: Dva Vrcholy se Stejným Stupněm",
     leftCard: {
-      title: "Klasická Zkoušková Věta",
-      badge: "VĚTA O GRAFECH",
-      type: "orange",
+      title: "Věta a Identifikace Holubů a Škatułek",
+      badge: "VĚTA",
+      type: "warm",
       items: [
-        { bold: "Znění věty:", text: "V každém jednoduchém neorientovaném grafu G = (V, E) s n ≥ 2 vrcholy existují alespoň dva vrcholy se stejným stupněm." },
-        { bold: "Otázka ke zkoušce:", text: "Lze sestrojit graf o 5 vrcholech, kde by každý vrchol měl unikátní počet sousedů? (Odpověď: Nikdy!)" },
-        { bold: "Kdo jsou holubi?", text: "Holubi jsou samotné vrcholy grafu. Máme jich celkem n: {v₁, v₂, ..., v_n}." }
+        { bold: "Věta:", text: "V každém jednoduchém neorientovaném grafu G = (V, E) s n ≥ 2 vrcholy vždy existují alespoň dva vrcholy se stejným stupněm." },
+        { bold: "1. Kdo jsou „holubi“?:", text: "Holubi jsou vrcholy grafu. Máme jich celkem n (označme je v₁, v₂, …, vn)." },
+        { bold: "2. Co jsou „škatulky“?:", text: "Škatulky jsou možné hodnoty stupňů vrcholů deg(v). Minimální stupeň je 0 (izolovaný vrchol), maximální stupeň je n - 1 (spojen se všemi ostatními). Teoreticky stupně z {0, 1, 2, …, n - 1} = celkem n různých možných stupňů." }
       ]
     },
     rightCard: {
-      title: "Co Jsou Škatulky (Možné Stupně)?",
-      badge: "KAPACITA HODNOT",
-      type: "blue",
-      items: [
-        { bold: "Minimální stupeň:", text: "0 (vrchol je izolovaný, nemá žádnou incidentní hranu)." },
-        { bold: "Maximální stupeň:", text: "n - 1 (vrchol je spojen se všemi zbývajícími n - 1 vrcholy)." },
-        { bold: "Množina možných stupňů:", text: "{0, 1, 2, ..., n - 1}. To je celkem n možných hodnot!" },
-        { bold: "Zdanlivý problém:", text: "Máme n holubů a n škatułek. Dirichlet zdánlivě nelze použít – potřebujeme n > k!" }
-      ]
-    }
-  });
-
-  // 7. Example 1: Mutual Exclusion Trick
-  createSingleCardSlide(pres, {
-    breadcrumb,
-    title: "Příklad 1: Grafový Trik Vzájemného Vyloučení",
-    card: {
-      title: "Mohou v Grafu Současně Existovat Stupně 0 a n - 1?",
-      badge: "KLÍČOVÝ DŮKAZ SPOREM",
+      title: "Klíčový Grafový Trik: Vzájemné Vyloučení",
+      badge: "VZÁJEMNÉ VYLOUČENÍ",
       type: "rose",
       items: [
-        { bold: "Předpokládejme pro spor, že ANO:", text: "V grafu G existuje uzel u se stupněm deg(u) = n - 1 a zároveň uzel w se stupněm deg(w) = 0." },
-        { bold: "Význam deg(u) = n - 1:", text: "Vrchol u je spojen hranou s ÚPLNĚ VŠEMI ostatními vrcholy v grafu." },
-        { bold: "Význam deg(w) = 0:", text: "Vrchol w není spojen hranou s VŮBEC NIKÝM v celém grafu." },
-        { bold: "Okamžitý SPOR (💥):", text: "Protože u sousedí se všemi, musí sousedit i s w, tedy hrana {u, w} existuje. Tím má w stupeň alespoň 1, což je spor s deg(w) = 0!" },
-        { bold: "Důsledek:", text: "Stupeň 0 a stupeň n - 1 se VZÁJEMNĚ VYLUČUJÍ. Žádný graf nemůže obsahovat obě tyto hodnoty současně!" }
+        { bold: "Může existovat 0 i n - 1 současně?:", text: "Předpokládejme pro spor, že ano." },
+        { bold: "Rozbor:", text: "Nechť vrchol u má stupeň n - 1 (je spojen s úplně všemi). Nechť vrchol w má stupeň 0 (není spojen s vůbec nikým). Ale u musí být spojen i s w! Hrana {u, w} tedy nutně existuje." },
+        { bold: "SPOR:", text: "Tím pádem má vrchol w stupeň alespoň 1, což je SPOR s tím, že má stupeň 0! Hodnoty 0 a n - 1 se vzájemně vylučují a nemohou se v tomtéž grafu potkat!" }
       ]
     }
   });
 
-  // 8. Example 1: Pigeonhole Application & PPI
+  // 7. Příklad 1: Aplikace Dirichleta a PPI interpretace
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Příklad 1: Dokončení Důkazu & Bio Analogie",
+    title: "Příklad 1: Aplikace Dirichleta a Bio Interpretace",
     leftCard: {
-      title: "Finální Aplikace Dirichleta",
-      badge: "n HOLUBŮ DO n-1 ŠKATULEK",
+      title: "4. Aplikace Dirichletova Principu",
+      badge: "DIRICHLET",
       type: "emerald",
       items: [
-        { bold: "Situace A (Graf má uzel deg 0):", text: "Pak nemá uzel stupně n - 1. Dostupné stupně jsou pouze {0, 1, ..., n - 2} ➔ přesně n - 1 škatułek!" },
-        { bold: "Situace B (Graf nemá uzel deg 0):", text: "Všechny stupně jsou alespoň 1. Dostupné stupně jsou {1, 2, ..., n - 1} ➔ opět přesně n - 1 škatułek!" },
-        { bold: "Závěr Dirichletova principu:", text: "V obou situacích máme n vrcholů a nejvýše n - 1 hodnot stupňů. Protože n > n - 1, alespoň dva vrcholy sdílí stejný stupeň." }
+        { bold: "Dvě situace v libovolném grafu:", text: "Nastává právě jedna ze dvou situací:" },
+        { bold: "Situace A (Obsahuje izolovaný vrchol):", text: "Pak v grafu není žádný vrchol stupně n - 1. Možné hodnoty stupňů jsou pouze z množiny {0, 1, 2, …, n - 2}. To je přesně n - 1 škatułek." },
+        { bold: "Situace B (Neobsahuje izolovaný vrchol):", text: "Pak všechny vrcholy mají stupeň alespoň 1. Možné hodnoty stupňů jsou z množiny {1, 2, …, n - 1}. To je opět přesně n - 1 škatułek." },
+        { bold: "Závěr:", text: "Máme n vrcholů (holubů) a nanejvýš n - 1 možných stupňů (škatułek). Protože n > n - 1, alespoň dva vrcholy sdílí stejný stupeň!" }
       ]
     },
     rightCard: {
-      title: "Interpretace v Bioinformatice",
-      badge: "PPI PROTEINOVÉ SÍTĚ",
-      type: "orange",
+      title: "Bioinformatická Interpretace (PPI Síť)",
+      badge: "BIOINFORMATIKA",
+      type: "warm",
       items: [
-        { bold: "Proteinové interakce:", text: "V protein-proteinové interakční síti (PPI síť) o n proteinech vždy existují dva proteiny se stejným počtem partnerů." },
-        { bold: "Biologický význam:", text: "I v chaotické buněčné síti existuje striktní matematický řád vynucený strukturou grafu." }
+        { bold: "V proteinové síti:", text: "V protein-proteinové interakční síti (PPI síť) o n proteinech vždy existují alespoň dva proteiny, které mají navlas stejný počet interakčních partnerů." },
+        { bold: "Vizuální znázornění pro n = 4:", text: "Vrcholy A, B, C, D padají do škatułek deg 1, deg 2, deg 3. Kolize je nevyhnutelná — např. vrcholy B a C mají shodně stupeň 2!" }
       ]
     }
   });
 
-  // 9. Example 2: Walk of length n creates cycle
+  // 8. Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Příklad 2: Trasa Délky n Nutně Obsahuje Cyklus",
+    title: "Příklad 2: Trasa Délky n Nutně Tvoří Cyklus",
     leftCard: {
-      title: "Dirichlet na Posloupnosti Kroků",
-      badge: "SLED DÉLKY n HRAN",
-      type: "blue",
+      title: "Tvrzení a Rozbor",
+      badge: "ORIENTOVANÝ SLED",
+      type: "neutral",
       items: [
-        { bold: "Formulace věty:", text: "Pokud v grafu G o n vrcholech existuje sled procházející n hranami, pak nutně obsahuje alespoň jeden cyklus (smyčku)." },
-        { bold: "Rozbor návštěv:", text: "Sled délky n hran navštíví přesně n + 1 vrcholů: (u₀ ➔ u₁ ➔ u₂ ➔ ... ➔ u_n)." },
-        { bold: "Kdo jsou holubi?", text: "n + 1 navštívených pozic na trase." },
-        { bold: "Co jsou škatulky?", text: "Skutečné existující vrcholy grafu (je jich pouze n)." }
+        { bold: "Tvrzení:", text: "Pokud v grafu G = (V, E) o n vrcholech existuje orientovaná posloupnost kroků (sled) procházející n hranami, pak tato posloupnost nutně obsahuje alespoň jeden cyklus (smyčku)." },
+        { bold: "1. Kdo jsou holubi?:", text: "Sled délky n hran navštíví celkem n + 1 vrcholů (u₀ ➔ u₁ ➔ … ➔ un). Naši holubi jsou navštívené pozice na trase: máme jich n + 1." },
+        { bold: "2. Co jsou škatulky?:", text: "Naše škatulky jsou skutečné existující vrcholy grafu: máme jich jen n (V = {v₁, …, vn})." }
       ]
     },
     rightCard: {
-      title: "Vznik Cyklu & Algoritmický Význam",
-      badge: "KOLIZE UZŮ",
+      title: "Vznik Cyklu a Algoritmický Význam",
+      badge: "VZNIK CYKLU",
       type: "emerald",
       items: [
-        { bold: "Dirichletova kolize:", text: "Protože n + 1 > n, alespoň jeden vrchol byl navštíven dvakrát: u_i = u_j pro i < j." },
-        { bold: "Uzavřený cyklus:", text: "Úsek mezi návštěvami (u_i ➔ u_{i+1} ➔ ... ➔ u_j) tvoří uzavřený cyklus v grafu!" },
-        { bold: "Detekce cyklů (PA2 / AG1):", text: "Teoretický základ pro Floydův algoritmus želvy a zajíce i korektnost Bellman-Fordova algoritmu." }
+        { bold: "Dirichletova kolize:", text: "Dle Dirichletova principu (n+1 > n) musel být alespoň jeden vrchol grafu navštíven alespoň dvakrát: u_i = u_j pro nějaké 0 ≤ i < j ≤ n." },
+        { bold: "Uzavřený cyklus:", text: "Úsek trasy mezi těmito indexy tvoří uzavřený cyklus: (u_i ➔ u_{i+1} ➔ … ➔ u_j = u_i)." },
+        { bold: "Algoritmický význam:", text: "Toto je teoretický základ pro Floydův algoritmus detekce cyklů (želva a zajíc) i pro důkaz korektnosti Bellman-Fordova algoritmu (nejdelší jednoduchá cesta má nanejvýš n - 1 hran)." }
       ]
     }
   });
 
-  // 10. Extremal Principle
+  // 9. Section 4: Extremální Princip v Grafech
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Extremální Princip v Grafech",
+    title: "4. 🔬 Extremální Princip v Grafech",
     leftCard: {
-      title: "Filozofie Extremálního Výběru",
-      badge: "PRINCIP EXTRÉMU",
-      type: "orange",
+      title: "Definice Extremálního Principu",
+      badge: "EXTREMÁLNÍ PRINCIP",
+      type: "warm",
       items: [
-        { bold: "Základní myšlenka:", text: "Místo náhodného zkoumání celého grafu vybereme globálně extrémní objekt struktury." },
-        { bold: "Typické volby v AG1:", text: "Nejdelší jednoduchá cesta P_max, nejmenší cyklus C_min, vrchol minimálního stupně δ(G), nejlehčí hrana." },
-        { bold: "Kouzlo pro spory:", text: "Extrémní objekt už z definice nemůže mít vlastnost, která by ho ještě více zvětšila (či zmenšila)!" }
+        { bold: "Extremální princip:", text: "Když chceš najít spor, zvolíme extrémní objekt (např. nejdelší jednoduchou cestu P_max, nejmenší cyklus, vrchol s maximálním či minimálním stupněm nebo nejlehčí hranu) a zkoumáme, co z jeho extremality plyne." },
+        { bold: "Klíčová myšlenka:", text: "Extrémní objekt už z principu nemůže mít vlastnost, která by ho ještě více zvětšila či zmenšila (jinak by existoval ještě extrémnější, což je spor s jeho volbou). To nám dá okamžitý a čistý spor." }
       ]
     },
     rightCard: {
-      title: "Mechanismus Důkazu",
-      badge: "LOGICKÁ PÁKA",
-      type: "emerald",
+      title: "Pracovaný Příklad 1: Zadání",
+      badge: "ZADÁNÍ PŘÍKLADU",
+      type: "neutral",
       items: [
-        { bold: "Předpoklad existence:", text: "V každém konečném grafu extrémní objekt zaručeně existuje (konečná množina délek má maximum)." },
-        { bold: "Zkoumání hranic:", text: "Podíváme se na konce nejdelší cesty. Všechny hrany z konce musí vést dovnitř cesty, jinak by cesta nebyla nejdelší!" },
-        { bold: "Výsledek:", text: "Hranice extrémního objektu okamžitě uzavírají cykly nebo generují spor." }
+        { bold: "Tvrzení:", text: "Nechť G = (V, E) je konečný neorientovaný graf s minimálním stupněm δ(G) ≥ 2. Pak G obsahuje alespoň jeden cyklus." },
+        { bold: "Konkrétní příklad pro ilustraci:", text: "Uvažuj graf s vrcholy {1, 2, 3, 4, 5} a hranami tak, že každý vrchol má stupeň alespoň 2. Zde každý vrchol má stupeň 2. Cyklus 1 ➔ 2 ➔ 3 ➔ 4 ➔ 5 ➔ 1 zjevně existuje. Jak to dokázat obecně pro libovolný takový graf?" }
       ]
     }
   });
 
-  // 11. Worked Example 1: delta(G) >= 2 implies cycle
-  createProofSlide(pres, {
-    breadcrumb,
-    title: "Věta: Pokud δ(G) ≥ 2, pak Graf Obsahuje Cyklus",
-    statement: "Nechť G = (V, E) je konečný neorientovaný graf s minimálním stupněm δ(G) ≥ 2. Pak G obsahuje alespoň jeden cyklus.",
-    steps: [
-      { bold: "1. Volba nejdelší cesty:", text: "Zvolme v grafu G nejdelší jednoduchou cestu P = (v₀, v₁, v₂, ..., v_k). Taková cesta v konečném grafu zaručeně existuje." },
-      { bold: "2. Sousedé krajního vrcholu v₀:", text: "Z předpokladu δ(G) ≥ 2 má koncový vrchol v₀ stupeň deg(v₀) ≥ 2, má tedy alespoň dva různé sousedy." },
-      { bold: "3. Sousedé nemohou ležet mimo cestu:", text: "Kdyby měl v₀ souseda u ∉ P, pak (u, v₀, v₁, ..., v_k) by byla delší jednoduchá cesta délky k+1. To je SPOR s maximalitou cesty P! Všichni sousedé v₀ leží na cestě P." },
-      { bold: "4. Uzavření cyklu:", text: "Jeden soused v₀ je v₁ (součást cesty). Druhý soused v_j (pro j ≥ 2) leží dále na cestě. Hrana {v₀, v_j} spolu s úsekem cesty v₀ ➔ v₁ ➔ ... ➔ v_j tvoří cyklus!" },
-      { bold: "5. Závěr:", text: "Každý konečný graf s minimálním stupněm alespoň 2 nutně obsahuje cyklus." }
-    ]
-  });
-
-  // 12. Tracing on 5-node graph
+  // 10. Pracovaný příklad 1: Kroky 1 až 3
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Vizualizace Důkazu na Grafu s 5 Vrcholy",
+    title: "Důkaz Extremálním Principem: Kroky 1 až 3",
     leftCard: {
-      title: "Konkrétní Graf s deg(v) ≥ 2",
-      badge: "PŘÍKLAD V PRAXI",
-      type: "blue",
+      title: "Krok 1 & Krok 2",
+      badge: "NEJDELŠÍ CESTA",
+      type: "neutral",
       items: [
-        { bold: "Vrcholy a hrany:", text: "V = {1, 2, 3, 4, 5}. Hrany: {1,2}, {2,3}, {3,4}, {4,5}, {5,1}, {1,3}. Každý vrchol má stupeň ≥ 2." },
-        { bold: "Volba nejdelší cesty:", text: "Zvolme cestu P = (2, 1, 5, 4, 3) o délce 4 hran procházející všemi vrcholy." },
-        { bold: "Krajní uzel v₀ = 2:", text: "Sousedé vrcholu 2 jsou {1, 3}. Oba leží na cestě P (vrchol 1 je v₁, vrchol 3 je v₄)." }
+        { bold: "Krok 1 — Nejdelší jednoduchá cesta:", text: "Nechť P = (v₀, v₁, v₂, …, vk) je nejdelší jednoduchá cesta v grafu G. (Takový extremální objekt v konečném grafu zaručeně existuje)." },
+        { bold: "Krok 2 — Zkoumáme krajní vrchol v₀:", text: "Stupeň deg(v₀) ≥ 2 (z předpokladu δ(G) ≥ 2). Vrchol v₀ tedy má alespoň 2 sousedy." }
       ]
     },
     rightCard: {
-      title: "Nalezený Cyklus v Grafu",
-      badge: "UZAVŘENÍ SMYČKY",
-      type: "emerald",
+      title: "Krok 3 — Sousedé v₀ Musí Být na Cestě P",
+      badge: "SPOR S MAXIMALITOU",
+      type: "rose",
       items: [
-        { bold: "Hrana zpět na cestu:", text: "Hrana {2, 3} vede z konce v₀ přímo do vnitřního uzlu v₄ na cestě." },
-        { bold: "Vzniklý cyklus:", text: "2 ➔ 1 ➔ 5 ➔ 4 ➔ 3 ➔ 2 tvoří plný pětiúhelníkový cyklus délky 5." },
-        { bold: "Alternativní trojúhelník:", text: "Hrana {1, 3} tvoří s uzlem 2 další cyklus 1 ➔ 2 ➔ 3 ➔ 1 délky 3." }
+        { bold: "Předpokládejme pro spor:", text: "že v₀ má souseda u ∉ {v₁, v₂, …, vk} (mimo cestu P)." },
+        { bold: "Delší cesta:", text: "Pak (u, v₀, v₁, …, vk) je jednoduchá cesta délky k+1 — delší než P." },
+        { bold: "💥 SPOR:", text: "To je SPOR s maximalitou cesty P! Tedy všichni sousedé v₀ leží přímo na cestě P: v₀ sousedí pouze s vrcholy v₁, v₂, …, vk." }
       ]
     }
   });
 
-  // 13. Worked Example 2: Shortest path has no cycle
+  // 11. Pracovaný příklad 1: Krok 4 a Tracování
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Příklad 2: Nejkratší Cesta Neobsahuje Cyklus",
+    title: "Důkaz Extremálním Principem: Cyklus a Tracování",
     leftCard: {
-      title: "Věta o Nejkratší Trase",
-      badge: "NEZÁPORNÉ VÁHY w(e) ≥ 0",
-      type: "orange",
+      title: "Krok 4 — Nalezení Cyklu",
+      badge: "CYKLUS",
+      type: "emerald",
       items: [
-        { bold: "Znění věty:", text: "V grafu G = (V, E, w) s nezápornými vahami neobsahuje žádná nejkratší cesta z s do t žádný cyklus." },
-        { bold: "Předpoklad pro spor:", text: "Předpokládejme, že nejkratší cesta P z s do t obsahuje cyklus C procházející vrcholem u." },
-        { bold: "Rozklad cesty:", text: "s ➔ P₁ ➔ u ➔ C ➔ u ➔ P₂ ➔ t. Celková váha je w(P) = w(P₁) + w(C) + w(P₂)." }
+        { bold: "Analýza sousedů:", text: "Víme, že v₀ má alespoň 2 sousedy a všichni leží na P. Jeden soused je v₁ (hrana {v₀, v₁} je součástí P). Druhý soused vj (pro j ≥ 2) dává hranu {v₀, vj}." },
+        { bold: "Vznik cyklu:", text: "Hrana {v₀, vj} spolu s úsekem cesty v₀, v₁, …, vj tvoří cyklus: v₀ ➔ v₁ ➔ v₂ ➔ … ➔ vj ➔ v₀." },
+        { bold: "Závěr:", text: "G obsahuje cyklus." }
+      ]
+    },
+    rightCard: {
+      title: "Tracování na Grafu s 5 Vrcholy",
+      badge: "TRACENÍ",
+      type: "neutral",
+      items: [
+        { bold: "Graf:", text: "V = {1, 2, 3, 4, 5}, hrany {1,2}, {2,3}, {3,4}, {4,5}, {5,1}, {1,3}. Každý uzel má stupeň ≥ 2." },
+        { bold: "1. Nejdelší cesta:", text: "Zvolme např. P = (2, 1, 5, 4, 3) o délce 4." },
+        { bold: "2. Krajní vrchol v₀ = 2:", text: "Sousedé vrcholu 2 jsou {1, 3}. Oba leží na P (1 je v₁, 3 je v₄)." },
+        { bold: "3. Nalezený cyklus:", text: "Hrana {2, 3} + úsek cesty 2 ➔ 1 ➔ 5 ➔ 4 ➔ 3 dává cyklus 2 ➔ 1 ➔ 5 ➔ 4 ➔ 3 ➔ 2 délky 5." }
+      ]
+    }
+  });
+
+  // 12. Pracovaný příklad 2: Nejkratší cesta s nezápornými vahami
+  createTwoCardSlide(pres, {
+    breadcrumb,
+    title: "Pracovaný Příklad 2: Nejkratší Cesta Neobsahuje Cyklus",
+    leftCard: {
+      title: "Věta a Předpoklad pro Spor",
+      badge: "VĚTA",
+      type: "neutral",
+      items: [
+        { bold: "Věta:", text: "V grafu G = (V, E, w) s nezápornými vahami (w(e) ≥ 0) neobsahuje žádná nejkratší cesta z s do t žádný cyklus." },
+        { bold: "1. Předpoklad pro spor:", text: "Předpokládejme pro spor, že nejkratší cesta P z s do t obsahuje cyklus C." },
+        { bold: "2. Rozklad na úseky:", text: "s ──(P₁)──> u ──(C)──> u ──(P₂)──> t. Celková váha je w(P) = w(P₁) + w(C) + w(P₂)." }
       ]
     },
     rightCard: {
       title: "Odvození Sporu Vynecháním Cyklu",
-      badge: "ZKRÁCENÍ TRASY",
-      type: "emerald",
+      badge: "SPOR",
+      type: "rose",
       items: [
-        { bold: "Vynechání cyklu C:", text: "Sestrojíme novou cestu P': s ➔ P₁ ➔ u ➔ P₂ ➔ t (vynecháme oběhnutí cyklu C)." },
-        { bold: "Váha nové cesty:", text: "Protože w(e) ≥ 0, platí w(C) ≥ 0. Je-li w(C) > 0, pak w(P') < w(P), což je SPOR s minimalitou P!" },
-        { bold: "Nulový cyklus (w(C) = 0):", text: "Cesta P' má stejnou váhu, ale méně hran. Nejkratší jednoduchá cesta cyklus nikdy nepotřebuje." }
+        { bold: "3. Nová cesta P':", text: "Vynecháním cyklu C získáme novou cestu P': s ──(P₁)──> u ──(P₂)──> t." },
+        { bold: "4. Nezápory vah:", text: "Protože váhy jsou nezáporné, platí w(C) ≥ 0." },
+        { bold: "Případ w(C) > 0:", text: "Pak w(P') < w(P), což je SPOR s tím, že P byla nejkratší." },
+        { bold: "Případ w(C) = 0:", text: "Nová cesta P' má stejnou váhu, ale striktně méně hran — což vylučuje nutnost cyklu na nejkratší jednoduché trase." }
       ]
     }
   });
 
-  // 14. Constructive vs Non-constructive Existence
+  // 13. Konstruktivní vs. Nekonstruktivní existence
   createTwoCardSlide(pres, {
     breadcrumb,
     title: "Konstruktivní vs. Nekonstruktivní Existence",
     leftCard: {
-      title: "Nekonstruktivní Existence (Matematika)",
-      badge: "VÍME, ŽE EXISTUJE",
+      title: "Nekonstruktivní Existence",
+      badge: "NEKONSTRUKTIVNÍ",
       type: "rose",
       items: [
-        { bold: "Podstata:", text: "Důkaz sporem, Dirichletův princip i extremální princip dokazují, že hledaný prvek MUSÍ zaručeně existovat." },
-        { bold: "Omezení:", text: "Nedávají žádný návod, postup ani algoritmus, jak ho v konkrétních datech najít nebo sestrojit." },
-        { bold: "Příklad:", text: "Víme, že dva proteiny mají stejný stupeň, ale nevíme které, dokud celou síť neprohledáme." }
+        { bold: "Společná vlastnost metod:", text: "Důkaz sporem, Dirichletův princip i Extremální princip jsou nekonstruktivní." },
+        { bold: "Co dokážou:", text: "Dokážou, že hledaný prvek (dva vrcholy se stejným stupněm, cyklus, nejkratší cesta) musí zaručeně existovat." },
+        { bold: "Omezení:", text: "Nedávají žádný recept ani algoritmus, jak ho v datech najít či sestrojit." }
       ]
     },
     rightCard: {
-      title: "Konstruktivní Existence (Informatika)",
-      badge: "MÁME KÓD V C++",
+      title: "Konstruktivní Existence (Zlatý Standard)",
+      badge: "KONSTRUKTIVNÍ",
       type: "emerald",
       items: [
-        { bold: "Zlatý standard IT:", text: "Existenci dokážeme tím, že předložíme funkční deterministický algoritmus v C++, který prvek přímo zkonstruuje." },
-        { bold: "Výsledek v ruce:", text: "Po doběhnutí kódu držíme nalezený objekt, cestu či rozklad přímo v paměti." },
-        { bold: "Synergie:", text: "Nekonstruktivní důkaz zaručí, že algoritmus nemůže skončit nezdarem (řešení existuje!)." }
+        { bold: "Zlatý standard v informatice:", text: "Existenci dokážeme tím, že předložíme konkrétní funkční algoritmus (kód v C++)." },
+        { bold: "Spolehlivý výsledek:", text: "Algoritmus řešení krok za krokem spolehlivě sestrojí — po doběhnutí kódu držíme výsledek přímo v ruce." }
       ]
     }
   });
 
-  // 15. Bonus Task 1: Delta(G) <= 2 is Path or Cycle
+  // 14. Procvičovací úlohy: Důkazy Sporem
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Zkoušková Úloha: Graf s Δ(G) ≤ 2 je Cesta či Cyklus",
+    title: "Procvičovací Úlohy: Důkazy Sporem v Grafech",
     leftCard: {
-      title: "Formulace & Extremální Krok",
-      badge: "DŮKAZ EXTRÉMEM",
-      type: "blue",
+      title: "Úloha 1: Stupeň Δ(G) ≤ 2 je Cesta nebo Cyklus",
+      badge: "ÚLOHA 1",
+      type: "neutral",
       items: [
-        { bold: "Tvrzení:", text: "Každý souvislý graf G s maximálním stupněm Δ(G) ≤ 2 je buď cesta, nebo kružnice." },
-        { bold: "Nejdelší cesta:", text: "Zvolme v G nejdelší jednoduchou cestu P = (v₀, v₁, ..., v_k)." },
-        { bold: "Předpoklad pro spor:", text: "Předpokládejme, že v grafu existuje uzel u ležící mimo cestu P (u ∉ P)." }
+        { bold: "Tvrzení:", text: "Každý souvislý graf G s deg(v) ≤ 2 je buď cesta (P_n), nebo kružnice (C_n)." },
+        { bold: "Důkaz sporem:", text: "Zvolme nejdelší cestu P = (v₀, …, vk). Předpokládejme pro spor uzel u ∉ P. Protože G je souvislý, existuje hrana do P. Vnitřní vrcholy již mají stupeň 2. Hrana z u by musela vést do v₀ nebo vk — to by však prodloužilo P, což je SPOR s maximalitou cesty P! Žádný uzel mimo P neexistuje." }
       ]
     },
     rightCard: {
-      title: "Dosažení Sporu s Maximalitou P",
-      badge: "💥 ROZPOR",
-      type: "emerald",
+      title: "Úloha 2: Každý Konečný DAG Má Alespoň Jeden Zdroj",
+      badge: "ÚLOHA 2",
+      type: "warm",
       items: [
-        { bold: "Souvislost grafu:", text: "Protože G je souvislý, musí z u vést hrana k nějakému vrcholu na cestě P." },
-        { bold: "Vnitřní uzly jsou plné:", text: "Uzly v₁ až v_{k-1} již mají stupeň 2 (hrany k sousedům na P). Nemohou se spojit s u (Δ(G) ≤ 2)." },
-        { bold: "Krajní uzel:", text: "Hrana by musela vést do v₀ nebo v_k. To by však umožnilo prodloužit cestu P o uzel u, což je SPOR s maximalitou P!" }
-      ]
-    }
-  });
-
-  // 16. Bonus Task 2: DAG always has a Source
-  createTwoCardSlide(pres, {
-    breadcrumb,
-    title: "Zkoušková Úloha: Každý Konečný DAG má Zdroj",
-    leftCard: {
-      title: "Formulace & Zpětný Řetězec",
-      badge: "DŮKAZ SPOREM",
-      type: "orange",
-      items: [
-        { bold: "Tvrzení:", text: "V každém konečném orientovaném acyklickém grafu (DAG) existuje uzel se vstupním stupněm deg⁻(v) = 0 (zdroj)." },
-        { bold: "Předpoklad pro spor:", text: "Předpokládejme, že v DAGu žádný zdroj neexistuje, tedy každý uzel má alespoň jednoho předchůdce (deg⁻(v) ≥ 1)." },
-        { bold: "Konstrukce zpětné trasy:", text: "Vybereme u₀. Má předchůdce u₁, ten má předchůdce u₂, atd. Vzniká posloupnost ... ➔ u₂ ➔ u₁ ➔ u₀." }
-      ]
-    },
-    rightCard: {
-      title: "Dirichletův Cyklus & Rozpor",
-      badge: "💥 ROZPOR S DAGEM",
-      type: "emerald",
-      items: [
-        { bold: "Dirichlet na konečné množině:", text: "Graf má pouze n vrcholů. Po n + 1 krocích dozadu se podle Dirichleta musí alespoň jeden vrchol zopakovat: u_i = u_j." },
-        { bold: "Vzniklý orientovaný cyklus:", text: "Mezi u_i a u_j vzniká orientovaný cyklus v grafu." },
-        { bold: "Dosažení sporu:", text: "To je přímý SPOR s definicí DAGu, který nesmí obsahovat žádný orientovaný cyklus. Zdroj tedy nutně existuje!" }
-      ]
-    }
-  });
-
-  // 17. Summary of Module 6
-  createSingleCardSlide(pres, {
-    breadcrumb,
-    title: "Shrnutí Modulu 6: Důkazy Sporem a Extrémy",
-    card: {
-      title: "Klíčové Zkouškové Zásady pro AG1",
-      badge: "ZKOUŠKOVÉ DESATERO",
-      type: "orange",
-      items: [
-        { bold: "Formální šablona sporem:", text: "Vždy jasně napište: 'Předpokládejme pro spor ¬B', logicky odvoďte rozpor 💥 a uzavřete 'Proto platí B'." },
-        { bold: "Dirichletův princip:", text: "n předmětů do k přihrádek (n > k) vynutí alespoň v jedné přihrádce kolizi (≥ 2 předměty)." },
-        { bold: "Trik se stupni 0 a n - 1:", text: "Izolovaný vrchol a vrchol spojený se všemi se v grafu vzájemně vylučují ➔ n vrcholů do n-1 hodnot stupňů." },
-        { bold: "Extremální princip:", text: "Při důkazu existence cyklu zvolte nejdelší jednoduchou cestu P. Její koncový vrchol musí mít sousedy uvnitř P, což okamžitě uzavře cyklus." },
-        { bold: "Acyklické procesy (DAG):", text: "Zpětné trasování v konečném grafu bez zdrojů nutně narazí na Dirichletův cyklus, což vyvrátí acykličnost." }
+        { bold: "Tvrzení:", text: "V každém konečném DAGu existuje uzel se vstupním stupněm deg⁻(v) = 0." },
+        { bold: "Důkaz sporem:", text: "Předpokládejme pro spor, že každý uzel má deg⁻(v) ≥ 1. Vybereme libovolný uzel u₀ a postupujeme dozadu: … ➔ u₂ ➔ u₁ ➔ u₀. Protože graf má pouze n vrcholů, podle Dirichletova principu se po nejvýše n+1 krocích musí alespoň jeden vrchol zopakovat: u_i = u_j. Tím vzniká orientovaný cyklus, což je SPOR s definicí DAGu!" }
       ]
     }
   });

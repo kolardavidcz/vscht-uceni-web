@@ -1,13 +1,12 @@
 /**
  * Module 7: Grafy v C++ & Reprezentace v Paměti
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-bio-grafy-b.md
+ * Exact 1:1 text fidelity with website markdown.
  */
 import {
   createLectureDividerSlide,
   createTwoCardSlide,
-  createSingleCardSlide,
-  createCodeSlide,
-  createThreeCardSlide,
-  createProofSlide
+  createTableSlide
 } from "../pptx_engine.mjs";
 
 export function addModule7Slides(pres) {
@@ -17,353 +16,217 @@ export function addModule7Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 7,
     title: "Grafy v C++ & Reprezentace v Paměti",
-    goal: "Ovládnout základní grafové pojmy (incidence, adjacence, Handshaking Lemma, sled, cesta, cyklus), pochopit paměťové reprezentace grafů v C++ (matice sousedství vs. seznam sousedů) a analyzovat chování DFS a BFS na reálných sítích.",
+    goal: "Pochopit počítačovou reprezentaci grafů v jazyce C++ (PA2 ➔ AG1), porovnat matici sousedství a seznam sousedů z hlediska časové a paměťové složitosti, porozumět prohledávání DFS vs. BFS a provést praktickou analýzu proteinové interakční sítě (PPI).",
     topics: [
-      "Minimum z grafových pojmů: Incidence, adjacence a Handshaking Lemma",
-      "Sled (Walk), Cesta (Path) a Cyklus (Cycle)",
-      "Počítačová reprezentace grafů v C++: Proč záleží na paměťové struktuře",
-      "Matice sousedství (Adjacency Matrix): Paměť Θ(n²), test hrany O(1)",
-      "Seznam sousedů (Adjacency List): Paměť Θ(n + m), průchod Θ(deg(u))",
-      "Srovnání struktur: Kdy použít matici a kdy seznam sousedů",
-      "C++ Implementace: Reprezentace grafu pomocí std::vector",
-      "DFS (Depth-First Search): Mechanismus zásobníku a zanořování",
-      "BFS (Breadth-First Search): Fronta, vlnoplochy a nejkratší cesta",
-      "Trasování na konkrétním grafu: Proč DFS našlo 6 hran a BFS 4 hrany",
-      "Úloha PPI: Analýza proteinové interakční sítě o 6 proteinech",
-      "Stupně, Huby a Listy v biologických sítích",
-      "Matice sousedství a ověření Handshaking Lemmatu pro PPI",
-      "Shrnutí a doporučení pro zkouškové programování v PA2 a AG1"
+      "0. Minimum z Grafových Pojmů: Incidence, Adjacence, Stupeň",
+      "Handshaking Lemma, Sled (Walk), Cesta (Path) a Cyklus",
+      "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)",
+      "1.1 Matice Sousedství (Adjacency Matrix) & Složitosti",
+      "1.2 Seznam Sousedů (Adjacency List) & Složitosti",
+      "Srovnání paměti a rychlosti: Θ(n²) vs. Θ(n + m)",
+      "2. Dva Přístupy k Prohledávání: DFS vs. BFS",
+      "DFS: Hloubkové prohledávání a proč nezaručuje nejkratší cestu",
+      "BFS: Šířkové prohledávání a nalezení nejkratší cesty",
+      "3. Úloha: Analýza Proteinové Interakční Sítě (PPI)",
+      "Stupně vrcholů, Huby, Listy, Matice sousedství a Handshaking"
     ]
   });
 
-  // 2. Minimum Graph Terms
+  // 2. Section 0: Minimum z grafových pojmů
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Minimum z Grafových Pojmů",
+    title: "0. Minimum z Grafových Pojmů",
     leftCard: {
-      title: "Základní Vztahy Mezi Prvky",
+      title: "Základní Vztahy a Handshaking Lemma",
+      badge: "DEFINICE POJMŮ",
+      type: "neutral",
+      items: [
+        { bold: "Incidence:", text: "Vrchol u a hrana e jsou incidentní, pokud u ∈ e." },
+        { bold: "Adjacence (sousedství):", text: "Dva vrcholy u, v jsou sousední, pokud {u, v} ∈ E." },
+        { bold: "Stupeň vrcholu deg(v):", text: "Počet hran incidentních s vrcholem v." },
+        { bold: "Handshaking Lemma:", text: "∑_{v ∈ V} deg(v) = 2|E| (součet všech stupňů je vždy dvojnásobek počtu hran)." }
+      ]
+    },
+    rightCard: {
+      title: "Sled, Cesta a Cyklus",
+      badge: "POHYB V GRAFU",
+      type: "warm",
+      items: [
+        { bold: "Sled (Walk):", text: "Střídavá posloupnost vrcholů a hran (v₀, e₁, v₁, e₂, …, ek, vk), kde se vrcholy i hrany mohou opakovat." },
+        { bold: "Cesta (Path):", text: "Sled, ve kterém se neopakuje žádný vrchol (a tedy ani hrana)." },
+        { bold: "Cyklus (Cycle):", text: "Uzavřený sled (v₀, e₁, v₁, …, ek, v₀) délky k ≥ 3, kde jsou všechny vnitřní vrcholy navzájem různé." }
+      ]
+    }
+  });
+
+  // 3. Section 1: Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)
+  createTwoCardSlide(pres, {
+    breadcrumb,
+    title: "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)",
+    leftCard: {
+      title: "Paměť a Výkon Algoritmů",
+      badge: "PA2 ➔ AG1",
+      type: "neutral",
+      items: [
+        { bold: "Způsob uložení rozhoduje:", text: "V předmětech PA2 a AG1 budete grafové algoritmy zapisovat v jazyce C++. Způsob, jakým graf uložíte do paměti, rozhodne o tom, zda váš program proběhne za 0.01 sekundy, nebo vyprší časový limit (Time Limit Exceeded)." },
+        { bold: "Základní značení:", text: "Uvažujme graf G = (V, E) o n = |V| vrcholech a m = |E| hranách. Vrcholy očíslujeme od 0 do n - 1." }
+      ]
+    },
+    rightCard: {
+      title: "Matice Sousedství vs. Seznam Sousedů",
+      badge: "DVA PŘÍSTUPY",
+      type: "warm",
+      items: [
+        { bold: "1. Matice sousedství (Adjacency Matrix):", text: "Dvoudimenzionální pole typu n × n. Vhodné pro husté grafy (m ≈ n²)." },
+        { bold: "2. Seznam sousedů (Adjacency List):", text: "Pole dynamických vektorů std::vector. Optimální pro řídké grafy (m ≪ n²)." },
+        { bold: "Význam volby:", text: "Špatná volba reprezentace může vést k překročení paměti (Memory Limit) nebo času (Time Limit)." }
+      ]
+    }
+  });
+
+  // 4. Section 1.1: Matice Sousedství
+  createTwoCardSlide(pres, {
+    breadcrumb,
+    title: "1.1 Matice Sousedství (Adjacency Matrix)",
+    leftCard: {
+      title: "Definice Matice A typu n × n",
       badge: "DEFINICE",
-      type: "orange",
+      type: "neutral",
       items: [
-        { bold: "Incidence:", text: "Vrchol u a hrana e jsou incidentní, pokud vrchol leží na hraně: u ∈ e." },
-        { bold: "Adjacence (sousedství):", text: "Dva vrcholy u, v jsou sousední, pokud mezi nimi vede hrana: {u, v} ∈ E." },
-        { bold: "Stupeň vrcholu deg(v):", text: "Počet incidentních hran vrcholu v. Izolovaný uzel má stupeň 0, list má stupeň 1." },
-        { bold: "Handshaking Lemma:", text: "∑_{v∈V} deg(v) = 2|E|. Součet stupňů všech vrcholů je roven přesně dvojnásobku počtu hran!" }
+        { bold: "Definice:", text: "Graf reprezentujeme dvoudimenzionálním polem (maticí) A typu n × n:" },
+        { bold: "A[i][j]:", text: "1 pokud {v_i, v_j} ∈ E (nebo (v_i, v_j) ∈ E), 0 pokud hrana neexistuje." },
+        { bold: "Symetrie:", text: "U neorientovaného grafu je matice symetrická: A[i][j] = A[j][i]." }
       ]
     },
     rightCard: {
-      title: "Typy Pohybu po Grafu",
-      badge: "SLED vs. CESTA vs. CYKLUS",
-      type: "emerald",
+      title: "Složitosti Matice Sousedství",
+      badge: "SLOŽITOST",
+      type: "warm",
       items: [
-        { bold: "Sled (Walk):", text: "Střídavá posloupnost (v₀, e₁, v₁, ..., e_k, v_k). Vrcholy i hrany se MOHOU opakovat (můžeme se vracet)." },
-        { bold: "Cesta (Path):", text: "Sled, ve kterém se NEOPAKUJE ŽÁDNÝ VRCHOL (a tedy ani žádná hrana). Jednoduchý přímý průchod." },
-        { bold: "Cyklus (Cycle):", text: "Uzavřený sled délky k ≥ 3, kde se neopakuje žádný vrchol kromě shody prvního a posledního (v₀ = v_k)." }
+        { bold: "Paměťová složitost:", text: "Θ(n²) — bez ohledu na počet hran m." },
+        { bold: "Test existence hrany {u, v}:", text: "O(1) — okamžitý přístup do pole." },
+        { bold: "Průchod sousedů vrcholu u:", text: "Θ(n) — projití celého řádku matice." }
       ]
     }
   });
 
-  // 3. Why Memory Representation Matters
+  // 5. Section 1.2: Seznam Sousedů
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Počítačová Reprezentace Grafů v C++",
+    title: "1.2 Seznam Sousedů (Adjacency List)",
     leftCard: {
-      title: "Dopad Volby Reprezentace",
-      badge: "PA2 ➔ AG1 ROZDÍL",
-      type: "orange",
+      title: "Definice Seznamu Sousedů v C++",
+      badge: "DEFINICE",
+      type: "neutral",
       items: [
-        { bold: "Klíčové rozhodnutí:", text: "Způsob uložení grafu do paměti rozhoduje o tom, zda program proběhne za 0.01 s, nebo skončí TLE (Time Limit Exceeded)." },
-        { bold: "Typické zkouškové zadání:", text: "Graf má n = 100 000 vrcholů a m = 200 000 hran (řídký graf)." },
-        { bold: "Chybná volba matice:", text: "n² prvků = 10¹⁰ bajtů ≈ 10 GB RAM ➔ okamžitý Memory Limit Exceeded / pád programu!" },
-        { bold: "Správná volba seznamu:", text: "Uchová pouze reálné hrany: 200 000 prvků ≈ pár megabajtů RAM." }
+        { bold: "Princip:", text: "Pro každý vrchol u ∈ V uchováváme seznam (dynamické pole std::vector) všech vrcholů v, které jsou s u spojeny hranou." },
+        { bold: "Využití paměti:", text: "Ukládáme pouze skutečně existující hrany, ne prázdná místa." }
       ]
     },
     rightCard: {
-      title: "Dva Hlavní Přístupy",
-      badge: "STRUKTURY",
-      type: "blue",
-      items: [
-        { bold: "1. Matice sousedství (Adjacency Matrix):", text: "Dvojrozměrné pole n × n. Vhodné pro husté grafy (m ≈ n²) a okamžitý test hrany." },
-        { bold: "2. Seznam sousedů (Adjacency List):", text: "Pole seznamů sousedů (vector<vector<int>>). Vhodné pro řídké grafy a průchody BFS/DFS." }
-      ]
-    }
-  });
-
-  // 4. Adjacency Matrix
-  createTwoCardSlide(pres, {
-    breadcrumb,
-    title: "1. Matice Sousedství (Adjacency Matrix)",
-    leftCard: {
-      title: "Definice a Paměťové Chování",
-      badge: "MATICE n × n",
-      type: "orange",
-      items: [
-        { bold: "Definice:", text: "A[i][j] = 1 pokud {v_i, v_j} ∈ E, jinak A[i][j] = 0." },
-        { bold: "Paměťová složitost:", text: "Θ(n²) bez ohledu na počet hran m. I prázdný graf bez hran zabírá celých n² buněk." },
-        { bold: "Symetrie u neorientovaných grafů:", text: "A[i][j] = A[j][i]. Matice je symetrická podle hlavní diagonály." },
-        { bold: "Smyčky:", text: "Pokud graf nemá smyčky, hlavní diagonála A[i][i] obsahuje samé nuly." }
-      ]
-    },
-    rightCard: {
-      title: "Výpočetní Operace v Matici",
-      badge: "SLOŽITOSTI",
+      title: "Složitosti Seznamu Sousedů",
+      badge: "SLOŽITOST",
       type: "emerald",
       items: [
-        { bold: "Test existence hrany {u, v}:", text: "O(1) – okamžitý přístup do pole na pozici A[u][v]." },
-        { bold: "Průchod všech sousedů uzlu u:", text: "Θ(n) – musíme projít celý řádek délky n a otestovat každou nulu a jedničku." },
-        { bold: "Vhodné použití:", text: "Husté sítě (m ≈ n²), Floyd-Warshallův algoritmus, maticové násobení pro počet sledů délky k." }
+        { bold: "Paměťová složitost:", text: "Θ(n + m) — optimální pro řídké grafy." },
+        { bold: "Test existence hrany {u, v}:", text: "O(deg(u)) — prohledání sousedů vrcholu u." },
+        { bold: "Průchod sousedů vrcholu u:", text: "Θ(deg(u)) — průchod pouze reálných sousedů." }
       ]
     }
   });
 
-  // 5. Adjacency List
-  createTwoCardSlide(pres, {
+  // 6. Srovnání reprezentací: Tabulka
+  createTableSlide(pres, {
     breadcrumb,
-    title: "2. Seznam Sousedů (Adjacency List)",
-    leftCard: {
-      title: "Struktura Dynamických Seznamů",
-      badge: "SEZNAM SOUSEDŮ",
-      type: "emerald",
-      items: [
-        { bold: "Princip:", text: "Pro každý vrchol u ∈ V uchováváme dynamické pole sousedů: std::vector<int> adj[u]." },
-        { bold: "Paměťová složitost:", text: "Θ(n + m). Optimální pro řídké grafy, ukládáme pouze existující vrcholy a hrany." },
-        { bold: "Neorientovaný graf:", text: "Každá neorientovaná hrana {u, v} je uložena dvakrát: v v adj[u] a u v adj[v]." },
-        { bold: "Orientovaný graf:", text: "Hrana (u, v) je uložena pouze jednou: v v seznamu adj[u]." }
-      ]
-    },
-    rightCard: {
-      title: "Výpočetní Operace v Seznamu",
-      badge: "SLOŽITOSTI",
-      type: "blue",
-      items: [
-        { bold: "Test existence hrany {u, v}:", text: "O(deg(u)) – musíme projít seznam sousedů vrcholu u." },
-        { bold: "Průchod všech sousedů uzlu u:", text: "Θ(deg(u)) – procházíme pouze reálné sousedy bez testování neexistujících hran." },
-        { bold: "Standard v praxi:", text: "BFS a DFS na seznamu sousedů běží v optimálním čase O(n + m)." }
-      ]
-    }
-  });
-
-  // 6. Comparison Table
-  createThreeCardSlide(pres, {
-    breadcrumb,
-    title: "Srovnání: Matice Sousedství vs. Seznam Sousedů",
-    card1: {
-      title: "Paměťová Náročnost",
-      badge: "RAM",
-      type: "orange",
-      items: [
-        { bold: "Matice sousedství:", text: "Θ(n²) – kvadratická, nezávisí na počtu hran." },
-        { bold: "Seznam sousedů:", text: "Θ(n + m) – lineární s velikostí grafu." },
-        { bold: "Vítěz pro řídké grafy:", text: "Seznam sousedů (ušetří gigabajty RAM)." }
-      ]
-    },
-    card2: {
-      title: "Test Existence Hrany {u, v}",
-      badge: "TEST HRANY",
-      type: "emerald",
-      items: [
-        { bold: "Matice sousedství:", text: "O(1) – přímý index v poli." },
-        { bold: "Seznam sousedů:", text: "O(deg(u)) – sekvenční vyhledání v poli." },
-        { bold: "Vítěz pro dotazy:", text: "Matice sousedství (okamžitá odpověď)." }
-      ]
-    },
-    card3: {
-      title: "Průchod Sousedů (BFS / DFS)",
-      badge: "PROHLEDÁVÁNÍ",
-      type: "blue",
-      items: [
-        { bold: "Matice sousedství:", text: "Θ(n) na uzel ➔ celkem O(n²)." },
-        { bold: "Seznam sousedů:", text: "Θ(deg(u)) na uzel ➔ celkem O(n + m)." },
-        { bold: "Vítěz pro průchody:", text: "Seznam sousedů (běží v O(n + m))." }
-      ]
-    }
-  });
-
-  // 7. C++ Implementation
-  createCodeSlide(pres, {
-    breadcrumb,
-    title: "C++ Kód: Reprezentace Grafu Seznamem Sousedů",
-    code: `// C++ reprezentace neorientovaného neohodnoceného grafu
-#include <iostream>
-#include <vector>
-
-class Graph {
-public:
-    int n; // počet vrcholů
-    std::vector<std::vector<int>> adj; // seznam sousedů
-
-    explicit Graph(int vertices) : n(vertices), adj(vertices) {}
-
-    // Přidání neorientované hrany mezi u a v
-    void addEdge(int u, int v) {
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-
-    // Výpis sousedů vrcholu u
-    void printNeighbors(int u) const {
-        std::cout << "Sousede vrcholu " << u << ": ";
-        for (int v : adj[u]) {
-            std::cout << v << " ";
-        }
-        std::cout << "\\n";
-    }
-};`,
-    notes: [
-      { bold: "adj[u]:", text: "Dynamický vektor obsahující všechny indexy sousedních vrcholů." },
-      { bold: "Obousměrnost:", text: "U neorientovaného grafu se hrana vloží do obou seznamů adj[u] i adj[v]." },
-      { bold: "Indexace od 0:", text: "Vrcholy číslujeme od 0 do n - 1 dle C++ konvence." }
+    title: "Srovnání Reprezentací Grafu v C++",
+    subtitle: "Podrobné porovnání matice sousedství a seznamu sousedů:",
+    headers: ["Vlastnost / Operace", "Matice Sousedství (Adjacency Matrix)", "Seznam Sousedů (Adjacency List)"],
+    colWidths: [3.4, 4.2, 4.1],
+    rows: [
+      ["Paměťová složitost", "Θ(n²) — bez ohledu na počet hran m", "Θ(n + m) — optimální pro řídké grafy"],
+      ["Test existence hrany {u, v}", "O(1) — okamžitý přístup do pole", "O(deg(u)) — prohledání sousedů vrcholu u"],
+      ["Průchod sousedů vrcholu u", "Θ(n) — projití celého řádku matice", "Θ(deg(u)) — průchod pouze reálných sousedů"],
+      ["Vhodnost pro typ grafu", "Husté grafy (m ≈ n²)", "Řídké grafy (m ≪ n², např. stromy a bio sítě)"]
     ]
   });
 
-  // 8. DFS vs BFS Overview
+  // 7. Section 2: Prohledávání DFS vs. BFS
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Dva Přístupy k Prohledávání: DFS vs. BFS",
+    title: "2. Dva Přístupy k Prohledávání: DFS vs. BFS",
     leftCard: {
-      title: "DFS (Depth-First Search)",
-      badge: "DO HLOUBKY (ZÁSOBNÍK)",
+      title: "DFS (Hloubkové Prohledávání)",
+      badge: "HLOUBKA",
       type: "rose",
       items: [
-        { bold: "Základní strategie:", text: "Vnořuje se co nejhlouběji podél jedné větve, dokud nenarazí na slepou uličku nebo cíl." },
-        { bold: "Datová struktura:", text: "Zásobník (LIFO) nebo rekurzivní volání funkcí v programovém call stacku." },
-        { bold: "Garance nejkratší cesty:", text: "NE! DFS najde libovolnou cestu, často dlouhou a oklikou." },
-        { bold: "Využití:", text: "Topologické řazení DAGů, hledání silně souvislých komponent (Tarjan), detekce cyklů." }
+        { bold: "Princip průchodu:", text: "Vnoří se podél větve: v₀ ─(e₁)➔ v₁ ─(e₂)➔ v₂ ─(e₃)➔ v₃ ─(e₄)➔ v₄ ─(e₇)➔ v₆ ─(e₈)➔ v₇ (slepá ulička)." },
+        { bold: "Návrat a cíl:", text: "Vrátí se a přes e₉ dorazí k cíli v₈ (C) oklikou (6 hran: e₁, e₂, e₃, e₄, e₇, e₉)." },
+        { bold: "Klíčová vlastnost:", text: "Nezaručuje nejkratší cestu!" }
       ]
     },
     rightCard: {
-      title: "BFS (Breadth-First Search)",
-      badge: "DO ŠÍŘKY (FRONTA)",
+      title: "BFS (Šířkové Prohledávání)",
+      badge: "ŠÍŘKA",
       type: "emerald",
       items: [
-        { bold: "Základní strategie:", text: "Šíří se po koncentrických vlnoplochách (vrstva po vrstvě podle vzdálenosti od startu)." },
-        { bold: "Datová struktura:", text: "Fronta (FIFO) – std::queue v C++." },
-        { bold: "Garance nejkratší cesty:", text: "ANO! V neohodnoceném grafu BFS zaručeně najde cestu s minimálním počtem hran." },
-        { bold: "Využití:", text: "Nejkratší cesty, test bipartitnosti grafu (2-obarvení), minimální počet kroků." }
+        { bold: "Princip průchodu:", text: "Postupuje po vlnoplochách: v₀ ─(e₅)➔ v₅ ─(e₆)➔ v₄ ─(e₇)➔ v₆ ─(e₉)➔ v₈ (C)." },
+        { bold: "Nalezení cíle:", text: "Okamžitě nalezne nejkratší cestu po horní větvi (pouhé 4 hrany: e₅, e₆, e₇, e₉)." },
+        { bold: "Klíčová vlastnost:", text: "V neohodnoceném grafu zaručuje nalezení cesty s minimálním počtem hran." }
       ]
     }
   });
 
-  // 9. Tracing Graph Showcase: DFS vs BFS
+  // 8. Section 3: Úloha PPI - Zadání a Stupně
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Trasování DFS vs. BFS na Ukázkovém Grafu",
+    title: "3. Úloha: Analýza Proteinové Interakční Sítě (PPI)",
     leftCard: {
-      title: "Průchod DFS ze Startu S (v₀) do Cíle C (v₈)",
-      badge: "6 HRAN (OKLIKA)",
-      type: "rose",
+      title: "Zadání Úlohy PPI Sítě",
+      badge: "ZADÁNÍ ÚLOHY",
+      type: "neutral",
       items: [
-        { bold: "Postup zanoření:", text: "v₀ ─(e₁)→ v₁ ─(e₂)→ v₂ ─(e₃)→ v₃ ─(e₄)→ v₄ ─(e₇)→ v₆ ─(e₈)→ v₇." },
-        { bold: "Slepá ulička v₇:", text: "Uzel v₇ nemá další neprozkoumané sousedy. DFS provede návrat (backtrack) do v₆." },
-        { bold: "Dosažení cíle:", text: "Z v₆ po hraně e₉ dorazí do cíle v₈." },
-        { bold: "Nalezená cesta:", text: "6 hran: {e₁, e₂, e₃, e₄, e₇, e₉}. Prozkoumala zbytečně spodní smyčku grafu!" }
+        { bold: "Množina proteinů V:", text: "|V| = 6 proteinů {P₁, P₂, P₃, P₄, P₅, P₆}." },
+        { bold: "Množina interakcí E:", text: "E = { {P₁, P₂}, {P₁, P₃}, {P₂, P₃}, {P₃, P₄}, {P₄, P₅}, {P₄, P₆} }." },
+        { bold: "Úkoly k vyřešení:", text: "1. Určete stupně všech vrcholů deg(P_i). 2. Identifikujte proteiny s nejvyšším stupněm (Huby) a listy (deg(v) = 1). 3. Vypište matici sousedství A tohoto grafu. 4. Ověřte Handshaking Lemma ∑ deg(v) = 2|E|." }
       ]
     },
     rightCard: {
-      title: "Průchod BFS ze Startu S (v₀) do Cíle C (v₈)",
-      badge: "4 HRANY (NEJKRATŠÍ)",
-      type: "emerald",
+      title: "1. Stupně Vrcholů & 2. Huby a Listy",
+      badge: "ŘEŠENÍ 1 & 2",
+      type: "warm",
       items: [
-        { bold: "Vlna 1:", text: "Ze startu v₀ navštíví v₁ (dole) i v₅ (nahoře) ve vzdálenosti 1." },
-        { bold: "Vlna 2:", text: "Z v₅ expanduje do v₄ po hraně e₆." },
-        { bold: "Vlna 3:", text: "Z v₄ expanduje do v₆ po hraně e₇." },
-        { bold: "Vlna 4 (Cíl!):", text: "Z v₆ expanduje do cíle v₈ po hraně e₉. Nalezena nejkratší trasa o pouhých 4 hranách: {e₅, e₆, e₇, e₉}!" }
+        { bold: "P₁ a P₂:", text: "deg(P₁) = 2 (sousedi P₂, P₃), deg(P₂) = 2 (sousedi P₁, P₃)." },
+        { bold: "P₃ a P₄ (Huby):", text: "deg(P₃) = 3 (sousedi P₁, P₂, P₄), deg(P₄) = 3 (sousedi P₃, P₅, P₆). Proteiny P₃ a P₄ mají nejvyšší stupeň (deg = 3), představují lokální huby sítě spojené mostem e₄." },
+        { bold: "P₅ a P₆ (Listy):", text: "deg(P₅) = 1 (soused P₄), deg(P₆) = 1 (soused P₄). Proteiny P₅ a P₆ jsou listy (deg = 1)." }
       ]
     }
   });
 
-  // 10. PPI Network Task Statement
-  createSingleCardSlide(pres, {
-    breadcrumb,
-    title: "Úloha: Analýza Proteinové Interakční Sítě (PPI)",
-    card: {
-      title: "Zadání Protein-Proteinové Sítě",
-      badge: "BIOINFORMATICKÁ SÍŤ",
-      type: "orange",
-      items: [
-        { bold: "Množina proteinů (|V| = 6):", text: "V = {P₁, P₂, P₃, P₄, P₅, P₆}." },
-        { bold: "Množina interakcí (|E| = 6):", text: "E = {{P₁, P₂}, {P₁, P₃}, {P₂, P₃}, {P₃, P₄}, {P₄, P₅}, {P₄, P₆}}." },
-        { bold: "Otázka 1:", text: "Určete stupně všech vrcholů deg(P_i)." },
-        { bold: "Otázka 2:", text: "Identifikujte proteiny s nejvyšším stupněm (Huby) a listy (deg(v) = 1)." },
-        { bold: "Otázka 3:", text: "Sestrojte matici sousedství A tohoto grafu." },
-        { bold: "Otázka 4:", text: "Ověřte platnost Handshaking Lemmatu ∑ deg(v) = 2|E|." }
-      ]
-    }
-  });
-
-  // 11. PPI Solution: Degrees, Hubs and Leaves
+  // 9. Úloha PPI: Matice Sousedství a Handshaking Lemma
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Řešení PPI: Stupně, Huby a Listy",
+    title: "Úloha PPI: Matice Sousedství a Handshaking",
     leftCard: {
-      title: "Stupně Vrcholů deg(P_i)",
-      badge: "POČET INTERAKCÍ",
-      type: "blue",
+      title: "3. Matice Sousedství A (Velikost 6 × 6)",
+      badge: "MATICE A",
+      type: "neutral",
       items: [
-        { bold: "P₁ (deg = 2):", text: "Sousedí přes hrany e₁, e₂ s proteiny P₂ a P₃." },
-        { bold: "P₂ (deg = 2):", text: "Sousedí přes hrany e₁, e₃ s proteiny P₁ a P₃." },
-        { bold: "P₃ (deg = 3):", text: "Sousedí přes hrany e₂, e₃, e₄ s proteiny P₁, P₂ a P₄." },
-        { bold: "P₄ (deg = 3):", text: "Sousedí přes hrany e₄, e₅, e₆ s proteiny P₃, P₅ a P₆." },
-        { bold: "P₅ (deg = 1):", text: "Sousedí pouze přes hranu e₅ s proteinem P₄." },
-        { bold: "P₆ (deg = 1):", text: "Sousedí pouze přes hranu e₆ s proteinem P₄." }
+        { bold: "Řádek P₁:", text: "[0, 1, 1, 0, 0, 0]" },
+        { bold: "Řádek P₂:", text: "[1, 0, 1, 0, 0, 0]" },
+        { bold: "Řádek P₃:", text: "[1, 1, 0, 1, 0, 0]" },
+        { bold: "Řádek P₄:", text: "[0, 0, 1, 0, 1, 1]" },
+        { bold: "Řádek P₅:", text: "[0, 0, 0, 1, 0, 0]" },
+        { bold: "Řádek P₆:", text: "[0, 0, 0, 1, 0, 0]" }
       ]
     },
     rightCard: {
-      title: "Biologická Interpretace: Huby a Listy",
-      badge: "STRUKTURA SÍTĚ",
+      title: "4. Ověření Handshaking Lemmatu",
+      badge: "HANDSHAKING LEMMA",
       type: "emerald",
       items: [
-        { bold: "Lokální Huby (P₃ a P₄):", text: "Proteiny s nejvyšším stupněm (deg = 3). Tvoří klíčové komunikační uzly spojené mostem e₄." },
-        { bold: "Periferní Listy (P₅ a P₆):", text: "Proteiny se stupněm deg = 1. Koncové molekuly vázané výhradně na hub P₄." },
-        { bold: "Trojúhelníkový modul:", text: "Proteiny P₁, P₂, P₃ tvoří těsně vázaný proteinový komplex (kliku K₃)." }
-      ]
-    }
-  });
-
-  // 12. PPI Adjacency Matrix and Handshaking
-  createTwoCardSlide(pres, {
-    breadcrumb,
-    title: "Řešení PPI: Matice Sousedství & Handshaking",
-    leftCard: {
-      title: "Matice Sousedství A (6 × 6)",
-      badge: "BINÁRNÍ REPREZENTACE",
-      type: "orange",
-      items: [
-        { bold: "Řádek P₁:", text: "[0, 1, 1, 0, 0, 0] – sousedé P₂, P₃." },
-        { bold: "Řádek P₂:", text: "[1, 0, 1, 0, 0, 0] – sousedé P₁, P₃." },
-        { bold: "Řádek P₃:", text: "[1, 1, 0, 1, 0, 0] – sousedé P₁, P₂, P₄." },
-        { bold: "Řádek P₄:", text: "[0, 0, 1, 0, 1, 1] – sousedé P₃, P₅, P₆." },
-        { bold: "Řádek P₅:", text: "[0, 0, 0, 1, 0, 0] – soused P₄." },
-        { bold: "Řádek P₆:", text: "[0, 0, 0, 1, 0, 0] – soused P₄." }
-      ]
-    },
-    rightCard: {
-      title: "Ověření Handshaking Lemmatu",
-      badge: "∑ deg(v) = 2|E|",
-      type: "emerald",
-      items: [
-        { bold: "Počet hran |E|:", text: "Máme celkem 6 hran (e₁ až e₆). Pravá strana: 2|E| = 2 × 6 = 12." },
-        { bold: "Součet stupňů:", text: "∑ deg(P_i) = 2 + 2 + 3 + 3 + 1 + 1 = 12." },
-        { bold: "Rovnost:", text: "12 = 12 ✅. Věta o podání rukou bezchybně platí." },
-        { bold: "Počet jedniček v matici:", text: "Součet všech prvků matice A je přesně 12 (každá neorientovaná hrana dává dvě jedničky)." }
-      ]
-    }
-  });
-
-  // 13. Summary Checklist
-  createSingleCardSlide(pres, {
-    breadcrumb,
-    title: "Shrnutí Modulu 7: Grafy v C++ ke Zkoušce",
-    card: {
-      title: "Zkouškový Přehled Reprezentace Grafů",
-      badge: "LETNÍ PŘÍPRAVA NA AG1",
-      type: "orange",
-      items: [
-        { bold: "Incidence vs. Adjacence:", text: "Incidence je vztah vrchol-hrana (u ∈ e). Adjacence je vztah vrchol-vrchol ({u, v} ∈ E)." },
-        { bold: "Volba reprezentace v C++:", text: "V 95 % úloh v PA2/AG1 volte seznam sousedů (vector<vector<int>>). Šetří paměť a dává lineární čas O(n + m)." },
-        { bold: "Matice sousedství:", text: "Použijte pouze při hustých grafech (m ≈ n²) nebo když potřebujete testovat existenci hrany v čase O(1)." },
-        { bold: "BFS pro nejkratší cestu:", text: "BFS s frontou garantuje minimální počet hran na cestě v neohodnoceném grafu. DFS tuto vlastnost nemá!" },
-        { bold: "Handshaking Lemma:", text: "Součet stupňů je vždy sudé číslo 2|E|. Z toho plyne, že graf má vždy sudý počet vrcholů s lichým stupněm." }
+        { bold: "Počet hran |E|:", text: "|E| = 6 (e₁ až e₆). Tedy 2|E| = 2 × 6 = 12." },
+        { bold: "Součet stupňů:", text: "∑_{i=1}^6 deg(P_i) = 2 + 2 + 3 + 3 + 1 + 1 = 12." },
+        { bold: "Ověření rovnosti:", text: "Platí 12 = 12. Handshaking lemma je bezchybně ověřeno!" }
       ]
     }
   });

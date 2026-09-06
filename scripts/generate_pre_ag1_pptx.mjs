@@ -8,7 +8,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { FONT_DELTA, createCourseTitleSlide } from "./pptx_engine.mjs";
-import { addModule1Slides } from "./modules/module1_pa2.mjs";
 import { addModule2Slides } from "./modules/module2_dml_summer.mjs";
 import { addModule3Slides } from "./modules/module3_bio_graphs.mjs";
 import { addModule4Slides } from "./modules/module4_logic.mjs";
@@ -23,7 +22,7 @@ const rootDir = path.resolve(__dirname, "..");
 
 async function generate() {
   console.log("================================================================");
-  console.log("  PRE-AG1 POWERPOINT GENERATOR");
+  console.log("  PRE-AG1 POWERPOINT GENERATOR (MODULES 2-8)");
   console.log(`  Font Delta: ${FONT_DELTA >= 0 ? "+" : ""}${FONT_DELTA} pt`);
   console.log("================================================================");
 
@@ -47,10 +46,6 @@ async function generate() {
     author: "VŠCHT Učení · Obor Bioinformatika",
     date: "2026"
   });
-
-  // 1. Module 1: PA2 C++ Bridge to AG1
-  console.log("Generating Module 1: PA2 C++ Most k AG1...");
-  addModule1Slides(pres);
 
   // 2. Module 2: Summer Guide to Graph Math
   console.log("Generating Module 2: Letní Průvodce Grafovou Matematikou...");

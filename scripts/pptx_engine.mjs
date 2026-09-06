@@ -1,23 +1,24 @@
 /**
  * Pre-AG1 PowerPoint Engine
- * Provides website-matched branding, font scaling (FONT_DELTA), layout primitives,
- * and mathematical Unicode text helpers for generating slides via pptxgenjs.
+ * Provides website-matched branding, font scaling (FONT_SCALE and FONT_DELTA), layout primitives,
+ * native table renderer, and mathematical Unicode text helpers for generating slides via pptxgenjs.
  */
 
 // ============================================================================
-// GLOBAL CONFIGURATION: FONT SIZE DELTA
-// Change this value to adjust the font size across the entire presentation:
-// 0 = Default, +1, +2 = Larger, -1, -2 = Smaller
+// GLOBAL CONFIGURATION: FONT SIZING (2X BIGGER AS REQUESTED)
+// FONT_SCALE: Overall scale multiplier (2.0 = 2x bigger, 1.0 = standard)
+// FONT_DELTA: Incremental point adjustment (+1, +2, -1, -2, ...)
 // ============================================================================
+export const FONT_SCALE = 2.0;
 export const FONT_DELTA = 0;
 
 /**
- * Calculates responsive font size based on the base size and FONT_DELTA.
+ * Calculates responsive font size based on the base size, FONT_SCALE and FONT_DELTA.
  * @param {number} base Base font size in points
- * @returns {number} Scaled font size (never lower than 7pt)
+ * @returns {number} Scaled font size
  */
 export function fs(base) {
-  return Math.max(7, Math.round(base + FONT_DELTA));
+  return Math.max(9, Math.round(base * FONT_SCALE + FONT_DELTA));
 }
 
 // ============================================================================
@@ -58,10 +59,10 @@ export const colors = {
   bgCode: "160F0B",
   borderCode: "2D1E16",
   codeText: "F5F0EA",
-  codeMuted: "94A3B8",
-  codeAccent: "F97316",
+  codeAccent: "F95D12",
+  codeMuted: "A8A29E",
 
-  // Primary brand accents
+  // Brand Accents
   brandOrange: "F95D12",
   brandOrangeDark: "C2410C",
   brandOrangeLight: "FED7AA",
@@ -82,7 +83,7 @@ export const fonts = {
 
 /**
  * Clean text for PowerPoint XML to prevent entity parse errors.
- * Replaces unescaped ampersands.
+ * Normalizes ampersands and underscores.
  */
 export function cleanText(str) {
   if (typeof str !== "string") return "";
@@ -117,16 +118,22 @@ export function texToUnicode(text) {
 
   // Logic and set symbols
   s = s.replace(/\\forall/g, "∀")
+    .replace(/\\exists!/g, "∃!")
     .replace(/\\exists/g, "∃")
     .replace(/\\neg/g, "¬")
     .replace(/\\lor/g, "∨")
     .replace(/\\land/g, "∧")
     .replace(/\\implies/g, "⇒")
+    .replace(/\\Rightarrow/g, "⇒")
     .replace(/\\iff/g, "⇔")
+    .replace(/\\Leftrightarrow/g, "⇔")
     .replace(/\\bot/g, "⊥")
+    .replace(/\\top/g, "⊤")
+    .replace(/\\models/g, "⊨")
     .replace(/\\in/g, "∈")
     .replace(/\\notin/g, "∉")
     .replace(/\\subset/g, "⊂")
+    .replace(/\\subsetneq/g, "⊊")
     .replace(/\\subseteq/g, "⊆")
     .replace(/\\cup/g, "∪")
     .replace(/\\cap/g, "∩")
@@ -140,6 +147,12 @@ export function texToUnicode(text) {
     .replace(/\\equiv/g, "≡")
     .replace(/\\sum/g, "∑")
     .replace(/\\prod/g, "∏")
+    .replace(/\\mathbb\{N\}/g, "ℕ")
+    .replace(/\\mathbb\{R\}/g, "ℝ")
+    .replace(/\\mathcal\{E\}/g, "ℰ")
+    .replace(/\\mathcal\{S\}/g, "𝒮")
+    .replace(/\\binom\{n\}\{k\}/g, "(n nad k)")
+    .replace(/\\triangle/g, "△")
     .replace(/\\times/g, "×")
     .replace(/\\cdot/g, "·")
     .replace(/\\dots/g, "…")
@@ -168,25 +181,27 @@ export function addSlideChrome(slide, breadcrumb, title) {
     x: 0.8,
     y: 0.35,
     w: 11.733,
-    h: 0.25,
+    h: 0.3,
     fontFace: fonts.heading,
-    fontSize: fs(9),
+    fontSize: fs(5.5),
     color: colors.brandOrangeDark,
     bold: true,
     charSpacing: 1.5,
+    valign: "middle",
     margin: 0,
   });
 
   // Slide Title
   slide.addText(cleanText(title), {
     x: 0.8,
-    y: 0.58,
+    y: 0.68,
     w: 11.733,
-    h: 0.55,
+    h: 0.6,
     fontFace: fonts.heading,
-    fontSize: fs(21),
+    fontSize: fs(12),
     color: colors.textPrimary,
     bold: true,
+    valign: "middle",
     margin: 0,
   });
 
@@ -197,8 +212,9 @@ export function addSlideChrome(slide, breadcrumb, title) {
     w: 9.0,
     h: 0.25,
     fontFace: fonts.sans,
-    fontSize: fs(8.5),
+    fontSize: fs(4.5),
     color: colors.textLightMuted,
+    valign: "middle",
     margin: 0,
   });
 }
@@ -206,11 +222,11 @@ export function addSlideChrome(slide, breadcrumb, title) {
 /**
  * Creates the master presentation title slide.
  */
-export function createCourseTitleSlide(pres, { title, subtitle, note, date = "2026", author = "VŠCHT Učení · Obor Bioinformatika" }) {
+export function createCourseTitleSlide(pres, { title, subtitle, date = "2026", author = "VŠCHT Učení · Obor Bioinformatika" }) {
   const slide = pres.addSlide();
   slide.background = { color: colors.bgDark };
 
-  // Subtle background glow/card container
+  // Subtle background container
   slide.addShape(pres.ShapeType.roundRect, {
     x: 0.8,
     y: 0.8,
@@ -226,7 +242,7 @@ export function createCourseTitleSlide(pres, { title, subtitle, note, date = "20
     x: 1.4,
     y: 1.4,
     w: 4.8,
-    h: 0.38,
+    h: 0.45,
     rectRadius: 0.1,
     fill: { color: colors.brandOrangeDark },
     line: { color: colors.brandOrange, width: 1 },
@@ -235,10 +251,10 @@ export function createCourseTitleSlide(pres, { title, subtitle, note, date = "20
     x: 1.4,
     y: 1.4,
     w: 4.8,
-    h: 0.38,
+    h: 0.45,
     fontFace: fonts.heading,
-    fontSize: fs(10),
-    color: colors.textWhite,
+    fontSize: fs(6.5),
+    color: "FFFFFF",
     bold: true,
     align: "center",
     valign: "middle",
@@ -248,11 +264,11 @@ export function createCourseTitleSlide(pres, { title, subtitle, note, date = "20
   // Main Title
   slide.addText(cleanText(title), {
     x: 1.4,
-    y: 2.0,
+    y: 2.1,
     w: 10.5,
-    h: 1.4,
+    h: 1.5,
     fontFace: fonts.heading,
-    fontSize: fs(34),
+    fontSize: fs(18),
     color: colors.textDarkHeading,
     bold: true,
     lineSpacingMultiple: 1.1,
@@ -262,11 +278,11 @@ export function createCourseTitleSlide(pres, { title, subtitle, note, date = "20
   // Subtitle
   slide.addText(cleanText(subtitle), {
     x: 1.4,
-    y: 3.5,
+    y: 3.7,
     w: 10.5,
-    h: 0.9,
+    h: 1.0,
     fontFace: fonts.sans,
-    fontSize: fs(15),
+    fontSize: fs(9),
     color: colors.textDarkSub,
     lineSpacingMultiple: 1.2,
     margin: 0,
@@ -274,34 +290,34 @@ export function createCourseTitleSlide(pres, { title, subtitle, note, date = "20
 
   // Course Highlights Grid
   const highlights = [
-    "8 tématicky navazujících modulů",
-    "Přechod z C++ (PA2) k rigorózní matematice",
-    "Zkouškové šablony důkazů & eliminace pastí",
-    "Grafové bioinformatické reprezentace"
+    "7 tématicky navazujících modulů (2 až 8)",
+    "1:1 věrná kopie výukových materiálů",
+    "Důkazy dekonstrukcí, sporem & invarianty",
+    "Příprava studentů VŠCHT na FIT ČVUT"
   ];
   slide.addShape(pres.ShapeType.roundRect, {
     x: 1.4,
-    y: 4.6,
+    y: 4.8,
     w: 10.5,
-    h: 1.0,
+    h: 0.9,
     rectRadius: 0.1,
     fill: { color: colors.bgDark },
     line: { color: colors.bgCardDarkBorder, width: 1 },
   });
 
-  highlights.forEach((hl, idx) => {
-    const colX = 1.6 + idx * 2.55;
-    slide.addText(cleanText(hl), {
-      x: colX,
-      y: 4.75,
-      w: 2.4,
-      h: 0.7,
+  const hW = 10.5 / 4;
+  highlights.forEach((h, idx) => {
+    slide.addText(cleanText(h), {
+      x: 1.4 + idx * hW,
+      y: 4.8,
+      w: hW,
+      h: 0.9,
       fontFace: fonts.sans,
-      fontSize: fs(9.5),
-      color: colors.brandOrangeLight,
-      bold: true,
-      lineSpacingMultiple: 1.1,
-      margin: 0,
+      fontSize: fs(6),
+      color: colors.textDarkSub,
+      align: "center",
+      valign: "middle",
+      margin: 0.1,
     });
   });
 
@@ -312,7 +328,7 @@ export function createCourseTitleSlide(pres, { title, subtitle, note, date = "20
     w: 8.0,
     h: 0.3,
     fontFace: fonts.sans,
-    fontSize: fs(10),
+    fontSize: fs(5.5),
     color: colors.textDarkMuted,
     margin: 0,
   });
@@ -321,9 +337,9 @@ export function createCourseTitleSlide(pres, { title, subtitle, note, date = "20
 }
 
 /**
- * Creates a section divider slide introducing one of the 8 lectures.
+ * Creates a section divider slide introducing one of the lectures.
  */
-export function createLectureDividerSlide(pres, { lectureNumber, title, subtitle, goal, topics = [] }) {
+export function createLectureDividerSlide(pres, { lectureNumber, title, goal, topics = [] }) {
   const slide = pres.addSlide();
   slide.background = { color: colors.bgDark };
 
@@ -339,13 +355,13 @@ export function createLectureDividerSlide(pres, { lectureNumber, title, subtitle
   });
 
   // Category chip
-  slide.addText(`LEKCE ${lectureNumber} · PRE-AG1 KURZ`, {
+  slide.addText(`${lectureNumber} · PRE-AG1 KURZ`, {
     x: 1.4,
     y: 1.25,
     w: 6.0,
-    h: 0.3,
+    h: 0.35,
     fontFace: fonts.heading,
-    fontSize: fs(11),
+    fontSize: fs(6.5),
     color: colors.brandOrange,
     bold: true,
     charSpacing: 2.0,
@@ -355,11 +371,11 @@ export function createLectureDividerSlide(pres, { lectureNumber, title, subtitle
   // Lecture Title
   slide.addText(cleanText(title), {
     x: 1.4,
-    y: 1.6,
+    y: 1.65,
     w: 10.5,
     h: 1.1,
     fontFace: fonts.heading,
-    fontSize: fs(28),
+    fontSize: fs(15),
     color: colors.textDarkHeading,
     bold: true,
     lineSpacingMultiple: 1.1,
@@ -367,12 +383,13 @@ export function createLectureDividerSlide(pres, { lectureNumber, title, subtitle
   });
 
   // Goal Box
+  let contentStartY = 2.9;
   if (goal) {
     slide.addShape(pres.ShapeType.roundRect, {
       x: 1.4,
-      y: 2.8,
+      y: 2.85,
       w: 10.5,
-      h: 1.2,
+      h: 1.35,
       rectRadius: 0.1,
       fill: { color: colors.bgDark },
       line: { color: colors.brandOrangeDark, width: 1.2 },
@@ -382,9 +399,9 @@ export function createLectureDividerSlide(pres, { lectureNumber, title, subtitle
       x: 1.65,
       y: 2.95,
       w: 10.0,
-      h: 0.25,
+      h: 0.3,
       fontFace: fonts.heading,
-      fontSize: fs(10),
+      fontSize: fs(6),
       color: colors.brandOrange,
       bold: true,
       margin: 0,
@@ -392,48 +409,63 @@ export function createLectureDividerSlide(pres, { lectureNumber, title, subtitle
 
     slide.addText(cleanText(goal), {
       x: 1.65,
-      y: 3.25,
+      y: 3.3,
       w: 10.0,
-      h: 0.65,
+      h: 0.8,
       fontFace: fonts.sans,
-      fontSize: fs(11),
+      fontSize: fs(7),
       color: colors.textDarkSub,
       lineSpacingMultiple: 1.2,
       margin: 0,
     });
+    contentStartY = 4.35;
   }
 
   // Topics Grid
-  if (topics.length > 0) {
+  if (topics && topics.length > 0) {
     slide.addText("PŘEHLED PROBÍRANÝCH TÉMAT:", {
       x: 1.4,
-      y: 4.25,
-      w: 10.0,
-      h: 0.25,
+      y: contentStartY,
+      w: 10.5,
+      h: 0.3,
       fontFace: fonts.heading,
-      fontSize: fs(10),
+      fontSize: fs(6),
       color: colors.textDarkMuted,
       bold: true,
       margin: 0,
     });
 
-    const colWidth = 5.1;
-    topics.forEach((top, idx) => {
-      const col = idx % 2;
-      const row = Math.floor(idx / 2);
-      const topX = 1.4 + col * (colWidth + 0.3);
-      const topY = 4.6 + row * 0.45;
+    const half = Math.ceil(topics.length / 2);
+    const col1 = topics.slice(0, half);
+    const col2 = topics.slice(half);
 
-      slide.addText(`• ${cleanText(top)}`, {
-        x: topX,
-        y: topY,
-        w: colWidth,
-        h: 0.4,
-        fontFace: fonts.sans,
-        fontSize: fs(10.5),
-        color: colors.textDarkSub,
-        margin: 0,
-      });
+    const formatTopic = (t) => `• ${cleanText(t)}`;
+
+    const topicFontSize = topics.length > 8 ? fs(5.5) : fs(6.5);
+    const topicLineSpacing = topics.length > 8 ? 1.15 : 1.25;
+
+    slide.addText(col1.map(formatTopic).join("\n"), {
+      x: 1.4,
+      y: contentStartY + 0.35,
+      w: 5.1,
+      h: 1.8,
+      fontFace: fonts.sans,
+      fontSize: topicFontSize,
+      color: colors.textDarkSub,
+      lineSpacingMultiple: topicLineSpacing,
+      margin: 0,
+    });
+
+    slide.addText(col2.map(formatTopic).join("\n"), {
+      x: 6.8,
+      y: contentStartY + 0.35,
+      w: 5.1,
+      h: 1.8,
+      fontFace: fonts.sans,
+      fontSize: topicFontSize,
+      color: colors.textDarkSub,
+      lineSpacingMultiple: topicLineSpacing,
+      margin: 0,
     });
   }
 
@@ -454,8 +486,8 @@ export function createTwoCardSlide(pres, {
   slide.background = { color: colors.bgLight };
   addSlideChrome(slide, breadcrumb, title);
 
-  const cardY = 1.25;
-  const cardH = 5.5;
+  const cardY = 1.35;
+  const cardH = 5.4;
   const cardW = 5.7;
 
   // Render Left Card
@@ -486,6 +518,9 @@ export function createTwoCardSlide(pres, {
   return slide;
 }
 
+/**
+ * Creates a single wide-card content slide.
+ */
 export function createSingleCardSlide(pres, {
   breadcrumb,
   title,
@@ -510,9 +545,9 @@ export function createSingleCardSlide(pres, {
 
   renderContentCard(pres, slide, {
     x: 0.8,
-    y: 1.25,
+    y: 1.35,
     w: 11.733,
-    h: 5.5,
+    h: 5.4,
     title: finalTitle,
     subtitle: finalSubtitle,
     items: finalItems,
@@ -524,6 +559,9 @@ export function createSingleCardSlide(pres, {
   return slide;
 }
 
+/**
+ * Creates a code & explanation slide.
+ */
 export function createCodeSlide(pres, {
   breadcrumb,
   title,
@@ -536,8 +574,8 @@ export function createCodeSlide(pres, {
   slide.background = { color: colors.bgLight };
   addSlideChrome(slide, breadcrumb, title);
 
-  const cardY = 1.25;
-  const cardH = 5.5;
+  const cardY = 1.35;
+  const cardH = 5.4;
 
   let lTitle = "Vysvětlení & Principy";
   let lItems = [];
@@ -595,7 +633,7 @@ export function createCodeSlide(pres, {
     w: rW - 0.7,
     h: 0.35,
     fontFace: fonts.heading,
-    fontSize: fs(12.5),
+    fontSize: fs(7.5),
     color: colors.codeAccent,
     bold: true,
     valign: "top",
@@ -609,7 +647,7 @@ export function createCodeSlide(pres, {
     w: rW - 0.7,
     h: analysisItems.length > 0 ? 3.3 : 4.4,
     fontFace: fonts.mono,
-    fontSize: fs(9.5),
+    fontSize: fs(6.5),
     color: colors.codeText,
     lineSpacingMultiple: 1.15,
     valign: "top",
@@ -632,9 +670,9 @@ export function createCodeSlide(pres, {
       x: rX + 0.45,
       y: cardY + 4.25,
       w: rW - 0.9,
-      h: 0.22,
+      h: 0.25,
       fontFace: fonts.heading,
-      fontSize: fs(9.5),
+      fontSize: fs(6.5),
       color: colors.brandOrange,
       bold: true,
       margin: 0,
@@ -643,28 +681,30 @@ export function createCodeSlide(pres, {
     const analysisTexts = analysisItems.map(item => `• ${cleanText(texToUnicode(item))}`).join("\n");
     slide.addText(analysisTexts, {
       x: rX + 0.45,
-      y: cardY + 4.5,
+      y: cardY + 4.55,
       w: rW - 0.9,
-      h: 0.75,
+      h: 0.7,
       fontFace: fonts.sans,
-      fontSize: fs(9.5),
+      fontSize: fs(6.5),
       color: colors.codeMuted,
       lineSpacingMultiple: 1.15,
       margin: 0,
     });
   }
 
-  if (notes) slide.addNotes(notes);
   return slide;
 }
 
+/**
+ * Creates a 3-column card slide (ideal for comparing 3 variants, phases, or representations).
+ */
 export function createThreeCardSlide(pres, { breadcrumb, title, cards, card1, card2, card3, notes = "" }) {
   const slide = pres.addSlide();
   slide.background = { color: colors.bgLight };
   addSlideChrome(slide, breadcrumb, title);
 
   const cardW = 3.65;
-  const cardH = 5.5;
+  const cardH = 5.4;
   const gap = 0.39;
 
   const cardList = Array.isArray(cards) ? cards : [card1, card2, card3].filter(Boolean);
@@ -673,7 +713,7 @@ export function createThreeCardSlide(pres, { breadcrumb, title, cards, card1, ca
     const cX = 0.8 + idx * (cardW + gap);
     renderContentCard(pres, slide, {
       x: cX,
-      y: 1.25,
+      y: 1.35,
       w: cardW,
       h: cardH,
       title: card.title,
@@ -688,6 +728,100 @@ export function createThreeCardSlide(pres, { breadcrumb, title, cards, card1, ca
   return slide;
 }
 
+/**
+ * Creates a native PowerPoint table slide matching website markdown tables.
+ */
+export function createTableSlide(pres, {
+  breadcrumb,
+  title,
+  subtitle,
+  headers = [],
+  rows = [],
+  colWidths = [],
+  notes = ""
+}) {
+  const slide = pres.addSlide();
+  slide.background = { color: colors.bgLight };
+  addSlideChrome(slide, breadcrumb, title);
+
+  let tableY = 1.35;
+  if (subtitle) {
+    slide.addText(cleanText(subtitle), {
+      x: 0.8,
+      y: 1.35,
+      w: 11.733,
+      h: 0.35,
+      fontFace: fonts.sans,
+      fontSize: fs(7),
+      color: colors.textSecondary,
+      bold: true,
+      margin: 0,
+    });
+    tableY = 1.75;
+  }
+
+  const tableRows = [];
+
+  // Header row
+  if (headers.length > 0) {
+    const headerRow = headers.map(h => ({
+      text: cleanText(texToUnicode(h)),
+      options: {
+        fontFace: fonts.heading,
+        fontSize: fs(7),
+        bold: true,
+        color: colors.brandOrangeDark,
+        fill: { color: colors.bgCardWarm },
+        align: "left",
+        valign: "middle",
+        margin: 8,
+      }
+    }));
+    tableRows.push(headerRow);
+  }
+
+  // Data rows
+  rows.forEach((row, rIdx) => {
+    const isEven = rIdx % 2 === 0;
+    const rowCells = row.map((cell, cIdx) => {
+      const cellText = cleanText(texToUnicode(cell));
+      return {
+        text: cellText,
+        options: {
+          fontFace: fonts.sans,
+          fontSize: fs(6.5),
+          color: colors.textPrimary,
+          fill: { color: isEven ? colors.bgLight : colors.bgCardNeutral },
+          bold: cIdx === 0,
+          align: "left",
+          valign: "top",
+          margin: 8,
+        }
+      };
+    });
+    tableRows.push(rowCells);
+  });
+
+  const totalColW = colWidths.reduce((a, b) => a + b, 0);
+  const actualColW = colWidths.length > 0
+    ? colWidths.map(w => (w / totalColW) * 11.733)
+    : undefined;
+
+  slide.addTable(tableRows, {
+    x: 0.8,
+    y: tableY,
+    w: 11.733,
+    colW: actualColW,
+    border: { type: "solid", pt: 1, color: colors.borderWarm },
+  });
+
+  if (notes) slide.addNotes(notes);
+  return slide;
+}
+
+/**
+ * Creates a structured formal proof template slide (for induction, contradiction, invariants).
+ */
 export function createProofSlide(pres, {
   breadcrumb,
   title,
@@ -701,8 +835,8 @@ export function createProofSlide(pres, {
   slide.background = { color: colors.bgLight };
   addSlideChrome(slide, breadcrumb, title);
 
-  const cardY = 1.25;
-  const cardH = 5.5;
+  const cardY = 1.35;
+  const cardH = 5.4;
   const lW = 5.6;
   const rW = 5.8;
 
@@ -786,15 +920,15 @@ function renderContentCard(pres, slide, { x, y, w, h, title, subtitle, items = [
     line: { color: borderColor, width: 1.2 },
   });
 
-  let currentY = y + 0.3;
+  let currentY = y + 0.25;
 
   // Optional Badge
   if (badge) {
     slide.addShape(pres.ShapeType.roundRect, {
       x: x + 0.35,
       y: currentY,
-      w: Math.min(w - 0.7, 2.2),
-      h: 0.28,
+      w: Math.min(w - 0.7, 2.8),
+      h: 0.32,
       rectRadius: 0.08,
       fill: { color: borderColor },
       line: { color: borderColor, width: 1 },
@@ -803,10 +937,10 @@ function renderContentCard(pres, slide, { x, y, w, h, title, subtitle, items = [
     slide.addText(cleanText(badge).toUpperCase(), {
       x: x + 0.35,
       y: currentY,
-      w: Math.min(w - 0.7, 2.2),
-      h: 0.28,
+      w: Math.min(w - 0.7, 2.8),
+      h: 0.32,
       fontFace: fonts.heading,
-      fontSize: fs(8.5),
+      fontSize: fs(5.5),
       color: headerColor,
       bold: true,
       align: "center",
@@ -814,7 +948,7 @@ function renderContentCard(pres, slide, { x, y, w, h, title, subtitle, items = [
       margin: 0,
     });
 
-    currentY += 0.38;
+    currentY += 0.42;
   }
 
   // Card Title
@@ -823,14 +957,15 @@ function renderContentCard(pres, slide, { x, y, w, h, title, subtitle, items = [
       x: x + 0.35,
       y: currentY,
       w: w - 0.7,
-      h: 0.38,
+      h: 0.45,
       fontFace: fonts.heading,
-      fontSize: fs(14),
+      fontSize: fs(8.5),
       color: headerColor,
       bold: true,
+      valign: "top",
       margin: 0,
     });
-    currentY += 0.42;
+    currentY += 0.5;
   }
 
   // Card Subtitle
@@ -839,37 +974,43 @@ function renderContentCard(pres, slide, { x, y, w, h, title, subtitle, items = [
       x: x + 0.35,
       y: currentY,
       w: w - 0.7,
-      h: 0.32,
+      h: 0.35,
       fontFace: fonts.sans,
-      fontSize: fs(10),
+      fontSize: fs(6.5),
       color: colors.textMuted,
+      valign: "top",
       margin: 0,
     });
-    currentY += 0.38;
+    currentY += 0.4;
   }
 
-  // Content Items
+  // Content Items / Paragraphs
   if (Array.isArray(items) && items.length > 0) {
     const textRuns = [];
 
     items.forEach((item, idx) => {
       if (typeof item === "string") {
+        const isBullet = item.startsWith("• ") || item.startsWith("- ") || item.startsWith("* ");
+        const cleanItem = item.replace(/^[•\-*]\s*/, "");
+        const prefix = isBullet ? "• " : "";
         textRuns.push({
-          text: `• ${cleanText(texToUnicode(item))}\n`,
+          text: `${prefix}${cleanText(texToUnicode(cleanItem))}\n\n`,
           options: {
             fontFace: fonts.sans,
-            fontSize: fs(11),
+            fontSize: fs(7.5),
             color: colors.textSecondary,
             lineSpacingMultiple: 1.2,
           }
         });
       } else if (typeof item === "object" && item !== null) {
+        const isBullet = item.bullet !== false;
+        const prefix = isBullet ? "• " : "";
         if (item.bold) {
           textRuns.push({
-            text: `• ${cleanText(texToUnicode(item.bold))} `,
+            text: `${prefix}${cleanText(texToUnicode(item.bold))} `,
             options: {
               fontFace: fonts.sans,
-              fontSize: fs(11),
+              fontSize: fs(7.5),
               color: colors.textPrimary,
               bold: true,
               lineSpacingMultiple: 1.2,
@@ -877,11 +1018,12 @@ function renderContentCard(pres, slide, { x, y, w, h, title, subtitle, items = [
           });
         }
         if (item.text) {
+          const textPrefix = (!item.bold && isBullet) ? "• " : "";
           textRuns.push({
-            text: `${cleanText(texToUnicode(item.text))}\n`,
+            text: `${textPrefix}${cleanText(texToUnicode(item.text))}\n\n`,
             options: {
               fontFace: fonts.sans,
-              fontSize: fs(11),
+              fontSize: fs(7.5),
               color: colors.textSecondary,
               lineSpacingMultiple: 1.2,
             }
