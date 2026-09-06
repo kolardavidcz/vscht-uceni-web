@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
+import { Link } from "react-router-dom";
 import {
   AlertTriangle,
   ChevronDown,
@@ -516,6 +517,35 @@ export function PA2ToAG1Overview() {
             vám nejvíce sedne.
           </p>
         </div>
+      </Card>
+
+      {/* Quick link to cheatsheet */}
+      <Card className="p-4 sm:p-5 border-brand-orange/30 bg-gradient-to-r from-orange-50/80 via-white to-amber-50/50 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-start gap-3 min-w-0">
+          <div className="p-2.5 rounded-xl bg-brand-orange/10 text-brand-orange shrink-0 mt-0.5">
+            <BookOpen size={20} />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="text-sm font-black text-stone-900 tracking-tight">
+                PA2 → AG1 Velký Tahák Klíčových Témat (50%+)
+              </h3>
+              <Badge variant="orange" className="font-bold text-[10px]">
+                Nový souhrn
+              </Badge>
+            </div>
+            <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+              Kompaktní studijní přehled všech 32 klíčových témat z C++ s kódem, častými pastmi a tabulkou složitostí pro AG1.
+            </p>
+          </div>
+        </div>
+        <Link
+          to="/obor-bioinformatika/3-semestr/pre-ag1/pa2-ag1-cheatsheet"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-orange hover:bg-orange-600 text-white font-bold text-xs transition-colors shadow-sm shrink-0 cursor-pointer"
+        >
+          <BookOpen size={15} />
+          <span>Otevřít Tahák</span>
+        </Link>
       </Card>
 
       {/* Print plan levels */}
