@@ -7,14 +7,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { FONT_DELTA, createCourseTitleSlide } from "./pptx_engine.mjs";
-import { addModule2Slides } from "./modules/module2_dml_summer.mjs";
-import { addModule3Slides } from "./modules/module3_bio_graphs.mjs";
-import { addModule4Slides } from "./modules/module4_logic.mjs";
-import { addModule5Slides } from "./modules/module5_induction.mjs";
-import { addModule6Slides } from "./modules/module6_contradiction.mjs";
-import { addModule7Slides } from "./modules/module7_representation.mjs";
-import { addModule8Slides } from "./modules/module8_workshop.mjs";
+import { FONT_DELTA, createDocMasterTitleSlide } from "./pptx_document_engine.mjs";
+import { addModule2Slides } from "./modules_doc/module2_doc.mjs";
+import { addModule3Slides } from "./modules_doc/module3_doc.mjs";
+import { addModule4Slides } from "./modules_doc/module4_doc.mjs";
+import { addModule5Slides } from "./modules_doc/module5_doc.mjs";
+import { addModule6Slides } from "./modules_doc/module6_doc.mjs";
+import { addModule7Slides } from "./modules_doc/module7_doc.mjs";
+import { addModule8Slides } from "./modules_doc/module8_doc.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,7 +40,7 @@ async function generate() {
 
   // 0. Master Course Title Slide
   console.log("Generating Course Title Slide...");
-  createCourseTitleSlide(pres, {
+  createDocMasterTitleSlide(pres, {
     title: "pre-AG1: Letní Průvodce Grafovou Matematikou",
     subtitle: "Kompletní 1:1 příprava pro bioinformatiky na Algoritmy a Grafy 1 (FIT ČVUT) z pohledu studenta VŠCHT",
     author: "VŠCHT Učení · Obor Bioinformatika",

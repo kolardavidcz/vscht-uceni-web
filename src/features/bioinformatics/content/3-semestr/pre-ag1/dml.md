@@ -34,42 +34,7 @@ Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec
 
 ---
 
-### 3.1 Anatomie Důkazu: Cesta k Výsledku vs. Úsporný Zápis
-
-> [!NOTE]
-> **Důkazy nevznikly kvůli velké lásce k abstraktním matematickým výrazům.**  
-> Vznikly z ryzí inženýrské a vědecké potřeby: **získat 100% jistotu a záruku**, že náš algoritmus nebo tvrzení funguje za všech myslitelných okolností (a neselže uprostřed noci na neznámých biologických datech v produkci). V bioinformatice nestačí říct: *„Na pěti testovacích sekvencích to běželo, tak to snad bude fungovat vždycky.“*
-
-V odborné literatuře i na přednáškách se setkáte se **dvěma zásadními typy důkazů**:
-
-| Typ Důkazu | Jak Funguje v Praxi | Proč Může Zmást Studenta | Význam pro Bioinformatiku a AG1 |
-| :--- | :--- | :--- | :--- |
-| **1. Důkaz Heuristický / Objevný** *(Cesta k výsledku)* | Ukazuje **skutečný myšlenkový postup autora** — od prvotní motivace přes jednoduché náčrtky až po obecný vzorec. | Bývá delší na čtení, protože neskrývá slepé uličky a experimentální intuici. | **Zásadní pro algoritmy:** Tento důkaz často *přímo generuje samotný algoritmus a kód v C++* (např. konstrukce Eulerova tahu). |
-| **2. Důkaz Formální / Úsporný** *(Čistá verifikace)* | Dokazuje tvrzení v co nejmenším počtu řádků a **zkracuje všechno, co může**. | **Působí jako kouzlo spadlé z nebe.** Autor zahodil všechny papíry s náčrtky a předloží jen finální geniální trik. | Slouží k rychlému a neprůstřelnému ověření, ale sám o sobě vás nenaučí, jak na řešení přijít. |
-
-```text
-JAK VE SKUTEČNOSTI VZNIKÁ MATEMATICKÝ A ALGORITMICKÝ OBJEV:
-
- 1. Pokus & Omyl        ➔  Vezmeš papír a zkoušíš malé případy (n = 1, 2, 3, 4)
-          │
-          ▼
- 2. Pozorování & Vzory  ➔  Všimneš si: „Aha! Pro sudá čísla to jde vždy rozdělit na poloviny!“
-          │
-          ▼
- 3. Formulace Hypotézy  ➔  Zformuluješ přesné tvrzení v jazyce logiky (∀, ∃, ⇒)
-          │
-          ▼
- 4. Finální Důkaz       ➔  Teprve teď sepíšeš formální důkaz jako neprůstřelnou obhajobu
-```
-
-> [!TIP]
-> **💡 Tajemství zkouškových premiantů:**  
-> Když lidé (včetně slavných matematiků a informatiků) přijdou na něco nového, **rozhodně to není tím, že by seděli doma a z hlavy psali abstraktní formule na papír** *(s nadsázkou to neplatí snad jedině pro teoretické fyziky! 😉)*.  
-> Skutečné poznání začíná tím, že si **něco zkoušíte, kreslíte náčrtky a hledáte invarianty a skryté vlastnosti**. Formální důkaz je až slavnostní obal, kterým svou intuici obhájíte před světem.
-
----
-
-### 3.2 Role Znalostí: První Setkání s Profesorem u Tabule
+### 3.1 Role Znalostí: První Setkání s Profesorem u Tabule
 
 Představte si své první cvičení z diskrétní matematiky na univerzitě. Vstoupí vyučující, beze slova vezme křídu, nakreslí na tabuli obrázek níže, otočí se do ztichlé učebny a položí zdánlivě nevinnou otázku:
 
@@ -136,7 +101,7 @@ Dokud neznáte definici, mozek tápe v mlze, protože nemá záchytný bod. Jakm
 
 ---
 
-### 3.3 Role Postupu: Rychlé Umocňování ($x^n$) & Formální Logika
+### 3.2 Role Postupu: Rychlé Umocňování ($x^n$) & Formální Logika
 
 Zatímco kružnice demonstrovala sílu **statických znalostí (definic)**, v programování a předmětu AG1 rozhoduje **dynamický postup (algoritmus)** opřený o zákony **formální matematické logiky**.
 
