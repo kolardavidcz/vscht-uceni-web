@@ -63,7 +63,7 @@ int main() {
 
 ### 7. Konstruktory, Destruktor & Uživatelské konverze `[100% · Trainer]`
 - **Princip**: Inicializační seznam nastavuje atributy přímo při vzniku před vstupem do těla `{}` (povinné pro `const` a reference). Konstruktor s jedním argumentem (bez klíčového slova `explicit`) slouží kompilátoru jako automatický konverzní můstek.
-- 💡 **Kouzlo konverze pro operátory**: Nemusíte přetěžovat operátory pro každou kombinaci typů (např. `T + int` i `int + T`). Stačí definovat konverzní konstruktor `T(int)` a volný symetrický `operator+(T, T)` — kompilátor cizí typ sám převede na `T` a sečte je!
+- 💡 **Kouzlo konverze pro operátory**: Kompilátor smí zkombinovat **standardní konverzi** (např. `int` -> `double`) s nejvýše **jednou uživatelskou konverzí** (konstruktor `double` -> `Weight`). Díky tomu nemusíte psát desítky přetížených operátorů pro každou kombinaci typů!
 
 ### 8. Chytré řetězce `std::string` `[100% · Trainer]`
 - **Princip**: Dynamicky spravovaný řetězec znaků s automatickou alokací paměti.
@@ -77,22 +77,22 @@ int main() {
 - **Princip**: Zásadní pro `std::set`, `std::map`, `std::priority_queue` a `std::sort`. Vyžaduje striktní slabé uspořádání (při rovnosti musí vrátit `false`). V moderním C++20 stačí `auto operator<=>(const T &) const = default;`.
 
 ### 10. Metoda versus volná funkce u operátorů `[80% · Trainer]`
-- **Princip**: Operátory měnící levý operand (`+=`, `[]`, `=`) se píší jako metody třídy. Symetrické operátory (`+`, `-`, `<<` pro streamy) se píší jako volné funkce mimo třídu.
+- **Princip**: Operátory měnící levý operand (`+=`, `[]`, `=`) se píší jako metody třídy. Symetrické operátory (`+`, `-`, `<<` pro streamy) se píší jako volné funkce nebo jako `friend` funkce přímo v těle třídy.
 
 ### 🌟 Sjednocená kódová ukázka pro Týdny 2 a 3 (OOP, Konverze, Operátory & Uspořádání)
-- **Pokrývá vše v jednom celku**: `class` (`private`/`public`), inicializační seznam, konverzní konstruktor (`int -> Weight`), destruktor, `const` metodu, `static` členy, metodu `operator+=`, volnou funkci `operator+` s uživatelskou konverzí, `operator<` i C++20 `operator<=>`.
+- **Pokrývá vše v jednom celku**: `class` (`private`/`public`), inicializační seznam, konverzní konstruktor (`double -> Weight`), destruktor, `const` metodu, `static` členy, metodu `operator+=`, přátelskou funkci `friend operator+`, řetězení konverzí (`int -> double -> Weight`), `operator<` i C++20 `operator<=>`.
 ```cpp
 class Weight {
 private:
-    int m_grams;
+    double m_grams;
     static int s_count; // Statický člen: sdílen všemi instancemi
 
 public:
-    // Konverzní konstruktor (int -> Weight) s inicializačním seznamem:
-    Weight(int g = 0) : m_grams(g) { ++s_count; }
+    // Konverzní konstruktor (double -> Weight) s inicializačním seznamem:
+    Weight(double g = 0.0) : m_grams(g) { ++s_count; }
     ~Weight() { --s_count; } // Destruktor (úklid prostředků / dekrementace)
 
-    int grams() const { return m_grams; } // Konstantní metoda (lze volat na const &)
+    double grams() const { return m_grams; } // Konstantní metoda (lze volat na const &)
     static int getCount() { return s_count; } // Statická metoda: Weight::getCount()
 
     // Operátor měnící levý operand (METODA třídy):
@@ -101,17 +101,17 @@ public:
     // Uspořádání (pro std::sort, std::set, std::priority_queue):
     bool operator<(const Weight &other) const { return m_grams < other.m_grams; }
     auto operator<=>(const Weight &) const = default; // C++20: vygeneruje <, <=, >, >=, ==, !=
+
+    // Přátelská funkce (friend): volná funkce uvnitř třídy, umožňuje oboustrannou konverzi
+    friend Weight operator+(Weight a, const Weight &b) { return a += b; }
 };
 
 int Weight::s_count = 0; // Inicializace statického členu mimo třídu
 
-// Symetrický operátor jako VOLNÁ FUNKCE: obslouží Weight + Weight, Weight + int i int + Weight!
-Weight operator+(Weight a, const Weight &b) { return a += b; }
-
-// Praktické použití a ukázka konverze v akci:
-Weight w(100);
-Weight r1 = w + 50;  // Kompilátor automaticky zavolá Weight(50) -> sečte
-Weight r2 = 25 + w;  // Funguje symetricky i zleva bez dalších přetížených operátorů!
+// Praktické použití (kombinace standardní int->double a uživatelské double->Weight konverze):
+Weight w(100.5);
+Weight r1 = w + 50;  // int(50) -> standardní konverze na double -> uživatelská na Weight(50.0)
+Weight r2 = 2.5 + w; // double(2.5) -> uživatelská konverze na Weight(2.5), funguje i zleva!
 ```
 
 ---
