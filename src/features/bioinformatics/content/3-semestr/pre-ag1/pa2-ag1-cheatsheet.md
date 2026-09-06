@@ -5,30 +5,28 @@
 
 ---
 
-## 📅 Týden 0: Rekurze (Základní šablona)
+## 📅 Týden 0: Rekurze (Základy z C / PA1)
 
-### 0. Univerzální šablona rekurzivní funkce (Backtracking & Průchod)
-- **Princip**: Každý rekurzivní algoritmus (např. DFS nebo stavové prohledávání) stojí na 2 krocích:
-  1. **Kontrola konce**: Test, zda jsme nedosáhli cíle či limitu (bázový stav).
-  2. **Cyklus přes dílčí možnosti**: Procházení všech podvoleb a rekurzivní zanoření.
-- **Kód**:
-```cpp
-void backtrack(int step, State &state) {
-    // 1. Kontrola, zda nejsme na konci (bázový případ / nalezené řešení):
-    if (step == TARGET_STEP) {
-        saveSolution(state);
-        return; // Důležité: ukončit větev
+### 0. Univerzální šablona rekurzivní funkce (Backtracking v čistém C)
+- **Princip**: Každá rekurzivní funkce stojí na dvou krocích: **1. kontrola, zda nejsme na konci** (bázový případ pro ukončení zanořování) a **2. cyklus přes podvolby** (vyzkoušení všech možných pokračování a rekurzivní krok).
+- **Kód (Čisté C)**:
+```c
+#include <stdio.h>
+
+void solve(int step, int max_steps) {
+    // 1. Kontrola, zda nejsme na konci (bázový případ):
+    if (step == max_steps) {
+        printf("Konec vetve / nalezen cil!\n");
+        return;
     }
 
-    // 2. Cyklus pro dílčí možnosti (větvení do podproblémů):
-    for (const auto &subOption : getSubOptions(step)) {
-        apply(subOption, state);    // Proveď volbu
-        backtrack(step + 1, state); // Rekurzivní zanoření
-        undo(subOption, state);     // Návrat stavu (backtracking)
+    // 2. Cyklus pres vsechny podvolby (mozna pokracovani):
+    for (int choice = 0; choice < 2; ++choice) {
+        solve(step + 1, max_steps); // Rekurzivni krok pro kazdou volbu
     }
 }
 ```
-- ⚠️ **Past**: Chybějící nebo špatně otestovaná koncová podmínka způsobí nekonečné zanoření a přetečení zásobníku (*stack overflow* / segfault).
+- ⚠️ **Past**: Pokud zapomenete ukončovací podmínku nebo se v parametrech nepřibližujete k bázovému stavu, dojde k nekonečnému zanoření a pádu programu na přetečení zásobníku (*Stack Overflow* / segfault).
 
 ---
 
