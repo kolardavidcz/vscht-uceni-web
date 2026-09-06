@@ -426,9 +426,3 @@ auto u1 = std::make_unique<int>(42);
 auto u2 = std::move(u1); // OK: Vlastnictví přesunuto do u2 (u1 je nyní nullptr).
 ```
 
----
-
-> 🚀 **Praktické procvičení v kódu:**
-> Vyzkoušejte si reálnou implementaci stromové rekurze, DFS, BFS i Dijkstry v samostatném C++20 souboru s testy ke stažení:
-> 👉 **[9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra (rekurze_bro.cpp) →](/obor-bioinformatika/3-semestr/pre-ag1/rekurze-bro)**
-
