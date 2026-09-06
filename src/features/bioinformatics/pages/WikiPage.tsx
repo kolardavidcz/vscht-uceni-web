@@ -6,6 +6,8 @@ import {
   ChevronRight,
   Menu,
   MessageSquarePlus,
+  PanelLeftClose,
+  PanelLeftOpen,
   Printer,
   Search,
   X,
@@ -167,6 +169,44 @@ export function WikiPage() {
   const [query, setQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [suggestOpen, setSuggestOpen] = useState(false);
+  const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    try {
+      return localStorage.getItem("wiki_sidebar_hidden") === "true";
+    } catch {
+      return false;
+    }
+  });
+
+  const toggleSidebar = () => {
+    setIsSidebarHidden((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem("wiki_sidebar_hidden", String(next));
+      } catch {}
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
+        const target = e.target as HTMLElement;
+        if (
+          target &&
+          (target.tagName === "INPUT" ||
+            target.tagName === "TEXTAREA" ||
+            target.isContentEditable)
+        ) {
+          return;
+        }
+        e.preventDefault();
+        toggleSidebar();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     document.title = active
@@ -206,8 +246,8 @@ export function WikiPage() {
 
   const sidebar = (
     <aside className="flex flex-col h-full min-h-0 max-h-full">
-      <div className="p-3 border-b border-stone-200 shrink-0">
-        <div className="relative">
+      <div className="p-3 border-b border-stone-200 shrink-0 flex items-center gap-2">
+        <div className="relative flex-1 min-w-0">
           <Search
             size={14}
             className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400"
@@ -219,6 +259,15 @@ export function WikiPage() {
             className="w-full rounded-xl border border-stone-200 bg-white pl-9 pr-3 py-2 text-xs"
           />
         </div>
+        <button
+          type="button"
+          onClick={toggleSidebar}
+          title="Skrýt postranní panel (Ctrl+B)"
+          className="hidden lg:flex items-center justify-center p-2 rounded-xl text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer shrink-0"
+          aria-label="Skrýt postranní panel"
+        >
+          <PanelLeftClose size={16} />
+        </button>
       </div>
       <nav className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-2 space-y-3">
         {filteredGroups.map((g) => (
@@ -273,9 +322,32 @@ export function WikiPage() {
       title="Obor: Bioinformatika"
       subtitle="Studijní wiki · zápisky, rozcestníky, PA2→AG1"
       theme="light"
-      maxWidth="max-w-7xl"
+      maxWidth={isSidebarHidden ? "max-w-[1600px]" : "max-w-7xl"}
       actions={
         <div className="flex items-center gap-2">
+          <Button
+            variant="dark"
+            size="sm"
+            onClick={toggleSidebar}
+            title={
+              isSidebarHidden
+                ? "Zobrazit postranní panel materiálů (Ctrl+B)"
+                : "Skrýt postranní panel pro plnou šířku obsahu (Ctrl+B)"
+            }
+            className="hidden lg:inline-flex text-xs font-bold gap-1.5 border-white/20 bg-white/10 text-white hover:bg-white/15 hover:border-brand-orange/50 hover:text-brand-orange cursor-pointer"
+          >
+            {isSidebarHidden ? (
+              <>
+                <PanelLeftOpen size={15} className="text-brand-orange" />
+                <span>Zobrazit panel</span>
+              </>
+            ) : (
+              <>
+                <PanelLeftClose size={15} className="text-brand-orange" />
+                <span>Skrýt panel</span>
+              </>
+            )}
+          </Button>
           {active && !isSpecial && (
             <Button
               variant="dark"
@@ -298,10 +370,27 @@ export function WikiPage() {
         </div>
       }
     >
-      <div className="flex gap-6 items-start min-h-[70vh]">
-        <div className="hidden lg:flex w-72 shrink-0 flex-col rounded-2xl border border-stone-200 bg-white shadow-sm sticky top-24 self-start h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] min-h-0 overflow-hidden print:hidden">
-          {sidebar}
-        </div>
+      <div className="flex gap-4 lg:gap-6 items-start min-h-[70vh]">
+        {!isSidebarHidden ? (
+          <div className="hidden lg:flex w-72 shrink-0 flex-col rounded-2xl border border-stone-200 bg-white shadow-sm sticky top-24 self-start h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] min-h-0 overflow-hidden print:hidden transition-all duration-200">
+            {sidebar}
+          </div>
+        ) : (
+          <div className="hidden lg:flex shrink-0 sticky top-24 self-start print:hidden z-10">
+            <button
+              type="button"
+              onClick={toggleSidebar}
+              title="Zobrazit postranní panel materiálů (Ctrl+B)"
+              className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-stone-200 bg-white shadow-sm hover:border-brand-orange/40 hover:bg-orange-50/50 text-stone-700 hover:text-brand-orange-text text-xs font-bold transition-all cursor-pointer group"
+            >
+              <PanelLeftOpen
+                size={16}
+                className="text-brand-orange transition-transform group-hover:scale-110"
+              />
+              <span className="hidden xl:inline">Materiály</span>
+            </button>
+          </div>
+        )}
 
         {sidebarOpen && (
           <div className="fixed inset-0 z-50 lg:hidden print:hidden">
@@ -328,7 +417,12 @@ export function WikiPage() {
         )}
 
         <div className="flex-1 min-w-0 print:w-full">
-          <div className="rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8 print:border-none print:shadow-none print:p-0 print:m-0 print:rounded-none">
+          <div
+            className={cn(
+              "rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8 print:border-none print:shadow-none print:p-0 print:m-0 print:rounded-none transition-all",
+              isSidebarHidden && "lg:p-10 xl:p-12"
+            )}
+          >
             {!active ? (
               <div className="text-center py-16 text-stone-500">
                 <BookOpen className="mx-auto mb-3 text-brand-orange" size={32} />
