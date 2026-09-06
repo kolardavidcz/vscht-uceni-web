@@ -88,45 +88,25 @@ private:
     static int s_count; // Statický člen: sdílen všemi instancemi
 
 public:
-    // Konverzní konstruktor s inicializačním seznamem:
-    // Umožňuje implicitní uživatelskou konverzi int -> Weight
-    Weight(int g = 0) : m_grams(g) {
-        ++s_count;
-    }
+    // Konverzní konstruktor (int -> Weight) s inicializačním seznamem:
+    Weight(int g = 0) : m_grams(g) { ++s_count; }
+    ~Weight() { --s_count; } // Destruktor (úklid prostředků / dekrementace)
 
-    // Destruktor (úklid prostředků)
-    ~Weight() {
-        --s_count;
-    }
+    int grams() const { return m_grams; } // Konstantní metoda (lze volat na const &)
+    static int getCount() { return s_count; } // Statická metoda: Weight::getCount()
 
-    // Konstantní metoda: zaručuje neměnnost (lze volat na const &)
-    int grams() const { return m_grams; }
+    // Operátor měnící levý operand (METODA třídy):
+    Weight & operator+=(const Weight &other) { m_grams += other.m_grams; return *this; }
 
-    // Statická metoda: volá se bez konkrétní instance třídy (Weight::getCount())
-    static int getCount() { return s_count; }
-
-    // Operátor měnící levý operand: píše se jako METODA třídy
-    Weight & operator+=(const Weight &other) {
-        m_grams += other.m_grams;
-        return *this;
-    }
-
-    // Klasické uspořádání (pro std::sort, std::set, std::priority_queue)
-    bool operator<(const Weight &other) const {
-        return m_grams < other.m_grams;
-    }
-
-    // Moderní C++20 (spaceship operator <=>): automaticky vygeneruje <, <=, >, >=, ==, !=
-    auto operator<=>(const Weight &) const = default;
+    // Uspořádání (pro std::sort, std::set, std::priority_queue):
+    bool operator<(const Weight &other) const { return m_grams < other.m_grams; }
+    auto operator<=>(const Weight &) const = default; // C++20: vygeneruje <, <=, >, >=, ==, !=
 };
 
 int Weight::s_count = 0; // Inicializace statického členu mimo třídu
 
-// Symetrický operátor: píše se jako VOLNÁ FUNKCE.
-// Díky konverznímu konstruktoru obslouží Weight + Weight, Weight + int i int + Weight!
-Weight operator+(Weight a, const Weight &b) {
-    return a += b;
-}
+// Symetrický operátor jako VOLNÁ FUNKCE: obslouží Weight + Weight, Weight + int i int + Weight!
+Weight operator+(Weight a, const Weight &b) { return a += b; }
 
 // Praktické použití a ukázka konverze v akci:
 Weight w(100);
@@ -373,23 +353,7 @@ adj[v].push_back(u); // Přidat i toto, pokud je graf neorientovaný: u <-> v
   - **Dijkstrův algoritmus**:
     - Nejkratší cesty v grafu s nezápornými vahami hran.
     - Používá **prioritní frontu `std::priority_queue` (min-heap)**: `std::priority_queue<PII, std::vector<PII>, std::greater<PII>>`.
-- **Kód (BFS šablona)**:
-```cpp
-std::vector<bool> visited(n, false);
-std::deque<int> q; // Rychlejší než std::queue
-visited[start] = true; q.push_back(start); // Označit VŽDY ihned při vložení!
-
-while (!q.empty()) {
-    int u = q.front(); q.pop_front();
-    for (int v : adj[u]) {
-        if (!visited[v]) {
-            visited[v] = true;
-            q.push_back(v);
-        }
-    }
-}
-```
-- ⚠️ **Kritická past v BFS**: Vrchol označte jako `visited` **ihned při vložení `q.push_back(v)`**! Pokud ho označíte až při vyzvednutí `pop`, do fronty se vloží stejný vrchol mnohokrát a program havaruje na limit paměti.
+- ⚠️ **Kritická past v BFS**: Vrchol označte jako `visited` **ihned při vložení do fronty**! Pokud ho označíte až při vyzvednutí `pop`, do fronty se vloží stejný vrchol mnohokrát a program havaruje na limit paměti.
 
 ### 24. Binární vyhledávací strom (BST) `[100% · E-learning]`
 - **Princip**: Pro každý uzel platí `levý potomek < uzel < pravý potomek`. Vyhledávání průměrně trvá $O(\log n)$, při degeneraci (seřazená data) však padá na $O(n)$.
@@ -410,7 +374,6 @@ struct Node { T val; Node *next = nullptr; }; // Šablona třídy/struktury
 ```
 - 💡 **Osvědčený postup pro tvorbu šablon**:
   Nejprve celou funkci či třídu napište a **odlaďte pro konkrétní normální typ** (např. `int` nebo `std::string`). Jakmile kód spolehlivě funguje a projde testy, teprve potom ho zobecněte: nahraďte typ symbolem `T` a přidejte `template <typename T>`. Ušetříte si tím luštění nepřehledných chybových hlášení kompilátoru.
-- ⚠️ **Past**: Celé tělo šablony musí být definováno **přímo v hlavičkovém souboru (`.hpp`/`.h`)**, nikoliv v `.cpp`, jinak linker ohlásí *undefined reference*.
 
 ---
 
