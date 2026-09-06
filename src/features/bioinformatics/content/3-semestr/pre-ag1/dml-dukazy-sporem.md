@@ -179,58 +179,6 @@ Navštívené uzly:   u₀ ─────> u₁ ─────> u₂ ───
 
 ---
 
-### 🎨 Příklad 3: Monochromatický trojúhelník v síti 6 proteinů ($K_6$)
-
-Tento slavný výsledek pochází z Ramseyovy teorie a ukazuje, jak Dirichlet odhaluje skrytý řád i v zdánlivě chaotických sítích.
-
-> **Věta:** Mějme kompletní síť 6 proteinů ($K_6$, kde každý protein interaguje se všemi 5 ostatními). Předpokládejme, že každá vazba je buď **aktivační** (zelená), nebo **inhibiční** (červená). Pak v síti **vždy existuje trojice proteinů spojená stejným typem vazby** (tzv. monochromatický trojúhelník — buď 3 vzájemné aktivace, nebo 3 vzájemné inhibice).
-
-#### 🐢 Pomalý rozbor:
-1. Zvolme jeden libovolný protein, označme ho $A$.
-2. Z proteinu $A$ vychází do zbývajících 5 proteinů přesně **5 vazeb**.
-3. Máme **2 typy vazeb (škatulky)**: zelená (aktivace) a červená (inhibice).
-4. Rozdělujeme 5 vazeb do 2 barev. Podle Dirichletova principu:
-   $$\left\lceil \frac{5}{2} \right\rceil = 3$$
-   Alespoň **3 vazby** vycházející z proteinu $A$ musí mít **shodnou barvu**!
-5. Bez újmy na obecnosti předpokládejme, že tyto 3 vazby jsou **zelené**, a vedou k proteinům $B, C, D$.
-
-```text
-               ( A )
-              /  |  \
-    zelená   /   |   \  zelená
-            / zelená  \
-           ▼     ▼     ▼
-         ( B ) ( C ) ( D )
-```
-
-6. Nyní prozkoumejme vazby mezi trojicí $\{B, C, D\}$:
-   - **Situace 1 (Alespoň jedna vazba je zelená):**  
-     Pokud je např. vazba mezi $B$ a $C$ zelená, pak trojice $A, B, C$ tvoří **zelený trojúhelník** (vazby $A-B, A-C, B-C$ jsou všechny zelené).
-   - **Situace 2 (Žádná vazba mezi nimi není zelená):**  
-     Pokud žádná z vazeb $\{B, C\}, \{C, D\}, \{B, D\}$ není zelená, pak **všechny tři musí být červené**! Tím okamžitě vzniká **červený trojúhelník** $(B, C, D)$.
-
-V každém možném případě nutně vznikne jednobarevný trojúhelník!
-
----
-
-### 🧩 Příklad 4: Kolize v enzymatickém párování (Bipartitní alokace)
-
-Představme si biochemický model: máme $m$ enzymů a $k$ dostupných aktivních vazebných míst na membráně.
-- Pokud se $m$ enzymů naváže na $k$ míst a platí $m > k$, Dirichlet zaručuje, že **alespoň jedno místo váže 2 nebo více enzymů**.
-- Tento jednoduchý princip je základem pro odvozování kompetitivní inhibice a modelování saturace receptorů v enzymové kinetice.
-
-```text
-Enzymy (m = 5):                 (E₁)  (E₂)  (E₃)  (E₄)  (E₅)
-                                  \    │     /     │     /
-                                   ▼   ▼    ▼      ▼    ▼
-Vazebná místa (k = 4):           [M₁] [M₂]       [M₃] [M₄]
-                                       ▲
-                                       └─ Kolize! 2 enzymy (E₂, E₃)
-                                          soutěží o vazebné místo M₂!
-```
-
----
-
 ## 4. 🔬 Extremální Princip v Grafech — Krok za Krokem `[Relevance: 90%]` `[MEGA EPIC]`
 
 ### Princip
@@ -326,131 +274,18 @@ Graf: $V = \{1,2,3,4,5\}$, hrany: $\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{5,1\},\{1,3
 
 ---
 
-## 5. 🏗️ Konstruktivní vs. Nekonstruktivní Důkazy Existence `[INSIGHT]` `[Relevance: 95%]`
-
-V matematice i informatice se neustále ptáme: *„Existuje v tomto grafu řešení?“* (např. existuje cesta, existuje 2-obarvení, existuje kostra grafu, existuje vrchol se specifickou vlastností?).
-
-<div class="my-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div class="p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-[#1c130d] shadow-xs">
-    <div class="flex items-center gap-2 font-bold text-stone-900 dark:text-stone-100 text-sm mb-2">
-      <span class="text-base">🔮</span> <span>Nekonstruktivní důkaz existence</span>
-    </div>
-    <ul class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 space-y-1.5 list-disc pl-4">
-      <li><strong>Prokáže, že hledaný objekt MUSÍ existovat</strong> (např. sporem vyvrátí jeho neexistenci).</li>
-      <li>Typicky využívá <strong>důkaz sporem</strong>, <strong>Dirichletův princip</strong> nebo <strong>extremální princip</strong>.</li>
-      <li><strong>Neposkytuje žádný návod ani algoritmus</strong>, jak objekt v datech najít či sestrojit.</li>
-      <li><em>Metafora:</em> „Kdyby poklad na ostrově nebyl, ostrov by se potopil.“</li>
-    </ul>
+<div class="my-6 p-4 rounded-xl border border-brand-orange/30 bg-brand-orange/5 text-stone-800 dark:text-stone-200">
+  <div class="flex items-center gap-2 font-bold text-brand-orange-text dark:text-brand-orange text-sm mb-1.5">
+    <span>💡</span> <span>Důležitý vhled pro AG1: Konstruktivní vs. Nekonstruktivní existence</span>
   </div>
-  <div class="p-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-[#1c130d] shadow-xs">
-    <div class="flex items-center gap-2 font-bold text-stone-900 dark:text-stone-100 text-sm mb-2">
-      <span class="text-base">🛠️</span> <span>Konstruktivní důkaz existence</span>
-    </div>
-    <ul class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 space-y-1.5 list-disc pl-4">
-      <li><strong>Prokáže existenci tím, že předloží přesný algoritmus</strong> (recept).</li>
-      <li>Pro libovolný platný vstup krok za krokem objekt bezchybně zkonstruuje.</li>
-      <li><strong>Po skončení algoritmu držíme hotový objekt v ruce</strong> (v poli, struktuře, souboru).</li>
-      <li><em>Metafora:</em> „Tady je mapa s křížkem a přesné GPS souřadnice, kde kopat.“</li>
-    </ul>
-  </div>
+  <p class="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mb-2">
+    Všimněte si společné vlastnosti: <strong>Důkaz sporem, Dirichletův princip i Extremální princip jsou nekonstruktivní</strong>.
+  </p>
+  <ul class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 space-y-1 list-disc pl-4">
+    <li><strong>Nekonstruktivní existence:</strong> Dokážou, že hledaný prvek (dva vrcholy se stejným stupněm, cyklus, nejkratší cesta) <em>musí zaručeně existovat</em>, ale <strong>nedávají žádný recept ani algoritmus</strong>, jak ho v datech najít či sestrojit.</li>
+    <li><strong>Konstruktivní existence (zlatý standard v informatice):</strong> Existenci dokážeme tím, že předložíme konkrétní funkční <strong>algoritmus (kód v C++)</strong>, který řešení krok za krokem spolehlivě sestrojí — po doběhnutí kódu držíme výsledek přímo v ruce.</li>
+  </ul>
 </div>
-
-### 🔮 Nekonstruktivní důkazy v praxi (Důkaz sporem & Dirichlet)
-
-V předchozích kapitolách jsme viděli typické nekonstruktivní postupy:
-1. **Dirichletův přihrádkový princip:** V kapitole 3 jsme dokázali, že v libovolném grafu s alespoň 2 vrcholy **musí existovat dva vrcholy se stejným stupněm**.
-   - Důkaz je stoprocentně neprůstřelný.
-   - Dirichlet nám však **ani náznakem neřekl, které dva konkrétní vrcholy to jsou**! Pokud bychom je chtěli zjistit, museli bychom graf projít a stupně otestovat.
-2. **Důkaz sporem:** Předpokládáme, že hledaný objekt neexistuje. Z tohoto předpokladu dovodíme logický spor ($\bot$). Objekt tedy existovat musí, ale nemáme žádný algoritmus na jeho sestavení.
-3. **Extremální princip:** Zvolíme „nejkratší cestu“ nebo „vrchol s minimálním stupněm“. Z konečnosti grafu víme, že takový prvek zaručeně existuje, ale jak ho v grafu s milionem uzlů efektivně najít, to už řeší až samostatný algoritmus.
-
----
-
-### 🛠️ Konstruktivní důkazy v informatice (Algoritmus jako důkaz)
-
-V programování a bioinformatice nestačí vědět, že řešení hypoteticky existuje. Potřebujeme spustit kód v C++, který nám výsledek spočítá a vrátí:
-> **Princip Konstruktivního Důkazu:** Prokazujeme existenci matematického objektu tím, že **předložíme explicitní algoritmus**, který pro libovolný platný vstup tento objekt v konečném počtu kroků bezchybně zkonstruuje.
-
-- **Příklad z bioinformatiky:** Chceme dokázat, že z krátkých přečtených fragmentů DNA lze poskládat původní chromozom.
-  - Nekonstruktivní věta: *„Pokud jsou stupně uzlů v de Bruijn grafu vyvážené, Eulerovský tah existuje.“* (Hezké vědět, ale sekvenci chromozomu v souboru ještě nemáme).
-  - Konstruktivní důkaz: **Hierholzerův algoritmus** — vezme graf a cyklus po cyklu nám skutečnou sekvenci DNA znak po znaku poskládá!
-
----
-
-### 🌉 Krásný most do další kapitoly: Dva světy v jediné větě
-
-Následující kapitola o **bipartitních grafech** je pro studenty AG1 fascinující právě tím, že v jednom jediném zkouškovém tvrzení propojuje **oba světy**:
-- **Směr $\implies$ (Bipartitní $\implies$ Bez lichých cyklů):** Dokážeme **nekonstruktivně sporem** (ukážeme, že existence lichého cyklu by okamžitě vedla k logickému rozporu).
-- **Směr $\impliedby$ (Bez lichých cyklů $\implies$ Bipartitní):** Dokážeme **konstruktivně**! Předložíme algoritmus **BFS (prohledávání do šířky)**, který projde graf po vrstvách a sám přímo vygeneruje rozdělení vrcholů do dvou partit.
-
----
-
-## 6. 🌊 Bipartitní Grafy & BFS Obarvení (Charakterizace Lichých Cyklů) `[Relevance: 85%]`
-
-*(Tento oddíl shrnuje pokročilejší zkouškovou větu propojující důkazy sporem s prohledáváním do šířky.)*
-
-> **Definice Bipartitního Grafu:**  
-> Graf $G = (V, E)$ je **bipartitní**, pokud lze jeho množinu vrcholů rozdělit na dvě disjunktní skupiny $V_1, V_2$ ($V = V_1 \cup V_2, V_1 \cap V_2 = \emptyset$) tak, že každá hrana vede **mezi** těmito skupinami. Žádná hrana nespojuje dva uzly uvnitř téže skupiny.
-
-```text
-Partita V₁ (např. Enzymy):      (E₁)     (E₂)     (E₃)
-                                  \       / \       │
-                                   \     /   \      │   Hrany vedou POUZE
-                                    \   /     \     │   mezi partitami!
-                                     ▼ ▼       ▼    ▼
-Partita V₂ (např. Substráty):   (S₁)     (S₂)     (S₃)
-```
-
-### 📜 Věta: Graf $G$ je bipartitní $\iff$ neobsahuje žádný lichý cyklus.
-
-Tato ekvivalence se skládá ze dvou směrů:
-
-#### 1. Snadný směr ($\implies$): Bipartitní $\implies$ Nemá liché cykly (Důkaz sporem)
-1. **Předpoklad pro spor:** Nechť $G$ je bipartitní ($V = V_1 \cup V_2$) a ZÁROVEŇ obsahuje lichý cyklus $(v_1, v_2, \dots, v_k, v_1)$ o liché délce $k = 2r + 1$.
-2. Zařaďme $v_1 \in V_1$.
-3. Protože hrany střídají partity: $v_2 \in V_2, v_3 \in V_1, v_4 \in V_2, \dots$
-4. Poslední vrchol cyklu $v_k$ má lichý index $k$, proto nutně $v_k \in V_1$.
-5. **💥 SPOR:** Cyklus je uzavřen hranou $\{v_k, v_1\}$. Oba její konce leží uvnitř téže partity $V_1$, což je spor s definicí bipartitnosti! Bipartitní graf tedy nemůže obsahovat lichý cyklus.
-
-#### 2. Konstruktivní směr ($\impliedby$): Nemá liché cykly $\implies$ Bipartitní (BFS Vrstvy)
-Jak graf bez lichých cyklů rozdělit na 2 partity? Spustíme **BFS (prohledávání do šířky)** ze startovního vrcholu $s$:
-- $L_0 = \{s\}$ — nultá vrstva (barva 1)
-- $L_1 = \{$ sousedé $s$ $\}$ — první vrstva (barva 2)
-- $L_2 = \{$ sousedé $L_1$ ještě nenavštívení $\}$ — druhá vrstva (barva 1)
-- Obecně: sudé vrstvy přiřadíme do $V_1$, liché vrstvy do $V_2$.
-
-```text
-        ( s )         ← Vrstva L₀ (Barva 1)
-        /   \
-      (a)   (b)       ← Vrstva L₁ (Barva 2)
-      / \     \
-    (c) (d)   (e)     ← Vrstva L₂ (Barva 1)
-```
-
-**Důkaz sporem:** Kdyby BFS obarvení selhalo, musela by existovat hrana $\{u, v\}$ mezi dvěma uzly v téže vrstvě $L_i$ (nebo se stejnou barvou).  
-Pak cesta ze společného předka $s$ do $u$ (délky $i$), cesta z $s$ do $v$ (délky $i$) a příčná hrana $\{u, v\}$ dohromady vytvoří cyklus délky:
-$$i + i + 1 = 2i + 1 \quad \text{(LICHÉ ČÍSLO!)}$$
-To je však **SPOR** s tím, že graf neobsahuje žádné liché cykly! Proto žádná taková hrana neexistuje a graf je bipartitní.
-
----
-
-<details class="my-4 rounded-xl border border-stone-200 dark:border-stone-800 bg-stone-100/50 dark:bg-stone-900/40 overflow-hidden">
-<summary class="cursor-pointer px-4 py-3 font-semibold text-sm text-stone-800 dark:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 select-none">
-🔍 Zobrazit zkouškovou aplikaci: Nerovinnost bipartitního grafu $K_{3,3}$
-</summary>
-<div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-2">
-<p>
-<strong>Úloha:</strong> Dokažte sporem, že kompletní bipartitní graf $K_{3,3}$ (se 6 vrcholy a 9 hranami) nelze nakreslit v rovině bez křížení hran.
-</p>
-<ol class="list-decimal pl-5 space-y-1">
-<li>Předpokládejme pro spor, že $K_{3,3}$ je rovinný.</li>
-<li>Jelikož je bipartitní, neobsahuje liché cykly — nejkratší cyklus má délku alespoň 4. Každá stěna v rovinném nakreslení je proto ohraničena alespoň 4 hranami: $2e \ge 4f \implies f \le \frac{e}{2}$.</li>
-<li>Dosazením do Eulerovy formule ($v - e + f = 2$) dostáváme nerovnost: $e \le 2v - 4$.</li>
-<li>Pro $K_{3,3}$ máme $v = 6$ a $e = 9$. Dosadíme: $9 \le 2(6) - 4 = 8$.</li>
-<li><strong>💥 SPOR:</strong> Nerovnost $9 \le 8$ je aritmetický rozpor! Graf $K_{3,3}$ tedy není rovinný.</li>
-</ol>
-</div>
-</details>
 
 ---
 

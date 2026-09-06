@@ -265,29 +265,6 @@ public:
 
 Pro každý vrchol $u \in V$ uchováváme seznam (dynamické pole `std::vector`) všech vrcholů $v$, které jsou s $u$ spojeny hranou.
 
-#### Zápis v C++:
-```cpp
-#include <vector>
-
-class GraphList {
-private:
-    int n;
-    std::vector<std::vector<int>> adjList;
-
-public:
-    GraphList(int vertices) : n(vertices), adjList(vertices) {}
-
-    void addEdge(int u, int v) {
-        adjList[u].push_back(v);
-        adjList[v].push_back(u); // Pro neorientovaný graf
-    }
-
-    const std::vector<int>& getNeighbors(int u) const {
-        return adjList[u];
-    }
-};
-```
-
 #### Vlastnosti Seznamu Sousedů:
 - **Paměťová složitost:** $\Theta(n + m)$ pro neorientovaný i orientovaný graf.
 - **Test existence hrany $\lbrace u, v \rbrace$:** $O(\deg(u))$ (Musíme prohledat sousedy vrcholu $u$).
@@ -304,37 +281,12 @@ Shrňme si přesné matematické definice všech pojmů, které budeme v další
 - Dva vrcholy $u, v$ jsou **sousední (adjacentní)**, pokud $\{u, v\} \in E$.
 - **Stupeň vrcholu $\deg_G(v)$** v neorientovaném grafu $G$ je počet hran incidentních s $v$:
   $$\deg_G(v) = |\{e \in E \mid v \in e\}|$$
-- V orientovaném grafu rozlišujeme:
-  - **Vstupní stupeň $\text{deg}^-(v)$:** Počet hran vstupujících do $v$: $|\{(u, v) \in E\}|$.
-  - **Výstupní stupeň $\text{deg}^+(v)$:** Počet hran vycházejících z $v$: $|\{(v, w) \in E\}|$.
-
 ---
-
-### 4.2 Podgrafy a Vyvolané Podgrafy
-
-Mějme graf $G = (V, E)$.
-1. **Podgraf (Subgraph):** Graf $G' = (V', E')$ je podgrafem $G$ (zapisujeme $G' \subseteq G$), pokud $V' \subseteq V$ a $E' \subseteq E$.
-2. **Vyvolaný podgraf (Induced Subgraph):** Nechť $V' \subseteq V$ je podmnožina vrcholů. Vyvolaný podgraf $G[V']$ je graf $(V', E')$, kde $E'$ obsahuje **všechny hrany původního grafu $G$, které mají oba koncové vrcholy ve $V'$**:
-   $$E' = \{\{u, v\} \in E \mid u \in V' \land v \in V'\}$$
-
-```
-Původní graf G:                  Vyvolaný podgraf G[V'] pro V' = {A, B, C}:
-    (A) ───── (B)                    (A) ───── (B)
-     │   \     │                      │   \     │
-     │    \    │                      │    \    │
-     │     \   │                      │     \   │
-    (C) ───── (D)                    (C)       (D vynechán i s jeho hranami)
-```
-
----
-
-### 4.3 Sledy, Tahy, Cesty a Cykly
 
 Nechť $G = (V, E)$ je neorientovaný graf.
 1. **Sled (Walk):** Střídavá posloupnost vrcholů a hran $(v_0, e_1, v_1, e_2, v_2, \dots, e_k, v_k)$, kde $e_i = \{v_{i-1}, v_i\}$. *(Vrcholy i hrany se mohou opakovat).*
-2. **Tah (Trail):** Sled, ve kterém se **neopakuje žádná hrana**. *(Vrcholy se opakovat mohou).*
-3. **Cesta (Path):** Sled, ve kterém se **neopakuje žádný vrchol** (a tedy ani hrana). Délka cesty je počet jejích hran $k$.
-4. **Cyklus (Cycle):** Uzavřený sled $(v_0, e_1, v_1, \dots, e_k, v_0)$ délky $k \ge 3$, kde $v_0, v_1, \dots, v_{k-1}$ jsou navzájem různé vrcholy.
+2. **Cesta (Path):** Sled, ve kterém se **neopakuje žádný vrchol** (a tedy ani hrana). Délka cesty je počet jejích hran $k$.  
+3. **Cyklus (Cycle):** Uzavřený sled $(v_0, e_1, v_1, \dots, e_k, v_0)$ délky $k \ge 3$, kde $v_0, v_1, \dots, v_{k-1}$ jsou navzájem různé vrcholy.
 
 ---
 
