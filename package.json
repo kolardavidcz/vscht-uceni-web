@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "preview": "vite preview",
+    "pptx:pre-ag1": "node scripts/generate_pre_ag1_pptx.mjs",
     "scrape:trainer": "node scripts/scrape-trainer-course.mjs --course 81",
     "db:backup": "npx tsx scripts/export-db.ts"
   },
@@ -33,6 +34,7 @@
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",
     "@vitejs/plugin-react": "^4.5.0",
+    "pptxgenjs": "^4.0.1",
     "tailwindcss": "^4.1.8",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",

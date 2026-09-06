@@ -27,3 +27,8 @@ pnpm-debug.log*
 
 # Raw data (large reference files, not needed in repo)
 /src/features/bioinformatics/data/raw_data/
+
+# Presentation previews
+/dist_slides/
+*.pdf
+
