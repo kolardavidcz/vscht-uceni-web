@@ -37,6 +37,7 @@ export function setupMathJaxCopyListener(): void {
         mathContainers.forEach((cnt) => {
           const unicode =
             cnt.getAttribute("data-unicode") ||
+            cnt.querySelector(".mjx-selectable-layer")?.textContent ||
             cnt.querySelector(".mjx-selectable-unicode")?.textContent ||
             cnt.querySelector("mjx-assistive-mml")?.textContent ||
             latexToUnicode(cnt.getAttribute("data-latex") || "") ||
@@ -56,7 +57,7 @@ export function setupMathJaxCopyListener(): void {
           cnt.parentNode?.replaceChild(span, cnt);
         });
 
-        cloned.querySelectorAll(".mjx-selectable-unicode, mjx-assistive-mml").forEach((s) => s.remove());
+        cloned.querySelectorAll(".mjx-selectable-layer, .mjx-selectable-unicode, mjx-assistive-mml").forEach((s) => s.remove());
 
         // Normalize any transparent inline styling in the cloned tree
         cloned.querySelectorAll<HTMLElement>("[style*='transparent']").forEach((el) => {
@@ -84,6 +85,7 @@ export function setupMathJaxCopyListener(): void {
         if (enclosing) {
           const unicode =
             enclosing.getAttribute("data-unicode") ||
+            enclosing.querySelector(".mjx-selectable-layer")?.textContent ||
             enclosing.querySelector(".mjx-selectable-unicode")?.textContent ||
             enclosing.querySelector("mjx-assistive-mml")?.textContent ||
             latexToUnicode(enclosing.getAttribute("data-latex") || "") ||
@@ -126,20 +128,29 @@ export function makeMathJaxContainerSelectable(container: HTMLElement): void {
   // Remove assistive MathML which MathJax marks unselectable="on" with user-select: none
   container.querySelectorAll("mjx-assistive-mml").forEach((a) => a.remove());
 
-  // Allow browser selection on container and math elements
-  container.style.userSelect = "text";
+  // Prevent selection on the internal MathJax CHTML layout structure
   const math = container.querySelector("mjx-math");
   if (math) {
-    math.removeAttribute("aria-hidden");
-    (math as HTMLElement).style.userSelect = "text";
+    (math as HTMLElement).style.userSelect = "none";
+    (math as HTMLElement).style.webkitUserSelect = "none";
+    (math as HTMLElement).style.pointerEvents = "none";
   }
 
-  // Populate each mjx-c with its corresponding Unicode character
-  const chars = container.querySelectorAll<HTMLElement>("mjx-c");
-  chars.forEach((c) => {
-    c.style.userSelect = "text";
-    if (c.textContent) return;
+  // If already processed with an overlay layer, return
+  if (container.querySelector(".mjx-selectable-layer")) return;
 
+  // Extract unicode characters from MathJax CHTML glyphs and text elements
+  const elements = container.querySelectorAll<HTMLElement>("mjx-c, mjx-utext");
+  const extractedParts: string[] = [];
+
+  elements.forEach((el) => {
+    if (el.tagName.toLowerCase() === "mjx-utext") {
+      extractedParts.push(el.textContent || "");
+      return;
+    }
+
+    // It is an mjx-c glyph element - keep c text-free so zero-height font does not break selection
+    const c = el;
     const match = c.className.match(/mjx-c([0-9A-Fa-f]+)/);
     let ch = "";
     if (match) {
@@ -167,12 +178,28 @@ export function makeMathJaxContainerSelectable(container: HTMLElement): void {
         if (c.closest("mjx-msup") && SUPER_MAP[ch]) ch = SUPER_MAP[ch];
         if (c.closest("mjx-msub") && SUB_MAP[ch]) ch = SUB_MAP[ch];
       }
-      c.textContent = ch;
+      extractedParts.push(ch);
     }
   });
 
-  const fullText = container.textContent || "";
-  container.setAttribute("data-unicode", fullText);
+  let unicode = extractedParts.join("");
+  if (!unicode) {
+    const rawLatex = container.getAttribute("data-latex") || "";
+    unicode = latexToUnicode(rawLatex);
+  }
+  if (!unicode) {
+    unicode = container.textContent || "";
+  }
+  unicode = unicode.trim();
+
+  container.setAttribute("data-unicode", unicode);
+
+  // Inject a single overlay layer that spans the entire container.
+  // This provides a smooth, full-height, continuous highlight without clipping descenders.
+  const layer = document.createElement("span");
+  layer.className = "mjx-selectable-layer";
+  layer.textContent = unicode;
+  container.appendChild(layer);
 }
 
 function ensureConfig() {

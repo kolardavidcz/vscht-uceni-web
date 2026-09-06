@@ -1,6 +1,6 @@
-# Modul 0: Od Biologické Intuice k Jazyku Grafů
+# Bio-Intuice & Co je Graf
 
-> **Cíl modulu:** Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů $G = (V, E)$, abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AG1 na FIT ČVUT.
+> **Cíl kapitoly:** Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů $G = (V, E)$, abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AG1 na FIT ČVUT.
 
 ---
 
@@ -72,86 +72,86 @@ V chemii vnímáme glukózu jako molekulu $C_6H_{12}O_6$. V teoretické informat
 <line x1="205" y1="155" x2="135" y2="175" stroke="#c2410c" stroke-width="3" stroke-dasharray="4 3" stroke-linecap="round" />
 
 <!-- Návěští hran (e₁ .. e₁₂) -->
-<rect x="312" y="58" width="18" height="13" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="321" y="68" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁</text>
+<rect x="310" y="57" width="22" height="15" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="321" y="69" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁</text>
 
-<rect x="362" y="114" width="18" height="13" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="371" y="124" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₂</text>
+<rect x="360" y="113" width="22" height="15" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="371" y="125" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₂</text>
 
-<rect x="312" y="174" width="18" height="13" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="321" y="184" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₃</text>
+<rect x="310" y="173" width="22" height="15" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="321" y="185" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₃</text>
 
-<rect x="233" y="174" width="18" height="13" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="242" y="184" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₄</text>
+<rect x="231" y="173" width="22" height="15" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="242" y="185" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₄</text>
 
-<rect x="194" y="114" width="18" height="13" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="203" y="124" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₅</text>
+<rect x="192" y="113" width="22" height="15" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="203" y="125" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₅</text>
 
-<rect x="233" y="58" width="18" height="13" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="242" y="68" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₆</text>
+<rect x="231" y="57" width="22" height="15" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="242" y="69" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₆</text>
 
-<rect x="161" y="58" width="18" height="13" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="170" y="68" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₇</text>
+<rect x="159" y="57" width="22" height="15" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="170" y="69" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₇</text>
 
-<rect x="94" y="42" width="18" height="13" rx="3" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
-<text x="103" y="52" fill="#c2410c" class="dark:fill-orange-300" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₈</text>
+<rect x="92" y="41" width="22" height="15" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
+<text x="103" y="53" fill="#c2410c" class="dark:fill-orange-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₈</text>
 
-<rect x="382" y="77" width="18" height="13" rx="3" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
-<text x="391" y="87" fill="#c2410c" class="dark:fill-orange-300" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₉</text>
+<rect x="380" y="76" width="22" height="15" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
+<text x="391" y="88" fill="#c2410c" class="dark:fill-orange-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₉</text>
 
-<rect x="382" y="167" width="20" height="13" rx="3" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
-<text x="392" y="177" fill="#c2410c" class="dark:fill-orange-300" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁₀</text>
+<rect x="380" y="166" width="24" height="15" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
+<text x="392" y="178" fill="#c2410c" class="dark:fill-orange-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁₀</text>
 
-<rect x="286" y="202" width="20" height="13" rx="3" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
-<text x="296" y="212" fill="#c2410c" class="dark:fill-orange-300" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁₁</text>
+<rect x="284" y="201" width="24" height="15" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
+<text x="296" y="213" fill="#c2410c" class="dark:fill-orange-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁₁</text>
 
-<rect x="160" y="167" width="20" height="13" rx="3" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
-<text x="170" y="177" fill="#c2410c" class="dark:fill-orange-300" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁₂</text>
+<rect x="158" y="166" width="24" height="15" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1" class="dark:fill-[#2a1708] dark:stroke-orange-600" />
+<text x="170" y="178" fill="#c2410c" class="dark:fill-orange-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁₂</text>
 
 <!-- Vrcholy (Atomy v₁ .. v₁₂) -->
 <circle cx="280" cy="50" r="19" fill="#e11d48" />
-<text x="280" y="48" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">O</text>
-<text x="280" y="60" fill="#fecdd3" font-size="8.5" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">v₁</text>
+<text x="280" y="48" fill="#ffffff" font-size="13" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">O</text>
+<text x="280" y="61" fill="#fecdd3" font-size="10.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₁</text>
 
 <circle cx="355" cy="85" r="19" fill="#1e293b" />
-<text x="355" y="83" fill="#ffffff" font-size="12" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₁</text>
-<text x="355" y="95" fill="#94a3b8" font-size="8.5" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">v₂</text>
+<text x="355" y="83" fill="#ffffff" font-size="13" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₁</text>
+<text x="355" y="96" fill="#cbd5e1" font-size="10.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₂</text>
 
 <circle cx="355" cy="155" r="19" fill="#1e293b" />
-<text x="355" y="153" fill="#ffffff" font-size="12" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₂</text>
-<text x="355" y="165" fill="#94a3b8" font-size="8.5" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">v₃</text>
+<text x="355" y="153" fill="#ffffff" font-size="13" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₂</text>
+<text x="355" y="166" fill="#cbd5e1" font-size="10.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₃</text>
 
 <circle cx="280" cy="190" r="19" fill="#1e293b" />
-<text x="280" y="188" fill="#ffffff" font-size="12" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₃</text>
-<text x="280" y="200" fill="#94a3b8" font-size="8.5" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">v₄</text>
+<text x="280" y="188" fill="#ffffff" font-size="13" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₃</text>
+<text x="280" y="201" fill="#cbd5e1" font-size="10.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₄</text>
 
 <circle cx="205" cy="155" r="19" fill="#1e293b" />
-<text x="205" y="153" fill="#ffffff" font-size="12" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₄</text>
-<text x="205" y="165" fill="#94a3b8" font-size="8.5" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">v₅</text>
+<text x="205" y="153" fill="#ffffff" font-size="13" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₄</text>
+<text x="205" y="166" fill="#cbd5e1" font-size="10.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₅</text>
 
 <circle cx="205" cy="85" r="19" fill="#1e293b" />
-<text x="205" y="83" fill="#ffffff" font-size="12" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₅</text>
-<text x="205" y="95" fill="#94a3b8" font-size="8.5" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">v₆</text>
+<text x="205" y="83" fill="#ffffff" font-size="13" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₅</text>
+<text x="205" y="96" fill="#cbd5e1" font-size="10.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₆</text>
 
 <circle cx="135" cy="50" r="19" fill="#1e293b" />
-<text x="135" y="48" fill="#ffffff" font-size="12" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₆</text>
-<text x="135" y="60" fill="#94a3b8" font-size="8.5" font-weight="700" font-family="'Outfit', sans-serif" text-anchor="middle">v₇</text>
+<text x="135" y="48" fill="#ffffff" font-size="13" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">C₆</text>
+<text x="135" y="61" fill="#cbd5e1" font-size="10.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₇</text>
 
 <!-- OH substituenty (v₈ .. v₁₂) -->
-<rect x="425" y="73" width="54" height="24" rx="6" fill="#ea580c" />
-<text x="452" y="89" fill="#ffffff" font-size="11" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₈)</text>
+<rect x="420" y="72" width="60" height="26" rx="7" fill="#ea580c" />
+<text x="450" y="89" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₈)</text>
 
-<rect x="425" y="163" width="54" height="24" rx="6" fill="#ea580c" />
-<text x="452" y="179" fill="#ffffff" font-size="11" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₉)</text>
+<rect x="420" y="162" width="60" height="26" rx="7" fill="#ea580c" />
+<text x="450" y="179" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₉)</text>
 
-<rect x="253" y="215" width="54" height="24" rx="6" fill="#ea580c" />
-<text x="280" y="231" fill="#ffffff" font-size="11" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₁₀)</text>
+<rect x="250" y="214" width="60" height="26" rx="7" fill="#ea580c" />
+<text x="280" y="231" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₁₀)</text>
 
-<rect x="80" y="163" width="54" height="24" rx="6" fill="#ea580c" />
-<text x="107" y="179" fill="#ffffff" font-size="11" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₁₁)</text>
+<rect x="76" y="162" width="60" height="26" rx="7" fill="#ea580c" />
+<text x="106" y="179" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₁₁)</text>
 
-<rect x="18" y="38" width="54" height="24" rx="6" fill="#ea580c" />
-<text x="45" y="54" fill="#ffffff" font-size="11" font-weight="800" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₁₂)</text>
+<rect x="14" y="37" width="60" height="26" rx="7" fill="#ea580c" />
+<text x="44" y="54" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', system-ui, sans-serif" text-anchor="middle">OH (v₁₂)</text>
 </svg>
   </div>
   <p class="text-xs text-stone-600 dark:text-stone-400 mt-3 mb-0 leading-relaxed text-center">

@@ -1,4 +1,4 @@
-# Modul 4a: Grafy v C++ & Reprezentace v Paměti
+# Grafy v C++ & Reprezentace v Paměti
 
 ## 0. Minimum z Grafových Pojmů
 
@@ -38,10 +38,23 @@ Graf reprezentujeme dvoudimenzionálním polem (maticí) $A$ typu $n \times n$:
 
 $$A[i][j] = \begin{cases} 1 & \text{pokud } \lbrace v_i, v_j \rbrace \in E \text{ (nebo } (v_i, v_j) \in E \text{)}, \\ 0 & \text{pokud hrana neexistuje.} \end{cases}$$
 
-#### Vlastnosti Matice Sousedství:
-- **Paměťová složitost:** $\Theta(n^2)$ bez ohledu na počet hran $m$.
-- **Test existence hrany $\lbrace u, v \rbrace$:** $O(1)$ (Okamžitý přístup do pole).
-- **Procházení všech sousedů vrcholu $u$:** $\Theta(n)$ (Musíme projít celý řádek matice).
+<div class="my-3 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+  <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-[#140d09] border border-stone-200/80 dark:border-stone-800">
+    <div class="text-[11px] text-stone-500 dark:text-stone-400 font-medium">Paměťová složitost</div>
+    <div class="font-mono font-bold text-amber-600 dark:text-amber-400 text-sm mt-0.5">$\Theta(n^2)$</div>
+    <div class="text-[11px] text-stone-400 dark:text-stone-500 mt-0.5">bez ohledu na počet hran $m$</div>
+  </div>
+  <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-[#140d09] border border-stone-200/80 dark:border-stone-800">
+    <div class="text-[11px] text-stone-500 dark:text-stone-400 font-medium">Test existence hrany $\lbrace u, v \rbrace$</div>
+    <div class="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm mt-0.5">$O(1)$</div>
+    <div class="text-[11px] text-stone-400 dark:text-stone-500 mt-0.5">okamžitý přístup do pole</div>
+  </div>
+  <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-[#140d09] border border-stone-200/80 dark:border-stone-800">
+    <div class="text-[11px] text-stone-500 dark:text-stone-400 font-medium">Průchod sousedů vrcholu $u$</div>
+    <div class="font-mono font-bold text-amber-600 dark:text-amber-400 text-sm mt-0.5">$\Theta(n)$</div>
+    <div class="text-[11px] text-stone-400 dark:text-stone-500 mt-0.5">projití celého řádku matice</div>
+  </div>
+</div>
 
 ---
 
@@ -49,10 +62,23 @@ $$A[i][j] = \begin{cases} 1 & \text{pokud } \lbrace v_i, v_j \rbrace \in E \text
 
 Pro každý vrchol $u \in V$ uchováváme seznam (dynamické pole `std::vector`) všech vrcholů $v$, které jsou s $u$ spojeny hranou.
 
-#### Vlastnosti Seznamu Sousedů:
-- **Paměťová složitost:** $\Theta(n + m)$ pro neorientovaný i orientovaný graf.
-- **Test existence hrany $\lbrace u, v \rbrace$:** $O(\deg(u))$ (Musíme prohledat sousedy vrcholu $u$).
-- **Procházení všech sousedů vrcholu $u$:** $\Theta(\deg(u))$ (Projdeme pouze skutečné sousedy!).
+<div class="my-3 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+  <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-[#140d09] border border-stone-200/80 dark:border-stone-800">
+    <div class="text-[11px] text-stone-500 dark:text-stone-400 font-medium">Paměťová složitost</div>
+    <div class="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm mt-0.5">$\Theta(n + m)$</div>
+    <div class="text-[11px] text-stone-400 dark:text-stone-500 mt-0.5">optimální pro řídké grafy</div>
+  </div>
+  <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-[#140d09] border border-stone-200/80 dark:border-stone-800">
+    <div class="text-[11px] text-stone-500 dark:text-stone-400 font-medium">Test existence hrany $\lbrace u, v \rbrace$</div>
+    <div class="font-mono font-bold text-amber-600 dark:text-amber-400 text-sm mt-0.5">$O(\deg(u))$</div>
+    <div class="text-[11px] text-stone-400 dark:text-stone-500 mt-0.5">prohledání sousedů vrcholu $u$</div>
+  </div>
+  <div class="p-2.5 rounded-xl bg-stone-50 dark:bg-[#140d09] border border-stone-200/80 dark:border-stone-800">
+    <div class="text-[11px] text-stone-500 dark:text-stone-400 font-medium">Průchod sousedů vrcholu $u$</div>
+    <div class="font-mono font-bold text-emerald-600 dark:text-emerald-400 text-sm mt-0.5">$\Theta(\deg(u))$</div>
+    <div class="text-[11px] text-stone-400 dark:text-stone-500 mt-0.5">průchod pouze reálných sousedů</div>
+  </div>
+</div>
 
 ---
 
@@ -84,64 +110,64 @@ DFS
 <line x1="275" y1="80" x2="275" y2="145" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="4.5" stroke-linecap="round" />
 
 <!-- Návěští hran e₁ až e₉ -->
-<rect x="44" y="112" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="53" y="123" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁</text>
+<rect x="42" y="111" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="53" y="123" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁</text>
 
-<rect x="92" y="167" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="101" y="178" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₂</text>
+<rect x="90" y="166" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="101" y="178" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₂</text>
 
-<rect x="161" y="167" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="170" y="178" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₃</text>
+<rect x="159" y="166" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="170" y="178" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₃</text>
 
-<rect x="212" y="112" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="221" y="123" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₄</text>
+<rect x="210" y="111" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="221" y="123" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₄</text>
 
-<rect x="92" y="60" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="101" y="71" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₅</text>
+<rect x="90" y="59" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="101" y="71" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₅</text>
 
-<rect x="161" y="60" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="170" y="71" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₆</text>
+<rect x="159" y="59" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="170" y="71" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₆</text>
 
-<rect x="231" y="60" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="240" y="71" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₇</text>
+<rect x="229" y="59" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="240" y="71" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₇</text>
 
-<rect x="290" y="47" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="299" y="58" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₈</text>
+<rect x="288" y="46" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="299" y="58" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₈</text>
 
-<rect x="285" y="105" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="294" y="116" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₉</text>
+<rect x="283" y="104" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="294" y="116" fill="#0f172a" class="fill-stone-800 dark:fill-stone-200" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₉</text>
 
 <!-- Vrcholy v₁ až v₇ -->
-<circle cx="68" cy="160" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="68" y="163.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₁</text>
+<circle cx="68" cy="160" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="68" y="164" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₁</text>
 
-<circle cx="135" cy="160" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="135" y="163.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₂</text>
+<circle cx="135" cy="160" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="135" y="164" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₂</text>
 
-<circle cx="205" cy="160" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="205" y="163.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₃</text>
+<circle cx="205" cy="160" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="205" y="164" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₃</text>
 
-<circle cx="205" cy="80" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="205" y="83.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₄</text>
+<circle cx="205" cy="80" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="205" y="84" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₄</text>
 
-<circle cx="135" cy="80" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="135" y="83.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₅</text>
+<circle cx="135" cy="80" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="135" y="84" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₅</text>
 
-<circle cx="275" cy="80" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="275" y="83.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₆</text>
+<circle cx="275" cy="80" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="275" y="84" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₆</text>
 
-<circle cx="280" cy="28" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="280" y="31.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₇</text>
+<circle cx="280" cy="28" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="280" y="32" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₇</text>
 
 <!-- Start v₀ (S) -->
-<circle cx="68" cy="80" r="12" fill="#db2777" />
-<text x="68" y="84" fill="#ffffff" font-size="9.5" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₀</text>
-<text x="34" y="88" fill="#db2777" font-size="24" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
+<circle cx="68" cy="80" r="15" fill="#db2777" />
+<text x="68" y="84.5" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₀</text>
+<text x="32" y="89" fill="#db2777" font-size="26" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
 
 <!-- Cíl v₈ (C) -->
-<circle cx="275" cy="145" r="12" fill="#db2777" />
-<text x="275" y="149" fill="#ffffff" font-size="9.5" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₈</text>
-<text x="298" y="153" fill="#db2777" font-size="24" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
+<circle cx="275" cy="145" r="15" fill="#db2777" />
+<text x="275" y="149.5" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₈</text>
+<text x="300" y="154" fill="#db2777" font-size="26" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
 </svg>
 </div>
 </div>
@@ -172,64 +198,64 @@ BFS
 <line x1="205" y1="160" x2="205" y2="80" stroke="#cbd5e1" class="stroke-stone-400 dark:stroke-stone-600" stroke-width="3" stroke-linecap="round" />
 
 <!-- Návěští hran e₁ až e₉ -->
-<rect x="44" y="112" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="53" y="123" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁</text>
+<rect x="42" y="111" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="53" y="123" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₁</text>
 
-<rect x="92" y="167" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="101" y="178" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₂</text>
+<rect x="90" y="166" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="101" y="178" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₂</text>
 
-<rect x="161" y="167" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="170" y="178" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₃</text>
+<rect x="159" y="166" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="170" y="178" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₃</text>
 
-<rect x="212" y="112" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="221" y="123" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₄</text>
+<rect x="210" y="111" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="221" y="123" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₄</text>
 
-<rect x="92" y="60" width="18" height="14" rx="3" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
-<text x="101" y="71" fill="#047857" class="dark:fill-emerald-300" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₅</text>
+<rect x="90" y="59" width="22" height="16" rx="4" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
+<text x="101" y="71" fill="#047857" class="dark:fill-emerald-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₅</text>
 
-<rect x="161" y="60" width="18" height="14" rx="3" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
-<text x="170" y="71" fill="#047857" class="dark:fill-emerald-300" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₆</text>
+<rect x="159" y="59" width="22" height="16" rx="4" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
+<text x="170" y="71" fill="#047857" class="dark:fill-emerald-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₆</text>
 
-<rect x="231" y="60" width="18" height="14" rx="3" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
-<text x="240" y="71" fill="#047857" class="dark:fill-emerald-300" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₇</text>
+<rect x="229" y="59" width="22" height="16" rx="4" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
+<text x="240" y="71" fill="#047857" class="dark:fill-emerald-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₇</text>
 
-<rect x="290" y="47" width="18" height="14" rx="3" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
-<text x="299" y="58" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₈</text>
+<rect x="288" y="46" width="22" height="16" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1" class="fill-white dark:fill-[#1e1712] stroke-stone-400 dark:stroke-stone-600" />
+<text x="299" y="58" fill="#64748b" class="fill-stone-500 dark:fill-stone-400" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₈</text>
 
-<rect x="285" y="105" width="18" height="14" rx="3" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
-<text x="294" y="116" fill="#047857" class="dark:fill-emerald-300" font-size="9" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₉</text>
+<rect x="283" y="104" width="22" height="16" rx="4" fill="#d1fae5" stroke="#10b981" stroke-width="1.2" class="dark:fill-[#064e3b]/50 dark:stroke-emerald-500" />
+<text x="294" y="116" fill="#047857" class="dark:fill-emerald-300" font-size="11" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">e₉</text>
 
 <!-- Vrcholy v₁ až v₇ -->
-<circle cx="68" cy="160" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="68" y="163.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₁</text>
+<circle cx="68" cy="160" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="68" y="164" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₁</text>
 
-<circle cx="135" cy="160" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="135" y="163.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₂</text>
+<circle cx="135" cy="160" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="135" y="164" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₂</text>
 
-<circle cx="205" cy="160" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="205" y="163.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₃</text>
+<circle cx="205" cy="160" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="205" y="164" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₃</text>
 
-<circle cx="205" cy="80" r="9.5" fill="#10b981" />
-<text x="205" y="83.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₄</text>
+<circle cx="205" cy="80" r="13.5" fill="#10b981" />
+<text x="205" y="84" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₄</text>
 
-<circle cx="135" cy="80" r="9.5" fill="#10b981" />
-<text x="135" y="83.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₅</text>
+<circle cx="135" cy="80" r="13.5" fill="#10b981" />
+<text x="135" y="84" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₅</text>
 
-<circle cx="275" cy="80" r="9.5" fill="#10b981" />
-<text x="275" y="83.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₆</text>
+<circle cx="275" cy="80" r="13.5" fill="#10b981" />
+<text x="275" y="84" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₆</text>
 
-<circle cx="280" cy="28" r="9.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
-<text x="280" y="31.5" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₇</text>
+<circle cx="280" cy="28" r="13.5" fill="#334155" class="fill-stone-700 dark:fill-stone-400" />
+<text x="280" y="32" fill="#ffffff" font-size="11.5" font-weight="800" font-family="'Outfit', sans-serif" text-anchor="middle">v₇</text>
 
 <!-- Start v₀ (S) -->
-<circle cx="68" cy="80" r="12" fill="#10b981" />
-<text x="68" y="84" fill="#ffffff" font-size="9.5" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₀</text>
-<text x="34" y="88" fill="#10b981" font-size="24" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
+<circle cx="68" cy="80" r="15" fill="#10b981" />
+<text x="68" y="84.5" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₀</text>
+<text x="32" y="89" fill="#10b981" font-size="26" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
 
 <!-- Cíl v₈ (C) -->
-<circle cx="275" cy="145" r="12" fill="#10b981" />
-<text x="275" y="149" fill="#ffffff" font-size="9.5" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₈</text>
-<text x="298" y="153" fill="#10b981" font-size="24" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
+<circle cx="275" cy="145" r="15" fill="#10b981" />
+<text x="275" y="149.5" fill="#ffffff" font-size="12" font-weight="900" font-family="'Outfit', sans-serif" text-anchor="middle">v₈</text>
+<text x="300" y="154" fill="#10b981" font-size="26" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
 </svg>
 </div>
 </div>
@@ -241,12 +267,17 @@ BFS
 
 ---
 
-## 4. Úloha 4a.1: Analýza Proteinové Interakční Sítě (PPI)
+## 3. Úloha: Analýza Proteinové Interakční Sítě (PPI)
 
 Mějme proteinovou síť popsanou neorientovaným grafem $G = (V, E)$ s $|V| = 6$ proteiny $\lbrace P_1, P_2, P_3, P_4, P_5, P_6 \rbrace$ a množinou interakcí:
 $$E = \lbrace \lbrace P_1, P_2 \rbrace, \lbrace P_1, P_3 \rbrace, \lbrace P_2, P_3 \rbrace, \lbrace P_3, P_4 \rbrace, \lbrace P_4, P_5 \rbrace, \lbrace P_4, P_6 \rbrace \rbrace$$
 
-<div class="my-5 p-4 rounded-xl bg-white dark:bg-[#0f0906] border border-stone-200/80 dark:border-stone-800/80 flex flex-col items-center justify-center shadow-2xs">
+<details class="print:hidden my-4 group rounded-xl border border-stone-200/80 dark:border-stone-800 bg-stone-50/60 dark:bg-[#140d09] p-3 shadow-2xs">
+  <summary class="cursor-pointer font-bold text-xs text-stone-700 dark:text-stone-300 flex items-center gap-2 select-none">
+    <span>📊 Zobrazit grafové schéma PPI sítě</span>
+    <span class="text-[10px] text-stone-400 font-normal">(klikněte pro rozbalení · skryto v tisku)</span>
+  </summary>
+  <div class="mt-3 bg-white dark:bg-[#0f0906] p-4 rounded-xl border border-stone-200/80 dark:border-stone-800/80 flex flex-col items-center justify-center shadow-2xs">
 <svg viewBox="0 0 460 170" class="w-full max-w-[420px] h-auto" xmlns="http://www.w3.org/2000/svg">
   <!-- Hrany -->
   <line x1="70" y1="45" x2="70" y2="125" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round" />
@@ -297,7 +328,8 @@ $$E = \lbrace \lbrace P_1, P_2 \rbrace, \lbrace P_1, P_3 \rbrace, \lbrace P_2, P
 <span class="text-[11px] text-stone-500 dark:text-stone-400 mt-2 text-center">
   Vrcholy: <strong>V = {P₁, P₂, P₃, P₄, P₅, P₆}</strong> · Hrany: <strong>E = {e₁, e₂, e₃, e₄, e₅, e₆}</strong> · Huby (oranžově): <strong>P₃, P₄</strong> · Listy (zeleně): <strong>P₅, P₆</strong>
 </span>
-</div>
+  </div>
+</details>
 
 1. Určete stupně všech vrcholů $\deg(P_i)$.
 2. Identifikujte proteiny s nejvyšším stupněm (Huby) a listy ($\deg(v) = 1$).
@@ -305,7 +337,7 @@ $$E = \lbrace \lbrace P_1, P_2 \rbrace, \lbrace P_1, P_3 \rbrace, \lbrace P_2, P
 4. Ověřte Handshaking Lemma $\sum \deg(v) = 2|E|$.
 
 <details>
-<summary>🔍 Zobrazit detailní řešení Úlohy 4a.1</summary>
+<summary>🔍 Zobrazit detailní řešení Úlohy PPI</summary>
 
 ### ✍️ Řešení:
 

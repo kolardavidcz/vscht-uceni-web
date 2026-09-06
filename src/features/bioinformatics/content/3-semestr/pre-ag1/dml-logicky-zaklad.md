@@ -1,6 +1,6 @@
-# Modul 1: Logický & Důkazový Základ pro Grafové Algoritmy
+# Logický & Důkazový základ
 
-> **Cíl modulu:** Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků ($\forall, \exists, \exists!$), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AG1 na FIT ČVUT.
+> **Cíl kapitoly:** Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků ($\forall, \exists, \exists!$), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AG1 na FIT ČVUT.
 
 ---
 
@@ -12,7 +12,7 @@ Odpověď závisí přesně na tom, **jak přečteme implikaci** „pokud A, pak
 
 Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AG1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů.
 
-> 💡 **Příslib tohoto modulu:** Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C — žádná teorie grafů není předem potřeba!
+> 💡 **Příslib této kapitoly:** Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C — žádná teorie grafů není předem potřeba!
 
 ---
 

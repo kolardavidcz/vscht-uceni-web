@@ -368,28 +368,25 @@ h4,
   border-radius: 0.75rem;
 }
 
+/* Universal brand selection styling */
+::selection {
+  background: rgba(249, 93, 18, 0.25);
+  color: inherit;
+}
+
 /* ==========================================================================
    MathJax Selectable Text & Formulas
    ========================================================================== */
-mjx-container,
-mjx-container * {
-  user-select: text !important;
-  -webkit-user-select: text !important;
-}
-
 mjx-container {
   position: relative;
   display: inline-block;
+  user-select: text !important;
+  -webkit-user-select: text !important;
 }
 
 mjx-container[display="true"],
 mjx-container.MJX-DISPLAY {
   display: block !important;
-}
-
-/* Visually hide underlying selectable text inside mjx-c to prevent ghosting/double letters */
-mjx-c {
-  color: transparent !important;
 }
 
 /* Ensure MathJax rendered pseudo-glyph ::before is visible with crisp theme-aware color */
@@ -405,8 +402,6 @@ mjx-c::before {
 mjx-utext {
   font-family: inherit !important;
   font-size: 100% !important;
-  vertical-align: baseline !important;
-  padding: 0 !important;
 }
 
 @media print {
@@ -415,14 +410,83 @@ mjx-utext {
   }
 }
 
-mjx-c::selection {
+/* Single continuous selectable overlay layer */
+.mjx-selectable-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: transparent !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  font-family: inherit;
+  font-size: 100%;
+  line-height: inherit;
+  pointer-events: auto;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.mjx-selectable-layer::selection {
   background: rgba(249, 93, 18, 0.25) !important;
   color: transparent !important;
 }
 
-mjx-container::selection,
-mjx-container *::selection {
-  background: rgba(249, 93, 18, 0.25) !important;
+/* Inline icon badges for check and cross */
+.inline-icon-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.18em;
+  margin: 0 0.2em;
+  border-radius: 9999px;
+  background-color: #dcfce7;
+  border: 1px solid #86efac;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2315803d'%3E%3Cpath fill-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 70% 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.inline-icon-cross {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15em;
+  height: 1.15em;
+  vertical-align: -0.18em;
+  margin: 0 0.2em;
+  border-radius: 9999px;
+  background-color: #ffe4e6;
+  border: 1px solid #fca5a5;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23be123c'%3E%3Cpath d='M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z'/%3E%3C/svg%3E");
+  background-size: 70% 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dark .inline-icon-check {
+  background-color: rgba(21, 128, 61, 0.2);
+  border-color: rgba(134, 239, 172, 0.3);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%234ade80'%3E%3Cpath fill-rule='evenodd' d='M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z' clip-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.dark .inline-icon-cross {
+  background-color: rgba(190, 18, 60, 0.2);
+  border-color: rgba(252, 165, 165, 0.3);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23fb7185'%3E%3Cpath d='M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z'/%3E%3C/svg%3E");
+}
+
+@media print {
+  .inline-icon-check,
+  .inline-icon-cross {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
 }
 
 /* Universal selectability across wiki and app */

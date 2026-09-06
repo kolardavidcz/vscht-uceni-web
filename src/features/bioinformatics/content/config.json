@@ -89,31 +89,31 @@
               "order": 1
             },
             "dml": {
-              "title": "2 · Hub: Přehled Letní Přípravy",
+              "title": "2 · ☀️ Letní průvodce grafovou matematikou pro bioinformatiky",
               "order": 2
             },
             "dml-bio-grafy": {
-              "title": "3 · Modul 0: Bio-Intuice & Co je Graf",
+              "title": "3 · Bio-Intuice & Co je Graf",
               "order": 3
             },
             "dml-logicky-zaklad": {
-              "title": "4 · Modul 1: Logický & Důkazový základ",
+              "title": "4 · Logický & Důkazový základ",
               "order": 4
             },
             "dml-indukce-na-grafech": {
-              "title": "5 · Modul 2: Indukce na Grafech & Redukční Past",
+              "title": "5 · Indukce na Grafech & Redukční Past",
               "order": 5
             },
             "dml-dukazy-sporem": {
-              "title": "6 · Modul 3: Důkazy Sporem & Extremální Princip",
+              "title": "6 · Důkazy Sporem & Extremální Princip",
               "order": 6
             },
             "dml-bio-grafy-b": {
-              "title": "7 · Modul 4a: Grafy v C++ & Reprezentace v Paměti",
+              "title": "7 · Grafy v C++ & Reprezentace v Paměti",
               "order": 7
             },
             "dml-zkouskovy-workshop": {
-              "title": "8 · Modul 4b: Zkouškový Workshop & Šablony Důkazů",
+              "title": "8 · Zkouškový Workshop & Šablony Důkazů",
               "order": 8
             }
           }

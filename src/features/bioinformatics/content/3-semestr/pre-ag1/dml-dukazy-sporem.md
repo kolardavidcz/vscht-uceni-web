@@ -1,6 +1,6 @@
-# Modul 3: Důkazy Sporem & Extremální Princip
+# Důkazy Sporem & Extremální Princip
 
-> **Cíl modulu:** Naučit se elegantní techniku důkazu, kde místo přímého dokazování ukážeš, že opak by vedl k nesmyslu.
+> **Cíl kapitoly:** Naučit se elegantní techniku důkazu, kde místo přímého dokazování ukážeš, že opak by vedl k nesmyslu.
 
 ---
 

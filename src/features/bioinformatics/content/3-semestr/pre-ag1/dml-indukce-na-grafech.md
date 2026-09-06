@@ -1,6 +1,6 @@
-# Modul 2: Indukce na Grafech & Redukční Past
+# Indukce na Grafech & Redukční Past
 
-> **Cíl modulu:** Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky.
+> **Cíl kapitoly:** Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky.
 
 ---
 

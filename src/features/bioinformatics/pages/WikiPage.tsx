@@ -242,17 +242,6 @@ export function WikiPage() {
         Našli jste chybu nebo máte doplnění k tomuto materiálu?
       </p>
       <div className="flex items-center gap-2">
-        {canSuggestMarkdown && (
-          <button
-            type="button"
-            onClick={() => window.print()}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-stone-200 bg-white text-stone-700 hover:bg-stone-50 text-xs font-bold transition-colors cursor-pointer"
-            title="Vytisknout stránku nebo uložit do PDF"
-          >
-            <Printer size={16} />
-            Tisk / PDF
-          </button>
-        )}
         {canSuggestMarkdown ? (
           <button
             type="button"

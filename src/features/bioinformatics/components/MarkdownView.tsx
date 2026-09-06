@@ -137,11 +137,27 @@ function protectMathSyntax(content: string): string {
   return res;
 }
 
+/**
+ * Replaces checkmark and cross emojis outside code blocks with clean SVG badge spans.
+ */
+function replaceEmojis(content: string): string {
+  const parts = content.split(/(```[\s\S]*?```|`[^`\n]+`)/g);
+  return parts
+    .map((part, i) => {
+      // Odd indices are code blocks or inline code
+      if (i % 2 === 1) return part;
+      return part
+        .replace(/✅|✔/g, '<span class="inline-icon-check" aria-label="ano"></span>')
+        .replace(/❌|✖/g, '<span class="inline-icon-cross" aria-label="ne"></span>');
+    })
+    .join("");
+}
+
 export function MarkdownView({ content }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   const processedContent = useMemo(
-    () => protectMathSyntax(normalizeMarkdownLists(content)),
+    () => replaceEmojis(protectMathSyntax(normalizeMarkdownLists(content))),
     [content]
   );
 

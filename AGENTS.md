@@ -276,15 +276,26 @@ See `useMicrobiologyData.ts`:
 
 Storage key versioning exists so bad encodings do not poison UI forever.
 
-### Wiki content
+### Wiki content & Pre-AG1 Structure
 
 - Files: `src/features/bioinformatics/content/**/*.md` + `config.json`
 - Loaded via feature `contentLoader` / materials data
 - Suggest-edit only for repo-relative content paths (allowlist in server)
+- **Pre-AG1 lecture numbering:** Always use `X · <Název>` in `config.json` and `# <Název>` in Markdown H1 headers (e.g. `1 · PA2 C++ Most k AG1`, `7 · Grafy v C++ & Reprezentace v Paměti`). **Never** reintroduce `Modul <X>` prefixes.
+- **Tisk / PDF button:** Located strictly in the top `PageShell` header bar. Never duplicate this button in `suggestFooter` or the bottom of wiki pages.
+- **Large showcase graphs in exercises:** Wrap in `<details class="print:hidden ...">` with descriptive summary buttons so print versions stay compact and fast.
+
+### MathJax & LaTeX Formula Invariants
+
+1. **Zero descender clipping:** MathJax CHTML font `MJXZERO` has zero line-height. Never assign text inside `<mjx-c>` directly (it shrinks selection highlights to 3.2px strips that cut off `g`, `j`, `y`, `p`, `q`).
+2. **Layer overlay:** `makeMathJaxContainerSelectable` in `loadMathJax.ts` extracts the full unicode text and injects a single `.mjx-selectable-layer` spanning `mjx-container`.
+3. **`mjx-utext` styling:** Never set `padding: 0 !important` or `vertical-align: baseline !important` on `mjx-utext`. MathJax relies on its native padding (`0.75em 0 0.2em`) to preserve descenders in text blocks (`\text{...}`).
+4. **Emoji replacement:** In `MarkdownView.tsx`, `✅` and `❌` outside code blocks are transformed into `.inline-icon-check` and `.inline-icon-cross` vector badges with theme/print support.
 
 ### Brand constraints (UX)
 
 - Accent orange only: `#f95d12` / text `#c2410c`
+- Selection highlight: `rgba(249, 93, 18, 0.25)` brand orange
 - Dark surfaces: espresso `#0f0906` + warm browns
 - Fonts: Plus Jakarta Sans (body), Outfit (display)
 - Avoid blue/green/purple brand backgrounds

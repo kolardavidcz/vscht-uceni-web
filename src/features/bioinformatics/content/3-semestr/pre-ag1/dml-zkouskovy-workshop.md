@@ -1,6 +1,6 @@
-# Modul 4b: Zkouškový Workshop & Šablony Důkazů z AG1
+# Zkouškový Workshop & Šablony Důkazů z AG1
 
-> **Cíl modulu:** Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.
+> **Cíl kapitoly:** Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.
 
 ---
 
@@ -8,17 +8,63 @@
 
 Při opravování teoretických písemek z AG1 platí neúprosná kritéria:
 
-```
-┌─────────────────────────────────────────────────────────┬─────────────────────────────────────────────────────────┐
-│ ❌ Co vás stane ztrátu bodů (až 0 bodů za příklad)      │ ✅ Co vám zajistí plný počet bodů (100 %)               │
-├─────────────────────────────────────────────────────────┼─────────────────────────────────────────────────────────┤
-│ Redukční past u indukce (začátek z G_n a přidání uzlu). │ Dekonstrukční indukce (začátek z LIBOVOLNÉHO G_{n+1}). │
-│ Chybějící ověření Báze indukce pro nejmenší objekt.    │ Explicitně zapsaný a ověřený základní krok P(n_0).      │
-│ Nejasně formulovaný předpoklad pro spor (chybí ¬B).     │ Přesně zapsaný předpoklad sporu: "Platí A a zároveň ¬B".│
-│ Neoznačený rozpor u sporu (kde přesně vznikl spor).     │ Jasně označený rozpor (⚡ / SPOR) s konkrétním faktem.  │
-│ U invariantu chybí jedna z 3 fází (např. Ukončení).    │ Všechny 3 fáze (Inicializace, Udržování, Ukončení).     │
-└─────────────────────────────────────────────────────────┴─────────────────────────────────────────────────────────┘
-```
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+  <div class="p-4 rounded-xl border border-rose-200/80 bg-rose-50/50 dark:bg-rose-950/20 dark:border-rose-900/40">
+    <div class="flex items-center gap-2 font-bold text-rose-700 dark:text-rose-400 text-sm mb-3">
+      <span class="inline-icon-cross"></span> Co vás bude stát body (až 0 b za příklad)
+    </div>
+    <ul class="space-y-2 text-xs text-stone-700 dark:text-stone-300">
+      <li class="flex items-start gap-2">
+        <span class="text-rose-500 font-bold shrink-0">•</span>
+        <span><strong>Redukční past u indukce:</strong> začátek z $G_n$ a přidání uzlu místo dekonstrukce z $G_{n+1}$.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-500 font-bold shrink-0">•</span>
+        <span><strong>Chybějící ověření báze:</strong> opomenutí nejmenšího objektu $P(n_0)$.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-500 font-bold shrink-0">•</span>
+        <span><strong>Nejasný předpoklad sporu:</strong> chybí explicitní negace závěru $\neg B$.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-500 font-bold shrink-0">•</span>
+        <span><strong>Neoznačený rozpor:</strong> neuvedení přesného místa a faktu, kde spor nastal.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-rose-500 font-bold shrink-0">•</span>
+        <span><strong>Neúplný invariant:</strong> chybí jedna ze 3 fází (např. ukončení).</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="p-4 rounded-xl border border-emerald-200/80 bg-emerald-50/50 dark:bg-emerald-950/20 dark:border-emerald-900/40">
+    <div class="flex items-center gap-2 font-bold text-emerald-700 dark:text-emerald-400 text-sm mb-3">
+      <span class="inline-icon-check"></span> Co vám zajistí plný počet bodů (100 %)
+    </div>
+    <ul class="space-y-2 text-xs text-stone-700 dark:text-stone-300">
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-500 font-bold shrink-0">•</span>
+        <span><strong>Dekonstrukční indukce:</strong> začátek z <em>libovolného</em> $G_{n+1}$ a redukce na $G_n$.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-500 font-bold shrink-0">•</span>
+        <span><strong>Explicitní báze:</strong> přesně zapsaný a ověřený základní krok $P(n_0)$.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-500 font-bold shrink-0">•</span>
+        <span><strong>Přesný předpoklad sporu:</strong> zapsáno „Platí $A$ a zároveň $\neg B$“.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-500 font-bold shrink-0">•</span>
+        <span><strong>Jasný rozpor:</strong> jednoznačně označený rozpor ($⚡$ / SPOR) s konkrétní větou.</span>
+      </li>
+      <li class="flex items-start gap-2">
+        <span class="text-emerald-500 font-bold shrink-0">•</span>
+        <span><strong>Kompletní invariant:</strong> všechny 3 fáze (inicializace, udržování, ukončení).</span>
+      </li>
+    </ul>
+  </div>
+</div>
 
 ---
 
