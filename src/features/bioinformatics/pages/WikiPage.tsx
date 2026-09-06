@@ -54,7 +54,12 @@ function NavTreeList({
   depth?: number;
 }) {
   return (
-    <ul className={cn("space-y-0.5", depth > 0 && "ml-2 pl-2 border-l border-stone-100")}>
+    <ul
+      className={cn(
+        "space-y-0.5 min-w-0",
+        depth > 0 && "ml-1.5 pl-1.5 border-l border-stone-100"
+      )}
+    >
       {nodes.map((node) => (
         <NavTreeItem
           key={`${node.type}-${node.key}`}
@@ -88,13 +93,14 @@ function NavTreeItem({
     const isActive = activePath === node.material.path;
     const isPA2 = node.material.path.includes("pa2-ag1-overview");
     return (
-      <li>
+      <li className="min-w-0">
         <Link
           to={href}
+          title={node.title}
           onMouseEnter={isPA2 ? prefetchPA2 : undefined}
           onTouchStart={isPA2 ? prefetchPA2 : undefined}
           className={cn(
-            "block rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors",
+            "block rounded-lg px-2 py-1.5 text-xs font-semibold transition-colors truncate",
             isActive
               ? "bg-brand-orange text-white shadow-sm"
               : "text-stone-700 hover:bg-stone-100"
@@ -111,8 +117,8 @@ function NavTreeItem({
     node.hub && activePath === node.hub.path && node.children.length > 0;
 
   return (
-    <li>
-      <div className="flex items-stretch gap-0.5">
+    <li className="min-w-0">
+      <div className="flex items-stretch gap-0.5 min-w-0">
         <button
           type="button"
           aria-expanded={open}
@@ -125,8 +131,9 @@ function NavTreeItem({
         {hubHref ? (
           <Link
             to={hubHref}
+            title={node.title}
             className={cn(
-              "flex-1 min-w-0 rounded-lg px-2 py-1.5 text-xs font-bold transition-colors",
+              "flex-1 min-w-0 rounded-lg px-1.5 py-1.5 text-xs font-bold transition-colors truncate",
               folderActive || (containsActive && !open)
                 ? "text-brand-orange-text bg-brand-orange/10"
                 : "text-stone-800 hover:bg-stone-100"
@@ -137,8 +144,9 @@ function NavTreeItem({
         ) : (
           <button
             type="button"
+            title={node.title}
             onClick={() => setOpen((v) => !v)}
-            className="flex-1 min-w-0 text-left rounded-lg px-2 py-1.5 text-xs font-bold text-stone-800 hover:bg-stone-100 cursor-pointer"
+            className="flex-1 min-w-0 text-left rounded-lg px-1.5 py-1.5 text-xs font-bold text-stone-800 hover:bg-stone-100 cursor-pointer truncate"
           >
             {node.title}
           </button>
@@ -169,19 +177,23 @@ export function WikiPage() {
   const [query, setQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [suggestOpen, setSuggestOpen] = useState(false);
-  const [isSidebarHidden, setIsSidebarHidden] = useState<boolean>(() => {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     try {
-      return localStorage.getItem("wiki_sidebar_hidden") === "true";
+      return (
+        localStorage.getItem("wiki_sidebar_collapsed") === "true" ||
+        localStorage.getItem("wiki_sidebar_hidden") === "true"
+      );
     } catch {
       return false;
     }
   });
 
   const toggleSidebar = () => {
-    setIsSidebarHidden((prev) => {
+    setIsSidebarCollapsed((prev) => {
       const next = !prev;
       try {
+        localStorage.setItem("wiki_sidebar_collapsed", String(next));
         localStorage.setItem("wiki_sidebar_hidden", String(next));
       } catch {}
       return next;
@@ -244,35 +256,58 @@ export function WikiPage() {
   /** Interactive special pages aren't a single .md source for full-file PR */
   const canSuggestMarkdown = Boolean(active && !isSpecial);
 
-  const sidebar = (
+  const renderSidebarContent = (collapsed: boolean) => (
     <aside className="flex flex-col h-full min-h-0 max-h-full">
-      <div className="p-3 border-b border-stone-200 shrink-0 flex items-center gap-2">
-        <div className="relative flex-1 min-w-0">
-          <Search
-            size={14}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400"
-          />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Hledat materiály…"
-            className="w-full rounded-xl border border-stone-200 bg-white pl-9 pr-3 py-2 text-xs"
-          />
-        </div>
-        <button
-          type="button"
-          onClick={toggleSidebar}
-          title="Skrýt postranní panel (Ctrl+B)"
-          className="hidden lg:flex items-center justify-center p-2 rounded-xl text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer shrink-0"
-          aria-label="Skrýt postranní panel"
-        >
-          <PanelLeftClose size={16} />
-        </button>
+      <div className="h-13 px-2 border-b border-stone-200 shrink-0 flex items-center justify-between gap-1 overflow-hidden">
+        {collapsed ? (
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            title="Rozbalit postranní panel (Ctrl+B)"
+            className="w-full flex items-center justify-between gap-1 px-1.5 py-2 rounded-xl text-stone-700 hover:text-brand-orange-text hover:bg-orange-50/60 transition-colors cursor-pointer group min-w-0"
+            aria-label="Rozbalit postranní panel"
+          >
+            <span className="text-xs font-bold truncate text-stone-800 group-hover:text-brand-orange">
+              Materiály
+            </span>
+            <PanelLeftOpen
+              size={16}
+              className="text-brand-orange shrink-0 group-hover:scale-110 transition-transform"
+            />
+          </button>
+        ) : (
+          <div className="flex items-center gap-1.5 w-full min-w-0">
+            <div className="relative flex-1 min-w-0">
+              <Search
+                size={14}
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none"
+              />
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Hledat materiály…"
+                className="w-full rounded-xl border border-stone-200 bg-white pl-8 pr-2.5 py-1.5 text-xs focus:outline-none focus:border-brand-orange"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={toggleSidebar}
+              title="Sbalit postranní panel (Ctrl+B)"
+              className="flex items-center justify-center p-2 rounded-xl text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors cursor-pointer shrink-0"
+              aria-label="Sbalit postranní panel"
+            >
+              <PanelLeftClose size={16} />
+            </button>
+          </div>
+        )}
       </div>
-      <nav className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-2 space-y-3">
+      <nav className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-2 space-y-3 [scrollbar-width:thin]">
         {filteredGroups.map((g) => (
-          <div key={g.key}>
-            <div className="px-2 py-1 text-[10px] font-black uppercase tracking-wider text-stone-400 sticky top-0 bg-white/95 backdrop-blur-sm z-[1]">
+          <div key={g.key} className="min-w-0">
+            <div
+              title={g.label}
+              className="px-2 py-1 text-[10px] font-black uppercase tracking-wider text-stone-400 sticky top-0 bg-white/95 backdrop-blur-sm z-[1] truncate"
+            >
               {g.label}
             </div>
             <NavTreeList nodes={g.tree} activePath={active?.path} />
@@ -322,7 +357,7 @@ export function WikiPage() {
       title="Obor: Bioinformatika"
       subtitle="Studijní wiki · zápisky, rozcestníky, PA2→AG1"
       theme="light"
-      maxWidth={isSidebarHidden ? "max-w-[1600px]" : "max-w-7xl"}
+      maxWidth="max-w-[1600px]"
       actions={
         <div className="flex items-center gap-2">
           <Button
@@ -330,21 +365,21 @@ export function WikiPage() {
             size="sm"
             onClick={toggleSidebar}
             title={
-              isSidebarHidden
-                ? "Zobrazit postranní panel materiálů (Ctrl+B)"
-                : "Skrýt postranní panel pro plnou šířku obsahu (Ctrl+B)"
+              isSidebarCollapsed
+                ? "Rozbalit postranní panel (Ctrl+B)"
+                : "Sbalit postranní panel pro širší zobrazení (Ctrl+B)"
             }
             className="hidden lg:inline-flex text-xs font-bold gap-1.5 border-white/20 bg-white/10 text-white hover:bg-white/15 hover:border-brand-orange/50 hover:text-brand-orange cursor-pointer"
           >
-            {isSidebarHidden ? (
+            {isSidebarCollapsed ? (
               <>
                 <PanelLeftOpen size={15} className="text-brand-orange" />
-                <span>Zobrazit panel</span>
+                <span>Rozbalit panel</span>
               </>
             ) : (
               <>
                 <PanelLeftClose size={15} className="text-brand-orange" />
-                <span>Skrýt panel</span>
+                <span>Sbalit panel</span>
               </>
             )}
           </Button>
@@ -371,26 +406,15 @@ export function WikiPage() {
       }
     >
       <div className="flex gap-4 lg:gap-6 items-start min-h-[70vh]">
-        {!isSidebarHidden ? (
-          <div className="hidden lg:flex w-72 shrink-0 flex-col rounded-2xl border border-stone-200 bg-white shadow-sm sticky top-24 self-start h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] min-h-0 overflow-hidden print:hidden transition-all duration-200">
-            {sidebar}
-          </div>
-        ) : (
-          <div className="hidden lg:flex shrink-0 sticky top-24 self-start print:hidden z-10">
-            <button
-              type="button"
-              onClick={toggleSidebar}
-              title="Zobrazit postranní panel materiálů (Ctrl+B)"
-              className="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-stone-200 bg-white shadow-sm hover:border-brand-orange/40 hover:bg-orange-50/50 text-stone-700 hover:text-brand-orange-text text-xs font-bold transition-all cursor-pointer group"
-            >
-              <PanelLeftOpen
-                size={16}
-                className="text-brand-orange transition-transform group-hover:scale-110"
-              />
-              <span className="hidden xl:inline">Materiály</span>
-            </button>
-          </div>
-        )}
+        {/* Desktop Sidebar: stays permanently mounted, smoothly animates width between w-72 and w-36 */}
+        <div
+          className={cn(
+            "hidden lg:flex flex-col rounded-2xl border border-stone-200 bg-white shadow-sm sticky top-24 self-start h-[calc(100vh-8rem)] max-h-[calc(100vh-8rem)] min-h-0 overflow-hidden print:hidden shrink-0 transition-[width] duration-300 ease-in-out",
+            isSidebarCollapsed ? "w-36" : "w-72"
+          )}
+        >
+          {renderSidebarContent(isSidebarCollapsed)}
+        </div>
 
         {sidebarOpen && (
           <div className="fixed inset-0 z-50 lg:hidden print:hidden">
@@ -410,19 +434,14 @@ export function WikiPage() {
                 </button>
               </div>
               <div className="flex-1 min-h-0 overflow-hidden flex flex-col">
-                {sidebar}
+                {renderSidebarContent(false)}
               </div>
             </div>
           </div>
         )}
 
-        <div className="flex-1 min-w-0 print:w-full">
-          <div
-            className={cn(
-              "rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8 print:border-none print:shadow-none print:p-0 print:m-0 print:rounded-none transition-all",
-              isSidebarHidden && "lg:p-10 xl:p-12"
-            )}
-          >
+        <div className="flex-1 min-w-0 print:w-full transition-all duration-300 ease-in-out">
+          <div className="rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8 lg:p-10 print:border-none print:shadow-none print:p-0 print:m-0 print:rounded-none">
             {!active ? (
               <div className="text-center py-16 text-stone-500">
                 <BookOpen className="mx-auto mb-3 text-brand-orange" size={32} />
