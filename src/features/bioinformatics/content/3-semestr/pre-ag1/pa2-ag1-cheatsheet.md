@@ -57,63 +57,13 @@ int main() {
 
 ## 📅 Týden 2: Třídy & OOP
 
-### 6. Třídy, Zapouzdření & Statika v praxi `[100% · Trainer]`
-- **Princip**: Třída zapouzdřuje data (`private`) a rozhraní (`public`). `const` metody chrání objekt před nechtěnou změnou a statické členy patří třídě jako celku.
-- **Kód (Kompletní přehledová ukázka)**:
-```cpp
-class GraphNode {
-private:
-    int m_id;
-    std::string m_label;
-    static int s_totalCount; // Sdíleno všemi instancemi
-
-public:
-    // Konstruktor s inicializačním seznamem (povinné pro const a reference)
-    GraphNode(int id, std::string label)
-        : m_id(id), m_label(std::move(label)) {
-        ++s_totalCount;
-    }
-
-    // Destruktor (úklid prostředků)
-    ~GraphNode() {
-        --s_totalCount;
-    }
-
-    // Konstantní metoda: zaručuje neměnnost objektu (lze volat na const &)
-    int getId() const { return m_id; }
-
-    // Statická metoda: volá se bez konkrétní instance třídy
-    static int getTotalCount() { return s_totalCount; }
-};
-
-int GraphNode::s_totalCount = 0; // Inicializace statického členu mimo třídu
-```
+### 6. Třídy, Zapouzdření & Statika `[100% · Trainer]`
+- **Princip**: Třída zapouzdřuje data (`private`) a rozhraní (`public`). `const` metody chrání objekt před nechtěnou změnou (`this` je `const T*`) a `static` členy patří samotné třídě jako celku, nikoliv konkrétní instanci.
 - ⚠️ **Past**: Zapomenutí `const` za hlavičkou metody znemožní její zavolání na instanci předané jako `const &`.
 
-### 7. Uživatelské konverze (Konverzní konstruktor) `[Trainer]`
-- **Princip**: Konstruktor s jedním argumentem (bez klíčového slova `explicit`) slouží kompilátoru jako automatický konverzní můstek.
-- **Kouzlo pro operátory**: Nemusíte přetěžovat operátor pro každou kombinaci typů (např. `Complex + double` i `double + Complex`). Stačí definovat jediný symetrický `operator+` a konverzní konstruktor — kompilátor cizí číslo sám převede na `Complex` a sečte je!
-- **Kód**:
-```cpp
-class Complex {
-    double m_re, m_im;
-public:
-    // Konverzní konstruktor: umožňuje implicitní převod double -> Complex
-    Complex(double re = 0.0, double im = 0.0) : m_re(re), m_im(im) {}
-
-    double real() const { return m_re; }
-    double imag() const { return m_im; }
-};
-
-// Jediný volný operátor obslouží Complex + Complex, Complex + double i double + Complex!
-Complex operator+(const Complex &a, const Complex &b) {
-    return Complex(a.real() + b.real(), a.imag() + b.imag());
-}
-
-Complex c(1.0, 2.0);
-Complex r1 = c + 5.0;  // Kompilátor automaticky zavolá Complex(5.0) -> sečte
-Complex r2 = 3.14 + c; // Funguje symetricky i zleva!
-```
+### 7. Konstruktory, Destruktor & Uživatelské konverze `[100% · Trainer]`
+- **Princip**: Inicializační seznam nastavuje atributy přímo při vzniku před vstupem do těla `{}` (povinné pro `const` a reference). Konstruktor s jedním argumentem (bez klíčového slova `explicit`) slouží kompilátoru jako automatický konverzní můstek.
+- 💡 **Kouzlo konverze pro operátory**: Nemusíte přetěžovat operátory pro každou kombinaci typů (např. `T + int` i `int + T`). Stačí definovat konverzní konstruktor `T(int)` a volný symetrický `operator+(T, T)` — kompilátor cizí typ sám převede na `T` a sečte je!
 
 ### 8. Chytré řetězce `std::string` `[100% · Trainer]`
 - **Princip**: Dynamicky spravovaný řetězec znaků s automatickou alokací paměti.
@@ -124,26 +74,65 @@ Complex r2 = 3.14 + c; // Funguje symetricky i zleva!
 ## 📅 Týden 3: Přetěžování operátorů
 
 ### 9. Porovnávání & Uspořádání (`operator<` a `operator<=>`) `[100% · Trainer]`
-- **Princip**: Zásadní pro `std::set`, `std::map`, `std::priority_queue` a `std::sort`. Vyžaduje striktní slabé uspořádání (při rovnosti musí vrátit `false`).
-- **Kód (C++98/11 vs moderní C++20)**:
-```cpp
-struct Edge {
-    int to;
-    int weight;
-
-    // Klasické C++ uspořádání (Kruskalův algoritmus / std::sort / std::set):
-    bool operator<(const Edge &other) const {
-        return weight < other.weight;
-    }
-
-    // Moderní C++20 (spaceship operator <=>):
-    // Automaticky vygeneruje operátory <, <=, >, >=, ==, !=
-    auto operator<=>(const Edge &) const = default;
-};
-```
+- **Princip**: Zásadní pro `std::set`, `std::map`, `std::priority_queue` a `std::sort`. Vyžaduje striktní slabé uspořádání (při rovnosti musí vrátit `false`). V moderním C++20 stačí `auto operator<=>(const T &) const = default;`.
 
 ### 10. Metoda versus volná funkce u operátorů `[80% · Trainer]`
 - **Princip**: Operátory měnící levý operand (`+=`, `[]`, `=`) se píší jako metody třídy. Symetrické operátory (`+`, `-`, `<<` pro streamy) se píší jako volné funkce mimo třídu.
+
+### 🌟 Sjednocená kódová ukázka pro Týdny 2 a 3 (OOP, Konverze, Operátory & Uspořádání)
+- **Pokrývá vše v jednom celku**: `class` (`private`/`public`), inicializační seznam, konverzní konstruktor (`int -> Weight`), destruktor, `const` metodu, `static` členy, metodu `operator+=`, volnou funkci `operator+` s uživatelskou konverzí, `operator<` i C++20 `operator<=>`.
+```cpp
+class Weight {
+private:
+    int m_grams;
+    static int s_count; // Statický člen: sdílen všemi instancemi
+
+public:
+    // Konverzní konstruktor s inicializačním seznamem:
+    // Umožňuje implicitní uživatelskou konverzi int -> Weight
+    Weight(int g = 0) : m_grams(g) {
+        ++s_count;
+    }
+
+    // Destruktor (úklid prostředků)
+    ~Weight() {
+        --s_count;
+    }
+
+    // Konstantní metoda: zaručuje neměnnost (lze volat na const &)
+    int grams() const { return m_grams; }
+
+    // Statická metoda: volá se bez konkrétní instance třídy (Weight::getCount())
+    static int getCount() { return s_count; }
+
+    // Operátor měnící levý operand: píše se jako METODA třídy
+    Weight & operator+=(const Weight &other) {
+        m_grams += other.m_grams;
+        return *this;
+    }
+
+    // Klasické uspořádání (pro std::sort, std::set, std::priority_queue)
+    bool operator<(const Weight &other) const {
+        return m_grams < other.m_grams;
+    }
+
+    // Moderní C++20 (spaceship operator <=>): automaticky vygeneruje <, <=, >, >=, ==, !=
+    auto operator<=>(const Weight &) const = default;
+};
+
+int Weight::s_count = 0; // Inicializace statického členu mimo třídu
+
+// Symetrický operátor: píše se jako VOLNÁ FUNKCE.
+// Díky konverznímu konstruktoru obslouží Weight + Weight, Weight + int i int + Weight!
+Weight operator+(Weight a, const Weight &b) {
+    return a += b;
+}
+
+// Praktické použití a ukázka konverze v akci:
+Weight w(100);
+Weight r1 = w + 50;  // Kompilátor automaticky zavolá Weight(50) -> sečte
+Weight r2 = 25 + w;  // Funguje symetricky i zleva bez dalších přetížených operátorů!
+```
 
 ---
 
