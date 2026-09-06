@@ -1,503 +1,331 @@
-# 💻 PA2 → AG1: Praktický Kódovací Tahák (Kontejnery & Metody)
+# 💻 PA2 → AG1: Kompaktní Kódovací Tahák (Týdny 1–8)
 
-> **Praktický tahák pro psaní kódu** zaměřený na nejdůležitější STL kontejnery a struktury z **BI-PA2 / BI-AG1** (témata s relevancí 60%+ nebo odznakem EPIC).
->
-> Místo zkouškové teorie obsahuje tento tahák **vizuální schémata metod**, přehled nejpoužívanějších funkcí a **maximálně jednoduché, snadno zapamatovatelné C++ snippety**.
-
----
-
-## 📦 1. `std::vector<T>` — Dynamické pole `[Relevance: 90% · EPIC]`
-
-Nejčastější kontejner pro ukládání dat a reprezentaci grafů. Data leží v souvislém bloku paměti.
-
-### 📐 Vizuální mapa metod
-![Schéma metod std::vector](/images/cheatsheet/vector-methods.png)
-
-### 🛠️ Nejužitečnější metody
-| Metoda | Popis | Příklad |
-| :--- | :--- | :--- |
-| `push_back(x)` | Přidá prvek na konec (amortizovaně $O(1)$) | `v.push_back(42);` |
-| `pop_back()` | Odebere poslední prvek (vrací `void`!) | `v.pop_back();` |
-| `v[i]` / `at(i)` | Přímý přístup k prvku na indexu $i$ ($O(1)$) | `int x = v[0];` |
-| `front()` / `back()` | Reference na první / poslední prvek | `v.back() += 1;` |
-| `size()` / `empty()` | Počet prvků / kontrola prázdnosti | `if (!v.empty())` |
-| `clear()` | Vymaže všechny prvky (velikost = 0) | `v.clear();` |
-| `reserve(n)` | Předalokuje paměť pro $n$ prvků (nemění `size()`) | `v.reserve(1000);` |
-
-### 💡 Jednoduchý kód
-```cpp
-#include <vector>
-#include <iostream>
-
-std::vector<int> v = {10, 20, 30};
-v.push_back(40); // {10, 20, 30, 40}
-v.pop_back();    // {10, 20, 30}
-
-// Rychlý průchod všemi prvky (moderní C++):
-for (int x : v) {
-    std::cout << x << ' ';
-}
-```
-
-> ⚠️ **Past při kódování**: Pokud vektor při `push_back` překročí kapacitu, přestěhuje se na jinou adresu v paměti RAM. **Všechny dříve uložené iterátory a ukazatele na prvky vektoru se tím zneplatní!**
+> **Vyvážený rychlotahák zaměřený na psaní kódu** (vychází z nejrelevantnějších témat z Traineru a STL e-learningu s relevancí 60%+).
+> Každé téma obsahuje **1–2 věty principu**, klíčovou past a **pouze nezbytný minimalistický kód** tam, kde je potřeba syntaxe. U kontejnerů jsou metody a jejich diagramy umístěny vedle sebe.
 
 ---
 
-## 📦 2. `std::queue<T>` — Fronta (FIFO) `[Relevance: 100% · MEGA EPIC]`
+## 📅 Týden 1: Základy C++
 
-Kontejner typu **First-In, First-Out** (kdo dřív přijde, ten dřív odejde). Zcela zásadní pro algoritmus **BFS**.
-
-### 📐 Vizuální mapa metod
-![Schéma metod std::queue](/images/cheatsheet/queue-methods.png)
-
-### 🛠️ Nejužitečnější metody
-| Metoda | Popis | Příklad |
-| :--- | :--- | :--- |
-| `push(x)` | Vloží prvek na konec fronty | `q.push(v);` |
-| `pop()` | Odebere prvek ze začátku fronty (**POZOR: vrací `void`!**) | `q.pop();` |
-| `front()` | Vrátí referenci na první prvek (ke čtení i zápisu) | `int u = q.front();` |
-| `back()` | Vrátí referenci na naposledy přidaný prvek | `int last = q.back();` |
-| `empty()` | Test, zda je fronta prázdná | `while (!q.empty())` |
-| `size()` | Aktuální počet prvků ve frontě | `size_t n = q.size();` |
-
-### 💡 Jednoduchý kód
+### 1. Reference & Reference na konstantu `[100% · Trainer]`
+- **Princip**: Reference je neměnný alias pro existující proměnnou v paměti (nealokuje adresu, nemůže být `nullptr`). `const &` umožňuje rychlé čtení velkých objektů bez nákladného kopírování.
+- **Kód**:
 ```cpp
-#include <queue>
-#include <iostream>
+void process(const std::vector<int> &data); // Read-only předání bez kopie
+void swap(int &a, int &b) { int tmp = a; a = b; b = tmp; } // Změna originálu
+```
+- ⚠️ **Past**: Nikdy nevracejte referenci na lokální proměnnou z funkce — po návratu proměnná zanikne (*dangling reference* / segfault).
 
-std::queue<int> q;
-q.push(1);
-q.push(2);
-
-// Standardní cyklus zpracování fronty:
-while (!q.empty()) {
-    int u = q.front(); // 1. přečíst
-    q.pop();           // 2. odebrat
-    std::cout << u << ' ';
-}
+### 2. Výchozí (implicitní) argumenty `[100% · Trainer]`
+- **Princip**: Umožňují volat funkci bez zadání parametrů zprava, kompilátor doplní výchozí hodnoty.
+- **Kód**:
+```cpp
+void addEdge(int u, int v, int weight = 1); // Zapsat POUZE do deklarace v hlavičce (.h/.hpp)
 ```
 
-> ⚠️ **Past při kódování**: `q.pop()` **nic nevrací**! Nezkoušejte psát `int x = q.pop();`. Vždy musíte nejprve zavolat `q.front()` a teprve poté `q.pop()`.
+### 3. Přetěžování funkcí `[100% · Trainer]`
+- **Princip**: Více funkcí se stejným jménem, které se liší typem nebo počtem parametrů (signaturou).
+- ⚠️ **Past**: Samotný návratový typ pro přetížení nestačí (`int f()` a `void f()` v jednom rozsahu nelze přeložit).
+
+### 4. Jmenné prostory (`namespace`) `[100% · Trainer]`
+- **Princip**: Logicky izolují identifikátory a brání kolizím jmen funkcí a tříd.
+- ⚠️ **Past**: Nikdy nepište `using namespace std;` do hlavičkových souborů (`.h`/`.hpp`), znečistíte tím všechny soubory, které hlavičku vloží.
+
+### 5. Řazení v C++ (`std::sort`) `[70% · Trainer]`
+- **Princip**: Rychlé $O(n \log n)$ řazení z knihovny `<algorithm>`.
+- **Kód**:
+```cpp
+std::sort(v.begin(), v.end());                     // Vzestupně (vyžaduje operator<)
+std::sort(v.begin(), v.end(), std::greater<int>()); // Sestupně
+```
+
+### 6. Dynamická alokace (`new` a `delete`) `[60% · Trainer]`
+- **Princip**: Přímé řízení paměti na haldě (v moderním C++ preferujte `std::vector` a RAII).
+- ⚠️ **Past**: Pro pole alokované přes `new T[n]` se musí použít `delete[] ptr;` (pouhé `delete ptr;` způsobí memory leak a nedefinované chování).
 
 ---
 
-## 📦 3. `std::stack<T>` — Zásobník (LIFO) `[Relevance: 90% · EPIC]`
+## 📅 Týden 2: Třídy & OOP
 
-Kontejner typu **Last-In, First-Out** (prvek vložený naposledy se zpracuje jako první). Používá se pro **DFS**, závorkové párování a vyhodnocování výrazů.
-
-### 📐 Vizuální mapa metod
-![Schéma metod std::stack](/images/cheatsheet/stack-methods.png)
-
-### 🛠️ Nejužitečnější metody
-| Metoda | Popis | Příklad |
-| :--- | :--- | :--- |
-| `push(x)` | Vloží prvek na vrchol zásobníku | `s.push(42);` |
-| `pop()` | Odebere prvek z vrcholu (**vrací `void`!**) | `s.pop();` |
-| `top()` | Vrátí referenci na prvek na vrcholu | `int x = s.top();` |
-| `empty()` | Test, zda je zásobník prázdný | `if (!s.empty())` |
-| `size()` | Počet prvků v zásobníku | `s.size()` |
-
-### 💡 Jednoduchý kód
+### 7. Metody & Konstantní metody (`const`) `[100% · Trainer]`
+- **Princip**: Metoda s `const` za hlavičkou garantuje, že nemění atributy objektu (`this` je `const T*`).
+- **Kód**:
 ```cpp
-#include <stack>
-#include <iostream>
-
-std::stack<int> s;
-s.push(10);
-s.push(20);
-
-// Na vrcholu je nyní 20:
-int topVal = s.top();
-s.pop(); // Odebere 20
-
-std::cout << "Novy vrchol: " << s.top() << '\n'; // Vypíše 10
+int getVertexCount() const { return m_count; } // Povinné, aby šlo volat na const &
 ```
+- ⚠️ **Past**: Zapomenutí `const` znemožní zavolat metodu na instanci předané jako `const &`.
 
-> ⚠️ **Past při kódování**: Volání `s.top()` nebo `s.pop()` na **prázdném zásobníku** způsobuje okamžitý pád programu (Segmentation Fault). Vždy nejprve ověřte `!s.empty()`.
-
----
-
-## 📦 4. `std::priority_queue<T>` — Prioritní fronta / Halda `[Relevance: 100% · MEGA EPIC]`
-
-Vnitřně uspořádaná binární halda. Zajišťuje, že na vrcholu je vždy prvek s nejvyšší prioritou (v čase $O(1)$). Vkládání i mazání trvá $O(\log n)$.
-
-### 📐 Schéma fungování
-```text
-                 [ top() = EXTRÉM ]  <-- O(1) náhled
-                     /        \
-                   [o]        [o]    <-- Každý uzel splňuje vlastnost haldy
-                  /   \      /   \
-                [o]   [o]  [o]   [o]
-     
-     push(x) --> vloží na konec a probublá nahoru: O(log n)
-     pop()   --> smaže kořen a přesype haldu:       O(log n)
-```
-
-### 🛠️ Nejužitečnější metody
-| Metoda | Popis | Příklad |
-| :--- | :--- | :--- |
-| `push(x)` | Vloží prvek do haldy v čase $O(\log n)$ | `pq.push(15);` |
-| `pop()` | Odebere extrém z vrcholu haldy ($O(\log n)$) | `pq.pop();` |
-| `top()` | Vrátí nejvyšší prvek bez odebrání ($O(1)$) | `int best = pq.top();` |
-| `empty()` | Kontrola prázdnosti haldy | `while (!pq.empty())` |
-
-### 💡 Jak vytvořit MIN-HEAP (pro Dijkstrův algoritmus)
-Implicitní halda v C++ je **MAX-heap** (vrací největší číslo). V AG1 pro nejkratší cesty ale potřebujete **MIN-heap** (vracet nejmenší vzdálenost):
-
+### 8. Konstruktory & Inicializační seznam `[100% · Trainer]`
+- **Princip**: Inicializační seznam nastavuje atributy přímo při vzniku před vstupem do těla `{}`.
+- **Kód**:
 ```cpp
-#include <queue>
-#include <vector>
-#include <iostream>
-
-// 1. Výchozí MAX-heap (největší nahoře):
-std::priority_queue<int> maxHeap;
-maxHeap.push(10);
-maxHeap.push(30);
-std::cout << maxHeap.top() << '\n'; // Vypíše 30
-
-// 2. MIN-heap pro AG1 (nejmenší nahoře - klíč pro Dijkstru):
-using PII = std::pair<int, int>; // {vzdalenost, vrchol}
-std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
-
-minHeap.push({5, 1});
-minHeap.push({2, 4});
-auto [dist, vertex] = minHeap.top(); // {2, 4} - nejkratší vzdálenost!
-minHeap.pop();
-```
-
----
-
-## 📦 5. `std::deque<T>` — Oboustranná fronta `[Relevance: 80%]`
-
-Hybrid mezi polem a seznamem. Umožňuje $O(1)$ přidávání i odebírání na **obou koncích** a přímý přístup `[]`.
-
-### 📐 Vizuální mapa metod
-![Schéma metod std::deque](/images/cheatsheet/deque-methods.png)
-
-### 🛠️ Nejužitečnější metody
-| Metoda | Popis | Příklad |
-| :--- | :--- | :--- |
-| `push_front(x)` / `push_back(x)` | Přidání na začátek / konec ($O(1)$) | `dq.push_front(1);` |
-| `pop_front()` / `pop_back()` | Odebrání ze začátku / konce ($O(1)$) | `dq.pop_back();` |
-| `dq[i]` / `front()` / `back()` | Přímý indexový přístup v čase $O(1)$ | `int x = dq[0];` |
-
-### 💡 Jednoduchý kód
-```cpp
-#include <deque>
-#include <iostream>
-
-std::deque<int> dq;
-dq.push_back(10);
-dq.push_front(5);  // {5, 10}
-dq.push_back(20);  // {5, 10, 20}
-
-dq.pop_front();    // Odebere 5 -> zbývá {10, 20}
-std::cout << "Prvni: " << dq.front() << ", Posledni: " << dq.back() << '\n';
-```
-
----
-
-## 📦 6. `std::list<T>` & `std::forward_list<T>` — Spojové seznamy `[Relevance: 80% / 50% · EPIC]`
-
-Uzlové seznamy. Výhodné, pokud potřebujete často vkládat nebo mazat uprostřed sekvence v $O(1)$ (pokud už máte iterátor).
-
-### 📐 Vizuální mapa metod `std::list`
-![Schéma metod std::list](/images/cheatsheet/list-methods.png)
-
-### 🛠️ Nejužitečnější metody
-- `std::list`: `push_front()`, `push_back()`, `pop_front()`, `pop_back()`, `insert(it, val)`, `erase(it)`
-- `std::forward_list`: Pouze jednosměrný (`push_front()`, `insert_after()`, `erase_after()`)
-
-### 💡 Jednoduchý kód
-```cpp
-#include <list>
-#include <iostream>
-
-std::list<int> l = {10, 20, 30};
-l.push_front(5); // {5, 10, 20, 30}
-
-// Vložení prvku před prvek 20:
-auto it = l.begin();
-++it; // Ukazuje na 10
-++it; // Ukazuje na 20
-l.insert(it, 15); // {5, 10, 15, 20, 30}
-```
-
-> ⚠️ **Past při kódování**: Do `std::list` **nelze přistupovat indexem** `l[i]`! Prvky nelze náhodně indexovat, musíte k nim dojít postupným posunem iterátoru (`++it`).
-
----
-
-## 📦 7. `std::map<Key, Value>` — Asociativní stromový slovník `[Relevance: 70% · EPIC]`
-
-Ukládá páry `(klíč, hodnota)` do seřazeného samovyvažujícího se stromu (Red-Black Tree). Hledání, vkládání i mazání trvá garantovaně **$O(\log n)$**.
-
-### 🛠️ Nejužitečnější metody
-| Metoda | Popis | Příklad |
-| :--- | :--- | :--- |
-| `m[key]` | Vrátí hodnotu pro klíč. **POZOR: pokud neexistuje, automaticky ji vytvoří!** | `counts["apple"]++;` |
-| `find(key)` | Vyhledá klíč. Vrací iterátor na prvek, nebo `m.end()`, pokud neexistuje. | `if (m.find(k) != m.end())` |
-| `count(key)` | Vrací 1, pokud klíč existuje, jinak 0 | `if (m.count(key))` |
-| `erase(key)` | Smaže klíč ze slovníku ($O(\log n)$) | `m.erase(key);` |
-
-### 💡 Jednoduchý kód
-```cpp
-#include <map>
-#include <string>
-#include <iostream>
-
-std::map<std::string, int> scores;
-scores["Alice"] = 95;
-scores["Bob"] = 80;
-
-// Bezpečné čtení bez nechtěného vložení nového prvku:
-auto it = scores.find("Charlie");
-if (it != scores.end()) {
-    std::cout << "Skore: " << it->second << '\n';
-} else {
-    std::cout << "Charlie v mape neni!\n";
-}
-
-// Procházení mapy (klíče jsou automaticky seřazeny abecedně!):
-for (const auto &[name, score] : scores) {
-    std::cout << name << ": " << score << '\n';
-}
-```
-
-> ⚠️ **Past při kódování**: Zápis `if (scores["Charlie"] == 100)` **automaticky vloží** klíč `"Charlie"` do mapy s výchozí hodnotou `0`! Pro testování existence VŽDY používejte `scores.count("Charlie")` nebo `scores.find("Charlie")`.
-
----
-
-## 📦 8. `std::set<T>` — Uspořádaná množina unikátních prvků `[Relevance: 60%]`
-
-Ukládá unikátní hodnoty v seřazeném pořadí. Všechny operace pracují v čase **$O(\log n)$**.
-
-### 💡 Jednoduchý kód
-```cpp
-#include <set>
-#include <iostream>
-
-std::set<int> visited;
-visited.insert(10);
-visited.insert(20);
-visited.insert(10); // Duplicita je tiše ignorována, množina obsahuje {10, 20}
-
-if (visited.count(20)) {
-    std::cout << "Vrchol 20 uz byl navstiven!\n";
-}
-
-// Vymazání prvku:
-visited.erase(10);
-```
-
----
-
-## 📦 9. `std::array<T, N>` — Statické pole na zásobníku `[Relevance: 60%]`
-
-Obal pro pole pevné velikosti alokované přímo na zásobníku (*stack*). Nulová režie na haldě.
-
-### 💡 Jednoduchý kód
-```cpp
-#include <array>
-#include <iostream>
-
-// Typické použití v AG1: směrové posuny pro prohledávání v mřížce 2D:
-constexpr std::array<int, 4> dx = {0, 0, 1, -1};
-constexpr std::array<int, 4> dy = {1, -1, 0, 0};
-
-int x = 5, y = 5;
-for (size_t i = 0; i < dx.size(); ++i) {
-    int nextX = x + dx[i];
-    int nextY = y + dy[i];
-    std::cout << "Soused: [" << nextX << ", " << nextY << "]\n";
-}
-```
-
----
-
-## 📦 10. `std::bitset<N>` — Blesková bitová množina `[Relevance: 30% · EPIC]`
-
-Kompaktní pole bitů velikosti $N$. Zrychluje množinové operace až $64\times$ díky bitovým instrukcím procesoru.
-
-### 💡 Jednoduchý kód
-```cpp
-#include <bitset>
-#include <iostream>
-
-std::bitset<64> mask;
-mask.set(5);       // Nastaví 5. bit na 1
-mask.reset(5);     // Nastaví 5. bit na 0
-mask.flip(0);      // Neguje 0. bit
-
-if (mask.test(0)) { // Test, zda je bit 0 zapnutý
-    std::cout << "Bit 0 je 1\n";
-}
-std::cout << "Pocet 1 bitu: " << mask.count() << '\n';
-```
-
----
-
-## 🔄 11. Iterátory v STL `[Relevance: 35% · EPIC]`
-
-Iterátor se chová jako zobecněný ukazatel na prvek v libovolném kontejneru.
-
-### 💡 Jednoduchý kód
-```cpp
-#include <vector>
-#include <iostream>
-
-std::vector<int> v = {1, 2, 3, 4, 5};
-
-// 1. Moderní C++ auto iterace (doporučeno):
-for (auto it = v.begin(); it != v.end(); ++it) {
-    std::cout << *it << ' '; // Přístup k hodnotě přes hvězdičku *
-}
-
-// 2. Obrácený průchod (od konce k začátku):
-for (auto it = v.rbegin(); it != v.rend(); ++it) {
-    std::cout << *it << ' '; // Vypíše 5 4 3 2 1
-}
-```
-
----
-
-## 🌳 12. Binární vyhledávací strom (BST) `[Relevance: 100%]`
-
-Základní pravidlo BST: **všechny prvky vlevo jsou menší, všechny vpravo jsou větší**.
-
-### 📐 Struktura uzlu a vyhledávání v kódu
-```cpp
-struct Node {
-    int val;
-    Node *left = nullptr;
-    Node *right = nullptr;
-
-    Node(int v) : val(v) {}
+class Point {
+    const int m_id;
+    int m_x, m_y;
+public:
+    Point(int id, int x, int y) : m_id(id), m_x(x), m_y(y) {} // const členy MUSÍ být v seznamu!
 };
-
-// Vyhledání hodnoty v BST:
-bool search(Node *root, int target) {
-    if (!root) return false;
-    if (root->val == target) return true;
-    if (target < root->val) return search(root->left, target);
-    return search(root->right, target);
-}
 ```
+
+### 9. Zapouzdření (`class` vs `struct`) `[70% · Trainer]`
+- **Princip**: Jediný rozdíl v C++: `struct` má členy i dědičnost implicitně `public`, zatímco `class` implicitně `private`.
+
+### 10. Statické členy (`static`) `[65% · Trainer]`
+- **Princip**: Patří samotné třídě, nikoliv konkrétní instanci; sdílí je všechny vytvořené objekty.
+
+### 11. Chytré řetězce `std::string` `[100% · Trainer]`
+- **Princip**: Dynamicky spravovaný řetězec znaků s automatickou alokací paměti.
+- **Užitečné metody**: `s.size()`, `s.empty()`, `s += "text"`, `s.substr(pos, len)`, `s.find("sub")` (vrací `std::string::npos`, pokud nenalezeno).
 
 ---
 
-## 🌐 13. Reprezentace Grafu v Kódu pro AG1 `[Relevance: 90%]`
+## 📅 Týden 3: Přetěžování operátorů
 
-Nejjednodušší a nejefektivnější způsob zápisu grafu v úlohách — **seznam sousedů pomocí vnořeného vektoru**.
-
-### 💡 Šablona pro orientovaný i neorientovaný graf
+### 12. Porovnávání & Uspořádání (`operator<`) `[100% · Trainer]`
+- **Princip**: Zásadní operátor pro `std::set`, `std::map`, `std::priority_queue` a `std::sort`. Vyžaduje tzv. striktní slabé uspořádání (pokud jsou si prvky rovny, musí vrátit `false`).
+- **Kód**:
 ```cpp
-#include <vector>
-#include <iostream>
-
-int n = 5; // Počet vrcholů (0 až 4)
-std::vector<std::vector<int>> adj(n);
-
-// 1. Orientovaná hrana (pouze u -> v):
-void addDirectedEdge(int u, int v) {
-    adj[u].push_back(v);
-}
-
-// 2. Neorientovaná hrana (u <-> v):
-void addUndirectedEdge(int u, int v) {
-    adj[u].push_back(v);
-    adj[v].push_back(u); // Zpětná hrana!
-}
-```
-
----
-
-## 🚶 14. Grafové Průchody (BFS & DFS) pro Testy `[Relevance: 60%]`
-
-Krátké, spolehlivé šablony, které zvládnete napsat během 2 minut.
-
-### 💡 BFS (Prohledávání do šířky s frontou)
-```cpp
-#include <vector>
-#include <queue>
-
-void bfs(int start, const std::vector<std::vector<int>> &adj) {
-    std::vector<bool> visited(adj.size(), false);
-    std::queue<int> q;
-
-    visited[start] = true;
-    q.push(start); // Značíme navštívené VŽDY při vložení!
-
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-
-        for (int v : adj[u]) {
-            if (!visited[v]) {
-                visited[v] = true;
-                q.push(v);
-            }
-        }
+struct Edge {
+    int to, weight;
+    // Klíčové pro řazení hran v Kruskalově algoritmu (MST):
+    bool operator<(const Edge &other) const {
+        return weight < other.weight;
     }
-}
+};
 ```
 
-### 💡 DFS (Prohledávání do hloubky rekurzí)
+### 13. Metoda versus volná funkce u operátorů `[80% · Trainer]`
+- **Princip**: Operátory měnící levý operand (`+=`, `[]`, `=`) se píší jako metody třídy. Symetrické operátory (`+`, `<<` pro streamy) se píší jako volné funkce mimo třídu.
+
+---
+
+## 📅 Týden 4: Iterátory & Základní kontejnery
+
+### 14. Základy iterátorů `[85% · Trainer]`
+- **Princip**: Univerzální ukazovátko do kontejneru. Posun `++it`, přístup k hodnotě `*it`.
+- **Kód**:
 ```cpp
-#include <vector>
+for (auto it = v.begin(); it != v.end(); ++it) { ... }
+for (auto it = v.rbegin(); it != v.rend(); ++it) { ... } // Výpis pozpátku
+```
 
-void dfs(int u, const std::vector<std::vector<int>> &adj, std::vector<bool> &visited) {
-    visited[u] = true;
+### 15. `std::vector<T>` — Dynamické pole `[100% Trainer · 90% E-learning]`
+- **Princip**: Data leží v souvislém bloku paměti. Přímý přístup v $O(1)$, amortizované vkládání na konec v $O(1)$.
 
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div>
+    <img src="/images/cheatsheet/vector-methods.png" alt="Schéma metod std::vector" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+  </div>
+  <div class="overflow-x-auto">
+
+| Metoda | Popis | Příklad |
+| :--- | :--- | :--- |
+| `push_back(x)` | Vloží na konec ($O(1)$) | `v.push_back(10);` |
+| `pop_back()` | Odebere z konce (vrací `void`) | `v.pop_back();` |
+| `v[i]` / `at(i)` | Přímý indexový přístup ($O(1)$) | `int x = v[0];` |
+| `front()` / `back()` | První / poslední prvek | `int last = v.back();` |
+| `size()` / `empty()` | Velikost / kontrola prázdnosti | `if (!v.empty())` |
+| `reserve(n)` | Předalokuje paměť (nemění size) | `v.reserve(1000);` |
+| `erase(it)` | Smaže prvek na iterátoru | `v.erase(v.begin() + i);` |
+
+  </div>
+</div>
+
+- ⚠️ **Past**: Při překročení kapacity se vektor přestěhuje v RAM -> **všechny dřívější iterátory a ukazatele na prvky zaniknou (invalidace)!**
+
+### 16. `std::array<T, N>` — Statické pole `[60% · E-learning]`
+- **Princip**: Pole pevné velikosti alokované přímo na zásobníku (stack) s nulovou režií na haldě.
+- **Kód**:
+```cpp
+constexpr std::array<int, 4> dx = {0, 0, 1, -1}; // Směrové posuny v mřížce
+```
+
+---
+
+## 📅 Týden 5: Pokročilé STL kontejnery
+
+### 17. `std::queue<T>` — Fronta (FIFO) `[100% · E-learning]`
+- **Princip**: First-In, First-Out (kdo dřív přijde, dřív odejde). Klíčová datová struktura pro **BFS**.
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div>
+    <img src="/images/cheatsheet/queue-methods.png" alt="Schéma metod std::queue" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+  </div>
+  <div class="overflow-x-auto">
+
+| Metoda | Popis | Příklad |
+| :--- | :--- | :--- |
+| `push(x)` | Vloží na konec fronty ($O(1)$) | `q.push(start);` |
+| `pop()` | Odebere ze začátku (**vrací `void`**) | `q.pop();` |
+| `front()` | Vrátí referenci na první prvek | `int u = q.front();` |
+| `back()` | Vrátí referenci na poslední prvek | `int last = q.back();` |
+| `empty()` | Test prázdnosti fronty | `while (!q.empty())` |
+| `size()` | Počet prvků ve frontě | `size_t n = q.size();` |
+
+  </div>
+</div>
+
+- ⚠️ **Past**: `q.pop()` **nic nevrací**! Hodnotu musíte nejprve přečíst přes `q.front()` a teprve poté zavolat `q.pop()`.
+
+---
+
+### 18. `std::priority_queue<T>` — Prioritní fronta / Halda `[100% · E-learning]`
+- **Princip**: Binární halda. Na vrcholu `top()` udržuje nejvyšší prvek v $O(1)$, vkládání a mazání trvá $O(\log n)$.
+- **Metody**: `push(x)` (vloží v $O(\log n)$), `pop()` (odebere extrém v $O(\log n)$), `top()` (náhled na extrém v $O(1)$), `empty()`.
+- **Kód (Přepnutí na MIN-HEAP pro Dijkstrův algoritmus)**:
+```cpp
+// Implicitní je MAX-heap. Pro nejkratší cesty (Dijkstra) musíte použít std::greater:
+using PII = std::pair<int, int>; // {vzdálenost, vrchol}
+std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
+```
+
+---
+
+### 19. `std::stack<T>` — Zásobník (LIFO) `[90% · E-learning]`
+- **Princip**: Last-In, First-Out (poslední vložený jde první ven). Využití pro **iterativní DFS** a párování závorek.
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div>
+    <img src="/images/cheatsheet/stack-methods.png" alt="Schéma metod std::stack" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+  </div>
+  <div class="overflow-x-auto">
+
+| Metoda | Popis | Příklad |
+| :--- | :--- | :--- |
+| `push(x)` | Vloží prvek na vrchol ($O(1)$) | `s.push(node);` |
+| `pop()` | Odebere prvek z vrcholu (**vrací `void`**) | `s.pop();` |
+| `top()` | Vrátí referenci na vrcholový prvek | `int u = s.top();` |
+| `empty()` | Test, zda je zásobník prázdný | `if (!s.empty())` |
+| `size()` | Počet prvků v zásobníku | `s.size();` |
+
+  </div>
+</div>
+
+- ⚠️ **Past**: Volání `s.top()` nebo `s.pop()` na prázdném zásobníku způsobí pád programu.
+
+---
+
+### 20. `std::deque<T>` — Oboustranná fronta `[80% · E-learning]`
+- **Princip**: Umožňuje $O(1)$ vkládání i mazání na **obou koncích** a přímý přístup přes `[]`. Vkládání na konce nikdy neinvaliduje ukazatele na stávající prvky.
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div>
+    <img src="/images/cheatsheet/deque-methods.png" alt="Schéma metod std::deque" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+  </div>
+  <div class="overflow-x-auto">
+
+| Metoda | Popis | Příklad |
+| :--- | :--- | :--- |
+| `push_front(x)` / `push_back(x)` | Vloží na začátek / konec ($O(1)$) | `dq.push_front(1);` |
+| `pop_front()` / `pop_back()` | Odebere ze začátku / konce ($O(1)$) | `dq.pop_front();` |
+| `dq[i]` / `at(i)` | Přímý přístup k indexu ($O(1)$) | `int val = dq[0];` |
+| `front()` / `back()` | Reference na první / poslední prvek | `dq.front();` |
+| `size()` / `empty()` | Velikost a kontrola prázdnosti | `dq.empty();` |
+
+  </div>
+</div>
+
+---
+
+### 21. `std::list<T>` — Obousměrný spojový seznam `[80% · E-learning]`
+- **Princip**: Uzly v paměti propojené obousměrnými ukazateli. Umožňuje $O(1)$ vkládání kdekoliv, pokud již máme iterátor.
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div>
+    <img src="/images/cheatsheet/list-methods.png" alt="Schéma metod std::list" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+  </div>
+  <div class="overflow-x-auto">
+
+| Metoda | Popis | Příklad |
+| :--- | :--- | :--- |
+| `push_front(x)` / `push_back(x)` | Vložení na začátek / konec ($O(1)$) | `l.push_back(5);` |
+| `pop_front()` / `pop_back()` | Odebrání ze začátku / konce ($O(1)$) | `l.pop_back();` |
+| `insert(it, x)` | Vloží prvek před iterátor ($O(1)$) | `l.insert(it, 15);` |
+| `erase(it)` | Smaže uzel na daném iterátoru | `l.erase(it);` |
+| `front()` / `back()` | První a poslední prvek | `l.front();` |
+
+  </div>
+</div>
+
+- ⚠️ **Past**: V `std::list` **nelze použít index** `l[i]`! K prvkům se lze dostat výhradně sekvenčním posunem iterátoru `++it`.
+
+---
+
+### 22. `std::map<Key, Value>` — Asociativní strom `[70% · E-learning]`
+- **Princip**: Samovyvažující se červeno-černý strom seřazených párů klíč-hodnota. Operace `insert`, `find`, `erase` trvají garantovaně $O(\log n)$.
+
+| Metoda | Popis | Příklad |
+| :--- | :--- | :--- |
+| `find(key)` | Hledá klíč, vrací iterátor nebo `end()` | `if (m.find(k) != m.end())` |
+| `count(key)` | Vrací 1 při existenci, jinak 0 | `if (m.count(k))` |
+| `m[key]` | **POZOR: pokud klíč neexistuje, vytvoří ho!** | `m["body"] = 100;` |
+| `erase(key)` | Smaže klíč v čase $O(\log n)$ | `m.erase(k);` |
+
+- ⚠️ **Past**: Volání `if (m["neexistuje"] == 5)` automaticky vytvoří klíč s hodnotou `0`! Pro pouhé čtení používejte `.find()` nebo `.count()`.
+
+---
+
+### 23. `std::set<T>` — Uspořádaná množina `[60% · E-learning]`
+- **Princip**: Červeno-černý strom uchovávající unikátní hodnoty v seřazeném pořadí.
+- **Kód**:
+```cpp
+std::set<int> visited;
+visited.insert(42);
+if (visited.count(42)) { ... } // Nalezeno v O(log n)
+visited.erase(42);
+```
+
+---
+
+## 📅 Týden 7: Grafy a Stromy
+
+### 24. Reprezentace grafu v kódu `[100% Trainer · 90% E-learning]`
+- **Princip**: Seznam sousedů přes vnořený vektor je nejefektivnější volba pro 99 % úloh ($O(V + E)$ paměti).
+- **Kód**:
+```cpp
+std::vector<std::vector<int>> adj(n); // n vrcholů (0 až n-1)
+
+adj[u].push_back(v); // Orientovaná hrana: u -> v
+adj[v].push_back(u); // Přidat i toto, pokud je graf neorientovaný: u <-> v
+```
+
+### 25. Grafové průchody BFS a DFS `[100% Trainer · 60% Lectures]`
+- **Princip**:
+  - **BFS (Fronta `std::queue`)**: Nalezne nejkratší cestu v neohodnoceném grafu ($O(V + E)$).
+  - **DFS (Rekurze)**: Prochází do hloubky (detekce cyklů, komponenty souvislosti).
+- **Kód (BFS šablona)**:
+```cpp
+std::vector<bool> visited(n, false);
+std::queue<int> q;
+visited[start] = true; q.push(start); // Označit VŽDY při vložení do fronty!
+
+while (!q.empty()) {
+    int u = q.front(); q.pop();
     for (int v : adj[u]) {
         if (!visited[v]) {
-            dfs(v, adj, visited);
+            visited[v] = true;
+            q.push(v);
         }
     }
 }
 ```
+- ⚠️ **Past**: V BFS musíte vrchol označit jako `visited` **ihned při vložení `q.push(v)`**. Pokud označíte až při `q.pop()`, dojde k zahlcení fronty duplicitami a pád programu na limit paměti.
+
+### 26. Binární vyhledávací strom (BST) `[100% · E-learning]`
+- **Princip**: Pro každý uzel platí `levý < uzel < pravý`. Vyhledávání průměrně trvá $O(\log n)$, při degeneraci (seřazená data) však padá na $O(n)$.
 
 ---
 
-## 🧩 15. Šablony (Generické funkce & třídy) `[Relevance: 60%]`
+## 📅 Týden 8: Šablony (Generické programování)
 
-Jak napsat obecný kód pro libovolný typ.
-
-### 💡 Jednoduchý kód
+### 27. Šablony funkcí & tříd `[60% · E-learning]`
+- **Princip**: Šablona je předpis pro kompilátor, který vytvoří konkrétní funkci/třídu až při jejím volání pro daný typ.
+- **Kód**:
 ```cpp
-// 1. Šablona funkce:
 template <typename T>
-T myMax(T a, T b) {
-    return (a > b) ? a : b;
-}
+T myMax(T a, T b) { return (a > b) ? a : b; } // Šablona funkce
 
-// 2. Šablona jednoduché třídy:
 template <typename T>
-struct Pair {
-    T first;
-    T second;
-};
-
-int main() {
-    int m = myMax(10, 20);            // T je odvozeno jako int
-    Pair<double> p = {3.14, 2.71};    // T je double
-}
+struct Node { T val; Node *next = nullptr; }; // Šablona třídy/struktury
 ```
-
-> ⚠️ **Pravidlo pro šablony**: Celá definice šablony (včetně těla funkcí) **musí být v hlavičkovém souboru** (`.h`/`.hpp`), neoddělujte ji do `.cpp`.
-
----
-
-## ⚡ 16. Základní C++ I/O & Manipulátory `[Relevance: 15–20% · EPIC]`
-
-```cpp
-#include <iostream>
-#include <iomanip>
-
-// Zrychlení standardního I/O v C++ (klíč pro online testy):
-std::ios_base::sync_with_stdio(false);
-std::cin.tie(nullptr);
-
-// Výpis čísla s pevnou přesností:
-double pi = 3.14159265;
-std::cout << std::fixed << std::setprecision(2) << pi << '\n'; // Vypíše 3.14
-```
+- ⚠️ **Past**: Celé tělo šablony musí být definováno **přímo v hlavičkovém souboru (`.hpp`/`.h`)**, nikoliv v `.cpp`, jinak linker ohlásí *undefined reference*.
