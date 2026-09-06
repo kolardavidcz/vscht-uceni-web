@@ -93,27 +93,27 @@
               "order": 2
             },
             "dml-bio-grafy": {
-              "title": "3 · Modul 0A: Bio-Intuice & Co je Graf",
+              "title": "3 · Modul 0: Bio-Intuice & Co je Graf",
               "order": 3
             },
-            "dml-bio-grafy-b": {
-              "title": "4 · Modul 0B: Formální Jazyk Grafů & C++",
+            "dml-logicky-zaklad": {
+              "title": "4 · Modul 1: Logický & Důkazový základ",
               "order": 4
             },
-            "dml-logicky-zaklad": {
-              "title": "5 · Modul 1: Logický & Důkazový základ",
+            "dml-indukce-na-grafech": {
+              "title": "5 · Modul 2: Indukce na Grafech & Redukční Past",
               "order": 5
             },
-            "dml-indukce-na-grafech": {
-              "title": "6 · Modul 2: Indukce na Grafech & Redukční Past",
+            "dml-dukazy-sporem": {
+              "title": "6 · Modul 3: Důkazy Sporem & Extremální Princip",
               "order": 6
             },
-            "dml-dukazy-sporem": {
-              "title": "7 · Modul 3: Důkazy Sporem & Extremální Princip",
+            "dml-bio-grafy-b": {
+              "title": "7 · Modul 4a: Grafy v C++ & Reprezentace v Paměti",
               "order": 7
             },
             "dml-zkouskovy-workshop": {
-              "title": "8 · Modul 4: Zkouškový Workshop & Šablony Důkazů",
+              "title": "8 · Modul 4b: Zkouškový Workshop & Šablony Důkazů",
               "order": 8
             }
           }

@@ -26,7 +26,7 @@ Co konkrétně se naučíš? Jednoduše řečeno:
 
 ---
 
-## 3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek? `[Relevance: 95%]` `[EPIC]` `[INSIGHT]`
+## 3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek?
 
 Častý mýtus mezi studenty 1. ročníku zní: *„Matematici a teoretičtí informatici milují složité řecké značky a píší důkazy jen proto, aby potrápili studenty u zkoušky.“*
 
@@ -34,7 +34,7 @@ Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec
 
 ---
 
-### 3.1 Anatomie Důkazu: Cesta k Výsledku vs. Úsporný Zápis `[INSIGHT]`
+### 3.1 Anatomie Důkazu: Cesta k Výsledku vs. Úsporný Zápis
 
 > [!NOTE]
 > **Důkazy nevznikly kvůli velké lásce k abstraktním matematickým výrazům.**  
@@ -69,7 +69,7 @@ JAK VE SKUTEČNOSTI VZNIKÁ MATEMATICKÝ A ALGORITMICKÝ OBJEV:
 
 ---
 
-### 3.2 Role Znalostí: První Setkání s Profesorem u Tabule `[CHALLENGE]`
+### 3.2 Role Znalostí: První Setkání s Profesorem u Tabule
 
 Představte si své první cvičení z diskrétní matematiky na univerzitě. Vstoupí vyučující, beze slova vezme křídu, nakreslí na tabuli obrázek níže, otočí se do ztichlé učebny a položí zdánlivě nevinnou otázku:
 
@@ -136,7 +136,7 @@ Dokud neznáte definici, mozek tápe v mlze, protože nemá záchytný bod. Jakm
 
 ---
 
-### 3.3 Role Postupu: Rychlé Umocňování ($x^n$) & Formální Logika `[EPIC]` `[LOGIKA-IN-ACTION]`
+### 3.3 Role Postupu: Rychlé Umocňování ($x^n$) & Formální Logika
 
 Zatímco kružnice demonstrovala sílu **statických znalostí (definic)**, v programování a předmětu AG1 rozhoduje **dynamický postup (algoritmus)** opřený o zákony **formální matematické logiky**.
 
@@ -252,3 +252,4 @@ long long power(long long x, unsigned int n) {
   - a celkového algoritmického myšlení, které po vás bude vyžadovat AG1.
 
 </details>
+

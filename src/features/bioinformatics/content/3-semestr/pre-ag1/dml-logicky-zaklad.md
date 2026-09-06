@@ -1,6 +1,5 @@
 # Modul 1: Logický & Důkazový Základ pro Grafové Algoritmy
 
-> **[Relevance: 95%]** · **Tags:** `[EPIC]` `[INSIGHT]` `[PAST U ZKOUŠKY]`
 > **Cíl modulu:** Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků ($\forall, \exists, \exists!$), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AG1 na FIT ČVUT.
 
 ---
@@ -17,7 +16,7 @@ Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zk
 
 ---
 
-## 1. Úvod do Matematické Logiky `[INSIGHT]`
+## 1. Úvod do Matematické Logiky
 
 V běžném jazyce bývají biologická a chemická tvrzení často mnohoznačná. V počítačové vědě a teoretické informatice však musíme formulovat myšlenky tak, aby neexistovala žádná pochybnost o jejich pravdivosti.
 
@@ -33,7 +32,7 @@ Matematická logika pracuje s **výroky**:
 
 ---
 
-## 2. Výrokové Spojky a Pravdivostní Tabulky `[Relevance: 95%]` `[EPIC]`
+## 2. Výrokové Spojky a Pravdivostní Tabulky
 
 Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B, C$) pomocí **výrokových spojek**:
 
@@ -118,7 +117,7 @@ Složitější výroky stavíme z jednoduchých výrokových proměnných ($A, B
 
 ---
 
-### 2.1 Mnemotechnika Implikace ($A \Rightarrow B$): Student vs. Učitel `[PAST U ZKOUŠKY]`
+### 2.1 Mnemotechnika Implikace ($A \Rightarrow B$): Student vs. Učitel
 
 Studenti VŠCHT nejčastěji chybují v pravdivosti **implikace**, pokud je předpoklad nepravdivý. Jak si to okamžitě a bezpečně zapamatovat do konce života?
 
@@ -188,7 +187,7 @@ Kdy student zkouškou projde (**GOOD / 1**) a kdy dostane **0**?
 
 ---
 
-### 2.2 De Morganovy Zákony a Klíčové Logické Ekvivalence `[Relevance: 95%]` `[EPIC]`
+### 2.2 De Morganovy Zákony a Klíčové Logické Ekvivalence
 
 **De Morganovy zákony** tvoří základní pravidlo pro distribuci negace přes logickou konjunkci ($\land$) a disjunkci ($\lor$). 
 
@@ -337,7 +336,7 @@ Při úpravě logických výroků v algoritmech a důkazech se neobcházíte bez
 
 ---
 
-## 3. Nutná vs. Postačující Podmínka `[Relevance: 95%]` `[INSIGHT]`
+## 3. Nutná vs. Postačující Podmínka
 
 V předmětu AG1 musíte bez váhání rozumět slovnímu spojení *"Nutná a postačující podmínka"*:
 
@@ -365,7 +364,7 @@ Uvažujme implikaci $A \Rightarrow B$:
 
 ---
 
-## 4. Kvantifikátory ($\forall, \exists, \exists!$) a Jejich Negace `[Relevance: 95%]` `[MEGA EPIC]`
+## 4. Kvantifikátory ($\forall, \exists, \exists!$) a Jejich Negace
 
 V matematice, bioinformatice i algoritmických sítích popisujeme vlastnosti celých množin prvků pomocí kvantifikátorů:
 
@@ -375,7 +374,7 @@ V matematice, bioinformatice i algoritmických sítích popisujeme vlastnosti ce
 
 ---
 
-### 4.1 Pravidlo Negace Kvantifikátorů `[PAST U ZKOUŠKY]`
+### 4.1 Pravidlo Negace Kvantifikátorů
 
 Při negování výroků s kvantifikátory platí dvě neúprosná pravidla:
 1. **Záměna kvantifikátoru:** $\forall \longleftrightarrow \exists$.
@@ -426,7 +425,7 @@ Nechť $V$ je množina molekul a $(v, w) \in E$ značí existenci chemické reak
 
 ---
 
-## 5. Přehled 4 Základních Důkazových Technik pro AG1 `[MEGA EPIC]`
+## 5. Přehled 4 Základních Důkazových Technik pro AG1
 
 Abychom dokázali matematické tvrzení $T$, používáme v algoritmické informatice 4 přístupy:
 
@@ -565,6 +564,3 @@ Tvrzení lze dokázat také **zcela přímo** ($A \implies B$) bez přechodu k n
 5. **Závěr:** V síti nutně existuje cyklus. Tvrzení je dokázáno přímo.
 </details>
 
----
-
-> ➡️ **Pokračujte na stěžejní modul AG1:** [2 · Indukce na Grafech & Redukční Past](./dml-indukce-na-grafech)

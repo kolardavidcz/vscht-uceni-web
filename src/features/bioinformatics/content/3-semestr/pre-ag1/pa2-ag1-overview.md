@@ -1,11 +1,10 @@
 # Průvodce: PA2 C++ Most k Algoritmům a Grafům (AG1)
 
-> **[Relevance: 95%]** · **Tags:** `[INSIGHT]` `[BIO-ANALOGIE]` `[EPIC]`
 > **Cíl příručky:** Propojit praktické znalosti programování v C++ z předmětu **BI-PA2** s teoretickými požadavky na algoritmickou korektnost, datové struktury, paměťový model a matematické důkazy v předmětu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT.
 
 ---
 
-## 1. Od Psaní Kódu v C++ k Matematickým Důkazům v AG1 `[INSIGHT]`
+## 1. Od Psaní Kódu v C++ k Matematickým Důkazům v AG1
 
 V předmětu **PA2** (Programování a Algoritmy 2) jste se učili psát funkční C++ kód, spravovat paměť (RAII, indikátory, `std::unique_ptr`), řešit objektové návrhy a procházet automatickými testy Progtestu.
 
@@ -17,18 +16,18 @@ Tato příručka vám ukáže, jak přesně datové struktury C++ Standard Templ
 
 ---
 
-## 2. Mapa Propojení C++ STL Kontejnérů a 7 Modulů AG1 `[Relevance: 100%]` `[EPIC]`
+## 2. Mapa Propojení C++ STL Kontejnérů a 7 Modulů AG1
 
 ```
 ┌──────────────────────────────────────┬──────────────────────────────────────┬──────────────────────────────────────┐
 │ Datová Struktura v C++ (PA2)         │ Formální Grafový Koncept (AG1)       │ Modul Pre-AG1                        │
 ├──────────────────────────────────────┼──────────────────────────────────────┼──────────────────────────────────────┤
-│ std::vector<std::vector<int>>        │ Seznam Sousedů Grafu (Adjacency List)│ Modul 0 (Bio-grafy & C++ reprezentace)│
-│ std::queue<int>                      │ FIFO Fronta Prohledávání do Šířky    │ Modul 4 (BFS & Invariant Vlnoplochy) │
-│ std::priority_queue<std::pair<int,int>>│ Min-Prioritní Halda pro Dijkstru/Prima│ Modul 4 & Modul 5 (Greedy & MST)     │
-│ std::vector<std::pair<int, std::pair>>│ Edge List pro Kruskalův MST Algoritmus│ Modul 5 (Cut Property & DSU)         │
-│ std::stack<int>                      │ Zásobník pro Prohledávání do Hloubky │ Modul 2 & Modul 4 (Iterativní DFS)   │
-│ std::vector<bool> visited            │ Množina Vyřízených Vrcholů S         │ Modul 3 & Modul 4 (Důkazy Sporem)    │
+│ std::vector<std::vector<int>>        │ Seznam Sousedů Grafu (Adjacency List)│ Modul 4a (Grafy v C++ & Reprezentace)│
+│ std::queue<int>                      │ FIFO Fronta Prohledávání do Šířky    │ Modul 4a (BFS v C++) & Modul 4b      │
+│ std::priority_queue<std::pair<int,int>>│ Min-Prioritní Halda pro Dijkstru/Prima│ Algoritmy v AG1 (Greedy & MST)       │
+│ std::vector<std::pair<int, std::pair>>│ Edge List pro Kruskalův MST Algoritmus│ Algoritmy v AG1 (Cut Property & DSU) │
+│ std::stack<int>                      │ Zásobník pro Prohledávání do Hloubky │ Modul 4a (DFS v C++)                 │
+│ std::vector<bool> visited            │ Množina Vyřízených Vrcholů S         │ Modul 3 & Modul 4b (Důkazy Sporem)   │
 └──────────────────────────────────────┴──────────────────────────────────────┴──────────────────────────────────────┘
 ```
 
@@ -38,7 +37,7 @@ Tato příručka vám ukáže, jak přesně datové struktury C++ Standard Templ
 
 ---
 
-### 3.1 Seznam Sousedů: `std::vector<std::vector<int>>` `[Relevance: 95%]`
+### 3.1 Seznam Sousedů: `std::vector<std::vector<int>>`
 
 Pro reprezentaci řídkých biologických grafů ($m = \mathcal{O}(n)$) používáme dynamické pole vektorů:
 
@@ -69,7 +68,7 @@ public:
 
 ---
 
-### 3.2 FIFO Fronta pro BFS: `std::queue<int>` `[Relevance: 100%]` `[MEGA EPIC]`
+### 3.2 FIFO Fronta pro BFS: `std::queue<int>`
 
 Prohledávání do šířky (BFS) udržuje rozhraní vlny pomocí FIFO fronty:
 
@@ -105,7 +104,7 @@ std::vector<int> runBFS(const Graph& G, int startNode) {
 
 ---
 
-### 3.3 Prioritní Halda pro Dijkstrův a Primův Algoritmus: `std::priority_queue` `[Relevance: 100%]`
+### 3.3 Prioritní Halda pro Dijkstrův a Primův Algoritmus: `std::priority_queue`
 
 Dijkstrův a Primův algoritmus vyžadují v každém kroku vybrání vrcholu s **minimální reálnou vzdáleností / vahou**. K tomu slouží Min-Prioritní Halda:
 
@@ -146,7 +145,7 @@ void runDijkstra(int n, int startNode, const std::vector<std::vector<EdgeWeight>
 
 ---
 
-### 3.4 Paměťové Limity: Rekurze u DFS vs. Stack Overflow `[PAST U ZKOUŠKY]`
+### 3.4 Paměťové Limity: Rekurze u DFS vs. Stack Overflow
 
 V předmětu PA2 jste zvyklí psát rekurzivní funkce. V teorii grafů a algoritmech AG1 má rekurzivní prohledávání do hloubky (DFS) skrytou past: **Stack Overflow (přetečení zásobníku volání)**!
 
@@ -187,7 +186,7 @@ void iterativeDFS(const Graph& G, int startNode) {
 
 ---
 
-### 3.5 Paměťová Optimalizace: `std::vector<bool>` a Alokace `[INSIGHT]`
+### 3.5 Paměťová Optimalizace: `std::vector<bool>` a Alokace
 
 V C++ má `std::vector<bool>` speciální bitovou kompresní specializaci:
 - Uchovává každý `bool` jako **1 bit** v paměti místo 1 bajtu!
@@ -218,7 +217,7 @@ Pro úspěšné určování složitostí algoritmů v AG1 musíte mít zafixovan
 
 ---
 
-## 5. Rychlé Vstupy a Výstupy v C++ pro Zkouškové Úlohy (Fast I/O) `[INSIGHT]`
+## 5. Rychlé Vstupy a Výstupy v C++ pro Zkouškové Úlohy (Fast I/O)
 
 V automatických testech na FIT ČVUT (Progtest) může zpracování obrovských grafů s 1 miliónem hran selhat na Time Limit Exceeded pouze kvůli pomalému `std::cin` a `std::cout`!
 
@@ -247,7 +246,7 @@ int main() {
 
 ---
 
-## 3. 🚿 BFS: Kód vedle Matematiky (Side by Side) `[Relevance: 100%]` `[MEGA EPIC]`
+## 3. 🚿 BFS: Kód vedle Matematiky (Side by Side)
 
 Tohle je nejlepší způsob, jak propojit PA2 a AG1. Ukazujeme BFS ve dvou sloupcích — C++ kód vlevo, matematický invariant vpravo.
 
@@ -293,7 +292,7 @@ Před každou iterací `while (!q.empty())` platí:
 
 ---
 
-## 4. ⛰️ Dijkstra: Priority Queue a Proč to Funguje `[Relevance: 100%]` `[MEGA EPIC]`
+## 4. ⛰️ Dijkstra: Priority Queue a Proč to Funguje
 
 Dijkstra je BFS pro **ohodnocené grafy** (hrany mají váhy). Místo fronty (`queue`) používáme **prioritní frontu** (`priority_queue`) — struktura, která vždy vydá prvek s nejmenší prioritou (vzdáleností).
 
@@ -351,7 +350,7 @@ Při každém výskoku vrcholu $u$ z prioritní fronty platí: $d[u] = \delta(s,
 
 ---
 
-## 5. 🌲 DFS a Riziko Stack Overflow `[Relevance: 75%]` `[INSIGHT]`
+## 5. 🌲 DFS a Riziko Stack Overflow
 
 ### Rekurzivní DFS (PA2 styl)
 
@@ -404,7 +403,7 @@ Zásobník je nyní na **haldě** (heap) — může být mnohem větší. Pro gr
 
 ---
 
-## 6. 🔗 DSU (Disjoint Set Union) — Kruskal bez slz `[Relevance: 80%]` `[EPIC]`
+## 6. 🔗 DSU (Disjoint Set Union) — Kruskal bez slz
 
 Kruskalův algoritmus buduje MST hladově — přidává hrany od nejlehčí, ale **přeskočí hranu, která by vytvořila cyklus**.
 
@@ -462,7 +461,7 @@ int kruskal_mst(int n, vector<tuple<int,int,int>>& edges) {
 
 ---
 
-## 7. 🚨 Nejčastější PA2 → AG1 Chyby `[Relevance: 95%]` `[PAST U ZKOUŠKY]`
+## 7. 🚨 Nejčastější PA2 → AG1 Chyby
 
 | Chyba | PA2 myšlení | AG1 požadavek |
 |:---|:---|:---|
@@ -475,7 +474,7 @@ int kruskal_mst(int n, vector<tuple<int,int,int>>& edges) {
 
 ---
 
-## 8. ☀️ Letní Kontrolní Seznam před AG1 `[Relevance: 100%]`
+## 8. ☀️ Letní Kontrolní Seznam před AG1
 
 Proveď si tento self-test před zářím. Pokud odpovíš ANO na všechny, máš solidní start:
 
@@ -488,6 +487,3 @@ Proveď si tento self-test před zářím. Pokud odpovíš ANO na všechny, má�
 - [ ] Zvládnu zapsat invariant cyklu pro BFS ve 3 krocích (Inicializace / Udržování / Ukončení).
 - [ ] Vím, že Dijkstra nefunguje se zápornými hranami — a proč.
 
----
-
-> ➡️ **Návrat na Hlavní Rozcestník Kurzu:** [Zpět na Přehled 7 Modulů Pre-AG1](./dml)

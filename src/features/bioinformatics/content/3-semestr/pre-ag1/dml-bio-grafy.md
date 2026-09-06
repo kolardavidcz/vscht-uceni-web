@@ -1,6 +1,5 @@
-# Modul 0A: Od Biologické Intuice k Jazyku Grafů (Úvod)
+# Modul 0: Od Biologické Intuice k Jazyku Grafů
 
-> **[Relevance: 95%]** · **Tags:** `[INSIGHT]` `[BIO-ANALOGIE]` `[EPIC]`
 > **Cíl modulu:** Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů $G = (V, E)$, abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AG1 na FIT ČVUT.
 
 ---
@@ -35,9 +34,7 @@ Jakmile tohle pochopíš, uvidíš grafy všude:
 
 ---
 
-## 1. Předmluva: Proč Bioinformatik Potřebuje Teoretickou Informatiku? `[INSIGHT]`
-
-V biologii a chemii jste zvyklí nahlížet na složité systémy vizuálně a přírodovědně:
+## 1. Předmluva: Proč Bioinformatik Potřebuje Teoretickou Informatiku? V biologii a chemii jste zvyklí nahlížet na složité systémy vizuálně a přírodovědně:
 - Vidíte **molekulu glukózy** a chápete její prostorovou konformaci a chemické kovalentní vazby mezi atomy Uhlíku, Kyslíku a Vodíku.
 - Vidíte **metabolickou dráhu glykolýzy** a vnímáte ji jako posloupnost enzymatických přeměn jednoho substrátu v druhý.
 
@@ -231,108 +228,3 @@ Dva nejdůležitější grafové pojmy, se kterými budete v AG1 pracovat každ�
 </div>
 </div>
 
----
-
-## 3. Ukázka Algoritmů na Grafech: DFS vs. BFS `[EPIC]`
-
-Když máme graf uložený v počítači, nejčastěji v něm chceme **něco najít** (např. cestu z počátečního bodu $S$ do cíle $C$). Dva základní přístupy:
-
-<div class="my-6 p-4 rounded-xl bg-stone-100/80 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs">
-  <div class="flex items-center justify-between mb-3">
-    <span class="text-xs text-stone-700 dark:text-stone-300 font-bold uppercase tracking-wide">📊 Vizuální srovnání: Reprezentace neorientovaného a orientovaného grafu v paměti</span>
-  </div>
-  <img src="/images/graph-representation-showcase.png" alt="Ukázka reprezentace neorientovaného a orientovaného grafu: Seznam sousedů (Adjacency List) vs. Matice sousedství (Adjacency Matrix)" class="rounded-lg shadow-sm border border-stone-200 dark:border-stone-700 max-w-full h-auto mx-auto bg-white p-2" />
-  <p class="text-xs text-stone-500 dark:text-stone-400 mt-2 text-center">
-    Vlevo: <strong>Neorientovaný vs. Orientovaný graf</strong> · Uprostřed: <strong>Seznam sousedů (Adjacency List)</strong> · Vpravo: <strong>Matice sousedství (Adjacency Matrix)</strong>
-  </p>
-</div>
-
-<div class="my-8 grid grid-cols-1 md:grid-cols-2 gap-5">
-<div class="p-5 rounded-2xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between mb-3">
-<h3 class="text-base font-bold text-stone-900 dark:text-stone-100 m-0! flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-[#db2777] inline-block"></span>
-DFS
-</h3>
-<span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-[#db2777]/10 text-[#db2777] dark:text-[#f472b6]">Hloubkové prohledávání</span>
-</div>
-<div class="bg-white dark:bg-[#0f0906] p-4 rounded-xl border border-stone-200/80 dark:border-stone-800/80 flex items-center justify-center shadow-2xs">
-<svg viewBox="0 0 360 200" class="w-full max-w-[320px] h-auto" xmlns="http://www.w3.org/2000/svg">
-<line x1="68" y1="75" x2="135" y2="75" stroke="#cbd5e1" class="stroke-stone-300 dark:stroke-stone-700" stroke-width="2.5" stroke-dasharray="5 5" stroke-linecap="round" />
-<line x1="68" y1="75" x2="68" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="68" y1="155" x2="135" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="135" y1="155" x2="205" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="205" y1="155" x2="205" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="205" y1="75" x2="135" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="205" y1="75" x2="275" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="275" y1="75" x2="280" y2="25" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="275" y1="75" x2="275" y2="130" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<circle cx="68" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="135" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="205" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="205" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="135" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="275" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="280" cy="25" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="68" cy="75" r="11" fill="#db2777" />
-<text x="24" y="87" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
-<circle cx="275" cy="130" r="11" fill="#db2777" />
-<text x="302" y="142" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
-</svg>
-</div>
-</div>
-<p class="text-xs text-stone-600 dark:text-stone-400 mt-3 mb-0 leading-relaxed">
-<strong>Prohledávání do hloubky (DFS):</strong> Algoritmus se slepě vnoří podél první větve. Obejde celý spodní cyklus, uzel nahoře navštíví jako slepou uličku a k cíli <strong>C</strong> dorazí dlouhou oklikou (6 hran). <em>Nezaručuje nejkratší cestu!</em>
-</p>
-</div>
-<div class="p-5 rounded-2xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs flex flex-col justify-between">
-<div>
-<div class="flex items-center justify-between mb-3">
-<h3 class="text-base font-bold text-stone-900 dark:text-stone-100 m-0! flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-BFS
-</h3>
-<span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300">Šířkové prohledávání</span>
-</div>
-<div class="bg-white dark:bg-[#0f0906] p-4 rounded-xl border border-stone-200/80 dark:border-stone-800/80 flex items-center justify-center shadow-2xs">
-<svg viewBox="0 0 360 200" class="w-full max-w-[320px] h-auto" xmlns="http://www.w3.org/2000/svg">
-<line x1="68" y1="75" x2="135" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="135" y1="75" x2="205" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="205" y1="75" x2="275" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="275" y1="75" x2="275" y2="130" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="275" y1="75" x2="280" y2="25" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="68" y1="75" x2="68" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="68" y1="155" x2="135" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="135" y1="155" x2="205" y2="155" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<line x1="205" y1="155" x2="205" y2="75" stroke="#1e293b" class="stroke-stone-800 dark:stroke-stone-200" stroke-width="5" stroke-linecap="round" />
-<circle cx="68" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="135" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="205" cy="155" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="205" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="135" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="275" cy="75" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="280" cy="25" r="7" fill="#334155" class="fill-stone-700 dark:fill-stone-300" />
-<circle cx="68" cy="75" r="11" fill="#db2777" />
-<text x="24" y="87" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">S</text>
-<circle cx="275" cy="130" r="11" fill="#db2777" />
-<text x="302" y="142" fill="#db2777" font-size="34" font-weight="900" font-family="'Outfit', system-ui, sans-serif">C</text>
-</svg>
-</div>
-</div>
-<p class="text-xs text-stone-600 dark:text-stone-400 mt-3 mb-0 leading-relaxed">
-<strong>Prohledávání do šířky (BFS):</strong> Postupuje po vlnoplochách (vrstvách vzdálenosti od <strong>S</strong>). K cíli <strong>C</strong> okamžitě nalezne <strong>nejkratší cestu</strong> po horní větvi (pouhé 4 hrany).
-</p>
-</div>
-</div>
-
----
-
-<div class="my-8 p-4 rounded-xl bg-stone-100 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-  <span class="text-xs text-stone-500 dark:text-stone-400">
-    Intuici máme zvládnutou. Teď ji převedeme do přesné matematiky a kódu v C++.
-  </span>
-  <a href="./dml-bio-grafy-b" class="text-sm font-semibold text-[#f95d12] hover:text-[#c2410c] flex items-center gap-1.5 transition-colors">
-    Pokračujte na Modul 0B: Formální Jazyk Grafů & C++ ➡️
-  </a>
-</div>

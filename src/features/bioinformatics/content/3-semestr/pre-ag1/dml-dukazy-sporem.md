@@ -1,6 +1,5 @@
 # Modul 3: Důkazy Sporem & Extremální Princip
 
-> **[Relevance: 90%]** · **Tags:** `[EPIC]` `[CHALLENGE]` `[INSIGHT]` `[PAST U ZKOUŠKY]`
 > **Cíl modulu:** Naučit se elegantní techniku důkazu, kde místo přímého dokazování ukážeš, že opak by vedl k nesmyslu.
 
 ---
@@ -22,7 +21,7 @@ Důkaz sporem funguje přesně takhle:
 
 ---
 
-## 1. Logická Podstata Důkazu Sporem `[INSIGHT]`
+## 1. Logická Podstata Důkazu Sporem
 
 V Modulu 1 jsme si ukázali, že negací implikace $A \Rightarrow B$ je výrok:
 $$\neg (A \Rightarrow B) \quad \equiv \quad (A \land \neg B)$$
@@ -46,7 +45,7 @@ Schéma myšlenkového toku u důkazu sporem:
 
 ---
 
-## 2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1 `[Relevance: 95%]` `[PAST U ZKOUŠKY]`
+## 2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1
 
 Při hodnocení zkouškových testů z AG1 vyžadují vyučující přesně definovanou strukturu:
 
@@ -69,7 +68,7 @@ FORMÁLNÍ ŠABLONA ZÁPISU DŮKAZU SPOREM:
 
 ---
 
-## 3. 🐦 Dirichletův princip v Teorii Grafů (Holubi, Škatulky & Sítě) `[Relevance: 95%]` `[EPIC]`
+## 3. 🐦 Dirichletův princip v Teorii Grafů (Holubi, Škatulky & Sítě)
 
 Tento princip (v angličtině *Pigeonhole Principle*) je jedním z nejmocnějších nástrojů diskrétní matematiky a teorie grafů. Jeho základní znění zní téměř banálně:
 
@@ -179,7 +178,7 @@ Navštívené uzly:   u₀ ─────> u₁ ─────> u₂ ───
 
 ---
 
-## 4. 🔬 Extremální Princip v Grafech — Krok za Krokem `[Relevance: 90%]` `[MEGA EPIC]`
+## 4. 🔬 Extremální Princip v Grafech — Krok za Krokem
 
 ### Princip
 
@@ -325,8 +324,4 @@ Dokažte sporem, že v každém konečném orientovaném acyklickém grafu exist
 </ol>
 </div>
 </details>
-
----
-
-> ➡️ **Pokračujte na závěrečný zkouškový workshop:** [4 · Zkouškový Workshop & Šablony Důkazů z AG1](./dml-zkouskovy-workshop)
 

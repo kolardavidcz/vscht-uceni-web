@@ -1,11 +1,10 @@
-# Modul 4: Zkouškový Workshop & Šablony Důkazů z AG1
+# Modul 4b: Zkouškový Workshop & Šablony Důkazů z AG1
 
-> **[Relevance: 100%]** · **Tags:** `[MEGA EPIC]` `[PAST U ZKOUŠKY]` `[CHALLENGE]`
 > **Cíl modulu:** Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.
 
 ---
 
-## 1. Jak Vyučující na FIT ČVUT Opravují Zkouškové Důkazy? `[INSIGHT]`
+## 1. Jak Vyučující na FIT ČVUT Opravují Zkouškové Důkazy?
 
 Při opravování teoretických písemek z AG1 platí neúprosná kritéria:
 
@@ -23,7 +22,7 @@ Při opravování teoretických písemek z AG1 platí neúprosná kritéria:
 
 ---
 
-## 2. Kompletní Šablonový Manuál pro Písemné Důkazy `[Relevance: 100%]` `[MEGA EPIC]`
+## 2. Kompletní Šablonový Manuál pro Písemné Důkazy
 
 Před odevzdáním zkouškového testu zkontrolujte, že váš zápis odpovídá jedné z těchto šablon:
 
@@ -112,7 +111,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-## 3. Workshop Plně Vyřešených Zkouškových Případů z AG1 `[Relevance: 100%]` `[PAST U ZKOUŠKY]`
+## 3. Workshop Plně Vyřešených Zkouškových Případů z AG1
 
 ---
 
@@ -275,17 +274,8 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-## 📋 Zkouškový Checklist pro Získání Plného Počtu Bodů
-
-Před odevzdáním písemného testu z AG1 si projděte tento kontrolní seznam:
-
-- [ ] **Negoval/a jsem správně kvantifikátory?** ($\forall \to \exists$ a znegovat vnitřní formuli).
-- [ ] **Vyhnul/a jsem se redukční pasti u indukce?** (Začínám z libovolného $G_{n+1}$, odebírám prvek na $G'$, nekonstruuji přidáváním!).
-- [ ] **Nezapomněl/a jsem ověřit Bázi indukce?** (Triviální případ $n=1$ nebo $m=0$).
-- [ ] **Mám u sporu označený jasný rozpor $\bot$?** (Napsáno přesně, s čím je odvozený fakt v rozporu).
-- [ ] **Mám u invariantů sepsané 3 fáze?** (Inicializace, Udržování, Ukončení).
-
 ---
 
 > 🎯 **Gratulujeme! Dokončili jste kompletní letní 0-to-Hero přípravu pre-AG1!**
 > Nyní máte veškerou matematickou jistotu i praktickou výbavu pro zvládnutí předmětu AG1 na FIT ČVUT! 🚀
+

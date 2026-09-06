@@ -1,6 +1,5 @@
 # Modul 2: Indukce na Grafech & Redukční Past
 
-> **[Relevance: 100%]** · **Tags:** `[MEGA EPIC]` `[PAST U ZKOUŠKY]` `[INSIGHT]`
 > **Cíl modulu:** Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky.
 
 ---
@@ -116,7 +115,7 @@ Tím jsme přesně vyplatili $n + 1$ Kč, což jsme potřebovali dokázat!
 
 ---
 
-## 1. Peano Axiomy a Princip Matematické Indukce `[INSIGHT]`
+## 1. Peano Axiomy a Princip Matematické Indukce
 
 V klasické algebře dokazujeme tvrzení $P(n)$ závislá na přirozeném čísle $n \in \mathbb{N}$ (např. součty řad) pomocí **Slabé Matematické Indukce**:
 1. **Báze indukce:** Dokážeme, že $P(n_0)$ platí pro nejmenší případ (např. $n_0 = 1$).
@@ -136,7 +135,7 @@ Při aplikaci na grafy nepředstavuje induktivní proměnná $n$ pouhé číslo,
 
 ---
 
-## 2. 🚨 CRITICAL EXAM TRAP: Redukční vs. Dekonstrukční Indukce `[MEGA EPIC]` `[PAST U ZKOUŠKY]`
+## 2. 🚨 CRITICAL EXAM TRAP: Redukční vs. Dekonstrukční Indukce
 
 Toto je vůbec **nejčastější důvod pro udělení 0 bodů** u zkouškových důkazů z AG1 na FIT ČVUT!
 
@@ -236,7 +235,7 @@ $$(n + 1) = ((n + 1) - k) + k$$
 
 ---
 
-## 3. Růst Počtu Hran při Dekonstrukci Sítě: Vrcholy Stupně 3 `[Relevance: 95%]` `[EPIC]`
+## 3. Růst Počtu Hran při Dekonstrukci Sítě: Vrcholy Stupně 3
 
 Místo abstraktních lemmat se podívejme na přímý, intuitivní důkaz, který se přesně hodí k pochopení dekonstrukce na grafech: **jak roste počet hran se vzrůstajícím počtem vrcholů**.
 
@@ -320,7 +319,7 @@ Tento vztah vám okamžitě odemkne celou teorii grafů:
 
 ---
 
-## 4. Stromy v Letní Přípravě: Proč má strom $m = n - 1$ hran `[Relevance: 100%]` `[MEGA EPIC]`
+## 4. Stromy v Letní Přípravě: Proč má strom $m = n - 1$ hran
 
 Stromy jsou nejčastější grafovou strukturou v bioinformatice (fylogenetické evoluční stromy, hierarchie taxonomií, kostry molekulárních sítí).
 
@@ -381,7 +380,7 @@ Zvolme ve stromu nejdelší možnou cestu $P = (v_0, v_1, \dots, v_k)$. Koncový
 
 ---
 
-## 5. 💡 Propojení s Bioinformatikou: Orientované Sítě bez Cyklů (DAGy) `[Relevance: 80%]`
+## 5. 💡 Propojení s Bioinformatikou: Orientované Sítě bez Cyklů (DAGy)
 
 V bioinformatice často nestudujeme jen obousměrné vztahy, ale **procesy, které tečou jedním směrem**:
 - **Metabolické dráhy:** Glykolýza začíná glukózou a přes sérii nevratných enzymatických reakcí končí pyruvátem.
@@ -448,7 +447,7 @@ Vezmeme libovolný DAG $G$ o $n+1$ vrcholech. Najdeme zdroj $u$ ($\text{deg}^-(u
 
 ---
 
-## 6. Přehled: Co je základ letní přípravy a co přijde v AG1 `[Relevance: 80%]` `[INSIGHT]`
+## 6. Přehled: Co je základ letní přípravy a co přijde v AG1
 
 Z tohoto modulu vám pro letní přípravu bohatě stačí:
 
