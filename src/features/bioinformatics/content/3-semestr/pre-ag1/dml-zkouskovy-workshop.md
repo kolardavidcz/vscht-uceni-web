@@ -322,6 +322,11 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-> 🎯 **Gratulujeme! Dokončili jste kompletní letní 0-to-Hero přípravu pre-AG1!**
-> Nyní máte veškerou matematickou jistotu i praktickou výbavu pro zvládnutí předmětu AG1 na FIT ČVUT! 🚀
+> 🎯 **Gratulujeme! Dokončili jste teoretickou a důkazovou část kurzu pre-AG1!**
+> Nyní máte veškerou matematickou jistotu pro zvládnutí předmětu AG1 na FIT ČVUT! 🚀
+>
+> 💻 **Závěrečná praktická prověrka v C++:**
+> Vyzkoušejte si implementaci stromové rekurze, DFS, BFS i Dijkstry na reálných úlohách:
+> 👉 **[9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra (rekurze_bro.cpp) →](/obor-bioinformatika/3-semestr/pre-ag1/rekurze-bro)**
+
 

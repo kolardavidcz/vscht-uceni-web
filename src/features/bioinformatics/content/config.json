@@ -119,6 +119,10 @@
             "dml-zkouskovy-workshop": {
               "title": "8 · Zkouškový Workshop & Šablony Důkazů",
               "order": 8
+            },
+            "rekurze-bro": {
+              "title": "9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra",
+              "order": 9
             }
           }
         },
