@@ -578,11 +578,10 @@ body,
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* Cheatsheet method diagrams: capped at max 550px width, dynamic height */
+/* Cheatsheet method diagrams: unconstrained on website, restricted in print */
 .cheatsheet-method-img {
-  max-width: 550px !important;
   width: 100%;
-  height: auto !important;
+  height: auto;
   display: block;
 }
 
@@ -782,9 +781,13 @@ body,
   .wiki-prose img.cheatsheet-method-img,
   .cheatsheet-method-img {
     max-width: 550px !important;
+    max-height: 350px !important;
+    width: auto !important;
     height: auto !important;
+    object-fit: contain !important;
     margin-left: auto !important;
     margin-right: auto !important;
+    display: block !important;
   }
 
   /* Explicitly hide spoilers, overlay selectable spans, and marked interactive elements from print */
