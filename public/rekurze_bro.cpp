@@ -83,10 +83,11 @@ Graph create_acyclic_tree() {
  * Graf 2: Neorientovaný cyklický graf (Slide 2.2 – Srovnání DFS vs BFS)
  *
  *  Start (S)
- *     v0 ───────(e5)─────── v5 ───────(e6)─────── v4 ──(e7)── v6 ──(e9)── v8
- * (Cíl C) │                                          │           │ (e1) (e4)
- * (e8) │                                          │           │ v1
- * ───────(e2)─────── v2 ───────(e3)────────┘           v7 (slepá větev)
+ *     v0 ─────(e5)───── v5 ─────(e6)───── v4 ──(e7)── v6 ──(e9)── v8 (Cíl C)
+ *     │                                   │           │
+ *    (e1)                                (e4)        (e8)
+ *     │                                   │           │
+ *     v1 ─────(e2)───── v2 ─────(e3)───── v3          v7 (slepá větev)
  *
  * Uzavřený neorientovaný cyklus: v0 - v1 - v2 - v3 - v4 - v5 - v0
  * POZOR: Na tomto neorientovaném cyklu "basic rekurze" (jen s parametrem
@@ -115,10 +116,12 @@ Graph create_cyclic_graph() {
  * Graf 3: Neorientovaný ohodnocený graf pro Dijkstru
  *
  *          [váha: 10]           [váha: 10]
- *     0 ───────────────── 1 ───────────────── 2   (Horní větev: 2 hrany,
- * celková váha = 20) │                                       │ │ [váha: 1] │
- * [váha: 1] │                                       │ 3 ───────────────── 4
- * ──────────────────┘   (Spodní větev: 3 hrany, celková váha = 3) [váha: 1]
+ *     0 ───────────────── 1 ───────────────── 2   (Horní: 2 hrany, váha = 20)
+ *     │                                       │
+ * [váha: 1]                               [váha: 1]
+ *     │                                       │
+ *     3 ───────────────── 4 ──────────────────┘   (Spodní: 3 hrany, váha = 3)
+ *               [váha: 1]
  *
  * Všechny hrany jsou neorientované (obousměrné).
  * BFS by zvolilo horní cestu (méně hran: 2).
