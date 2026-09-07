@@ -154,9 +154,9 @@ for (auto it = v.rbegin(); it != v.rend(); ++it) { ... } // Výpis pozpátku
 ### 12. `std::vector<T>` — Dynamické pole `[100% Trainer · 90% E-learning]`
 - **Princip**: Data leží v souvislém bloku paměti. Přímý přístup v $O(1)$, amortizované vkládání na konec v $O(1)$.
 
-<div class="grid grid-cols-1 lg:grid-cols-2 print:grid-cols-2 print-methods-grid gap-4 items-center my-3 print:my-2">
-  <div>
-    <img src="/images/cheatsheet/vector-methods.png" alt="Schéma metod std::vector" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div class="flex justify-center">
+    <img src="/images/cheatsheet/vector-methods.png" alt="Schéma metod std::vector" class="cheatsheet-method-img w-full max-w-[550px] h-auto rounded-xl border border-stone-200 bg-white p-2 shadow-sm mx-auto" style="max-width: 550px; height: auto;" />
   </div>
   <div class="overflow-x-auto">
 
@@ -194,9 +194,9 @@ constexpr std::array<int, 4> dx = {0, 0, 1, -1}; // Směrové posuny v mřížce
 ### 14. `std::queue<T>` — Fronta (FIFO) `[100% · E-learning]`
 - **Princip**: First-In, First-Out (kdo dřív přijde, dřív odejde). Klíčová datová struktura pro **BFS**.
 
-<div class="grid grid-cols-1 lg:grid-cols-2 print:grid-cols-2 print-methods-grid gap-4 items-center my-3 print:my-2">
-  <div>
-    <img src="/images/cheatsheet/queue-methods.png" alt="Schéma metod std::queue" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div class="flex justify-center">
+    <img src="/images/cheatsheet/queue-methods.png" alt="Schéma metod std::queue" class="cheatsheet-method-img w-full max-w-[550px] h-auto rounded-xl border border-stone-200 bg-white p-2 shadow-sm mx-auto" style="max-width: 550px; height: auto;" />
   </div>
   <div class="overflow-x-auto">
 
@@ -231,9 +231,9 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 ### 16. `std::stack<T>` — Zásobník (LIFO) `[90% · E-learning]`
 - **Princip**: Last-In, First-Out (poslední vložený jde první ven). Využití pro **iterativní DFS** a párování závorek.
 
-<div class="grid grid-cols-1 lg:grid-cols-2 print:grid-cols-2 print-methods-grid gap-4 items-center my-3 print:my-2">
-  <div>
-    <img src="/images/cheatsheet/stack-methods.png" alt="Schéma metod std::stack" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div class="flex justify-center">
+    <img src="/images/cheatsheet/stack-methods.png" alt="Schéma metod std::stack" class="cheatsheet-method-img w-full max-w-[550px] h-auto rounded-xl border border-stone-200 bg-white p-2 shadow-sm mx-auto" style="max-width: 550px; height: auto;" />
   </div>
   <div class="overflow-x-auto">
 
@@ -255,9 +255,9 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 ### 17. `std::deque<T>` — Oboustranná fronta `[80% · E-learning]`
 - **Princip**: Umožňuje $O(1)$ vkládání i mazání na **obou koncích** a přímý přístup přes `[]`. Vkládání na konce nikdy neinvaliduje ukazatele na stávající prvky.
 
-<div class="grid grid-cols-1 lg:grid-cols-2 print:grid-cols-2 print-methods-grid gap-4 items-center my-3 print:my-2">
-  <div>
-    <img src="/images/cheatsheet/deque-methods.png" alt="Schéma metod std::deque" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div class="flex justify-center">
+    <img src="/images/cheatsheet/deque-methods.png" alt="Schéma metod std::deque" class="cheatsheet-method-img w-full max-w-[550px] h-auto rounded-xl border border-stone-200 bg-white p-2 shadow-sm mx-auto" style="max-width: 550px; height: auto;" />
   </div>
   <div class="overflow-x-auto">
 
@@ -277,9 +277,9 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 ### 18. `std::list<T>` — Obousměrný spojový seznam `[80% · E-learning]`
 - **Princip**: Uzly v paměti propojené obousměrnými ukazateli. Umožňuje $O(1)$ vkládání kdekoliv, pokud již máme iterátor.
 
-<div class="grid grid-cols-1 lg:grid-cols-2 print:grid-cols-2 print-methods-grid gap-4 items-center my-3 print:my-2">
-  <div>
-    <img src="/images/cheatsheet/list-methods.png" alt="Schéma metod std::list" class="w-full rounded-xl border border-stone-200 bg-white p-2 shadow-sm" />
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
+  <div class="flex justify-center">
+    <img src="/images/cheatsheet/list-methods.png" alt="Schéma metod std::list" class="cheatsheet-method-img w-full max-w-[550px] h-auto rounded-xl border border-stone-200 bg-white p-2 shadow-sm mx-auto" style="max-width: 550px; height: auto;" />
   </div>
   <div class="overflow-x-auto">
 
