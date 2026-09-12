@@ -12,7 +12,7 @@ export type FileConfig = {
 
 export type CategoryConfig = {
   label: string;
-  order: number;
+  order?: number;
   files?: Record<string, FileConfig>;
 };
 
@@ -113,7 +113,10 @@ function resolveConfigPath(
       if (i < relParts.length - 1) folderTitles.push(part.replace(/-/g, " "));
       continue;
     }
-    pathOrders.push(node.order ?? 999);
+    const keys = files ? Object.keys(files) : [];
+    const keyIdx = keys.indexOf(part);
+    const order = node.order ?? (keyIdx >= 0 ? keyIdx : 999);
+    pathOrders.push(order);
     leaf = node;
     if (i < relParts.length - 1) {
       folderTitles.push(node.title || part.replace(/-/g, " "));
@@ -136,10 +139,13 @@ function comparePathOrders(a: number[], b: number[]): number {
 
 export function loadWikiMaterials(): WikiMaterial[] {
   const materials: WikiMaterial[] = [];
+  const catKeys = Object.keys(config.categories);
 
   for (const [modulePath, raw] of Object.entries(rawModules)) {
     const { categoryKey, fileKey, segments } = pathToParts(modulePath);
     const catCfg = config.categories[categoryKey];
+    const catIdx = catKeys.indexOf(categoryKey);
+    const categoryOrder = catCfg?.order ?? (catIdx >= 0 ? catIdx : 999);
     const relParts = segments.slice(1);
     const { leaf, pathOrders } = resolveConfigPath(catCfg, relParts);
     const fallbackTitle = fileKey.replace(/-/g, " ");
@@ -152,7 +158,7 @@ export function loadWikiMaterials(): WikiMaterial[] {
       title,
       categoryKey,
       categoryLabel: catCfg?.label || categoryKey,
-      categoryOrder: catCfg?.order ?? 999,
+      categoryOrder,
       fileOrder,
       pathOrders,
       path: modulePath,
@@ -248,7 +254,10 @@ export function buildCategoryTree(
       const part = rel[i];
       const isLeaf = i === rel.length - 1;
       const nodeCfg = filesCfg?.[part];
-      const order = nodeCfg?.order ?? m.pathOrders[i] ?? 999;
+      const keys = filesCfg ? Object.keys(filesCfg) : [];
+      const keyIdx = keys.indexOf(part);
+      const configOrder = nodeCfg?.order ?? (keyIdx >= 0 ? keyIdx : undefined);
+      const order = configOrder ?? m.pathOrders[i] ?? 999;
       const title =
         nodeCfg?.title ||
         (isLeaf ? m.title : part.replace(/-/g, " "));

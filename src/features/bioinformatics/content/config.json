@@ -2,185 +2,144 @@
   "categories": {
     "obecne": {
       "label": "Obecné informace",
-      "order": 0,
       "files": {
         "general": {
-          "title": "Hlavní rozcestník",
-          "order": 1
+          "title": "Hlavní rozcestník"
         },
         "pruvodce-prvaka": {
-          "title": "Průvodce prváka (VŠCHT + FIT)",
-          "order": 2
+          "title": "Průvodce prváka (VŠCHT + FIT)"
         },
         "zapisky": {
-          "title": "Zápisky",
-          "order": 5
+          "title": "Zápisky"
         }
       }
     },
     "0-semestr": {
       "label": "0. Semestr",
-      "order": 1,
       "files": {
         "priprav-se-programovani": {
           "title": "Připrav se – programování",
-          "order": 1,
           "externalUrl": "https://e-learning.vscht.cz/course/view.php?id=3521"
         },
         "stedokolsk-chemie": {
-          "title": "Středoškolská chemie",
-          "order": 2
+          "title": "Středoškolská chemie"
         }
       }
-    },      
+    },
     "1-semestr": {
       "label": "1. Semestr",
-      "order": 2,
       "files": {
         "bi-pa1": {
           "title": "BI-PA1 — Programování v C",
-          "order": 1,
           "files": {
             "behem-semestru-a-pred-nim": {
-              "title": "0 · Během semestru a před ním",
-              "order": 0
+              "title": "0 · Během semestru a před ním"
             },
             "wsl-a-setup": {
-              "title": "1 · WSL a setup",
-              "order": 1
+              "title": "1 · WSL a setup"
             },
             "kalendar": {
-              "title": "2 · Kalendář co musím umět",
-              "order": 2
+              "title": "2 · Kalendář co musím umět"
             },
             "jak-to-spravit": {
-              "title": "3 · Jak to spravit (debug & testování)",
-              "order": 3
+              "title": "3 · Jak to spravit (debug & testování)"
             },
             "struktura-kodu": {
-              "title": "4 · Struktura kódu",
-              "order": 4
+              "title": "4 · Struktura kódu"
             },
             "progtest-a-zkouska": {
-              "title": "5 · Progtest a zkouška (plné rady)",
-              "order": 5
+              "title": "5 · Progtest a zkouška (plné rady)"
             }
           }
         },
         "oach-i": {
-          "title": "Obecná a anorganická chemie I",
-          "order": 2
+          "title": "Obecná a anorganická chemie I"
         },
         "matematika-a-a-b": {
-          "title": "Matematika A/B",
-          "order": 3
+          "title": "Matematika A/B"
         }
       }
     },
     "2-semestr": {
       "label": "2. Semestr",
-      "order": 3,
       "files": {
         "fyzika-i": {
-          "title": "Fyzika I",
-          "order": 1
+          "title": "Fyzika I"
         }
       }
     },
     "3-semestr": {
       "label": "3. Semestr",
-      "order": 4,
       "files": {
         "pre-ag1": {
           "title": "pre-AG1 - Algoritmy a Grafy 1",
-          "order": 0,
           "files": {
             "pa2-ag1-overview": {
-              "title": "1 · PA2 C++ Most k AG1",
-              "order": 1
+              "title": "1 · PA2 C++ Most k AG1"
             },
             "pa2-ag1-cheatsheet": {
-              "title": "1b · PA2→AG1 Tahák klíčových témat (50%+)",
-              "order": 1.5
+              "title": "1b · PA2→AG1 Tahák klíčových témat (50%+)"
             },
             "dml": {
-              "title": "2 · ☀️ Letní průvodce grafovou matematikou pro bioinformatiky",
-              "order": 2
+              "title": "2 · ☀️ Letní průvodce grafovou matematikou pro bioinformatiky"
             },
             "dml-bio-grafy": {
-              "title": "3 · Bio-Intuice & Co je Graf",
-              "order": 3
+              "title": "3 · Bio-Intuice & Co je Graf"
             },
             "dml-logicky-zaklad": {
-              "title": "4 · Logický & Důkazový základ",
-              "order": 4
+              "title": "4 · Logický & Důkazový základ"
             },
             "dml-indukce-na-grafech": {
-              "title": "5 · Indukce na Grafech & Redukční Past",
-              "order": 5
+              "title": "5 · Indukce na Grafech & Redukční Past"
             },
             "dml-dukazy-sporem": {
-              "title": "6 · Důkazy Sporem & Extremální Princip",
-              "order": 6
+              "title": "6 · Důkazy Sporem & Extremální Princip"
             },
             "dml-bio-grafy-b": {
-              "title": "7 · Grafy v C++ & Reprezentace v Paměti",
-              "order": 7
+              "title": "7 · Grafy v C++ & Reprezentace v Paměti"
             },
             "dml-zkouskovy-workshop": {
-              "title": "8 · Zkouškový Workshop & Šablony Důkazů",
-              "order": 8
+              "title": "8 · Zkouškový Workshop & Šablony Důkazů"
             },
             "rekurze-bro": {
-              "title": "9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra",
-              "order": 9
+              "title": "9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra"
             }
           }
         },
         "ag1": {
-          "title": "Algoritmy a Grafy 1",
-          "order": 1
+          "title": "Algoritmy a Grafy 1"
         },
         "fyzikalni-chemie": {
-          "title": "Fyzikální chemie",
-          "order": 2
+          "title": "Fyzikální chemie"
         },
         "laboratore-pro-bioinfirmstiky-i": {
-          "title": "Laboratoře pro bioinformatiky I",
-          "order": 3
+          "title": "Laboratoře pro bioinformatiky I"
         },
         "python": {
           "title": "Python",
-          "order": 4,
           "externalUrl": "https://newpyt.vercel.app/"
         }
       }
     },
     "4-semestr": {
       "label": "4. Semestr",
-      "order": 5,
       "files": {
         "biochemie-II": {
-          "title": "Biochemie II",
-          "order": 1
+          "title": "Biochemie II"
         },
         "Analyticka-chemie": {
-          "title": "Analytická chemie",
-          "order": 2
+          "title": "Analytická chemie"
         },
         "Statistika": {
-          "title": "Statistika",
-          "order": 3
+          "title": "Statistika"
         }
       }
     },
     "5-semestr": {
       "label": "5. Semestr",
-      "order": 6,
       "files": {
         "bakalarky-a-vyzkum": {
-          "title": "Bakalářské práce & Výzkum (ÚICH)",
-          "order": 1
+          "title": "Bakalářské práce & Výzkum (ÚICH)"
         }
       }
     }
