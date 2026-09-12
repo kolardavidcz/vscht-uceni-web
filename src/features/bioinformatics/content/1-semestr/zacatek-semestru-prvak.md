@@ -40,7 +40,7 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 * [ ] **BOZP školení:** Na VŠCHT se podepisuje při zápisu; na FITu probíhá e-learningem a následným fyzickým podpisem (**někdy během semestru vám přijde e-mailem výzva**).
 
 ### 💻 Programátorský základ (C pro BI-PA1)
-* [ ] **Naučit se všechna důležitá klíčová slova:** Osvojte si základní stavební kameny syntaxe jazyka C pro BI-PA1:
+* [ ] **Naučit se vysvětlit důležitá klíčová slova:** Dokážete vlastními slovy vysvětlit, co které klíčové slovo v jazyce C dělá a k čemu slouží? (Konkrétní význam a příklady použití si můžete ujasnit například pomocí AI):
 
 | Kategorie | Klíčová slova |
 | :--- | :--- |
