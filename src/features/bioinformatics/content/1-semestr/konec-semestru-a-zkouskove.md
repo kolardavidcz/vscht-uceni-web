@@ -37,6 +37,8 @@ Zkouškové období trvá přibližně 5 až 6 týdnů (leden až polovina únor
   Většina studentů začíná zkouškou z PA1 (abyste měli v hlavě čerstvou praxi z programování) nebo Matematikou A, a chemii si nechávají na samostatný blok přípravy.
 * **Opravné termíny**:  
   Na každý předmět máte nárok na řádný termín a dva opravné termíny (v rámci vypsaných kapacit).
+* **💡 Tip pro zkoušky a cvičení na FITu:**  
+  Řekněte cvičícím a zkoušejícím na FITu, že jste bioinformatici z VŠCHT — berou na to ohled a na vaše informatické znalosti zpravidla pohlížejí výrazně vstřícněji a shovívavěji.
 
 ---
 

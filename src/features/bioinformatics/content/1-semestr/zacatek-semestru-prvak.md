@@ -2,9 +2,8 @@
 
 ## 🏛️ Dvě univerzity: Jak funguje dvojí studium (VŠCHT vs. FIT ČVUT)
 
-* **Status:** Jste studenty **výhradně VŠCHT** (předpisy, kredity i stipendia se řídí VŠCHT). Na FIT ČVUT docházíte pouze na smluvní výuku.
-* **Přednášky na FITu:** Můžete navštěvovat libovolné paralelky přednášek a proseminářů, které nekolidují s vaším rozvrhem na VŠCHT.
-* **💡 Tip pro cvičení na FITu:** Řekněte cvičícím a zkoušejícím na FITu, že jste bioinformatici z VŠCHT — berou na to ohled a bývají výrazně vstřícnější.
+* **Status:** Jste studenty **výhradně VŠCHT** (veškeré předpisy, kredity i stipendia se řídí VŠCHT). Na FIT ČVUT docházíte na smluvní výuku svých informatických předmětů.
+* **Přednášky na FITu:** Na přednáškách na FITu se docházka nekontroluje — pokud vám nevyhovuje čas vaší doporučené přednášky, můžete jít na jinou paralelku.
 
 ## ⚡ Checklist prvních dvou týdnů
 
