@@ -101,132 +101,26 @@ Dejte si pozor na tyto klíčové rozdíly:
 
 ---
 
-## 📊 The Great Filter: První semestr & Kreditová pravidla
+## 📊 The Great Filter: Tři pilíře 1. semestru & výzva v BI-PA1
 
-Zimní semestr 1. ročníku představuje největší síto studia. Tvoří ho **trojice velkých předmětů po 8 kreditech**:
-1. **BI-PA1 (Programování a algoritmizace I)** na FIT ČVUT — 8 kreditů
-2. **Matematika A** na VŠCHT — 8 kreditů
-3. **Obecná a anorganická chemie I (OACH I)** na VŠCHT — 8 kreditů
-*(Dohromady 24 kreditů ze 3 předmětů).*
+Zimní semestr 1. ročníku představuje největší studijní síto. Tvoří ho **trojice velkých předmětů po 8 kreditech** (dohromady 24 kreditů ze 3 předmětů):
+1. **BI-PA1 (Programování a algoritmizace I)** na FIT ČVUT
+2. **Matematika A** na VŠCHT
+3. **Obecná a anorganická chemie I (OACH I)** na VŠCHT
 
-### Klíčových prvních 7 týdnů:
-* V polovině semestru (kolem 6. týdne) se píší **první zápočtové testy z Matematiky A i Anorganické chemie I**.
-* **Zásadní fakt:** První zápočtové testy jsou **podstatně jednodušší** než druhé zápočtové testy na konci semestru!
-* Na zápočet z Matiky i Chemie potřebujete z obou testů dohromady **více než 50 % bodů** (cca 100 bodů). Pokud první test napíšete výborně, vytvoříte si klid pro náročný závěr semestru.
-* *Pokud zápočet nezískáte:* Píší se souhrnné opravné testy, které však zkouší učivo obou zápočtů dohromady, což je nesrovnatelně těžší.
+### 💻 Proč je BI-PA1 největším sítem semestru:
+* **Týdenní deadliny v Progtestu:** Progtest není zkouška, kterou se naučíte za víkend. Každý týden či dva odevzdáváte náročné programovací úlohy. Pokud začnete psát kód den před deadlinem, úlohu nestihnete odladit a odevzdat.
+* **Časové bonusy zachraňují semestr:** Úlohy odevzdané v předstihu získávají bonusové body, které vám na konci semestru vytvoří kritickou rezervu pro získání zápočtu.
+* **🚨 Zákaz odkládání a přenášení PA1:**  
+  Pokud PA1 neuděláte a přenesete si ji do 2. ročníku, ocitnete se v brutální časové pasti: ve druháku se potkáte s těžkými informatickými předměty z FITu (BI-AG1) a zároveň nejtěžšími chemickými zkouškami na VŠCHT (Biochemie a Fyzikální chemie). Udělat PA1 napoprvé je naprostou prioritou celého 1. ročníku!
+* **Kompletní návody k PA1:** Všechny tipy k prostředí, šablonám a ladění kódu najdete v samostatné podsekci [BI-PA1](file:///B:/src/features/bioinformatics/content/1-semestr/bi-pa1/behem-semestru-a-pred-nim.md).
 
-### Podmínky postupu podle Studijního řádu:
-* **Zápis do letního semestru 1. ročníku:**  
-  Musíte získat **minimálně 15 kreditů** za zimní semestr. V praxi to znamená: **musíte udělat buď matiku, nebo chemii + PA1 (aspoň jedno z toho), případně obě VŠCHT zkoušky**.
-* **Postup do 2. ročníku:**  
-  Za celý 1. akademický rok musíte mít z povinných (P) a povinně volitelných (PV) předmětů **minimálně 45 kreditů**!
-* **Vzorec maximálního kreditového deficitu:**  
-  Pro postup do každého dalšího ročníku vám smí chybět maximálně 15 kreditů z třicetinásobku již absolvovaných semestrů:
-  $$30 \times n - 15$$
-  *(po 2 semestrech min. 45 kreditů, po 4 semestrech min. 105 kreditů).*
-* **Pravidlo 3×:** Každý předmět si lze zapsat **maximálně 3×**, každou zkoušku opakovat **maximálně 3×** (1 řádný + 2 opravné termíny).
-* **🚨 Proč je kritické nepřenášet BI-PA1 do 2. ročníku:**  
-  Pokud PA1 neuděláte a přenesete si ji do druháku, ocitnete se v extrémní pasti: ve 2. ročníku přibývají další těžké předměty z FITu (BI-AG1, BI-OSY či BI-DML) a současně těžké chemické předměty na VŠCHT (Biochemie a Fyzikální chemie).
-* **Krizový plán (Když nestíháte):**  
-  Pokud cítíte, že semestr nezvládáte, nečekejte na vyhazov a zajděte včas na děkanát VŠCHT požádat o **rozložení ročníku**. Obecná rada starších studentů: zapisovat si maximálně **1 opakovaný předmět navíc na semestr** (více je silně nedoporučeno). Do posledního semestru se předměty nepřepisují (vyžaduje to pak mimořádný studijní plán).
+### ⚡ Prvních 7 týdnů (Zápočty z Matiky a Chemie):
+* Kolem 6. týdne se píší **první zápočtové testy z Matematiky A i Anorganické chemie I**.
+* **První zápočtové testy jsou podstatně jednodušší** než druhé závěrečné testy v prosinci. Udělejte maximum pro to, abyste v nich nasbírali co nejvíce bodů (potřebujete v součtu > 50 %), a zajistili si klidný konec semestru.
 
----
+> ℹ️ *Konkrétní podmínky postupu, kreditová minima, vzorce deficitu a pravidla opakování předmětů najdete v průvodci [Konec 1. semestru & zkouškové](file:///B:/src/features/bioinformatics/content/1-semestr/konec-semestru-a-zkouskove.md) a v platném [Studijním a zkušebním řádu VŠCHT](https://www.vscht.cz/studium/studuji/rad-a-predpisy).*
 
-## 🎯 Akademický checklist dovedností: Co začít trénovat hned
-
-| Oblast | Klíčové dovednosti pro první týdny | Doporučené zdroje |
-| :--- | :--- | :--- |
-| **Programování (BI-PA1)** | • Napsat, zkompilovat a spustit program v C.<br>• Napsat testovací skript pro ověření vstupů/výstupů.<br>• Používat debugger (AddressSanitizer, Valgrind).<br>• Včas odevzdávat do Progtestu pro časové bonusové body. | [Trainer KSI](https://trainer.ksi.fit.cvut.cz/), [FIT-Wiki](https://www.fit-wiki.cz), [OnlineGDB](https://www.onlinegdb.com/) |
-| **Matematika A** | • Elementární funkce: definiční obory, obory hodnot, grafy.<br>• Derivace, limity a vyšetřování průběhu funkcí.<br>• Příprava na 1. zápočtový test (6. týden). | Přednášky dr. Maxové na e-learningu VŠCHT, sbírka příkladů z burzy |
-| **Anorganická chemie (OACH I)** | • Periodická tabulka: trendy, elektronegativita, vaznost, skupiny.<br>• Chemické názvosloví anorganických sloučenin.<br>• Lewisovy elektronové vzorce a vyčíslování redoxních rovnic. | Studijní opory na e-learningu VŠCHT, ECHO reakce |
-
----
-
-## 💻 Hardware & Vývojové prostředí: Davidovo pravidlo
-
-> 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
-> Častou pastí začátečníků bývá, že stráví první dva týdny snahou o konfiguraci „dokonalého Linuxu“, laděním fontů a pluginů v editoru. Započítají si to jako čas strávený studiem, ale ve skutečnosti nenapsali ani řádek kódu v C a látka v PA1 jim mezitím uteče.  
-> I jednoduchý kompilátor na Windows nebo [OnlineGDB](https://www.onlinegdb.com/) v prohlížeči je na první týdny lepší než hodiny ztracené instalacemi bez jediného řádku kódu.
-
-* **Zářijový instalační den na FITu:**  
-  Koncem září pořádají zkušení studenti FITu hromadnou instalační akci, kde vám zdarma pomohou nastavit Linux, dual-boot i WSL na vašem konkrétním notebooku.
-* **Pravidlo pro Dual-boot:**  
-  Pokud chcete mít Windows i Linux vedle sebe, **vždy instalujte nejprve Windows a až poté Linux**! (GRUB zavaděč Linuxu automaticky rozpozná Windows).
-
----
-
-## 🔬 Bakalářské práce & Vědecké směřování (ÚICH)
-
-Na bioinformatice se o vědeckých projektech přemýšlí mnohem dříve než na jiných oborech:
-* **Kdo témata vypisuje:**  
-  Téma bakalářské práce (BP) si student volí **výhradně z vědeckých projektů řešených zaměstnanci Ústavu informatiky a chemie (ÚICH)**. Z projektů na jiném pracovišti (např. ústavy AV ČR, jiné fakulty VŠCHT či jiné VŠ) se témata pro bakaláře nevypisují!
-* **Dvě hlavní vědecké oblasti ústavu:**
-  1. **Bioinformatika** (Dr. Jan Pačes, Dr. Michal Kolář, Dr. Božena Klodová):  
-     Vyhledávání v genomických databázích, vývoj algoritmů pro zpracování genomických dat, sledování mutací a aktivity genů.
-  2. **Počítačový návrh léčiv / Chemoinformatika** (Dr. Martin Šícho, Dr. Wim Dehaen, Dr. Ivan Čmelo):  
-     Návrh biologicky aktivních látek pomocí AI, prediktivní modelování interakce léčiva s organismem.  
-     *Tip:* Pokud vás láká výzkum léčiv, zapište si v Bc. studiu volitelné předměty *Základy farmakologie* a *Výzkum a vývoj léčiv*.
-* **Časový plán:**  
-  Předběžná témata BP si studenti vybírají **na začátku 2. ročníku**. Potenciální školitele kontaktujte nejpozději na konci 2. ročníku.
-
----
-
-## 💰 Finanční podpora a stipendia
-
-1. **Ubytovací stipendium:**
-   * Určeno pro studenty s trvalým bydlištěm mimo okres Praha.
-   * Činí přibližně **27 Kč na den** (vyplácí se zpětně za čtvrtletí).
-   * Žádost se podává online v **SIS VŠCHT** (sekce Stipendia).
-2. **Mimořádné prospěchové stipendium pro studenty 1. ročníku (40 000 Kč):**
-   * Mimořádná finanční odměna pro nejlepší nastupující prváky.
-   * **Podmínky pro přiznání:**
-     * Maturita složená v daném kalendářním roce.
-     * Splnění všech předepsaných studijních povinností za 1. ročník v řádném termínu.
-     * Získání alespoň 30 kreditů do konce letního semestru.
-     * **Vážený studijní průměr za 1. ročník menší než 1,20!**
-
----
-
-## 📍 Dejvický kampus & Kde trávit volný čas
-
-### Studovny a klubovny:
-* **Místnost B1322 (budova B VŠCHT):**  
-  Seminární místnost Ústavu informatiky a chemie ([mapa ÚICH](https://uich.vscht.cz/mapa)). Slouží jako **otevřená klubovna a studovna pro bioinformatiky**. Můžete zde mezi přednáškami trávit volný čas, řešit Progtest nebo diskutovat. Kalendář rezervací najdete na [studuj.bioinformatiku.cz](https://studuj.bioinformatiku.cz).
-* **Národní technická knihovna (NTK):**  
-  Srdce kampusu Dejvice. Nabízí tichá patra, noční studovnu, týmové konzultační boxy i venkovní střešní posezení. Instagram: `@people_of_ntk`.  
-  *Tisk z notebooku:* Nainstalujte si [speciální ovladač tiskáren NTK](https://www.techlib.cz/cs/2912-jak-nainstalovat-ntk-tiskarny-na-vlastni-zarizeni).
-* **Zázemí v budově B VŠCHT:**  
-  *Respirium* (odpočinková zóna s mikrovlnkami), bistro *Bufan*, restaurace/menza *Carbon* v suterénu a kavárna *Prostoru_* v přízemí NTK.
-
-### Menzy a stravování:
-V Dejvicích fungují 3 menzy ČVUT:
-1. **Menza Technická** (vedle budovy NTK)
-2. **Menza Studentský dům** (Bílá ulice, u dejvických kolejí)
-3. **Menza Masarykova kolej** (Thákurova ulice)
-* Kredit na jídlo dobijete na pokladně v libovolné menze (kartou i hotově), nebo online přes portál **Agáta** ([agata.suz.cvut.cz](https://agata.suz.cvut.cz)).
-
-### Doprava (Lítačka):
-* Pro nákup studentského kupónu musíte mít aktivní status studenta po celou dobu trvání kupónu.
-* Vždy mějte v aplikaci Lítačka včas nahrané platné potvrzení o studiu ze SISu nebo prodloužený ISIC, aby vám revizor neudělil pokutu.
-
-### 💼 Studium a práce:
-První ročník bioinformatiky je **časově náročný jako plný pracovní úvazek**. Pokusy o práci na víc než drobnou víkendovou brigádu v 1. semestru vedou téměř zákonitě k přetížení a předčasnému ukončení studia.
-
----
-
-## 🤝 Kultura studia: Vzájemná pomoc vs. „Medvědí služba“
-
-Vysoká škola se studuje v týmu, ale musíte rozlišovat mezi pomocí a podvodem:
-* **Skutečná pomoc:**  
-  *„V 3. domácím úkolu nechápu, jak funguje rekurze / kdy použít L'Hospitalovo pravidlo. Mohl by mi to někdo vysvětlit?“*  
-  Společná diskuze a vysvětlování konceptů posouvá obě strany.
-* **🛑 Medvědí služba (Cesta k postihu):**  
-  *„Nevím si rady s úkolem, pošlete mi někdo svůj hotový kód.“*  
-  Progtest implementuje pokročilý antiplagiátorský systém, který odhalí i přejmenované proměnné a přehozené řádky. Za plagiátorství hrozí disciplinární komise. Navíc u zápočtového testu a zkoušky budete sedět v učebně sami bez internetu.
-* **FIT-Wiki ([fit-wiki.cz](https://www.fit-wiki.cz)):**  
-  Studentská databáze zápisků, vypracovaných otázek a starých zkouškových testů z FITu.
-
----
 
 ## 🎉 Komunitní akce ÚICH: Proč se zapojit
 

@@ -64,18 +64,19 @@ Pokud se vám předmět nepodaří napoprvé dokončit, řiďte se následujíc�
 
 ---
 
-## 📊 Kreditové minimum & vzorec pro postup
+## 📊 Podmínky postupu podle Studijního řádu (Kreditová minima)
 
 Pro postup do dalšího semestru a ročníku musíte splnit stanovený počet kreditů:
 
 * **Zápis do letního semestru 1. ročníku**:  
-  Minimálně **15 kreditů** za zimní semestr.
+  Minimálně **15 kreditů** za zimní semestr. V praxi to znamená: **musíte udělat buď zkoušku z Matematiky A, nebo Chemii I + PA1 (aspoň jedno z toho), případně obě zkoušky na VŠCHT**.
 * **Postup do 2. ročníku**:  
   Na konci 1. akademického roku musíte mít z povinných (P) a povinně volitelných (PV) předmětů **minimálně 45 kreditů**!
 * **Vzorec pro postup do dalších ročníků**:  
   Pro postup do každého dalšího ročníku vám smí chybět maximálně 15 kreditů z třicetinásobku již absolvovaných semestrů:
   $$30 \times n - 15$$
   *(kde $n$ je počet již absolvovaných semestrů; např. po 2 semestrech: $30 \times 2 - 15 = 45$ kreditů, po 4 semestrech: $30 \times 4 - 15 = 105$ kreditů).*
+* **Pravidlo 3×:** Každý předmět si lze zapsat **maximálně 3×**, každou zkoušku opakovat **maximálně 3×** (1 řádný + 2 opravné termíny).
 
 ---
 
@@ -104,13 +105,13 @@ Na konci každého semestru probíhá v SISu hodnocení přednášejících a cv
 
 ---
 
-## ⚠️ Co dělat při nedostatku kreditů (Šetření 3+1 let)
+## ⚠️ Co dělat při nedostatku kreditů & krizový plán (Šetření 3+1 let)
 
-Pokud získáte méně kreditů, než je nutné minimum, a nemůžete pokračovat ve studiu, budete muset studium ukončit.
-
-> 🛑 **Důležité varování**:  
-> Pokud víte, že podmínky pro postup nesplníte, **neodkládejte formální ukončení studia na studijním oddělení**!  
-> Státem bezplatně hrazená doba vysokoškolského studia je na bakaláři standardní doba + 1 rok ($3 + 1$). Do této doby se započítává **každý kalendářní den, kdy jste ke studiu zapsáni**. Včasným ukončením ušetříte dny pro případný nový nástup do 1. ročníku nebo přechod na jiný obor bez placení poplatků za delší studium.
+* **Krizový plán (Rozložení ročníku):**  
+  Pokud cítíte, že semestr či ročník nezvládáte, nečekejte na vyhazov pro nesplnění podmínek a zajděte včas na děkanát VŠCHT požádat o **rozložení ročníku** (mimořádný studijní plán). Obecná rada starších studentů: zapisovat si maximálně **1 opakovaný předmět navíc na semestr** (více je silně nedoporučeno). Do posledního semestru se předměty nepřepisují (vyžaduje to pak mimořádný studijní plán).
+* **🛑 Včasné ukončení studia (Šetření bezplatné doby 3+1):**  
+  Pokud víte, že podmínky pro postup nesplníte, **neodkládejte formální ukončení studia na studijním oddělení**!  
+  Státem bezplatně hrazená doba vysokoškolského studia je na bakaláři standardní doba + 1 rok ($3 + 1$). Do této doby se započítává **každý kalendářní den, kdy jste ke studiu zapsáni**. Včasným ukončením ušetříte dny pro případný nový nástup do 1. ročníku nebo přechod na jiný obor bez placení poplatků za delší studium.
 
 ---
 
