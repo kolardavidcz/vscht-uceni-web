@@ -12,16 +12,10 @@
 
 ---
 
-## 🕒 Harmonogram & časové anomálie
-
-Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu [harmonogramem ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
-
-* **Posun začátku výuky v ZS:** VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
-* **Rozvrhové anomálie během semestru:** Pozor na střídání **lichého a sudého týdne** (některá cvičení běží jen jednou za 14 dní), **kompenzace státních svátků** (určitý den se učí podle rozvrhu jiného dne, např. pátek podle pondělí), vzájemně se nekryjící **rektorské dny a děkanská volna** (volno na VŠCHT neplatí na FITu a naopak) a slavnostní **imatrikulaci VŠCHT** (výuka na VŠCHT odpadá, nutný společenský oděv).
-
----
-
 ## ⚡ Checklist prvních dvou týdnů
+
+### 💬 Komunita & Discord BioCord
+* [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní oficiální komunikační kanál ústavu a spolužáků).
 
 ### 💳 Karty a vstup na FIT ČVUT
 * [ ] **Karta VŠCHT / ISIC:** Karta se nevydává při zápisu — je nutné si ji osobně vyzvednout v [Kartovém centru VŠCHT](https://vc.vscht.cz/idkarty) (fotka vám zůstává po celou dobu studia).
@@ -29,14 +23,11 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
   * **Kdy jít:** Výhradně v 1. týdnu výuky na VŠCHT (dříve vás systém ČVUT nerozpozná, později jsou obří fronty). Rezervujte si čas online!
   * **Co zařídíte:** Nahrání vstupu do budov FITu na kartu VŠCHT + vydání **iniciálního hesla** ČVUT.
 
-### 🔑 Účty, hesla a Wi-Fi
+### 🔑 Účty, hesla, Wi-Fi a bezpečnost
 * [ ] **Heslo ČVUT:** Na [Usermap ČVUT](https://usermap.cvut.cz) zadejte iniciální heslo a nastavte si trvalé heslo.
 * [ ] **Wi-Fi připojení (eduroam):** Pro spolehlivé připojení k celouniverzitní síti eduroam si stáhněte bezpečnostní certifikát z [webu Výpočetního centra VŠCHT](https://vc.vscht.cz/navody/sit/wi-fi). Na FIT ČVUT si navíc v profilu na [Usermap ČVUT](https://usermap.cvut.cz) nastavte **speciální síťové heslo** (je odlišné od hesla do KOSu).
 * [ ] **Registrace v NTK:** Zajděte osobně k zákaznickému pultu v [NTK](https://www.techlib.cz) a zaregistrujte si ISIC / kartu VŠCHT (online předregistrace na webu ušetří čas) — získáte přístup k Wi-Fi, tiskárnám, výpůjčkám a do noční studovny.
 * [ ] **Forward e-mailů:** Nastavte si automatické přesměrování z `@vscht.cz` i `@fit.cvut.cz` do jedné soukromé schránky.
-
-### 💬 Komunikace a bezpečnost
-* [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní komunikační kanál ústavu).
 * [ ] **BOZP školení:** Na VŠCHT se podepisuje při zápisu; na FITu probíhá e-learningem a následným fyzickým podpisem (**někdy během semestru vám přijde e-mailem výzva**).
 
 ### 💻 Programátorský základ (C pro BI-PA1)
@@ -56,56 +47,84 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 ## 🌐 Rozcestník školních systémů
 
-<div class="my-3 space-y-1.5">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 pb-1 mb-1.5 font-bold text-stone-900 dark:text-stone-100 border-b border-stone-200 dark:border-stone-800">
-<div>Systémy VŠCHT:</div>
-<div>Systémy FIT ČVUT:</div>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+<div class="overflow-x-auto my-3">
+<table class="systems-table">
+<thead>
+<tr>
+<th>Systémy VŠCHT:</th>
+<th>Systémy FIT ČVUT:</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
 <li><strong><a href="https://student.vscht.cz">SIS VŠCHT</a></strong> — rozvrh, zkouškové termíny, oficiální index, zápis předmětů a stipendia.</li>
 </ul>
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+</td>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
 <li><strong><a href="https://kos.cvut.cz">KOS ČVUT</a></strong> — zápis předmětů, paralelek a zkoušek na FITu.</li>
 <li><strong><a href="https://timetable.fit.cvut.cz">Timetable FIT</a></strong> — detailní rozvrhy předmětů FIT a obsazenost učeben.</li>
 </ul>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+</td>
+</tr>
+<tr>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
 <li><strong><a href="https://e-learning.vscht.cz">Moodle VŠCHT</a></strong> — slajdy z přednášek, cvičné testy z chemie a matematiky.</li>
 </ul>
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+</td>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
 <li><strong><a href="https://courses.fit.cvut.cz">Courses FIT</a></strong> — výukový portál FIT: přednášky, materiály ze cvičení, zadání.</li>
 <li><strong><a href="https://trainer.ksi.fit.cvut.cz">Trainer KSI</a></strong> — cvičebnice programování od základů v C až po zkouškové úlohy.</li>
 <li><strong><a href="https://www.fit-wiki.cz">FIT-Wiki</a></strong> — studentská databáze: zápisky z přednášek a <strong>archiv minulých zkouškových písemek</strong>.</li>
 </ul>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
-<div class="hidden md:block"></div>
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
 <li><strong><a href="https://progtest.fit.cvut.cz">Progtest</a></strong> — odevzdávací systém programovacích úloh pro BI-PA1.</li>
 </ul>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+</td>
+</tr>
+<tr>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
+<li><strong><a href="https://studium.vscht.cz/#kotva100609">Průvodce studiem VŠCHT</a></strong> — portál pro začínající studenty: první kroky, předpisy, organizace výuky a zázemí.</li>
 <li><strong><a href="https://emil.vscht.cz/maps">Mapy Emil VŠCHT</a></strong> — interaktivní plánek budov A a B a hledání učeben.</li>
 </ul>
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+</td>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
 <li><strong><a href="https://help.fit.cvut.cz">FIT Help &amp; Navigace</a></strong> — návody k budovám, značení místností na FITu a licence.</li>
 </ul>
-</div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
-<ul class="list-disc pl-5 my-0 space-y-0.5">
+</td>
+</tr>
+<tr>
+<td>
+<ul class="list-disc pl-4 space-y-0.5 my-0">
 <li><strong><a href="https://studuj.bioinformatiku.cz">studuj.bioinformatiku.cz</a></strong> — studijní plány oboru a obsazenost klubovny B1322.</li>
 </ul>
-<div class="hidden md:block"></div>
+</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
 </div>
-</div>
+
+---
+
+## 🕒 Harmonogram & časové anomálie
+
+Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu [harmonogramem ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
+
+* **Posun začátku výuky v ZS:** VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
+* **Rozvrhové anomálie během semestru:** Pozor na střídání **lichého a sudého týdne** (některá cvičení běží jen jednou za 14 dní), **kompenzace státních svátků** (určitý den se učí podle rozvrhu jiného dne, např. pátek podle pondělí), vzájemně se nekryjící **rektorské dny a děkanská volna** (volno na VŠCHT neplatí na FITu a naopak) a slavnostní **imatrikulaci VŠCHT** (výuka na VŠCHT odpadá, nutný společenský oděv).
+
 
 ---
 
