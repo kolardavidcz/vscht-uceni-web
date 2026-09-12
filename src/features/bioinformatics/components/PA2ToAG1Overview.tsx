@@ -540,7 +540,7 @@ export function PA2ToAG1Overview() {
           </div>
         </div>
         <Link
-          to="/obor-bioinformatika/3-semestr/pre-ag1/pa2-ag1-cheatsheet"
+          to="/obor-bioinformatika/3-semestr/pre-ag1/coding/pa2-ag1-cheatsheet"
           className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-orange hover:bg-orange-600 text-white font-bold text-xs transition-colors shadow-sm shrink-0 cursor-pointer"
         >
           <BookOpen size={15} />

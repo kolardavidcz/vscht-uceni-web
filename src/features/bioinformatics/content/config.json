@@ -3,14 +3,14 @@
     "obecne": {
       "label": "Obecné informace",
       "files": {
-        "general": {
-          "title": "Hlavní rozcestník"
+        "kontakty-a-rozcestnik": {
+          "title": "Kontakty, systémy & rozcestník"
         },
-        "pruvodce-prvaka": {
-          "title": "Průvodce prváka (VŠCHT + FIT)"
+        "zacatek-semestru-prvak": {
+          "title": "Průvodce prváka: Začátek 1. semestru"
         },
-        "zapisky": {
-          "title": "Zápisky"
+        "konec-semestru-a-zkouskove": {
+          "title": "Průvodce prváka: Konec semestru & zkouškové"
         }
       }
     },
@@ -74,35 +74,45 @@
         "pre-ag1": {
           "title": "pre-AG1 - Algoritmy a Grafy 1",
           "files": {
-            "pa2-ag1-overview": {
-              "title": "1 · PA2 C++ Most k AG1"
+            "coding": {
+              "title": "C++ & Algoritmy (1, 1b, 9)",
+              "files": {
+                "pa2-ag1-overview": {
+                  "title": "1 · PA2 C++ Most k AG1"
+                },
+                "pa2-ag1-cheatsheet": {
+                  "title": "1b · PA2→AG1 Tahák klíčových témat (50%+)"
+                },
+                "rekurze-bro": {
+                  "title": "9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra"
+                }
+              }
             },
-            "pa2-ag1-cheatsheet": {
-              "title": "1b · PA2→AG1 Tahák klíčových témat (50%+)"
-            },
-            "dml": {
-              "title": "2 · ☀️ Letní průvodce grafovou matematikou pro bioinformatiky"
-            },
-            "dml-bio-grafy": {
-              "title": "3 · Bio-Intuice & Co je Graf"
-            },
-            "dml-logicky-zaklad": {
-              "title": "4 · Logický & Důkazový základ"
-            },
-            "dml-indukce-na-grafech": {
-              "title": "5 · Indukce na Grafech & Redukční Past"
-            },
-            "dml-dukazy-sporem": {
-              "title": "6 · Důkazy Sporem & Extremální Princip"
-            },
-            "dml-bio-grafy-b": {
-              "title": "7 · Grafy v C++ & Reprezentace v Paměti"
-            },
-            "dml-zkouskovy-workshop": {
-              "title": "8 · Zkouškový Workshop & Šablony Důkazů"
-            },
-            "rekurze-bro": {
-              "title": "9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra"
+            "math": {
+              "title": "Matematika & Grafy (2 až 8)",
+              "files": {
+                "dml": {
+                  "title": "2 · ☀️ Letní průvodce grafovou matematikou pro bioinformatiky"
+                },
+                "dml-bio-grafy": {
+                  "title": "3 · Bio-Intuice & Co je Graf"
+                },
+                "dml-logicky-zaklad": {
+                  "title": "4 · Logický & Důkazový základ"
+                },
+                "dml-indukce-na-grafech": {
+                  "title": "5 · Indukce na Grafech & Redukční Past"
+                },
+                "dml-dukazy-sporem": {
+                  "title": "6 · Důkazy Sporem & Extremální Princip"
+                },
+                "dml-bio-grafy-b": {
+                  "title": "7 · Grafy v C++ & Reprezentace v Paměti"
+                },
+                "dml-zkouskovy-workshop": {
+                  "title": "8 · Zkouškový Workshop & Šablony Důkazů"
+                }
+              }
             }
           }
         },
