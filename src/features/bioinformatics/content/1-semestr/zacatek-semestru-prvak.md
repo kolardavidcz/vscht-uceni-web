@@ -8,7 +8,7 @@
   * **Studijní referentka FCHT VŠCHT (Petra Kohoutová):** `Petra.Kohoutova@vscht.cz` — potvrzení o studiu, žádosti, stipendia, rozložení ročníku.
   * **Garant oboru (Dr. Martin Šícho):** `Martin.Sicho@vscht.cz` — koncepce programu a řešení zásadních studijních otázek.
   * **Tajemník ústavu (Ing. Jiří Znamenáček):** `Jiri.Znamenacek@vscht.cz` — rozvrh a organizace výuky na ÚICH.
-  * **Výuka a cvičení na FITu:** Problémy se cvičeními a přístupy na FIT řešte přímo přes **`bioinformatika@fit.cvut.cz`** (e-mail studijním referentkám FIT).
+  * **Studijní referentka FIT ČVUT pro bioinformatiky (Zdeňka Kutinová):** `zdenka.kutinova@fit.cvut.cz` — zápis do KOSu, kapacitní výjimky, kolize v rozvrhu a přístupy na FIT (případně hromadný e-mail `bioinformatika@fit.cvut.cz`).
 
 ---
 

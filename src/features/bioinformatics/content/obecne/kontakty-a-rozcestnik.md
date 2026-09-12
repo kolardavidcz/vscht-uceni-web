@@ -94,7 +94,7 @@ Tato stránka slouží jako **univerzální rozcestník a záchranná síť** pr
 * **Centrální e-mail pro výuku bioinformatiky na FIT**: `bioinformatika@fit.cvut.cz`  
   *(E-maily putují přímo pověřeným pracovníkům studijního oddělení FIT ČVUT.)*
 * **Koordinátorka studijní agendy bioinformatiky na FIT**: **Ing. Regina Šmídová**
-* **Studijní oddělení FIT ČVUT**: **Zdeňka Kutinová**, **Ivana Dolejšová** ([kontakty na studijní oddělení FIT](https://fit.cvut.cz/cs/studium/informacni-servis/studijni-oddeleni))
+* **Studijní referentka FIT ČVUT pro bioinformatiky**: **Zdeňka Kutinová** — `zdenka.kutinova@fit.cvut.cz` (zápis do KOSu, kapacitní výjimky, rozvrh; [další kontakty na studijní oddělení FIT](https://fit.cvut.cz/cs/studium/informacni-servis/studijni-oddeleni))
 
 ---
 

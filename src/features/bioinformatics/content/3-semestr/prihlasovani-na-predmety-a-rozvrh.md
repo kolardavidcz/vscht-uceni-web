@@ -44,4 +44,4 @@ Zápis probíhá podle [harmonogramu FIT ČVUT](https://fit.cvut.cz/cs/studium/i
 * **Export rozvrhu ze SISu do kalendáře:**  
   V modulu *Rozvrh NG* v SISu přejděte na *Můj rozvrh* $\to$ *Export* a zkopírujte iCalendar odkaz např. do Google Kalendáře (*Nastavení* $\to$ *Přidat kalendář pomocí adresy URL*).
 * **Komunikace při problémech s rozvrhem na FIT:**  
-  Při jakýchkoliv kolizích nebo potížích se zápisem pište na **`bioinformatika@fit.cvut.cz`** (e-mail putuje přímo studijním referentkám FIT).
+  Při jakýchkoliv kolizích nebo potížích se zápisem pište studijní referentce pro bioinformatiky **Zdeňce Kutinové** na **`zdenka.kutinova@fit.cvut.cz`** (případně na hromadný e-mail `bioinformatika@fit.cvut.cz`).
