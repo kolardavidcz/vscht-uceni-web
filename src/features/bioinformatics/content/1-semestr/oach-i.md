@@ -1,6 +1,7 @@
 # 🧪 OACH I (Obecná a anorganická chemie I)
+Po nové restrukturalizaci OACH e-learningu není mnoho co dodat.
 
-## 🛠️ Užitečné odkazy a zdroje
+## 🛠️ Seznam underated zdrojů
 
 * **[Řešené úlohy na e-learningu](https://e-learning.vscht.cz/mod/page/view.php?id=94967)** – Sbírka praktické teorie s trochou příkladů na ověření, jestli jste téma pochopili. Hezky procvičují obsah cvčení.
 * **[Přidej – Obecná a anorganická chemie / Reaktivita anorganických látek](https://e-learning.vscht.cz/course/view.php?id=387#section-1)** – Hezký přehled chemických reakcí a svkělý materiál na pochopení pointy anorganické chemie, neboli reakcí.
