@@ -2,8 +2,29 @@
 
 ## 🏛️ Dvě univerzity: Jak funguje dvojí studium (VŠCHT vs. FIT ČVUT)
 
-* **Status:** Jste studenty **výhradně VŠCHT** (veškeré předpisy, kredity i stipendia se řídí VŠCHT). Na FIT ČVUT docházíte na smluvní výuku svých informatických předmětů.
-* **Přednášky na FITu:** Na přednáškách na FITu se docházka nekontroluje — pokud vám nevyhovuje čas vaší doporučené přednášky, můžete jít na jinou paralelku.
+* **Formální příslušnost:** Jste řádnými studenty **výhradně VŠCHT Praha** (Fakulta chemické technologie – FCHT). Vaše studium se řídí Studijním a zkušebním řádem VŠCHT. Na FIT ČVUT docházíte pouze na smluvní výuku svých informatických předmětů.
+* **Kde sledovat kredity a studijní výsledky:** Jediným oficiálním a právně závazným systémem je **[SIS VŠCHT](https://student.vscht.cz)**. Údaje v KOSu ČVUT (kreditová zátěž, zápisy) jsou orientační — pro postup do dalších semestrů rozhoduje výhradně počet kreditů a zkoušek v SISu.
+* **Na koho se obracet s administrativou:**
+  * **Studijní referentka FCHT VŠCHT (Petra Kohoutová):** `Petra.Kohoutova@vscht.cz` — potvrzení o studiu, žádosti, stipendia, rozložení ročníku.
+  * **Garant oboru (Dr. Martin Šícho):** `Martin.Sicho@vscht.cz` — koncepce programu a řešení zásadních studijních otázek.
+  * **Tajemník ústavu (Ing. Jiří Znamenáček):** `Jiri.Znamenacek@vscht.cz` — rozvrh a organizace výuky na ÚICH.
+  * **Výuka a cvičení na FITu:** Problémy se cvičeními a přístupy na FIT řešte přímo přes **`bioinformatika@fit.cvut.cz`** (e-mail studijním referentkám FIT).
+
+---
+
+## 🕒 Harmonogram & časové anomálie
+
+Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu [harmonogramem ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
+
+1. **Posun začátku výuky v ZS:**  
+   VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
+2. **Rozvrhové anomálie během semestru:**
+   * **Lichý vs. sudý týden:** Část výuky (zejména cvičení) probíhá pouze jednou za dva týdny.
+   * **Rektorské dny a děkanské volno:** Volno na VŠCHT neplatí na FITu a naopak.
+   * **Kompenzace státních svátků:** Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
+   * **Imatrikulace VŠCHT:** Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný společenský oděv; výuka na VŠCHT odpadá).
+
+---
 
 ## ⚡ Checklist prvních dvou týdnů
 
@@ -22,26 +43,7 @@
 
 ### 💬 Komunikace a bezpečnost
 * [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní komunikační kanál ústavu).
-* [ ] **Problémy s výukou na FIT:** Pište přímo referentkám studijního oddělení na `bioinformatika@fit.cvut.cz`.
 * [ ] **BOZP školení:** Na VŠCHT se podepisuje při zápisu; na FITu probíhá e-learningem a následným fyzickým podpisem.
-
----
-
-## 🕒 Harmonogram & časové anomálie
-
-Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu [harmonogramem ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
-
-1. **Posun začátku výuky v ZS:**  
-   VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
-2. **Rozvrhové anomálie během semestru:**
-   * **Lichý vs. sudý týden:** Část výuky (zejména cvičení) probíhá pouze jednou za dva týdny.
-   * **Rektorské dny a děkanské volno:** Volno na VŠCHT neplatí na FITu a naopak.
-   * **Kompenzace státních svátků:** Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
-   * **Imatrikulace VŠCHT:** Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný společenský oděv; výuka na VŠCHT odpadá).
-
----
-
-
 
 ---
 
@@ -67,7 +69,7 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 * **Cvičení máte zajištěna:** V 1. i 2. semestru jsou cvičení na FITu rezervována výhradně pro bioinformatiky — o zápis paralelek cvičení se nestaráte.
 * **🛑 Ignorujte matoucí e-maily z KOSu:** Automatické zprávy typu *„vaše paralelka není otevřená“* ignorujte a v KOSu nic neměňte. Cvičení platí.
-* **Přednášky:** Choďte na libovolnou paralelku přednášek a proseminářů. V KOSu se na ně nezapisujte.
+* **Přednášky a prosemináře na FITu:** Docházka se na nich nekontroluje. Můžete navštěvovat libovolnou paralelku přednášek, která vám nekoliduje s výukou na VŠCHT (v KOSu se na přednášky nepřihlašujte).
 * **Kódy FIT předmětů v SISu:** Začínají kódem `B500xxx`.
 * **Výběr rozvrhu:** Sami si paralelky volíte až od 2. ročníku (předběžný zápis v KOSu pro 2. ročník začíná již v letním semestru 1. ročníku!).
 
