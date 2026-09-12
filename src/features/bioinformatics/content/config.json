@@ -70,6 +70,9 @@
     "3-semestr": {
       "label": "3. Semestr",
       "files": {
+        "prihlasovani-na-predmety-a-rozvrh": {
+          "title": "Přihlašování na předměty & rozvrh (ČVUT / KOS)"
+        },
         "pre-ag1": {
           "title": "Před-AG1 — Příprava na Algoritmy a Grafy",
           "files": {

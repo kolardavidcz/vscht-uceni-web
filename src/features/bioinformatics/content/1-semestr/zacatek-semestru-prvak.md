@@ -6,22 +6,6 @@
 * **Přednášky na FITu:** Můžete navštěvovat libovolné paralelky přednášek a proseminářů, které nekolidují s vaším rozvrhem na VŠCHT.
 * **💡 Tip pro cvičení na FITu:** Řekněte cvičícím a zkoušejícím na FITu, že jste bioinformatici z VŠCHT — berou na to ohled a bývají výrazně vstřícnější.
 
----
-
-## 🕒 Harmonogram & časové anomálie
-
-Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu [harmonogramem ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
-
-1. **Posun začátku výuky v ZS:**  
-   VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
-2. **Rozvrhové anomálie během semestru:**
-   * **Lichý vs. sudý týden:** Část výuky (zejména cvičení) probíhá pouze jednou za dva týdny.
-   * **Rektorské dny a děkanské volno:** Volno na VŠCHT neplatí na FITu a naopak.
-   * **Kompenzace státních svátků:** Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
-   * **Imatrikulace VŠCHT:** Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný společenský oděv; výuka na VŠCHT odpadá).
-
----
-
 ## ⚡ Checklist prvních dvou týdnů
 
 ### 💳 Karty a vstup na FIT ČVUT
@@ -41,6 +25,24 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 * [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní komunikační kanál ústavu).
 * [ ] **Problémy s výukou na FIT:** Pište přímo referentkám studijního oddělení na `bioinformatika@fit.cvut.cz`.
 * [ ] **BOZP školení:** Na VŠCHT se podepisuje při zápisu; na FITu probíhá e-learningem a následným fyzickým podpisem.
+
+---
+
+## 🕒 Harmonogram & časové anomálie
+
+Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu [harmonogramem ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
+
+1. **Posun začátku výuky v ZS:**  
+   VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
+2. **Rozvrhové anomálie během semestru:**
+   * **Lichý vs. sudý týden:** Část výuky (zejména cvičení) probíhá pouze jednou za dva týdny.
+   * **Rektorské dny a děkanské volno:** Volno na VŠCHT neplatí na FITu a naopak.
+   * **Kompenzace státních svátků:** Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
+   * **Imatrikulace VŠCHT:** Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný společenský oděv; výuka na VŠCHT odpadá).
+
+---
+
+
 
 ---
 
