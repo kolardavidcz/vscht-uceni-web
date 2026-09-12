@@ -29,19 +29,23 @@ describe("contentLoader position-based ordering", () => {
     const materials = loadWikiMaterials();
     const groupsWithTree = groupByCategoryTree(materials);
 
-    // obecne -> 3 targeted files
+    // obecne -> single central directory guide
     const obecne = groupsWithTree.find((g) => g.key === "obecne");
     expect(obecne).toBeDefined();
     const obecneKeys = obecne?.tree.map((c) => c.key);
-    expect(obecneKeys).toEqual([
-      "kontakty-a-rozcestnik",
-      "zacatek-semestru-prvak",
-      "konec-semestru-a-zkouskove",
-    ]);
+    expect(obecneKeys).toEqual(["kontakty-a-rozcestnik"]);
 
-    // 1-semestr -> bi-pa1 files
+    // 1-semestr -> ordered files including freshmen guides
     const sem1 = groupsWithTree.find((g) => g.key === "1-semestr");
     expect(sem1).toBeDefined();
+    const sem1Keys = sem1?.tree.map((c) => c.key);
+    expect(sem1Keys).toEqual([
+      "zacatek-semestru-prvak",
+      "bi-pa1",
+      "oach-i",
+      "matematika-a-a-b",
+      "konec-semestru-a-zkouskove",
+    ]);
 
     const pa1Folder = sem1?.tree.find((n) => n.key === "bi-pa1");
     expect(pa1Folder).toBeDefined();

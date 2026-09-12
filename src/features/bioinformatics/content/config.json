@@ -5,12 +5,6 @@
       "files": {
         "kontakty-a-rozcestnik": {
           "title": "Kontakty, systémy & rozcestník"
-        },
-        "zacatek-semestru-prvak": {
-          "title": "Průvodce prváka: Začátek 1. semestru"
-        },
-        "konec-semestru-a-zkouskove": {
-          "title": "Průvodce prváka: Konec semestru & zkouškové"
         }
       }
     },
@@ -28,6 +22,9 @@
     "1-semestr": {
       "label": "1. Semestr",
       "files": {
+        "zacatek-semestru-prvak": {
+          "title": "Průvodce prváka: Začátek 1. semestru"
+        },
         "bi-pa1": {
           "title": "BI-PA1 — Programování v C",
           "files": {
@@ -56,6 +53,9 @@
         },
         "matematika-a-a-b": {
           "title": "Matematika A/B"
+        },
+        "konec-semestru-a-zkouskove": {
+          "title": "Průvodce prváka: Konec semestru & zkouškové"
         }
       }
     },
