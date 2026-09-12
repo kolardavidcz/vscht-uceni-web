@@ -1,41 +1,19 @@
 # 🎒 Průvodce prváka: Začátek 1. semestru
 
 > 📘 Tento průvodce je **kompletním manuálem pro přežití prvních týdnů a celého prvního semestru** v mezioborovém programu *Bioinformatika a chemická informatika* (společné studium VŠCHT Praha a FIT ČVUT).  
-> Shrnuje veškeré administrativní postupy, pravidla dvojího studia, systémy, rozvrhy, stipendia i komunitní zázemí.  
-> *(Podrobné tipy k učení jednotlivých předmětů najdete v jejich samostatných kapitolách ve wiki).*
 
----
 
-## 👵 1. „Hele, co že to vlastně studuješ?“
-
-Pokud se vás rodiče nebo babička zeptají, co vlastně studujete, nejjednodušší vysvětlení zní:  
-**„Chemie a biologie v počítačích.“**  
-Obor propojuje dvě hlavní větve:
-1. **Bioinformatiku** — zpracování genomických dat, analýzu DNA/RNA, sledování mutací a evoluce.
-2. **Chemoinformatiku & počítačový návrh léčiv** — navrhování biologicky aktivních látek pomocí umělé inteligence, prediktivní modelování a vývoj specializovaného softwaru.
-
-> 🤝 **Osobní vzkaz starších spolužáků**:  
-> Když jsme nastupovali do prváku, sedli si s námi starší studenti a vyučující z Ústavu informatiky a chemie a začátek nám výrazně usnadnili. Prošli jsme si tím samým peklem i úspěchy. Kdykoliv budete potřebovat poradit, ptejte se na BioCordu nebo v klubovně B1322 — rádi pomůžeme!
-
----
-
-## 🏛️ 2. Dvě univerzity: Jak funguje dvojí studium (VŠCHT vs. FIT ČVUT)
+## 🏛️ Dvě univerzity: Jak funguje dvojí studium (VŠCHT vs. FIT ČVUT)
 
 Na výuce se podílí **VŠCHT Praha** a **Fakulta informačních technologií ČVUT** (na magisterském stupni navíc i ústavy AV ČR).
 
-Z administrativního pohledu platí pevná pravidla:
-* **Formální status studenta:**  
-  Formálně jste řádnými studenty **výhradně VŠCHT** (Fakulta chemické technologie). Vztahují se na vás předpisy VŠCHT, stipendijní řád a termíny. Na FIT ČVUT docházíte pouze na smluvní výuku.
-* **Platnost kreditů:**  
-  Kreditová dotace některých předmětů na FITu se může lišit od VŠCHT. **Pro vaše studium je závazný VÝHRADNĚ počet kreditů uvedený v SISu na VŠCHT!** Podle SISu se počítá postup do dalšího semestru i stipendia.
-* **Úřední žádosti:**  
-  Potvrzení o studiu, přerušení, rozložení ročníku či uznávání předmětů vyřizujete na děkanátu VŠCHT.
-* **🤫 Zlatý psychologický tip pro zkoušky a cvičení na FITu:**  
-  *Když dáte vyučujícím na FITu při cvičeních nebo u zkoušky vědět, že jste z VŠCHT (bioinformatici), budou na vaše znalosti z informatiky zpravidla pohlížet výrazně shovívavěji a s větším pochopením!*
+Z administrativního pohledu platí pravidla:
+* Formálně jste řádnými studenty **výhradně VŠCHT**. Vztahují se na vás předpisy VŠCHT, pravidla (kredity), stipendijní řád a termíny. Na FIT ČVUT docházíte pouze na smluvní výuku, nikdo vás ovšem nezstaví pokud přijdete na přednášky/proseminář co vás bude zajímat.
+* *Když dáte vyučujícím na FITu při cvičeních nebo u zkoušky vědět, že jste z VŠCHT (bioinformatici), budou na vaše znalosti z informatiky zpravidla pohlížet výrazně shovívavěji a s větším pochopením!*
 
 ---
 
-## 🕒 3. Harmonogram & Časové anomálie
+## 🕒 Harmonogram & časové anomálie
 
 Předměty VŠCHT běží podle [harmonogramu VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu podle [harmonogramu ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
 
@@ -44,18 +22,15 @@ Dejte si pozor na tyto klíčové rozdíly:
    * **VŠCHT začíná dříve** (např. 14. 09. 2026).
    * **FIT ČVUT začíná o týden později** (např. 21. 09. 2026).
    * *Co z toho plyne:* V 1. týdnu máte výuku pouze na VŠCHT. Tento volnější týden je ideální pro zařízení vstupu a karet na ČVUT bez front!
-2. **Lichý vs. sudý týden:**  
-   Číslování kalendářního a akademického týdne se na VŠCHT a ČVUT může rozcházet. Vždy sledujte rozvrh daného předmětu.
-3. **Rektorské dny a děkanské volno:**  
-   Volno vyhlášené na VŠCHT neplatí na FITu a naopak.
-4. **Kompenzace státních svátků:**  
-   Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
-5. **Imatrikulace VŠCHT:**  
-   Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný formální společenský oblek/šaty).
+2. **Kalendářní a rozvrhové anomálie během semestru:**
+   * **Lichý vs. sudý týden:** Část výuky (zejména cvičení) probíhá pouze jednou za dva týdny.
+   * **Rektorské dny a děkanské volno:** Volno vyhlášené na VŠCHT neplatí na FITu a naopak.
+   * **Kompenzace státních svátků:** Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
+   * **Imatrikulace VŠCHT:** Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný formální společenský oblek/šaty; výuka na VŠCHT v tento den odpadá).
 
 ---
 
-## ⚡ 4. Checklist prvních dvou týdnů (Krok za krokem)
+## ⚡ Checklist prvních dvou týdnů (Krok za krokem)
 
 ### 💳 Průkazy a vstup na FIT ČVUT
 * [ ] **ISIC / Karta studenta VŠCHT:**  
@@ -93,7 +68,7 @@ Dejte si pozor na tyto klíčové rozdíly:
 
 ---
 
-## 🌐 5. Rozcestník školních systémů: Co kde hledat
+## 🌐 Rozcestník školních systémů: Co kde hledat
 
 ### Systémy VŠCHT:
 * **[SIS VŠCHT](https://student.vscht.cz)** — rozvrhy, přihlašování na termíny zkoušek, oficiální index, zápis předmětů a žádosti o stipendia.
@@ -113,7 +88,7 @@ Dejte si pozor na tyto klíčové rozdíly:
 
 ---
 
-## ⚠️ 6. Rozvrh, paralelky na FIT a „Past KOSu“
+## ⚠️ Rozvrh, paralelky na FIT a „Past KOSu“
 
 * **1. ročník Bc. — Cvičení jsou zajištěna:**  
   V 1. i 2. semestru jsou cvičení na FITu **rezervována výhradně pro studenty bioinformatiky**. Nikdo cizí se do nich nemůže zapsat a vy sami se o zápis paralelek cvičení nestaráte.
@@ -128,7 +103,7 @@ Dejte si pozor na tyto klíčové rozdíly:
 
 ---
 
-## 📊 7. The Great Filter: První semestr & Kreditová pravidla
+## 📊 The Great Filter: První semestr & Kreditová pravidla
 
 Zimní semestr 1. ročníku představuje největší síto studia. Tvoří ho **trojice velkých předmětů po 8 kreditech**:
 1. **BI-PA1 (Programování a algoritmizace I)** na FIT ČVUT — 8 kreditů
@@ -159,7 +134,7 @@ Zimní semestr 1. ročníku představuje největší síto studia. Tvoří ho **
 
 ---
 
-## 🎯 8. Akademický checklist dovedností: Co začít trénovat hned
+## 🎯 Akademický checklist dovedností: Co začít trénovat hned
 
 | Oblast | Klíčové dovednosti pro první týdny | Doporučené zdroje |
 | :--- | :--- | :--- |
@@ -169,7 +144,7 @@ Zimní semestr 1. ročníku představuje největší síto studia. Tvoří ho **
 
 ---
 
-## 💻 9. Hardware & Vývojové prostředí: Davidovo pravidlo
+## 💻 Hardware & Vývojové prostředí: Davidovo pravidlo
 
 > 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
 > Častou pastí začátečníků bývá, že stráví první dva týdny snahou o konfiguraci „dokonalého Linuxu“, laděním fontů a pluginů v editoru. Započítají si to jako čas strávený studiem, ale ve skutečnosti nenapsali ani řádek kódu v C a látka v PA1 jim mezitím uteče.  
@@ -182,7 +157,7 @@ Zimní semestr 1. ročníku představuje největší síto studia. Tvoří ho **
 
 ---
 
-## 🔬 10. Bakalářské práce & Vědecké směřování (ÚICH)
+## 🔬 Bakalářské práce & Vědecké směřování (ÚICH)
 
 Na bioinformatice se o vědeckých projektech přemýšlí mnohem dříve než na jiných oborech:
 * **Kdo témata vypisuje:**  
@@ -198,7 +173,7 @@ Na bioinformatice se o vědeckých projektech přemýšlí mnohem dříve než n
 
 ---
 
-## 💰 11. Finanční podpora a stipendia
+## 💰 Finanční podpora a stipendia
 
 1. **Ubytovací stipendium:**
    * Určeno pro studenty s trvalým bydlištěm mimo okres Praha.
@@ -214,7 +189,7 @@ Na bioinformatice se o vědeckých projektech přemýšlí mnohem dříve než n
 
 ---
 
-## 📍 12. Dejvický kampus & Kde trávit volný čas
+## 📍 Dejvický kampus & Kde trávit volný čas
 
 ### Studovny a klubovny:
 * **Místnost B1322 (budova B VŠCHT):**  
@@ -241,7 +216,7 @@ První ročník bioinformatiky je **časově náročný jako plný pracovní úv
 
 ---
 
-## 🤝 13. Kultura studia: Vzájemná pomoc vs. „Medvědí služba“
+## 🤝 Kultura studia: Vzájemná pomoc vs. „Medvědí služba“
 
 Vysoká škola se studuje v týmu, ale musíte rozlišovat mezi pomocí a podvodem:
 * **Skutečná pomoc:**  
@@ -255,7 +230,7 @@ Vysoká škola se studuje v týmu, ale musíte rozlišovat mezi pomocí a podvod
 
 ---
 
-## 🎉 14. Komunitní akce ÚICH: Proč se zapojit
+## 🎉 Komunitní akce ÚICH: Proč se zapojit
 
 Statistická data z předchozích let hovoří jasně: **Studenti, kteří se aktivně zapojují do akcí ústavu, mají násobně vyšší úspěšnost dokončení studia!** V neformálním prostředí získáte kontakty a rady k předmětům od starších spolužáků i pedagogů:
 
