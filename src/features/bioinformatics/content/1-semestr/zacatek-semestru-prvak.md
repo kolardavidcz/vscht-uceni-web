@@ -80,8 +80,6 @@ Dejte si pozor na tyto klíčové rozdíly:
 * **[Courses FIT](https://courses.fit.cvut.cz)** — centrální studijní portál FIT: přednáškové slajdy, materiály ze cvičení, zadání.
 * **[Progtest](https://progtest.fit.cvut.cz)** — automatický vyhodnocovací systém programovacích úloh pro BI-PA1.
 * **[Timetable FIT](https://timetable.fit.cvut.cz)** — rozvrhy předmětů FIT a obsazenost učeben.
-* **[Marast](https://marast.fit.cvut.cz)** — matematické cvičebnice a testovací prostředí ČVUT.
-* **[Grades FIT](https://grades.fit.cvut.cz)** — přehled průběžných bodů ze cvičení na FITu.
 * **[Trainer KSI](https://trainer.ksi.fit.cvut.cz)** — cvičebnice programování od naprostých základů v C až po zkoušková zadání.
 * **[FIT Help & Navigace](https://help.fit.cvut.cz)** — návody k budovám, značení místností na FITu a softwarové licence.
 * **[FIT-Wiki](https://www.fit-wiki.cz)** — neocenitelná studentská databáze: zápisky z přednášek, vypracované materiály a **archiv reálných zkouškových písemek z minulých let** (vyžaduje rychlou registraci s ČVUT účtem).
