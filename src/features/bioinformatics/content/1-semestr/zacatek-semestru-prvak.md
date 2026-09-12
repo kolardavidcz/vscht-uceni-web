@@ -56,55 +56,54 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 ## 🌐 Rozcestník školních systémů
 
-<div class="my-4 space-y-3">
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 pb-1 mb-2 font-bold text-stone-900 dark:text-stone-100 border-b border-stone-200 dark:border-stone-800">
+<div class="my-3 space-y-1.5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 pb-1 mb-1.5 font-bold text-stone-900 dark:text-stone-100 border-b border-stone-200 dark:border-stone-800">
 <div>Systémy VŠCHT:</div>
 <div>Systémy FIT ČVUT:</div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
-<ul class="list-disc pl-5 my-0 space-y-1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://student.vscht.cz">SIS VŠCHT</a></strong> — rozvrh, zkouškové termíny, oficiální index, zápis předmětů a stipendia.</li>
 </ul>
-<ul class="list-disc pl-5 my-0 space-y-1">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://kos.cvut.cz">KOS ČVUT</a></strong> — zápis předmětů, paralelek a zkoušek na FITu.</li>
 <li><strong><a href="https://timetable.fit.cvut.cz">Timetable FIT</a></strong> — detailní rozvrhy předmětů FIT a obsazenost učeben.</li>
 </ul>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
-<ul class="list-disc pl-5 my-0 space-y-1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://e-learning.vscht.cz">Moodle VŠCHT</a></strong> — slajdy z přednášek, cvičné testy z chemie a matematiky.</li>
 </ul>
-<ul class="list-disc pl-5 my-0 space-y-1">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://courses.fit.cvut.cz">Courses FIT</a></strong> — výukový portál FIT: přednášky, materiály ze cvičení, zadání.</li>
 <li><strong><a href="https://trainer.ksi.fit.cvut.cz">Trainer KSI</a></strong> — cvičebnice programování od základů v C až po zkouškové úlohy.</li>
+<li><strong><a href="https://www.fit-wiki.cz">FIT-Wiki</a></strong> — studentská databáze: zápisky z přednášek a <strong>archiv minulých zkouškových písemek</strong>.</li>
 </ul>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
 <div class="hidden md:block"></div>
-<ul class="list-disc pl-5 my-0 space-y-1">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://progtest.fit.cvut.cz">Progtest</a></strong> — odevzdávací systém programovacích úloh pro BI-PA1.</li>
 </ul>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
-<ul class="list-disc pl-5 my-0 space-y-1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://emil.vscht.cz/maps">Mapy Emil VŠCHT</a></strong> — interaktivní plánek budov A a B a hledání učeben.</li>
 </ul>
-<ul class="list-disc pl-5 my-0 space-y-1">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://help.fit.cvut.cz">FIT Help &amp; Navigace</a></strong> — návody k budovám, značení místností na FITu a licence.</li>
 </ul>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
-<ul class="list-disc pl-5 my-0 space-y-1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-5 items-start">
+<ul class="list-disc pl-5 my-0 space-y-0.5">
 <li><strong><a href="https://studuj.bioinformatiku.cz">studuj.bioinformatiku.cz</a></strong> — studijní plány oboru a obsazenost klubovny B1322.</li>
 </ul>
-<ul class="list-disc pl-5 my-0 space-y-1">
-<li><strong><a href="https://www.fit-wiki.cz">FIT-Wiki</a></strong> — studentská databáze: zápisky z přednášek a <strong>archiv minulých zkouškových písemek</strong>.</li>
-</ul>
+<div class="hidden md:block"></div>
 </div>
 </div>
 
