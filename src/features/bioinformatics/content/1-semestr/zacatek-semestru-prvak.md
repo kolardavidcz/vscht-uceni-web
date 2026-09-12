@@ -159,14 +159,23 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 
 ---
 
-## 💻 Hardware & Linux: Davidovo pravidlo
+## 💻 Hardware & Linux
 
 > 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
 > Neztrácejte první týdny konfigurací Linuxu nebo editoru. Pokud ještě nemáte lokální setup, začněte psát kód v [OnlineGDB](https://www.onlinegdb.com/) přímo v prohlížeči. Hlavní je začít psát kód v C od prvního dne.
 
-* **Návod na lokální prostředí:** Kompletní průvodce instalací a konfigurací najdete v kapitole **[1 · WSL a setup](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup)**.
+<div class="my-4 p-4 rounded-2xl border border-amber-500/30 bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div>
+<div class="font-bold text-stone-900 dark:text-stone-100 text-sm">Průvodce instalací Linuxu &amp; vývojového prostředí</div>
+<div class="text-xs text-stone-600 dark:text-stone-400">Kompletní návod na WSL2, Ubuntu, kompilátor gcc, CLion i pravidla pro dual-boot.</div>
+</div>
+<a href="/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-orange hover:bg-orange-600 text-white font-bold text-xs sm:text-sm shadow-sm transition-all shrink-0 no-underline">
+<span>1 · WSL a setup</span>
+<span>→</span>
+</a>
+</div>
+
 * **Zářijový instalační den na FITu:** Koncem září pořádají studenti FITu akci, kde vám zdarma pomohou nastavit Linux, dual-boot i WSL.
-* **Pravidlo pro Dual-boot:** Pokud instalujete Windows i Linux, **vždy instalujte nejprve Windows a až poté Linux**.
 
 ---
 
