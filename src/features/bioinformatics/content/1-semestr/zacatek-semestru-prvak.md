@@ -39,6 +39,19 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 * [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní komunikační kanál ústavu).
 * [ ] **BOZP školení:** Na VŠCHT se podepisuje při zápisu; na FITu probíhá e-learningem a následným fyzickým podpisem (**někdy během semestru vám přijde e-mailem výzva**).
 
+### 💻 Programátorský základ (C pro BI-PA1)
+* [ ] **Naučit se všechna důležitá klíčová slova:** Osvojte si základní stavební kameny syntaxe jazyka C pro BI-PA1:
+
+| Kategorie | Klíčová slova |
+| :--- | :--- |
+| **Datové typy** | `char`, `int`, `float`, `double`, `void` |
+| **Modifikátory typů** | `short`, `long`, `signed`, `unsigned` |
+| **Řízení toku programu** | `if`, `else`, `switch`, `case`, `default`, `break` |
+| **Smyčky (cykly)** | `for`, `while`, `do`, `continue` |
+| **Struktury a uživatelské typy** | `struct`, `union`, `enum`, `typedef` |
+| **Symboly** | `*`, `&` |
+| **Ostatní** | `return`, `const` |
+
 ---
 
 ## 🌐 Rozcestník školních systémů
