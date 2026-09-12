@@ -37,7 +37,7 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 ### 💬 Komunikace a bezpečnost
 * [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní komunikační kanál ústavu).
-* [ ] **BOZP školení:** Na VŠCHT se podepisuje při zápisu; na FITu probíhá e-learningem a následným fyzickým podpisem.
+* [ ] **BOZP školení:** Na VŠCHT se podepisuje při zápisu; na FITu probíhá e-learningem a následným fyzickým podpisem (**někdy během semestru vám přijde e-mailem výzva**).
 
 ---
 
