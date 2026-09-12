@@ -4,44 +4,20 @@ Tato stránka slouží jako **univerzální rozcestník a záchranná síť** pr
 
 ---
 
-## 👥 Důležité kontakty a záchranná síť
-
-### VŠCHT Praha (Ústav informatiky a chemie — ÚICH)
-* **Garant bakalářského programu**:  
-  **Ing. Martin Šícho, Ph.D.** — `Martin.Sicho@vscht.cz`  
-  *(Kontaktujte při jakýchkoliv systémových potížích, dotazech k organizaci studia či uznávání předmětů.)*
-* **Garant magisterského a Ph.D. programu**:  
-  **prof. Daniel Svozil, Ph.D.** — `Daniel.Svozil@vscht.cz`  
-  *(Koordinátor česko-francouzského double-degree programu VŠCHT-Štrasburk.)*
-* **Tajemník ústavu (rozvrh a organizace)**:  
-  **Ing. Jiří Znamenáček** — `Jiri.Znamenacek@vscht.cz`
-* **Děkanát FCHT VŠCHT (studijní referentky)**:  
-  * Bakalářské studium: **Petra Kohoutová** — tel. `+420 22044 4148`, `Petra.Kohoutova@vscht.cz`  
-  * Magisterské studium: **Klára Voltrová** — tel. `+420 22044 3767`, `Klara.Voltrova@vscht.cz`
-* **Pedagogické oddělení VŠCHT (celoškolní agenda)**:  
-  **Ing. Petra Kubová** — tel. `+420 22044 4139`, `Petra1.Kubova@vscht.cz`
-
-### FIT ČVUT (Smluvní výuka)
-* **Centrální e-mail pro výuku bioinformatiky na FIT**: `bioinformatika@fit.cvut.cz`  
-  *(E-maily putují přímo pověřeným pracovníkům studijního oddělení FIT ČVUT.)*
-* **Koordinátorka studijní agendy bioinformatiky na FIT**: **Ing. Regina Šmídová**
-* **Studijní oddělení FIT ČVUT**: **Zdeňka Kutinová**, **Ivana Dolejšová** ([kontakty na studijní oddělení FIT](https://fit.cvut.cz/cs/studium/informacni-servis/studijni-oddeleni))
-
----
-
-## ☕ Komunita, zázemí & studovna B1322
-
-> 💡 **Zkušenost z praxe katedry**:  
-> Pravidelní účastníci komunitního života ústavu mají statisticky **výrazně vyšší úspěšnost dokončení studia**. Sdílení know-how se staršími spolužáky i vyučujícími v neformálním prostředí je nejrychlejší cesta k překonání krizových momentů.
+## 💬 Komunita & zázemí
 
 * **Discord BioCord**:  
   Oficiální komunitní server studentů a vyučujících oboru: **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)**.  
   ⚠️ **Povinnost:** Nastavte si svou přezdívku na serveru na civilní **Jméno Příjmení** — slouží jako primární oficiální kanál ÚICH.
 * **Klubovna a volná studovna B1322 (budova B VŠCHT)**:  
   Seminární místnost B1322 ([mapa ÚICH](https://uich.vscht.cz/mapa)) slouží mimo rozvrhovanou výuku jako otevřená studovna a klubovna pro bioinformatiky. Můžete zde trávit volné chvíle mezi přednáškami, učit se a programovat.
-* **Orientace v dejvickém kampusu**:
-  * Interaktivní mapy budov VŠCHT: [emil.vscht.cz/maps](https://emil.vscht.cz/maps)
-  * Plánky učeben a navigace FIT ČVUT (Nová budova ČVUT & THÁKUROVA): [help.fit.cvut.cz](https://help.fit.cvut.cz)
+
+---
+
+## 🗺️ Orientace v dejvickém kampusu
+
+* **Interaktivní mapy budov VŠCHT**: [emil.vscht.cz/maps](https://emil.vscht.cz/maps)
+* **Plánky učeben a navigace FIT ČVUT** (Nová budova ČVUT & THÁKUROVA): [help.fit.cvut.cz](https://help.fit.cvut.cz)
 
 ---
 
@@ -85,6 +61,9 @@ Tato stránka slouží jako **univerzální rozcestník a záchranná síť** pr
 
 ## 🌲 Pravidelné akce oboru
 
+> 💡 **Zkušenost z praxe katedry**:  
+> Pravidelní účastníci komunitního života ústavu mají statisticky **výrazně vyšší úspěšnost dokončení studia**. Sdílení know-how se staršími spolužáky i vyučujícími v neformálním prostředí je nejrychlejší cesta k překonání krizových momentů.
+
 * **Bioinformatické vítání prváků (listopad)**:  
   Pravidelný celodenní pěší výlet studentů všech ročníků a vyučujících ÚICH do přírody první listopadovou sobotu. Ideální příležitost poznat starší spolužáky i vyučující.
 * **SVK — Studentská vědecká konference (konec listopadu)**:  
@@ -93,3 +72,29 @@ Tato stránka slouží jako **univerzální rozcestník a záchranná síť** pr
   Výroční konference doktorandů oboru Bioinformatika s prezentacemi aktuálních výzkumných projektů.
 * **Double-degree VŠCHT–Štrasburk**:  
   Prestižní navazující magisterský program umožňující získat francouzský i český diplom.
+
+## 👥 Důležité kontakty a záchranná síť
+
+### VŠCHT Praha (Ústav informatiky a chemie — ÚICH)
+* **Garant bakalářského programu**:  
+  **Ing. Martin Šícho, Ph.D.** — `Martin.Sicho@vscht.cz`  
+  *(Kontaktujte při jakýchkoliv systémových potížích, dotazech k organizaci studia či uznávání předmětů.)*
+* **Garant magisterského a Ph.D. programu**:  
+  **prof. Daniel Svozil, Ph.D.** — `Daniel.Svozil@vscht.cz`  
+  *(Koordinátor česko-francouzského double-degree programu VŠCHT-Štrasburk.)*
+* **Tajemník ústavu (rozvrh a organizace)**:  
+  **Ing. Jiří Znamenáček** — `Jiri.Znamenacek@vscht.cz`
+* **Děkanát FCHT VŠCHT (studijní referentky)**:  
+  * Bakalářské studium: **Petra Kohoutová** — tel. `+420 22044 4148`, `Petra.Kohoutova@vscht.cz`  
+  * Magisterské studium: **Klára Voltrová** — tel. `+420 22044 3767`, `Klara.Voltrova@vscht.cz`
+* **Pedagogické oddělení VŠCHT (celoškolní agenda)**:  
+  **Ing. Petra Kubová** — tel. `+420 22044 4139`, `Petra1.Kubova@vscht.cz`
+
+### FIT ČVUT (Smluvní výuka)
+* **Centrální e-mail pro výuku bioinformatiky na FIT**: `bioinformatika@fit.cvut.cz`  
+  *(E-maily putují přímo pověřeným pracovníkům studijního oddělení FIT ČVUT.)*
+* **Koordinátorka studijní agendy bioinformatiky na FIT**: **Ing. Regina Šmídová**
+* **Studijní oddělení FIT ČVUT**: **Zdeňka Kutinová**, **Ivana Dolejšová** ([kontakty na studijní oddělení FIT](https://fit.cvut.cz/cs/studium/informacni-servis/studijni-oddeleni))
+
+---
+

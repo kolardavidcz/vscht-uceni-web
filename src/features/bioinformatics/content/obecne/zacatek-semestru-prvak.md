@@ -24,38 +24,15 @@ Druhá polovina semestru přináší souběh velkých úloh v Progtestu s těžk
 
 ---
 
-## ⚡ Checklist prvních dvou týdnů
+## ⚡ Rychlý checklist prvních 2 týdnů
 
-Úkoly, které si musíte vyřídit ihned po zápisu ke studiu:
-
-* [ ] **1. Vyzvednout kartu VŠCHT**:  
-  Obdržíte ji při zápisu na VŠCHT. Bez ní nelze registrovat přístup do systémů ČVUT.
-* [ ] **2. Zaregistrovat kartu na ČVUT**:  
-  Navštivte [Vydavatelství průkazů ČVUT](https://ist.cvut.cz/nase-sluzby/kategorie-sluzeb/prukazy-cvut) a zaregistrujte svou kartu VŠCHT do systému ČVUT.  
-  💡 **Praktický tip:** Vyrazte tam hned v prvním týdnu výuky na VŠCHT — semestr na ČVUT začíná o týden později, takže se vyhnete obřím frontám!
-* [ ] **3. Získat celouniverzitní heslo ČVUT & zkontrolovat systémy**:  
-  Při registraci průkazu získáte iniciální heslo. Nastavte si trvalé heslo na [Usermap ČVUT](https://usermap.cvut.cz). Ověřte funkčnost přihlášení do [KOS ČVUT](https://kos.cvut.cz) a výukového portálu [Courses FIT](https://courses.fit.cvut.cz).
-* [ ] **4. Nastavit automatické přeposílání e-mailů (forward)**:  
-  Škola s vámi komunikuje přes schránky `@vscht.cz` i `@fit.cvut.cz`. Nastavte si z obou automatický forward do svého soukromého e-mailu, ať vám neuteče důležitý termín.
-* [ ] **5. Připojit se na Discord BioCord**:  
-  Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a **změňte si přezdívku na své civilní Jméno Příjmení**. Slouží jako oficiální komunikační kanál ústavu.
-* [ ] **6. Nastavit synchronizaci rozvrhu do Google Calendar**:  
-  Zprovozněte si automatický import rozvrhu do telefonu podle návodu níže.
-* [ ] **7. Školení bezpečnosti**:  
-  Na VŠCHT se podepisuje při zápisu. Na FIT ČVUT probíhá formou online e-learningového kurzu (instrukce přijdou e-mailem).
-
----
-
-## 📅 Plánování času & Synchronizace rozvrhu
-
-Propojení dvou univerzit vyžaduje přísný time-management. Důrazně doporučujeme používat online kalendář (např. Google Calendar).
-
-### Postup automatického exportu rozvrhu ze SISu:
-1. V SIS VŠCHT otevřete modul **Rozvrh NG**.
-2. V záložce **Můj rozvrh** klikněte na možnost **Export**.
-3. Zkopírujte vygenerovaný odkaz formátu **iCalendar**.
-4. V Google Calendar na počítači klikněte na: **Nastavení $\to$ Přidat kalendář $\to$ Pomocí adresy URL** a vložte zkopírovaný odkaz.
-5. *Výsledek:* Rozvrh se bude automaticky propisovat do mobilu i kalendáře při jakékoliv změně v SISu.
+* [ ] **Karta VŠCHT**: Vyzvednout při zápisu na VŠCHT (nutná pro vstup i registraci na ČVUT).
+* [ ] **Registrace karty na ČVUT**: Zastavit se ve [Vydavatelství průkazů ČVUT](https://ist.cvut.cz/nase-sluzby/kategorie-sluzeb/prukazy-cvut).  
+  💡 *Tip:* Běžte tam hned v 1. týdnu výuky na VŠCHT (výuka na ČVUT začíná o týden později $\to$ nulové fronty!).
+* [ ] **Heslo Usermap ČVUT & systémy**: Získat iniciální heslo, změnit v [Usermap ČVUT](https://usermap.cvut.cz) a zkusit přihlášení do [KOS ČVUT](https://kos.cvut.cz) a [Courses FIT](https://courses.fit.cvut.cz).
+* [ ] **Forward školních e-mailů**: Nastavit si přeposílání ze schránek `@vscht.cz` i `@fit.cvut.cz` do osobního e-mailu.
+* [ ] **Discord BioCord**: Připojit se na **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a nastavit si přezdívku na **Jméno Příjmení** (oficiální komunikační kanál ústavu).
+* [ ] **Školení bezpečnosti**: VŠCHT při zápisu; FIT ČVUT probíhá online e-learningem (instrukce dorazí e-mailem).
 
 ---
 

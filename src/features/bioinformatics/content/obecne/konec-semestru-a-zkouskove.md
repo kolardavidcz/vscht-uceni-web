@@ -42,23 +42,75 @@ Zkouškové období trvá přibližně 5 až 6 týdnů (leden až polovina únor
 
 ### Postup vygenerování potvrzení z KOSu:
 1. Přihlaste se do **KOS ČVUT** ([kos.cvut.cz](https://kos.cvut.cz)).
-2. V horním navigačním menu otevřete **Studium** $\to$ **Dokumenty studia** *(pozor: neklikat na položku „Studijní výsledky“!)*.
-3. V seznamu dostupných dokumentů vyberte **Seznam absolvovaných předmětů** *(pozor: nevolit „elektronické potvrzení o studiu“)*.
-4. Zvolte jazyk dokumentu **Česky** a klikněte na tlačítko pro vygenerování PDF.
-5. Stažené oficiální PDF odešlete e-mailem své studijní referentce na děkanát FCHT VŠCHT (**Petra Kohoutová** — `Petra.Kohoutova@vscht.cz`), případně jej odevzdejte osobně na studijním oddělení.
+2. V levém postranním panelu klikněte na **Studium** $\to$ **Dokumenty studia** *(pozor: neklikat na položku „Studijní výsledky“)*.
+3. V sekci **SEZNAM ABSOLVOVANÝCH PŘEDMĚTŮ** rozklikněte modré tlačítko **Vygenerovat seznam předmětů** a zvolte jazyk **Česky**.
+4. Následně v tabulce klikněte na vygenerovaný soubor **Výpis absolvovaných předmětů - (CS)** a stáhněte si oficiální PDF.
+5. Stažené PDF odešlete e-mailem své studijní referentce na děkanát FCHT VŠCHT (**Petra Kohoutová** — `Petra.Kohoutova@vscht.cz`), případně jej odevzdejte osobně na studijním oddělení.
 
-*Alternativní cesta:* Můžete kontaktovat paní Zdeňku Kutinovou ze studijního oddělení FIT ČVUT, požádat o vystavení oficiálního potvrzení o absolvování předmětů FIT (uveďte kódy a názvy) a následně jej doručit na studijní oddělení VŠCHT.
+![Vygenerování výpisu absolvovaných předmětů v KOSu](/images/kos-vypis-predmetu.png)
 
 ---
 
-## 🎓 Postup do letního semestru
+## 🔄 Pravidla opakování předmětu
 
-* **Kontrola kreditů**:  
-  Pro zápis do letního semestru 1. ročníku musíte splnit minimální kreditový limit stanovený Studijním a zkušebním řádem VŠCHT (obvykle 15 kreditů za zimní semestr).
-* **Zápis předmětů do LS**:  
-  Zkontrolujte si v SISu, že máte řádně zapsány všechny povinné předměty 2. semestru.
-* **Dobrá zpráva na závěr**:  
-  Letní semestr je pro většinu bioinformatiků výrazně klidnější než zimní — odpadá souběh trojice vyhazovacích předmětů.
+Pokud se vám předmět nepodaří napoprvé dokončit, řiďte se následujícími pravidly Studijního a zkušebního řádu VŠCHT:
+
+* **Neudělení zápočtu nebo vyčerpání 3 pokusů na zkoušku**:  
+  Předmět musíte opakovat. Je nutné si jej znovu zapsat v následujícím semestru, ve kterém se daný předmět vyučuje (obvykle za rok).
+* **Splněný zápočet, ale nesplněná zkouška (uznání zápočtu)**:  
+  Pokud jste zápočet získali, ale zkoušku neudělali, můžete si v následujícím semestru nechat **zápočet uznat**. Podmínky pro uznání zápočtu si stanovuje každý předmět samostatně. Napište e-mail garantovi předmětu a domluvte se s ním.
+* **Limit zápisů**:  
+  Každý předmět si lze během celého studia zapsat **maximálně 3×**!
+
+---
+
+## 📊 Kreditové minimum & vzorec pro postup
+
+Pro postup do dalšího semestru a ročníku musíte splnit stanovený počet kreditů:
+
+* **Zápis do letního semestru 1. ročníku**:  
+  Minimálně **15 kreditů** za zimní semestr.
+* **Postup do 2. ročníku**:  
+  Na konci 1. akademického roku musíte mít z povinných (P) a povinně volitelných (PV) předmětů **minimálně 45 kreditů**!
+* **Vzorec pro postup do dalších ročníků**:  
+  Pro postup do každého dalšího ročníku vám smí chybět maximálně 15 kreditů z třicetinásobku již absolvovaných semestrů:
+  $$30 \times n - 15$$
+  *(kde $n$ je počet již absolvovaných semestrů; např. po 2 semestrech: $30 \times 2 - 15 = 45$ kreditů, po 4 semestrech: $30 \times 4 - 15 = 105$ kreditů).*
+
+---
+
+## 🎓 Bakalářské minimum 180 kreditů & Volitelné předměty (V)
+
+> 💡 **Zásadní tip tutora z praxe**:  
+> Za celé bakalářské studium musíte získat celkem **180 kreditů**!  
+> Samotné povinné (P) a povinně volitelné (PV) předměty předepsané studijním plánem na 180 kreditů nestačí. Předem si sečtěte, kolik kreditů vám P + PV dají, a **včas si v SISu zapište volitelné předměty (V)** (např. jazyky, tělocviky, doplňkové informatické či chemické kurzy).
+
+### Checklist před zápisem do dalšího ročníku:
+* [ ] Splněny podmínky pro zápis (kreditové minimum).
+* [ ] Zkontrolovány a přepsány všechny známky v SISu (včetně předmětů z FITu).
+* [ ] Zapsány povinně volitelné a volitelné předměty v SISu pro další úsek studia.
+
+---
+
+## 📝 Studentské ankety hodnocení výuky v SISu
+
+Na konci každého semestru probíhá v SISu hodnocení přednášejících a cvičících:
+* **Známkování:** Hodnotí se jako ve škole od **1 (nejlepší)** do **5 (nejhorší)**, s možností detailního slovního komentáře.
+* **Možnosti podpisu:**
+  * **Anonymně** — hodnocení je zcela anonymní.
+  * **Anonymně podepsat** — vyučující vidí pouze váš ročník a obor.
+  * **Podepsat** — je viditelné vaše jméno, ročník i obor.
+* **Proč vyplňovat:** Zpětná vazba od studentů reálně slouží vedení ústavu i garantům ke zlepšování předmětů a akreditací.
+
+---
+
+## ⚠️ Co dělat při nedostatku kreditů (Šetření 3+1 let)
+
+Pokud získáte méně kreditů, než je nutné minimum, a nemůžete pokračovat ve studiu, budete muset studium ukončit.
+
+> 🛑 **Důležité varování**:  
+> Pokud víte, že podmínky pro postup nesplníte, **neodkládejte formální ukončení studia na studijním oddělení**!  
+> Státem bezplatně hrazená doba vysokoškolského studia je na bakaláři standardní doba + 1 rok ($3 + 1$). Do této doby se započítává **každý kalendářní den, kdy jste ke studiu zapsáni**. Včasným ukončením ušetříte dny pro případný nový nástup do 1. ročníku nebo přechod na jiný obor bez placení poplatků za delší studium.
 
 ---
 

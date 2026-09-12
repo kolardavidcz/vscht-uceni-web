@@ -1,7 +1,8 @@
 # 1 · WSL a vývojové prostředí
 
-> 💡 **ZLATÉ PRAVIDLO: DŮLEŽITĚJŠÍ JE PROGRAMOVAT, AŽ PAK ŘEŠIT PROSTŘEDÍ!**  
-> Nenechte se na začátku odradit nebo zaseknout na ladění Linuxu či editorů. Pokud vám WSL hned nenaskočí, začněte psát první kód klidně v online kompilátoru (např. [OnlineGDB](https://www.onlinegdb.com/)). Cílem prvních dní je pochopit syntaxi C a psát kód — prostředí doladíte v prvním týdnu!
+> 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
+> Nejdůležitější věcí na začátku studia je **začít okamžitě programovat a psát kód**, ne se na celé dny zaseknout na instalaci Linuxu, konfiguraci editorů či ladění chybějících knihoven.  
+> I když lokální prostředí a kódování jdou časem ruku v ruce, pokud vám WSL nebo IDE hned nenaskočí, nepanikařte: otevřete si online GCC kompilátor (např. [OnlineGDB](https://www.onlinegdb.com/)) a začněte psát a zkoušet úlohy přímo v prohlížeči. Plnohodnotné lokální prostředí v klidu dořešíte během prvního týdne (třeba na zářijové hromadné instalaci na FITu).
 
 ---
 

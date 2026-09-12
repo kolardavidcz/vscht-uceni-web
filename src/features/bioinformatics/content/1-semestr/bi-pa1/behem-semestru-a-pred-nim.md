@@ -5,33 +5,25 @@ Tento přehled shrnuje to podstatné: co udělat před semestrem, jak rozvrhnout
 
 ---
 
-## 🎯 Před semestrem: Nulový yapping, začněte kódem
+## ⚙️ Jak probíhá semestr v BI-PA1
 
-1. **Přípravný kurz v e-learningu VŠCHT**:  
-   Před začátkem semestru si můžete projít kurz [Připrav se – Bioinformatika](https://e-learning.vscht.cz/course/view.php?id=3521).
-2. **Důležitější je programovat, až pak ladit prostředí**:  
-   Neztrácej dny nastavováním dokonalého editoru. První řádky si napiš klidně v prohlížeči na [OnlineGDB](https://www.onlinegdb.com/) nebo [W3Schools C](https://www.w3schools.com/c/index.php). Linux a WSL dořešíš v 1. týdnu.
-3. **Co se vyplatí vidět před 1. přednáškou**:  
-   Funkce `printf`, `scanf`, proměnné (`int`, `double`, `char`), podmínky (`if` / `else`) a cykly (`for`, `while`).
+Předmět **Programování a algoritmizace I (BI-PA1)** na FIT ČVUT je postaven na průběžném a nekompromisním testování v automatickém vyhodnocovacím systému **Progtest**.
 
----
+### 1. Týdenní cyklus domácích úloh
+* **Zadání nové úlohy:** Vychází pravidelně po přednášce.
+* **Časový bonus:** Pokud úlohu odevzdáte v první polovině termínu (obvykle během prvních dnů), získáte **časové bonusové body**.
+* **Řádný deadline:** Odevzdání do stanoveného termínu (obvykle neděle 23:59). Po deadlinu již nelze za úlohu získat plný počet bodů.
+* **Proč sbírat bonusy hned od začátku:** Úlohy na začátku semestru (podmínky, jednoduché cykly) jsou nesrovnatelně snazší než úlohy v listopadu a prosinci (ukazatele, paměť, spojové seznamy). **Body nasbírané z bonusů na začátku vám vytvoří polštář, který vás zachrání v závěru semestru!**
 
-## ⚡ Během semestru: Strategie přežití
+### 2. Podmínky udělení zápočtu
+* **Minimální bodová hranice z úloh v Progtestu:** Pro připuštění ke zkoušce musíte dosáhnout předepsaného minima bodů z domácích úloh.
+* **Zápočtový test:** Píše se v zápočtovém týdnu v počítačových učebnách FITu. Řeší se nová úloha přímo v prostředí Progtestu v reálném čase a bez přístupu k internetu či AI.
+* **Aktivita na cvičeních:** Na cvičeních se často řeší malé rozcvičky či kontrolní otázky, za které můžete získat další dílčí body.
 
-### 1. Pozor na trojkombinaci „vyhazováků“
-V 1. semestru vás čeká unikátní kombinace tří těžkých předmětů:
-* **Obecná a anorganická chemie I (OACH I)**
-* **Matematika A**
-* **BI-PA1 (Programování v C)**
-
-Ve druhé polovině semestru se spojí náročné zápočtové testy z chemie a matiky s nejtěžšími úlohami z PA1. **Začněte makat od prvního týdne**, abyste se vyhnuli časové tísni a hromadění restů.
-
-### 2. Pravidla pro úspěch v PA1
-* **Řešte Progtesty hned po zadání**: Získáte cenné **bonusové body za včasné odevzdání**, které vám na konci zachrání zápočet.
-* **Nehledejte složitosti na internetu**: Vše, co Progtest vyžaduje, zazní na přednáškách a cvičeních. Řešení z internetu bývají zbytečně překombinovaná nebo poruší pravidla zadání.
-* **Choďte na cvičení a prosemináře**: Cvičící často napoví přesnou kostru řešení nebo upozorní na chytáky v testech.
-* **Využívejte Trainer**: Cvičebnice [Trainer KSI](https://trainer.ksi.fit.cvut.cz/courses/81) má praktické úkoly s vysvětlením od jednoduché kompilace až po zkouškové úlohy.
-* **Ptejte se**: Na cvičeních nebo na FIT Discordu – cvičící rádi pomohou, když vidí snahu.
+### 3. Jak zvládnout tempo výuky
+* **Nečekejte na víkend:** Začněte úlohu analyzovat ihned v den zadání. Pokud narazíte na nejasnost v zadání nebo neprojdete na mezních testech, máte čas zajít na cvičení, na konzultaci nebo se zeptat na FIT Discordu.
+* **Cvičení a prosemináře:** Cvičící na hodinách rozebírají chytáky a typické algoritmy. Navštěvujte je pravidelně.
+* **Cvičebnice Trainer:** Kdykoliv máte pochybnost o syntaxi nebo algoritmu, procvičte si ho v cvičebnici [Trainer KSI](https://trainer.ksi.fit.cvut.cz/courses/81).
 
 ---
 

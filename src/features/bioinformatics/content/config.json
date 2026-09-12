@@ -5,6 +5,12 @@
       "files": {
         "kontakty-a-rozcestnik": {
           "title": "Kontakty, systémy & rozcestník"
+        },
+        "zacatek-semestru-prvak": {
+          "title": "Průvodce prváka: Začátek 1. semestru"
+        },
+        "konec-semestru-a-zkouskove": {
+          "title": "Průvodce prváka: Konec semestru & zkouškové"
         }
       }
     },
@@ -12,8 +18,7 @@
       "label": "0. Semestr",
       "files": {
         "priprav-se-programovani": {
-          "title": "pre-Bi-PaPřiprav se – programování",
-          "externalUrl": "https://e-learning.vscht.cz/course/view.php?id=3521"
+          "title": "pre-BI-PA1 (Připrav se – programování)"
         },
         "stedokolsk-chemie": {
           "title": "pre-OACH (Středoškolská chemie)"
@@ -23,9 +28,6 @@
     "1-semestr": {
       "label": "1. Semestr",
       "files": {
-        "zacatek-semestru-prvak": {
-          "title": "Průvodce prváka: Začátek 1. semestru"
-        },
         "bi-pa1": {
           "title": "BI-PA1 — Programování v C",
           "files": {
@@ -54,9 +56,6 @@
         },
         "matematika-a-a-b": {
           "title": "Matematika A/B"
-        },
-        "konec-semestru-a-zkouskove": {
-          "title": "Průvodce prváka: Konec semestru & zkouškové"
         }
       }
     },
@@ -78,10 +77,10 @@
               "title": "Programování & C++",
               "files": {
                 "pa2-ag1-overview": {
-                  "title": "C++ most z PA2 k AG1"
+                  "title": "Přehled FIT zdrojů z PA2 pro AG1"
                 },
                 "pa2-ag1-cheatsheet": {
-                  "title": "Kompaktní kódovací tahák C++"
+                  "title": "Přehled C++ (Vše důležité z PA2)"
                 },
                 "rekurze-bro": {
                   "title": "Trénink: Rekurze, průchody a Dijkstra"
@@ -92,7 +91,7 @@
               "title": "Diskrétní matematika & Grafy",
               "files": {
                 "dml": {
-                  "title": "☀️ Průvodce grafovou matematikou"
+                  "title": "Úvod"
                 },
                 "dml-bio-grafy": {
                   "title": "Bio-intuice & Co je graf"
