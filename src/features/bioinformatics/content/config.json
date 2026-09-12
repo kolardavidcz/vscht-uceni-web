@@ -5,12 +5,6 @@
       "files": {
         "kontakty-a-rozcestnik": {
           "title": "Kontakty, systémy & rozcestník"
-        },
-        "zacatek-semestru-prvak": {
-          "title": "Průvodce prváka: Začátek 1. semestru"
-        },
-        "konec-semestru-a-zkouskove": {
-          "title": "Průvodce prváka: Konec semestru & zkouškové"
         }
       }
     },
@@ -18,17 +12,20 @@
       "label": "0. Semestr",
       "files": {
         "priprav-se-programovani": {
-          "title": "Připrav se – programování",
+          "title": "pre-Bi-PaPřiprav se – programování",
           "externalUrl": "https://e-learning.vscht.cz/course/view.php?id=3521"
         },
         "stedokolsk-chemie": {
-          "title": "Středoškolská chemie"
+          "title": "pre-OACH (Středoškolská chemie)"
         }
       }
     },
     "1-semestr": {
       "label": "1. Semestr",
       "files": {
+        "zacatek-semestru-prvak": {
+          "title": "Průvodce prváka: Začátek 1. semestru"
+        },
         "bi-pa1": {
           "title": "BI-PA1 — Programování v C",
           "files": {
@@ -57,6 +54,9 @@
         },
         "matematika-a-a-b": {
           "title": "Matematika A/B"
+        },
+        "konec-semestru-a-zkouskove": {
+          "title": "Průvodce prváka: Konec semestru & zkouškové"
         }
       }
     },
@@ -72,45 +72,45 @@
       "label": "3. Semestr",
       "files": {
         "pre-ag1": {
-          "title": "pre-AG1 - Algoritmy a Grafy 1",
+          "title": "Před-AG1 — Příprava na Algoritmy a Grafy",
           "files": {
             "coding": {
-              "title": "C++ & Algoritmy (1, 1b, 9)",
+              "title": "Programování & C++",
               "files": {
                 "pa2-ag1-overview": {
-                  "title": "1 · PA2 C++ Most k AG1"
+                  "title": "C++ most z PA2 k AG1"
                 },
                 "pa2-ag1-cheatsheet": {
-                  "title": "1b · PA2→AG1 Tahák klíčových témat (50%+)"
+                  "title": "Kompaktní kódovací tahák C++"
                 },
                 "rekurze-bro": {
-                  "title": "9 · C++ Trénink: Rekurze, BFS, DFS & Dijkstra"
+                  "title": "Trénink: Rekurze, průchody a Dijkstra"
                 }
               }
             },
             "math": {
-              "title": "Matematika & Grafy (2 až 8)",
+              "title": "Diskrétní matematika & Grafy",
               "files": {
                 "dml": {
-                  "title": "2 · ☀️ Letní průvodce grafovou matematikou pro bioinformatiky"
+                  "title": "☀️ Průvodce grafovou matematikou"
                 },
                 "dml-bio-grafy": {
-                  "title": "3 · Bio-Intuice & Co je Graf"
+                  "title": "Bio-intuice & Co je graf"
                 },
                 "dml-logicky-zaklad": {
-                  "title": "4 · Logický & Důkazový základ"
+                  "title": "Logický & důkazový základ"
                 },
                 "dml-indukce-na-grafech": {
-                  "title": "5 · Indukce na Grafech & Redukční Past"
+                  "title": "Indukce na grafech & Redukční past"
                 },
                 "dml-dukazy-sporem": {
-                  "title": "6 · Důkazy Sporem & Extremální Princip"
+                  "title": "Důkazy sporem & Extremální princip"
                 },
                 "dml-bio-grafy-b": {
-                  "title": "7 · Grafy v C++ & Reprezentace v Paměti"
+                  "title": "Grafy v C++ & Reprezentace v paměti"
                 },
                 "dml-zkouskovy-workshop": {
-                  "title": "8 · Zkouškový Workshop & Šablony Důkazů"
+                  "title": "Zkouškový workshop & Šablony důkazů"
                 }
               }
             }
