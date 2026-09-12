@@ -76,7 +76,7 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 ### 💻 BI-PA1 jako hlavní síto:
 * **Týdenní deadliny v Progtestu:** Úlohy nelze napsat za večer před deadlinem. Začněte programovat hned v den zadání.
 * **Časové bonusy zachraňují semestr:** Odevzdání v předstihu dává bonusové body, které vám na konci semestru vytvoří kritickou rezervu pro získání zápočtu.
-* **🚨 Zákaz přenášení PA1 do 2. ročníku:** Ve druháku přibývají další těžké předměty z FITu (BI-AG1) a zároveň nejtěžší chemické předměty na VŠCHT (Biochemie a Fyzikální chemie). Udělat PA1 napoprvé je absolutní priorita.
+* **🚨 Neučí se v letním semestru:** BI-PA1 se vyučuje **výhradně v zimním semestru** (v letním semestru se vůbec neotvírá!). Pokud ji neuděláte, musíte čekat celý rok až do 3. semestru, kde se vám ale nakumuluje s další pověstnou síťovkou z FITu (**BI-AG1**) a nejtěžšími chemickými předměty VŠCHT (Biochemie a Fyzikální chemie). Udělat PA1 napoprvé je proto absolutní priorita.
 * **Návody k PA1:** Kompletní tipy a šablony najdete v podsekci [BI-PA1](/obor-bioinformatika/1-semestr/bi-pa1/behem-semestru-a-pred-nim).
 
 ### ⚡ Prvních 7 týdnů (Zápočty z Matiky a Chemie):
