@@ -7,8 +7,8 @@ Tento přehled shrnuje to podstatné: co udělat před semestrem, jak rozvrhnout
 
 ## 🎯 Před semestrem: Nulový yapping, začněte kódem
 
-1. **Vyzkoušejte si základy v Moodle VŠCHT**:  
-   Projdi si [Připrav se – programování](https://e-learning.vscht.cz/course/view.php?id=3521). Obsahuje interaktivní testovací úlohy od studenta bioinformatiky Davida Koláře.
+1. **Přípravný kurz v e-learningu VŠCHT**:  
+   Před začátkem semestru si můžete projít kurz [Připrav se – Bioinformatika](https://e-learning.vscht.cz/course/view.php?id=3521).
 2. **Důležitější je programovat, až pak ladit prostředí**:  
    Neztrácej dny nastavováním dokonalého editoru. První řádky si napiš klidně v prohlížeči na [OnlineGDB](https://www.onlinegdb.com/) nebo [W3Schools C](https://www.w3schools.com/c/index.php). Linux a WSL dořešíš v 1. týdnu.
 3. **Co se vyplatí vidět před 1. přednáškou**:  

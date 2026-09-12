@@ -19,8 +19,8 @@ Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** n
   Využijte je! Můžete si vzájemně se spolužáky pomáhat a nápovědy sdílet. Ukážete si, na kterých vstupních datech váš kód selhal, a pomůžete si navzájem odhalit chybějící podmínky.
 * **Řešte nepovinná malá „Cvičení“**:  
   Kromě velkých domácích úloh jsou v Progtestu i malé úlohy za minimum bodů. Tyto úlohy izolovaně učí nový princip (např. rekurzi nebo dynamické pole) a máte v nich k dispozici **cca 20 nápověd** — ideální trénink!
-* **Přípravný testovač Davida Koláře na Moodle**:  
-  Pokud chcete začít ještě před semestrem, vyzkoušejte interaktivní úlohy v kurzu [Připrav se – Bioinformatika (id=3521)](https://e-learning.vscht.cz/course/view.php?id=3521).
+* **Přípravný kurz v e-learningu**:  
+  [Připrav se – Bioinformatika (id=3521)](https://e-learning.vscht.cz/course/view.php?id=3521).
 * **Aplikace Trainer**:  
   Cvičebnice [Trainer KSI (kurz k PA1)](https://trainer.ksi.fit.cvut.cz/courses/81) nabízí praktické úkoly s teorií od úplných začátků kompilace až po několik ukázkových zkouškových zadání.
 * **Studijní portál FIT Wiki**:  
