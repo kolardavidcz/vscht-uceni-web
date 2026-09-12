@@ -130,11 +130,9 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 ## ⚠️ Rozvrh na FIT a „Past KOSu“
 
-* **Cvičení i přednášky máte zajištěny:** V 1. i 2. semestru jsou cvičení i přednášky na FITu rezervovány přímo pro bioinformatiky — o zápis paralelek se v 1. ročníku vůbec nestaráte.
-  * **🛑 Ignorujte matoucí e-maily z KOSu:** Automatické zprávy typu *„vaše paralelka není otevřená“* ignorujte a v KOSu nic neměňte. Vše platí.
-  * **Výběr rozvrhu až později:** Sami si paralelky a rozvrh volíte až od 2. ročníku (předběžný zápis v KOSu pro 2. ročník začíná již v letním semestru 1. ročníku!).
-* **Přednášky a prosemináře na FITu:** Docházka se na nich nekontroluje. Můžete navštěvovat libovolnou paralelku přednášek, která vám nekoliduje s výukou na VŠCHT (v KOSu se na přednášky nepřihlašujte).
-* **Kódy FIT předmětů v SISu:** Začínají kódem `B500xxx`.
+* **Rozvrh v 1. ročníku máte plně zajištěn:** V 1. i 2. semestru jsou všechna cvičení na FITu pro bioinformatiky pevně zarezervována. V KOSu nic nezapisujete ani neměníte (vlastní výběr rozvrhu řešíte až od 2. ročníku).
+* **🛑 Ignorujte chybové e-maily z KOSu:** Automatická hlášení typu *„vaše paralelka není otevřená“*, *„nemáte zapsán minimální počet kreditů“* nebo *„chyba zápisu rozvrhu“* ignorujte. KOS nevidí vaše studium na VŠCHT a kredity se řídí výhradně SISem. Vše platí.
+* **Přednášky:** Docházka na FITu se nekontroluje — můžete navštěvovat libovolnou paralelku, která nekoliduje s VŠCHT (v KOSu se nezapisují). Kódy předmětů FITu v SISu začínají `B500xxx`.
 
 ---
 
@@ -164,12 +162,12 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 > 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
 > Neztrácejte první týdny konfigurací Linuxu nebo editoru. Pokud ještě nemáte lokální setup, začněte psát kód v [OnlineGDB](https://www.onlinegdb.com/) přímo v prohlížeči. Hlavní je začít psát kód v C od prvního dne.
 
-<div class="my-4 p-4 rounded-2xl border border-amber-500/30 bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="my-4 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 <div>
 <div class="font-bold text-stone-900 dark:text-stone-100 text-sm">Průvodce instalací Linuxu &amp; vývojového prostředí</div>
 <div class="text-xs text-stone-600 dark:text-stone-400">Kompletní návod na WSL2, Ubuntu, kompilátor gcc, CLion i pravidla pro dual-boot.</div>
 </div>
-<a href="/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-orange hover:bg-orange-600 text-white font-bold text-xs sm:text-sm shadow-sm transition-all shrink-0 no-underline">
+<a href="/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup" class="wiki-btn shrink-0">
 <span>1 · WSL a setup</span>
 <span>→</span>
 </a>
