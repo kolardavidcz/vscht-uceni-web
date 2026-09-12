@@ -31,9 +31,8 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 ### 🔑 Účty, hesla a Wi-Fi
 * [ ] **Heslo ČVUT:** Na [Usermap ČVUT](https://usermap.cvut.cz) zadejte iniciální heslo a nastavte si trvalé heslo.
-* [ ] **eduroam Wi-Fi:**  
-  * **Na VŠCHT:** Stáhněte certifikát z webu [Výpočetního centra VŠCHT](https://vc.vscht.cz/navody/sit/wi-fi).  
-  * **Na FIT ČVUT:** Nastavte si **speciální síťové heslo** v profilu na [Usermap ČVUT](https://usermap.cvut.cz) (je jiné než heslo do KOSu).
+* [ ] **Wi-Fi připojení (eduroam):** Pro spolehlivé připojení k celouniverzitní síti eduroam si stáhněte bezpečnostní certifikát z [webu Výpočetního centra VŠCHT](https://vc.vscht.cz/navody/sit/wi-fi). Na FIT ČVUT si navíc v profilu na [Usermap ČVUT](https://usermap.cvut.cz) nastavte **speciální síťové heslo** (je odlišné od hesla do KOSu).
+* [ ] **Registrace v NTK:** Zajděte osobně k zákaznickému pultu v [NTK](https://www.techlib.cz) a zaregistrujte si ISIC / kartu VŠCHT (online předregistrace na webu ušetří čas) — získáte přístup k Wi-Fi, tiskárnám, výpůjčkám a do noční studovny.
 * [ ] **Forward e-mailů:** Nastavte si automatické přesměrování z `@vscht.cz` i `@fit.cvut.cz` do jedné soukromé schránky.
 
 ### 💬 Komunikace a bezpečnost
