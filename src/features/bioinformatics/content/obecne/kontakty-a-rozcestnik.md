@@ -4,20 +4,29 @@ Tato stránka slouží jako **univerzální rozcestník a záchranná síť** pr
 
 ---
 
-## 💬 Komunita & zázemí
+## 💬 Komunita & komunikace
 
 * **Discord BioCord**:  
   Oficiální komunitní server studentů a vyučujících oboru: **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)**.  
   ⚠️ **Povinnost:** Nastavte si svou přezdívku na serveru na civilní **Jméno Příjmení** — slouží jako primární oficiální kanál ÚICH.
-* **Klubovna a volná studovna B1322 (budova B VŠCHT)**:  
-  Seminární místnost B1322 ([mapa ÚICH](https://uich.vscht.cz/mapa)) slouží mimo rozvrhovanou výuku jako otevřená studovna a klubovna pro bioinformatiky. Můžete zde trávit volné chvíle mezi přednáškami, učit se a programovat.
 
 ---
 
-## 🗺️ Orientace v dejvickém kampusu
+## 📍 Dejvický kampus & Studentský život
 
-* **Interaktivní mapy budov VŠCHT**: [emil.vscht.cz/maps](https://emil.vscht.cz/maps)
-* **Plánky učeben a navigace FIT ČVUT** (Nová budova ČVUT & THÁKUROVA): [help.fit.cvut.cz](https://help.fit.cvut.cz)
+* **Klubovna B1322 (budova B VŠCHT)**:  
+  Seminární místnost B1322 ([mapa ÚICH](https://uich.vscht.cz/mapa)) slouží mimo rozvrhovanou výuku jako otevřená studovna a klubovna pro bioinformatiky. Vhodná na řešení úloh (Progtest), studium i odpočinek mezi přednáškami.
+* **NTK (Národní technická knihovna)**:  
+  Tichá patra pro soustředěné studium, noční studovna a tisk z vlastního notebooku.
+* **Menzy ČVUT**:  
+  Menzy v bezprostředním okolí: Technická (vedle NTK), Studentský dům a Masarykova kolej. Dobíjení kartou na pokladně nebo online přes portál [Agáta](https://agata.suz.cvut.cz).
+* **Orientace a mapy budov**:  
+  * [Interaktivní mapy budov VŠCHT (Emil)](https://emil.vscht.cz/maps) — interaktivní plánek budov A a B a vyhledávání učeben.  
+  * [Plánky učeben a navigace FIT ČVUT](https://help.fit.cvut.cz) — značení místností a navigace po FITu (Nová budova ČVUT a Thákurova).
+* **💼 Studium a práce**:  
+  1. ročník je časově náročný jako plný úvazek. Větší než drobná víkendová brigáda v 1. semestru vede téměř jistě k přetížení a neúspěchu.
+* **Kultura pomoci vs. plagiátorství**:  
+  Společná diskuze a vzájemné vysvětlování konceptů je žádoucí. **Nikdy nesdílejte hotový kód** — odevzdávací systémy (zejména Progtest na FIT) mají pokročilý antiplagiátor a za opisování hrozí disciplinární komise.
 
 ---
 

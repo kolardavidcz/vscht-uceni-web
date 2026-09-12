@@ -151,10 +151,4 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 
 ---
 
-## 📍 Dejvický kampus & Studentský život
-
-* **Klubovna B1322 (budova B VŠCHT):** Otevřená seminární místnost a klubovna pro bioinformatiky ([mapa ÚICH](https://uich.vscht.cz/mapa)). Vhodná na řešení Progtestu, studium i volný čas.
-* **NTK (Národní technická knihovna):** Tichá patra, noční studovna, tisk z vlastního notebooku.
-* **Menzy ČVUT:** Technická (vedle NTK), Studentský dům a Masarykova kolej. Dobíjení kartou na pokladně nebo přes portál [Agáta](https://agata.suz.cvut.cz).
-* **💼 Studium a práce:** 1. ročník je časově náročný jako plný úvazek. Větší než drobná víkendová brigáda v 1. semestru vede téměř jistě k přetížení a neúspěchu.
-* **Kultura pomoci vs. plagiátorství:** Společná diskuze a vysvětlování konceptů je žádoucí. **Nikdy nesdílejte hotový kód** — Progtest má pokročilý antiplagiátor a za opisování hrozí disciplinární komise.
+> ℹ️ *Informace o kampusu, menzách, studovnách B1322 a studentském životě najdete na úvodní stránce [Kontakty, systémy & rozcestník](/obor-bioinformatika/obecne/kontakty-a-rozcestnik).*
