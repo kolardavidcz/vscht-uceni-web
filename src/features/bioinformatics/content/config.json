@@ -4,7 +4,10 @@
       "label": "Obecné informace",
       "files": {
         "kontakty-a-rozcestnik": {
-          "title": "Kontakty, systémy & rozcestník"
+          "title": "Dejvický kampus & Komunita"
+        },
+        "tipy-ke-studiu": {
+          "title": "Tipy ke studiu"
         }
       }
     },

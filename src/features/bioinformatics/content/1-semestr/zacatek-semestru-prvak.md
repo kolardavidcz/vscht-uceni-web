@@ -177,4 +177,4 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 
 ---
 
-> ℹ️ *Informace o kampusu, menzách, studovnách B1322 a studentském životě najdete na úvodní stránce [Kontakty, systémy & rozcestník](/obor-bioinformatika/obecne/kontakty-a-rozcestnik).*
+> ℹ️ *Informace o kampusu, menzách, studovnách B1322 a studentském životě najdete na stránce [Dejvický kampus & Komunita](/obor-bioinformatika/obecne/kontakty-a-rozcestnik). Tipy k literatuře, psaní zápisků a tisku v NTK najdete v [Tipech ke studiu](/obor-bioinformatika/obecne/tipy-ke-studiu).*
