@@ -6,13 +6,18 @@ Závěr zimního semestru a první vysokoškolské zkouškové období představ
 
 ## 🎯 Finále semestru & Zápočtový maraton (listopad / prosinec)
 
-V posledních týdnech výuky dochází k nejobávanější kumulaci studijních povinností:
-* **Obecná a anorganická chemie I**: Finální zápočtové testy z názvosloví a chemických výpočtů.
-* **Matematika A**: Zápočtové písemky (derivace, limity, integrály a vyšetřování průběhu funkcí).
-* **BI-PA1 na FIT**: Závěrečné a nejtěžší domácí úlohy v Progtestu (dynamická alokace paměti, řetězce, struktury a spojové seznamy).
+Závěr semestru přináší největší kumulaci povinností: na VŠCHT vrcholí druhé zápočty z **Matematiky A** a **OACH I**, ale hlavní časovou zátěž představuje **BI-PA1 na FITu**.
 
-> 💡 **Strategické pravidlo přežití**:  
-> Udělejte si zápočty z chemie a matematiky na první pokus v řádném termínu během semestru. Pokud budete v lednu muset dohánět zápočty i zkoušky současně, ocitnete se pod obrovským tlakem.
+### 💻 BI-PA1: Kde se láme zápočet
+* **Nejtěžší Progtest úlohy celého semestru:**  
+  V listopadu a prosinci nastupuje dynamická paměť (`malloc`, `free`, `realloc`), struktury a spojové seznamy. Úlohy už nejsou na jedno odpoledne — odhalování chyb paměti přes **Valgrind nebo AddressSanitizer** zabere desítky hodin.
+* **Nahánění zápočtového minima & časové bonusy:**  
+  Pokud jste v první půlce semestru sbírali časové bonusy za včasné odevzdání, máte klid. Kdo odevzdával bez bonusů na poslední chvíli, musí v závěru odevzdat prakticky vše na 100 %, jinak zápočet nezíská a ke zkoušce ho vůbec nepustí.
+* **Přechod od domácího kódování ke zkoušce:**  
+  Zatímco Progtest úlohy ladíte týden doma, zkouška se píše **prezenčně v laboratoři na FITu za 2 až 3 hodiny bez přístupu na internet**. Už během prosince začněte v [Traineru KSI](https://trainer.ksi.fit.cvut.cz/) cvičit psaní algoritmů na čas z hlavy.
+
+### ⚡ Ostatní předměty (Matika A & OACH I):
+* **Základní pravidlo:** Získejte zápočty hned v řádném termínu v prosinci. Pokud spadnete do souhrnných opravných testů, budete v lednu opakovat učivo za celý semestr současně s přípravou na zkoušku z PA1.
 
 ---
 
