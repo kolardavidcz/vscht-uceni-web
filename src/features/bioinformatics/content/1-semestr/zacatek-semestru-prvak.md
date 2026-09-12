@@ -56,29 +56,67 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 ## 🌐 Rozcestník školních systémů
 
-### Systémy VŠCHT:
-* **[SIS VŠCHT](https://student.vscht.cz)** — rozvrh, zkouškové termíny, oficiální index, zápis předmětů a stipendia.
-* **[Moodle VŠCHT](https://e-learning.vscht.cz)** — slajdy z přednášek, cvičné testy z chemie a matematiky.
-* **[Mapy Emil VŠCHT](https://emil.vscht.cz/maps)** — interaktivní plánek budov A a B a hledání učeben.
-* **[studuj.bioinformatiku.cz](https://studuj.bioinformatiku.cz)** — studijní plány a kalendář obsazenosti klubovny B1322.
+<div class="my-4 space-y-3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 pb-1 mb-2 font-bold text-stone-900 dark:text-stone-100 border-b border-stone-200 dark:border-stone-800">
+<div>Systémy VŠCHT:</div>
+<div>Systémy FIT ČVUT:</div>
+</div>
 
-### Systémy FIT ČVUT:
-* **[Courses FIT](https://courses.fit.cvut.cz)** — výukový portál FIT: přednášky, materiály ze cvičení, zadání.
-* **[Progtest](https://progtest.fit.cvut.cz)** — odevzdávací systém programovacích úloh pro BI-PA1.
-* **[Timetable FIT](https://timetable.fit.cvut.cz)** — rozvrhy předmětů FIT a obsazenost učeben.
-* **[Trainer KSI](https://trainer.ksi.fit.cvut.cz)** — cvičebnice programování od naprostých základů v C až po zkouškové úlohy.
-* **[FIT-Wiki](https://www.fit-wiki.cz)** — studentská databáze: zápisky z přednášek a **archiv reálných zkouškových písemek z minulých let**.
-* **[FIT Help & Navigace](https://help.fit.cvut.cz)** — návody k budovám, značení místností na FITu a licence.
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://student.vscht.cz">SIS VŠCHT</a></strong> — rozvrh, zkouškové termíny, oficiální index, zápis předmětů a stipendia.</li>
+</ul>
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://kos.cvut.cz">KOS ČVUT</a></strong> — zápis předmětů, paralelek a zkoušek na FITu.</li>
+<li><strong><a href="https://timetable.fit.cvut.cz">Timetable FIT</a></strong> — detailní rozvrhy předmětů FIT a obsazenost učeben.</li>
+</ul>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://e-learning.vscht.cz">Moodle VŠCHT</a></strong> — slajdy z přednášek, cvičné testy z chemie a matematiky.</li>
+</ul>
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://courses.fit.cvut.cz">Courses FIT</a></strong> — výukový portál FIT: přednášky, materiály ze cvičení, zadání.</li>
+<li><strong><a href="https://trainer.ksi.fit.cvut.cz">Trainer KSI</a></strong> — cvičebnice programování od základů v C až po zkouškové úlohy.</li>
+</ul>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
+<div class="hidden md:block"></div>
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://progtest.fit.cvut.cz">Progtest</a></strong> — odevzdávací systém programovacích úloh pro BI-PA1.</li>
+</ul>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://emil.vscht.cz/maps">Mapy Emil VŠCHT</a></strong> — interaktivní plánek budov A a B a hledání učeben.</li>
+</ul>
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://help.fit.cvut.cz">FIT Help &amp; Navigace</a></strong> — návody k budovám, značení místností na FITu a licence.</li>
+</ul>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 items-start">
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://studuj.bioinformatiku.cz">studuj.bioinformatiku.cz</a></strong> — studijní plány oboru a obsazenost klubovny B1322.</li>
+</ul>
+<ul class="list-disc pl-5 my-0 space-y-1">
+<li><strong><a href="https://www.fit-wiki.cz">FIT-Wiki</a></strong> — studentská databáze: zápisky z přednášek a <strong>archiv minulých zkouškových písemek</strong>.</li>
+</ul>
+</div>
+</div>
 
 ---
 
 ## ⚠️ Rozvrh na FIT a „Past KOSu“
 
-* **Cvičení máte zajištěna:** V 1. i 2. semestru jsou cvičení na FITu rezervována výhradně pro bioinformatiky — o zápis paralelek cvičení se nestaráte.
-* **🛑 Ignorujte matoucí e-maily z KOSu:** Automatické zprávy typu *„vaše paralelka není otevřená“* ignorujte a v KOSu nic neměňte. Cvičení platí.
+* **Cvičení i přednášky máte zajištěny:** V 1. i 2. semestru jsou cvičení i přednášky na FITu rezervovány přímo pro bioinformatiky — o zápis paralelek se v 1. ročníku vůbec nestaráte.
+  * **🛑 Ignorujte matoucí e-maily z KOSu:** Automatické zprávy typu *„vaše paralelka není otevřená“* ignorujte a v KOSu nic neměňte. Vše platí.
+  * **Výběr rozvrhu až později:** Sami si paralelky a rozvrh volíte až od 2. ročníku (předběžný zápis v KOSu pro 2. ročník začíná již v letním semestru 1. ročníku!).
 * **Přednášky a prosemináře na FITu:** Docházka se na nich nekontroluje. Můžete navštěvovat libovolnou paralelku přednášek, která vám nekoliduje s výukou na VŠCHT (v KOSu se na přednášky nepřihlašujte).
 * **Kódy FIT předmětů v SISu:** Začínají kódem `B500xxx`.
-* **Výběr rozvrhu:** Sami si paralelky volíte až od 2. ročníku (předběžný zápis v KOSu pro 2. ročník začíná již v letním semestru 1. ročníku!).
 
 ---
 
