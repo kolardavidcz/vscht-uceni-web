@@ -79,9 +79,13 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 * **🚨 Neučí se v letním semestru:** BI-PA1 se vyučuje **výhradně v zimním semestru** (v letním semestru se vůbec neotvírá!). Pokud ji neuděláte, musíte čekat celý rok až do 3. semestru, kde se vám ale nakumuluje s další pověstnou síťovkou z FITu (**BI-AG1**) a nejtěžšími chemickými předměty VŠCHT (Biochemie a Fyzikální chemie). Udělat PA1 napoprvé je proto absolutní priorita.
 * **Návody k PA1:** Kompletní tipy a šablony najdete v podsekci [BI-PA1](/obor-bioinformatika/1-semestr/bi-pa1/behem-semestru-a-pred-nim).
 
-### ⚡ Prvních 7 týdnů (Zápočty z Matiky a Chemie):
+### ⚡ Prvních 7 týdnů (Zápočty z Matiky a Chemie vs. eskalace v PA1):
 * Kolem 6. týdne se píší **první zápočtové testy z Matematiky A i Anorganické chemie I**.
 * Jsou **podstatně jednodušší** než druhé zápočty v prosinci. Nasbírejte v nich co nejvíce bodů (v součtu potřebujete > 50 %), ať máte klidný závěr roku.
+* **⚠️ PA1 mezitím prudce nabírá na náročnosti:** Zatímco se učíte na zápočty z chemie a matiky, úlohy v Progtestu jsou **týden od týdne obtížnější**. Zatímco matika nebo chemie se dají nárazově dohnat před zkouškou, programování o víkendu nedoženete. Na základy z PA1 navíc v dalším studiu **striktně navazuje celý informatický řetězec**:
+  * **Java $\to$ BI-AG1** (Algoritmy a grafy 1 ve 3. semestru)
+  * **Python $\to$ BI-AAG** (Automaty a gramatiky)
+  Ztratit tempo v PA1 během prvních 7 týdnů znamená zkomplikovat si celé další studium informatiky.
 
 > ℹ️ *Konkrétní podmínky postupu a kreditová minima najdete shrnutá v průvodci [Konec 1. semestru & zkouškové](/obor-bioinformatika/1-semestr/konec-semestru-a-zkouskove).*
 
@@ -97,16 +101,6 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 
 ---
 
-## 🔬 Bakalářské práce & Vědecké směřování (ÚICH)
-
-* **Kde se práce píší:** Téma bakalářské práce si student volí **výhradně z vědeckých projektů řešených na Ústavu informatiky a chemie (ÚICH)** — nikoliv na AV ČR či externích fakultách.
-* **Dva hlavní směry:**
-  1. **Bioinformatika** (Dr. Pačes, Dr. Kolář, Dr. Klodová) — genomická data, algoritmy, analýza mutací a genové exprese.
-  2. **Chemoinformatika / Počítačový návrh léčiv** (Dr. Šícho, Dr. Dehaen, Dr. Čmelo) — modelování interakce léčiva s organismem, AI návrh molekul.
-* **Časový plán:** Témata si studenti vybírají na začátku 2. ročníku.
-
----
-
 ## 📍 Dejvický kampus & Studentský život
 
 * **Klubovna B1322 (budova B VŠCHT):** Otevřená seminární místnost a klubovna pro bioinformatiky ([mapa ÚICH](https://uich.vscht.cz/mapa)). Vhodná na řešení Progtestu, studium i volný čas.
@@ -114,11 +108,3 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 * **Menzy ČVUT:** Technická (vedle NTK), Studentský dům a Masarykova kolej. Dobíjení kartou na pokladně nebo přes portál [Agáta](https://agata.suz.cvut.cz).
 * **💼 Studium a práce:** 1. ročník je časově náročný jako plný úvazek. Větší než drobná víkendová brigáda v 1. semestru vede téměř jistě k přetížení a neúspěchu.
 * **Kultura pomoci vs. plagiátorství:** Společná diskuze a vysvětlování konceptů je žádoucí. **Nikdy nesdílejte hotový kód** — Progtest má pokročilý antiplagiátor a za opisování hrozí disciplinární komise.
-
----
-
-## 🎉 Komunitní akce ÚICH: Proč se zapojit
-
-* **Bioinformatické vítání prváků (první listopadová sobota):** Celodenní pěší výlet studentů všech ročníků a vyučujících do přírody. Nejrychlejší způsob, jak získat kontakty a rady ke zkouškám.
-* **SVK — Studentská vědecká konference (konec listopadu):** Prezentace vědeckých prací studentů spojená s **celoškolním rektorským volnem**.
-* **Vánoční večírek ÚICH (polovina prosince):** Neformální setkání studentů a vyučujících před začátkem zkouškového.

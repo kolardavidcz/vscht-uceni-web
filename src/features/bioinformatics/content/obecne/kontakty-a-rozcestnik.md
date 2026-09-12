@@ -59,15 +59,17 @@ Tato stránka slouží jako **univerzální rozcestník a záchranná síť** pr
 
 ---
 
-## 🌲 Pravidelné akce oboru
+## 🎉 Komunitní akce ÚICH: Proč se zapojit
 
-> 💡 **Zkušenost z praxe katedry**:  
-> Pravidelní účastníci komunitního života ústavu mají statisticky **výrazně vyšší úspěšnost dokončení studia**. Sdílení know-how se staršími spolužáky i vyučujícími v neformálním prostředí je nejrychlejší cesta k překonání krizových momentů.
+> 💡 **Zkušenost z praxe ústavu**:  
+> Pravidelní účastníci komunitního života ústavu mají statisticky **výrazně vyšší úspěšnost dokončení studia**. Sdílení know-how se staršími spolužáky i vyučujícími v neformálním prostředí je nejrychlejší cesta k překonání krizových momentů a zkouškových pastí.
 
-* **Bioinformatické vítání prváků (listopad)**:  
-  Pravidelný celodenní pěší výlet studentů všech ročníků a vyučujících ÚICH do přírody první listopadovou sobotu. Ideální příležitost poznat starší spolužáky i vyučující.
+* **Bioinformatické vítání prváků (první listopadová sobota)**:  
+  Celodenní pěší výlet studentů všech ročníků a vyučujících ÚICH do přírody. Nejrychlejší způsob, jak navázat kontakty a získat neocenitelné rady ke zkouškám od starších ročníků.
 * **SVK — Studentská vědecká konference (konec listopadu)**:  
-  Celoškolní den studentské vědy spojený s rektorským volnem. Sekce bioinformatiky probíhá v angličtině a představuje skvělou inspiraci pro volbu tématu vlastní bakalářské práce.
+  Celoškolní den studentské vědy spojený s **celoškolním rektorským volnem**. Sekce bioinformatiky probíhá v angličtině a představuje skvělou inspiraci pro volbu tématu vlastní bakalářské práce.
+* **Vánoční večírek ÚICH (polovina prosince)**:  
+  Neformální setkání studentů a vyučujících před začátkem zkouškového.
 * **BIOPUCT**:  
   Výroční konference doktorandů oboru Bioinformatika s prezentacemi aktuálních výzkumných projektů.
 * **Double-degree VŠCHT–Štrasburk**:  
