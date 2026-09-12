@@ -4,6 +4,7 @@ import {
   BookOpen,
   ChevronDown,
   ChevronRight,
+  ExternalLink,
   Menu,
   MessageSquarePlus,
   PanelLeftClose,
@@ -48,10 +49,12 @@ function NavTreeList({
   nodes,
   activePath,
   depth = 0,
+  isSearching = false,
 }: {
   nodes: NavNode[];
   activePath?: string;
   depth?: number;
+  isSearching?: boolean;
 }) {
   return (
     <ul
@@ -66,6 +69,7 @@ function NavTreeList({
           node={node}
           activePath={activePath}
           depth={depth}
+          isSearching={isSearching}
         />
       ))}
     </ul>
@@ -76,19 +80,41 @@ function NavTreeItem({
   node,
   activePath,
   depth,
+  isSearching = false,
 }: {
   node: NavNode;
   activePath?: string;
   depth: number;
+  isSearching?: boolean;
 }) {
   const containsActive = navNodeContainsPath(node, activePath);
-  const [open, setOpen] = useState(containsActive || depth === 0);
+  const [open, setOpen] = useState(containsActive);
 
   useEffect(() => {
     if (containsActive) setOpen(true);
   }, [containsActive, activePath]);
 
   if (node.type === "file") {
+    if (node.material.externalUrl) {
+      return (
+        <li className="min-w-0">
+          <a
+            href={node.material.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`${node.title} (otevře externí stránku)`}
+            className="flex items-center justify-between gap-1.5 rounded-lg px-2 py-1.5 text-xs font-semibold text-stone-700 hover:bg-stone-100 hover:text-brand-orange transition-colors truncate group cursor-pointer"
+          >
+            <span className="truncate">{node.title}</span>
+            <ExternalLink
+              size={12}
+              className="shrink-0 text-stone-400 group-hover:text-brand-orange transition-colors"
+            />
+          </a>
+        </li>
+      );
+    }
+
     const href = materialHref(node.material);
     const isActive = activePath === node.material.path;
     const isPA2 = node.material.path.includes("pa2-ag1-overview");
@@ -115,18 +141,19 @@ function NavTreeItem({
   const hubHref = node.hub ? materialHref(node.hub) : undefined;
   const folderActive =
     node.hub && activePath === node.hub.path && node.children.length > 0;
+  const isOpen = isSearching || open;
 
   return (
     <li className="min-w-0">
       <div className="flex items-stretch gap-0.5 min-w-0">
         <button
           type="button"
-          aria-expanded={open}
-          aria-label={open ? "Sbalit" : "Rozbalit"}
-          onClick={() => setOpen((v) => !v)}
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Sbalit" : "Rozbalit"}
+          onClick={() => setOpen(!isOpen)}
           className="shrink-0 rounded-lg px-1 text-stone-400 hover:bg-stone-100 hover:text-stone-700 cursor-pointer"
         >
-          {open ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+          {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
         </button>
         {hubHref ? (
           <Link
@@ -134,7 +161,7 @@ function NavTreeItem({
             title={node.title}
             className={cn(
               "flex-1 min-w-0 rounded-lg px-1.5 py-1.5 text-xs font-bold transition-colors truncate",
-              folderActive || (containsActive && !open)
+              folderActive || (containsActive && !isOpen)
                 ? "text-brand-orange-text bg-brand-orange/10"
                 : "text-stone-800 hover:bg-stone-100"
             )}
@@ -145,19 +172,20 @@ function NavTreeItem({
           <button
             type="button"
             title={node.title}
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => setOpen(!isOpen)}
             className="flex-1 min-w-0 text-left rounded-lg px-1.5 py-1.5 text-xs font-bold text-stone-800 hover:bg-stone-100 cursor-pointer truncate"
           >
             {node.title}
           </button>
         )}
       </div>
-      {open && (
+      {isOpen && (
         <div className="mt-0.5">
           <NavTreeList
             nodes={node.children}
             activePath={activePath}
             depth={depth + 1}
+            isSearching={isSearching}
           />
         </div>
       )}
@@ -227,6 +255,12 @@ export function WikiPage() {
   }, [active]);
 
   useEffect(() => {
+    if (active?.externalUrl) {
+      window.location.replace(active.externalUrl);
+    }
+  }, [active?.externalUrl]);
+
+  useEffect(() => {
     setSidebarOpen(false);
     setSuggestOpen(false);
   }, [splat]);
@@ -253,8 +287,8 @@ export function WikiPage() {
   }, [groups, query]);
 
   const isSpecial = active?.key === "pa2-ag1-overview";
-  /** Interactive special pages aren't a single .md source for full-file PR */
-  const canSuggestMarkdown = Boolean(active && !isSpecial);
+  /** Interactive special pages & external redirect pages aren't a single .md source for full-file PR */
+  const canSuggestMarkdown = Boolean(active && !isSpecial && !active.externalUrl);
 
   const renderSidebarContent = (collapsed: boolean) => (
     <aside className="flex flex-col h-full min-h-0 max-h-full">
@@ -310,7 +344,11 @@ export function WikiPage() {
             >
               {g.label}
             </div>
-            <NavTreeList nodes={g.tree} activePath={active?.path} />
+            <NavTreeList
+              nodes={g.tree}
+              activePath={active?.path}
+              isSearching={Boolean(query.trim())}
+            />
           </div>
         ))}
         {filteredGroups.length === 0 && (
@@ -446,6 +484,36 @@ export function WikiPage() {
               <div className="text-center py-16 text-stone-500">
                 <BookOpen className="mx-auto mb-3 text-brand-orange" size={32} />
                 <p className="font-semibold">Vyberte materiál v bočním panelu</p>
+              </div>
+            ) : active.externalUrl ? (
+              <div className="text-center py-16 px-4 max-w-md mx-auto">
+                <div className="w-14 h-14 rounded-2xl bg-orange-50 text-brand-orange flex items-center justify-center mx-auto mb-4 border border-brand-orange/20">
+                  <ExternalLink size={26} />
+                </div>
+                <h1 className="text-xl font-bold text-stone-900 mb-2">
+                  Přesměrování na externí stránku
+                </h1>
+                <p className="text-sm text-stone-600 mb-6">
+                  Probíhá přesměrování na{" "}
+                  <strong className="text-stone-800">{active.title}</strong>:
+                  <br />
+                  <a
+                    href={active.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-xs text-brand-orange hover:underline font-semibold break-all mt-1 inline-block"
+                  >
+                    {active.externalUrl}
+                  </a>
+                </p>
+                <a
+                  href={active.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-orange text-white font-bold text-sm shadow-sm hover:bg-orange-600 transition-colors"
+                >
+                  Přejít na stránku <ExternalLink size={14} />
+                </a>
               </div>
             ) : isSpecial ? (
               <>

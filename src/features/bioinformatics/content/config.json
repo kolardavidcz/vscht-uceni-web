@@ -1,8 +1,8 @@
 {
   "categories": {
-    "0-obecne": {
+    "obecne": {
       "label": "Obecné informace",
-      "order": 1,
+      "order": 0,
       "files": {
         "general": {
           "title": "Hlavní rozcestník",
@@ -12,20 +12,27 @@
           "title": "Průvodce prváka (VŠCHT + FIT)",
           "order": 2
         },
-        "stedokolsk-chemie": {
-          "title": "Středoškolská chemie",
-          "order": 3
-        },
-        "priprav-se-programovani": {
-          "title": "Připrav se – programování",
-          "order": 4
-        },
         "zapisky": {
           "title": "Zápisky",
           "order": 5
         }
       }
     },
+    "0-semestr": {
+      "label": "0. Semestr",
+      "order": 1,
+      "files": {
+        "priprav-se-programovani": {
+          "title": "Připrav se – programování",
+          "order": 1,
+          "externalUrl": "https://e-learning.vscht.cz/course/view.php?id=3521"
+        },
+        "stedokolsk-chemie": {
+          "title": "Středoškolská chemie",
+          "order": 2
+        }
+      }
+    },      
     "1-semestr": {
       "label": "1. Semestr",
       "order": 2,
@@ -139,8 +146,13 @@
           "order": 2
         },
         "laboratore-pro-bioinfirmstiky-i": {
-          "title": "Laboratoře pro bioinformatiku",
+          "title": "Laboratoře pro bioinformatiky I",
           "order": 3
+        },
+        "python": {
+          "title": "Python",
+          "order": 4,
+          "externalUrl": "https://newpyt.vercel.app/"
         }
       }
     },

@@ -15,18 +15,22 @@ Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** n
 
 ## 💡 Strategické tipy pro Progtest (přímo z katedry)
 
-* **2 nápovědy bez penalizace na každou úlohu**:  
-  Využijte je! Můžete si vzájemně se spolužáky pomáhat a nápovědy sdílet. Ukážete si, na kterých vstupních datech váš kód selhal, a pomůžete si navzájem odhalit chybějící podmínky.
-* **Řešte nepovinná malá „Cvičení“**:  
-  Kromě velkých domácích úloh jsou v Progtestu i malé úlohy za minimum bodů. Tyto úlohy izolovaně učí nový princip (např. rekurzi nebo dynamické pole) a máte v nich k dispozici **cca 20 nápověd** — ideální trénink!
-* **Přípravný kurz v e-learningu**:  
-  [Připrav se – Bioinformatika (id=3521)](https://e-learning.vscht.cz/course/view.php?id=3521).
+* **Odevzdávání na jistotu (pozor na limit ~20 pokusů)**:  
+  Na odevzdání každé úlohy máte přibližně 20 pokusů. **Nikdy neodevzdávejte stylem pokus-omyl!** Odevzdejte pouze kód, u kterého jste si lokálním otestováním jistí, že na 100 % splňuje základní testy z ukázky zadání a ošetřuje mezní stavy.
+* **Hledat řešení na internetu je ztráta času**:  
+  Vše potřebné k vyřešení úloh zazní na přednáškách a cvičeních. Nalezená řešení na internetu často používají pokročilé knihovny či konstrukce mimo rámec kurzu, které v Progtestu neprojdou přes restrikce nebo selžou na efektivitu.
+* **2 nepenalizované nápovědy na úlohu (nástroj spolupráce)**:  
+  Každá progtestová úloha nabízí dvě nápovědy zdarma. Využijte je a **sdílejte mezi sebou vstupní data, na kterých vám kód selhal**. Zjistíte tak, jaké zákeřné vstupy Progtest testuje, aniž byste porušili zákaz sdílení kódu.
+* **Řešte nepovinná malá „Cvičení“ (cca 20 nápověd)**:  
+  Kromě velkých domácích úloh jsou v Progtestu k dispozici malé úlohy za minimum bodů. Vyučující je na cvičeních neprobírají, ale silně doporučují si je vyřešit: v jednoduché a izolované podobě představují nové principy (např. práci s pamětí, rekurzi či spojové seznamy), které se vzápětí objeví ve velké úloze. Máte v nich navíc k dispozici cca 20 nápověd!
 * **Aplikace Trainer**:  
   Cvičebnice [Trainer KSI (kurz k PA1)](https://trainer.ksi.fit.cvut.cz/courses/81) nabízí praktické úkoly s teorií od úplných začátků kompilace až po několik ukázkových zkouškových zadání.
 * **Studijní portál FIT Wiki**:  
   Velmi cenným studijním zdrojem materiálů a zadání je [fit-wiki.cz](https://www.fit-wiki.cz) (vyžaduje bezplatnou registraci).
+* **Přípravný kurz v e-learningu**:  
+  [Připrav se – Bioinformatika (id=3521)](https://e-learning.vscht.cz/course/view.php?id=3521).
 * **🚨 ZÁKAZ SDÍLENÍ KÓDU (Antiplagiátor)**:  
-  Za žádnou cenu nikomu neposkytujte svůj zdrojový kód a nedávejte jej na internet (GitHub bez privátního nastavení, Discord apod.). Progtest používá špičkový antiplagiátorský systém analyzující strukturu AST stromů. Společné debaty nad algoritmem jsou skvělé, ale kód pište vždy výhradně sami.
+  Za žádnou cenu nikomu neposkytujte svůj zdrojový kód a nedávejte jej na internet (veřejný GitHub, Discord apod.). Progtest implementuje špičkový antiplagiátorský systém analyzující abstraktní syntaktické stromy (AST). Společné úvahy nad algoritmem jsou skvělé, ale kód si pište výhradně sami.
 * **🎓 Psychologický tip ke zkoušce na FITu**:  
   Když dáte vyučujícímu při zkoušce nebo na cvičeních nenásilně najevo, že jste **z VŠCHT**, bývá pohled na vaše programátorské zaváhání znatelně shovívavější!
 

@@ -6,6 +6,8 @@ export type FileConfig = {
   order?: number;
   /** Nested children — folder node in the sidebar tree */
   files?: Record<string, FileConfig>;
+  /** Optional external URL for direct redirect/transfer */
+  externalUrl?: string;
 };
 
 export type CategoryConfig = {
@@ -31,6 +33,8 @@ export type WikiMaterial = {
   raw: string;
   /** route segments after /obor-bioinformatika/ */
   segments: string[];
+  /** Optional external URL for direct redirect/transfer */
+  externalUrl?: string;
 };
 
 /** Sidebar tree node */
@@ -63,6 +67,15 @@ const rawModules = import.meta.glob("../content/**/*.md", {
 function titleFromMarkdown(raw: string, fallback: string): string {
   const match = raw.match(/^#\s+(.+)$/m);
   return match?.[1]?.trim() || fallback;
+}
+
+function externalUrlFromMarkdown(raw: string): string | undefined {
+  const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (fmMatch) {
+    const urlMatch = fmMatch[1].match(/externalUrl:\s*(.+)$/m);
+    if (urlMatch) return urlMatch[1].trim();
+  }
+  return undefined;
 }
 
 function pathToParts(modulePath: string): {
@@ -132,6 +145,7 @@ export function loadWikiMaterials(): WikiMaterial[] {
     const fallbackTitle = fileKey.replace(/-/g, " ");
     const title = leaf?.title || titleFromMarkdown(raw, fallbackTitle);
     const fileOrder = pathOrders[pathOrders.length - 1] ?? 999;
+    const externalUrl = leaf?.externalUrl || externalUrlFromMarkdown(raw);
 
     materials.push({
       key: fileKey,
@@ -144,6 +158,7 @@ export function loadWikiMaterials(): WikiMaterial[] {
       path: modulePath,
       raw,
       segments,
+      externalUrl,
     });
   }
 
