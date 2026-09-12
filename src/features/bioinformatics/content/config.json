@@ -8,13 +8,21 @@
           "title": "Hlavní rozcestník",
           "order": 1
         },
+        "pruvodce-prvaka": {
+          "title": "Průvodce prváka (VŠCHT + FIT)",
+          "order": 2
+        },
         "stedokolsk-chemie": {
           "title": "Středoškolská chemie",
-          "order": 2
+          "order": 3
+        },
+        "priprav-se-programovani": {
+          "title": "Připrav se – programování",
+          "order": 4
         },
         "zapisky": {
           "title": "Zápisky",
-          "order": 3
+          "order": 5
         }
       }
     },
@@ -26,8 +34,8 @@
           "title": "BI-PA1 — Programování v C",
           "order": 1,
           "files": {
-            "jak-cist": {
-              "title": "0 · Jak toto číst",
+            "behem-semestru-a-pred-nim": {
+              "title": "0 · Během semestru a před ním",
               "order": 0
             },
             "wsl-a-setup": {
@@ -39,20 +47,16 @@
               "order": 2
             },
             "jak-to-spravit": {
-              "title": "2 · Jak to spravit (debug · struktura · pasty)",
-              "order": 2
-            },
-            "struktura-kodu": {
-              "title": "3 · Struktura kódu",
+              "title": "3 · Jak to spravit (debug & testování)",
               "order": 3
             },
-            "testovaci-skript": {
-              "title": "4 · Testovací skript",
+            "struktura-kodu": {
+              "title": "4 · Struktura kódu",
               "order": 4
             },
             "progtest-a-zkouska": {
               "title": "5 · Progtest a zkouška (plné rady)",
-              "order": 6
+              "order": 5
             }
           }
         },
@@ -137,6 +141,34 @@
         "laboratore-pro-bioinfirmstiky-i": {
           "title": "Laboratoře pro bioinformatiku",
           "order": 3
+        }
+      }
+    },
+    "4-semestr": {
+      "label": "4. Semestr",
+      "order": 5,
+      "files": {
+        "biochemie-II": {
+          "title": "Biochemie II",
+          "order": 1
+        },
+        "Analyticka-chemie": {
+          "title": "Analytická chemie",
+          "order": 2
+        },
+        "Statistika": {
+          "title": "Statistika",
+          "order": 3
+        }
+      }
+    },
+    "5-semestr": {
+      "label": "5. Semestr",
+      "order": 6,
+      "files": {
+        "bakalarky-a-vyzkum": {
+          "title": "Bakalářské práce & Výzkum (ÚICH)",
+          "order": 1
         }
       }
     }

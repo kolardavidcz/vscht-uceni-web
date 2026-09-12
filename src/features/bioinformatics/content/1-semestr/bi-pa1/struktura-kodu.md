@@ -1,8 +1,8 @@
-# Obecně o struktuře kódu
+# 4 · Struktura kódu
 
 *Jak psát programy, abyste se z toho nezbláznili — a abyste je vůbec uměli opravit.*
 
-Zpět: [kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar) · [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit)
+Zpět: [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar) · [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit) · [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 
 ---
 

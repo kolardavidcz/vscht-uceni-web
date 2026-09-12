@@ -1,15 +1,36 @@
-# Progtest (během semestru)
+# 5 · Progtest a zkouška (rady a tipy)
 Souvisí: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit) · [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) · [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar)
 
-Progtest je automat na odevzdávání — **hodně citlivý** na přesnost oproti zadání.
+Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** na přesnost formátu výstupu, rychlost a čistou práci s pamětí.
 
-**Před submitem**
+**Před submitem do Progtestu**
 
-* Přesný výstup (mezery, konce řádků, hlášky).  
-* Edge cases ze zadání, ne jen že to minimálně projde.  
-* Lokální sada: [testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript).  
+* Přesný výstup (každá mezera, konce řádků `\n`, přesné znění chybových hlášek).  
+* Edge cases ze zadání (prázdné pole, 0 prvků, 1 prvek, maximální limit).  
+* Lokální sada: [lokální testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#lokalni-testovani-ze-souboru).  
 * Kompilace / paměť / warningy: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).  
-* Když program na Progtestu padá — **potráp ho většími vstupy** lokálně.
+* Když program na Progtestu padá — **potrap ho většími vstupy** lokálně.
+
+---
+
+## 💡 Strategické tipy pro Progtest (přímo z katedry)
+
+* **2 nápovědy bez penalizace na každou úlohu**:  
+  Využijte je! Můžete si vzájemně se spolužáky pomáhat a nápovědy sdílet. Ukážete si, na kterých vstupních datech váš kód selhal, a pomůžete si navzájem odhalit chybějící podmínky.
+* **Řešte nepovinná malá „Cvičení“**:  
+  Kromě velkých domácích úloh jsou v Progtestu i malé úlohy za minimum bodů. Tyto úlohy izolovaně učí nový princip (např. rekurzi nebo dynamické pole) a máte v nich k dispozici **cca 20 nápověd** — ideální trénink!
+* **Přípravný testovač Davida Koláře na Moodle**:  
+  Pokud chcete začít ještě před semestrem, vyzkoušejte interaktivní úlohy v kurzu [Připrav se – Bioinformatika (id=3521)](https://e-learning.vscht.cz/course/view.php?id=3521).
+* **Aplikace Trainer**:  
+  Cvičebnice [Trainer KSI (kurz k PA1)](https://trainer.ksi.fit.cvut.cz/courses/81) nabízí praktické úkoly s teorií od úplných začátků kompilace až po několik ukázkových zkouškových zadání.
+* **Studijní portál FIT Wiki**:  
+  Velmi cenným studijním zdrojem materiálů a zadání je [fit-wiki.cz](https://www.fit-wiki.cz) (vyžaduje bezplatnou registraci).
+* **🚨 ZÁKAZ SDÍLENÍ KÓDU (Antiplagiátor)**:  
+  Za žádnou cenu nikomu neposkytujte svůj zdrojový kód a nedávejte jej na internet (GitHub bez privátního nastavení, Discord apod.). Progtest používá špičkový antiplagiátorský systém analyzující strukturu AST stromů. Společné debaty nad algoritmem jsou skvělé, ale kód pište vždy výhradně sami.
+* **🎓 Psychologický tip ke zkoušce na FITu**:  
+  Když dáte vyučujícímu při zkoušce nebo na cvičeních nenásilně najevo, že jste **z VŠCHT**, bývá pohled na vaše programátorské zaváhání znatelně shovívavější!
+
+---
 
 ### Co Progtest testuje (typy testů)
 
@@ -20,6 +41,8 @@ Progtest je automat na odevzdávání — **hodně citlivý** na přesnost oprot
 | **Test ošetření vstupních dat** | Nesprávné vstupy (nečíselné tam kde číslo, záporná délka…) — program musí správně odmítnout. |
 | **Extenzivní test náhodnými hodnotami** | Větší náhodné vstupy, výsledky se srovnávají s referenčním řešením. |
 | **Kontrola práce s pamětí** | Stejně jako extenzivní, ale navíc kontroluje přístupy mimo alokovanou paměť a správné `free`. Za úniky paměti **−30 %**. |
+
+---
 
 # Příprava na zkoušku (poznámky od přednášejících)
 

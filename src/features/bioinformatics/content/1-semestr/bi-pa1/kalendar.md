@@ -53,7 +53,7 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 * Mezera ve formátovacím řetězci ve `scanf` **přeskočí bílé znaky** — `scanf(" ")` umí ušetřit šílenosti.
 * Formát u `scanf` ideálně **končí konverzí**.
 * Když se `printf` v CLionu „neukáže hned“: [Jak to spravit → fflush](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
-* Lokální testy bez copy-paste do konzole (ale do kódu): [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript).
+* Lokální testy bez copy-paste do konzole: [Testovací skript v Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#4-lokalni-testovani-ze-souboru-testshellsh).
 * Pokorčílé (zjistíte později): `scanf("%s")` **nemůže být bezpečné** (buffer) — na Progtestu se to mstí. Detaily: [zkouškové rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska).
 
 **Trainer**
@@ -117,7 +117,7 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 
 * Funkce, která „dělá všechno + tiskne + čte“ se na Progtestu a v debugování mstí.
 * U zkoušky: **jeden obří `main`** bez funkcí u zkouškové úlohy úplně neprojde. Funkce se lépe defungují debug. → [Struktura](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) · [zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
-* Lokální automatické testy: [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript).
+* Lokální automatické testy: [Testovací skript v Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#4-lokalni-testovani-ze-souboru-testshellsh).
 
 **Trainer**
 
@@ -415,7 +415,7 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 |--------|-----|
 | Debug, flagy, paměť, pasty | [**Jak to spravit**](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit) |
 | Nestíháš se v kódu vyznat / obří main | [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) |
-| Manuální testování přes copy-paste | [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript) |
+| Manuální testování přes copy-paste | [Testovací skript v Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#4-lokalni-testovani-ze-souboru-testshellsh) |
 | Windows bez Linux nástrojů | [WSL](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup) |
 | Odevzdání / **zkouška (plné rady)** | [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) |
 

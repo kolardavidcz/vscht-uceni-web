@@ -1,13 +1,12 @@
-# Jak to spravit
+# 3 · Jak to spravit (debug & testování)
 
-**Debug · struktura · pasty** — když kód nefunguje, Progtest nadává, nebo nevíš, kde začít.
+**Debug · testovací skript · pasty** — když kód nefunguje, Progtest nadává, nebo nevíš, kde začít.
 
-Nejde o učebnici C. Jde o **postup, jak si program opravit**: nástroje → typické pasty (dřív „SUS“) → odkazy na strukturu a testy.
+Nejde o učebnici C. Jde o **postup, jak si program opravit**: nástroje $\to$ lokální testování $\to$ typické pasty $\to$ odkazy na strukturu.
 
-* [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) — jak psát, abys to vůbec uměl debugovat  
-* [Testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript) — lokální testy bez copy-paste  
-* [Zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) — časté chyby u zkoušky (celý seznam)  
-* [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar)
+* [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) — jak psát, aby šel kód rozumně ladit  
+* [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) — strategie nápověd a časté zkouškové chyby  
+* [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar) — co musím umět v kterém týdnu  
 
 ---
 
@@ -158,21 +157,61 @@ Když kompilátor nezná `nullptr` (starší standard než C23):
 
 ---
 
-## 4. Rychlý postup „kód je rozbitý“
+## 4. Lokální testování ze souborů (`testshell.sh`)
 
-1. **Přečti první error kompilátoru shora** (ne poslední v cascade).  
-2. Zapni `-Wall -Wextra -pedantic` a vyčisti warningy.  
-3. Malý vstup ručně / [testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/testovaci-skript).  
-4. Debugger: kde se hodnoty rozcházejí s papírem.  
-5. Paměť: sanitizer **nebo** Valgrind.  
-6. Když padá jen na Progtestu — napiš si vlastní testovací vstupy
- * **vlastní** předpočítej si vlastní testovací data, čím záludnější, tím lepší (ne jen sample)
- * **větší vstupy** zkus nakopírovat nějaký test několikrát za/do sebe.  
-7. Kód je spaghetti? → [struktura](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) (funkce + structy).
+Místo neustálého copy-pastování vstupů do konzole si vytvořte složku s testy a automatický spouštěcí skript.
+
+### Příprava složky:
+1. Sestavený binární program: `./main`
+2. Složka s testy (např. `CZE/` z Progtestu) obsahující dvojice `*_in.txt` a referenční `*_out.txt`
+3. Skript `testshell.sh` ve stejné složce:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+PROG=./main
+REFERENCE_FOLDER=CZE/*_in.txt
+
+for IN_FILE in $REFERENCE_FOLDER; do
+  REF_FILE="${IN_FILE/_in.txt/_out.txt}"
+  "$PROG" < "$IN_FILE" > my_out.txt
+  if ! diff -u "$REF_FILE" my_out.txt; then
+    echo "❌ Fail na testu: $IN_FILE"
+    exit 1
+  else
+    echo "✅ OK: $IN_FILE"
+  fi
+done
+echo "🎉 Všechny lokální testy prošly!"
+```
+
+Spuštění ve WSL:
+```bash
+chmod +x testshell.sh
+./testshell.sh
+```
+
+> ⚠️ **Pozor na konce řádků (CRLF vs. LF)**:  
+> Textové soubory vytvořené ve Windows mohou mít konce řádků `\r\n`. V Linuxu to způsobí, že `diff` nahlásí chybu i při shodném textu. Případně použijte nástroj `dos2unix` nebo v editoru nastavte konce řádků na **LF**.
 
 ---
 
-## 5. Typické pasti
+## 5. Rychlý postup „kód je rozbitý“
+
+1. **Přečti první error kompilátoru shora** (ne poslední v cascade).  
+2. Zapni `-Wall -Wextra -pedantic` a vyčisti warningy.  
+3. Malý vstup vyzkoušej ručně / spusť lokální `testshell.sh`.  
+4. Debugger: kde se hodnoty rozcházejí s očekáváním na papíře.  
+5. Paměť: sanitizer `-fsanitize=address,undefined` **nebo** Valgrind.  
+6. Když padá jen na Progtestu — napiš si vlastní testovací vstupy:
+   * **vlastní**: předpočítej si záludná data (prázdný vstup, záporné číslo, hraniční nuly).
+   * **větší vstupy**: zkus nakopírovat testovací data několikrát za sebou pro ověření škálování paměti a rychlosti.  
+7. Kód je spaghetti? $\to$ [struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) (rozdělení do funkcí a struktur).
+
+---
+
+## 6. Typické pasti
 
 * [ ] Ignorované warningy „protože to stejně běží“  
 * [ ] `scanf` bez kontroly návratové hodnoty  
