@@ -29,7 +29,7 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 ## ⚡ Checklist prvních dvou týdnů
 
 ### 💳 Karty a vstup na FIT ČVUT
-* [ ] **Karta VŠCHT / ISIC:** Vyzvednete při zápisu na VŠCHT (fotka vám zůstává po celou dobu studia).
+* [ ] **Karta VŠCHT / ISIC:** Karta se nevydává při zápisu — je nutné si ji osobně vyzvednout v [Kartovém centru VŠCHT](https://vc.vscht.cz/idkarty) (fotka vám zůstává po celou dobu studia).
 * [ ] **Aktivace vstupu na ČVUT ([Vydavatelství průkazů](https://ist.cvut.cz/nase-sluzby/kategorie-sluzeb/prukazy-cvut/)):**  
   * **Kdy jít:** Výhradně v 1. týdnu výuky na VŠCHT (dříve vás systém ČVUT nerozpozná, později jsou obří fronty). Rezervujte si čas online!
   * **Co zařídíte:** Nahrání vstupu do budov FITu na kartu VŠCHT + vydání **iniciálního hesla** ČVUT.
