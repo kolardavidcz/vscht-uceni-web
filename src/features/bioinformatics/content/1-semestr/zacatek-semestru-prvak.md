@@ -1,210 +1,271 @@
 # 🎒 Průvodce prváka: Začátek 1. semestru
 
-> 📘 Tento průvodce shrnuje veškeré **administrativní, organizační, studijní i praktické náležitosti** spojené s nástupem do 1. ročníku mezioborového bakalářského programu *Bioinformatika a chemická informatika* (společné studium VŠCHT Praha a FIT ČVUT).  
-> *Konkrétní studijní tipy k jednotlivým předmětům (chemie, matematika, programování v C) najdete v jejich samostatných kapitolách ve wiki.*
+> 📘 Tento průvodce je **kompletním manuálem pro přežití prvních týdnů a celého prvního semestru** v mezioborovém programu *Bioinformatika a chemická informatika* (společné studium VŠCHT Praha a FIT ČVUT).  
+> Shrnuje veškeré administrativní postupy, pravidla dvojího studia, systémy, rozvrhy, stipendia i komunitní zázemí.  
+> *(Podrobné tipy k učení jednotlivých předmětů najdete v jejich samostatných kapitolách ve wiki).*
 
 ---
 
-## 🏛️ 1. Principy dvojího studia (VŠCHT Praha vs. FIT ČVUT)
+## 👵 1. „Hele, co že to vlastně studuješ?“
 
-Studijní program *Bioinformatika a chemická informatika* je unikátní tím, že na něm spolupracují dvě přední vysoké školy: **VŠCHT Praha** a **FIT ČVUT v Praze** (na magisterském stupni navíc i ústavy Akademie věd ČR).
+Pokud se vás rodiče nebo babička zeptají, co vlastně studujete, nejjednodušší vysvětlení zní:  
+**„Chemie a biologie v počítačích.“**  
+Obor propojuje dvě hlavní větve:
+1. **Bioinformatiku** — zpracování genomických dat, analýzu DNA/RNA, sledování mutací a evoluce.
+2. **Chemoinformatiku & počítačový návrh léčiv** — navrhování biologicky aktivních látek pomocí umělé inteligence, prediktivní modelování a vývoj specializovaného softwaru.
 
-Tato mezioborovost s sebou nese několik zásadních administrativních pravidel:
+> 🤝 **Osobní vzkaz starších spolužáků**:  
+> Když jsme nastupovali do prváku, sedli si s námi starší studenti a vyučující z Ústavu informatiky a chemie a začátek nám výrazně usnadnili. Prošli jsme si tím samým peklem i úspěchy. Kdykoliv budete potřebovat poradit, ptejte se na BioCordu nebo v klubovně B1322 — rádi pomůžeme!
+
+---
+
+## 🏛️ 2. Dvě univerzity: Jak funguje dvojí studium (VŠCHT vs. FIT ČVUT)
+
+Na výuce se podílí **VŠCHT Praha** a **Fakulta informačních technologií ČVUT** (na magisterském stupni navíc i ústavy AV ČR).
+
+Z administrativního pohledu platí pevná pravidla:
 * **Formální status studenta:**  
-  Formálně jste řádnými studenty **výhradně na VŠCHT** (Fakulta chemické technologie). Vztahují se na vás předpisy VŠCHT, stipendijní řád, termíny i vedení indexu. Na FIT ČVUT docházíte pouze na smluvní výuku informatiky.
+  Formálně jste řádnými studenty **výhradně VŠCHT** (Fakulta chemické technologie). Vztahují se na vás předpisy VŠCHT, stipendijní řád a termíny. Na FIT ČVUT docházíte pouze na smluvní výuku.
 * **Platnost kreditů:**  
-  Předměty vyučované na FIT ČVUT mohou mít v systémech ČVUT jinou kreditovou hodnotu než na VŠCHT. **Pro vaše studium vždy platí počet kreditů uvedený v SISu na VŠCHT!** Podle hodnot v SISu se posuzuje splnění podmínek pro postup do dalších semestrů i nárok na stipendia.
-* **Rozdělení zodpovědnosti:**  
-  Veškeré formální žádosti (přerušení studia, potvrzení o studiu, uznávání předmětů, rozložení ročníku) řešíte se studijním oddělením VŠCHT.
+  Kreditová dotace některých předmětů na FITu se může lišit od VŠCHT. **Pro vaše studium je závazný VÝHRADNĚ počet kreditů uvedený v SISu na VŠCHT!** Podle SISu se počítá postup do dalšího semestru i stipendia.
+* **Úřední žádosti:**  
+  Potvrzení o studiu, přerušení, rozložení ročníku či uznávání předmětů vyřizujete na děkanátu VŠCHT.
+* **🤫 Zlatý psychologický tip pro zkoušky a cvičení na FITu:**  
+  *Když dáte vyučujícím na FITu při cvičeních nebo u zkoušky vědět, že jste z VŠCHT (bioinformatici), budou na vaše znalosti z informatiky zpravidla pohlížet výrazně shovívavěji a s větším pochopením!*
 
 ---
 
-## 🕒 2. Harmonogram a časové anomálie semestru
+## 🕒 3. Harmonogram & Časové anomálie
 
-Předměty zajišťované VŠCHT běží podle [harmonogramu VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty zajišťované FITem podle [harmonogramu ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
+Předměty VŠCHT běží podle [harmonogramu VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu podle [harmonogramu ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
 
-Dejte si pozor na následující klíčové odlišnosti:
-1. **Posun začátku zimního semestru:**
-   * **Výuka na VŠCHT začíná dříve** (typicky v polovině září, např. 14. 09. 2026).
-   * **Výuka na FIT ČVUT začíná o týden později** (např. 21. 09. 2026).
-   * *Praktický dopad:* V prvním týdnu máte výuku pouze na VŠCHT. Tento volnější týden využijte k zařízení průkazů a přístupů na ČVUT bez front!
+Dejte si pozor na tyto klíčové rozdíly:
+1. **Posun začátku výuky v zimním semestru:**
+   * **VŠCHT začíná dříve** (např. 14. 09. 2026).
+   * **FIT ČVUT začíná o týden později** (např. 21. 09. 2026).
+   * *Co z toho plyne:* V 1. týdnu máte výuku pouze na VŠCHT. Tento volnější týden je ideální pro zařízení vstupu a karet na ČVUT bez front!
 2. **Lichý vs. sudý týden:**  
-   Číslování kalendářních týdnů a akademických týdnů se může na obou školách rozcházet. Vždy sledujte, jaký týden výuky eviduje rozvrh konkrétního předmětu.
+   Číslování kalendářního a akademického týdne se na VŠCHT a ČVUT může rozcházet. Vždy sledujte rozvrh daného předmětu.
 3. **Rektorské dny a děkanské volno:**  
-   Dny volna vyhlášené rektorem VŠCHT neplatí pro výuku na ČVUT a naopak.
+   Volno vyhlášené na VŠCHT neplatí na FITu a naopak.
 4. **Kompenzace státních svátků:**  
-   V harmonogramu obou škol se občas vyskytují dny, kdy výuka probíhá podle rozvrhu jiného dne v týdnu (např. v pátek se učí podle pondělního rozvrhu).
-5. **Imatrikulace:**  
-   Slavnostní akademický obřad přijetí nových studentů do akademické obce VŠCHT (vyžaduje formální společenský oděv).
+   Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
+5. **Imatrikulace VŠCHT:**  
+   Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný formální společenský oblek/šaty).
 
 ---
 
-## ⚡ 3. Checklist prvních dvou týdnů
+## ⚡ 4. Checklist prvních dvou týdnů (Krok za krokem)
 
-### 💳 Průkazy, karty a vstup do budov
-* [ ] **ISIC / Studentský průkaz VŠCHT:**
-  * Obdržíte jej při zápisu ke studiu na VŠCHT.
-  * *Tip z praxe:* Fotografie z průkazu vám zůstane po celou dobu studia! (Při případné ztrátě či výrobě nového průkazu vás na kartovém centru znovu přefotí).
-* [ ] **Kartové centrum ČVUT (Vydavatelství průkazů ČVUT):**
-  * Webové stránky a rezervace: [ist.cvut.cz/nase-sluzby/kategorie-sluzeb/prukazy-cvut](https://ist.cvut.cz/nase-sluzby/kategorie-sluzeb/prukazy-cvut/)
-  * **Kdy tam vyrazit:** Výhradně v **1. týdnu výuky na VŠCHT**!
-    * *Dříve ne:* Systém ČVUT čeká na finální předání seznamu zapsaných studentů z VŠCHT, dříve vás systém ČVUT nerozpozná.
-    * *Později ne:* Jakmile začne semestr na ČVUT, tvoří se kolem poledne obří fronty.
-    * *Doporučení:* Předem si na webu zarezervujte konkrétní čas návštěvy.
-  * **Co se tam vyřizuje:**
-    1. Registrace vaší karty VŠCHT do systému ČVUT pro otevírání dveří a průchod turnikety na FITu (registrace je zpoplatněna dle sazebníku ČVUT).
-    2. Vydání **iniciálního hesla** pro přístup do systémů ČVUT.
+### 💳 Průkazy a vstup na FIT ČVUT
+* [ ] **ISIC / Karta studenta VŠCHT:**  
+  * Vyzvednete při zápisu na VŠCHT.  
+  * *Tip:* Fotografie na průkazu vám zůstane po celou dobu studia! (Při případné výměně karty vás na kartovém centru vyfotí znovu).
+* [ ] **Kartové centrum ČVUT (Vydavatelství průkazů ČVUT):**  
+  * Web a rezervace: [ist.cvut.cz/nase-sluzby/kategorie-sluzeb/prukazy-cvut](https://ist.cvut.cz/nase-sluzby/kategorie-sluzeb/prukazy-cvut/)  
+  * **Kdy jít:** **Výhradně v 1. týdnu výuky na VŠCHT!**  
+    * *Dříve ne:* Systém ČVUT čeká na finální předání seznamu studentů od VŠCHT a dříve vás nerozpozná.  
+    * *Později ne:* Jakmile začne výuka na ČVUT, tvoří se kolem poledne obří fronty.  
+    * *Tip:* Zarezervujte si čas návštěvy předem online!  
+  * **Co tam zařídíte:**  
+    1. Registraci vaší karty VŠCHT do systému ČVUT pro vstup do budov a učeben FITu (zpoplatněno dle sazebníku ČVUT).  
+    2. Vydání **iniciálního hesla** do systémů ČVUT.
 
-### 🔑 Účty, systémy a Wi-Fi
-* [ ] **Zprovoznění celouniverzitního hesla ČVUT:**
-  * Na portálu [Usermap ČVUT](https://usermap.cvut.cz) zadejte iniciální heslo a nastavte si trvalé celouniverzitní heslo.
-* [ ] **Kontrola přístupu do studijních systémů:**
-  * **VŠCHT:** [SIS](https://student.vscht.cz) (rozvrhy, zkoušky, index) a [Moodle VŠCHT](https://e-learning.vscht.cz) (e-learningové testy, studijní materiály).
-  * **FIT ČVUT:** [KOS](https://kos.cvut.cz) (studijní systém ČVUT) a [Courses FIT](https://courses.fit.cvut.cz) (slajdy přednášek, zadání domácích úloh).
-* [ ] **Nastavení Wi-Fi (eduroam):**
-  * **Na VŠCHT:** Pro bezproblémové připojení stáhněte certifikát z webu [Výpočetního centra VŠCHT](https://vc.vscht.cz/navody/sit/wi-fi).
-  * **Na FIT ČVUT:** Pozor, pro přihlášení k eduroam přes ČVUT je potřeba nastavit **speciální síťové heslo** v profilu na [Usermap ČVUT](https://usermap.cvut.cz) (liší se od hlavního přístupového hesla).
-* [ ] **Nastavení přeposílání e-mailů (Forward):**
-  * Škola s vámi bude komunikovat přes schránky `@vscht.cz` i `@fit.cvut.cz` (popř. `@cvut.cz`).
-  * Nastavte si z obou školních schránek automatické přeposílání (forward) do své hlavní soukromé schránky, abyste nezmeškali úřední výzvy a termíny.
+### 🔑 Účty, hesla a Wi-Fi
+* [ ] **Zprovoznění celouniverzitního hesla ČVUT:**  
+  * Na portálu [Usermap ČVUT](https://usermap.cvut.cz) zadejte iniciální heslo a nastavte si trvalé heslo.
+* [ ] **Nastavení Wi-Fi (eduroam):**  
+  * **Na VŠCHT:** Stáhněte certifikát z webu [Výpočetního centra VŠCHT](https://vc.vscht.cz/navody/sit/wi-fi).  
+  * **Na FIT ČVUT:** Pozor, pro eduroam na ČVUT je potřeba nastavit **speciální síťové heslo** v profilu na [Usermap ČVUT](https://usermap.cvut.cz) (je jiné než hlavní heslo do KOSu!).
+* [ ] **Automatické přeposílání e-mailů (Forward):**  
+  * Budou vám chodit zprávy do schránky `@vscht.cz` i `@fit.cvut.cz` / `@cvut.cz`.  
+  * Nastavte si z obou forward do jedné soukromé schránky, ať nepromeškáte deadliny a úřední výzvy.
 
-### 💬 Komunikace & Bezpečnost
-* [ ] **Discord BioCord (Povinný komunikační uzel!):**
-  * Připojte se přes odkaz: **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)**.
-  * ⚠️ **Zásadní povinnost:** Nastavte si svůj server nickname na své občanské **Jméno Příjmení**! BioCord slouží jako oficiální komunikační kanál Ústavu informatiky a chemie pro operativní informace, výuku i pomoc od starších studentů.
-* [ ] **Problémy s výukou na FIT:**
-  * Pro řešení jakýchkoliv organizačních či výukových potíží na FITu pište na adresu: `bioinformatika@fit.cvut.cz` (váš požadavek je přímo předán studijnímu oddělení FIT).
-* [ ] **Školení bezpečnosti:**
-  * **VŠCHT:** Realizuje se při zápisu ke studiu podpisem příslušného prohlášení.
-  * **FIT ČVUT:** Probíhá formou online e-learningového kurzu, po jehož absolvování je nutné se fyzicky dostavit k podpisu (pokyny obdržíte e-mailem).
+### 💬 Komunikace a Discord
+* [ ] **Discord BioCord (Povinnost!):**  
+  * Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)**.  
+  * ⚠️ **Zásadní pravidlo:** Změňte si nickname na své reálné **Jméno Příjmení**! BioCord je primární komunikační uzel Ústavu informatiky a chemie pro výuku, rady i akce.
+* [ ] **Řešení problémů s výukou na FIT:**  
+  * Při jakýchkoliv administrativních či rozvrhových potížích na FITu pište na adresu: `bioinformatika@fit.cvut.cz` (váš mail putuje přímo referentkám studijního oddělení FIT).
+* [ ] **Školení bezpečnosti:**  
+  * **VŠCHT:** Podepisuje se při zápisu.  
+  * **FIT ČVUT:** Probíhá online e-learningem, po jehož dokončení se musíte fyzicky dostavit k podpisu (instrukce dorazí e-mailem).
 
 ---
 
-## ⚠️ 4. Rozvrh, paralelky na FIT a „Past KOSu“
+## 🌐 5. Rozcestník školních systémů: Co kde hledat
 
-Způsob zápisu rozvrhu se mezi univerzitami zásadně liší:
+### Systémy VŠCHT:
+* **[SIS VŠCHT](https://student.vscht.cz)** — rozvrhy, přihlašování na termíny zkoušek, oficiální index, zápis předmětů a žádosti o stipendia.
+* **[Moodle VŠCHT](https://e-learning.vscht.cz)** — e-learningové kurzy, přednáškové slajdy, cvičné testy z chemie a matematiky.
+* **[Mapy Emil VŠCHT](https://emil.vscht.cz/maps)** — interaktivní plánek budov A a B a hledání učeben.
+* **[Web studijního programu](https://studuj.bioinformatiku.cz)** — studijní plány a kalendář obsazenosti klubovny B1322.
 
-* **1. ročník Bc. — Cvičení jsou předem zajištěna:**  
-  Pro 1. i 2. semestr (celý první ročník) jsou rozvrhové paralelky cvičení na FITu **rezervovány výhradně pro studenty bioinformatiky**. Nikdo cizí se do nich nemůže zapsat a vy sami se o zápis paralelek cvičení nestaráte.
+### Systémy FIT ČVUT:
+* **[Courses FIT](https://courses.fit.cvut.cz)** — centrální studijní portál FIT: přednáškové slajdy, materiály ze cvičení, zadání.
+* **[Progtest](https://progtest.fit.cvut.cz)** — automatický vyhodnocovací systém programovacích úloh pro BI-PA1.
+* **[Timetable FIT](https://timetable.fit.cvut.cz)** — rozvrhy předmětů FIT a obsazenost učeben.
+* **[Marast](https://marast.fit.cvut.cz)** — matematické cvičebnice a testovací prostředí ČVUT.
+* **[Grades FIT](https://grades.fit.cvut.cz)** — přehled průběžných bodů ze cvičení na FITu.
+* **[Trainer KSI](https://trainer.ksi.fit.cvut.cz)** — cvičebnice programování od naprostých základů v C až po zkoušková zadání.
+* **[FIT Help & Navigace](https://help.fit.cvut.cz)** — návody k budovám, značení místností na FITu a softwarové licence.
+* **[FIT-Wiki](https://www.fit-wiki.cz)** — neocenitelná studentská databáze: zápisky z přednášek, vypracované materiály a **archiv reálných zkouškových písemek z minulých let** (vyžaduje rychlou registraci s ČVUT účtem).
+
+---
+
+## ⚠️ 6. Rozvrh, paralelky na FIT a „Past KOSu“
+
+* **1. ročník Bc. — Cvičení jsou zajištěna:**  
+  V 1. i 2. semestru jsou cvičení na FITu **rezervována výhradně pro studenty bioinformatiky**. Nikdo cizí se do nich nemůže zapsat a vy sami se o zápis paralelek cvičení nestaráte.
 * **🛑 VAROVÁNÍ: Matoucí e-maily z KOSu ignorujte!**  
-  Na začátku semestru vám ze systému KOS mohou začít chodit automatické systémové zprávy s upozorněním, že vaše paralelka *„není otevřená“*. **Tyto e-maily ignorujte a v KOSu rozhodně nic neměňte!** Vaše paralelky jsou pevně domluvené a cvičení pro vás platí.
+  Na začátku semestru vám ze systému KOS mohou přijít automatické zprávy, že vaše paralelka *„není otevřená“*. **Tyto e-maily ignorujte a v KOSu nic neměňte!** Cvičení pro vás platí.
 * **Přednášky a prosemináře na FIT:**  
-  Můžete navštěvovat libovolné paralelky přednášek a proseminářů, které si vyberete tak, aby nekolidovaly s vaším rozvrhem na VŠCHT. **V KOSu se na přednášky nepřihlašujte!**
-* **Značení FIT předmětů v SISu:**  
-  V rozvrhu SIS poznáte předměty vyučované na FITu podle kódu začínajícího na `B500xxx` (pro bakaláře) nebo `M500xxx` (pro magistry).
-* **Navigace po kampusu a učebnách:**  
-  * Budovy a místnosti VŠCHT: [emil.vscht.cz/maps](https://emil.vscht.cz/maps)
-  * Učebny a značení budov FIT ČVUT (Nová budova ČVUT a Thákurova): [help.fit.cvut.cz](https://help.fit.cvut.cz)
-  * Rozvrhy FIT: [timetable.fit.cvut.cz](https://timetable.fit.cvut.cz)
-* **Předběžný zápis pro 2. ročník:**  
-  Upozornění: Zatímco v 1. ročníku cvičení zajišťuje katedra, **od 2. ročníku si paralelky na FITu zapisujete sami v KOSu**. Tento proces začíná **již v průběhu letního semestru 1. ročníku předběžným zápisem**!
+  Můžete navštěvovat kterékoliv paralelky přednášek a proseminářů, které nekolidují s vaším rozvrhem na VŠCHT. **V KOSu se na přednášky nepřihlašujte!**
+* **Kódy FIT předmětů v SISu:**  
+  V SISu začínají kódem `B500xxx` (Bc.) nebo `M500xxx` (Mgr.).
+* **Kdy si budete rozvrh na FITu volit sami:**  
+  Samostatný výběr paralelek vás čeká od 2. ročníku. Pozor: **předběžný zápis předmětů v KOSu pro 2. ročník začíná již v letním semestru 1. ročníku!**
 
 ---
 
-## 📊 5. Pravidla postupu: „The Great Filter“ & Kreditový deficit
+## 📊 7. The Great Filter: První semestr & Kreditová pravidla
 
-O technických školách se říká, že přijímačky končí až druhým ročníkem. První semestr bioinformatiky představuje nejnáročnější síto z celého studia.
-
-Zimní semestr stojí na **trojici stěžejních předmětů po 8 kreditech**:
+Zimní semestr 1. ročníku představuje největší síto studia. Tvoří ho **trojice velkých předmětů po 8 kreditech**:
 1. **BI-PA1 (Programování a algoritmizace I)** na FIT ČVUT — 8 kreditů
 2. **Matematika A** na VŠCHT — 8 kreditů
 3. **Obecná a anorganická chemie I (OACH I)** na VŠCHT — 8 kreditů
-*(Tyto 3 předměty tvoří dohromady 24 kreditů z celkových 30 za semestr).*
+*(Dohromady 24 kreditů ze 3 předmětů).*
+
+### Klíčových prvních 7 týdnů:
+* V polovině semestru (kolem 6. týdne) se píší **první zápočtové testy z Matematiky A i Anorganické chemie I**.
+* **Zásadní fakt:** První zápočtové testy jsou **podstatně jednodušší** než druhé zápočtové testy na konci semestru!
+* Na zápočet z Matiky i Chemie potřebujete z obou testů dohromady **více než 50 % bodů** (cca 100 bodů). Pokud první test napíšete výborně, vytvoříte si klid pro náročný závěr semestru.
+* *Pokud zápočet nezískáte:* Píší se souhrnné opravné testy, které však zkouší učivo obou zápočtů dohromady, což je nesrovnatelně těžší.
 
 ### Podmínky postupu podle Studijního řádu:
 * **Zápis do letního semestru 1. ročníku:**  
-  Musíte získat **minimálně 15 kreditů** ze zimního semestru. V praxi to znamená nutnost úspěšně složit **alespoň 2 velké zkoušky** (nebo 1 velkou + menší povinné předměty).
+  Musíte získat **minimálně 15 kreditů** za zimní semestr. V praxi to znamená: **musíte udělat buď matiku, nebo chemii + PA1 (aspoň jedno z toho), případně obě VŠCHT zkoušky**.
 * **Postup do 2. ročníku:**  
-  Na konci 1. akademického roku musíte mít z povinných (P) a povinně volitelných (PV) předmětů **minimálně 45 kreditů**!
-* **Vzorec maximálního kreditového deficitu pro vyšší ročníky:**  
+  Za celý 1. akademický rok musíte mít z povinných (P) a povinně volitelných (PV) předmětů **minimálně 45 kreditů**!
+* **Vzorec maximálního kreditového deficitu:**  
   Pro postup do každého dalšího ročníku vám smí chybět maximálně 15 kreditů z třicetinásobku již absolvovaných semestrů:
   $$30 \times n - 15$$
-  *(kde $n$ je počet již absolvovaných semestrů; po 2 semestrech min. 45 kreditů, po 4 semestrech min. 105 kreditů).*
-
-### Opakování předmětů a zkoušek:
-* **Limit zápisů předmětu:** Každý předmět si lze během celého studia zapsat **maximálně 3×**.
-* **Limit termínů:** Na každou zkoušku máte **3 pokusy** (1 řádný + 2 opravné).
-* **Proč je kritické nepřenášet BI-PA1 do 2. ročníku:**  
-  Pokud neuděláte PA1 v prváku a přenesete si ji do druháku, ocitnete se v extrémně rizikové situaci. Ve 2. ročníku totiž nastupují další těžké informatické předměty z FITu (např. BI-AG1, BI-OSY či BI-DML) a současně těžké chemické předměty na VŠCHT (Biochemie a Fyzikální chemie).
-* **Krizový plán — Co dělat, když nestíháte:**  
-  Pokud v průběhu roku zjistíte, že tempo nezvládáte, nečekejte na vyloučení ze studia. Zajděte včas na děkanát VŠCHT a požádejte o **rozložení ročníku**. Zkušenost starších studentů: zapisovat si maximálně **jeden opakovaný předmět navíc na semestr**, vyšší zátěž vede téměř jistě k dalšímu přetížení.
+  *(po 2 semestrech min. 45 kreditů, po 4 semestrech min. 105 kreditů).*
+* **Pravidlo 3×:** Každý předmět si lze zapsat **maximálně 3×**, každou zkoušku opakovat **maximálně 3×** (1 řádný + 2 opravné termíny).
+* **🚨 Proč je kritické nepřenášet BI-PA1 do 2. ročníku:**  
+  Pokud PA1 neuděláte a přenesete si ji do druháku, ocitnete se v extrémní pasti: ve 2. ročníku přibývají další těžké předměty z FITu (BI-AG1, BI-OSY či BI-DML) a současně těžké chemické předměty na VŠCHT (Biochemie a Fyzikální chemie).
+* **Krizový plán (Když nestíháte):**  
+  Pokud cítíte, že semestr nezvládáte, nečekejte na vyhazov a zajděte včas na děkanát VŠCHT požádat o **rozložení ročníku**. Obecná rada starších studentů: zapisovat si maximálně **1 opakovaný předmět navíc na semestr** (více je silně nedoporučeno). Do posledního semestru se předměty nepřepisují (vyžaduje to pak mimořádný studijní plán).
 
 ---
 
-## 💰 6. Finanční podpora a stipendia pro prváky
+## 🎯 8. Akademický checklist dovedností: Co začít trénovat hned
 
-VŠCHT nabízí stipendijní programy, o které mohou prváci žádat již od začátku studia:
-
-1. **Ubytovací stipendium:**
-   * **Podmínka:** Trvalé bydliště mimo okres Praha.
-   * **Částka:** Přibližně **27 Kč na den** (vyplácí se zpětně v kvartálních platbách).
-   * **Jak žádat:** Žádost se podává online přímo v **SIS VŠCHT** (sekce Stipendia).
-2. **Mimořádné prospěchové stipendium pro studenty 1. ročníku (40 000 Kč):**
-   * Prestižní stipendium určené pro nejlepší nastupující prváky.
-   * **Kritéria pro přiznání:**
-     * Složení maturitní zkoušky v daném kalendářním roce.
-     * Splnění všech předepsaných studijních povinností za 1. ročník v řádném termínu.
-     * Získání alespoň 30 kreditů do konce letního semestru.
-     * **Vážený studijní průměr za 1. ročník do 1,20!**
-
----
-
-## 📍 7. Zázemí v kampusu Dejvice & Studentský život
-
-### Kde trávit volný čas a studovat mezi přednáškami:
-* **Místnost B1322 (budova B VŠCHT):**  
-  Seminární místnost Ústavu informatiky a chemie ([mapa ÚICH](https://uich.vscht.cz/mapa)). Slouží jako **otevřená klubovna a studovna pro bioinformatiky**. Můžete zde mezi přednáškami odpočívat, pracovat na úlohách do Progtestu nebo se učit se spolužáky. Rozvrh volných hodin najdete na webu [studuj.bioinformatiku.cz](https://studuj.bioinformatiku.cz).
-* **Národní technická knihovna (NTK):**  
-  Centrální bod kampusu Dejvice. Poskytuje tichá studijní patra, noční studovnu, týmové konzultační místnosti i relaxační střešní prostor. Pro spolehlivý tisk z notebooku si nainstalujte [speciální ovladač tiskáren NTK](https://www.techlib.cz/cs/2912-jak-nainstalovat-ntk-tiskarny-na-vlastni-zarizeni).
-* **Studentské prostory v budově B VŠCHT:**  
-  *Respirium* (hlavní odpočinková zóna s mikrovlnkami), bistro *Bufan*, menza/restaurace *Carbon* v suterénu a kavárna *Prostoru_* v přízemí budovy NTK.
-
-### Menzy a stravování:
-V dejvickém kampusu máte na výběr ze 3 menz ČVUT:
-1. **Menza Technická** (v areálu ČVUT vedle NTK)
-2. **Menza Studentský dům** (Bílá ulice, u dejvických kolejí)
-3. **Menza Masarykova kolej** (Thákurova ulice)
-* Kredit na jídlo si můžete dobít hotově i kartou přímo na pokladně v kterékoliv menze, případně online prostřednictvím systému **Agáta** ([agata.suz.cvut.cz](https://agata.suz.cvut.cz)).
-
-### Doprava po Praze (Lítačka):
-* Pro nákup zlevněného studentského kupónu na MHD v aplikaci Lítačka musíte mít **status studenta platný po celou dobu trvání kupónu**.
-* Vždy si včas nahrajte potvrzení o studiu nebo validovaný ISIC, abyste se vyhnuli pokutám při kontrole revizorem na začátku akademického roku.
-
----
-
-## 🤝 8. Studijní kultura: Vzájemná pomoc vs. „Medvědí služba“
-
-Vysoká škola je kolektivní záležitost — lidé, kteří spolupracují v týmu, mají nesrovnatelně vyšší šanci na úspěšné dokončení:
-
-* **Skutečná pomoc:**  
-  Diskutujte nad logikou problémů, hledejte společně příčiny chyb kompilátoru a vysvětlujte si matematické důkazy či mechanismy chemických reakcí. Pokud někomu látku vysvětlíte, sami si ji nejlépe upevníte.
-* **🛑 Medvědí služba (Přímé riziko postihu):**  
-  *Nikdy nikomu neposílejte svůj zdrojový kód ani neopisujte cizí řešení!*  
-  Progtest na FIT ČVUT využívá pokročilý antiplagiátorský systém, který spolehlivě odhalí i přepsané proměnné či přehozené bloky kódu. Vystavujete se tím disciplinárnímu řízení. Navíc u zápočtových testů a zkoušek budete sedět v učebně bez cizí pomoci.
-* **FIT-Wiki ([fit-wiki.cz](https://www.fit-wiki.cz)):**  
-  Nesmírně cenná studentská databáze materiálů, vypracovaných otázek a archivních písemek z minulých let. Pro přístup je nutná rychlá registrace s vaším ČVUT účtem.
+| Oblast | Klíčové dovednosti pro první týdny | Doporučené zdroje |
+| :--- | :--- | :--- |
+| **Programování (BI-PA1)** | • Napsat, zkompilovat a spustit program v C.<br>• Napsat testovací skript pro ověření vstupů/výstupů.<br>• Používat debugger (AddressSanitizer, Valgrind).<br>• Včas odevzdávat do Progtestu pro časové bonusové body. | [Trainer KSI](https://trainer.ksi.fit.cvut.cz/), [FIT-Wiki](https://www.fit-wiki.cz), [OnlineGDB](https://www.onlinegdb.com/) |
+| **Matematika A** | • Elementární funkce: definiční obory, obory hodnot, grafy.<br>• Derivace, limity a vyšetřování průběhu funkcí.<br>• Příprava na 1. zápočtový test (6. týden). | Přednášky dr. Maxové na e-learningu VŠCHT, sbírka příkladů z burzy |
+| **Anorganická chemie (OACH I)** | • Periodická tabulka: trendy, elektronegativita, vaznost, skupiny.<br>• Chemické názvosloví anorganických sloučenin.<br>• Lewisovy elektronové vzorce a vyčíslování redoxních rovnic. | Studijní opory na e-learningu VŠCHT, ECHO reakce |
 
 ---
 
 ## 💻 9. Hardware & Vývojové prostředí: Davidovo pravidlo
 
-* **💡 Zlaté pravidlo prváka:**  
-  **Začněte okamžitě programovat, neprokrastinujte na ladění prostředí!**  
-  Častou chybou začátečníků bývá, že stráví první dva týdny snahou o konfiguraci „dokonalého Linuxu“, laděním fontů a pluginů v editoru. Započítají si to jako čas strávený studiem, ale ve skutečnosti nenapsali ani řádek kódu v C a výuka jim mezitím uteče.
-* Pokud vám instalace WSL nebo Linuxu hned nenaskočí, otevřete si online kompilátor [OnlineGDB](https://www.onlinegdb.com/) a programujte přímo v prohlížeči. Syntaxi a logiku C se naučíte i tam.
+> 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
+> Častou pastí začátečníků bývá, že stráví první dva týdny snahou o konfiguraci „dokonalého Linuxu“, laděním fontů a pluginů v editoru. Započítají si to jako čas strávený studiem, ale ve skutečnosti nenapsali ani řádek kódu v C a látka v PA1 jim mezitím uteče.  
+> I jednoduchý kompilátor na Windows nebo [OnlineGDB](https://www.onlinegdb.com/) v prohlížeči je na první týdny lepší než hodiny ztracené instalacemi bez jediného řádku kódu.
+
 * **Zářijový instalační den na FITu:**  
-  Koncem září pořádají zkušení studenti FITu hromadnou instalační akci, kde vám zdarma a ochotně pomohou zprovoznit Linux, dual-boot i WSL na vašem konkrétním notebooku. Sledujte termín na FIT Discordu!
+  Koncem září pořádají zkušení studenti FITu hromadnou instalační akci, kde vám zdarma pomohou nastavit Linux, dual-boot i WSL na vašem konkrétním notebooku.
+* **Pravidlo pro Dual-boot:**  
+  Pokud chcete mít Windows i Linux vedle sebe, **vždy instalujte nejprve Windows a až poté Linux**! (GRUB zavaděč Linuxu automaticky rozpozná Windows).
 
 ---
 
-## 🎉 10. Komunitní akce ÚICH: Proč se zapojit
+## 🔬 10. Bakalářské práce & Vědecké směřování (ÚICH)
 
-Dlouhodobá pozorování z praxe ústavu ukazují jasný trend: **Studenti, kteří se aktivně zapojují do komunitních akcí, mají statisticky výrazně vyšší úspěšnost dokončení studia.** Neformální kontakty se staršími studenty a pedagogy jsou nejlepší záchrannou sítí v krizových chvílích.
+Na bioinformatice se o vědeckých projektech přemýšlí mnohem dříve než na jiných oborech:
+* **Kdo témata vypisuje:**  
+  Téma bakalářské práce (BP) si student volí **výhradně z vědeckých projektů řešených zaměstnanci Ústavu informatiky a chemie (ÚICH)**. Z projektů na jiném pracovišti (např. ústavy AV ČR, jiné fakulty VŠCHT či jiné VŠ) se témata pro bakaláře nevypisují!
+* **Dvě hlavní vědecké oblasti ústavu:**
+  1. **Bioinformatika** (Dr. Jan Pačes, Dr. Michal Kolář, Dr. Božena Klodová):  
+     Vyhledávání v genomických databázích, vývoj algoritmů pro zpracování genomických dat, sledování mutací a aktivity genů.
+  2. **Počítačový návrh léčiv / Chemoinformatika** (Dr. Martin Šícho, Dr. Wim Dehaen, Dr. Ivan Čmelo):  
+     Návrh biologicky aktivních látek pomocí AI, prediktivní modelování interakce léčiva s organismem.  
+     *Tip:* Pokud vás láká výzkum léčiv, zapište si v Bc. studiu volitelné předměty *Základy farmakologie* a *Výzkum a vývoj léčiv*.
+* **Časový plán:**  
+  Předběžná témata BP si studenti vybírají **na začátku 2. ročníku**. Potenciální školitele kontaktujte nejpozději na konci 2. ročníku.
+
+---
+
+## 💰 11. Finanční podpora a stipendia
+
+1. **Ubytovací stipendium:**
+   * Určeno pro studenty s trvalým bydlištěm mimo okres Praha.
+   * Činí přibližně **27 Kč na den** (vyplácí se zpětně za čtvrtletí).
+   * Žádost se podává online v **SIS VŠCHT** (sekce Stipendia).
+2. **Mimořádné prospěchové stipendium pro studenty 1. ročníku (40 000 Kč):**
+   * Mimořádná finanční odměna pro nejlepší nastupující prváky.
+   * **Podmínky pro přiznání:**
+     * Maturita složená v daném kalendářním roce.
+     * Splnění všech předepsaných studijních povinností za 1. ročník v řádném termínu.
+     * Získání alespoň 30 kreditů do konce letního semestru.
+     * **Vážený studijní průměr za 1. ročník menší než 1,20!**
+
+---
+
+## 📍 12. Dejvický kampus & Kde trávit volný čas
+
+### Studovny a klubovny:
+* **Místnost B1322 (budova B VŠCHT):**  
+  Seminární místnost Ústavu informatiky a chemie ([mapa ÚICH](https://uich.vscht.cz/mapa)). Slouží jako **otevřená klubovna a studovna pro bioinformatiky**. Můžete zde mezi přednáškami trávit volný čas, řešit Progtest nebo diskutovat. Kalendář rezervací najdete na [studuj.bioinformatiku.cz](https://studuj.bioinformatiku.cz).
+* **Národní technická knihovna (NTK):**  
+  Srdce kampusu Dejvice. Nabízí tichá patra, noční studovnu, týmové konzultační boxy i venkovní střešní posezení. Instagram: `@people_of_ntk`.  
+  *Tisk z notebooku:* Nainstalujte si [speciální ovladač tiskáren NTK](https://www.techlib.cz/cs/2912-jak-nainstalovat-ntk-tiskarny-na-vlastni-zarizeni).
+* **Zázemí v budově B VŠCHT:**  
+  *Respirium* (odpočinková zóna s mikrovlnkami), bistro *Bufan*, restaurace/menza *Carbon* v suterénu a kavárna *Prostoru_* v přízemí NTK.
+
+### Menzy a stravování:
+V Dejvicích fungují 3 menzy ČVUT:
+1. **Menza Technická** (vedle budovy NTK)
+2. **Menza Studentský dům** (Bílá ulice, u dejvických kolejí)
+3. **Menza Masarykova kolej** (Thákurova ulice)
+* Kredit na jídlo dobijete na pokladně v libovolné menze (kartou i hotově), nebo online přes portál **Agáta** ([agata.suz.cvut.cz](https://agata.suz.cvut.cz)).
+
+### Doprava (Lítačka):
+* Pro nákup studentského kupónu musíte mít aktivní status studenta po celou dobu trvání kupónu.
+* Vždy mějte v aplikaci Lítačka včas nahrané platné potvrzení o studiu ze SISu nebo prodloužený ISIC, aby vám revizor neudělil pokutu.
+
+### 💼 Studium a práce:
+První ročník bioinformatiky je **časově náročný jako plný pracovní úvazek**. Pokusy o práci na víc než drobnou víkendovou brigádu v 1. semestru vedou téměř zákonitě k přetížení a předčasnému ukončení studia.
+
+---
+
+## 🤝 13. Kultura studia: Vzájemná pomoc vs. „Medvědí služba“
+
+Vysoká škola se studuje v týmu, ale musíte rozlišovat mezi pomocí a podvodem:
+* **Skutečná pomoc:**  
+  *„V 3. domácím úkolu nechápu, jak funguje rekurze / kdy použít L'Hospitalovo pravidlo. Mohl by mi to někdo vysvětlit?“*  
+  Společná diskuze a vysvětlování konceptů posouvá obě strany.
+* **🛑 Medvědí služba (Cesta k postihu):**  
+  *„Nevím si rady s úkolem, pošlete mi někdo svůj hotový kód.“*  
+  Progtest implementuje pokročilý antiplagiátorský systém, který odhalí i přejmenované proměnné a přehozené řádky. Za plagiátorství hrozí disciplinární komise. Navíc u zápočtového testu a zkoušky budete sedět v učebně sami bez internetu.
+* **FIT-Wiki ([fit-wiki.cz](https://www.fit-wiki.cz)):**  
+  Studentská databáze zápisků, vypracovaných otázek a starých zkouškových testů z FITu.
+
+---
+
+## 🎉 14. Komunitní akce ÚICH: Proč se zapojit
+
+Statistická data z předchozích let hovoří jasně: **Studenti, kteří se aktivně zapojují do akcí ústavu, mají násobně vyšší úspěšnost dokončení studia!** V neformálním prostředí získáte kontakty a rady k předmětům od starších spolužáků i pedagogů:
 
 1. **Bioinformatické vítání prváků (první listopadová sobota):**  
-   Tradiční celodenní pěší výlet studentů bakalářského, magisterského i doktorského studia a pedagogů Ústavu informatiky a chemie do přírody. Ideální příležitost poznat starší spolužáky, načerpat rady a zjistit, že vyučující jsou fajn lidé.
+   Společný celodenní pěší výlet studentů všech ročníků a vyučujících Ústavu informatiky a chemie do přírody. Ideální příležitost poznat starší spolužáky i pedagogy.
 2. **SVK — Studentská vědecká konference (konec listopadu):**  
-   Celouniverzitní den vědy spojený s rektorským volnem a Dnem otevřených dveří. Na naší sekci bioinformatiky prezentují studenti v angličtině výsledky svých bakalářských a diplomových prací — nejlepší inspirace pro výběr vlastního výzkumného tématu.
-3. **Vánoční večírek ÚICH (polovina prosince):**  
-   Předvánoční neformální setkání ústavu před startem zkouškového maratonu.
+   Celouniverzitní den vědy spojený s Dnem otevřených dveří $\to$ **celoškolní rektorské volno!** Na naší bioinformatické sekci prezentují studenti v angličtině výsledky svých bakalářských a diplomových prací.
+3. **BIOPUCT:**  
+   Výroční konference doktorandů oboru Bioinformatika s prezentacemi aktuálních projektů.
+4. **Vánoční večírek ÚICH (polovina prosince, např. 17. 12.):**  
+   Předvánoční neformální posezení s pedagogy a spolužáky před začátkem zkouškového období.
+
 
