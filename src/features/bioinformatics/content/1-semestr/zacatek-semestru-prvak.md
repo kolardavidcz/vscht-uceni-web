@@ -16,13 +16,8 @@
 
 Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium/studuji/organizace-roku-vyuky), předměty FITu [harmonogramem ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram).
 
-1. **Posun začátku výuky v ZS:**  
-   VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
-2. **Rozvrhové anomálie během semestru:**
-   * **Lichý vs. sudý týden:** Část výuky (zejména cvičení) probíhá pouze jednou za dva týdny.
-   * **Rektorské dny a děkanské volno:** Volno na VŠCHT neplatí na FITu a naopak.
-   * **Kompenzace státních svátků:** Určitý den může probíhat výuka podle rozvrhu jiného dne (např. v pátek se učí pondělní rozvrh).
-   * **Imatrikulace VŠCHT:** Slavnostní uvítání nových studentů do akademické obce VŠCHT (nutný společenský oděv; výuka na VŠCHT odpadá).
+* **Posun začátku výuky v ZS:** VŠCHT začíná o **týden dříve** než FIT ČVUT. V 1. týdnu máte výuku jen na VŠCHT — ideální čas zařídit karty na ČVUT bez front.
+* **Rozvrhové anomálie během semestru:** Pozor na střídání **lichého a sudého týdne** (některá cvičení běží jen jednou za 14 dní), **kompenzace státních svátků** (určitý den se učí podle rozvrhu jiného dne, např. pátek podle pondělí), vzájemně se nekryjící **rektorské dny a děkanská volna** (volno na VŠCHT neplatí na FITu a naopak) a slavnostní **imatrikulaci VŠCHT** (výuka na VŠCHT odpadá, nutný společenský oděv).
 
 ---
 
