@@ -133,8 +133,7 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 * Kolem 6. týdne se píší **první zápočtové testy z Matematiky A i Anorganické chemie I**.
 * Jsou **podstatně jednodušší** než druhé zápočty v prosinci. Nasbírejte v nich co nejvíce bodů (v součtu potřebujete > 50 %), ať máte klidný závěr roku.
 * **⚠️ PA1 mezitím prudce nabírá na náročnosti:** Zatímco se učíte na zápočty z chemie a matiky, úlohy v Progtestu jsou **týden od týdne obtížnější**. Zatímco matika nebo chemie se dají nárazově dohnat před zkouškou, programování o víkendu nedoženete. Na základy z PA1 navíc v dalším studiu **striktně navazuje celý informatický řetězec**:
-  * **Java $\to$ BI-AG1** (Algoritmy a grafy 1 ve 3. semestru)
-  * **Python $\to$ BI-AAG** (Automaty a gramatiky)
+  * **BI-PA1 $\to$ Java $\to$ BI-AG1 + Python (oba naráz ve 3. semestru) $\to$ BI-AAG** (Automaty a gramatiky)
   Ztratit tempo v PA1 během prvních 7 týdnů znamená zkomplikovat si celé další studium informatiky.
 
 > ℹ️ *Konkrétní podmínky postupu a kreditová minima najdete shrnutá v průvodci [Konec 1. semestru & zkouškové](/obor-bioinformatika/1-semestr/konec-semestru-a-zkouskove).*
@@ -146,6 +145,7 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 > 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
 > Neztrácejte první týdny konfigurací Linuxu nebo editoru. Pokud ještě nemáte lokální setup, začněte psát kód v [OnlineGDB](https://www.onlinegdb.com/) přímo v prohlížeči. Hlavní je začít psát kód v C od prvního dne.
 
+* **Návod na lokální prostředí:** Kompletní průvodce instalací a konfigurací najdete v kapitole **[1 · WSL a setup](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup)**.
 * **Zářijový instalační den na FITu:** Koncem září pořádají studenti FITu akci, kde vám zdarma pomohou nastavit Linux, dual-boot i WSL.
 * **Pravidlo pro Dual-boot:** Pokud instalujete Windows i Linux, **vždy instalujte nejprve Windows a až poté Linux**.
 
