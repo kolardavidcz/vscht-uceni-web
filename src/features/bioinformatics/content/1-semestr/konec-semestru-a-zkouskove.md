@@ -9,15 +9,12 @@ Závěr zimního semestru a první vysokoškolské zkouškové období představ
 Závěr semestru přináší největší kumulaci povinností: na VŠCHT vrcholí druhé zápočty z **Matematiky A** a **OACH I**, ale hlavní časovou zátěž představuje **BI-PA1 na FITu**.
 
 ### 💻 BI-PA1: Kde se láme zápočet
-* **Nejtěžší Progtest úlohy celého semestru:**  
-  V listopadu a prosinci nastupuje dynamická paměť (`malloc`, `free`, `realloc`), struktury a spojové seznamy. Úlohy už nejsou na jedno odpoledne — odhalování chyb paměti přes **Valgrind nebo AddressSanitizer** zabere desítky hodin.
-* **Nahánění zápočtového minima & časové bonusy:**  
-  Pokud jste v první půlce semestru sbírali časové bonusy za včasné odevzdání, máte klid. Kdo odevzdával bez bonusů na poslední chvíli, musí v závěru odevzdat prakticky vše na 100 %, jinak zápočet nezíská a ke zkoušce ho vůbec nepustí.
-* **Přechod od domácího kódování ke zkoušce:**  
-  Zatímco Progtest úlohy ladíte týden doma, zkouška se píše **prezenčně v laboratoři na FITu za 2 až 3 hodiny bez přístupu na internet**. Už během prosince začněte v [Traineru KSI](https://trainer.ksi.fit.cvut.cz/) cvičit psaní algoritmů na čas z hlavy.
+* **Nejtěžší Progtest úlohy celého semestru**: V listopadu a prosinci nastupuje dynamická paměť (`malloc`, `free`, `realloc`), struktury a spojové seznamy. Úlohy už nejsou na jedno odpoledne — odhalování chyb paměti přes **Valgrind nebo AddressSanitizer** zabere desítky hodin.
+* **Nahánění zápočtového minima & časové bonusy**: Pokud jste v první půlce semestru sbírali časové bonusy za včasné odevzdání, máte klid. Kdo odevzdával bez bonusů na poslední chvíli, musí v závěru odevzdat prakticky vše na 100 %, jinak zápočet nezíská a ke zkoušce ho vůbec nepustí.
+* **Přechod od domácího kódování ke zkoušce**: Zatímco Progtest úlohy ladíte týden doma, zkouška se píše **prezenčně v laboratoři na FITu za 2 až 3 hodiny bez přístupu na internet**. Už během prosince začněte v [Traineru KSI](https://trainer.ksi.fit.cvut.cz/) cvičit psaní algoritmů na čas z hlavy a projděte si návod v kapitole [5 · Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska).
 
-### ⚡ Ostatní předměty (Matika A & OACH I):
-* **Základní pravidlo:** Získejte zápočty hned v řádném termínu v prosinci. Pokud spadnete do souhrnných opravných testů, budete v lednu opakovat učivo za celý semestr současně s přípravou na zkoušku z PA1.
+### ⚡ Ostatní předměty (Matika A & OACH I)
+* **Základní pravidlo**: Získejte zápočty hned v řádném termínu v prosinci. Pokud spadnete do souhrnných opravných testů, budete v lednu opakovat učivo za celý semestr současně s přípravou na zkoušku z PA1.
 
 ---
 
@@ -31,14 +28,12 @@ Zkouškové období trvá přibližně 5 až 6 týdnů (leden až polovina únor
 * Termíny se vypisují postupně — hlídejte si čas otevření zápisu termínů v SISu, nejatraktivnější termíny bývají rychle plné.
 
 ### 2. Strategie plánování termínů
-* **Jděte na zkoušky hned v prvních dvou týdnech v lednu**:  
-  Neodkládejte zkoušky na únor! Pokud první pokus nevyjde, máte dostatek času na druhý či třetí termín.
-* **Pořadí předmětů**:  
-  Většina studentů začíná zkouškou z PA1 (abyste měli v hlavě čerstvou praxi z programování) nebo Matematikou A, a chemii si nechávají na samostatný blok přípravy.
-* **Opravné termíny**:  
-  Na každý předmět máte nárok na řádný termín a dva opravné termíny (v rámci vypsaných kapacit).
-* **💡 Tip pro zkoušky a cvičení na FITu:**  
-  Řekněte cvičícím a zkoušejícím na FITu, že jste bioinformatici z VŠCHT — berou na to ohled a na vaše informatické znalosti zpravidla pohlížejí výrazně vstřícněji a shovívavěji.
+* **Zkouška z BI-PA1 v 1. a 2. týdnu**: Na zkoušku z PA1 jděte hned v 1. týdnu zkouškového (a v případě neúspěchu ihned ve 2. týdnu). Termíny v prvních dvou týdnech bývají statisticky **nejjednodušší**, zadání úloh v Progtestu bývá nejpřímočařejší a máte nejvyšší šanci na úspěch.
+  * **Zkouškové rady na wiki**: Před zkouškou si důkladně projděte zkouškové poznámky a postřehy v kapitole [5 · Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) (nápovědy v Progtestu, mezní vstupy, časový management).
+  * **Jděte raději k přednášejícím než k mladým cvičícím/studentům**: Pokud máte možnost volby zkoušejícího u ústní/teoretické části, běžte k přednášejícím (profesoři, docenti). Mladí cvičící a čerství doktorandi bývají zbytečně horliví, přísní a puntičkářští v tom, co všechno by student měl vědět, zatímco zkušení přednášející mají nadhled a jsou výrazně klidnější.
+  * **💡 FIT tip (identita VŠCHT)**: Vždy u zkoušky i na cvičeních zmiňte, že jste **bioinformatici z VŠCHT** — vyučující na FITu na to berou ohled a pohlížejí na vás s větším pochopením a shovívavostí.
+* **Pořadí předmětů**: Většina studentů začíná zkouškou z PA1 (dokud máte v prstech čerstvou praxi z programování) souběžně s Matematikou A, chemii si pak nechávají na samostatný blok přípravy.
+* **Opravné termíny**: Na každý předmět máte nárok na řádný termín a dva opravné termíny (v rámci vypsaných kapacit).
 
 ---
 
