@@ -6,8 +6,10 @@ Stručný přehled fungování BI-PA1 na FIT ČVUT: příprava před semestrem, 
 
 ## ⚡ Před semestrem
 
-* **Pokud s programováním začínáte**: Projděte si materiály v [Připrav se – programování](/obor-bioinformatika/0-semestr/priprav-se-programovani) a osvojte si základní syntaxi jazyka C (proměnné, podmínky, cykly).
-* **Vývojové prostředí**: Připravte si [WSL a kompilátor gcc](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup). Pokud prostředí nestihnete vyladit, začněte psát kód v [OnlineGDB](https://www.onlinegdb.com/) — nejdůležitější je začít programovat hned.
+* **Pokud s programováním začínáte**: Osvojte si základní syntaxi jazyka C (proměnné, podmínky, cykly) v oficiálním kurzu [Připrav se – programování](https://e-learning.vscht.cz/course/view.php?id=3521) na Moodle VŠCHT. Osvědčená jsou také skripta od Pavla Herouta (*Učebnice jazyka C*) nebo přehled konceptů na [W3Schools](https://www.w3schools.com/programming/prog_scope.php).
+* **Úlohy připravené studenty (v prohlížeči)**: Vyzkoušejte [OnlineGDB Classroom](https://onlinegdb.com/classroom/invite/YbS9Eoh6-) — starší studenti bioinformatiky připravili sadu jednoduchých úloh od `printf`/`scanf` až po podmínky a cykly, které můžete psát přímo v prohlížeči bez jakékoliv instalace.
+* **Vývojové prostředí**: Připravte si [WSL a kompilátor gcc](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup). Pokud prostředí nestihnete vyladit předem, nepanikařte a začněte psát kód v [OnlineGDB](https://www.onlinegdb.com/) — nejdůležitější je začít programovat hned.
+* **Učení s AI jako tutorem**: Využívejte AI k vysvětlování chyb kompilátoru, konceptů paměti nebo nápovědě k algoritmům. **Nikdy si nenechte generovat hotový kód** — Progtest má pokročilý antiplagiátor a u zkoušky i zápočtu píšete kód bez AI a internetu.
 
 ---
 

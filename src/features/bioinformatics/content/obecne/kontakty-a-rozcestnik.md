@@ -26,4 +26,3 @@ Tato stránka slouží jako průvodce zázemím na **Dejvickém kampusu**, živo
   * [Interaktivní mapy budov VŠCHT (Emil)](https://emil.vscht.cz/maps) — interaktivní plánek budov A a B a vyhledávání učeben.
   * [Plánky učeben a navigace FIT ČVUT](https://help.fit.cvut.cz) — značení místností a navigace po FITu (Nová budova ČVUT a Thákurova).
 * **💼 Studium a práce**: 1. ročník je časově náročný jako plný úvazek. Větší než drobná víkendová brigáda v 1. semestru vede téměř jistě k přetížení a neúspěchu.
-* **Kultura pomoci vs. plagiátorství**: Společná diskuze a vzájemné vysvětlování konceptů je žádoucí. **Nikdy nesdílejte hotový kód** — odevzdávací systémy (zejména Progtest na FIT) mají pokročilý antiplagiátor a za opisování hrozí disciplinární komise.

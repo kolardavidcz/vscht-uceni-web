@@ -103,7 +103,7 @@ describe("contentLoader position-based ordering", () => {
     const materials = loadWikiMaterials();
 
     const prepCourse = materials.find((m) => m.key === "priprav-se-programovani");
-    expect(prepCourse?.externalUrl).toBeUndefined();
+    expect(prepCourse?.externalUrl).toBe("https://e-learning.vscht.cz/course/view.php?id=3521");
 
     const pythonCourse = materials.find((m) => m.key === "python");
     expect(pythonCourse?.externalUrl).toBe("https://newpyt.vercel.app/");
