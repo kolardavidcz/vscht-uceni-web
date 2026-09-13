@@ -1,47 +1,22 @@
-# 📅 Přihlašování na předměty & rozvrh na ČVUT (KOS)
+# 📅 Zápis předmětů & rozvrh na FIT (od 3. semestru)
 
-> ⚠️ **ZÁSADNÍ ZMĚNA OD 2. ROČNÍKU:**  
-> Zatímco v 1. ročníku pro vás paralelky na FITu zajišťovala katedra automaticky, **od 3. semestru si předměty a rozvrhové paralelky na FIT ČVUT volíte a zapisujete zcela sami v KOSu!**
+Od 3. semestru už rozvrhové paralelky nezajišťuje katedra automaticky. Vaším úkolem je **poskládat si rozvrh na FITu tak, aby nekolidoval s výukou na VŠCHT**.
 
----
-
-## 🛑 Zlaté pravidlo: Nestačí mít předmět zapsaný v SISu
-
-* Na VŠCHT se předmět formálně zapíše v SISu (kódy předmětů z FITu začínají `B500xxx`).
-* **V KOSu se však musíte sami přihlásit na konkrétní paralelku cvičení, prosemináře a přednášky!**  
-  Pokud se na paralelku nepřihlásíte, nebudete v rozvrhu ani v docházce vyučujícího a nebudou se vám započítávat body ze cvičení.
+Přednášky a prosemináře na FITu bývají zpravidla stejné jako v SISu, ale **konkrétní cvičení si musíte najít a vybrat sami**.
 
 ---
 
-## 🕒 Fáze zápisu na FIT v KOSu
+## ✉️ Postup komunikace se studijním oddělením FIT
 
-Zápis probíhá podle [harmonogramu FIT ČVUT](https://fit.cvut.cz/cs/studium/informacni-servis/harmonogram):
+Zápis FIT předmětů a konkrétních cvičení řešíte se studijní referentkou pro bioinformatiky (**Zdeňka Kutinová** — `zdenka.kutinova@fit.cvut.cz`, případně `bioinformatika@fit.cvut.cz`):
 
-1. **Předběžný zápis předmětů:**  
-   Probíhá s předstihem (již v letním semestru předchozího ročníku). Volíte si předměty, které budete v zimním semestru studovat.
-2. **Zápis do rozvrhu (výběr paralelek):**  
-   Otevírá se před začátkem semestru. Zde si vybíráte konkrétní časy cvičení a přednášek.
-   * **Tip ke kolizím:** Vybírejte si cvičení na FITu tak, aby nekolidovala s rozvrhem na VŠCHT (např. *Fyzikální chemie I* nebo *Laboratoře pro bioinformatiky I*).
-3. **Uzavření zápisu:**  
-   Po tomto termínu již v KOSu změny provádět nelze.
+1. **Zápis předmětu**: Napište referentce e-mail se žádostí o zapsání daného kurzu do KOSu (např. BI-AG1).
+2. **Výběr cvičení (blížící se tvorba rozvrhu)**: Až se na FITu přiblíží zápis do rozvrhu, vyhledejte si rozvrh na [Timetable FIT](https://timetable.fit.cvut.cz) a pošlete referentce konkrétní paralelky cvičení, které vám časově sedí k rozvrhu na VŠCHT.
+3. **⚠️ Důležité pro opakující BI-PA1**: Pokud opakujete předmět BI-PA1, **musíte referentce také včas napsat**, aby vás do kurzu PA1 ručně zapsala (ve 2. ročníku již automatický zápis neprobíhá!).
 
 ---
 
-## ⚠️ Nepropisování změn do SISu & Kreditová pravidla
+## 🔗 Odkazy
 
-* **Změna paralelky v KOSu se nepropíše do SISu:**  
-  V SISu uvidíte pouze výchozí doporučený rozvrh. Jakmile si v KOSu zvolíte jinou paralelku cvičení či přednášky, změna platí na FITu, ale **v SISu zůstane původní zobrazení**. Svůj reálný rozvrh FIT předmětů proto sledujte výhradně v **KOSu** nebo na **[Timetable FIT](https://timetable.fit.cvut.cz)**.
-* **Platnost kreditů:**  
-  Kreditová dotace na FITu a VŠCHT se může u některých předmětů lišit. **Závazný je VÝHRADNĚ počet kreditů uvedený v SISu na VŠCHT!**
-
----
-
-## 🔗 Užitečné odkazy & řešení problémů
-
-* **[KOS ČVUT](https://kos.cvut.cz)** — zápis předmětů a volba rozvrhových paralelek.
-* **[Timetable FIT](https://timetable.fit.cvut.cz)** — detailní rozvrhy předmětů FITu a obsazenost učeben.
-* **[FIT Help & Navigace](https://help.fit.cvut.cz)** — plánky budov (Nová budova ČVUT a Thákurova) a značení místností.
-* **Export rozvrhu ze SISu do kalendáře:**  
-  V modulu *Rozvrh NG* v SISu přejděte na *Můj rozvrh* $\to$ *Export* a zkopírujte iCalendar odkaz např. do Google Kalendáře (*Nastavení* $\to$ *Přidat kalendář pomocí adresy URL*).
-* **Komunikace při problémech s rozvrhem na FIT:**  
-  Při jakýchkoliv kolizích nebo potížích se zápisem pište studijní referentce pro bioinformatiky **Zdeňce Kutinové** na **`zdenka.kutinova@fit.cvut.cz`** (případně na hromadný e-mail `bioinformatika@fit.cvut.cz`).
+* **[KOS ČVUT](https://kos.cvut.cz)** — studijní systém pro kontrolu zápisu předmětů.
+* **[Timetable FIT](https://timetable.fit.cvut.cz)** — rozvrhy předmětů a volná cvičení na FITu.

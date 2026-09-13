@@ -372,13 +372,12 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 **Co umět / na co si dát bacha**
 
 * `FILE *`, `fopen` / `fclose`, čtení/zápis; kontrola, že se soubor otevřel.
-* Rozdělení kódu do více souborů / hlaviček — co kam patří (deklarace vs. definice).
-* Trainer na tohle nemusí mít hustý „týden 1:1“ — ber přednášku + oficiální materiály.
+* * Modulární kód = méně „god file“ o 800 řádcích — souvisí se [strukturou kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
 
 **Tipy**
 
 * Nezapomeň `fclose`.
-* Modulární kód = méně „god file“ o 800 řádcích — souvisí se [strukturou kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
+
 
 **Trainer**
 

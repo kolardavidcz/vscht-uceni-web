@@ -1,5 +1,9 @@
 # 🎒 Průvodce prváka: Začátek 1. semestru
 
+> 📘 **Univerzální průvodce VŠCHT:** Kromě tohoto bioinformatického návodu si projděte také oficiální celoškolský [Průvodce prváka VŠCHT v PDF](https://pkc.vscht.cz/file/uzel/60690/0001~~KytOziiJLygqLctPSU4FMsoSsxPjjQyMzOJTMtMzSxJzAA.pdf) od Poradenského a kariérního centra VŠCHT (PKC).
+
+---
+
 ## 🏛️ Dvě univerzity: Jak funguje dvojí studium (VŠCHT vs. FIT ČVUT)
 
 * **Formální příslušnost:** Jste řádnými studenty **výhradně VŠCHT Praha** (Fakulta chemické technologie – FCHT). Vaše studium se řídí Studijním a zkušebním řádem VŠCHT. Na FIT ČVUT docházíte pouze na smluvní výuku svých informatických předmětů.
