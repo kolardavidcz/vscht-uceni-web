@@ -1,17 +1,16 @@
 /**
- * Module 8: Zkouškový Workshop & Šablony Důkazů z AG1
- * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml-zkouskovy-workshop.md
+ * Module 8: Zkouškový Workshop & Šablony Důkazů z AX1
+ * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ax1/dml-zkouskovy-workshop.md
  */
 import {
-  createDocSlide,
-  renderDocHeading,
-  renderDocParagraph,
-  renderDocList,
-  renderDocCallout,
-  renderDocTable,
-  renderSolutionBanner,
   colors,
-  fs
+  createDocSlide,
+  fs,
+  renderDocCallout,
+  renderDocHeading,
+  renderDocList,
+  renderDocTable,
+  renderSolutionBanner
 } from "../pptx_document_engine.mjs";
 
 export function addModule8Slides(pres) {
@@ -24,12 +23,12 @@ export function addModule8Slides(pres) {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "Zkouškový Workshop & Šablony Důkazů z AG1", { level: 1, y });
+    y = renderDocHeading(pres, slide, "Zkouškový Workshop & Šablony Důkazů z AX1", { level: 1, y });
 
     y = renderDocCallout(pres, slide, {
       type: "note",
       title: "Cíl kapitoly:",
-      text: "Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu AG1 na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou chyb.",
+      text: "Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu AX1 na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou chyb.",
       y,
     });
 
@@ -547,7 +546,7 @@ export function addModule8Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 8.15: Závěrečná Gratulace & Úspěch v AG1
+  // Slide 8.15: Závěrečná Gratulace & Úspěch v AX1
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
@@ -566,7 +565,7 @@ export function addModule8Slides(pres) {
       line: { color: colors.brandOrange, width: 2 },
     });
 
-    slide.addText("🎉 Gratulujeme! Dokončili jste kompletní letní přípravu pre-AG1!", {
+    slide.addText("🎉 Gratulujeme! Dokončili jste kompletní letní přípravu pre-AX1!", {
       x: 1.1,
       y: y + 0.3,
       w: boxW - 0.6,
@@ -579,7 +578,7 @@ export function addModule8Slides(pres) {
     });
 
     slide.addText(
-      "Nyní máte veškerou matematickou jistotu, intuici i formální aparát pro úspěšné zvládnutí předmětu AG1 na FIT ČVUT!\n\nCo všechno máte v malíku:\n• Přirozenou bio-intuici přeloženou do precizního jazyka grafů G = (V, E)\n• Bezchybnou negaci výroků s kvantifikátory a rozlišení nutné a postačující podmínky\n• Dekonstrukční indukci na grafech bez nebezpečné redukční pasti (vždy shora dolů!)\n• Důkazy sporem přes Dirichletův a Extremální princip nejdelší cesty\n• Efektivní reprezentaci grafů v C++ pomocí Seznamu sousedů a průchody BFS/DFS\n• Zkouškové šablony důkazů a rozbory typických chyb pro 100 % bodů z písemek",
+      "Nyní máte veškerou matematickou jistotu, intuici i formální aparát pro úspěšné zvládnutí předmětu AX1 na FIT ČVUT!\n\nCo všechno máte v malíku:\n• Přirozenou bio-intuici přeloženou do precizního jazyka grafů G = (V, E)\n• Bezchybnou negaci výroků s kvantifikátory a rozlišení nutné a postačující podmínky\n• Dekonstrukční indukci na grafech bez nebezpečné redukční pasti (vždy shora dolů!)\n• Důkazy sporem přes Dirichletův a Extremální princip nejdelší cesty\n• Efektivní reprezentaci grafů v C++ pomocí Seznamu sousedů a průchody BFS/DFS\n• Zkouškové šablony důkazů a rozbory typických chyb pro 100 % bodů z písemek",
       {
         x: 1.3,
         y: y + 1.1,

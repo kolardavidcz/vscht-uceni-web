@@ -137,7 +137,7 @@ Při aplikaci na grafy nepředstavuje induktivní proměnná $n$ pouhé číslo,
 
 ## 2. 🚨 CRITICAL EXAM TRAP: Redukční vs. Dekonstrukční Indukce
 
-Toto je vůbec **nejčastější důvod pro udělení 0 bodů** u zkouškových důkazů z AG1 na FIT ČVUT!
+Toto je vůbec **nejčastější důvod pro udělení 0 bodů** u zkouškových důkazů z AX1 na FIT ČVUT!
 
 ---
 
@@ -354,13 +354,13 @@ Tento slavný vzorec není žádná magie — je to přímý důsledek našeho *
 <summary class="cursor-pointer px-4 py-3 font-semibold text-sm text-stone-800 dark:text-stone-200 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 flex items-center justify-between select-none">
 <span class="flex items-center gap-2">
 <span>🎓</span>
-<span><strong>Pro zájemce do AG1:</strong> 5 ekvivalentních definic stromu & Důkaz Tree Leaf Lemmatu</span>
+<span><strong>Pro zájemce do AX1:</strong> 5 ekvivalentních definic stromu & Důkaz Tree Leaf Lemmatu</span>
 </span>
 <span class="text-xs text-stone-600 dark:text-stone-400 font-normal">Kliknutím rozbalit</span>
 </summary>
 <div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-3">
 <p class="m-0 font-medium text-stone-900 dark:text-stone-100">
-V kurzu AG1 dostanete těchto 5 vlastností jako hotové věty. Pro libovolný konečný graf $G = (V, E)$ s $n = |V|$ vrcholy jsou následující tvrzení <strong>zcela ekvivalentní</strong>:
+V kurzu AX1 dostanete těchto 5 vlastností jako hotové věty. Pro libovolný konečný graf $G = (V, E)$ s $n = |V|$ vrcholy jsou následující tvrzení <strong>zcela ekvivalentní</strong>:
 </p>
 <ol class="list-decimal pl-5 space-y-1">
 <li>$G$ je <strong>strom</strong> (je souvislý a nemá cykly).</li>
@@ -447,7 +447,7 @@ Vezmeme libovolný DAG $G$ o $n+1$ vrcholech. Najdeme zdroj $u$ ($\text{deg}^-(u
 
 ---
 
-## 6. Přehled: Co je základ letní přípravy a co přijde v AG1
+## 6. Přehled: Co je základ letní přípravy a co přijde v AX1
 
 Z tohoto modulu vám pro letní přípravu bohatě stačí:
 

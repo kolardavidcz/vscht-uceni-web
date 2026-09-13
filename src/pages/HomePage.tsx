@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Card } from "@/components/ui/Card";
 import {
   Binary,
   Biohazard,
@@ -8,16 +7,17 @@ import {
   ClipboardList,
   Terminal,
 } from "lucide-react";
-import { Card } from "@/components/ui/Card";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const prefetchMicrobiology = () => {
-  void import("@/features/microbiology/MicrobiologyRoutes").catch(() => {});
+  void import("@/features/microbiology/MicrobiologyRoutes").catch(() => { });
 };
 const prefetchWiki = () => {
-  void import("@/features/bioinformatics/pages/WikiPage").catch(() => {});
+  void import("@/features/bioinformatics/pages/WikiPage").catch(() => { });
 };
 const prefetchPython = () => {
-  void import("@/features/python-analyzer/pages/PythonAnalyzerPage").catch(() => {});
+  void import("@/features/python-analyzer/pages/PythonAnalyzerPage").catch(() => { });
 };
 
 export function HomePage() {
@@ -105,7 +105,7 @@ export function HomePage() {
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-3 flex-1">
               Studijní rozcestník, zápisky a materiály z předmětů. Markdown wiki
-              s MathJax a interaktivním PA2→AG1 přehledem.
+              s MathJax a interaktivním PA2→AX1 přehledem.
             </p>
             <div className="relative z-[2] flex flex-wrap gap-2 mb-5">
               <Link
@@ -115,10 +115,10 @@ export function HomePage() {
                 PA1
               </Link>
               <Link
-                to="/obor-bioinformatika/ag1/pa2-ag1-overview"
+                to="/obor-bioinformatika/ax1/pa2-ax1-overview"
                 className="px-2.5 py-1 bg-orange-600/10 hover:bg-orange-600/20 text-orange-400 text-[10px] font-black tracking-wider uppercase rounded-md border border-orange-600/20"
               >
-                AG1
+                AX1
               </Link>
               <Link
                 to="/obor-bioinformatika"

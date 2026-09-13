@@ -1,5 +1,4 @@
-# 5 · Progtest a zkouška (rady a tipy)
-Souvisí: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit) · [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) · [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar)
+# 5 · Progtest a zkouška (plné rady)
 
 Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** na přesnost formátu výstupu, rychlost a čistou práci s pamětí.
 
@@ -15,24 +14,14 @@ Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** n
 
 ## 💡 Strategické tipy pro Progtest (přímo z katedry)
 
-* **Odevzdávání na jistotu (pozor na limit ~20 pokusů)**:  
-  Na odevzdání každé úlohy máte přibližně 20 pokusů. **Nikdy neodevzdávejte stylem pokus-omyl!** Odevzdejte pouze kód, u kterého jste si lokálním otestováním jistí, že na 100 % splňuje základní testy z ukázky zadání a ošetřuje mezní stavy.
-* **Hledat řešení na internetu je ztráta času**:  
-  Vše potřebné k vyřešení úloh zazní na přednáškách a cvičeních. Nalezená řešení na internetu často používají pokročilé knihovny či konstrukce mimo rámec kurzu, které v Progtestu neprojdou přes restrikce nebo selžou na efektivitu.
-* **2 nepenalizované nápovědy na úlohu (nástroj spolupráce)**:  
-  Každá progtestová úloha nabízí dvě nápovědy zdarma. Využijte je a **sdílejte mezi sebou vstupní data, na kterých vám kód selhal**. Zjistíte tak, jaké zákeřné vstupy Progtest testuje, aniž byste porušili zákaz sdílení kódu.
-* **Řešte nepovinná malá „Cvičení“ (cca 20 nápověd)**:  
-  Kromě velkých domácích úloh jsou v Progtestu k dispozici malé úlohy za minimum bodů. Vyučující je na cvičeních neprobírají, ale silně doporučují si je vyřešit: v jednoduché a izolované podobě představují nové principy (např. práci s pamětí, rekurzi či spojové seznamy), které se vzápětí objeví ve velké úloze. Máte v nich navíc k dispozici cca 20 nápověd!
-* **Aplikace Trainer**:  
-  Cvičebnice [Trainer KSI (kurz k PA1)](https://trainer.ksi.fit.cvut.cz/courses/81) nabízí praktické úkoly s teorií od úplných začátků kompilace až po několik ukázkových zkouškových zadání.
-* **Studijní portál FIT Wiki**:  
-  Velmi cenným studijním zdrojem materiálů a zadání je [fit-wiki.cz](https://www.fit-wiki.cz) (vyžaduje bezplatnou registraci).
-* **Přípravný kurz v e-learningu**:  
-  [Připrav se – Bioinformatika (id=3521)](https://e-learning.vscht.cz/course/view.php?id=3521).
-* **🚨 ZÁKAZ SDÍLENÍ KÓDU (Antiplagiátor)**:  
-  Za žádnou cenu nikomu neposkytujte svůj zdrojový kód a nedávejte jej na internet (veřejný GitHub, Discord apod.). Progtest implementuje špičkový antiplagiátorský systém analyzující abstraktní syntaktické stromy (AST). Společné úvahy nad algoritmem jsou skvělé, ale kód si pište výhradně sami.
-* **🎓 Psychologický tip ke zkoušce na FITu**:  
-  Když dáte vyučujícímu při zkoušce nebo na cvičeních nenásilně najevo, že jste **z VŠCHT**, bývá pohled na vaše programátorské zaváhání znatelně shovívavější!
+* **Odevzdávání na jistotu (pozor na limit ~20 pokusů)**: Na odevzdání každé úlohy máte přibližně 20 pokusů. **Nikdy neodevzdávejte stylem pokus-omyl!** Odevzdejte pouze kód, u kterého jste si lokálním otestováním jistí, že na 100 % splňuje základní testy z ukázky zadání a ošetřuje mezní stavy.
+* **Hledání na internetu (matematika vs. kód)**: Dohledat si matematické a geometrické vzorce nebo teoretický princip algoritmu je naprosto v pořádku — některá zadání mají divoké vzorce a počítá se s tím, že si je vygooglíte. Nikdy ale nehledejte hotový kód úloh: cizí řešení neprojdou přes antiplagiátor, často používají zakázané knihovny nebo shoří na paměťových a časových testech.
+* **2 nepenalizované nápovědy na úlohu (nástroj spolupráce)**: Každá progtestová úloha nabízí dvě nápovědy zdarma. Využijte je a **sdílejte mezi sebou vstupní data, na kterých vám kód selhal**. Zjistíte tak, jaké zákeřné vstupy Progtest testuje, aniž byste porušili zákaz sdílení kódu.
+* **Řešte nepovinná malá „Cvičení“ (cca 20 nápověd)**: Kromě velkých domácích úloh jsou v Progtestu k dispozici malé úlohy za minimum bodů. Vyučující je na cvičeních neprobírají, ale silně doporučují si je vyřešit: v jednoduché a izolované podobě představují nové principy (např. práci s pamětí, rekurzi či spojové seznamy), které se vzápětí objeví ve velké úloze. Máte v nich navíc k dispozici cca 20 nápověd!
+* **Aplikace Trainer**: Cvičebnice [Trainer KSI (kurz k PA1)](https://trainer.ksi.fit.cvut.cz/courses/81) nabízí praktické úkoly s teorií od úplných začátků kompilace až po několik ukázkových zkouškových zadání.
+* **Studijní portál FIT Wiki**: Velmi cenným studijním zdrojem materiálů a zadání je [fit-wiki.cz](https://www.fit-wiki.cz) (vyžaduje bezplatnou registraci).
+* **🚨 ZÁKAZ SDÍLENÍ KÓDU (Antiplagiátor)**: Za žádnou cenu nikomu neposkytujte svůj zdrojový kód a nedávejte jej na internet (veřejný GitHub, Discord apod.). Progtest implementuje špičkový antiplagiátorský systém analyzující abstraktní syntaktické stromy (AST). Společné úvahy nad algoritmem jsou skvělé, ale kód si pište výhradně sami.
+* **🎓 Psychologický tip ke zkoušce na FITu**: Když dáte vyučujícímu při zkoušce nebo na cvičeních nenásilně najevo, že jste **z VŠCHT**, bývá pohled na vaše programátorské zaváhání znatelně shovívavější!
 
 ---
 
@@ -51,8 +40,6 @@ Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** n
 # Příprava na zkoušku (poznámky od přednášejících)
 
 ## Znalosti - Teorie je důležitá i v praktické části
-
-*Když nevím X, v praxi se stane Y:*
 
 * Když nevím, co je **struktura**, těžko napíšu přehledný kód.  
 * Když nevím, co je **pointer**, těžko si poznamenám místa v paměti k pozdější návštěvě.  
@@ -101,7 +88,7 @@ Detaily a příkazy: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-
 ---
 ## Časté chyby u zkoušky
 
-### 😿 Nepoužívání funkcí
+### Nepoužívání funkcí
 
 Velice často student napíše **jednu dlouhou `main`**, maximálně jednu malou pomocnou. V **~90 %** takových případů zkoušku nezvládne.
 
@@ -109,7 +96,7 @@ Funkce není nepřítel. Funkce je kámoš. Investujte čas do psaní ve funkcí
 
 → [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu)
 
-### 😿 Nepoužívání struktur
+### Nepoužívání struktur
 
 Bez rozumné organizace dat se nikam nedostaneš. Ve zkouškových úlohách data spolu souvisí — **struktury** jsou přirozená reprezentace.
 
@@ -117,21 +104,21 @@ Bez rozumné organizace dat se nikam nedostaneš. Ve zkouškových úlohách dat
 
 Máš na to nervy? Radši **strukturu**.
 
-### 😿 Neinicializované proměnné
+### Neinicializované proměnné
 
 V C jsou proměnné běžně **neinicializované** — s hodnotou nemůžeš pracovat, dokud ji nenastavíš. Stejně tak paměť z alokace. To není „bug jazyka“, je to způsob rychlých programů; začátečníky to drtí. Proto sanitizer / Valgrind — [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
 
-### 😿 Zbytečná alokace paměti
+### Zbytečná alokace paměti
 
 Příklad: `char **words` — při realokaci **nedává smysl** hned alokovat místo pro každé nové „prázdné“ slovo (`for … words[i] = malloc(WORD_LEN)`). V C je zvyk pracovat s věcmi, **až když je potřebuješ**: alokuj, až víš že použiješ; nastav hodnotu, až ji potřebuješ. Nic nezkazíš polem délky 0 a `NULL` pointerem — první alokaci zařídí `realloc`.
 
 U sekvencí (typicky řetězce) se snaž **vyhnout zbytečnému kopírování** (pomalé + další chyby). Raději algoritmus, který kopíruje co nejméně.
 
-### 😿 Nepoužívání knihovních funkcí
+### Nepoužívání knihovních funkcí
 
 Studenti často vynalézají kolo — chybné a zbytečná práce. Standardní knihovna C není tak velká, aby se nedalo těch pár užitečných funkcí naučit (viz seznam výše).
 
-### 😿 Neefektivní práce se vstupem a s řetězci
+### Neefektivní práce se vstupem a s řetězci
 
 * Často: načíst **celý vstup do jednoho řetězce** a pak složitě parsnout. Ve většině případů stačí zpracovávat **po částech** přes `scanf` a známé konverze.  
 * Často se nevyužije, že `scanf(" ")` **přeskočí bílé znaky**.  

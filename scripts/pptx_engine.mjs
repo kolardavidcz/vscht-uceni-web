@@ -1,5 +1,5 @@
 /**
- * Pre-AG1 PowerPoint Engine
+ * Pre-AX1 PowerPoint Engine
  * Provides website-matched branding, font scaling (FONT_SCALE and FONT_DELTA), layout primitives,
  * native table renderer, and mathematical Unicode text helpers for generating slides via pptxgenjs.
  */
@@ -206,7 +206,7 @@ export function addSlideChrome(slide, breadcrumb, title) {
   });
 
   // Bottom footer bar
-  slide.addText("VŠCHT Učení · Obor Bioinformatika · pre-AG1 (Algoritmy a Grafy)", {
+  slide.addText("VŠCHT Učení · Obor Bioinformatika · pre-AX1 (Algoritmy a Grafy)", {
     x: 0.8,
     y: 7.02,
     w: 9.0,
@@ -247,7 +247,7 @@ export function createCourseTitleSlide(pres, { title, subtitle, date = "2026", a
     fill: { color: colors.brandOrangeDark },
     line: { color: colors.brandOrange, width: 1 },
   });
-  slide.addText("OBOR BIOINFORMATIKA · PŘEDMĚT AG1", {
+  slide.addText("OBOR BIOINFORMATIKA · PŘEDMĚT AX1", {
     x: 1.4,
     y: 1.4,
     w: 4.8,
@@ -355,7 +355,7 @@ export function createLectureDividerSlide(pres, { lectureNumber, title, goal, to
   });
 
   // Category chip
-  slide.addText(`${lectureNumber} · PRE-AG1 KURZ`, {
+  slide.addText(`${lectureNumber} · PRE-AX1 KURZ`, {
     x: 1.4,
     y: 1.25,
     w: 6.0,
@@ -666,7 +666,7 @@ export function createCodeSlide(pres, {
       line: { color: colors.borderCode, width: 1 },
     });
 
-    slide.addText("Dopad na AG1 a složitost:", {
+    slide.addText("Dopad na AX1 a složitost:", {
       x: rX + 0.45,
       y: cardY + 4.25,
       w: rW - 0.9,
@@ -851,7 +851,7 @@ export function createProofSlide(pres, {
     h: cardH,
     title: "Věta & Formální Tvrzení",
     type: "warm",
-    badge: "AG1 TEORIE",
+    badge: "AX1 TEORIE",
     items: [
       { bold: "Dokazované tvrzení:", text: texToUnicode(stmtText) },
       ...(thObj.context ? [{ bold: "Kontext a význam:", text: texToUnicode(thObj.context) }] : []),

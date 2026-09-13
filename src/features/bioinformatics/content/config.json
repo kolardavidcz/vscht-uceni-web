@@ -77,16 +77,16 @@
         "prihlasovani-na-predmety-a-rozvrh": {
           "title": "Přihlašování na předměty & rozvrh (ČVUT / KOS)"
         },
-        "pre-ag1": {
-          "title": "Před-AG1 — Příprava na Algoritmy a Grafy",
+        "pre-ax1": {
+          "title": "Před-AX1 — Příprava na Algoritmy a Grafy",
           "files": {
             "coding": {
               "title": "Programování & C++",
               "files": {
-                "pa2-ag1-overview": {
-                  "title": "Přehled FIT zdrojů z PA2 pro AG1"
+                "pa2-ax1-overview": {
+                  "title": "Přehled FIT zdrojů z PA2 pro AX1"
                 },
-                "pa2-ag1-cheatsheet": {
+                "pa2-ax1-cheatsheet": {
                   "title": "Přehled C++ (Vše důležité z PA2)"
                 },
                 "rekurze-bro": {
@@ -122,8 +122,8 @@
             }
           }
         },
-        "ag1": {
-          "title": "Algoritmy a Grafy 1"
+        "ax1": {
+          "title": "BI-AX1 — Algoritmy a grafy"
         },
         "fyzikalni-chemie": {
           "title": "Fyzikální chemie"

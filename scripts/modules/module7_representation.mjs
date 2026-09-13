@@ -1,12 +1,12 @@
 /**
  * Module 7: Grafy v C++ & Reprezentace v Paměti
- * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-bio-grafy-b.md
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ax1/dml-bio-grafy-b.md
  * Exact 1:1 text fidelity with website markdown.
  */
 import {
   createLectureDividerSlide,
-  createTwoCardSlide,
-  createTableSlide
+  createTableSlide,
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule7Slides(pres) {
@@ -16,11 +16,11 @@ export function addModule7Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 7,
     title: "Grafy v C++ & Reprezentace v Paměti",
-    goal: "Pochopit počítačovou reprezentaci grafů v jazyce C++ (PA2 ➔ AG1), porovnat matici sousedství a seznam sousedů z hlediska časové a paměťové složitosti, porozumět prohledávání DFS vs. BFS a provést praktickou analýzu proteinové interakční sítě (PPI).",
+    goal: "Pochopit počítačovou reprezentaci grafů v jazyce C++ (PA2 ➔ AX1), porovnat matici sousedství a seznam sousedů z hlediska časové a paměťové složitosti, porozumět prohledávání DFS vs. BFS a provést praktickou analýzu proteinové interakční sítě (PPI).",
     topics: [
       "0. Minimum z Grafových Pojmů: Incidence, Adjacence, Stupeň",
       "Handshaking Lemma, Sled (Walk), Cesta (Path) a Cyklus",
-      "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)",
+      "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AX1)",
       "1.1 Matice Sousedství (Adjacency Matrix) & Složitosti",
       "1.2 Seznam Sousedů (Adjacency List) & Složitosti",
       "Srovnání paměti a rychlosti: Θ(n²) vs. Θ(n + m)",
@@ -59,16 +59,16 @@ export function addModule7Slides(pres) {
     }
   });
 
-  // 3. Section 1: Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)
+  // 3. Section 1: Počítačová Reprezentace Grafů v C++ (PA2 ➔ AX1)
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)",
+    title: "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AX1)",
     leftCard: {
       title: "Paměť a Výkon Algoritmů",
-      badge: "PA2 ➔ AG1",
+      badge: "PA2 ➔ AX1",
       type: "neutral",
       items: [
-        { bold: "Způsob uložení rozhoduje:", text: "V předmětech PA2 a AG1 budete grafové algoritmy zapisovat v jazyce C++. Způsob, jakým graf uložíte do paměti, rozhodne o tom, zda váš program proběhne za 0.01 sekundy, nebo vyprší časový limit (Time Limit Exceeded)." },
+        { bold: "Způsob uložení rozhoduje:", text: "V předmětech PA2 a AX1 budete grafové algoritmy zapisovat v jazyce C++. Způsob, jakým graf uložíte do paměti, rozhodne o tom, zda váš program proběhne za 0.01 sekundy, nebo vyprší časový limit (Time Limit Exceeded)." },
         { bold: "Základní značení:", text: "Uvažujme graf G = (V, E) o n = |V| vrcholech a m = |E| hranách. Vrcholy očíslujeme od 0 do n - 1." }
       ]
     },

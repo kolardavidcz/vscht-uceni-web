@@ -1,16 +1,16 @@
 /**
  * Module 3: Bio-Intuice & Co je Graf
- * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml-bio-grafy.md
+ * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ax1/dml-bio-grafy.md
  */
 import {
+  colors,
   createDocSlide,
-  renderDocHeading,
-  renderDocParagraph,
-  renderDocList,
+  fs,
   renderDocCallout,
   renderDocConnectingLine,
-  colors,
-  fs
+  renderDocHeading,
+  renderDocList,
+  renderDocParagraph
 } from "../pptx_document_engine.mjs";
 
 export function addModule3Slides(pres) {
@@ -28,7 +28,7 @@ export function addModule3Slides(pres) {
     y = renderDocCallout(pres, slide, {
       type: "note",
       title: "Cíl kapitoly:",
-      text: "Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů G = (V, E), abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AG1 na FIT ČVUT.",
+      text: "Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů G = (V, E), abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AX1 na FIT ČVUT.",
       y: y + 0.15,
     });
   }
@@ -122,7 +122,7 @@ export function addModule3Slides(pres) {
     ], { y });
 
     y = renderDocParagraph(slide,
-      "Jakmile však vstoupíte do kurzu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT, akademický jazyk se radikálně promění:",
+      "Jakmile však vstoupíte do kurzu **AX1 (Algoritmy a Grafy 1)** na FIT ČVUT, akademický jazyk se radikálně promění:",
       { y }
     );
 
@@ -335,7 +335,7 @@ export function addModule3Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Orientovaný graf (DAG):",
-      text: "V DAGu nelze po orientovaných hranách obejít kolečko zpět! To je klíčové pro topologické řazení a dynamické programování v AG1.",
+      text: "V DAGu nelze po orientovaných hranách obejít kolečko zpět! To je klíčové pro topologické řazení a dynamické programování v AX1.",
       y,
     });
   }
@@ -417,7 +417,7 @@ export function addModule3Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 3.7b: Schéma cyklu & Shrnutí rozdílu pro AG1
+  // Slide 3.7b: Schéma cyklu & Shrnutí rozdílu pro AX1
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🔄 Cyklus" });
@@ -452,7 +452,7 @@ export function addModule3Slides(pres) {
 
     renderDocCallout(pres, slide, {
       type: "note",
-      title: "Shrnutí rozdílu pro AG1:",
+      title: "Shrnutí rozdílu pro AX1:",
       text: "Strom = 0 cyklů, minimální souvislost, deterministická cesta. Cyklus = alternativní cesty, možnost zacyklení algoritmů (nutnost značit navštívené vrcholy 'visited'!).",
       y,
     });

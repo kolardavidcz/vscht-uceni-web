@@ -1,7 +1,7 @@
 # ☀️ Letní průvodce grafovou matematikou pro bioinformatiky
 
-> Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce.  
-> Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.
+> Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce.  
+> Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AX1. Zní to dobře? Začínáme.
 ---
 
 ### 📺 Úvodní výukové video
@@ -13,7 +13,7 @@
 
 Důkazy a diskrétní matematika nevznikla kvůli lásce k matematickým symbolům.
 
-Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi **znalostmi** a **postupem** a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AG1.
+Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi **znalostmi** a **postupem** a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AX1.
 
 ---
 
@@ -85,7 +85,7 @@ Dokud neznáte definici, mozek tápe v mlze, protože nemá záchytný bod. Jakm
 
 ### 3.2 Role Postupu: Rychlé Umocňování ($x^n$) & Formální Logika
 
-Zatímco kružnice demonstrovala sílu **statických znalostí (definic)**, v programování a předmětu AG1 rozhoduje **dynamický postup (algoritmus)** opřený o zákony **formální matematické logiky**.
+Zatímco kružnice demonstrovala sílu **statických znalostí (definic)**, v programování a předmětu AX1 rozhoduje **dynamický postup (algoritmus)** opřený o zákony **formální matematické logiky**.
 
 Představme si typickou algoritmickou výzvu:
 > **Algoritmická Výzva:**  
@@ -168,7 +168,7 @@ V každém rekurzivním kroku hodnota exponentu **ostře klesá** ($n' < n$). Mn
   - $2$ je sudé $\implies x^2 = x \cdot x$ *(5. násobení)*
   - **Výsledek:** Pouhých **5 násobení** místo 12!
 
-#### 💻 Jak to vypadá v C++ (pro AG1 a PA2):
+#### 💻 Jak to vypadá v C++ (pro AX1 a PA2):
 ```cpp
 // Rychlé umocňování v čase O(log n)
 long long power(long long x, unsigned int n) {
@@ -191,12 +191,12 @@ long long power(long long x, unsigned int n) {
 | **$n = 1\,024$** | 1 023 násobení | **10 násobení** | **$100\times$ rychlejší** |
 | **$n = 1\,000\,000$** | 999 999 násobení | **cca 20 násobení** | **$50\,000\times$ rychlejší!** |
 
-#### 🚀 Algoritmický význam pro AG1 a Bioinformatiku:
+#### 🚀 Algoritmický význam pro AX1 a Bioinformatiku:
 - Časová složitost klesla z lineární $O(n)$ na **logaritmickou $O(\log n)$**.
 - Tento princip (Divide & Conquer) je základem:
   - moderní kryptografie a modulární aritmetiky (šifrování RSA),
   - **rychlého umocňování matice sousedství grafu $A^k$** v bioinformatice (pro okamžité zjištění počtu cest délky $k$ mezi biomolekulami v síti bez pomalého prohledávání!),
-  - a celkového algoritmického myšlení, které po vás bude vyžadovat AG1.
+  - a celkového algoritmického myšlení, které po vás bude vyžadovat AX1.
 
 </details>
 

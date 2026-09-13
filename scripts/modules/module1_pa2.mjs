@@ -1,23 +1,22 @@
 /**
- * Module 1: PA2 C++ Most k Algoritmům a Grafům (AG1)
+ * Module 1: PA2 C++ Most k Algoritmům a Grafům (AX1)
  */
 import {
-  createLectureDividerSlide,
-  createTwoCardSlide,
-  createSingleCardSlide,
   createCodeSlide,
+  createLectureDividerSlide,
+  createSingleCardSlide,
   createThreeCardSlide,
-  cleanText
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule1Slides(pres) {
-  const breadcrumb = "1 · PA2 C++ Most k AG1";
+  const breadcrumb = "1 · PA2 C++ Most k AX1";
 
   // 1. Lecture Divider
   createLectureDividerSlide(pres, {
     lectureNumber: 1,
-    title: "PA2 C++ Most k Algoritmům a Grafům (AG1)",
-    goal: "Propojit praktické programování v C++ (RAII, STL kontejnery, paměťový model) z předmětu PA2 s formálními požadavky na algoritmickou korektnost, asymptotickou složitost a matematické důkazy v AG1.",
+    title: "PA2 C++ Most k Algoritmům a Grafům (AX1)",
+    goal: "Propojit praktické programování v C++ (RAII, STL kontejnery, paměťový model) z předmětu PA2 s formálními požadavky na algoritmickou korektnost, asymptotickou složitost a matematické důkazy v AX1.",
     topics: [
       "Posun perspektivy z kódu na matematické důkazy",
       "STL kontejnery mapované na grafové koncepty",
@@ -26,7 +25,7 @@ export function addModule1Slides(pres) {
       "DFS a prevence Stack Overflow (Call stack vs halda)",
       "DSU (Disjoint Set Union) pro Kruskalův MST",
       "Asymptotické složitosti STL operací a Fast I/O",
-      "7 nejčastějších chyb při přechodu z PA2 do AG1"
+      "7 nejčastějších chyb při přechodu z PA2 do AX1"
     ]
   });
 
@@ -46,8 +45,8 @@ export function addModule1Slides(pres) {
       ]
     },
     rightCard: {
-      title: "Předmět BI-AG1 (Teorie a Důkazy)",
-      badge: "AG1 PERSPEKTIVA",
+      title: "Předmět BI-AX1 (Teorie a Důkazy)",
+      badge: "AX1 PERSPEKTIVA",
       type: "warm",
       items: [
         { bold: "Hlavní cíl:", text: "Kód je pouze implementací abstraktního matematického konceptu." },
@@ -58,10 +57,10 @@ export function addModule1Slides(pres) {
     }
   });
 
-  // 3. STL to AG1 Concept Mapping Table
+  // 3. STL to AX1 Concept Mapping Table
   createSingleCardSlide(pres, {
     breadcrumb,
-    title: "Mapa Propojení C++ STL Kontejnerů a AG1",
+    title: "Mapa Propojení C++ STL Kontejnerů a AX1",
     cardTitle: "Jak Datové Struktury PA2 Odpovídají Grafové Teorii",
     badge: "STL MAPOVÁNÍ",
     type: "warm",
@@ -80,7 +79,7 @@ export function addModule1Slides(pres) {
     breadcrumb,
     title: "Reprezentace: Seznam Sousedů v C++",
     leftCard: {
-      title: "Vlastnosti a Analýza pro AG1",
+      title: "Vlastnosti a Analýza pro AX1",
       badge: "TEORIE",
       type: "warm",
       items: [
@@ -121,8 +120,8 @@ public:
     breadcrumb,
     title: "BFS: Kód vedle Matematiky (Side by Side)",
     leftCard: {
-      title: "Matematický Pohled (AG1)",
-      badge: "AG1 MATEMATIKA",
+      title: "Matematický Pohled (AX1)",
+      badge: "AX1 MATEMATIKA",
       type: "warm",
       items: [
         { bold: "Startovní vrchol s:", text: "Počáteční bod vlnoplochy, vzdálenost δ(s, s) = 0." },
@@ -251,7 +250,7 @@ std::vector<int> dijkstra(int s, int n,
     breadcrumb,
     title: "Dijkstra: Invariant a Past Záporných Hran",
     leftCard: {
-      title: "Klíčový Invariant pro AG1 Důkaz",
+      title: "Klíčový Invariant pro AX1 Důkaz",
       badge: "DŮKAZ SPOREM",
       type: "emerald",
       items: [
@@ -267,7 +266,7 @@ std::vector<int> dijkstra(int s, int n,
       items: [
         { bold: "Problém záporné váhy:", text: "Záporná hrana w(x, y) < 0 může dodatečně zkrátit cestu přes uzel, který již byl dříve uzavřen!" },
         { bold: "Narušení greedy principu:", text: "Předpoklad 'délka roste s počtem hran' přestává platit." },
-        { bold: "Zkouškový požadavek:", text: "Pro grafy se zápornými hranami se v AG1 používá Bellman-Ford O(n · m), nikoliv Dijkstra!" }
+        { bold: "Zkouškový požadavek:", text: "Pro grafy se zápornými hranami se v AX1 používá Bellman-Ford O(n · m), nikoliv Dijkstra!" }
       ]
     }
   });
@@ -326,7 +325,7 @@ void iterativeDFS(int start, const Graph& G) {
       badge: "DATOVÁ STRUKTURA",
       type: "warm",
       items: [
-        { bold: "Účel v AG1:", text: "Rychlá detekce, zda nová hrana (u, v) vytvoří cyklus při budování minimální kostry (MST)." },
+        { bold: "Účel v AX1:", text: "Rychlá detekce, zda nová hrana (u, v) vytvoří cyklus při budování minimální kostry (MST)." },
         { bold: "Path Compression:", text: "Při volání find(x) přesměrujeme ukazatel přímo na kořen komponenty." },
         { bold: "Union by Rank:", text: "Menší strom připojujeme pod kořen většího stromu pro zploštění hloubky." },
         { bold: "Složitost operací:", text: "O(α(n)) amortizovaně na operaci (inverzní Ackermannova funkce, prakticky ≤ 4)." }
@@ -368,7 +367,7 @@ void iterativeDFS(int start, const Graph& G) {
   createSingleCardSlide(pres, {
     breadcrumb,
     title: "Asymptotické Složitosti C++ STL Kontejnerů",
-    cardTitle: "Přehled Operací pro Analýzu Algoritmů v AG1",
+    cardTitle: "Přehled Operací pro Analýzu Algoritmů v AX1",
     badge: "SLOŽITOST V C++",
     type: "neutral",
     items: [
@@ -397,7 +396,7 @@ void iterativeDFS(int start, const Graph& G) {
       ]
     },
     codeBlock: {
-      title: "Rychlý I/O Template pro AG1 a PA2",
+      title: "Rychlý I/O Template pro AX1 a PA2",
       code: `#include <iostream>
 
 int main() {
@@ -419,12 +418,12 @@ int main() {
     }
   });
 
-  // 13. Top 7 PA2 -> AG1 Mistakes
+  // 13. Top 7 PA2 -> AX1 Mistakes
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "7 Nejčastějších Chyb při Přechodu z PA2 do AG1",
+    title: "7 Nejčastějších Chyb při Přechodu z PA2 do AX1",
     leftCard: {
-      title: "Co Fungovalo v PA2 (Ale v AG1 Selže)",
+      title: "Co Fungovalo v PA2 (Ale v AX1 Selže)",
       badge: "❌ PA2 MYŠLENÍ",
       type: "rose",
       items: [
@@ -435,8 +434,8 @@ int main() {
       ]
     },
     rightCard: {
-      title: "Co Požaduje Rigorózní AG1",
-      badge: "✅ AG1 POŽADAVEK",
+      title: "Co Požaduje Rigorózní AX1",
+      badge: "✅ AX1 POŽADAVEK",
       type: "emerald",
       items: [
         { bold: "Přesná definice grafu:", text: "Vždy definujte V = {0, ..., n - 1} a množinu hran E ⊆ V × V." },
@@ -450,7 +449,7 @@ int main() {
   // 14. Exam Self-Test Checklist
   createSingleCardSlide(pres, {
     breadcrumb,
-    title: "Zkouškový Checklist: Jsem Připraven na AG1?",
+    title: "Zkouškový Checklist: Jsem Připraven na AX1?",
     cardTitle: "8 Bodů pro Zvládnutí Algoritmů a Grafů",
     badge: "KONTROLNÍ SEZNAM",
     type: "emerald",

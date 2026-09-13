@@ -27,7 +27,7 @@ export interface ModuleInfo {
   text: string;
 }
 
-export const PRE_AG1_MODULES: ModuleInfo[] = [
+export const PRE_AX1_MODULES: ModuleInfo[] = [
   { id: 0, name: "Modul 0: Bio-Intuice & Jazyk Grafů", short: "M0: Bio-Grafy", color: "from-teal-500 to-emerald-600", text: "text-emerald-400" },
   { id: 1, name: "Modul 1: Logický & Důkazový základ", short: "M1: Logika", color: "from-blue-500 to-indigo-600", text: "text-indigo-400" },
   { id: 2, name: "Modul 2: Indukce na Grafech & Redukční Past", short: "M2: Indukce", color: "from-rose-500 to-red-600", text: "text-rose-400" },
@@ -37,21 +37,21 @@ export const PRE_AG1_MODULES: ModuleInfo[] = [
   { id: 6, name: "Modul 6: Zkouškový Workshop & Šablony", short: "M6: Workshop", color: "from-yellow-400 to-amber-500", text: "text-yellow-400" },
 ];
 
-export const PRE_AG1_SLIDES: SlideItem[] = [
+export const PRE_AX1_SLIDES: SlideItem[] = [
   {
     "id": 1,
     "module": 0,
     "moduleName": "Modul 0: Bio-Intuice & Jazyk Grafů",
     "badge": "Úvod & Vize",
     "badgeColor": "bg-emerald-950/80 text-emerald-300 border-emerald-500/40",
-    "title": "Diskrétní Matematika & Logika pro AG1",
+    "title": "Diskrétní Matematika & Logika pro AX1",
     "subtitle": "Most z biologie a chemie do teoretické informatiky na FIT ČVUT",
     "tags": [
       "EPIC",
       "START",
       "BIO-ANALOGIE"
     ],
-    "examTip": "U zkoušky z AG1 se netestuje mechanické programování, ale schopnost rigorózně a neprůstřelně dokázat korektnost struktur a algoritmů.",
+    "examTip": "U zkoušky z AX1 se netestuje mechanické programování, ale schopnost rigorózně a neprůstřelně dokázat korektnost struktur a algoritmů.",
     "keyFormula": "G = (V, E) \\quad |V| = n, \\quad |E| = m",
     "contentHtml": "\n      <div class=\"space-y-6\">\n        <div class=\"grid grid-cols-1 md:grid-cols-3 gap-4\">\n          <div class=\"p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-2\">\n            <div class=\"flex items-center gap-2 text-emerald-400 font-bold\">\n              🧬 Biologická Intuice\n            </div>\n            <p class=\"text-xs text-slate-300\">\n              Molekuly, metabolity, DNA fragmenty, proteinové komplexy, fylogenetické stromy. Přirozeně vnímáte strukturu a kauzalitu reakcí.\n            </p>\n          </div>\n          <div class=\"p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-2\">\n            <div class=\"flex items-center gap-2 text-indigo-400 font-bold\">\n              🌿 Jazyk Grafů $G = (V, E)$\n            </div>\n            <p class=\"text-xs text-slate-300\">\n              Přísný množinový formalismus: relace, incidence, stupně vrcholů, zachování parit, matice a seznamy sousedů v C++.\n            </p>\n          </div>\n          <div class=\"p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-2\">\n            <div class=\"flex items-center gap-2 text-amber-400 font-bold\">\n              🏆 Zkoušková Jistota\n            </div>\n            <p class=\"text-xs text-slate-300\">\n              Zvládnutí dekonstrukční indukce, důkazů sporem, extremálního principu a 3-krokových invariantů BFS a Dijkstry.\n            </p>\n          </div>\n        </div>\n\n        <div class=\"p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 flex items-start gap-3\">\n          <span class=\"text-xl\">✨</span>\n          <div class=\"text-xs text-emerald-100 space-y-1\">\n            <p class=\"font-semibold text-emerald-300\">Proč tato prezentace vznikla?</p>\n            <p>\n              Studenti informatiky FIT prošli 2 semestry matematických struktur (BI-DML). Tento kurz komprimuje 100 % nezbytného matematického aparátu do 7 stravitelných modulů přímo pro studenty Bioinformatiky VŠCHT.\n            </p>\n          </div>\n        </div>\n      </div>\n    "
   },
@@ -117,7 +117,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
       "ZKOUŠKA"
     ],
     "keyFormula": "\\sum_{v \\in V} \\deg(v) = 2|E| \\implies |\\{v \\in V \\mid \\deg(v) \\text{ je liché}\\}| \\text{ je SUDÉ}",
-    "examTip": "Na zkoušce AG1 se otázka: 'Může existovat graf s 11 vrcholy, kde každý má stupeň 3?' vyřeší za 5 sekund: 11 * 3 = 33 (liché číslo). 2|E| musí být sudé -> graf NEEXISTUJE!",
+    "examTip": "Na zkoušce AX1 se otázka: 'Může existovat graf s 11 vrcholy, kde každý má stupeň 3?' vyřeší za 5 sekund: 11 * 3 = 33 (liché číslo). 2|E| musí být sudé -> graf NEEXISTUJE!",
     "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 space-y-3\">\n          <span class=\"text-xs font-bold uppercase tracking-wider text-emerald-400\">Důkaz Dvojím Započtením (Double Counting)</span>\n          <p class=\"text-xs text-slate-300\">\n            Uvažme množinu incidencí $I = \\{(v, e) \\mid v \\in e\\}$.\n          </p>\n          <div class=\"grid grid-cols-1 md:grid-cols-2 gap-3 text-xs\">\n            <div class=\"p-3 rounded-lg bg-slate-800/80\">\n              <strong class=\"text-cyan-300\">Pohled přes hrany:</strong> Každá neorientovaná hrana $e = \\{u, v\\}$ má právě 2 konce. Celkový počet incidencí je tedy přesně $2|E|$.\n            </div>\n            <div class=\"p-3 rounded-lg bg-slate-800/80\">\n              <strong class=\"text-amber-300\">Pohled přes vrcholy:</strong> Do každého vrcholu $v$ vchází právě $\\deg(v)$ hran. Součet incidencí je $\\sum_{v \\in V} \\deg(v)$.\n            </div>\n          </div>\n          <p class=\"text-xs text-slate-400 italic\">\n            Protože oběma způsoby počítáme velikost téže množiny $I$, platí: $\\sum_{v \\in V} \\deg(v) = 2|E|$. $\\blacksquare$\n          </p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 text-xs text-emerald-200\">\n          <strong>Orientovaná varianta:</strong> V každém orientovaném grafu platí: $\\sum_{v \\in V} \\deg^-(v) = \\sum_{v \\in V} \\deg^+(v) = |E|$. Každá orientovaná hrana z jednoho uzlu vystoupí a do jiného vstoupí.\n        </div>\n      </div>\n    "
   },
   {
@@ -127,7 +127,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "badge": "Taxonomie Pohybu",
     "badgeColor": "bg-emerald-950/80 text-emerald-300 border-emerald-500/40",
     "title": "Sled, Tah, Cesta, Kružnice: Přesné Rozdíly",
-    "subtitle": "Záměna těchto čtyř pojmů u zkoušky AG1 znamená okamžitou srážku bodů",
+    "subtitle": "Záměna těchto čtyř pojmů u zkoušky AX1 znamená okamžitou srážku bodů",
     "tags": [
       "TERMINOLOGIE",
       "PAST",
@@ -141,7 +141,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "moduleName": "Modul 0: Bio-Intuice & Jazyk Grafů",
     "badge": "Implementace C++",
     "badgeColor": "bg-emerald-950/80 text-emerald-300 border-emerald-500/40",
-    "title": "Počítačová Reprezentace Grafů (PA2 $\\to$ AG1)",
+    "title": "Počítačová Reprezentace Grafů (PA2 $\\to$ AX1)",
     "subtitle": "Matice sousedství vs. Seznam sousedů v paměti a složitost operací",
     "tags": [
       "C++",
@@ -150,7 +150,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
       "PROGTEST"
     ],
     "keyFormula": "\\text{Matice: } O(|V|^2) \\text{ paměť, } O(1) \\text{ test hrany} \\quad \\text{vs.} \\quad \\text{Seznam: } O(|V| + |E|) \\text{ paměť, } O(\\deg(u)) \\text{ průchod}",
-    "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"overflow-x-auto\">\n          <table class=\"w-full text-xs text-left border-collapse border border-slate-700\">\n            <thead>\n              <tr class=\"bg-slate-800 text-slate-200\">\n                <th class=\"p-2.5 border border-slate-700\">Operace</th>\n                <th class=\"p-2.5 border border-slate-700 text-cyan-300\">Matice Sousedství</th>\n                <th class=\"p-2.5 border border-slate-700 text-emerald-300\">Seznam Sousedů (Adjacency List)</th>\n              </tr>\n            </thead>\n            <tbody class=\"text-slate-300\">\n              <tr class=\"border-b border-slate-800\">\n                <td class=\"p-2 font-semibold\">Paměťová náročnost</td>\n                <td class=\"p-2 text-rose-400 font-mono\">O(|V|^2)</td>\n                <td class=\"p-2 text-emerald-400 font-mono\">O(|V| + |E|) (Optimální!)</td>\n              </tr>\n              <tr class=\"border-b border-slate-800\">\n                <td class=\"p-2 font-semibold\">Existuje hrana {u, v}?</td>\n                <td class=\"p-2 text-emerald-400 font-mono\">O(1)</td>\n                <td class=\"p-2 text-amber-400 font-mono\">O(deg(u))</td>\n              </tr>\n              <tr class=\"border-b border-slate-800\">\n                <td class=\"p-2 font-semibold\">Projít všechny sousedy u</td>\n                <td class=\"p-2 text-rose-400 font-mono\">O(|V|)</td>\n                <td class=\"p-2 text-emerald-400 font-mono\">O(deg(u)) (Optimální!)</td>\n              </tr>\n              <tr>\n                <td class=\"p-2 font-semibold\">Kdy použít</td>\n                <td class=\"p-2\">Husté grafy (|E| ≈ |V|^2), malé |V|</td>\n                <td class=\"p-2\">Řídké grafy (|E| ≪ |V|^2), biologické sítě</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n        <div class=\"p-3 rounded-xl bg-slate-900/70 border border-slate-800 text-xs font-mono text-slate-300 space-y-1\">\n          <div class=\"text-slate-500\">// Typická deklarace pro AG1 v C++:</div>\n          <div><span class=\"text-indigo-400\">using</span> Graph = std::vector&lt;std::vector&lt;<span class=\"text-indigo-400\">int</span>&gt;&gt;;</div>\n          <div><span class=\"text-indigo-400\">using</span> WeightedGraph = std::vector&lt;std::vector&lt;std::pair&lt;<span class=\"text-indigo-400\">int</span>, <span class=\"text-indigo-400\">int</span>&gt;&gt;&gt;;</div>\n        </div>\n      </div>\n    "
+    "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"overflow-x-auto\">\n          <table class=\"w-full text-xs text-left border-collapse border border-slate-700\">\n            <thead>\n              <tr class=\"bg-slate-800 text-slate-200\">\n                <th class=\"p-2.5 border border-slate-700\">Operace</th>\n                <th class=\"p-2.5 border border-slate-700 text-cyan-300\">Matice Sousedství</th>\n                <th class=\"p-2.5 border border-slate-700 text-emerald-300\">Seznam Sousedů (Adjacency List)</th>\n              </tr>\n            </thead>\n            <tbody class=\"text-slate-300\">\n              <tr class=\"border-b border-slate-800\">\n                <td class=\"p-2 font-semibold\">Paměťová náročnost</td>\n                <td class=\"p-2 text-rose-400 font-mono\">O(|V|^2)</td>\n                <td class=\"p-2 text-emerald-400 font-mono\">O(|V| + |E|) (Optimální!)</td>\n              </tr>\n              <tr class=\"border-b border-slate-800\">\n                <td class=\"p-2 font-semibold\">Existuje hrana {u, v}?</td>\n                <td class=\"p-2 text-emerald-400 font-mono\">O(1)</td>\n                <td class=\"p-2 text-amber-400 font-mono\">O(deg(u))</td>\n              </tr>\n              <tr class=\"border-b border-slate-800\">\n                <td class=\"p-2 font-semibold\">Projít všechny sousedy u</td>\n                <td class=\"p-2 text-rose-400 font-mono\">O(|V|)</td>\n                <td class=\"p-2 text-emerald-400 font-mono\">O(deg(u)) (Optimální!)</td>\n              </tr>\n              <tr>\n                <td class=\"p-2 font-semibold\">Kdy použít</td>\n                <td class=\"p-2\">Husté grafy (|E| ≈ |V|^2), malé |V|</td>\n                <td class=\"p-2\">Řídké grafy (|E| ≪ |V|^2), biologické sítě</td>\n              </tr>\n            </tbody>\n          </table>\n        </div>\n        <div class=\"p-3 rounded-xl bg-slate-900/70 border border-slate-800 text-xs font-mono text-slate-300 space-y-1\">\n          <div class=\"text-slate-500\">// Typická deklarace pro AX1 v C++:</div>\n          <div><span class=\"text-indigo-400\">using</span> Graph = std::vector&lt;std::vector&lt;<span class=\"text-indigo-400\">int</span>&gt;&gt;;</div>\n          <div><span class=\"text-indigo-400\">using</span> WeightedGraph = std::vector&lt;std::vector&lt;std::pair&lt;<span class=\"text-indigo-400\">int</span>, <span class=\"text-indigo-400\">int</span>&gt;&gt;&gt;;</div>\n        </div>\n      </div>\n    "
   },
   {
     "id": 8,
@@ -158,7 +158,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "moduleName": "Modul 0: Bio-Intuice & Jazyk Grafů",
     "badge": "Shrnutí Modulu 0",
     "badgeColor": "bg-emerald-950/80 text-emerald-300 border-emerald-500/40",
-    "title": "Shrnutí Modulu 0: Co si odnést do AG1",
+    "title": "Shrnutí Modulu 0: Co si odnést do AX1",
     "subtitle": "Kontrolní checklist konceptů před přechodem k formální logice",
     "tags": [
       "CHECKLIST",
@@ -173,7 +173,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "badge": "Logika Výroků",
     "badgeColor": "bg-indigo-950/80 text-indigo-300 border-indigo-500/40",
     "title": "Výroková Logika & Kvantifikátory ($\\forall, \\exists$)",
-    "subtitle": "Základní stavební kameny všech matematických vět na FIT AG1",
+    "subtitle": "Základní stavební kameny všech matematických vět na FIT AX1",
     "tags": [
       "LOGIKA",
       "VÝROKY",
@@ -227,7 +227,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
       "POSTAČUJÍCÍ"
     ],
     "keyFormula": "A \\implies B: \\quad A \\text{ je POSTAČUJÍCÍ pro } B \\qquad B \\text{ je NUTNÁ pro } A",
-    "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-4 rounded-xl bg-slate-900/70 border border-indigo-500/40 space-y-2\">\n            <span class=\"text-xs font-bold text-indigo-400 uppercase\">Postačující podmínka (A je dost na to, aby B)</span>\n            <p class=\"text-xs text-slate-300\">\n              Pokud platí $A$, pak $B$ <strong>určitě</strong> nastane. Nemusí to však být jediná možnost.\n            </p>\n            <div class=\"p-2.5 rounded bg-slate-950 text-xs text-indigo-200 font-mono\">\n              „Graf je strom\" $\\implies$ „Graf je souvislý\".\n            </div>\n            <p class=\"text-[11px] text-slate-400\">\n              Být stromem bohatě <em>stačí</em> k souvislosti, ale není to nutné (cyklus $C_4$ je také souvislý).\n            </p>\n          </div>\n          <div class=\"p-4 rounded-xl bg-slate-900/70 border border-amber-500/40 space-y-2\">\n            <span class=\"text-xs font-bold text-amber-400 uppercase\">Nutná podmínka (Bez B nemůže být A)</span>\n            <p class=\"text-xs text-slate-300\">\n              Bez splnění $B$ nemá $A$ šanci platit. Samotné $B$ však k zaručení $A$ nestačí.\n            </p>\n            <div class=\"p-2.5 rounded bg-slate-950 text-xs text-amber-200 font-mono\">\n              „Graf je strom\" $\\impliedby$ „Graf je souvislý\" (NEPLATÍ!).\n            </div>\n            <p class=\"text-[11px] text-slate-400\">\n              Souvislost je pro strom <em>nutná</em>, ale ne postačující (musí navíc být acyklický!).\n            </p>\n          </div>\n        </div>\n        <div class=\"p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 text-xs text-emerald-200\">\n          <strong>Ekvivalence ($A \\iff B$):</strong> Podmínka je <em>nutná a zároveň postačující</em>. U zkoušky AG1 musíte v takovém případě VŽDY dokázat OBA směry zvlášť: $\\implies$ i $\\impliedby$!\n        </div>\n      </div>\n    "
+    "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n          <div class=\"p-4 rounded-xl bg-slate-900/70 border border-indigo-500/40 space-y-2\">\n            <span class=\"text-xs font-bold text-indigo-400 uppercase\">Postačující podmínka (A je dost na to, aby B)</span>\n            <p class=\"text-xs text-slate-300\">\n              Pokud platí $A$, pak $B$ <strong>určitě</strong> nastane. Nemusí to však být jediná možnost.\n            </p>\n            <div class=\"p-2.5 rounded bg-slate-950 text-xs text-indigo-200 font-mono\">\n              „Graf je strom\" $\\implies$ „Graf je souvislý\".\n            </div>\n            <p class=\"text-[11px] text-slate-400\">\n              Být stromem bohatě <em>stačí</em> k souvislosti, ale není to nutné (cyklus $C_4$ je také souvislý).\n            </p>\n          </div>\n          <div class=\"p-4 rounded-xl bg-slate-900/70 border border-amber-500/40 space-y-2\">\n            <span class=\"text-xs font-bold text-amber-400 uppercase\">Nutná podmínka (Bez B nemůže být A)</span>\n            <p class=\"text-xs text-slate-300\">\n              Bez splnění $B$ nemá $A$ šanci platit. Samotné $B$ však k zaručení $A$ nestačí.\n            </p>\n            <div class=\"p-2.5 rounded bg-slate-950 text-xs text-amber-200 font-mono\">\n              „Graf je strom\" $\\impliedby$ „Graf je souvislý\" (NEPLATÍ!).\n            </div>\n            <p class=\"text-[11px] text-slate-400\">\n              Souvislost je pro strom <em>nutná</em>, ale ne postačující (musí navíc být acyklický!).\n            </p>\n          </div>\n        </div>\n        <div class=\"p-3 rounded-lg bg-emerald-950/30 border border-emerald-500/30 text-xs text-emerald-200\">\n          <strong>Ekvivalence ($A \\iff B$):</strong> Podmínka je <em>nutná a zároveň postačující</em>. U zkoušky AX1 musíte v takovém případě VŽDY dokázat OBA směry zvlášť: $\\implies$ i $\\impliedby$!\n        </div>\n      </div>\n    "
   },
   {
     "id": 13,
@@ -235,7 +235,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "moduleName": "Modul 1: Logický & Důkazový základ",
     "badge": "Důkazové Techniky",
     "badgeColor": "bg-indigo-950/80 text-indigo-300 border-indigo-500/40",
-    "title": "Čtyři Pilíře Důkazových Technik v AG1",
+    "title": "Čtyři Pilíře Důkazových Technik v AX1",
     "subtitle": "Přehled strategií: Přímý, Obměnou, Sporem, Indukcí",
     "tags": [
       "STRATEGIE",
@@ -252,7 +252,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "badge": "Workshop",
     "badgeColor": "bg-indigo-950/80 text-indigo-300 border-indigo-500/40",
     "title": "Workshop: Negace Zkouškových Výroků",
-    "subtitle": "3 reálné zkouškové výroky z FIT AG1 a jejich precizní negace",
+    "subtitle": "3 reálné zkouškové výroky z FIT AX1 a jejich precizní negace",
     "tags": [
       "WORKSHOP",
       "ZKOUŠKA",
@@ -354,7 +354,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "badge": "Vzorový Důkaz II",
     "badgeColor": "bg-rose-950/80 text-rose-300 border-rose-500/40",
     "title": "Vzorový Důkaz: Počet Hran ve Stromu je $|V| - 1$",
-    "subtitle": "Správně provedená dekonstrukční indukce na 100 % bodů u zkoušky AG1",
+    "subtitle": "Správně provedená dekonstrukční indukce na 100 % bodů u zkoušky AX1",
     "tags": [
       "INDUKCE",
       "DŮKAZ",
@@ -393,7 +393,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
       "CONTRADICTION"
     ],
     "keyFormula": "A \\implies B \\iff \\neg (A \\land \\neg B) \\implies \\bot",
-    "contentHtml": "\n      <div class=\"space-y-4\">\n        <p class=\"text-sm text-slate-300\">\n          V diskrétní matematice je důkaz sporem jednou z nejsilnějších technik. Proč? Protože předpoklad, že objekt <em>neexistuje</em> nebo vlastnost <em>neplatí</em>, dává obrovská strukturální omezení!\n        </p>\n        <div class=\"p-4 rounded-xl bg-slate-900/60 border border-amber-500/40 space-y-2\">\n          <span class=\"text-xs font-bold text-amber-400 uppercase\">Standardní 4kroková šablona u zkoušky AG1:</span>\n          <ol class=\"list-decimal list-inside text-xs text-slate-300 space-y-1.5\">\n            <li><strong>Předpoklad pro spor:</strong> „Předpokládejme pro spor, že platí předpoklad $A$ a zároveň NEPLATÍ závěr $B$ (platí $\\neg B$).\"</li>\n            <li><strong>Odvození vlastností:</strong> Z platnosti $\\neg B$ logicky plyne chování objektů...</li>\n            <li><strong>Dosažení rozporu (💥 SPOR):</strong> Ukážeme rozpor s definicí, předpokladem nebo známou větou.</li>\n            <li><strong>Závěr:</strong> Předpoklad pro spor nemohl platit $\\implies$ původní tvrzení $A \\implies B$ platí. Q.E.D.</li>\n          </ol>\n        </div>\n      </div>\n    "
+    "contentHtml": "\n      <div class=\"space-y-4\">\n        <p class=\"text-sm text-slate-300\">\n          V diskrétní matematice je důkaz sporem jednou z nejsilnějších technik. Proč? Protože předpoklad, že objekt <em>neexistuje</em> nebo vlastnost <em>neplatí</em>, dává obrovská strukturální omezení!\n        </p>\n        <div class=\"p-4 rounded-xl bg-slate-900/60 border border-amber-500/40 space-y-2\">\n          <span class=\"text-xs font-bold text-amber-400 uppercase\">Standardní 4kroková šablona u zkoušky AX1:</span>\n          <ol class=\"list-decimal list-inside text-xs text-slate-300 space-y-1.5\">\n            <li><strong>Předpoklad pro spor:</strong> „Předpokládejme pro spor, že platí předpoklad $A$ a zároveň NEPLATÍ závěr $B$ (platí $\\neg B$).\"</li>\n            <li><strong>Odvození vlastností:</strong> Z platnosti $\\neg B$ logicky plyne chování objektů...</li>\n            <li><strong>Dosažení rozporu (💥 SPOR):</strong> Ukážeme rozpor s definicí, předpokladem nebo známou větou.</li>\n            <li><strong>Závěr:</strong> Předpoklad pro spor nemohl platit $\\implies$ původní tvrzení $A \\implies B$ platí. Q.E.D.</li>\n          </ol>\n        </div>\n      </div>\n    "
   },
   {
     "id": 22,
@@ -582,7 +582,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
       "KOLAPS",
       "BELLMAN-FORD"
     ],
-    "examTip": "Typická otázka AG1: 'Funguje Dijkstra, pokud ke všem hranám přičteme konstantu C tak, aby byly kladné?' ODPOVĚĎ: NE! Přičtení konstanty zvýhodní cesty s menším počtem hran oproti cestám s více hranami! Nejkratší cesta se může změnit!",
+    "examTip": "Typická otázka AX1: 'Funguje Dijkstra, pokud ke všem hranám přičteme konstantu C tak, aby byly kladné?' ODPOVĚĎ: NE! Přičtení konstanty zvýhodní cesty s menším počtem hran oproti cestám s více hranami! Nejkratší cesta se může změnit!",
     "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"p-4 rounded-xl bg-rose-950/40 border border-rose-500/50 space-y-2 text-xs text-slate-200\">\n          <div class=\"font-bold text-rose-300\">Kolaps greedy předpokladu:</div>\n          <p>\n            Dijkstra předpokládá, že jakmile uzel přidáme do $S$ s minimálním $d[u^*]$, žádná jiná cesta ho nemůže zkrátit, protože každé další prodloužení cesty o kladnou hranu by hodnotu jen <em>zvýšilo</em>.\n          </p>\n          <div class=\"p-3 rounded bg-black/40 border border-rose-500/30 text-rose-100 font-mono space-y-1\">\n            <div>Start (s) --(10)--> (A)</div>\n            <div>Start (s) --(20)--> (B) --(-15)--> (A)</div>\n          </div>\n          <p class=\"text-[11px] text-slate-300\">\n            Dijkstra nejprve uzavře $A$ s $d[A] = 10$. Teprve později prozkoumá $B$ ($d[B]=20$), odkud vede hrana s vahou $-15$. Skutečná vzdálenost do $A$ je $20 - 15 = 5 < 10$! Dijkstra už ale $A$ nikdy neaktualizuje! Invariant byl porušen.\n          </p>\n        </div>\n        <div class=\"p-3 rounded-lg bg-slate-900 border border-slate-700 text-xs text-slate-300\">\n          <strong>Řešení:</strong> Pro grafy se zápornými hranami (ale bez záporných cyklů) musíme použít <strong>Bellman-Fordův algoritmus</strong> s časovou složitostí $O(|V| \\cdot |E|)$.\n        </div>\n      </div>\n    "
   },
   {
@@ -671,7 +671,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "moduleName": "Modul 6: Zkouškový Workshop & Šablony",
     "badge": "Šablony Důkazů",
     "badgeColor": "bg-yellow-950/80 text-yellow-300 border-yellow-500/40",
-    "title": "4 Univerzální Šablony Důkazů pro Zkoušku AG1",
+    "title": "4 Univerzální Šablony Důkazů pro Zkoušku AX1",
     "subtitle": "Formální kostry, které zaručí plné bodové ohodnocení od cvičících",
     "tags": [
       "ŠABLONY",
@@ -703,7 +703,7 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "moduleName": "Modul 6: Zkouškový Workshop & Šablony",
     "badge": "7 Hříchů",
     "badgeColor": "bg-yellow-950/80 text-yellow-300 border-yellow-500/40",
-    "title": "7 Smrtelných Hříchů Studenta u Písemky AG1",
+    "title": "7 Smrtelných Hříchů Studenta u Písemky AX1",
     "subtitle": "Vyhněte se těmto chybám a ušetříte desítky zbytečně ztracených bodů",
     "tags": [
       "CHYBY",
@@ -738,8 +738,8 @@ export const PRE_AG1_SLIDES: SlideItem[] = [
     "tags": [
       "GRATULACE",
       "FINÁLE",
-      "AG1-READY"
+      "AX1-READY"
     ],
-    "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"p-5 rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-900 border border-yellow-500/40 text-center space-y-3\">\n          <div class=\"inline-flex p-3 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 text-2xl\">\n            🏆\n          </div>\n          <h3 class=\"text-lg font-bold text-slate-100\">\n            Zvládli jste všech 7 modulů matematické přípravy na AG1!\n          </h3>\n          <p class=\"text-xs text-slate-300 max-w-xl mx-auto\">\n            Máte v rukou formální jazyk grafů, schopnost správně negovat kvantifikované výroky, umíte dekonstrukční indukci bez build-up pasti, ovládáte extremální princip a víte, jak zapsat 3-fázový invariant.\n          </p>\n        </div>\n\n        <div class=\"grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs\">\n          <div class=\"p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center space-y-1\">\n            <div class=\"font-bold text-emerald-400\">1. Čtěte zadání dvakrát</div>\n            <div class=\"text-[11px] text-slate-400\">Identifikujte typ úlohy a ověřte, zda graf musí být souvislý.</div>\n          </div>\n          <div class=\"p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center space-y-1\">\n            <div class=\"font-bold text-cyan-400\">2. Kreslete protipříklady</div>\n            <div class=\"text-[11px] text-slate-400\">Malý protipříklad na papíře vám okamžitě ukáže, kudy vést spor.</div>\n          </div>\n          <div class=\"p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center space-y-1\">\n            <div class=\"font-bold text-yellow-400\">3. Držte se šablon</div>\n            <div class=\"text-[11px] text-slate-400\">Přehledný strukturovaný zápis vám získá sympatie opravujícího.</div>\n          </div>\n        </div>\n\n        <div class=\"p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 flex items-center justify-between text-xs text-amber-200\">\n          <span>Materiály můžete kdykoliv znovu studovat v jednotlivých modulech wiki.</span>\n          <a\n            href=\"/obor-bioinformatika/3-semestr/pre-ag1/math/dml\"\n            class=\"px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 transition-colors\"\n          >\n            Návrat na Hub 🚀\n          </a>\n        </div>\n      </div>\n    "
+    "contentHtml": "\n      <div class=\"space-y-4\">\n        <div class=\"p-5 rounded-2xl bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-900 border border-yellow-500/40 text-center space-y-3\">\n          <div class=\"inline-flex p-3 rounded-full bg-yellow-500/10 text-yellow-400 border border-yellow-500/30 text-2xl\">\n            🏆\n          </div>\n          <h3 class=\"text-lg font-bold text-slate-100\">\n            Zvládli jste všech 7 modulů matematické přípravy na AX1!\n          </h3>\n          <p class=\"text-xs text-slate-300 max-w-xl mx-auto\">\n            Máte v rukou formální jazyk grafů, schopnost správně negovat kvantifikované výroky, umíte dekonstrukční indukci bez build-up pasti, ovládáte extremální princip a víte, jak zapsat 3-fázový invariant.\n          </p>\n        </div>\n\n        <div class=\"grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs\">\n          <div class=\"p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center space-y-1\">\n            <div class=\"font-bold text-emerald-400\">1. Čtěte zadání dvakrát</div>\n            <div class=\"text-[11px] text-slate-400\">Identifikujte typ úlohy a ověřte, zda graf musí být souvislý.</div>\n          </div>\n          <div class=\"p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center space-y-1\">\n            <div class=\"font-bold text-cyan-400\">2. Kreslete protipříklady</div>\n            <div class=\"text-[11px] text-slate-400\">Malý protipříklad na papíře vám okamžitě ukáže, kudy vést spor.</div>\n          </div>\n          <div class=\"p-3 rounded-xl bg-slate-900/60 border border-slate-800 text-center space-y-1\">\n            <div class=\"font-bold text-yellow-400\">3. Držte se šablon</div>\n            <div class=\"text-[11px] text-slate-400\">Přehledný strukturovaný zápis vám získá sympatie opravujícího.</div>\n          </div>\n        </div>\n\n        <div class=\"p-3 rounded-xl bg-amber-950/30 border border-amber-500/30 flex items-center justify-between text-xs text-amber-200\">\n          <span>Materiály můžete kdykoliv znovu studovat v jednotlivých modulech wiki.</span>\n          <a\n            href=\"/obor-bioinformatika/3-semestr/pre-ax1/math/dml\"\n            class=\"px-3 py-1.5 rounded-lg bg-amber-500 text-slate-950 font-bold hover:bg-amber-400 transition-colors\"\n          >\n            Návrat na Hub 🚀\n          </a>\n        </div>\n      </div>\n    "
   }
 ];

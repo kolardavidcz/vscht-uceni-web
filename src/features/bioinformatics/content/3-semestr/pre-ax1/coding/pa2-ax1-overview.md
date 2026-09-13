@@ -1,31 +1,31 @@
-# Průvodce: PA2 C++ Most k Algoritmům a Grafům (AG1)
+# Průvodce: PA2 C++ Most k Algoritmům a Grafům (AX1)
 
-> **Cíl příručky:** Propojit praktické znalosti programování v C++ z předmětu **BI-PA2** s teoretickými požadavky na algoritmickou korektnost, datové struktury, paměťový model a matematické důkazy v předmětu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT.
+> **Cíl příručky:** Propojit praktické znalosti programování v C++ z předmětu **BI-PA2** s teoretickými požadavky na algoritmickou korektnost, datové struktury, paměťový model a matematické důkazy v předmětu **AX1 (Algoritmy a Grafy 1)** na FIT ČVUT.
 
 ---
 
-## 1. Od Psaní Kódu v C++ k Matematickým Důkazům v AG1
+## 1. Od Psaní Kódu v C++ k Matematickým Důkazům v AX1
 
 V předmětu **PA2** (Programování a Algoritmy 2) jste se učili psát funkční C++ kód, spravovat paměť (RAII, indikátory, `std::unique_ptr`), řešit objektové návrhy a procházet automatickými testy Progtestu.
 
-V předmětu **AG1** dochází k posunu perspektivy:
+V předmětu **AX1** dochází k posunu perspektivy:
 - Kód v C++ již není konečným cílem, ale **pouhou implementací matematického konceptu**.
 - Důraz se přesouvá od sintaxe C++ k **dokazování časové složitosti ($\mathcal{O}, \Omega, \Theta$)** a **matematické korektnosti algoritmů** pomocí invariantů cyklů a dekonstrukční indukce.
 
-Tato příručka vám ukáže, jak přesně datové struktury C++ Standard Template Library (STL) odpovídají konceptům našich 7 modulů kurzu pre-AG1.
+Tato příručka vám ukáže, jak přesně datové struktury C++ Standard Template Library (STL) odpovídají konceptům našich 7 modulů kurzu pre-AX1.
 
 ---
 
-## 2. Mapa Propojení C++ STL Kontejnérů a 7 Modulů AG1
+## 2. Mapa Propojení C++ STL Kontejnérů a 7 Modulů AX1
 
 ```
 ┌──────────────────────────────────────┬──────────────────────────────────────┬──────────────────────────────────────┐
-│ Datová Struktura v C++ (PA2)         │ Formální Grafový Koncept (AG1)       │ Modul Pre-AG1                        │
+│ Datová Struktura v C++ (PA2)         │ Formální Grafový Koncept (AX1)       │ Modul Pre-AX1                        │
 ├──────────────────────────────────────┼──────────────────────────────────────┼──────────────────────────────────────┤
 │ std::vector<std::vector<int>>        │ Seznam Sousedů Grafu (Adjacency List)│ Modul 4a (Grafy v C++ & Reprezentace)│
 │ std::queue<int>                      │ FIFO Fronta Prohledávání do Šířky    │ Modul 4a (BFS v C++) & Modul 4b      │
-│ std::priority_queue<std::pair<int,int>>│ Min-Prioritní Halda pro Dijkstru/Prima│ Algoritmy v AG1 (Greedy & MST)       │
-│ std::vector<std::pair<int, std::pair>>│ Edge List pro Kruskalův MST Algoritmus│ Algoritmy v AG1 (Cut Property & DSU) │
+│ std::priority_queue<std::pair<int,int>>│ Min-Prioritní Halda pro Dijkstru/Prima│ Algoritmy v AX1 (Greedy & MST)       │
+│ std::vector<std::pair<int, std::pair>>│ Edge List pro Kruskalův MST Algoritmus│ Algoritmy v AX1 (Cut Property & DSU) │
 │ std::stack<int>                      │ Zásobník pro Prohledávání do Hloubky │ Modul 4a (DFS v C++)                 │
 │ std::vector<bool> visited            │ Množina Vyřízených Vrcholů S         │ Modul 3 & Modul 4b (Důkazy Sporem)   │
 └──────────────────────────────────────┴──────────────────────────────────────┴──────────────────────────────────────┘
@@ -33,7 +33,7 @@ Tato příručka vám ukáže, jak přesně datové struktury C++ Standard Templ
 
 ---
 
-## 3. Detailní Analýza Datových Struktur v C++ pro AG1
+## 3. Detailní Analýza Datových Struktur v C++ pro AX1
 
 ---
 
@@ -62,7 +62,7 @@ public:
 };
 ```
 
-#### 📊 Propojení s AG1:
+#### 📊 Propojení s AX1:
 - **Paměťová složitost:** $\Theta(n + m)$ – optimální využití paměti pro řídké biologické sítě.
 - **Procházení sousedů vrcholu $u$:** Trvá $\Theta(\deg(u))$ kroků. Při procházení celého grafu přes BFS/DFS spotřebuje celkem $\sum_{u \in V} \deg(u) = 2m$ kroků. Celková časová složitost je tedy **$\Theta(n + m)$**.
 
@@ -98,7 +98,7 @@ std::vector<int> runBFS(const Graph& G, int startNode) {
 }
 ```
 
-#### 📊 Propojení s AG1 (Modul 4 Invarianty):
+#### 📊 Propojení s AX1 (Modul 4 Invarianty):
 - Operace `Q.push()` a `Q.pop()` mají amortizovanou složitost **$\mathcal{O}(1)$**.
 - **Invariant cyklu:** Vzdálenosti prvků ve frontě $Q$ splňují $d[v_r] \le d[v_1] + 1$ a tvoří nemonotónní posloupnost.
 
@@ -139,7 +139,7 @@ void runDijkstra(int n, int startNode, const std::vector<std::vector<EdgeWeight>
 }
 ```
 
-#### 📊 Propojení s AG1 (Modul 4 & Modul 5):
+#### 📊 Propojení s AX1 (Modul 4 & Modul 5):
 - Vložení do prioritní haldy trvá $\mathcal{O}(\log n)$.
 - Celková časová složitost Dijkstrova algoritmu s min-haldou je **$\mathcal{O}((n + m) \log n)$**.
 
@@ -147,7 +147,7 @@ void runDijkstra(int n, int startNode, const std::vector<std::vector<EdgeWeight>
 
 ### 3.4 Paměťové Limity: Rekurze u DFS vs. Stack Overflow
 
-V předmětu PA2 jste zvyklí psát rekurzivní funkce. V teorii grafů a algoritmech AG1 má rekurzivní prohledávání do hloubky (DFS) skrytou past: **Stack Overflow (přetečení zásobníku volání)**!
+V předmětu PA2 jste zvyklí psát rekurzivní funkce. V teorii grafů a algoritmech AX1 má rekurzivní prohledávání do hloubky (DFS) skrytou past: **Stack Overflow (přetečení zásobníku volání)**!
 
 #### ⚠️ Proč rekurzivní DFS selže na velkých grafech?
 Pokud má graf $G$ formu dlouhé jednoduché cesty $P_n$ o $n = 10^6$ vrcholech, rekurzivní DFS vytvoří $10^6$ zanořených rámců na zásobníku (Call Stack).
@@ -155,7 +155,7 @@ Pokud má graf $G$ formu dlouhé jednoduché cesty $P_n$ o $n = 10^6$ vrcholech,
 - Jeden rekurzivní rámec funkce zabere cca 64-128 bajtů.
 - Při hloubce rekurze $> 100\,000$ program spadne na chybové hlášení **Segmentation Fault (Stack Overflow)**!
 
-#### ✅ Řešení v C++ pro AG1: Iterativní DFS se `std::stack<int>`
+#### ✅ Řešení v C++ pro AX1: Iterativní DFS se `std::stack<int>`
 ```cpp
 #include <stack>
 #include <vector>
@@ -203,9 +203,9 @@ Tím předejdete opakované realokaci dynamického pole v `std::vector` při ka�
 
 ## 4. Přehled Asymptotických Složitostí Operací C++ STL Containerů
 
-Pro úspěšné určování složitostí algoritmů v AG1 musíte mít zafixované složitosti C++ STL operací:
+Pro úspěšné určování složitostí algoritmů v AX1 musíte mít zafixované složitosti C++ STL operací:
 
-| Kontejner | Operace | Průměrná složitost | Nejhorší složitost | Využití v AG1 |
+| Kontejner | Operace | Průměrná složitost | Nejhorší složitost | Využití v AX1 |
 | :--- | :--- | :--- | :--- | :--- |
 | `std::vector` | `push_back(x)` | $\mathcal{O}(1)$ amortizovaně | $\mathcal{O}(n)$ realokace | Seznam sousedů, ukládání cest |
 | `std::vector` | `operator[]` | $\Theta(1)$ | $\Theta(1)$ | Přístup k matici / poli vzdáleností |
@@ -238,22 +238,22 @@ int main() {
 
 ---
 
-## 💡 Závěrečné Doporučení pro Propojení PA2 a AG1
+## 💡 Závěrečné Doporučení pro Propojení PA2 a AX1
 
 1. **Neučte se algoritmy nazpaměť jako C++ kód:** Místo toho si nakreslete vlnoplochu BFS nebo řez u MST a pochopte, **proč** invariant drží.
 2. **Přemýšlejte o datových strukturách skrze jejich rozhraní:** Vzdálenosti v BFS udržujte přes `std::queue`, v Dijkstrovi přes `std::priority_queue`.
-3. **Při psaní důkazu z AG1 používejte formalismus z našich 7 modulů:** Místo popisu C++ ukazatelů pište formální množinové definice $G = (V, E)$.
+3. **Při psaní důkazu z AX1 používejte formalismus z našich 7 modulů:** Místo popisu C++ ukazatelů pište formální množinové definice $G = (V, E)$.
 
 ---
 
 ## 3. 🚿 BFS: Kód vedle Matematiky (Side by Side)
 
-Tohle je nejlepší způsob, jak propojit PA2 a AG1. Ukazujeme BFS ve dvou sloupcích — C++ kód vlevo, matematický invariant vpravo.
+Tohle je nejlepší způsob, jak propojit PA2 a AX1. Ukazujeme BFS ve dvou sloupcích — C++ kód vlevo, matematický invariant vpravo.
 
 ### BFS: Hledání nejkratších vzdáleností (neohodnocený graf)
 
 ```cpp
-// C++ (PA2 styl)                        // AG1 matematický pohled
+// C++ (PA2 styl)                        // AX1 matematický pohled
 #include <vector>
 #include <queue>
 
@@ -281,7 +281,7 @@ vector<int> bfs(int s,                   // s = startovní vrchol
 }
 ```
 
-### Invariant cyklu BFS (formálně, pro AG1 důkaz):
+### Invariant cyklu BFS (formálně, pro AX1 důkaz):
 
 Před každou iterací `while (!q.empty())` platí:
 1. Pro každý **zpracovaný** vrchol $u$ (již vyskočený z fronty): $d[u] = \delta(s, u)$.
@@ -339,14 +339,14 @@ vector<int> dijkstra(int s, const vector<vector<Edge>>& adj) {
 }
 ```
 
-### Klíčový invariant pro AG1 důkaz:
+### Klíčový invariant pro AX1 důkaz:
 
 Při každém výskoku vrcholu $u$ z prioritní fronty platí: $d[u] = \delta(s, u)$ (finální vzdálenost).
 
 **Proč?** Kdyby existovala kratší cesta $P'$ do $u$ dosud nenalezená, pak $P'$ prochází přes nějaký vrchol $x$ dosud ve frontě. Ale $d[x] \ge d[u]$ (jinak by byl $x$ vyskočen dříve). Cesta přes $x$ by měla délku $\ge d[x] \ge d[u]$, tedy není kratší. Spor!
 
 > [!WARNING]
-> **Dijkstra + záporné hrany = katas trofa!** Pokud existuje záporná hrana $\{u,v\}$ s $w < 0$, invariant se rozbije — vrchol může být vyskočen z fronty s neoptimální vzdáleností. Pro záporné hrany použij Bellman-Ford (AG1 probírá jako bonusové téma).
+> **Dijkstra + záporné hrany = katas trofa!** Pokud existuje záporná hrana $\{u,v\}$ s $w < 0$, invariant se rozbije — vrchol může být vyskočen z fronty s neoptimální vzdáleností. Pro záporné hrany použij Bellman-Ford (AX1 probírá jako bonusové téma).
 
 ---
 
@@ -461,20 +461,20 @@ int kruskal_mst(int n, vector<tuple<int,int,int>>& edges) {
 
 ---
 
-## 7. 🚨 Nejčastější PA2 → AG1 Chyby
+## 7. 🚨 Nejčastější PA2 → AX1 Chyby
 
-| Chyba | PA2 myšlení | AG1 požadavek |
+| Chyba | PA2 myšlení | AX1 požadavek |
 |:---|:---|:---|
 | **Off-by-one v indexování** | `adj[0..n-1]` nebo `adj[1..n]`? | Musíš specifikovat: „$V = \{0, 1, \ldots, n-1\}$" |
 | **Zapomnění na nesouvislé grafy** | BFS spustíš jen z vrcholu 0 | Pro nesouvislý $G$ musíš spustit BFS ze všech nenavštívených vrcholů |
 | **`int` overflow při součtu vah** | `d[u] + w` může přetéct pokud `d[u] = INT_MAX` | Testuj `d[u] != INT_MAX` před relaxací |
 | **Záporné hrany v Dijkstrovi** | Kód „funguje" na testovacích datech | Formálně: invariant Dijkstry selže, důkaz je nesprávný |
-| **Rekurzivní DFS na velkých grafech** | Progt test ho přijme | Stack overflow na $n = 10^5$ v AG1 zápočtovce |
+| **Rekurzivní DFS na velkých grafech** | Progt test ho přijme | Stack overflow na $n = 10^5$ v AX1 zápočtovce |
 | **Modifikace grafu při procházení** | `adj[u].push_back(v)` uvnitř BFS | Nedefinované chování, může zacyklit BFS |
 
 ---
 
-## 8. ☀️ Letní Kontrolní Seznam před AG1
+## 8. ☀️ Letní Kontrolní Seznam před AX1
 
 Proveď si tento self-test před zářím. Pokud odpovíš ANO na všechny, máš solidní start:
 

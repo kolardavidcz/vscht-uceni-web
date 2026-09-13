@@ -236,11 +236,11 @@ export function printPlanDocument(title: string, topics: PlanTopic[]) {
 <body>
   <h1>${escapeHtml(title)}</h1>
   ${rows || "<p><em>Žádná témata pro tuto úroveň.</em></p>"}
-  <footer>PA2 → AG1 · ${new Date().toLocaleString("cs-CZ")} · vscht-uceni</footer>
+  <footer>PA2 → AX1 · ${new Date().toLocaleString("cs-CZ")} · vscht-uceni</footer>
 </body>
 </html>`;
 
-  const IFRAME_ID = "pa2-ag1-print-frame";
+  const IFRAME_ID = "pa2-ax1-print-frame";
   document.getElementById(IFRAME_ID)?.remove();
 
   const iframe = document.createElement("iframe");

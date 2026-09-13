@@ -1,12 +1,12 @@
 /**
- * Module 8: Zkouškový Workshop & Šablony Důkazů z AG1
- * 1:1 Verbatim Content from src/features/bioinformatics/content/3-semestr/pre-ag1/dml-zkouskovy-workshop.md
+ * Module 8: Zkouškový Workshop & Šablony Důkazů z AX1
+ * 1:1 Verbatim Content from src/features/bioinformatics/content/3-semestr/pre-ax1/dml-zkouskovy-workshop.md
  * Split cleanly across slides to guarantee zero overflow at 2x font scale.
  */
 import {
   createLectureDividerSlide,
-  createTwoCardSlide,
-  createSingleCardSlide
+  createSingleCardSlide,
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule8Slides(pres) {
@@ -15,8 +15,8 @@ export function addModule8Slides(pres) {
   // 1. Lecture Divider
   createLectureDividerSlide(pres, {
     lectureNumber: 8,
-    title: "Zkouškový Workshop & Šablony Důkazů z AG1",
-    goal: "Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu AG1 (Algoritmy a Grafy 1) na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.",
+    title: "Zkouškový Workshop & Šablony Důkazů z AX1",
+    goal: "Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu AX1 (Algoritmy a Grafy 1) na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.",
     topics: [
       "1. Jak Vyučující na FIT ČVUT Opravují Zkouškové Důkazy?",
       "Co vás bude stát body (až 0 b) vs. Co vám zajistí 100 %",
@@ -504,11 +504,11 @@ export function addModule8Slides(pres) {
     breadcrumb,
     title: "🎯 Závěr Letní Přípravy: Gratulujeme!",
     card: {
-      title: "🎯 Gratulujeme! Dokončili jste kompletní letní 0-to-Hero přípravu pre-AG1!",
+      title: "🎯 Gratulujeme! Dokončili jste kompletní letní 0-to-Hero přípravu pre-AX1!",
       badge: "HOTOVO! 🚀",
       type: "emerald",
       items: [
-        { bold: "Úspěšné dokončení:", text: "Nyní máte veškerou matematickou jistotu i praktickou výbavu pro zvládnutí předmětu AG1 na FIT ČVUT! 🚀" }
+        { bold: "Úspěšné dokončení:", text: "Nyní máte veškerou matematickou jistotu i praktickou výbavu pro zvládnutí předmětu AX1 na FIT ČVUT! 🚀" }
       ]
     }
   });

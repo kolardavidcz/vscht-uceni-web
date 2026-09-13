@@ -147,14 +147,14 @@ Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů):
 ### 💻 BI-PA1 jako hlavní síto:
 * **Týdenní deadliny v Progtestu:** Úlohy nelze napsat za večer před deadlinem. Začněte programovat hned v den zadání.
 * **Časové bonusy zachraňují semestr:** Odevzdání v předstihu dává bonusové body, které vám na konci semestru vytvoří kritickou rezervu pro získání zápočtu.
-* **🚨 Neučí se v letním semestru:** BI-PA1 se vyučuje **výhradně v zimním semestru** (v letním semestru se vůbec neotvírá!). Pokud ji neuděláte, musíte čekat celý rok až do 3. semestru, kde se vám ale nakumuluje s další pověstnou síťovkou z FITu (**BI-AG1**) a nejtěžšími chemickými předměty VŠCHT (Biochemie a Fyzikální chemie). Udělat PA1 napoprvé je proto absolutní priorita.
+* **🚨 Neučí se v letním semestru:** BI-PA1 se vyučuje **výhradně v zimním semestru** (v letním semestru se vůbec neotvírá!). Pokud ji neuděláte, musíte čekat celý rok až do 3. semestru, kde se vám ale nakumuluje s další pověstnou síťovkou z FITu (**BI-AX1**) a nejtěžšími chemickými předměty VŠCHT (Biochemie a Fyzikální chemie). Udělat PA1 napoprvé je proto absolutní priorita.
 * **Návody k PA1:** Kompletní tipy a šablony najdete v podsekci [BI-PA1](/obor-bioinformatika/1-semestr/bi-pa1/behem-semestru-a-pred-nim).
 
 ### ⚡ Prvních 7 týdnů (Zápočty z Matiky a Chemie vs. eskalace v PA1):
 * Kolem 6. týdne se píší **první zápočtové testy z Matematiky A i Anorganické chemie I**.
 * Jsou **podstatně jednodušší** než druhé zápočty v prosinci. Nasbírejte v nich co nejvíce bodů (v součtu potřebujete > 50 %), ať máte klidný závěr roku.
 * **⚠️ PA1 mezitím prudce nabírá na náročnosti:** Zatímco se učíte na zápočty z chemie a matiky, úlohy v Progtestu jsou **týden od týdne obtížnější**. Zatímco matika nebo chemie se dají nárazově dohnat před zkouškou, programování o víkendu nedoženete. Na základy z PA1 navíc v dalším studiu **striktně navazuje celý informatický řetězec**:
-  * **BI-PA1 $\to$ Java $\to$ BI-AG1 + Python (oba naráz ve 3. semestru) $\to$ BI-AAG** (Automaty a gramatiky)
+  * **BI-PA1 $\to$ Java $\to$ BI-AX1 + Python (oba naráz ve 3. semestru) $\to$ BI-AAG** (Automaty a gramatiky)
   Ztratit tempo v PA1 během prvních 7 týdnů znamená zkomplikovat si celé další studium informatiky.
 
 > ℹ️ *Konkrétní podmínky postupu a kreditová minima najdete shrnutá v průvodci [Konec 1. semestru & zkouškové](/obor-bioinformatika/1-semestr/konec-semestru-a-zkouskove).*

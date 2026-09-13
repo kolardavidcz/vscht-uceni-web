@@ -1,6 +1,6 @@
 # 💻 C++ Trénink: Rekurze, BFS, DFS & Dijkstra (rekurze_bro.cpp)
 
-> **Praktický tréninkový kód v C++20 ze slidů a úloh pro AG1 (Algoritmy a Grafy 1)**.
+> **Praktický tréninkový kód v C++20 ze slidů a úloh pro AX1 (Algoritmy a Grafy 1)**.
 > Obsahuje kompletní reprezentaci grafů, 5 cvičení od základní stromové rekurze přes BFS/DFS až po prohledávání stavového prostoru (ProgTest styl) a Dijkstrův algoritmus s prioritní frontou, včetně automatických testů.
 
 <div class="my-6 p-4 sm:p-5 rounded-2xl border border-brand-orange/30 bg-gradient-to-r from-orange-50/80 to-amber-50/60 dark:from-orange-950/30 dark:to-amber-950/20 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

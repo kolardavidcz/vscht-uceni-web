@@ -1,14 +1,14 @@
 /**
  * Module 4: Logický & Důkazový základ
- * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-logicky-zaklad.md
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ax1/dml-logicky-zaklad.md
  * Exact 1:1 text fidelity with website markdown.
  */
 import {
-  createLectureDividerSlide,
-  createTwoCardSlide,
-  createThreeCardSlide,
   createCodeSlide,
-  createTableSlide
+  createLectureDividerSlide,
+  createTableSlide,
+  createThreeCardSlide,
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule4Slides(pres) {
@@ -18,7 +18,7 @@ export function addModule4Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 4,
     title: "Logický & Důkazový základ",
-    goal: "Cíl kapitoly: Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků (∀, ∃, ∃!), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AG1 na FIT ČVUT.",
+    goal: "Cíl kapitoly: Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků (∀, ∃, ∃!), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AX1 na FIT ČVUT.",
     topics: [
       "🌱 Než začneme: Proč se biologové učí logiku?",
       "1. Úvod do Matematické Logiky a Definice Výroku",
@@ -32,7 +32,7 @@ export function addModule4Slides(pres) {
       "3. Nutná vs. Postačující Podmínka",
       "4. Kvantifikátory (∀, ∃, ∃!) a Pravidlo Negace",
       "4.2 Složité Řetězené Negace v Bioinformatice",
-      "5. Přehled 4 Základních Důkazových Technik pro AG1",
+      "5. Přehled 4 Základních Důkazových Technik pro AX1",
       "Úloha 1.1: Bezchybná Negace Složité Formule Enzymu",
       "Úloha 1.2: Důkaz v Sítích (Kontrapozice vs. Přímý Důkaz)"
     ]
@@ -57,7 +57,7 @@ export function addModule4Slides(pres) {
       badge: "PŘÍSLIB KAPITOLY",
       type: "warm",
       items: [
-        { bold: "Úloha logiky:", text: "Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AG1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů." },
+        { bold: "Úloha logiky:", text: "Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AX1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů." },
         { bold: "Příslib této kapitoly:", text: "Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu." },
         { bold: "Bez abstraktní teorie:", text: "Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C — žádná teorie grafů není předem potřeba!" }
       ]
@@ -382,7 +382,7 @@ if (width <= 0 || height <= 0)         // De Morgan: „když je neplatná ší�
     }
   });
 
-  // 15. Section 5: Přehled 4 Základních Důkazových Technik pro AG1
+  // 15. Section 5: Přehled 4 Základních Důkazových Technik pro AX1
   createTwoCardSlide(pres, {
     breadcrumb,
     title: "5. Přehled 4 Základních Důkazových Technik",

@@ -1,22 +1,22 @@
 /**
  * Module 2: Letní průvodce grafovou matematikou pro bioinformatiky
- * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml.md
+ * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ax1/dml.md
  */
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  colors,
   createDocSlide,
-  renderDocHeading,
-  renderDocParagraph,
-  renderDocList,
+  fs,
   renderDocCallout,
   renderDocCode,
+  renderDocHeading,
+  renderDocImage,
+  renderDocList,
+  renderDocParagraph,
   renderDocTable,
   renderDocVideoPlaceholder,
-  renderDocImage,
-  renderSolutionBanner,
-  colors,
-  fs
+  renderSolutionBanner
 } from "../pptx_document_engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -38,7 +38,7 @@ export function addModule2Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "Přípravný letní materiál:",
-      text: "Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce.\n\nStudenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AG1. Zní to dobře? Začínáme.",
+      text: "Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce.\n\nStudenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AX1. Zní to dobře? Začínáme.",
       y: y + 0.15,
     });
   }
@@ -70,7 +70,7 @@ export function addModule2Slides(pres) {
     );
 
     renderDocParagraph(slide,
-      "Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi **znalostmi** a **postupem** a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AG1.",
+      "Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi **znalostmi** a **postupem** a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AX1.",
       { y }
     );
   }
@@ -277,7 +277,7 @@ export function addModule2Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Závěr pro studenta bioinformatiky:",
-      text: "Důkaz kružnice nespočívá v kreslení, ale v ověření rovnice (x - m)² + (y - n)² = r². V AG1 to bude navlas stejné: dokázat, že graf je strom, znamená ověřit formální definici stromu!",
+      text: "Důkaz kružnice nespočívá v kreslení, ale v ověření rovnice (x - m)² + (y - n)² = r². V AX1 to bude navlas stejné: dokázat, že graf je strom, znamená ověřit formální definici stromu!",
       y: y + 0.1,
     });
   }
@@ -292,7 +292,7 @@ export function addModule2Slides(pres) {
     y = renderDocHeading(pres, slide, "3.2 Role Postupu: Rychlé Umocňování ($x^n$) & Formální Logika", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "Zatímco kružnice demonstrovala sílu **statických znalostí (definic)**, v programování a předmětu AG1 rozhoduje **dynamický postup (algoritmus)** opřený o zákony **formální matematické logiky**.",
+      "Zatímco kružnice demonstrovala sílu **statických znalostí (definic)**, v programování a předmětu AX1 rozhoduje **dynamický postup (algoritmus)** opřený o zákony **formální matematické logiky**.",
       { y }
     );
 
@@ -391,13 +391,13 @@ long long power(long long x, unsigned int n) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 2.11b: Srovnání složitostí a Význam pro AG1
+  // Slide 2.11b: Srovnání složitostí a Význam pro AX1
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "3.2 Role Postupu" });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "📊 Srovnání Složitostí & Význam pro AG1", { level: 3, y });
+    y = renderDocHeading(pres, slide, "📊 Srovnání Složitostí & Význam pro AX1", { level: 3, y });
 
     y = renderDocTable(slide, {
       headers: ["Exponent n", "Naivní přístup (n - 1 násobení)", "Rychlé umocňování (≈ log₂ n)", "Zrychlení v praxi"],
@@ -412,7 +412,7 @@ long long power(long long x, unsigned int n) {
 
     renderDocCallout(pres, slide, {
       type: "tip",
-      title: "Algoritmický význam pro AG1 a Bioinformatiku:",
+      title: "Algoritmický význam pro AX1 a Bioinformatiku:",
       text: "Tento princip je základem moderní kryptografie (RSA) i rychlého umocňování matice sousedství grafu A^k v bioinformatice pro zjištění počtu cest délky k mezi biomolekulami v síti!",
       y: y + 0.05,
     });

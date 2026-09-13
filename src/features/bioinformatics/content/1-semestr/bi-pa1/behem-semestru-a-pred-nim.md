@@ -1,12 +1,7 @@
 # 0 · Během semestru
 
-Stručný přehled fungování BI-PA1 na FIT ČVUT a týdenní cyklus Progtestu:
-
----
-
 ## ⚙️ Pravidla semestru & Progtest
 
-* **Týdenní úloha**: Nové zadání vychází po přednášce, řádný deadline bývá v neděli 23:59.
 * **Sbírejte časové bonusy hned od října**: První úlohy (podmínky, jednoduché cykly) jsou nesrovnatelně snazší než listopadové a prosincové (ukazatele, dynamická paměť, spojové seznamy). Bonusové body z prvních týdnů tvoří záchranný polštář pro konec semestru.
 * **Práce na úloze**: Zadání si projděte hned po zveřejnění v týdnu, ať nad ním můžete přemýšlet a ujasnit si nejasnosti na cvičení. Realisticky je ale samotné kódování a ladění víkendová záležitost — počítejte s tím, že vám zabere často celý víkend.
 * **Podmínky zápočtu**: Zápočet je čistě o bodech — musíte získat předepsané bodové minimum z domácích úloh v Progtestu (žádný prezenční zápočtový test se na FITu nepíše).

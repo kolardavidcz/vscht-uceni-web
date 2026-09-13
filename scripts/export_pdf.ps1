@@ -1,4 +1,4 @@
-param([string]$name = "pre-ag1-kurz")
+param([string]$name = "pre-ax1-kurz")
 $ErrorActionPreference = 'Stop'
 $inputFile = "B:\vscht_uceni_web\$name.pptx"
 $outputFile = "B:\vscht_uceni_web\$name.pdf"

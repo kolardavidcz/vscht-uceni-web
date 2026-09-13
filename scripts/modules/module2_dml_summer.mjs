@@ -1,14 +1,13 @@
 /**
  * Module 2: Letní průvodce grafovou matematikou pro bioinformatiky
- * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml.md
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ax1/dml.md
  * Exact 1:1 text fidelity with website markdown.
  */
 import {
-  createLectureDividerSlide,
-  createTwoCardSlide,
-  createSingleCardSlide,
   createCodeSlide,
-  createTableSlide
+  createLectureDividerSlide,
+  createTableSlide,
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule2Slides(pres) {
@@ -18,7 +17,7 @@ export function addModule2Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 2,
     title: "☀️ Letní průvodce grafovou matematikou pro bioinformatiky",
-    goal: "Pro koho? Studenti Bioinformatiky na VŠCHT, kteří v září nastupují do 3. semestru a čeká je AG1 na FIT ČVUT. Vibe? Žádné tlusté skripta, žádný stres. Letní četba u kafe — jako kdyby ti to starší spolužák vysvětloval u oběda.",
+    goal: "Pro koho? Studenti Bioinformatiky na VŠCHT, kteří v září nastupují do 3. semestru a čeká je AX1 na FIT ČVUT. Vibe? Žádné tlusté skripta, žádný stres. Letní četba u kafe — jako kdyby ti to starší spolužák vysvětloval u oběda.",
     topics: [
       "👋 Hele, tohle není strašidelný kurz",
       "3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek?",
@@ -43,7 +42,7 @@ export function addModule2Slides(pres) {
       type: "neutral",
       items: [
         { bold: "Pocit z gymplu:", text: "Spousta bioinformatiků slyší „diskrétní matematika a důkazy\" a dostane špatný pocit z gymplu. Nemusíš." },
-        { bold: "Co je tento materiál:", text: "Tohle je přípravný letní materiál — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AG1 po tobě vůbec chce." },
+        { bold: "Co je tento materiál:", text: "Tohle je přípravný letní materiál — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce." },
         { bold: "Co tady NENÍ:", text: "Žádné integrály, žádné matice, žádná pravděpodobnost. Jen logika, grafy a pár hezkých triků na důkazy." }
       ]
     },
@@ -55,7 +54,7 @@ export function addModule2Slides(pres) {
         { bold: "Čtení formalismu:", text: "Jak číst a psát matematická tvrzení o grafech (aniž by to bylo strašidelné)." },
         { bold: "Správnost algoritmů:", text: "Jak dokázat, že algoritmus funguje správně (stačí 3 kroky, fakt)." },
         { bold: "Matematické myšlení:", text: "Jak myslet jako matematik, když řešíš strukturální problémy — a to ti pomůže i v bioinformatice." },
-        { bold: "Srovnání s FIT:", text: "Studenti FIT prošli celým předmětem BI-DML. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího pro AG1." }
+        { bold: "Srovnání s FIT:", text: "Studenti FIT prošli celým předmětem BI-DML. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího pro AX1." }
       ]
     }
   });
@@ -70,7 +69,7 @@ export function addModule2Slides(pres) {
       type: "neutral",
       items: [
         { bold: "Častý mýtus:", text: "„Matematici a teoretičtí informatici milují složité řecké značky a píší důkazy jen proto, aby potrápili studenty u zkoušky.“" },
-        { bold: "Pravda:", text: "Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi znalostmi a postupem a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AG1." }
+        { bold: "Pravda:", text: "Pravda je přesně opačná. V této kapitole si ukážeme, proč důkazy vůbec vznikly, jaký je zásadní rozdíl mezi znalostmi a postupem a jak se z bioinformatika stane člověk, který se nezalekne žádné teoretické otázky z AX1." }
       ]
     },
     rightCard: {
@@ -90,7 +89,7 @@ export function addModule2Slides(pres) {
     breadcrumb,
     title: "3.1 Anatomie Důkazu: Cesta k Výsledku vs. Úsporný Zápis",
     subtitle: "V odborné literatuře i na přednáškách se setkáte se dvěma zásadními typy důkazů:",
-    headers: ["Typ Důkazu", "Jak Funguje v Praxi", "Proč Může Zmást Studenta", "Význam pro Bioinformatiku a AG1"],
+    headers: ["Typ Důkazu", "Jak Funguje v Praxi", "Proč Může Zmást Studenta", "Význam pro Bioinformatiku a AX1"],
     colWidths: [2.8, 3.1, 2.7, 3.1],
     rows: [
       [
@@ -170,7 +169,7 @@ export function addModule2Slides(pres) {
       badge: "ALGORITMICKÁ VÝZVA",
       type: "neutral",
       items: [
-        { bold: "Přechod k dynamice:", text: "Zatímco kružnice demonstrovala sílu statických znalostí (definic), v programování a předmětu AG1 rozhoduje dynamický postup (algoritmus) opřený o zákony formální matematické logiky." },
+        { bold: "Přechod k dynamice:", text: "Zatímco kružnice demonstrovala sílu statických znalostí (definic), v programování a předmětu AX1 rozhoduje dynamický postup (algoritmus) opřený o zákony formální matematické logiky." },
         { bold: "Zadání výzvy:", text: "Chceme spočítat hodnotu mocniny x^n (pro libovolné přirozené číslo n ∈ ℕ) výhradně za pomoci operace násobení." },
         { bold: "Cíl:", text: "Provést co nejmenší možný počet násobení." }
       ]

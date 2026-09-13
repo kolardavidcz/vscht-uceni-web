@@ -1,5 +1,5 @@
 /**
- * Pre-AG1 PowerPoint Document Flow Engine
+ * Pre-AX1 PowerPoint Document Flow Engine
  * Renders slides in a pure 1:1 linear document flow matching the website reader / print layout:
  * - 16:9 widescreen pages (13.333" x 7.5") with pure white background
  * - Full-width headings, paragraphs (with inline bold/italic), and bullet lists
@@ -271,7 +271,7 @@ export function createDocSlide(pres, { breadcrumb = "", continuationHeader = "" 
   }
 
   // Bottom footer bar
-  slide.addText("VŠCHT Učení · Obor Bioinformatika · pre-AG1 (Algoritmy a Grafy)", {
+  slide.addText("VŠCHT Učení · Obor Bioinformatika · pre-AX1 (Algoritmy a Grafy)", {
     x: 0.8,
     y: 7.15,
     w: 9.0,
@@ -939,10 +939,10 @@ export function renderDocConnectingLine(pres, slide, x1, y1, x2, y2, {
 }
 
 /**
- * Creates the Master Title Slide for pre-AG1 presentation.
+ * Creates the Master Title Slide for pre-AX1 presentation.
  */
 export function createDocMasterTitleSlide(pres, {
-  title = "pre-AG1: Příprava na Algoritmy a Grafy",
+  title = "pre-AX1: Příprava na Algoritmy a Grafy",
   subtitle = "Kompletní 1:1 příprava pro bioinformatiky na Algoritmy a Grafy 1 (FIT ČVUT)",
   author = "VŠCHT Učení · Obor Bioinformatika",
   date = "2026"
@@ -961,7 +961,7 @@ export function createDocMasterTitleSlide(pres, {
   });
 
   // Breadcrumb / Category
-  slide.addText("OBOR BIOINFORMATIKA · PŘEDMĚT AG1 · FIT ČVUT", {
+  slide.addText("OBOR BIOINFORMATIKA · PŘEDMĚT AX1 · FIT ČVUT", {
     x: 0.8,
     y: 0.75,
     w: 11.733,

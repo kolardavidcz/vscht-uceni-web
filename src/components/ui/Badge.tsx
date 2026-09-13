@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-/** Matches original app badge variants used by PA2→AG1 overview */
+/** Matches original app badge variants used by PA2→AX1 overview */
 type BadgeVariant =
   | "orange"
   | "slate"

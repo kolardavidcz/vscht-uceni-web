@@ -1,13 +1,12 @@
 /**
- * Master PowerPoint Generator for pre-AG1 Course
- * Assembles all 8 modules into pre-ag1-kurz.pptx with 1:1 fidelity to website markdown.
+ * Master PowerPoint Generator for pre-AX1 Course
+ * Assembles all 8 modules into pre-ax1-kurz.pptx with 1:1 fidelity to website markdown.
  */
-import pptxgen from "pptxgenjs";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import pptxgen from "pptxgenjs";
 
-import { FONT_DELTA, createDocMasterTitleSlide } from "./pptx_document_engine.mjs";
 import { addModule2Slides } from "./modules_doc/module2_doc.mjs";
 import { addModule3Slides } from "./modules_doc/module3_doc.mjs";
 import { addModule4Slides } from "./modules_doc/module4_doc.mjs";
@@ -15,6 +14,7 @@ import { addModule5Slides } from "./modules_doc/module5_doc.mjs";
 import { addModule6Slides } from "./modules_doc/module6_doc.mjs";
 import { addModule7Slides } from "./modules_doc/module7_doc.mjs";
 import { addModule8Slides } from "./modules_doc/module8_doc.mjs";
+import { FONT_DELTA, createDocMasterTitleSlide } from "./pptx_document_engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +22,7 @@ const rootDir = path.resolve(__dirname, "..");
 
 async function generate() {
   console.log("================================================================");
-  console.log("  PRE-AG1 POWERPOINT GENERATOR (MODULES 2-8)");
+  console.log("  PRE-AX1 POWERPOINT GENERATOR (MODULES 2-8)");
   console.log(`  Font Delta: ${FONT_DELTA >= 0 ? "+" : ""}${FONT_DELTA} pt`);
   console.log("================================================================");
 
@@ -33,15 +33,15 @@ async function generate() {
   pres.layout = "WIDESCREEN_16_9";
 
   // Document metadata
-  pres.title = "pre-AG1: Letní Průvodce Grafovou Matematikou pro Bioinformatiky";
+  pres.title = "pre-AX1: Letní Průvodce Grafovou Matematikou pro Bioinformatiky";
   pres.author = "VŠCHT Učení · Obor Bioinformatika";
   pres.company = "VŠCHT Praha / FIT ČVUT";
-  pres.subject = "Příprava na Algoritmy a Grafy 1 (AG1 FIT ČVUT)";
+  pres.subject = "Příprava na Algoritmy a Grafy 1 (AX1 FIT ČVUT)";
 
   // 0. Master Course Title Slide
   console.log("Generating Course Title Slide...");
   createDocMasterTitleSlide(pres, {
-    title: "pre-AG1: Letní Průvodce Grafovou Matematikou",
+    title: "pre-AX1: Letní Průvodce Grafovou Matematikou",
     subtitle: "Kompletní 1:1 příprava pro bioinformatiky na Algoritmy a Grafy 1 (FIT ČVUT) z pohledu studenta VŠCHT",
     author: "VŠCHT Učení · Obor Bioinformatika",
     date: "2026"
@@ -75,8 +75,8 @@ async function generate() {
   console.log("Generating Module 8: Zkouškový Workshop & Šablony Důkazů...");
   addModule8Slides(pres);
 
-  const outputPath = path.join(rootDir, "pre-ag1-kurz.pptx");
-  const publicPath = path.join(rootDir, "public", "pre-ag1-kurz.pptx");
+  const outputPath = path.join(rootDir, "pre-ax1-kurz.pptx");
+  const publicPath = path.join(rootDir, "public", "pre-ax1-kurz.pptx");
 
   console.log(`\nWriting presentation to ${outputPath}...`);
   await pres.writeFile({ fileName: outputPath });
@@ -90,7 +90,7 @@ async function generate() {
   }
 
   console.log("\n================================================================");
-  console.log("  SUCCESSFULLY GENERATED pre-ag1-kurz.pptx!");
+  console.log("  SUCCESSFULLY GENERATED pre-ax1-kurz.pptx!");
   console.log(`  Output: ${outputPath}`);
   console.log("================================================================\n");
 }

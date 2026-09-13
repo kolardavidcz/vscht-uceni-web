@@ -14,9 +14,9 @@ Nechť $G = (V, E)$ je neorientovaný graf bez smyček a násobných hran:
 
 ---
 
-## 1. Počítačová Reprezentace Grafů v C++ (PA2 $\to$ AG1)
+## 1. Počítačová Reprezentace Grafů v C++ (PA2 $\to$ AX1)
 
-V předmětech **PA2** a **AG1** budete grafové algoritmy zapisovat v jazyce C++. Způsob, jakým graf uložíte do paměti, rozhodne o tom, zda váš program proběhne za 0.01 sekundy, nebo vyprší časový limit (Time Limit Exceeded).
+V předmětech **PA2** a **AX1** budete grafové algoritmy zapisovat v jazyce C++. Způsob, jakým graf uložíte do paměti, rozhodne o tom, zda váš program proběhne za 0.01 sekundy, nebo vyprší časový limit (Time Limit Exceeded).
 
 <div class="my-6 p-4 rounded-xl bg-stone-100/80 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs">
   <div class="flex items-center justify-between mb-3">

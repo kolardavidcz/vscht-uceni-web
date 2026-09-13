@@ -1,22 +1,22 @@
 /**
  * Module 4: Logický & Důkazový základ
- * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml-logicky-zaklad.md
+ * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ax1/dml-logicky-zaklad.md
  */
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  colors,
   createDocSlide,
-  renderDocHeading,
-  renderDocParagraph,
-  renderDocList,
+  fonts,
+  fs,
   renderDocCallout,
   renderDocCode,
-  renderDocTable,
+  renderDocHeading,
   renderDocImage,
-  renderSolutionBanner,
-  colors,
-  fonts,
-  fs
+  renderDocList,
+  renderDocParagraph,
+  renderDocTable,
+  renderSolutionBanner
 } from "../pptx_document_engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -38,7 +38,7 @@ export function addModule4Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Cíl kapitoly:",
-      text: "Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků (∀, ∃, ∃!), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AG1 na FIT ČVUT.",
+      text: "Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků (∀, ∃, ∃!), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AX1 na FIT ČVUT.",
       y: y + 0.1,
     });
   }
@@ -167,8 +167,8 @@ export function addModule4Slides(pres) {
       },
       {
         text: "„Máš-li kubickou rovnici bez kvadratického členu, kde se součet třetí mocniny neznámé a jejího násobku rovná zadané konstantě, rozděl si tuto konstantu na rozdíl dvou pomocných proměnných.\n\n" +
-              "Zvol je tak, aby jejich součin odpovídal třetí mocnině jedné třetiny koeficientu u neznámé.\n\n" +
-              "Výsledné řešení pak získáš jako rozdíl třetích odmocnin těchto dvou proměnných.“",
+          "Zvol je tak, aby jejich součin odpovídal třetí mocnině jedné třetiny koeficientu u neznámé.\n\n" +
+          "Výsledné řešení pak získáš jako rozdíl třetích odmocnin těchto dvou proměnných.“",
         options: {
           fontFace: fonts.sans,
           fontSize: fs(8.2),
@@ -433,7 +433,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
     y = renderDocHeading(pres, slide, "3. Nutná vs. Postačující Podmínka", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "V předmětu AG1 musíte bez váhání rozumět slovnímu spojení *„Nutná a postačující podmínka“*:\nUvažujme implikaci $A \\Rightarrow B$:",
+      "V předmětu AX1 musíte bez váhání rozumět slovnímu spojení *„Nutná a postačující podmínka“*:\nUvažujme implikaci $A \\Rightarrow B$:",
       { y }
     );
 
@@ -555,7 +555,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
     });
 
     y = renderDocTable(slide, {
-      headers: ["Typ Důkazu", "Jak Funguje v Praxi", "Proč Může Zmást Studenta", "Význam pro Bioinformatiku a AG1"],
+      headers: ["Typ Důkazu", "Jak Funguje v Praxi", "Proč Může Zmást Studenta", "Význam pro Bioinformatiku a AX1"],
       rows: [
         ["1. Heuristický / Objevný", "Ukazuje skutečný myšlenkový postup autora — od motivace a náčrtků po obecný vzorec.", "Bývá delší, neskrývá slepé uličky a experimentální intuici.", "Zásadní: tento důkaz často přímo generuje algoritmus a kód v C++."],
         ["2. Formální / Úsporný", "Dokazuje tvrzení v co nejmenším počtu řádků a zkracuje všechno, co může.", "Působí jako kouzlo spadlé z nebe — autor zahodil náčrtky a ukáže jen geniální trik.", "Slouží k neprůstřelnému ověření, ale sám o sobě nenaučí, jak na řešení přijít."]
@@ -573,13 +573,13 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
   }
 
   // --------------------------------------------------------------------------
-  // Slide 4.12a: 5.2 Čtyři Základní Důkazové Techniky v AG1 (Přehled)
+  // Slide 4.12a: 5.2 Čtyři Základní Důkazové Techniky v AX1 (Přehled)
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "5.2 Čtyři Základní Důkazové Techniky v AG1", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "5.2 Čtyři Základní Důkazové Techniky v AX1", { level: 2, y, showUnderline: true });
 
     // ASCII 4 techniky box
     const boxW = 11.733;

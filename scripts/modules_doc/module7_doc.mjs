@@ -1,21 +1,21 @@
 /**
  * Module 7: Grafy v C++ & Reprezentace v Paměti
- * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml-bio-grafy-b.md
+ * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ax1/dml-bio-grafy-b.md
  */
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  colors,
   createDocSlide,
-  renderDocHeading,
-  renderDocParagraph,
-  renderDocList,
+  fs,
   renderDocCallout,
   renderDocCode,
-  renderDocTable,
+  renderDocHeading,
   renderDocImage,
-  renderSolutionBanner,
-  colors,
-  fs
+  renderDocList,
+  renderDocParagraph,
+  renderDocTable,
+  renderSolutionBanner
 } from "../pptx_document_engine.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -84,10 +84,10 @@ export function addModule7Slides(pres) {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AG1)", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "1. Počítačová Reprezentace Grafů v C++ (PA2 ➔ AX1)", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "V předmětech **PA2** a **AG1** budete grafové algoritmy zapisovat v C++. Způsob uložení do paměti rozhodne o složitosti i spotřebě RAM:",
+      "V předmětech **PA2** a **AX1** budete grafové algoritmy zapisovat v C++. Způsob uložení do paměti rozhodne o složitosti i spotřebě RAM:",
       { y }
     );
 
@@ -167,14 +167,14 @@ export function addModule7Slides(pres) {
     y = renderDocHeading(pres, slide, "📊 Detailní Srovnání Grafových Reprezentací v C++", { level: 2, y, showUnderline: true });
 
     renderDocTable(slide, {
-      headers: ["Operace v C++", "Matice sousedství", "Seznam sousedů", "Doporučení pro AG1"],
+      headers: ["Operace v C++", "Matice sousedství", "Seznam sousedů", "Doporučení pro AX1"],
       rows: [
         ["Paměťová náročnost", "Θ(n²)", "Θ(n + m)", "Seznam sousedů pro m ≪ n²"],
         ["Test existence hrany {u, v}", "O(1) [okamžitý přístup]", "O(deg(u)) [průchod vektoru]", "Matice pro husté grafy"],
         ["Průchod všemi sousedy vrcholu u", "Θ(n) [celý řádek matice]", "Θ(deg(u)) [pouze sousedé]", "Seznam sousedů pro BFS/DFS"],
         ["Přidání nové hrany", "O(1)", "O(1) [push_back]", "Obě metody bleskové"],
         ["Smazání existující hrany", "O(1)", "O(deg(u)) [hledání prvku]", "Matice snazší"],
-        ["Vhodné pro grafy", "Husté grafy (m ≈ n²)", "Řídké grafy (m ≪ n²)", "V AG1 je 95 % úloh řídkých!"]
+        ["Vhodné pro grafy", "Husté grafy (m ≈ n²)", "Řídké grafy (m ≪ n²)", "V AX1 je 95 % úloh řídkých!"]
       ],
       colWidths: [3.2, 2.8, 3.0, 2.733],
       y,
@@ -182,18 +182,18 @@ export function addModule7Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 7.4b: Doporučení pro AG1 & Paměťové Chování
+  // Slide 7.4b: Doporučení pro AX1 & Paměťové Chování
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "📊 Detailní Srovnání Reprezentací" });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "Zlaté Pravidlo Volby Reprezentace v AG1", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "Zlaté Pravidlo Volby Reprezentace v AX1", { level: 2, y, showUnderline: true });
 
     y = renderDocCallout(pres, slide, {
       type: "tip",
-      title: "Zlaté pravidlo AG1:",
-      text: "Pokud není výslovně řečeno jinak, v AG1 VŽDY implementujeme graf pomocí Seznamu sousedů (std::vector<vector<int>>)! Šetří paměť a dává optimální čas O(n + m) pro BFS a DFS.",
+      title: "Zlaté pravidlo AX1:",
+      text: "Pokud není výslovně řečeno jinak, v AX1 VŽDY implementujeme graf pomocí Seznamu sousedů (std::vector<vector<int>>)! Šetří paměť a dává optimální čas O(n + m) pro BFS a DFS.",
       y,
     });
 
@@ -356,7 +356,7 @@ const std::vector<int>& getNeighbors(int u) const {
 
     renderDocCallout(pres, slide, {
       type: "tip",
-      title: "Shrnutí pro zkoušku z AG1:",
+      title: "Shrnutí pro zkoušku z AX1:",
       text: "Tento jednoduchý výpočet je standardní zahřívací úlohou u písemek na FIT ČVUT. Součet stupňů musí být VŽDY sudé číslo rovnající se 2|E|.",
       y,
     });

@@ -1,15 +1,5 @@
 # 3 · Jak to spravit (debug & testování)
 
-**Debug · testovací skript · pasty** — když kód nefunguje, Progtest nadává, nebo nevíš, kde začít.
-
-Nejde o učebnici C. Jde o **postup, jak si program opravit**: nástroje $\to$ lokální testování $\to$ typické pasty $\to$ odkazy na strukturu.
-
-* [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) — jak psát, aby šel kód rozumně ladit  
-* [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) — strategie nápověd a časté zkouškové chyby  
-* [Kalendář](/obor-bioinformatika/1-semestr/bi-pa1/kalendar) — co musím umět v kterém týdnu  
-
----
-
 ## 1. Nejdřív nástroje (ne hádání)
 
 ### Přepínače `g++` (doporučený balík)
@@ -224,5 +214,15 @@ chmod +x testshell.sh
 * [ ] Dynamické pole jako tři argumenty místo **struktury**
 ---
 * [ ] `scanf("%s")` „bezpečně“ — není; buffer overflow past 
-* Podrobný seznam chyb u zkoušky: **[Zkouška — rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)**
+
+<div class="my-6 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div>
+<div class="font-bold text-stone-900 dark:text-stone-100 text-sm">Podrobný seznam chyb a pastí u zkoušky</div>
+<div class="text-xs text-stone-600 dark:text-stone-400">Kompletní zkouškové poznámky od vyučujících z FITu, taktika a doporučené postupy.</div>
+</div>
+<a href="/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska" class="wiki-btn shrink-0">
+<span>5 · Progtest a zkouška</span>
+<span>→</span>
+</a>
+</div>
 

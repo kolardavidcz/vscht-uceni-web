@@ -3,7 +3,7 @@
 Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** — moderní Web Application spojující interaktivní studijní moduly a nástroje:
 
 1. 🦠 **Systematika bakterií** — interaktivní emoji kvíz, pracovní list, taxonomický atlas, kartičky a srovnávací matice.
-2. 📚 **Obor: Bioinformatika** — komunitní Markdown wiki s podporou MathJax, přehledem předmětů a průvodcem studia (PA2→AG1).
+2. 📚 **Obor: Bioinformatika** — komunitní Markdown wiki s podporou MathJax, přehledem předmětů a průvodcem studia (PA2→AX1).
 3. 🐍 **Python Analyzátor** — anotovaný skript pro bioinformatickou analýzu DNA/RNA sekvencí s živým simulovaným během.
 
 ---
@@ -72,7 +72,7 @@ src/
 │   └── HomePage.tsx      # Hlavní rozcestník modulů
 └── features/
     ├── microbiology/     # Systematika bakterií (kvíz, strom, kartičky, matice, admin)
-    ├── bioinformatics/   # Bioinformatická wiki (články v markdownu, PA2→AG1 přehled)
+    ├── bioinformatics/   # Bioinformatická wiki (články v markdownu, PA2→AX1 přehled)
     └── python-analyzer/  # Python skript prohlížeč a simulovaný terminál
 ```
 

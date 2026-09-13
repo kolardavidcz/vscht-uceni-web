@@ -1,4 +1,4 @@
-# 💻 PA2 → AG1: Kompaktní Kódovací Tahák (Týdny 0–8)
+# 💻 PA2 → AX1: Kompaktní Kódovací Tahák (Týdny 0–8)
 
 > **Vyvážený rychlotahák zaměřený na psaní kódu** (vychází z nejrelevantnějších témat z Traineru a STL e-learningu s relevancí 60%+).
 > Každé téma obsahuje **1–2 věty principu**, klíčovou past a **pouze nezbytný minimalistický kód s důrazem na maximální čitelnost**. U kontejnerů jsou metody a diagramy umístěny vedle sebe.
@@ -368,7 +368,7 @@ adj[v].push_back(u); // Přidat i toto, pokud je graf neorientovaný: u <-> v
 ```
 
 ### 23. Grafové průchody a vyhledávání cest `[100% Trainer · 60% Lectures]`
-- **Rychlý přehled pro AG1**:
+- **Rychlý přehled pro AX1**:
   - **BFS (Prohledávání do šířky)**:
     - Používá **frontu `std::queue`** (nebo preferovanou **`std::deque`**, která je v praxi rychlejší).
     - Hledá nejkratší cestu v neohodnoceném grafu (počet hran).

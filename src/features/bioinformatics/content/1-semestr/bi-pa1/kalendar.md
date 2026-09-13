@@ -1,9 +1,4 @@
-# PA1 Kalendář co musím umět
-
-Studentský **support** kalendář s tipy.  
-Osnova přednášek + „co lidi trápí“ + tipy z praxe + Trainer **jen když dává smysl**.
-
----
+# 2 · Kalendář co musím umět
 
 ### Týden 1 — Algoritmy a programy, základní podpora vývoje
 
@@ -374,11 +369,6 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 * `FILE *`, `fopen` / `fclose`, čtení/zápis; kontrola, že se soubor otevřel.
 * * Modulární kód = méně „god file“ o 800 řádcích — souvisí se [strukturou kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
 
-**Tipy**
-
-* Nezapomeň `fclose`.
-
-
 **Trainer**
 
 * Spíš opakuj slabá místa z dřívějška; před zkouškou: [Příprava na zkoušku I](https://trainer.ksi.fit.cvut.cz/lessons/546).
@@ -396,7 +386,7 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 **Tipy**
 
 * **Celé rady ke zkoušce (viditelně, ne zkrácené):** [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)  
-  — obraty, „když nevím…“, knihovní funkce, 😿 časté chyby, postup u úlohy, taktika výběru.
+  — obraty, „když nevím…“, knihovní funkce, časté chyby, postup u úlohy, taktika výběru.
 * Příprava: aspoň 1 HW / týden (i po termínu), Trainer, staré zkoušky ~2 h na úlohu.
 * Nesnaž se den před zkouškou učit C od nuly.
 * Pročti **obě** zadání, pak vyber; rekurze/seznamy často jistější než práce s dynamickou alokací.

@@ -1,16 +1,16 @@
 /**
  * Module 6: Důkazy Sporem & Extremální Princip
- * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml-dukazy-sporem.md
+ * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ax1/dml-dukazy-sporem.md
  */
 import {
-  createDocSlide,
-  renderDocHeading,
-  renderDocParagraph,
-  renderDocList,
-  renderDocCallout,
-  renderSolutionBanner,
   colors,
-  fs
+  createDocSlide,
+  fs,
+  renderDocCallout,
+  renderDocHeading,
+  renderDocList,
+  renderDocParagraph,
+  renderSolutionBanner
 } from "../pptx_document_engine.mjs";
 
 export function addModule6Slides(pres) {
@@ -119,16 +119,16 @@ export function addModule6Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 6.3: 2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1
+  // Slide 6.3: 2. Šablona Zápisu Důkazu Sporem u Zkoušky AX1
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "2. Šablona Zápisu Důkazu Sporem u Zkoušky AX1", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "Při hodnocení zkouškových testů z AG1 vyžadují vyučující přesně definovanou strukturu ve 4 krocích:",
+      "Při hodnocení zkouškových testů z AX1 vyžadují vyučující přesně definovanou strukturu ve 4 krocích:",
       { y }
     );
 
@@ -406,7 +406,7 @@ export function addModule6Slides(pres) {
     });
 
     renderDocParagraph(slide,
-      "Extremální princip je v teorii grafů a v kurzu AG1 jednou z nejefektivnějších heuristik: místo náhodného hledání zkoumáme hranice možného.",
+      "Extremální princip je v teorii grafů a v kurzu AX1 jednou z nejefektivnějších heuristik: místo náhodného hledání zkoumáme hranice možného.",
       { y }
     );
   }
@@ -519,7 +519,7 @@ export function addModule6Slides(pres) {
       y,
     });
 
-    y = renderDocHeading(pres, slide, "💡 Důležitý vhled pro AG1: Konstruktivní vs. Nekonstruktivní existence", { level: 3, y });
+    y = renderDocHeading(pres, slide, "💡 Důležitý vhled pro AX1: Konstruktivní vs. Nekonstruktivní existence", { level: 3, y });
 
     y = renderDocList(slide, [
       "**Nekonstruktivní existence (Důkaz sporem, Dirichlet, Extremální princip):** Dokážou, že hledaný prvek (vrcholy stejného stupně, cyklus, nejkratší cesta) *musí zaručeně existovat*, ale **nedávají žádný recept ani algoritmus**, jak ho v datech najít.",

@@ -1,5 +1,8 @@
-import { Suspense, useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { ErrorBoundary } from "@/components/common/ErrorBoundary";
+import { PageShell } from "@/components/layout/PageShell";
+import { Button } from "@/components/ui/Button";
+import { cn } from "@/lib/cn";
+import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import {
   BookOpen,
   ChevronDown,
@@ -13,27 +16,13 @@ import {
   Search,
   X,
 } from "lucide-react";
-import { PageShell } from "@/components/layout/PageShell";
-import { Button } from "@/components/ui/Button";
-import { cn } from "@/lib/cn";
-import { ErrorBoundary } from "@/components/common/ErrorBoundary";
-import { lazyWithRetry } from "@/lib/lazyWithRetry";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { MarkdownView } from "../components/MarkdownView";
 import {
   SuggestEditModal,
   materialToRepoPath,
 } from "../components/SuggestEditModal";
-
-const prefetchPA2 = () => {
-  void import("../components/PA2ToAG1Overview").catch(() => {});
-};
-
-/** Heavy materialsData tree — only load when opening the PA2 overview page */
-const PA2ToAG1Overview = lazyWithRetry(() =>
-  import("../components/PA2ToAG1Overview").then((m) => ({
-    default: m.PA2ToAG1Overview,
-  }))
-);
 import {
   filterNavTree,
   findMaterial,
@@ -44,6 +33,17 @@ import {
   type NavNode,
   type WikiMaterial,
 } from "../lib/contentLoader";
+
+const prefetchPA2 = () => {
+  void import("../components/PA2ToAX1Overview").catch(() => { });
+};
+
+/** Heavy materialsData tree — only load when opening the PA2 overview page */
+const PA2ToAX1Overview = lazyWithRetry(() =>
+  import("../components/PA2ToAX1Overview").then((m) => ({
+    default: m.PA2ToAX1Overview,
+  }))
+);
 
 function NavTreeList({
   nodes,
@@ -117,7 +117,7 @@ function NavTreeItem({
 
     const href = materialHref(node.material);
     const isActive = activePath === node.material.path;
-    const isPA2 = node.material.path.includes("pa2-ag1-overview");
+    const isPA2 = node.material.path.includes("pa2-ax1-overview");
     return (
       <li className="min-w-0">
         <Link
@@ -223,7 +223,7 @@ export function WikiPage() {
       try {
         localStorage.setItem("wiki_sidebar_collapsed", String(next));
         localStorage.setItem("wiki_sidebar_hidden", String(next));
-      } catch {}
+      } catch { }
       return next;
     });
   };
@@ -286,7 +286,7 @@ export function WikiPage() {
       .filter((g) => g.tree.length > 0);
   }, [groups, query]);
 
-  const isSpecial = active?.key === "pa2-ag1-overview";
+  const isSpecial = active?.key === "pa2-ax1-overview";
   /** Interactive special pages & external redirect pages aren't a single .md source for full-file PR */
   const canSuggestMarkdown = Boolean(active && !isSpecial && !active.externalUrl);
 
@@ -393,7 +393,7 @@ export function WikiPage() {
   return (
     <PageShell
       title="Obor: Bioinformatika"
-      subtitle="Studijní wiki · zápisky, rozcestníky, PA2→AG1"
+      subtitle="Studijní wiki · zápisky, rozcestníky, PA2→AX1"
       theme="light"
       maxWidth="max-w-[1600px]"
       actions={
@@ -521,11 +521,11 @@ export function WikiPage() {
                   <Suspense
                     fallback={
                       <p className="text-sm text-stone-500 font-semibold py-8 text-center">
-                        Načítám PA2→AG1 přehled…
+                        Načítám PA2→AX1 přehled…
                       </p>
                     }
                   >
-                    <PA2ToAG1Overview />
+                    <PA2ToAX1Overview />
                   </Suspense>
                 </ErrorBoundary>
                 {suggestFooter(active)}

@@ -45,9 +45,9 @@ Schéma myšlenkového toku u důkazu sporem:
 
 ---
 
-## 2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1
+## 2. Šablona Zápisu Důkazu Sporem u Zkoušky AX1
 
-Při hodnocení zkouškových testů z AG1 vyžadují vyučující přesně definovanou strukturu:
+Při hodnocení zkouškových testů z AX1 vyžadují vyučující přesně definovanou strukturu:
 
 ```text
 FORMÁLNÍ ŠABLONA ZÁPISU DŮKAZU SPOREM:
@@ -275,7 +275,7 @@ Graf: $V = \{1,2,3,4,5\}$, hrany: $\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{5,1\},\{1,3
 
 <div class="my-6 p-4 rounded-xl border border-brand-orange/30 bg-brand-orange/5 text-stone-800 dark:text-stone-200">
   <div class="flex items-center gap-2 font-bold text-brand-orange-text dark:text-brand-orange text-sm mb-1.5">
-    <span>💡</span> <span>Důležitý vhled pro AG1: Konstruktivní vs. Nekonstruktivní existence</span>
+    <span>💡</span> <span>Důležitý vhled pro AX1: Konstruktivní vs. Nekonstruktivní existence</span>
   </div>
   <p class="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mb-2">
     Všimněte si společné vlastnosti: <strong>Důkaz sporem, Dirichletův princip i Extremální princip jsou nekonstruktivní</strong>.

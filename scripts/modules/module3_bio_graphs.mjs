@@ -1,6 +1,6 @@
 /**
  * Module 3: Bio-Intuice & Co je Graf
- * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-bio-grafy.md
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ax1/dml-bio-grafy.md
  * Exact 1:1 text fidelity with website markdown.
  */
 import {
@@ -15,7 +15,7 @@ export function addModule3Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 3,
     title: "Bio-Intuice & Co je Graf",
-    goal: "Cíl kapitoly: Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů G = (V, E), abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AG1 na FIT ČVUT.",
+    goal: "Cíl kapitoly: Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů G = (V, E), abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AX1 na FIT ČVUT.",
     topics: [
       "🗺️ Co je to vlastně graf? (Opravdu, bez vzorců)",
       "Představa mapy metra: Stanice (vrcholy) a Koleje (hrany)",
@@ -76,10 +76,10 @@ export function addModule3Slides(pres) {
     },
     rightCard: {
       title: "Radikální Proměna Akademického Jazyka",
-      badge: "KURZ AG1 FIT ČVUT",
+      badge: "KURZ AX1 FIT ČVUT",
       type: "warm",
       items: [
-        { bold: "Vstup do kurzu AG1:", text: "Jakmile vstoupíte do kurzu AG1 (Algoritmy a Grafy 1) na FIT ČVUT, akademický jazyk se radikálně promění:" },
+        { bold: "Vstup do kurzu AX1:", text: "Jakmile vstoupíte do kurzu AX1 (Algoritmy a Grafy 1) na FIT ČVUT, akademický jazyk se radikálně promění:" },
         { bold: "Místo chemické molekuly:", text: "pracujete s neorientovaným grafem G = (V, E)." },
         { bold: "Místo enzymatické reakce:", text: "pracujete s orientovanou hranou e = (u, v) ∈ E v orientovaném acyklickém grafu (DAG)." }
       ]

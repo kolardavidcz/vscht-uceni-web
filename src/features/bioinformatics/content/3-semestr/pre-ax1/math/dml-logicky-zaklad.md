@@ -1,6 +1,6 @@
 # Logický & Důkazový základ
 
-> **Cíl kapitoly:** Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků ($\forall, \exists, \exists!$), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AG1 na FIT ČVUT.
+> **Cíl kapitoly:** Ovládnout přesný formální jazyk matematické logiky, získat 100% jistotu v negování složitých kvantifikovaných výroků ($\forall, \exists, \exists!$), bezchybně rozlišovat nutnou a postačující podmínku a osvojit si 4 základní důkazové šablony pro zápočtové testy a zkoušku z AX1 na FIT ČVUT.
 
 ---
 
@@ -10,7 +10,7 @@ Představ si, že zkoumáš nový protein. Kolega tvrdí: *„Pokud je tento gen
 
 Odpověď závisí přesně na tom, **jak přečteme implikaci** „pokud A, pak B". A tady spousta biologů (a i počítačových vědců) dělá chyby — protože přirozený jazyk je nejednoznačný. Věta „Pokud prší, vezmu deštník" **nic neříká o tom, co uděláš, když neprší** — třeba deštník vezmeš stejně, protože je hezký.
 
-Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AG1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů.
+Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AX1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů.
 
 > 💡 **Příslib této kapitoly:** Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C — žádná teorie grafů není předem potřeba!
 
@@ -54,7 +54,7 @@ Ještě v 16. století dnešní algebraické a logické symboly prakticky neexis
 Všimněte si, jakou úlevu přináší moderní symbolický jazyk — celou tuto básnickou sloku dnes zapíšeme do jediného algebraického řádku:
 $$x^3 + px = q \implies x = \sqrt[3]{u} - \sqrt[3]{v}, \quad \text{kde } u - v = q \ \land \ uv = \left(\frac{p}{3}\right)^3$$
 
-**Matematické symboly nevznikly jako překážka, ale jako záchrana před slovní mlhou.** Šetří kognitivní kapacitu, zamezují víceznačnosti a umožňují okamžitou kontrolu správnosti. Nyní se podívejme na základní symboly, se kterými budeme v AG1 pracovat:
+**Matematické symboly nevznikly jako překážka, ale jako záchrana před slovní mlhou.** Šetří kognitivní kapacitu, zamezují víceznačnosti a umožňují okamžitou kontrolu správnosti. Nyní se podívejme na základní symboly, se kterými budeme v AX1 pracovat:
 
 ---
 
@@ -364,7 +364,7 @@ Při úpravě logických výroků v algoritmech a důkazech se neobcházíte bez
 
 ## 3. Nutná vs. Postačující Podmínka
 
-V předmětu AG1 musíte bez váhání rozumět slovnímu spojení *"Nutná a postačující podmínka"*:
+V předmětu AX1 musíte bez váhání rozumět slovnímu spojení *"Nutná a postačující podmínka"*:
 
 Uvažujme implikaci $A \Rightarrow B$:
 - **$A$ je POSTAČUJÍCÍ podmínka pro $B$:** Platnost $A$ nám **zcela stačí** k tomu, abychom zaručili platnost $B$. (Jakmile nastane A, automaticky platí B).
@@ -427,7 +427,7 @@ $$\neg (\exists x \in M : P(x)) \quad \equiv \quad \forall x \in M : \neg P(x)$$
 
 ### 4.2 Složité Řetězené Negace v Bioinformatice
 
-V reálných testech z AG1 potkáte výroky s více vrstvami kvantifikátorů. Pojďme si je nacvičit:
+V reálných testech z AX1 potkáte výroky s více vrstvami kvantifikátorů. Pojďme si je nacvičit:
 
 #### Případ 1: Souvislost Sítě (Grafu)
 Představme si síť uzlů $V$ (např. biochemické metabolity propojené enzymovými reakcemi nebo servery na internetu):
@@ -452,7 +452,7 @@ Nechť $V$ je množina molekul a $(v, w) \in E$ značí existenci chemické reak
 ---
 
 
-## 5. Přehled 4 Základních Důkazových Technik pro AG1
+## 5. Přehled 4 Základních Důkazových Technik pro AX1
 
 ### 5.1 Anatomie Důkazu: Cesta k Výsledku vs. Úsporný Zápis
 
@@ -462,7 +462,7 @@ Nechť $V$ je množina molekul a $(v, w) \in E$ značí existenci chemické reak
 
 V odborné literatuře i na přednáškách se setkáte se **dvěma zásadními typy důkazů**:
 
-| Typ Důkazu | Jak Funguje v Praxi | Proč Může Zmást Studenta | Význam pro Bioinformatiku a AG1 |
+| Typ Důkazu | Jak Funguje v Praxi | Proč Může Zmást Studenta | Význam pro Bioinformatiku a AX1 |
 | :--- | :--- | :--- | :--- |
 | **1. Důkaz Heuristický / Objevný** *(Cesta k výsledku)* | Ukazuje **skutečný myšlenkový postup autora** — od prvotní motivace přes jednoduché náčrtky až po obecný vzorec. | Bývá delší na čtení, protože neskrývá slepé uličky a experimentální intuici. | **Zásadní pro algoritmy:** Tento důkaz často *přímo generuje samotný algoritmus a kód v C++* (např. konstrukce Eulerova tahu). |
 | **2. Důkaz Formální / Úsporný** *(Čistá verifikace)* | Dokazuje tvrzení v co nejmenším počtu řádků a **zkracuje všechno, co může**. | **Působí jako kouzlo spadlé z nebe.** Autor zahodil všechny papíry s náčrtky a předloží jen finální geniální trik. | Slouží k rychlému a neprůstřelnému ověření, ale sám o sobě vás nenaučí, jak na řešení přijít. |
@@ -489,13 +489,13 @@ JAK VE SKUTEČNOSTI VZNIKÁ MATEMATICKÝ A ALGORITMICKÝ OBJEV:
 
 ---
 
-### 5.2 Čtyři Základní Důkazové Techniky v AG1
+### 5.2 Čtyři Základní Důkazové Techniky v AX1
 
 Abychom dokázali matematické tvrzení $T$, používáme v algoritmické informatice 4 přístupy:
 
 ```
                                 ┌─────────────────────────────────────────────┐
-                                │     4 ZÁKLADNÍ DŮKAZOVÉ TECHNIKY V AG1      │
+                                │     4 ZÁKLADNÍ DŮKAZOVÉ TECHNIKY V AX1      │
                                 │      Jak dokázat matematické tvrzení T      │
                                 └──────────────────────┬──────────────────────┘
                                                        │

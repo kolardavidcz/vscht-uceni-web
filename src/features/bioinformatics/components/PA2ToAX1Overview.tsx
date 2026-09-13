@@ -1,28 +1,28 @@
-import { useState, useMemo, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import {
   AlertTriangle,
-  ChevronDown,
-  ChevronUp,
   BookOpen,
-  GraduationCap,
-  Users,
-  Terminal,
-  Printer,
-  ChevronsUpDown,
+  ChevronDown,
   ChevronsDownUp,
+  ChevronsUpDown,
+  ChevronUp,
+  GraduationCap,
+  Printer,
+  Terminal,
+  Users,
 } from "lucide-react";
+import { useCallback, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   materialsData,
   SchoolMaterial,
   SchoolMaterialNode,
 } from "../data/materialsData";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
 import {
-  PlanTopic,
   LVL1_WEEKS,
+  PlanTopic,
   printPlanDocument,
   stripMarkdownLinks,
 } from "./overview/printPlanDocument";
@@ -74,7 +74,7 @@ function renderNameWithLinks(
 
 
 
-export function PA2ToAG1Overview() {
+export function PA2ToAX1Overview() {
   // Default: LVL1 weeks expanded (1 & 7)
   const [expandedWeeks, setExpandedWeeks] = useState<number[]>([1, 7]);
 
@@ -395,7 +395,7 @@ export function PA2ToAG1Overview() {
       2: {
         title: "LVL2 — Relevance ≥ 70 %",
         description:
-          "Témata s relevancí 70 %+ k AG1 (barevný rámeček a pozadí v přehledu).",
+          "Témata s relevancí 70 %+ k AX1 (barevný rámeček a pozadí v přehledu).",
       },
       3: {
         title: "LVL3 — Relevance ≥ 50 %",
@@ -461,7 +461,7 @@ export function PA2ToAG1Overview() {
       {/* Introductory comments (from author) */}
       <Card className="p-5 sm:p-6 bg-white border-stone-200 space-y-3">
         <h2 className="font-display text-lg sm:text-xl font-black text-stone-900 tracking-tight">
-          Přehled FIT zdrojů z PA2 pro AG1
+          Přehled FIT zdrojů z PA2 pro AX1
         </h2>
         <div className="text-sm text-stone-600 font-medium leading-relaxed space-y-2.5">
           <p>
@@ -474,7 +474,7 @@ export function PA2ToAG1Overview() {
             <strong className="text-stone-800">PA2 z FITu</strong> o C++,
             protože{" "}
             <strong className="text-stone-800">
-              právě ty potkávají studenti absolvující AG1
+              právě ty potkávají studenti absolvující AX1
             </strong>
             .
           </p>
@@ -483,8 +483,8 @@ export function PA2ToAG1Overview() {
             <strong className="text-stone-800">každé téma</strong> prošel{" "}
             <strong className="text-stone-800">v každém týdnu</strong>{" "}
             <strong className="text-stone-800">v každém zdroji</strong>{" "}
-            (minulé prázdniny, když jsem se na AG1 připravoval) a ohodnotil jejich:{" "}
-            <em>relevanci k AG1</em> a{" "}
+            (minulé prázdniny, když jsem se na AX1 připravoval) a ohodnotil jejich:{" "}
+            <em>relevanci k AX1</em> a{" "}
             <em>jestli se vůbec jedná o kvalitní/dobrý zdroj</em>.
           </p>
           <p className="text-brand-orange-text font-bold">
@@ -528,19 +528,19 @@ export function PA2ToAG1Overview() {
           <div>
             <div className="flex items-center gap-2">
               <h3 className="text-sm font-black text-stone-900 tracking-tight">
-                PA2 → AG1 Velký Tahák Klíčových Témat (50%+)
+                PA2 → AX1 Velký Tahák Klíčových Témat (50%+)
               </h3>
               <Badge variant="orange" className="font-bold text-[10px]">
                 Nový souhrn
               </Badge>
             </div>
             <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-              Kompaktní studijní přehled všech 32 klíčových témat z C++ s kódem, častými pastmi a tabulkou složitostí pro AG1.
+              Kompaktní studijní přehled všech 32 klíčových témat z C++ s kódem, častými pastmi a tabulkou složitostí pro AX1.
             </p>
           </div>
         </div>
         <Link
-          to="/obor-bioinformatika/3-semestr/pre-ag1/coding/pa2-ag1-cheatsheet"
+          to="/obor-bioinformatika/3-semestr/pre-ax1/coding/pa2-ax1-cheatsheet"
           className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-orange hover:bg-orange-600 text-white font-bold text-xs transition-colors shadow-sm shrink-0 cursor-pointer"
         >
           <BookOpen size={15} />
@@ -937,11 +937,11 @@ export function PA2ToAG1Overview() {
                                     onClick={
                                       nodeUrl
                                         ? () =>
-                                            window.open(
-                                              nodeUrl,
-                                              "_blank",
-                                              "noopener,noreferrer"
-                                            )
+                                          window.open(
+                                            nodeUrl,
+                                            "_blank",
+                                            "noopener,noreferrer"
+                                          )
                                         : undefined
                                     }
                                     title={`${stripMarkdownLinks(node.name)} (Relevance: ${relevance}%, Quality: ${quality ? "Good" : "Bad"})${nodeUrl ? " — Kliknutím otevřete" : ""}`}
@@ -952,10 +952,10 @@ export function PA2ToAG1Overview() {
                                           {node.badges?.includes(
                                             "mega_epic"
                                           ) && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-amber-500 via-orange-500 to-[#ea580c] text-white leading-none">
-                                              MEGA EPIC
-                                            </span>
-                                          )}
+                                              <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-gradient-to-r from-amber-500 via-orange-500 to-[#ea580c] text-white leading-none">
+                                                MEGA EPIC
+                                              </span>
+                                            )}
                                           {node.badges?.includes("epic") && (
                                             <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#c2410c] text-white leading-none">
                                               EPIC
@@ -969,24 +969,24 @@ export function PA2ToAG1Overview() {
                                           {node.badges?.includes(
                                             "challenge"
                                           ) && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#9f1239] text-white leading-none">
-                                              CHALLENGE
-                                            </span>
-                                          )}
+                                              <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#9f1239] text-white leading-none">
+                                                CHALLENGE
+                                              </span>
+                                            )}
                                           {node.badges?.includes(
                                             "practice"
                                           ) && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#fae8ff] text-[#701a75] border border-[#d8b4fe] leading-none">
-                                              PRACTICE
-                                            </span>
-                                          )}
+                                              <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm bg-[#fae8ff] text-[#701a75] border border-[#d8b4fe] leading-none">
+                                                PRACTICE
+                                              </span>
+                                            )}
                                           {node.badges?.includes(
                                             "showcase"
                                           ) && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm border border-dashed border-[#7c3aed] text-[#6d28d9] bg-transparent leading-none">
-                                              SHOWCASE
-                                            </span>
-                                          )}
+                                              <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] rounded-sm border border-dashed border-[#7c3aed] text-[#6d28d9] bg-transparent leading-none">
+                                                SHOWCASE
+                                              </span>
+                                            )}
                                           {node.badges?.includes("no_code") && (
                                             <span className="text-[7.5px] font-black uppercase tracking-wider px-1.5 py-[2px] bg-[#fffbeb] text-[#b45309] border-l-[3px] border-[#f59e0b] rounded-[2px_6px_6px_2px] leading-none">
                                               NO CODE NEEDED
@@ -995,10 +995,10 @@ export function PA2ToAG1Overview() {
                                           {node.badges?.includes(
                                             "not_checked"
                                           ) && (
-                                            <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-white text-black leading-none">
-                                              NOT CHECKED
-                                            </span>
-                                          )}
+                                              <span className="text-[7.5px] font-black uppercase tracking-wider px-1 py-0.5 rounded-sm bg-white text-black leading-none">
+                                                NOT CHECKED
+                                              </span>
+                                            )}
                                           {isLowQuality && (
                                             <span className="text-[7.5px] font-black uppercase tracking-wider px-2 py-[2px] rounded-full bg-[#e2e8f0] text-[#475569] leading-none">
                                               LOW QUALITY

@@ -1,12 +1,12 @@
 /**
  * Module 6: Důkazy Sporem & Extremální Princip
- * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-dukazy-sporem.md
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ax1/dml-dukazy-sporem.md
  * Exact 1:1 text fidelity with website markdown.
  */
 import {
   createLectureDividerSlide,
-  createTwoCardSlide,
-  createSingleCardSlide
+  createSingleCardSlide,
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule6Slides(pres) {
@@ -20,7 +20,7 @@ export function addModule6Slides(pres) {
     topics: [
       "🕵️ Detektivní přístup k matematice (Sherlock Holmes)",
       "1. Logická Podstata Důkazu Sporem (A ∧ ¬B ⇒ ⊥)",
-      "2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1",
+      "2. Šablona Zápisu Důkazu Sporem u Zkoušky AX1",
       "3. 🐦 Dirichletův princip v Teorii Grafů (Pigeonhole Principle)",
       "Příklad 1: Dva vrcholy se stejným stupněm v každém grafu",
       "Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus",
@@ -92,7 +92,7 @@ export function addModule6Slides(pres) {
   // 4. Section 2: Šablona Zápisu Důkazu Sporem
   createSingleCardSlide(pres, {
     breadcrumb,
-    title: "2. Šablona Zápisu Důkazu Sporem u Zkoušky AG1",
+    title: "2. Šablona Zápisu Důkazu Sporem u Zkoušky AX1",
     cardTitle: "Formální Šablona Zápisu Důkazu Sporem",
     badge: "ZKOUŠKOVÁ ŠABLONA",
     type: "warm",

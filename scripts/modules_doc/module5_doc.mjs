@@ -1,16 +1,16 @@
 /**
  * Module 5: Indukce na Grafech & Redukční Past
- * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ag1/dml-indukce-na-grafech.md
+ * 1:1 match to src/features/bioinformatics/content/3-semestr/pre-ax1/dml-indukce-na-grafech.md
  */
 import {
-  createDocSlide,
-  renderDocHeading,
-  renderDocParagraph,
-  renderDocList,
-  renderDocCallout,
-  renderDocTable,
   colors,
-  fs
+  createDocSlide,
+  fs,
+  renderDocCallout,
+  renderDocHeading,
+  renderDocList,
+  renderDocParagraph,
+  renderDocTable
 } from "../pptx_document_engine.mjs";
 
 export function addModule5Slides(pres) {
@@ -28,7 +28,7 @@ export function addModule5Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Cíl kapitoly:",
-      text: "Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky z AG1.",
+      text: "Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky z AX1.",
       y: y + 0.1,
     });
   }
@@ -204,7 +204,7 @@ export function addModule5Slides(pres) {
     y = renderDocHeading(pres, slide, "2. 🚨 CRITICAL EXAM TRAP: Redukční vs. Dekonstrukční Indukce", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "Toto je vůbec **nejčastější důvod pro udělení 0 bodů** u zkouškových důkazů z AG1 na FIT ČVUT!",
+      "Toto je vůbec **nejčastější důvod pro udělení 0 bodů** u zkouškových důkazů z AX1 na FIT ČVUT!",
       { y }
     );
 
@@ -236,7 +236,7 @@ export function addModule5Slides(pres) {
 
     renderDocCallout(pres, slide, {
       type: "tip",
-      title: "Zlatá formulace pro zkoušku z AG1:",
+      title: "Zlatá formulace pro zkoušku z AX1:",
       text: "„Vezměme LIBOVOLNÝ ZADANÝ graf G = (V, E) o n+1 vrcholech splňující předpoklady. Najdeme v něm vhodný prvek (list či uzel min stupně), odebereme ho a získáme podgraf G' o n vrcholech. Ověříme, že G' stále splňuje předpoklady. Použijeme Indukční předpoklad (IP) na G'. Nakonec prvek vrátíme a dokážeme platnost pro původní G.“",
       y: y + 0.1,
     });
@@ -365,7 +365,7 @@ export function addModule5Slides(pres) {
     const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "Zlaté Pravidlo Teorie Grafů" });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "Univerzální Princip Dekonstrukce v AG1", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "Univerzální Princip Dekonstrukce v AX1", { level: 2, y, showUnderline: true });
 
     y = renderDocCallout(pres, slide, {
       type: "tip",
@@ -392,7 +392,7 @@ export function addModule5Slides(pres) {
     y = renderDocHeading(pres, slide, "4. Stromy v Letní Přípravě: Proč má strom m = n - 1 hran", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "V AG1 se stromy definují jako souvislé acyklické grafy a věta o počtu hran $m = n - 1$ je jedním z nejčastějších důkazů v testech. Správný postup využívá právě **indukci shora dolů**:",
+      "V AX1 se stromy definují jako souvislé acyklické grafy a věta o počtu hran $m = n - 1$ je jedním z nejčastějších důkazů v testech. Správný postup využívá právě **indukci shora dolů**:",
       { y }
     );
 
@@ -431,10 +431,10 @@ export function addModule5Slides(pres) {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "🎓 Pro zájemce do AG1: 5 Ekvivalentních Definic Stromu", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "🎓 Pro zájemce do AX1: 5 Ekvivalentních Definic Stromu", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "V kurzu AG1 dostanete těchto 5 vlastností jako hotové věty. Pro libovolný konečný graf $G = (V, E)$ s $n = |V|$ vrcholy jsou následující tvrzení **zcela ekvivalentní**:",
+      "V kurzu AX1 dostanete těchto 5 vlastností jako hotové věty. Pro libovolný konečný graf $G = (V, E)$ s $n = |V|$ vrcholy jsou následující tvrzení **zcela ekvivalentní**:",
       { y }
     );
 
@@ -451,7 +451,7 @@ export function addModule5Slides(pres) {
   // Slide 5.10b: Tree Leaf Lemma
   // --------------------------------------------------------------------------
   {
-    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🎓 Pro zájemce do AG1: 5 Ekvivalentních Definic Stromu" });
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "🎓 Pro zájemce do AX1: 5 Ekvivalentních Definic Stromu" });
     let y = 0.85;
 
     y = renderDocHeading(pres, slide, "🍃 Důkaz existence listu (Tree Leaf Lemma)", { level: 2, y, showUnderline: true });
@@ -498,13 +498,13 @@ export function addModule5Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.12a: 6. Přehled: Co je Základ Letní Přípravy pro AG1
+  // Slide 5.12a: 6. Přehled: Co je Základ Letní Přípravy pro AX1
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "6. Přehled: Co je Základ Letní Přípravy pro AG1", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "6. Přehled: Co je Základ Letní Přípravy pro AX1", { level: 2, y, showUnderline: true });
 
     renderDocTable(slide, {
       headers: ["Dovednost pro letní přípravu", "Status"],
@@ -523,10 +523,10 @@ export function addModule5Slides(pres) {
   // Slide 5.12b: Bonusové procvičovací úlohy
   // --------------------------------------------------------------------------
   {
-    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "6. Přehled: Co je Základ Letní Přípravy pro AG1" });
+    const slide = createDocSlide(pres, { breadcrumb, continuationHeader: "6. Přehled: Co je Základ Letní Přípravy pro AX1" });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "Bonusové Procvičovací Úlohy pro AG1", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "Bonusové Procvičovací Úlohy pro AX1", { level: 2, y, showUnderline: true });
 
     renderDocCallout(pres, slide, {
       type: "tip",

@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
-  loadWikiMaterials,
   groupByCategory,
   groupByCategoryTree,
+  loadWikiMaterials,
 } from "./contentLoader";
 
 describe("contentLoader position-based ordering", () => {
@@ -61,11 +61,11 @@ describe("contentLoader position-based ordering", () => {
       ]);
     }
 
-    // 3-semestr -> pre-ag1 files split into coding and math
+    // 3-semestr -> pre-ax1 files split into coding and math
     const sem3 = groupsWithTree.find((g) => g.key === "3-semestr");
     expect(sem3).toBeDefined();
 
-    const preAg1Folder = sem3?.tree.find((n) => n.key === "pre-ag1");
+    const preAg1Folder = sem3?.tree.find((n) => n.key === "pre-ax1");
     expect(preAg1Folder).toBeDefined();
     if (preAg1Folder?.type === "folder") {
       const subfolderKeys = preAg1Folder.children.map((c) => c.key);
@@ -76,8 +76,8 @@ describe("contentLoader position-based ordering", () => {
       if (codingFolder?.type === "folder") {
         const codingKeys = codingFolder.children.map((c) => c.key);
         expect(codingKeys).toEqual([
-          "pa2-ag1-overview",
-          "pa2-ag1-cheatsheet",
+          "pa2-ax1-overview",
+          "pa2-ax1-cheatsheet",
           "rekurze-bro",
         ]);
       }

@@ -1,6 +1,6 @@
 # Bio-Intuice & Co je Graf
 
-> **Cíl kapitoly:** Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů $G = (V, E)$, abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AG1 na FIT ČVUT.
+> **Cíl kapitoly:** Vybudovat neotřesitelný základ pro diskrétní matematiku a teorii grafů. Přeložíme vaši přirozenou bioinformatickou a chemickou intuici (molekulární struktury, metabolické reakční sítě, protein-proteinové interakce, fylogenetické stromy a sekvenování DNA) do srozumitelného jazyka grafů $G = (V, E)$, abyste přesně věděli, co je vrchol, hrana, strom a cyklus ještě před první přednáškou z AX1 na FIT ČVUT.
 
 ---
 
@@ -38,7 +38,7 @@ Jakmile tohle pochopíš, uvidíš grafy všude:
 - Vidíte **molekulu glukózy** a chápete její prostorovou konformaci a chemické kovalentní vazby mezi atomy Uhlíku, Kyslíku a Vodíku.
 - Vidíte **metabolickou dráhu glykolýzy** a vnímáte ji jako posloupnost enzymatických přeměn jednoho substrátu v druhý.
 
-Jakmile však vstoupíte do kurzu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT, akademický jazyk se radikálně promění:
+Jakmile však vstoupíte do kurzu **AX1 (Algoritmy a Grafy 1)** na FIT ČVUT, akademický jazyk se radikálně promění:
 - Místo *"chemické molekuly"* pracujete s **neorientovaným grafem** $G = (V, E)$.
 - Místo *"enzymatické reakce"* pracujete s **orientovanou hranou** $e = (u, v) \in E$ v **orientovaném acyklickém grafu (DAG)**.
 
@@ -226,7 +226,7 @@ Při odbourávání cukru v buňce probíhá kaskáda enzymatických reakcí. Ka
 
 ## 2. Co je to Strom a co je to Cyklus v Grafu? `[KLÍČOVÝ ROZDÍL]`
 
-Dva nejdůležitější grafové pojmy, se kterými budete v AG1 pracovat každý týden, mají přímé biologické protějšky:
+Dva nejdůležitější grafové pojmy, se kterými budete v AX1 pracovat každý týden, mají přímé biologické protějšky:
 
 <div class="my-6 grid grid-cols-1 md:grid-cols-2 gap-5">
 <div class="p-5 rounded-2xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs flex flex-col justify-between">

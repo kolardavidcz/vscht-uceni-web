@@ -68,7 +68,7 @@ src/
   components/{ui,layout}/     # Shared UI
   features/
     microbiology/             # Quiz, study modes, admin, domain data
-    bioinformatics/           # Wiki, SuggestEditModal, content/*.md, PA2ToAG1Overview
+    bioinformatics/           # Wiki, SuggestEditModal, content/*.md, PA2ToAX1Overview
     python-analyzer/
 
 vite-plugin-local-api.ts      # Dev-only middleware for POST /api/suggest-edit
@@ -247,7 +247,7 @@ Defined in `src/App.tsx`:
 
 ### HomePage click / navigation (stretched link)
 
-Cards use a full-card absolute `Link` with `z-[1]`. Nested shortcut chips (PA1, AG1, Wiki) use `relative z-[2]` so they receive clicks.
+Cards use a full-card absolute `Link` with `z-[1]`. Nested shortcut chips (PA1, AX1, Wiki) use `relative z-[2]` so they receive clicks.
 
 **Do not** put the overlay link under content with `z-0` while content is `z-10` without `pointer-events-none` on non-interactive chrome — icons and text will intercept clicks and navigation will feel broken.
 
@@ -261,9 +261,9 @@ Pattern:
 </Card>
 ```
 
-### PA2→AG1 Overview Print Badges
+### PA2→AX1 Overview Print Badges
 
-PDF print versions generate badges via `printBadgeHtml` in `PA2ToAG1Overview.tsx`. Badge `no_code` outputs `NO CODE NEEDED` to match the full on-screen tag label.
+PDF print versions generate badges via `printBadgeHtml` in `PA2ToAX1Overview.tsx`. Badge `no_code` outputs `NO CODE NEEDED` to match the full on-screen tag label.
 
 ### Microbiology data resolution order
 
@@ -276,12 +276,12 @@ See `useMicrobiologyData.ts`:
 
 Storage key versioning exists so bad encodings do not poison UI forever.
 
-### Wiki content & Pre-AG1 Structure
+### Wiki content & Pre-AX1 Structure
 
 - Files: `src/features/bioinformatics/content/**/*.md` + `config.json`
 - Loaded via feature `contentLoader` / materials data
 - Suggest-edit only for repo-relative content paths (allowlist in server)
-- **Pre-AG1 lecture numbering:** Always use `X · <Název>` in `config.json` and `# <Název>` in Markdown H1 headers (e.g. `1 · PA2 C++ Most k AG1`, `7 · Grafy v C++ & Reprezentace v Paměti`). **Never** reintroduce `Modul <X>` prefixes.
+- **Pre-AX1 lecture numbering:** Always use `X · <Název>` in `config.json` and `# <Název>` in Markdown H1 headers (e.g. `1 · PA2 C++ Most k AX1`, `7 · Grafy v C++ & Reprezentace v Paměti`). **Never** reintroduce `Modul <X>` prefixes.
 - **Tisk / PDF button:** Located strictly in the top `PageShell` header bar. Never duplicate this button in `suggestFooter` or the bottom of wiki pages.
 - **Large showcase graphs in exercises:** Wrap in `<details class="print:hidden ...">` with descriptive summary buttons so print versions stay compact and fast.
 

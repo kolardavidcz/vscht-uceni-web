@@ -1,12 +1,12 @@
-# Zkouškový Workshop & Šablony Důkazů z AG1
+# Zkouškový Workshop & Šablony Důkazů z AX1
 
-> **Cíl kapitoly:** Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu **AG1 (Algoritmy a Grafy 1)** na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.
+> **Cíl kapitoly:** Vybruslit ze všech nebezpečných úskalí u zkouškových písemek z předmětu **AX1 (Algoritmy a Grafy 1)** na FIT ČVUT. Osvojit si formální univerzální šablony důkazů a projít si rozsáhlý workshop plně vyřešených zkouškových příkladů s kompletním hodnoticím komentářem, bodovacím kritériem a analýzou nejčastějších chyb.
 
 ---
 
 ## 1. Jak Vyučující na FIT ČVUT Opravují Zkouškové Důkazy?
 
-Při opravování teoretických písemek z AG1 platí neúprosná kritéria:
+Při opravování teoretických písemek z AX1 platí neúprosná kritéria:
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
   <div class="p-4 rounded-xl border border-rose-200/80 bg-rose-50/50 dark:bg-rose-950/20 dark:border-rose-900/40">
@@ -157,7 +157,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-## 3. Workshop Plně Vyřešených Zkouškových Případů z AG1
+## 3. Workshop Plně Vyřešených Zkouškových Případů z AX1
 
 ---
 
@@ -320,8 +320,8 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-> 🎯 **Gratulujeme! Dokončili jste kompletní letní 0-to-Hero přípravu pre-AG1!**
-> Nyní máte veškerou matematickou jistotu i praktickou výbavu pro zvládnutí předmětu AG1 na FIT ČVUT! 🚀
+> 🎯 **Gratulujeme! Dokončili jste kompletní letní 0-to-Hero přípravu pre-AX1!**
+> Nyní máte veškerou matematickou jistotu i praktickou výbavu pro zvládnutí předmětu AX1 na FIT ČVUT! 🚀
 
 
 

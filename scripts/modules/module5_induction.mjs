@@ -1,13 +1,13 @@
 /**
  * Module 5: Indukce na Grafech & Redukční Past
- * Source: src/features/bioinformatics/content/3-semestr/pre-ag1/dml-indukce-na-grafech.md
+ * Source: src/features/bioinformatics/content/3-semestr/pre-ax1/dml-indukce-na-grafech.md
  * Exact 1:1 text fidelity with website markdown.
  */
 import {
   createLectureDividerSlide,
-  createTwoCardSlide,
   createSingleCardSlide,
-  createTableSlide
+  createTableSlide,
+  createTwoCardSlide
 } from "../pptx_engine.mjs";
 
 export function addModule5Slides(pres) {
@@ -31,7 +31,7 @@ export function addModule5Slides(pres) {
       "4. Stromy v Letní Přípravě: Proč má strom m = n - 1 hran",
       "5. 💡 Propojení s Bioinformatikou: Orientované Sítě bez Cyklů (DAGy)",
       "Zdroj (Source), Výtok (Sink) a Topologické uspořádání",
-      "6. Přehled: Co je základ letní přípravy a co přijde v AG1"
+      "6. Přehled: Co je základ letní přípravy a co přijde v AX1"
     ]
   });
 
@@ -348,7 +348,7 @@ export function addModule5Slides(pres) {
   // 15. 5 ekvivalentních definic stromu & Leaf Lemma
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Pro Zájemce do AG1: 5 Definic Stromu a Leaf Lemma",
+    title: "Pro Zájemce do AX1: 5 Definic Stromu a Leaf Lemma",
     leftCard: {
       title: "5 Ekvivalentních Definic Stromu",
       badge: "EKVIVALENCE",
@@ -455,7 +455,7 @@ export function addModule5Slides(pres) {
   // 19. Section 6: Přehled dovedností pro letní přípravu
   createTableSlide(pres, {
     breadcrumb,
-    title: "6. Přehled: Co je Základ Přípravy a Co Přijde v AG1",
+    title: "6. Přehled: Co je Základ Přípravy a Co Přijde v AX1",
     subtitle: "Z tohoto modulu vám pro letní přípravu bohatě stačí:",
     headers: ["Dovednost pro letní přípravu", "Status"],
     colWidths: [9.0, 2.7],
