@@ -1,6 +1,6 @@
 # Indukce na Grafech & Redukční Past
 
-> **Cíl kapitoly:** Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky.
+> **Cíl kapitoly:** Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou - a vyhnout se pasti, do které padne polovina studentů u zkoušky.
 
 ---
 
@@ -12,7 +12,7 @@ Znáš dominový efekt? Postavíš řadu kostek a první padne na druhou, druhá
 2. **Krok:** Ukážeš, že POKUD kostka č. $k$ padne, NUTNĚ padne i kostka č. $k+1$. *(Z pravdivosti pro $k$ plyne pravdivost pro $k+1$.)*
 3. **Závěr:** Všechny kostky padnou. *(Tvrzení platí pro všechna $n$.)*
 
-Na grafech to funguje stejně — jen místo „kostky č. $k$" říkáme „graf s $k$ vrcholy". A klíčový trik (viz níže) je, že nestavíme grafy od nuly nahoru, ale **rozebíráme je od větších k menším**.
+Na grafech to funguje stejně - jen místo „kostky č. $k$" říkáme „graf s $k$ vrcholy". A klíčový trik (viz níže) je, že nestavíme grafy od nuly nahoru, ale **rozebíráme je od větších k menším**.
 
 > **Intuice bez vzorce:** Indukce = nejprve dokážeš malý případ, pak ukážeš, že každý větší případ se dá rozebrat na menší. A to stačí pro důkaz pro všechna $n$ najednou.
 
@@ -22,7 +22,7 @@ Na grafech to funguje stejně — jen místo „kostky č. $k$" říkáme „gra
 <div class="px-5 py-3.5 bg-amber-500/15 dark:bg-amber-900/40 border-b border-amber-300/80 dark:border-amber-800/80 flex items-center justify-between">
 <div class="flex items-center gap-2.5 font-bold text-amber-950 dark:text-amber-200 text-sm sm:text-base">
 <span>☕</span>
-<span>Příklad: Platba mincemi (3 Kč a 5 Kč) — Slabá vs. Silná Indukce</span>
+<span>Příklad: Platba mincemi (3 Kč a 5 Kč) - Slabá vs. Silná Indukce</span>
 </div>
 <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200">Klasika ze zkoušek</span>
 </div>
@@ -54,21 +54,21 @@ Předpokládejme, že částku $n$ Kč (kde $n \ge 8$) máme vyplacenu v mincíc
 Nahlédneme do peněženky a rozlišíme 3 situace podle toho, jaké mince máme k dispozici:
 <div class="mt-2 space-y-2">
 <div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
-<strong class="text-stone-900 dark:text-stone-100">Případ A (V peněžence máme jen 5 Kč mince — žádnou 3 Kč):</strong><br>
+<strong class="text-stone-900 dark:text-stone-100">Případ A (V peněžence máme jen 5 Kč mince - žádnou 3 Kč):</strong><br>
 Jednu 5 Kč minci odebereme a nahradíme ji <strong>dvěma 3 Kč mincemi</strong> ($5 \to 3 + 3$).<br>
 <div class="my-1 font-mono text-xs text-amber-700 dark:text-amber-400 font-bold">
 5 Kč ➔ 3 Kč + 3 Kč &nbsp; (např. 10 Kč = 5+5 ➔ 5+3+3 = 11 Kč, čistá změna: -5 + 6 = +1 Kč)
 </div>
 </div>
 <div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
-<strong class="text-stone-900 dark:text-stone-100">Případ B (V peněžence je 5 Kč i 3 Kč — máme obě mince):</strong><br>
+<strong class="text-stone-900 dark:text-stone-100">Případ B (V peněžence je 5 Kč i 3 Kč - máme obě mince):</strong><br>
 Pětikorunu vyměníme za dvě tříkoruny ($5 \to 3 + 3$). Spolu s existující původní 3 Kč mincí tak vznikne <strong>trojice tříkorun 3 + 3 + 3</strong>:<br>
 <div class="my-1 font-mono text-xs text-blue-700 dark:text-blue-400 font-bold">
 (5 Kč) + 3 Kč ➔ (3 Kč + 3 Kč) + 3 Kč = 3 + 3 + 3 &nbsp; (např. 8 Kč = 5+3 ➔ 3+3+3 = 9 Kč, čistá změna: +1 Kč)
 </div>
 </div>
 <div class="p-2.5 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800">
-<strong class="text-stone-900 dark:text-stone-100">Případ C (V peněžence není žádná 5 Kč mince — máme jen 3 Kč mince):</strong><br>
+<strong class="text-stone-900 dark:text-stone-100">Případ C (V peněžence není žádná 5 Kč mince - máme jen 3 Kč mince):</strong><br>
 Protože celková částka je $n \ge 8$ a skládá se výhradně z tříkorun, musíme mít <strong>alespoň tři tříkoruny</strong> ($3 \times 3 = 9$ Kč; dvě dávají jen 6 Kč &lt; 8).
 Vezmeme tyto tři tříkoruny a nahradíme je <strong>dvěma pětikorunami</strong>:
 <div class="my-1 font-mono text-xs text-emerald-700 dark:text-emerald-400 font-bold">
@@ -87,7 +87,7 @@ Vezmeme tyto tři tříkoruny a nahradíme je <strong>dvěma pětikorunami</stro
 Metoda 2: Důkaz Silnou Indukcí (Pravidlo kroku o 3 Kč zpět: n+1 z n-2)
 </h4>
 <p class="text-xs sm:text-sm text-stone-700 dark:text-stone-300 mb-2">
-Zde si vystačíme bez jakékoliv výměny mincí v peněžence — stačí nám <strong>3 základní bázové případy</strong> a v indukčním kroku se vždy odvoláme na stav o <strong>3 Kč menší</strong>:
+Zde si vystačíme bez jakékoliv výměny mincí v peněžence - stačí nám <strong>3 základní bázové případy</strong> a v indukčním kroku se vždy odvoláme na stav o <strong>3 Kč menší</strong>:
 </p>
 <ol class="text-xs sm:text-sm space-y-2 pl-5 list-decimal text-stone-800 dark:text-stone-200">
 <li><strong>Báze indukce (3 po sobě jdoucí částky):</strong>
@@ -125,7 +125,7 @@ V klasické algebře dokazujeme tvrzení $P(n)$ závislá na přirozeném čísl
 V teoretické informatice a teorii grafů častěji využíváme **Silnou Matematickou Indukci**:
 
 > 💡 **Poznámka k zápisu (neučte se nazpaměť!):**  
-> Tuto formuli se v žádném případě **neučte zpaměti** — u zkoušky ji po vás nikdo nebude chtít odříkat. Je to jen test, jestli dokážete číst formální matematické symboly, co jste dříve znali jen napůl (např. $\bigwedge_{i=n_0}^k$ je jen velká konjunkce AND pro všechny mezistavy od $n_0$ do $k$, stejně jako $\sum$ je velký součet):
+> Tuto formuli se v žádném případě **neučte zpaměti** - u zkoušky ji po vás nikdo nebude chtít odříkat. Je to jen test, jestli dokážete číst formální matematické symboly, co jste dříve znali jen napůl (např. $\bigwedge_{i=n_0}^k$ je jen velká konjunkce AND pro všechny mezistavy od $n_0$ do $k$, stejně jako $\sum$ je velký součet):
 >
 > $$\left( P(n_0) \land \forall k \ge n_0 : \left( \bigwedge_{i=n_0}^k P(i) \implies P(k+1) \right) \right) \implies \forall n \ge n_0 : P(n)$$
 
@@ -145,7 +145,7 @@ Toto je vůbec **nejčastější důvod pro udělení 0 bodů** u zkouškových 
 
 > *"Předpokládejme, že tvrzení platí pro graf $G_n$ s $n$ vrcholy. Nyní sestrojíme nový graf $G_{n+1}$ tak, že k $G_n$ přidáme jeden nový vrchol $v$ a připojíme ho hranami k nějakým vrcholům..."*
 
-#### 💥 Proč vyučující udělují 0 bodů?
+#### Proč vyučující udělují 0 bodů?
 Pokud začnete od grafu $G_n$ a **přidáte** nový prvek, dokázali jste tvrzení **POUZE pro ty grafy o $n+1$ vrcholech, které lze vytvořit tímto konkrétním přidáním**!
 Neověřili jste, zda každý obecný graf s $n+1$ vrcholy lze z nějakého menšího grafu takto vybudovat. Opomněli jste celou třídu grafů! Váš důkaz platí pro speciálně vytvořené grafy, ne pro **všechny platné grafy**.
 
@@ -208,7 +208,7 @@ U dekonstrukce začínáme **vždy od zadaného cílového objektu velikosti $n+
 </summary>
 <div class="p-4 pt-2 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-3">
 <p class="m-0">
-Zatímco slabá indukce musí skákat o 1 ($n+1 \to n$), což u mincí vyžadovalo výměny, <strong>silná indukce výměny vůbec nepotřebuje</strong> — stačí odebrat celou minci či blok:
+Zatímco slabá indukce musí skákat o 1 ($n+1 \to n$), což u mincí vyžadovalo výměny, <strong>silná indukce výměny vůbec nepotřebuje</strong> - stačí odebrat celou minci či blok:
 $$(n + 1) = ((n + 1) - k) + k$$
 </p>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -323,12 +323,12 @@ Tento vztah vám okamžitě odemkne celou teorii grafů:
 
 Stromy jsou nejčastější grafovou strukturou v bioinformatice (fylogenetické evoluční stromy, hierarchie taxonomií, kostry molekulárních sítí).
 
-> 🌲 **Základní intuitivní definice:**  
+> 💡 **Základní intuitivní definice:**  
 > **Strom je souvislý graf, který neobsahuje žádné cykly.**
 
 ---
 
-### 🍃 Klíčová vlastnost pro indukci: Listy stromu
+### Klíčová vlastnost pro indukci: Listy stromu
 Každá konečná větev stromu musí někde skončit. Koncovým vrcholům říkáme **listy**:
 - **List** je vrchol se stupněm $\deg(v) = 1$ (vede z něj právě jedna jediná hrana).
 - Každý strom s alespoň 2 vrcholy má **minimálně dva listy**. *(Představte si klacík nebo větev – vždy má alespoň dva konce!)*
@@ -336,7 +336,7 @@ Každá konečná větev stromu musí někde skončit. Koncovým vrcholům řík
 ---
 
 ### ✍️ Proč má strom o $n$ vrcholech přesně $m = n - 1$ hran?
-Tento slavný vzorec není žádná magie — je to přímý důsledek našeho **pravidla dekonstrukce**:
+Tento slavný vzorec není žádná magie - je to přímý důsledek našeho **pravidla dekonstrukce**:
 
 1. **Začátek (Dekonstrukce shora):** Vezměme libovolný strom $T$ s $n$ vrcholy ($n \ge 2$).
 2. **Odebrání listu:** Najdeme koncový list $v$ (který má $\deg(v) = 1$) a odebereme ho i s jeho jedinou hranou.
@@ -370,9 +370,9 @@ V kurzu AX1 dostanete těchto 5 vlastností jako hotové věty. Pro libovolný k
 <li>$G$ je <strong>minimální souvislý graf</strong> (odebráním libovolné hrany se graf rozpadne).</li>
 </ol>
 <div class="p-3 rounded-lg bg-white/70 dark:bg-[#150e09] border border-stone-200 dark:border-stone-800 mt-2">
-<strong class="text-stone-900 dark:text-stone-100">🍃 Důkaz existence listu (Tree Leaf Lemma):</strong>
+<strong class="text-stone-900 dark:text-stone-100">Důkaz existence listu (Tree Leaf Lemma):</strong>
 <p class="mt-1 mb-0 text-xs leading-relaxed">
-Zvolme ve stromu nejdelší možnou cestu $P = (v_0, v_1, \dots, v_k)$. Koncový vrchol $v_k$ nemůže mít souseda mimo cestu (jinak by cesta nebyla nejdelší) ani jiného souseda na cestě (jinak by vznikl cyklus). Jediným sousedem $v_k$ je tedy předchozí vrchol $v_{k-1}$, což znamená $\deg(v_k) = 1$ — uzel $v_k$ je list! Ze stejného důvodu je listem i $v_0$. Strom má tedy alespoň 2 listy.
+Zvolme ve stromu nejdelší možnou cestu $P = (v_0, v_1, \dots, v_k)$. Koncový vrchol $v_k$ nemůže mít souseda mimo cestu (jinak by cesta nebyla nejdelší) ani jiného souseda na cestě (jinak by vznikl cyklus). Jediným sousedem $v_k$ je tedy předchozí vrchol $v_{k-1}$, což znamená $\deg(v_k) = 1$ - uzel $v_k$ je list! Ze stejného důvodu je listem i $v_0$. Strom má tedy alespoň 2 listy.
 </p>
 </div>
 </div>
@@ -386,16 +386,16 @@ V bioinformatice často nestudujeme jen obousměrné vztahy, ale **procesy, kter
 - **Metabolické dráhy:** Glykolýza začíná glukózou a přes sérii nevratných enzymatických reakcí končí pyruvátem.
 - **Signální a regulační kaskády:** Aktivace receptoru $\to$ fosforylace kinázy $\to$ exprese genu.
 
-Pokud v takovém procesu nedochází k nekonečným smyčkám (zpětným cyklům), nazýváme ho v informatice **DAG** (*Directed Acyclic Graph* — orientovaný acyklický graf).
+Pokud v takovém procesu nedochází k nekonečným smyčkám (zpětným cyklům), nazýváme ho v informatice **DAG** (*Directed Acyclic Graph* - orientovaný acyklický graf).
 
 ---
 
-### 🌊 Klíčová bio-intuice: Zdroj a Výtok
+### Klíčová bio-intuice: Zdroj a výtok
 V každé reálné jednosměrné dráze bez smyček musí existovat:
 1. **Zdroj (Source):** Počáteční metabolit, do kterého žádná reakce nevstupuje ($\text{deg}^-(u) = 0$, např. vstupní glukóza).
 2. **Výtok (Sink):** Finální metabolit, ze kterého už žádná reakce nepokračuje ($\text{deg}^+(w) = 0$, např. finální odpadní produkt / pyruvát).
 
-Díky tomu lze celou metabolickou dráhu **seřadit v čase zleva doprava** — tomu se v informatice říká **Topologické uspořádání**.
+Díky tomu lze celou metabolickou dráhu **seřadit v čase zleva doprava** - tomu se v informatice říká **Topologické uspořádání**.
 
 ---
 

@@ -38,7 +38,7 @@ const prefetchPA2 = () => {
   void import("../components/PA2ToAX1Overview").catch(() => { });
 };
 
-/** Heavy materialsData tree — only load when opening the PA2 overview page */
+/** Heavy materialsData tree - only load when opening the PA2 overview page */
 const PA2ToAX1Overview = lazyWithRetry(() =>
   import("../components/PA2ToAX1Overview").then((m) => ({
     default: m.PA2ToAX1Overview,
@@ -250,8 +250,8 @@ export function WikiPage() {
 
   useEffect(() => {
     document.title = active
-      ? `${active.title} — Bioinformatika`
-      : "Obor: Bioinformatika — VŠCHT Učení";
+      ? `${active.title} - Bioinformatika`
+      : "Obor: Bioinformatika - VŠCHT Učení";
   }, [active]);
 
   useEffect(() => {

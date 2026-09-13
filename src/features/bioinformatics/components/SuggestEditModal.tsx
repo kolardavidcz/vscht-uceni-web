@@ -103,7 +103,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
 
       if (!res.ok) {
         setError(
-          [data.error, data.detail].filter(Boolean).join(" — ") ||
+          [data.error, data.detail].filter(Boolean).join(" - ") ||
             `Chyba ${res.status}`
         );
         return;
@@ -199,7 +199,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
                 <strong className="text-stone-700">
                   Neslučuje se automaticky
                 </strong>{" "}
-                — zkontrolujte diff a merge ručně.
+                - zkontrolujte diff a merge ručně.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-2">
@@ -305,7 +305,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-[10px] text-stone-400 font-medium max-w-md">
                   Odesláním vznikne větev, commit a pull request na GitHubu.
-                  Merge je ruční — Vercel preview se pro větve{" "}
+                  Merge je ruční - Vercel preview se pro větve{" "}
                   <code className="text-[9px] bg-stone-200/80 px-1 rounded">
                     suggest/*
                   </code>{" "}
@@ -337,7 +337,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
   );
 }
 
-/** Map material → repo file path (prefer segments — stable across Vite glob keys) */
+/** Map material → repo file path (prefer segments - stable across Vite glob keys) */
 export function materialToRepoPath(material: WikiMaterial): string {
   if (material.segments?.length) {
     return `src/features/bioinformatics/content/${material.segments.join("/")}.md`;

@@ -69,6 +69,6 @@ def scan_mojibake() -> list[Path]:
 
 if __name__ == "__main__":
     restore_micro_data()
-    # also re-restore prazdniny from git if needed — already fixed
+    # also re-restore prazdniny from git if needed - already fixed
     bad = scan_mojibake()
     print("Remaining bad:", [str(p.relative_to(ROOT)) for p in bad] or "NONE")

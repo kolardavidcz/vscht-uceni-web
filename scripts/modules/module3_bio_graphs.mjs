@@ -96,7 +96,7 @@ export function addModule3Slides(pres) {
       type: "warm",
       items: [
         { bold: "Vrcholy V (Atomy):", text: "Jednotlivé atomy tvoří uzly sítě (C₁, …, C₆, O_kruh, …)." },
-        { bold: "Hrany E (Kovalentní vazby):", text: "Sdílený elektronový pár mezi dvěma atomy tvoří neorientovanou hranu {u, v}. Vazba působí vzájemně — nemá žádný „směr šipky“." },
+        { bold: "Hrany E (Kovalentní vazby):", text: "Sdílený elektronový pár mezi dvěma atomy tvoří neorientovanou hranu {u, v}. Vazba působí vzájemně - nemá žádný „směr šipky“." },
         { bold: "Formální popis:", text: "Množina vrcholů V = {v₁, v₂, …, v₁₂} (atomy O, C₁–C₆ a OH), množina neorientovaných hran E = {e₁, e₂, …, e₁₂} (kovalentní vazby: e₁ = {v₁, v₂}, e₂ = {v₂, v₃}, …)." }
       ]
     },
@@ -125,7 +125,7 @@ export function addModule3Slides(pres) {
         { bold: "Jednosměrnost reakcí:", text: "Při odbourávání cukru v buňce probíhá kaskáda enzymatických reakcí. Každá reakce je jednosměrná (spotřebovává energii či uvolňuje teplo)." },
         { bold: "Vrcholy V (Metabolity):", text: "Chemické látky v buňce (Glukóza, Glukóza-6-fosfát, Fruktóza-6-fosfát, Fruktóza-1,6-bisP, Pyruvát)." },
         { bold: "Hrany E (Enzymatické reakce):", text: "Orientované šipky (u, v) ∈ V × V. Reakce jde z výchozího substrátu u do výsledného produktu v." },
-        { bold: "Acykličnost (DAG):", text: "Glykolýza je přímá energetická dráha — metabolity se v ní netočí dokola, ale směřují k pyruvátu." }
+        { bold: "Acykličnost (DAG):", text: "Glykolýza je přímá energetická dráha - metabolity se v ní netočí dokola, ale směřují k pyruvátu." }
       ]
     },
     rightCard: {
@@ -153,7 +153,7 @@ export function addModule3Slides(pres) {
         { bold: "Definice:", text: "Souvislý graf, který neobsahuje žádný cyklus." },
         { bold: "Unikátní vlastnost:", text: "Mezi libovolnými dvěma vrcholy existuje právě jedna jediná cesta!" },
         { bold: "Biologický příklad:", text: "Fylogenetický strom taxonů V = {v₁, …, v₇} propojených evolučními větvemi E = {e₁, …, e₆} od kořene LUCA (v₁)." },
-        { bold: "Vlastnost:", text: "Žádné smyčky — větve se rozbíhají a nikdy se zpětně nespojují." }
+        { bold: "Vlastnost:", text: "Žádné smyčky - větve se rozbíhají a nikdy se zpětně nespojují." }
       ]
     },
     rightCard: {

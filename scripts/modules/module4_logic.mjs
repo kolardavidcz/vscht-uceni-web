@@ -48,8 +48,8 @@ export function addModule4Slides(pres) {
       type: "neutral",
       items: [
         { bold: "Kolegovo tvrzení:", text: "Představ si, že zkoumáš nový protein. Kolega tvrdí: „Pokud je tento gen aktivní, pak se protein exprimuje.“" },
-        { bold: "Výsledek experimentu:", text: "V experimentu vidíš buňky, kde gen aktivní není — a protein se tam taky neobjevuje. Potvrzuje to kolegovo tvrzení, nebo ho vyvrací?" },
-        { bold: "Problém přirozeného jazyka:", text: "Odpověď závisí přesně na tom, jak přečteme implikaci „pokud A, pak B“. Přirozený jazyk je nejednoznačný. Věta „Pokud prší, vezmu deštník“ nic neříká o tom, co uděláš, když neprší — třeba deštník vezmeš stejně, protože je hezký." }
+        { bold: "Výsledek experimentu:", text: "V experimentu vidíš buňky, kde gen aktivní není - a protein se tam taky neobjevuje. Potvrzuje to kolegovo tvrzení, nebo ho vyvrací?" },
+        { bold: "Problém přirozeného jazyka:", text: "Odpověď závisí přesně na tom, jak přečteme implikaci „pokud A, pak B“. Přirozený jazyk je nejednoznačný. Věta „Pokud prší, vezmu deštník“ nic neříká o tom, co uděláš, když neprší - třeba deštník vezmeš stejně, protože je hezký." }
       ]
     },
     rightCard: {
@@ -57,9 +57,9 @@ export function addModule4Slides(pres) {
       badge: "PŘÍSLIB KAPITOLY",
       type: "warm",
       items: [
-        { bold: "Úloha logiky:", text: "Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AX1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů." },
+        { bold: "Úloha logiky:", text: "Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AX1 budeš formulovat tvrzení o grafech a dokazovat je - a každá nejednoznačnost v logickém zápisu = ztráta bodů." },
         { bold: "Příslib této kapitoly:", text: "Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu." },
-        { bold: "Bez abstraktní teorie:", text: "Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C — žádná teorie grafů není předem potřeba!" }
+        { bold: "Bez abstraktní teorie:", text: "Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C - žádná teorie grafů není předem potřeba!" }
       ]
     }
   });
@@ -349,7 +349,7 @@ if (width <= 0 || height <= 0)         // De Morgan: „když je neplatná ší�
       badge: "MNEMOTECHNIKA",
       type: "neutral",
       items: [
-        { bold: "Negace ∀ (∀ ⟶ ∃):", text: "Původní: „Každý student je chytrý.“ Negace: „Není pravda, že každý student je chytrý.“ ⇔ „Existuje alespoň 1 student, který není chytrý.“ K vyvrácení nepotřebujete, aby byli všichni hloupí — stačí najít jediného studenta, který chytrý není!" },
+        { bold: "Negace ∀ (∀ ⟶ ∃):", text: "Původní: „Každý student je chytrý.“ Negace: „Není pravda, že každý student je chytrý.“ ⇔ „Existuje alespoň 1 student, který není chytrý.“ K vyvrácení nepotřebujete, aby byli všichni hloupí - stačí najít jediného studenta, který chytrý není!" },
         { bold: "Negace ∃ (∃ ⟶ ∀):", text: "Původní: „Existuje chytrý student.“ Negace: „Není pravda, že existuje chytrý student.“ ⇔ „Každý student je ne-chytrý (všichni jsou blbí).“ Pokud není pravda, že by existoval byť jediný, pak nutně všichni chytří nejsou." }
       ]
     }
@@ -436,14 +436,14 @@ if (width <= 0 || height <= 0)         // De Morgan: „když je neplatná ší�
   // 17. Exercise 1.2: Metoda A (Kontrapozice)
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Úloha 1.2: Důkaz v Sítích — Metoda A (Kontrapozice)",
+    title: "Úloha 1.2: Důkaz v Sítích - Metoda A (Kontrapozice)",
     leftCard: {
       title: "Tvrzení o Stupních a Cyklu",
       badge: "ZADÁNÍ & INTUICE",
       type: "neutral",
       items: [
         { bold: "Zadání:", text: "Dokážeme tvrzení pro libovolnou konečnou síť (graf) G = (V, E): „Pokud z každého uzlu v ∈ V vycházejí alespoň 2 spojnice (deg(v) ≥ 2), pak síť G nutně obsahuje alespoň jednu uzavřenou smyčku (cyklus).“" },
-        { bold: "Intuitivní představa:", text: "Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře (deg(v) ≥ 2), nikdy nemůžete uvíznout ve slepé uličce. Když procházíte kupředu a nevracíte se stejnými dveřmi zpět, v konečném počtu místností musíte narazit do místnosti, kde už jste byli — a tím jste uzavřeli cyklus!" }
+        { bold: "Intuitivní představa:", text: "Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře (deg(v) ≥ 2), nikdy nemůžete uvíznout ve slepé uličce. Když procházíte kupředu a nevracíte se stejnými dveřmi zpět, v konečném počtu místností musíte narazit do místnosti, kde už jste byli - a tím jste uzavřeli cyklus!" }
       ]
     },
     rightCard: {
@@ -462,7 +462,7 @@ if (width <= 0 || height <= 0)         // De Morgan: „když je neplatná ší�
   // 18. Exercise 1.2: Metoda B (Přímý Důkaz)
   createTwoCardSlide(pres, {
     breadcrumb,
-    title: "Úloha 1.2: Metoda B — Přímý Důkaz (Zpětná Hrana)",
+    title: "Úloha 1.2: Metoda B - Přímý Důkaz (Zpětná Hrana)",
     leftCard: {
       title: "Sestavení Nejdelší Cesty do Řady",
       badge: "PŘÍMÝ POSTUP",

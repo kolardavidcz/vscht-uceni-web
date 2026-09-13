@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import rehypeHighlight from "rehype-highlight";
-// Subset only languages we use in wiki fences — full highlight.js is huge
+// Subset only languages we use in wiki fences - full highlight.js is huge
 import c from "highlight.js/lib/languages/c";
 import cpp from "highlight.js/lib/languages/cpp";
 import bash from "highlight.js/lib/languages/bash";

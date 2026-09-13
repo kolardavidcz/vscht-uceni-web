@@ -10,7 +10,7 @@ export function PythonAnalyzerPage() {
   const [execDone, setExecDone] = useState(false);
 
   useEffect(() => {
-    document.title = "Python Analyzátor — VŠCHT Učení";
+    document.title = "Python Analyzátor - VŠCHT Učení";
   }, []);
 
   const copyScript = async () => {

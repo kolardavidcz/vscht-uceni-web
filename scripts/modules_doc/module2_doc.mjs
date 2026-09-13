@@ -38,7 +38,7 @@ export function addModule2Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "Přípravný letní materiál:",
-      text: "Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce.\n\nStudenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AX1. Zní to dobře? Začínáme.",
+      text: "Tohle je **přípravný letní materiál** - přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce.\n\nStudenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz - komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AX1. Zní to dobře? Začínáme.",
       y: y + 0.15,
     });
   }
@@ -229,7 +229,7 @@ export function addModule2Slides(pres) {
     y = renderSolutionBanner(pres, slide, { title: "Rozbor u Tabule: Proč se v této chvíli cítíte ztraceni?", y });
 
     y = renderDocParagraph(slide,
-      "V téhle jediné vteřině zažije naprosté ticho a prázdno v hlavě 95 % studentů v aule:\n*„Co po mně proboha chce?! Vždyť to vidím na vlastní oči — je to kulaté, je to kružnice, co na tom mám dokazovat?! Mám vytáhnout kružítko a pravítko a změřit to?“*",
+      "V téhle jediné vteřině zažije naprosté ticho a prázdno v hlavě 95 % studentů v aule:\n*„Co po mně proboha chce?! Vždyť to vidím na vlastní oči - je to kulaté, je to kružnice, co na tom mám dokazovat?! Mám vytáhnout kružítko a pravítko a změřit to?“*",
       { y }
     );
 

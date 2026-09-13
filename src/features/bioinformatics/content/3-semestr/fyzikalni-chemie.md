@@ -3,9 +3,9 @@
 
 ## 📚 Doporučené materiály
 
-Cvičící má velmi ráda tuto stránku s příklady. Dělá z nich cvičení a je to **mnohem užitečnější** (*more useful*) než doporučená sbírka na e-learningu:
+Cvičící má velmi ráda tuto stránku s příklady. Dělá z nich cvičení a je to **mnohem užitečnější** než doporučená sbírka na e-learningu:
 
-* 👉 **[Příkladník Fyzikální chemie VŠCHT](https://old.vscht.cz/fch/prikladnik/prikladnik/p.html)**
+* **[Příkladník Fyzikální chemie VŠCHT](https://old.vscht.cz/fch/prikladnik/prikladnik/p.html)**
 
 Najdete zde:
 * 🔢 **Seznam vzorečků** (vždy na začátku každé kategorie)
@@ -16,8 +16,8 @@ Najdete zde:
 
 **💡 Doporučený postup, jak se z toho nezbláznit:**
 
-* **Využijte AI:** Narvěte příklady do Gemini a řekněte mu, ať na jejich základě vygeneruje testové otázky s možnostmi **A, B, C, D** a tímto si počítání gamifikujte.
-* **Počítejte samostatně:** Vedle si na papír/tablet příklad spočítejte.
-* **Zpětná vazba:** Pokud odpovíte špatně, Gemini vám  vysvětlí, kde jste v postupu pravděpodobně udělali chybu. Můj oblibený prompt je: `Vysvětli mi, kde jsem udělal chybu a proč`
+* **Využijte AI:** Vložte příklady do Gemini / Claude a nechte si vygenerovat testové otázky s možnostmi **A, B, C, D** pro gamifikaci počítání.
+* **Počítejte samostatně:** Vedle si na papír či tablet příklad nejprve sami spočítejte.
+* **Zpětná vazba:** Pokud odpovíte špatně, AI model vám vysvětlí, kde jste v postupu pravděpodobně udělali chybu (např. prompt: `Vysvětli mi, kde jsem udělal v postupu chybu a proč`).
 
 </div>

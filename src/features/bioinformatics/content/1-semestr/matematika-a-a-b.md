@@ -27,6 +27,6 @@ Doporučuji si projít příklady diferenciálních rovnic na Wolframu a zaměř
 * **Plots of sample individual solutions** (ukázka jednoho řešení a vztahu mezi ním a jeho derivací)
 * **ODE classification** (abychom se vyznali v pojmenování)
 * **Slope field**, zobrazovací možnost **Directional field** (ukázka toho, co vlastně počítáme – viz vektorové pole z videa)
-* 👉 **[Odkaz na příklady diferenciálních rovnic z Wolframu](https://www.wolframalpha.com/input?i=differential+equation)**
+* **[Příklady diferenciálních rovnic ve WolframAlpha](https://www.wolframalpha.com/input?i=differential+equation)**
 
 </div>

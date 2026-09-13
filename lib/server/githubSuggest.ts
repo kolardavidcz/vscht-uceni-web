@@ -17,7 +17,7 @@ export type SuggestEditResult =
       branch: string;
       branchUrl: string;
       compareUrl: string;
-      /** Open PR URL — not merged; you review/merge manually */
+      /** Open PR URL - not merged; you review/merge manually */
       prUrl: string;
       prNumber: number;
       message: string;
@@ -135,7 +135,7 @@ export async function createSuggestBranch(
       error: "Nelze načíst výchozí větev",
       detail:
         ref.raw.slice(0, 400) ||
-        `HTTP ${ref.status} — zkontrolujte token a přístup k ${owner}/${repo}`,
+        `HTTP ${ref.status} - zkontrolujte token a přístup k ${owner}/${repo}`,
     };
   }
   const baseSha = ref.data.object.sha;
@@ -188,7 +188,7 @@ export async function createSuggestBranch(
     `${me.data.id}+${me.data.login}@users.noreply.github.com`;
 
   const commitMessage = [
-    `docs(wiki): návrh úpravy — ${title}`,
+    `docs(wiki): návrh úpravy - ${title}`,
     "",
     authorName ? `Autor návrhu: ${authorName}` : null,
     note ? `Poznámka: ${note}` : null,
@@ -228,7 +228,7 @@ export async function createSuggestBranch(
   const branchUrl = `https://github.com/${owner}/${repo}/tree/${encodeURIComponent(branch)}`;
   const compareUrl = `https://github.com/${owner}/${repo}/compare/${encodeURIComponent(defaultBranch)}...${encodeURIComponent(branch)}?expand=1`;
 
-  // Open a pull request — never auto-merge; Vercel skip via branch suggest/* + commit/PR markers
+  // Open a pull request - never auto-merge; Vercel skip via branch suggest/* + commit/PR markers
   const prBody = [
     `## Návrh úpravy wiki`,
     ``,
@@ -239,7 +239,7 @@ export async function createSuggestBranch(
     note ? `### Poznámka\n\n${note}` : null,
     ``,
     `> Odesláno z webového editoru **Navrhnout úpravu**.`,
-    `> PR se **neslučuje automaticky** — zkontrolujte diff a merge ručně.`,
+    `> PR se **neslučuje automaticky** - zkontrolujte diff a merge ručně.`,
     ``,
     `<!-- vercel: skip preview builds for suggest/* branches -->`,
     `[skip vercel]`,
@@ -263,7 +263,7 @@ export async function createSuggestBranch(
   );
 
   if (!pr.ok) {
-    // Branch still exists — surface compare link so you can open PR manually
+    // Branch still exists - surface compare link so you can open PR manually
     return {
       ok: false,
       status: 502,
@@ -281,6 +281,6 @@ export async function createSuggestBranch(
     prUrl: pr.data.html_url,
     prNumber: pr.data.number,
     message:
-      "Větev, commit a pull request jsou na GitHubu. PR se neslučuje automaticky — merge ručně po kontrole.",
+      "Větev, commit a pull request jsou na GitHubu. PR se neslučuje automaticky - merge ručně po kontrole.",
   };
 }

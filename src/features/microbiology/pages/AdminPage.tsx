@@ -119,7 +119,7 @@ export function AdminPage({ data }: Props) {
   const [editLabel, setEditLabel] = useState("");
 
   useEffect(() => {
-    document.title = "Admin — Systematika bakterií";
+    document.title = "Admin - Systematika bakterií";
   }, []);
 
   useEffect(() => {
@@ -745,7 +745,7 @@ export function AdminPage({ data }: Props) {
                     Vyberte taxon vlevo
                   </p>
                   <p className="text-[11px] text-center max-w-xs">
-                    Ukládání posílá jen frontu změn (ne celý strom) — dva admini
+                    Ukládání posílá jen frontu změn (ne celý strom) - dva admini
                     si nepřepisují nesouvisející úpravy.
                   </p>
                 </div>
@@ -985,7 +985,7 @@ export function AdminPage({ data }: Props) {
                       })}
                       {options.length === 0 && (
                         <p className="text-xs text-stone-400 italic col-span-full py-2">
-                          Prázdná kategorie — přidejte emoji tlačítkem výše.
+                          Prázdná kategorie - přidejte emoji tlačítkem výše.
                         </p>
                       )}
                     </div>

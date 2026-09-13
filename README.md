@@ -1,10 +1,10 @@
 # 🧪 VŠCHT Učení
 
-Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** — moderní Web Application spojující interaktivní studijní moduly a nástroje:
+Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** - moderní Web Application spojující interaktivní studijní moduly a nástroje:
 
-1. 🦠 **Systematika bakterií** — interaktivní emoji kvíz, pracovní list, taxonomický atlas, kartičky a srovnávací matice.
-2. 📚 **Obor: Bioinformatika** — komunitní Markdown wiki s podporou MathJax, přehledem předmětů a průvodcem studia (PA2→AX1).
-3. 🐍 **Python Analyzátor** — anotovaný skript pro bioinformatickou analýzu DNA/RNA sekvencí s živým simulovaným během.
+1. 🦠 **Systematika bakterií** - interaktivní emoji kvíz, pracovní list, taxonomický atlas, kartičky a srovnávací matice.
+2. 📚 **Obor: Bioinformatika** - komunitní Markdown wiki s podporou MathJax, přehledem předmětů a průvodcem studia (PA2→AX1).
+3. 🐍 **Python Analyzátor** - anotovaný skript pro bioinformatickou analýzu DNA/RNA sekvencí s živým simulovaným během.
 
 ---
 
@@ -13,22 +13,22 @@ Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** — moderní Web Ap
 ### 🏠 Hlavní rozcestník (Landing Page)
 ![VŠCHT Učení Rozcestník](docs/screenshots/home_screen.png)
 
-### 🦠 Systematika bakterií — Pracovní list a Kvíz
+### 🦠 Systematika bakterií - Pracovní list a Kvíz
 ![Systematika bakterií Kvíz](docs/screenshots/mikrobiology_test.png)
 
-### 🌳 Atlas bakterií — Taxonomický studijní strom
+### 🌳 Atlas bakterií - Taxonomický studijní strom
 ![Taxonomický studijní strom](docs/screenshots/mikrobiology_tree_ovreview.png)
 
-### 🟨 Systematika bakterií — Kartičky (Samostudium)
+### 🟨 Systematika bakterií - Kartičky (Samostudium)
 ![Systematika bakterií Kartičky](docs/screenshots/mikrobiology_flashcards.png)
 
-### 📊 Systematika bakterií — Srovnávací matice
+### 📊 Systematika bakterií - Srovnávací matice
 ![Systematika bakterií Srovnávací matice](docs/screenshots/mikrobiology_table.png)
 
-### 📚 Obor Bioinformatika — Studijní Wiki
+### 📚 Obor Bioinformatika - Studijní Wiki
 ![Bioinformatická Wiki](docs/screenshots/wiki_page.png)
 
-### ⭐ Bioinformatika Wiki — Hodnocení obsahu
+### ⭐ Bioinformatika Wiki - Hodnocení obsahu
 ![Wiki Hodnocení obsahu](docs/screenshots/wiki_content_rating.png)
 
 ---
@@ -120,7 +120,7 @@ Portál obsahuje funkci **„Navrhnout úpravu“** přímo na stránkách Wiki:
 1. Uživatel klikne na úpravu návodu/zápisku a odešle změnu.
 2. Endpoint `POST /api/suggest-edit` vytvoří větev na GitHubu (`suggest/*`).
 3. Automaticky zaloguje změny a otevře **Pull Request** do větve `main` v repositáři [kolardavidcz/vscht-uceni-web](https://github.com/kolardavidcz/vscht-uceni-web).
-4. Změny se **nefúzují automaticky** — úpravu schvaluje správce v rozhraní GitHubu.
+4. Změny se **nefúzují automaticky** - úpravu schvaluje správce v rozhraní GitHubu.
 
 #### Nastavení GitHub PAT (Personal Access Token)
 

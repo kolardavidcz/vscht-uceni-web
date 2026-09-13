@@ -11,11 +11,11 @@ g++ ./main -o main -Wall -Wextra -pedantic -g -std=c++20
 | Flag | K čemu |
 |------|--------|
 | `-std=c++20` | kompiluje kód ve stejné verzi jako na Progtestu |
-| `-Wall -Wextra -pedantic` | nahlásí co nejvíc potenciálních problémů — **vyřeš všechny** (je důležité v kombinaci s `-std=c++20`, aby vám hlásil stejné chyby jako Progtest) |
+| `-Wall -Wextra -pedantic` | nahlásí co nejvíc potenciálních problémů - **vyřeš všechny** (je důležité v kombinaci s `-std=c++20`, aby vám hlásil stejné chyby jako Progtest) |
 |`-lm`| pro používání matematických knihovnen |
 | `-fsanitize=undefined,address` | runtime kontroly UB (např. neinicializovaná proměnná) + paměť |
 | `-g` (pouze pro VS code, Clion to za vás řeší jinak) | ladicí informace (čísla řádků v debuggeru / Valgrindu) |
-| `-O2` | optimalizace; **nezlepší asymptotickou složitost** a na Progtestu tě „nezachrání“. Může ale program **shodit**, když děláš nekorektní věci (UB) — užitečné pro odhalení, ne jako „zrychlovač úkolu“ |
+| `-O2` | optimalizace; **nezlepší asymptotickou složitost** a na Progtestu tě „nezachrání“. Může ale program **shodit**, když děláš nekorektní věci (UB) - užitečné pro odhalení, ne jako „zrychlovač úkolu“ |
 
 
 Sanitizer (příklad):
@@ -29,11 +29,11 @@ g++ -Wall -Wextra -pedantic -std=c++20 -g -fsanitize=undefined,address -o main m
 
 Kromě C klíčových slov často: ***new, delete, private, public, protected***.
 
-### Printf debugging — v případě nouze
+### Printf debugging - v případě nouze
 
 V úplně prvních hodinách není debugger komfortní volba, ze začátku tedy stačí `printf`.
 
-**Pravidlo:** Vypisuj vždy **co funkce dostala** a **co vrátí** — a uvnitř cyklu **stav v každém kroku**.
+**Pravidlo:** Vypisuj vždy **co funkce dostala** a **co vrátí** - a uvnitř cyklu **stav v každém kroku**.
 
 ```c
 TYP nazev_funkce(ARGUMENTY) {
@@ -53,7 +53,7 @@ Díky prefixu `[DBG]` pak najdeš a smažeš všechny výpisy jedním vyhledáv�
 
 ### printf se „neukáže hned"
 
-Pokud `printf` nic nevypíše ani po spuštění, přidej `fflush(stdout);` hned za něj — CLion s tím má problém.
+Pokud `printf` nic nevypíše ani po spuštění, přidej `fflush(stdout);` hned za něj - CLion s tím má problém.
 
 ```c
 printf("TEXT\n");
@@ -62,7 +62,7 @@ fflush(stdout);
 
 ## 3. Jak číst chybu kompilátoru
 
-Kompilátor píše chyby odshora. **První chyba je ta pravá** — zbytek jsou často jen domino efekt.
+Kompilátor píše chyby odshora. **První chyba je ta pravá** - zbytek jsou často jen domino efekt.
 
 ```
 main.c:12:5: error: use of undeclared identifier 'pocet'
@@ -77,18 +77,18 @@ Nejčastější hlášky a co znamenají:
 | Hláška | Příčina |
 |--------|---------|
 | `undeclared identifier` | překlep, nebo jsi zapomněl deklarovat proměnnou |
-| `expected ';'` | chybějící středník — hledej o řádek výš |
+| `expected ';'` | chybějící středník - hledej o řádek výš |
 | `implicit declaration of function` | zapomněl jsi `#include` nebo funkci deklarovat před použitím |
-| `assignment to expression with array type` | zkusil jsi přiřadit pole jako `arr = ...` — to nejde, kopíruj prvky cyklem |
+| `assignment to expression with array type` | zkusil jsi přiřadit pole jako `arr = ...` - to nejde, kopíruj prvky cyklem |
 | `control reaches end of non-void function` | funkce slibuje `return` hodnotou, ale někde cesta nekončí `return` |
-| `format '%d' expects argument of type 'int*'` | špatný typ v `scanf`/`printf` — nejčastěji zapomenutý `&` |
+| `format '%d' expects argument of type 'int*'` | špatný typ v `scanf`/`printf` - nejčastěji zapomenutý `&` |
 
 
 ## Práce s alokovanou pamětí
 
 ### Debugging: zobrazování polí
 
-V debuggeru vidíš pointer, ale ne celé pole — standardně ukáže jen první prvek. Takhle ho rozbalíš:
+V debuggeru vidíš pointer, ale ne celé pole - standardně ukáže jen první prvek. Takhle ho rozbalíš:
 
 **VS Code (s WSL / gcc)**
 
@@ -109,29 +109,29 @@ V záložce *Variables* nebo *Evaluate Expression* (`Alt+F8`) použij cast:
 kde `T` = datový typ prvků (`int`, `double`, `char`, …) a `SIZE` = počet prvků, které chceš vidět.
 
 
-**Příklad** — máš `int arr[5] = {1,2,3,4,5}`:
+**Příklad** - máš `int arr[5] = {1,2,3,4,5}`:
 
 | IDE | Co napsat do Watch |
 |-----|--------------------|
 | VS Code | `arr,5` |
 | CLion | `(int(*)[5])arr` |
 
-> **Tip:** `SIZE` nemusí odpovídat deklarované délce — klidně dej větší číslo, pokud chceš vidět dál. Obsah za koncem pole je nedefinovaný, ale debugger ho ukáže (užitečné pro hledání off-by-one chyb).
+> **Tip:** `SIZE` nemusí odpovídat deklarované délce - klidně dej větší číslo, pokud chceš vidět dál. Obsah za koncem pole je nedefinovaný, ale debugger ho ukáže (užitečné pro hledání off-by-one chyb).
 
-### Paměť: sanitizer **nebo** Valgrind — **ne obojí najednou**
+### Paměť: sanitizer **nebo** Valgrind - **ne obojí najednou**
 
 Tyto dva nástroje se **vzájemně vylučují**. Valgrind nespouštěj na binárce se sanitizerem.
 
-**A) AddressSanitizer / UBSan** — viz flagy výše.
+**A) AddressSanitizer / UBSan** - viz flagy výše.
 
-**B) Valgrind (memcheck)** — primárně úniky a špatná práce s pamětí:
+**B) Valgrind (memcheck)** - primárně úniky a špatná práce s pamětí:
 
 ```bash
 valgrind --leak-check=full --track-origins=yes ./main
 ```
 
-* `--leak-check=full` — blíž k neuvolněné paměti (čím byla alokována)
-* `--track-origins=yes` — práce s neinicializovanou pamětí
+* `--leak-check=full` - blíž k neuvolněné paměti (čím byla alokována)
+* `--track-origins=yes` - práce s neinicializovanou pamětí
 
 > **Pozor:** Valgrind potřebuje `-g` při kompilaci (ladicí symboly). CLion to přidá automaticky v Debug módu; ve WSL přidej `-g` ručně.
 
@@ -194,7 +194,7 @@ chmod +x testshell.sh
 3. Malý vstup vyzkoušej ručně / spusť lokální `testshell.sh`.  
 4. Debugger: kde se hodnoty rozcházejí s očekáváním na papíře.  
 5. Paměť: sanitizer `-fsanitize=address,undefined` **nebo** Valgrind.  
-6. Když padá jen na Progtestu — napiš si vlastní testovací vstupy:
+6. Když padá jen na Progtestu - napiš si vlastní testovací vstupy:
    * **vlastní**: předpočítej si záludná data (prázdný vstup, záporné číslo, hraniční nuly).
    * **větší vstupy**: zkus nakopírovat testovací data několikrát za sebou pro ověření škálování paměti a rychlosti.  
 7. Kód je spaghetti? $\to$ [struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) (rozdělení do funkcí a struktur).
@@ -213,7 +213,7 @@ chmod +x testshell.sh
 * [ ] Jeden obří `main` bez funkcí → špatně se debuguje (nebo spíš stojí nervy na debuggování)
 * [ ] Dynamické pole jako tři argumenty místo **struktury**
 ---
-* [ ] `scanf("%s")` „bezpečně“ — není; buffer overflow past 
+* [ ] `scanf("%s")` „bezpečně“ - není; buffer overflow past 
 
 <div class="my-6 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 <div>

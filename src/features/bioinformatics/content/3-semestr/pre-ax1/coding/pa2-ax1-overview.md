@@ -248,7 +248,7 @@ int main() {
 
 ## 3. 🚿 BFS: Kód vedle Matematiky (Side by Side)
 
-Tohle je nejlepší způsob, jak propojit PA2 a AX1. Ukazujeme BFS ve dvou sloupcích — C++ kód vlevo, matematický invariant vpravo.
+Tohle je nejlepší způsob, jak propojit PA2 a AX1. Ukazujeme BFS ve dvou sloupcích - C++ kód vlevo, matematický invariant vpravo.
 
 ### BFS: Hledání nejkratších vzdáleností (neohodnocený graf)
 
@@ -285,22 +285,22 @@ vector<int> bfs(int s,                   // s = startovní vrchol
 
 Před každou iterací `while (!q.empty())` platí:
 1. Pro každý **zpracovaný** vrchol $u$ (již vyskočený z fronty): $d[u] = \delta(s, u)$.
-2. Fronta $Q$ obsahuje **hranici** — vrcholy vzdálenosti $k$ nebo $k+1$ pro aktuální „vlnu" $k$.
+2. Fronta $Q$ obsahuje **hranici** - vrcholy vzdálenosti $k$ nebo $k+1$ pro aktuální „vlnu" $k$.
 3. Žádný vrchol není vložen do fronty dvakrát (jakmile $d[v] \ne -1$, $v$ přeskočíme).
 
-**Proč to funguje intuitivně?** BFS se šíří jako vlna na vodní hladině — nejprve dosáhne nejbližší břeh (vzdálenost 1), pak dál (vzdálenost 2)... Fronta záruku dává: vždy zpracujeme kratší vzdálenosti dříve než delší.
+**Proč to funguje intuitivně?** BFS se šíří jako vlna na vodní hladině - nejprve dosáhne nejbližší břeh (vzdálenost 1), pak dál (vzdálenost 2)... Fronta záruku dává: vždy zpracujeme kratší vzdálenosti dříve než delší.
 
 ---
 
 ## 4. ⛰️ Dijkstra: Priority Queue a Proč to Funguje
 
-Dijkstra je BFS pro **ohodnocené grafy** (hrany mají váhy). Místo fronty (`queue`) používáme **prioritní frontu** (`priority_queue`) — struktura, která vždy vydá prvek s nejmenší prioritou (vzdáleností).
+Dijkstra je BFS pro **ohodnocené grafy** (hrany mají váhy). Místo fronty (`queue`) používáme **prioritní frontu** (`priority_queue`) - struktura, která vždy vydá prvek s nejmenší prioritou (vzdáleností).
 
 ### Proč nestačí obyčejná fronta?
 
 V BFS: všechny hrany mají váhu 1, takže vrchol vzdálenější o 1 krok = vzdálenější o 1. Fronta FIFO funguje perfektně.
 
-V Dijkstrovi: hrana $\{u,v\}$ může mít váhu $w(u,v) = 100$, hrana $\{u,x\}$ váhu $w(u,x) = 1$. Vrchol $x$ je „blíž" i když byl vložen do fronty později. Fronta FIFO to nezachytí — potřebujeme frontu, která vydá vrchol s nejmenší dosavadní vzdáleností.
+V Dijkstrovi: hrana $\{u,v\}$ může mít váhu $w(u,v) = 100$, hrana $\{u,x\}$ váhu $w(u,x) = 1$. Vrchol $x$ je „blíž" i když byl vložen do fronty později. Fronta FIFO to nezachytí - potřebujeme frontu, která vydá vrchol s nejmenší dosavadní vzdáleností.
 
 ### C++ implementace s `std::priority_queue`:
 
@@ -317,7 +317,7 @@ vector<int> dijkstra(int s, const vector<vector<Edge>>& adj) {
     int n = adj.size();
     vector<int> d(n, INT_MAX);           // d[v] = aktuální odhad δ(s,v)
 
-    // Min-halda: (vzdálenost, vrchol) — nejmenší vzdálenost nahoře
+    // Min-halda: (vzdálenost, vrchol) - nejmenší vzdálenost nahoře
     priority_queue<Edge, vector<Edge>, greater<Edge>> pq;
 
     d[s] = 0;
@@ -326,7 +326,7 @@ vector<int> dijkstra(int s, const vector<vector<Edge>>& adj) {
     while (!pq.empty()) {
         auto [dist_u, u] = pq.top(); pq.pop();
 
-        if (dist_u > d[u]) continue;     // Zastaralý záznam — přeskočíme
+        if (dist_u > d[u]) continue;     // Zastaralý záznam - přeskočíme
 
         for (auto [v, w] : adj[u]) {
             if (d[u] + w < d[v]) {       // Relaxace hrany (u,v):
@@ -346,7 +346,7 @@ Při každém výskoku vrcholu $u$ z prioritní fronty platí: $d[u] = \delta(s,
 **Proč?** Kdyby existovala kratší cesta $P'$ do $u$ dosud nenalezená, pak $P'$ prochází přes nějaký vrchol $x$ dosud ve frontě. Ale $d[x] \ge d[u]$ (jinak by byl $x$ vyskočen dříve). Cesta přes $x$ by měla délku $\ge d[x] \ge d[u]$, tedy není kratší. Spor!
 
 > [!WARNING]
-> **Dijkstra + záporné hrany = katas trofa!** Pokud existuje záporná hrana $\{u,v\}$ s $w < 0$, invariant se rozbije — vrchol může být vyskočen z fronty s neoptimální vzdáleností. Pro záporné hrany použij Bellman-Ford (AX1 probírá jako bonusové téma).
+> **Dijkstra + záporné hrany = katas trofa!** Pokud existuje záporná hrana $\{u,v\}$ s $w < 0$, invariant se rozbije - vrchol může být vyskočen z fronty s neoptimální vzdáleností. Pro záporné hrany použij Bellman-Ford (AX1 probírá jako bonusové téma).
 
 ---
 
@@ -397,15 +397,15 @@ void dfs_iterative(int start, const vector<vector<int>>& adj) {
 }
 ```
 
-Zásobník je nyní na **haldě** (heap) — může být mnohem větší. Pro grafy s $n = 10^5$ je iterativní DFS bezpečný.
+Zásobník je nyní na **haldě** (heap) - může být mnohem větší. Pro grafy s $n = 10^5$ je iterativní DFS bezpečný.
 
 **Matematická ekvivalence:** Oba přístupy prohledají stejné vrcholy ve stejném pořadí (zásobník emuluje rekurzi). Formálně jsou ekvivalentní.
 
 ---
 
-## 6. 🔗 DSU (Disjoint Set Union) — Kruskal bez slz
+## 6. 🔗 DSU (Disjoint Set Union) - Kruskal bez slz
 
-Kruskalův algoritmus buduje MST hladově — přidává hrany od nejlehčí, ale **přeskočí hranu, která by vytvořila cyklus**.
+Kruskalův algoritmus buduje MST hladově - přidává hrany od nejlehčí, ale **přeskočí hranu, která by vytvořila cyklus**.
 
 Jak zjistit, jestli hrana $\{u,v\}$ vytvoří cyklus? Jestli $u$ a $v$ jsou **ve stejné komponentě**.
 
@@ -457,7 +457,7 @@ int kruskal_mst(int n, vector<tuple<int,int,int>>& edges) {
 }
 ```
 
-**Matematické pozadí:** DSU udržuje množiny vrcholů — každá množina = jedna komponenta grafu. `find(x)` vrátí reprezentanta množiny. `unite(a,b)` sloučí dvě množiny. Hrana $\{u,v\}$ tvoří cyklus iff `find(u) == find(v)`.
+**Matematické pozadí:** DSU udržuje množiny vrcholů - každá množina = jedna komponenta grafu. `find(x)` vrátí reprezentanta množiny. `unite(a,b)` sloučí dvě množiny. Hrana $\{u,v\}$ tvoří cyklus iff `find(u) == find(v)`.
 
 ---
 
@@ -485,5 +485,5 @@ Proveď si tento self-test před zářím. Pokud odpovíš ANO na všechny, má�
 - [ ] Vím, kdy použít DFS iterativně (velké grafy) vs. rekurzivně.
 - [ ] Chápu, co je DSU a jak `find()` + `unite()` slouží Kruskalovi.
 - [ ] Zvládnu zapsat invariant cyklu pro BFS ve 3 krocích (Inicializace / Udržování / Ukončení).
-- [ ] Vím, že Dijkstra nefunguje se zápornými hranami — a proč.
+- [ ] Vím, že Dijkstra nefunguje se zápornými hranami - a proč.
 

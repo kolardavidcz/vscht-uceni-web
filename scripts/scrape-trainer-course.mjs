@@ -233,7 +233,7 @@ async function scrapeCourse(base, courseId, cookie) {
       const lName = lessonTitle(lesson);
       process.stdout.write(`    lesson: ${lName}… `);
 
-      // Prefer lesson detail — `/lessons/:id/modules` is often 403 for students
+      // Prefer lesson detail - `/lessons/:id/modules` is often 403 for students
       let modules = [];
       let detailName = lName;
       let detailType = lesson.type || null;
@@ -335,7 +335,7 @@ function weekToMarkdown(course, week, weekIndex) {
 
 function indexMarkdown(course) {
   const lines = [];
-  lines.push(`# ${course.name} — Trainer outline`);
+  lines.push(`# ${course.name} - Trainer outline`);
   lines.push("");
   lines.push(`Zdroj: [${course.url}](${course.url})`);
   lines.push("");
@@ -352,7 +352,7 @@ function indexMarkdown(course) {
     const lessonCount = w.lessons.length;
     const modCount = w.lessons.reduce((a, l) => a + l.modules.length, 0);
     lines.push(
-      `* [${w.name}](./${file}) — ${lessonCount} lekcí, ${modCount} cvičení`
+      `* [${w.name}](./${file}) - ${lessonCount} lekcí, ${modCount} cvičení`
     );
   }
   lines.push("");
@@ -478,7 +478,7 @@ Trainer API requires CTU login. Steps:
     }
 
     if (args.dryRun) {
-      console.log("(dry-run — no markdown written)");
+      console.log("(dry-run - no markdown written)");
       return;
     }
 

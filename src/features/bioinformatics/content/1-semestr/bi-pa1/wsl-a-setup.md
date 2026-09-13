@@ -1,100 +1,61 @@
 # 1 · WSL a vývojové prostředí
 
 > 💡 **ZLATÉ PRAVIDLO: NEJDŘÍV PROGRAMOVAT, AŽ PAK LADIT PROSTŘEDÍ!**  
-> Nejdůležitější věcí na začátku studia je **začít okamžitě programovat a psát kód**, ne se na celé dny zaseknout na instalaci Linuxu, konfiguraci editorů či ladění chybějících knihoven.  
-> I když lokální prostředí a kódování jdou časem ruku v ruce, pokud vám WSL nebo IDE hned nenaskočí, nepanikařte: otevřete si online GCC kompilátor (např. [OnlineGDB](https://www.onlinegdb.com/)) a začněte psát a zkoušet úlohy přímo v prohlížeči. Plnohodnotné lokální prostředí v klidu dořešíte během prvního týdne (třeba na zářijové hromadné instalaci na FITu).
+> Nejdůležitější je **okamžitě začít psát kód**, ne se na dny zaseknout na ladění prostředí. Pokud vám WSL nebo IDE hned nenaskočí, otevřete si online kompilátor [OnlineGDB](https://www.onlinegdb.com/) a programujte přímo v prohlížeči.  
+> **Při nastavování se nebojte ptát AI (ChatGPT / Claude / Gemini)** - zkopírujte jí chybovou hlášku, model notebooku nebo problém s BIOSem a dostanete přesné řešení na míru.
 
 ---
 
 ## Proč Linux / WSL pro BI-PA1?
 
-Na FITu i v bioinformatice obecně se pracuje především v operačním systému **Linux**. Programy psané v C, které budete řešit v PA1 a odevzdávat do Progtestu, se na Windows a Linuxu chovají odlišně (správa paměti, vstup/výstup, kompilátory).
-
-Nejsnazší cestou na Windows bez nutnosti přeinstalovat systém je **WSL (Windows Subsystem for Linux)** — plnohodnotný Linux běžící uvnitř Windows, který vám dá `gcc`, `gdb` a `valgrind`.
+Na FITu i v bioinformatice se pracuje v **Linuxu**. Úlohy v C se na Windows a Linuxu chovají odlišně (práce s pamětí, kompilátory, kontrola v Progtestu). Nejjednodušší cestou na Windows bez nutnosti přeinstalace je **WSL (Windows Subsystem for Linux)** - plnohodnotné linuxové prostředí běžící přímo uvnitř Windows.
 
 ---
 
-## Krok 1 — Nainstaluj WSL
+## Krok 1 - Instalace WSL
 
-Otevři **PowerShell jako administrátor** a spusť:
+Otevřete **PowerShell jako administrátor** a spusťte:
 
 ```powershell
 wsl --install
 ```
 
-Windows si stáhne Ubuntu a po restartu budeš mít Linux. Při prvním spuštění si zvolíš uživatelské jméno a heslo.
-
-> **Tip:** Video níže ukazuje instalaci krok za krokem. Na začátku a konci se věnuje VS Code — to klidně přeskoč.
-
-> **Pozor:** Na některých počítačích je potřeba nejdřív zapnout **virtualizaci v BIOSu** (VT-x / AMD-V / SVM — záleží na výrobci). Pokud instalace selže, s AI projdi BIOS.
+Windows stáhne Ubuntu a po restartu nastavíte své uživatelské jméno a heslo. *(Pokud instalace hlásí chybu virtualizace, je nutné v BIOSu povolit VT-x / AMD-V - zeptejte se AI podle výrobce svého notebooku).*
 
 <iframe src="https://www.youtube.com/embed/wOimgBphkE0?rel=0&wmode=transparent" class="w-full aspect-video rounded-xl my-4 border border-slate-200/85 shadow-sm" allowfullscreen></iframe>
 
 ---
 
-## Krok 2 — Nainstaluj vývojářské nástroje
+## Krok 2 - Vývojářské nástroje
 
-Po instalaci WSL otevři aplikaci **Ubuntu** (najdeš ji v nabídce Start) a vlož celý tento blok najednou:
+V nově otevřeném terminálu **Ubuntu** nainstalujte potřebnou výbavu jediným příkazem:
 
 ```bash
 sudo apt update && sudo apt upgrade -y && \
 sudo apt install -y build-essential gdb clang-format valgrind
 ```
 
-Co se nainstaluje:
-* **build-essential** — kompilátory `gcc` / `g++` + `make`
-* **gdb** — debugger (krokování programu)
-* **clang-format** — automatické formátování kódu
-* **valgrind** — hledání úniků paměti (budeš potřebovat ve druhé půlce semestru; viz [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit))
+Tím získáte kompilátory `gcc` / `g++` (`build-essential`), debugger `gdb` pro krokování kódu, automatický formátovač `clang-format` a detektor úniků paměti `valgrind` (klíčový pro druhou polovinu semestru; viz [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit)).
 
 ---
 
-## Krok 3 — Ověř, že vše funguje
+## 🛠️ Užitečné tipy z FITu
 
-Zkopíruj a spusť tento test:
-
-```bash
-echo '#include <stdio.h>
-int main(void){ printf("ok\n"); return 0; }' > t.c && \
-gcc -Wall -o t t.c && ./t && \
-echo "✓ Kompilátor funguje" && \
-gdb --version | head -1 && \
-valgrind --version
-```
-
-Pokud vidíš `ok` a `✓ Kompilátor funguje`, prostředí je připravené k programování.
+* **Nastavení CLionu s WSL**: V menu *Settings $\to$ Build, Execution, Deployment $\to$ Toolchains* klikněte na `+` a zvolte **WSL**. CLion automaticky najde `gcc`, `gdb` i `clang-format` uvnitř vašeho Ubuntu (studenti mají univerzitní licenci JetBrains zdarma).
+* **Kritické pravidlo pro Dual-boot**: Pokud preferujete nativní Linux vedle Windows, vždy instalujte **nejprve Windows a až poté Linux**! Zavaděč Linuxu (GRUB) automaticky detekuje Windows a vytvoří spouštěcí nabídku. V opačném pořadí Windows instalátor zavaděč Linuxu přepíše.
+* **Zářijová hromadná instalace na FITu**: Koncem září pořádá studentský klub na FIT ČVUT instalační den, kde vám starší studenti rádi pomohou s nastavením WSL, čistého Linuxu i ovladačů.
 
 ---
 
-## 🛠️ Alternativy & Užitečné tipy z FITu
+### Doplňující nastavení verze WSL
 
-### 1. Zářijová hromadná instalace Linuxu na FITu
-Koncem září se na FIT ČVUT pravidelně koná **hromadná instalace Linuxu**, kde vás zkušení starší studenti rádi provedou instalací WSL, čistého Linuxu i řešením problémů s hardwarem. Sledujte oznámení na FIT Discordu!
+Pokud WSL nefunguje podle očekávání, ověřte verzi příkazem:
 
-### 2. Dual-boot (Windows + Linux)
-Pokud dáváte přednost nativnímu Linuxu (např. Ubuntu nebo Linux Mint) vedle Windows:
-> ⚠️ **Kritické pravidlo pro Dual-boot**:  
-> Vždy nejprve nainstalujte **Windows a až poté Linux**! Instalátor Linuxu (GRUB) automaticky rozpozná Windows a vytvoří výběrové menu. Pokud byste instalovali v opačném pořadí, instalátor Windows přepíše zavaděč Linuxu.
-
-### 3. Nastavení CLionu s WSL
-Pokud jako vývojové prostředí zvolíte JetBrains CLion (studenti mají licenci zdarma):
-1. V menu otevřete **Settings** $\to$ **Build, Execution, Deployment** $\to$ **Toolchains**.
-2. Klikněte na symbol **`+`** (vlevo nahoře) a vyberte **WSL**.
-3. CLion automaticky detekuje kompilátory `gcc`, `gdb` a `clang-format` z vaší WSL distribuce.
-
----
-
-### Doplňující nastavení WSL
-
-Tohle potřebuješ jen pokud WSL nefunguje jak má.
-
-**Aktualizace WSL a ověření verze**
-
-```bash
+```powershell
 wsl --update && wsl --list --verbose
 ```
 
-Výstup by měl ukazovat `VERSION 2`. Pokud vidíš `VERSION 1`, spusť:
+Pokud vidíte `VERSION 1`, přepněte na moderní WSL 2:
 
 ```powershell
 wsl --set-default-version 2

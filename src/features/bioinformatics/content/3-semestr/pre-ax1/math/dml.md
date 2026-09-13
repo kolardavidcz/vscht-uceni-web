@@ -1,7 +1,7 @@
 # ☀️ Letní průvodce grafovou matematikou pro bioinformatiky
+ 
+> Tento materiál shrnuje klíčové koncepty z diskrétní matematiky a grafových důkazů nezbytné pro úspěšné zvládnutí předmětu **BI-AX1**.
 
-> Tohle je **přípravný letní materiál** — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce.  
-> Studenti FIT prošli celým předmětem *BI-DML* (Diskrétní matematika) a mají předměty, které používají a vyžadují důkazové myšlení. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího, co potřebuješ pro AX1. Zní to dobře? Začínáme.
 ---
 
 ### 📺 Úvodní výukové video
@@ -53,9 +53,9 @@ Představte si své první cvičení z diskrétní matematiky na univerzitě. Vs
   <span class="badge-print-hidden">🔒 skryto v tisku</span>
 </summary>
 
-#### 🤯 Proč se v této chvíli cítíte ztraceni?
+#### Proč se v této chvíli cítíte ztraceni?
 V téhle jediné vteřině zažije naprosté ticho a prázdno v hlavě 95 % studentů v aule:
-> *„Co po mně proboha chce?! Vždyť to vidím na vlastní oči — je to kulaté, je to kružnice, co na tom mám dokazovat?! Mám vytáhnout kružítko a pravítko a změřit to?“*
+> *„Co po mně proboha chce?! Vždyť to vidím na vlastní oči - je to kulaté, je to kružnice, co na tom mám dokazovat?! Mám vytáhnout kružítko a pravítko a změřit to?“*
 
 **Proč tento pocit bezmoci vzniká?**  
 Náš lidský mozek je ze střední školy i běžného života zvyklý spoléhat se na **vizuální intuici**. Jenže exaktní matematika a teoretická informatika nejsou o tom, co *vypadá kulatě*. Zrak může snadno klamat (může to být elipsa s poloosami $a = 60.0$ a $b = 59.9$, nebo pravidelný 128-úhelník).
@@ -118,7 +118,7 @@ $$\models \neg(A \land \neg A)$$
 
 Aplikujeme-li tuto logiku na vlastnost dělitelnosti celých čísel dvěma:
 $$\forall n \in \mathbb{N}: \text{sudé}(n) \lor \text{liché}(n)$$
-Každé číslo $n$ musí bezpodmínečně spadnout do jedné ze dvou kategorií — žádné číslo nemůže být „napůl sudé“, ani nemůže existovat číslo, které není ani jedno.
+Každé číslo $n$ musí bezpodmínečně spadnout do jedné ze dvou kategorií - žádné číslo nemůže být „napůl sudé“, ani nemůže existovat číslo, které není ani jedno.
 
 ##### 2. Důkaz a algoritmus rozborem případů (*Proof by Cases / Exhaustion*)
 Ve formální logice máme dedukční pravidlo:
@@ -145,7 +145,7 @@ Díky tomu můžeme algoritmus rozdělit na dvě dokonale vyčerpávající vět
 Proč si můžeme být 100% jistí, že se algoritmus nezacyklí v nekonečné smyčce?
 - V sudé větvi: pro $n \ge 2$ platí $n/2 < n$.
 - V liché větvi: pro $n \ge 1$ platí $n - 1 < n$.
-V každém rekurzivním kroku hodnota exponentu **ostře klesá** ($n' < n$). Množina přirozených čísel $\mathbb{N}$ je **dobře uspořádaná** (*well-founded set*) — neexistuje v ní žádná nekonečná klesající posloupnost. Algoritmus tedy v konečném počtu kroků nevyhnutelně narazí na bázi $n = 0$ a korektně skončí.
+V každém rekurzivním kroku hodnota exponentu **ostře klesá** ($n' < n$). Množina přirozených čísel $\mathbb{N}$ je **dobře uspořádaná** (*well-founded set*) - neexistuje v ní žádná nekonečná klesající posloupnost. Algoritmus tedy v konečném počtu kroků nevyhnutelně narazí na bázi $n = 0$ a korektně skončí.
 
 ---
 

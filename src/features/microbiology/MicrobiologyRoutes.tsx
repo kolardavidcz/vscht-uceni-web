@@ -5,7 +5,7 @@ import { StudyPage } from "./pages/StudyPage";
 import { AdminPage } from "./pages/AdminPage";
 
 /**
- * Microbiology feature shell — lazy-loaded so wiki/python stay out of the
+ * Microbiology feature shell - lazy-loaded so wiki/python stay out of the
  * critical path for the common entry `/mikrobiologie`.
  */
 export default function MicrobiologyRoutes() {

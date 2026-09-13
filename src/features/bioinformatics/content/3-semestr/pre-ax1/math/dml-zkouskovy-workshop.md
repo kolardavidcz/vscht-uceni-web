@@ -118,8 +118,8 @@ DŮKAZ SPOREM
    - "Z platnosti ¬B plyne vlastnost X: [Vypsat X]."
    - "Z vlastnosti X a předpokladu A odvodíme vlastnost Y: [Vypsat Y]."
 
-3. DOSAŽENÍ SPORU (⚡ / 💥 / ⊥):
-   - "Vlastnost Y je však v přímém SPORU (⚡) s [Definicí Z / Předpokladem A / Dokázaným faktem]!"
+3. DOSAŽENÍ SPORU (Rozporu / ⊥):
+   - "Vlastnost Y je však v přímém SPORU (⊥) s [Definicí Z / Předpokladem A / Dokázaným faktem]!"
 
 4. ZÁVĚR:
    - "Náš předpoklad pro spor (A ∧ ¬B) byl tedy chybný."
@@ -236,7 +236,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 4. **Krok 3 (Rekonstrukce kostry $T_2'$):**
    Vytvořme novou kostru $T_2' = (T_2 \cup \{e\}) \setminus \{e'\}$.
    Váha nové kostry je $w(T_2') = w(T_2) + w(e) - w(e') < w(T_2)$.
-5. **💥 SPOR ($\bot$):**
+5. **SPOR ($\bot$):**
    Našli jsme kostru $T_2'$ s váhou přísně menší než minimální kostra $T_2$! To je SPOR s minimalitou $T_2$.
 6. Minimální kostra s unikátními vahami je tedy jedinečná.
 
@@ -289,7 +289,7 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
    - Protože hrana $\{v_1, v_2\} \in E$ spojuje $V_1$ s $V_2$, musí $v_2 \in V_2$.
    - Obecně $v_i \in V_1 \iff i \text{ je liché}$, a $v_i \in V_2 \iff i \text{ je sudé}$.
 3. **Krok 2 (Poslední vrchol):** Jelikož $k$ je liché číslo, platí $v_k \in V_1$.
-4. **💥 SPOR ($\bot$):** Cyklus uzavírá hrana $\{v_k, v_1\}$. Oba její koncové vrcholy $v_k \in V_1$ i $v_1 \in V_1$ leží ve stejné množině $V_1$! To je v přímém SPORU s definicí bipartitního grafu!
+4. **SPOR ($\bot$):** Cyklus uzavírá hrana $\{v_k, v_1\}$. Oba její koncové vrcholy $v_k \in V_1$ i $v_1 \in V_1$ leží ve stejné množině $V_1$! To je v přímém SPORU s definicí bipartitního grafu!
 5. Bipartitní graf neobsahuje liché cykly.
 
 #### 📊 Rozbor Hodnocení (Rubrika):
@@ -320,8 +320,13 @@ DŮKAZ SPRÁVNOSTI ALGORITMU POMOCÍ INVARIANTU CYKLU
 
 ---
 
-> 🎯 **Gratulujeme! Dokončili jste kompletní letní 0-to-Hero přípravu pre-AX1!**
-> Nyní máte veškerou matematickou jistotu i praktickou výbavu pro zvládnutí předmětu AX1 na FIT ČVUT! 🚀
-
-
-
+<div class="my-6 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+  <div>
+    <div class="font-bold text-stone-900 dark:text-stone-100 text-sm">Přehled C++ a kódovací tahák pro AX1</div>
+    <div class="text-xs text-stone-600 dark:text-stone-400">Plynulý přechod z PA2 (C++) do grafových struktur AX1 a typické implementační idiomy.</div>
+  </div>
+  <a href="/obor-bioinformatika/3-semestr/pre-ax1/coding/pa2-ax1-cheatsheet" class="wiki-btn shrink-0">
+    <span>Kódovací tahák AX1</span>
+    <span>→</span>
+  </a>
+</div>

@@ -1,6 +1,6 @@
 # 2 · Kalendář co musím umět
 
-### Týden 1 — Algoritmy a programy, základní podpora vývoje
+### Týden 1 - Algoritmy a programy, základní podpora vývoje
 
 **Co umět / na co si dát bacha**
 
@@ -26,42 +26,42 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 **Tipy**
 
 * Když kompilátor řve nesmysly: zkus nejdřív *opravdu* přečíst první error shora.
-* Na Windows bez WSL se dřív nebo později u testování / valgrindu spálíš — setup udělej do 4 týdnů.
+* Na Windows bez WSL se dřív nebo později u testování / valgrindu spálíš - setup udělej do 4 týdnů.
 
 **Trainer** (když ti nejde ani „hello“ / kompilace)
 
-* Lekce [Kompilace, základní algoritmy](https://trainer.ksi.fit.cvut.cz/lessons/435) — série *Nefungující kompilace*, která vysvětluje krok za krokem co musí kód mít
+* Lekce [Kompilace, základní algoritmy](https://trainer.ksi.fit.cvut.cz/lessons/435) - série *Nefungující kompilace*, která vysvětluje krok za krokem co musí kód mít
 
 ---
 
-### Týden 2 — Proměnné, vstup a výstup v jazyce C
+### Týden 2 - Proměnné, vstup a výstup v jazyce C
 
 **Co umět / na co si dát bacha**
 
-* `printf()`, `scanf()` — formátovací řetězce (co a proč dáváme do `printf()` a `scanf()`), `&` (proč to u `scanf()`) a  `scanf` čísel.
-* **Debugging** — možnost se v každém kroku programu podívat, jaká hodnota je v proměnných a kudy program vlastně jde.
-* **ZEPTEJTE SE CVIČÍCÍHO / staršího studenta** — reálně jsem nenašel video, který by debugging v C dobře vysvětlovalo.
+* `printf()`, `scanf()` - formátovací řetězce (co a proč dáváme do `printf()` a `scanf()`), `&` (proč to u `scanf()`) a  `scanf` čísel.
+* **Debugging** - možnost se v každém kroku programu podívat, jaká hodnota je v proměnných a kudy program vlastně jde.
+* **ZEPTEJTE SE CVIČÍCÍHO / staršího studenta** - reálně jsem nenašel video, který by debugging v C dobře vysvětlovalo.
 
 **Tipy**
 
-* `scanf` vrací počet úspěšně načtených položek — kontroluj to (ne jen „načtu a doufám“).
-* Mezera ve formátovacím řetězci ve `scanf` **přeskočí bílé znaky** — `scanf(" ")` umí ušetřit šílenosti.
+* `scanf` vrací počet úspěšně načtených položek - kontroluj to (ne jen „načtu a doufám“).
+* Mezera ve formátovacím řetězci ve `scanf` **přeskočí bílé znaky** - `scanf(" ")` umí ušetřit šílenosti.
 * Formát u `scanf` ideálně **končí konverzí**.
 * Když se `printf` v CLionu „neukáže hned“: [Jak to spravit → fflush](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
 * Lokální testy bez copy-paste do konzole: [Testovací skript v Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#4-lokalni-testovani-ze-souboru-testshellsh).
-* Pokorčílé (zjistíte později): `scanf("%s")` **nemůže být bezpečné** (buffer) — na Progtestu se to mstí. Detaily: [zkouškové rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska).
+* Pokorčílé (zjistíte později): `scanf("%s")` **nemůže být bezpečné** (buffer) - na Progtestu se to mstí. Detaily: [zkouškové rady](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska).
 
 **Trainer**
 
-* [Celočíselné proměnné, vstup a výstup](https://trainer.ksi.fit.cvut.cz/lessons/439) — hlavně *Návratový kód funkce scanf*, *Kalkulačka*
+* [Celočíselné proměnné, vstup a výstup](https://trainer.ksi.fit.cvut.cz/lessons/439) - hlavně *Návratový kód funkce scanf*, *Kalkulačka*
 
 ---
 
-### Týden 3 — Pohyblivá řádová čárka. Výrazy v jazyce C
+### Týden 3 - Pohyblivá řádová čárka. Výrazy v jazyce C
 
 **Co umět / na co si dát bacha**
 
-* `float` / `double` **nejsou** „desetinná čísla ze střední“ — mají omezenou přesnost a **divné zaokrouhlování**.
+* `float` / `double` **nejsou** „desetinná čísla ze střední“ - mají omezenou přesnost a **divné zaokrouhlování**.
 * Porovnávání floatů přes `==` je past.
 * Matematika začíná být těžší: hodí se **googlit vzorečky, které neznáte ze střední** (NSD, NSN, …).
 
@@ -76,42 +76,42 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 
 **Trainer**
 
-* Pořád dává smysl vracet se k [vstupu/výstupu](https://trainer.ksi.fit.cvut.cz/lessons/439) a začít [řídící konstrukce](https://trainer.ksi.fit.cvut.cz/lessons/441) — float sám o sobě v Traineru není „jeden týden“, spíš se míchá do úloh.
+* Pořád dává smysl vracet se k [vstupu/výstupu](https://trainer.ksi.fit.cvut.cz/lessons/439) a začít [řídící konstrukce](https://trainer.ksi.fit.cvut.cz/lessons/441) - float sám o sobě v Traineru není „jeden týden“, spíš se míchá do úloh.
 
 ---
 
-### Týden 4 — Řídící konstrukce v jazyce C
+### Týden 4 - Řídící konstrukce v jazyce C
 
 **Co umět / na co si dát bacha**
 
-* `if` / `else`, `switch`, `while`, `for`, `do while` — a hlavně **kdy který**.
-* Prozatím lze všechny algoritmy „fintou“ dostat do **dvou cyklů** (for/while) — později sami poznáte, kdy už to není pravda.
-* Pokud se v zadání objeví slovo **„maska“**, bude to na h*vno úloha (aka. pondělí `1000000`, úterý `0100000`, víkend `0000011`, …).
-* teďka je **poslední šance zprovonznit si linux porstředí**.
+* `if` / `else`, `switch`, `while`, `for`, `do while` - a hlavně **kdy který**.
+* Prozatím lze všechny algoritmy „fintou“ dostat do **dvou cyklů** (for/while) - později sami poznáte, kdy už to není pravda.
+* Pokud se v zadání objeví slovo **„maska“**, jedná se o bitové operace a maskování (např. pondělí `1000000`, úterý `0100000`, víkend `0000011`, …).
+* Nyní je **poslední šance zprovoznit si lokální Linux prostředí (WSL2 / CLion)**.
 
 **Tipy**
 
-* Papír + flowchart pořád platí — u vnořených podmínek se bez toho zblázníš.
-* Přehlednost kódu je důležitější než počet proměnných nebo podmínek — viz [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
+* Papír + flowchart pořád platí - u vnořených podmínek se bez toho zblázníš.
+* Přehlednost kódu je důležitější než počet proměnných nebo podmínek - viz [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
 
 **Trainer**
 
 * [Řídící konstrukce I](https://trainer.ksi.fit.cvut.cz/lessons/441)
-* [Řídící konstrukce II — cykly](https://trainer.ksi.fit.cvut.cz/lessons/461)
+* [Řídící konstrukce II - cykly](https://trainer.ksi.fit.cvut.cz/lessons/461)
 
 ---
 
-### Týden 5 — Funkce v jazyce C
+### Týden 5 - Funkce v jazyce C
 
 **Co umět / na co si dát bacha**
 
 * Deklarace vs. definice; proč musí být **hlavička** vidět před voláním.
-* Předávání **hodnotou** vs. později ukazatelem (jablka — viz týden 7).
+* Předávání **hodnotou** vs. později ukazatelem (jablka - viz týden 7).
 * Testovatelný kód: malé funkce, jasný vstup/výstup.
 **Tipy**
 
 * Funkce, která „dělá všechno + tiskne + čte“ se na Progtestu a v debugování mstí.
-* U zkoušky: **jeden obří `main`** bez funkcí u zkouškové úlohy úplně neprojde. Funkce se lépe defungují debug. → [Struktura](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) · [zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
+* U zkoušky: **jeden obří `main`** bez funkcí u zkouškové úlohy neprojde. Menší funkce se lépe navrhují i ladí (viz [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu)).
 * Lokální automatické testy: [Testovací skript v Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#4-lokalni-testovani-ze-souboru-testshellsh).
 
 **Trainer**
@@ -121,23 +121,23 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 
 ---
 
-### Týden 6 — Pole a řetězce v jazyce C
+### Týden 6 - Pole a řetězce v jazyce C
 
 **Co umět / na co si dát bacha**
 
-* Úlohy začínají být **jednodušší na matematiku** a spíš testují jestli umíte **náročnější programovací látk**u.
-* Pole = souvislé schránky; při předání do funkce jde v podstatě o **adresu prvního prvku** + délku (viz analogie v týdnu 7).
-* Řetězce v C = pole `char` s `'\0'` na konci.
-* "Off-by-one" je název chyby kdy zkočníte o 1 prvek poli jinde (řed koncem/za koncem) -> (`i <= n` místo `i < n`, nebo naopak).
+* Úlohy začínají klást menší důraz na čistou matematiku a více testují práci s pamětí a indexováním.
+* Pole = souvislé schránky v paměti; při předání do funkce jde v podstatě o **adresu prvního prvku** + délku.
+* Řetězce v C = pole `char` zakončené nulovým bajtem `'\0'`.
+* **Off-by-one error**: chyba o jeden prvek na začátku či konci pole (např. `i <= n` místo `i < n`).
 
 **Tipy**
 
 * V debuggeru zobrazit pole: [Jak to spravit → pole](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
-* Indexování 2D: buď jedno dlouhé pole s mnoho náročnýma podmínkama a indexováním, nebo `pole[řádky][sloupce]` — viz týden 7.
-* **Nepouštěj `strlen` v každém kroku cyklu** — procházej do `'\0'`.
-* Prázdný řetězec: stačí `s[0] == '\0'`, ne nutně `strlen`.
-* Na `'\0'` musíš mít **místo** v poli — jinak nemůžeš (basicly) používat string knihovny.
-* Nesnaž se vždy nacpat celý vstup do jednoho stringu — často stačí `scanf` po částech. → [zkouška · vstup a řetězce](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
+* Indexování 2D: buď dynamická alokace 2D pole, nebo `pole[řádky][sloupce]`.
+* **Nepouštějte `strlen` v každém kroku cyklu** - procházejte pole do `'\0'`.
+* Prázdný řetězec: stačí zkontrolovat `s[0] == '\0'`, není nutné volat `strlen`.
+* Na ukončovací `'\0'` musíte mít **dostatečnou alokovanou velikost** v poli.
+* Nesnaž se vždy nacpat celý vstup do jednoho stringu - často stačí `scanf` po částech. → [zkouška · vstup a řetězce](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 
 **Trainer**
 
@@ -146,12 +146,12 @@ g++ ./main.c -o main -std=c++20 -pedantic -Wall -Wextra
 
 ---
 
-### Týden 7 — Struktury a ukazatele v jazyce C
+### Týden 7 - Struktury a ukazatele v jazyce C
 
 **Co umět / na co si dát bacha**
 
 * **Pochopit ukazatele.** Bez toho zbytek semestru bolí.
-* Struktury (`struct`) — balíček souvisejících dat.
+* Struktury (`struct`) - balíček souvisejících dat.
 
 #### Moje analogie s jablky a šuplíky
 
@@ -180,8 +180,8 @@ void mojeFunkce(int jablekVeFunkci) {
 
 V C/C++ má `*` hvězdička **2 významy**:
 
-* `int *variable` — při deklaraci (po datovém typu): není to pouhý `int`, ale typ obsahující **adresu na schovku**
-* `*variable` — před proměnnou: **jdi na místo schovky** a pracuj s hodnotou uvnitř
+* `int *variable` - při deklaraci (po datovém typu): není to pouhý `int`, ale typ obsahující **adresu na schovku**
+* `*variable` - před proměnnou: **jdi na místo schovky** a pracuj s hodnotou uvnitř
 
 V C má `&` tenhle význam: každá proměnná je ve schovce a má adresu. Adresu získáš pomocí `&variable`.
 
@@ -192,7 +192,7 @@ int main() {
     int pocetJablek = 11;
     int *ukazatelNaJablka = &pocetJablek; // adresa (ampersandem &) jablek
     mojeFunkce2(ukazatelNaJablka); // předáváme adresu schránky
-    return pocetJablek; // nyní 9 — původní proměnná byla změněna
+    return pocetJablek; // nyní 9 - původní proměnná byla změněna
 }
 
 void mojeFunkce2(int *jablekVeFunkci) {
@@ -227,7 +227,7 @@ Chceš uložit měsíční (30 dní) akciové ceny **více druhů ovoce**.
 **Primitivní způsob (1D pole):** jedno dlouhé pole + dohoda na indexování (každých N indexů jiný typ).  
 Výhoda: nemusíš složitou syntaxi ukazatelů. Nevýhoda: indexování je otravné.
 
-**Komplexnější způsob — vícerozměrné pole:**
+**Komplexnější způsob - vícerozměrné pole:**
 
 ```c
 void mojeFunkce4(
@@ -255,29 +255,29 @@ void mojeFunkce4(
 }
 ```
 
-Později umíš pole, u kterého neznáš velikost dopředu — viz týden 8. (ukázka konceptu: [pastebin](https://pastebin.com/AgpG70bQ))
+Později umíš pole, u kterého neznáš velikost dopředu - viz týden 8. (ukázka konceptu: [pastebin](https://pastebin.com/AgpG70bQ))
 
 **Tipy (zkouška / těžké HW)**
 
-* Teorie pointerů a struktur **není navíc** — bez ní praktická část bolí. → [„Když nevím…“](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
+* Teorie pointerů a struktur **není navíc** - bez ní praktická část bolí. → [„Když nevím…“](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 * Dynamické pole dělej jako **strukturu + helper funkce**, ne tři volné argumenty + `int **` peklo.
 * **Nevracej pointer na lokální proměnnou** z funkce (zásobník vs. halda).
 
 **Trainer**
 
-* Pořád [Pole + ukazatele](https://trainer.ksi.fit.cvut.cz/lessons/516) — *Ukazatele I–III*
+* Pořád [Pole + ukazatele](https://trainer.ksi.fit.cvut.cz/lessons/516) - *Ukazatele I–III*
 * Funkce se structy: [Funkce a struktury](https://trainer.ksi.fit.cvut.cz/lessons/514)
 
 ---
 
-### Týden 8 — Ukazatele a dynamická alokace paměti v jazyce C
+### Týden 8 - Ukazatele a dynamická alokace paměti v jazyce C
 
 **Co umět / na co si dát bacha**
 
-* `malloc` / `calloc` / `realloc` / `free` — kdo alokuje, uvolňuje.
+* `malloc` / `calloc` / `realloc` / `free` - kdo alokuje, uvolňuje.
 * Memory leak, use-after-free, zápis mimo alokované pole = Progtest / valgrind bolest.
-* **Valgrind** — kontroluje paměť, hlásí úniky a chybné čtení/zápisy. (CLion ho má cool integrovaný.)
-* **Sanitizer** — `-fsanitize=undefined,address` (+ `-g`): UB i paměť:
+* **Valgrind** - kontroluje paměť, hlásí úniky a chybné čtení/zápisy. (CLion ho má cool integrovaný.)
+* **Sanitizer** - `-fsanitize=undefined,address` (+ `-g`): UB i paměť:
 
 ```bash
 g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
@@ -285,45 +285,45 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 **Tipy**
 
-* Sanitizer a Valgrind **vzájemně vylučují** — vyber jedno. → [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit)
-* Realokuj **geometrickou řadou** (×2 apod.) — jinak často timeout na časových testech.
+* Sanitizer a Valgrind **vzájemně vylučují** - vyber jedno. → [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit)
+* Realokuj **geometrickou řadou** (×2 apod.) - jinak často timeout na časových testech.
 * Nealokuj „dopředu na jistotu“ každé prázdné políčko; v C se alokuje, **až když potřebuješ** (klidně začni `NULL` + `realloc`).
-* Neinicializovaná paměť / proměnné — sanitizer / Valgrind s `--track-origins=yes`.
+* Neinicializovaná paměť / proměnné - sanitizer / Valgrind s `--track-origins=yes`.
 * `NULL` vs `nullptr`: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
     * `calloc` v paměti vynuluje bajty, což pro ukazatele **funguje jako platný `nullptr`** (tam problém není).
     * **Pozor ale při kompilaci přes `g++`:**
-      1. `calloc`/`malloc` vrací `void*` — v C++ **musíš explicitně přetypovat** `(int*)calloc(...)`, jinak kód neprojde kompilací.
+      1. `calloc`/`malloc` vrací `void*` - v C++ **musíš explicitně přetypovat** `(int*)calloc(...)`, jinak kód neprojde kompilací.
       2. Na přednáškách se sice učí, že `0` = `NULL`, ale přímo v C++ kódu piš `nullptr` (psaní `= 0` u pointeru vyvolá varování `-pedantic`, které ti strne body).
 
 **Trainer**
 
-* [Dynamická alokace — Dominové kostky](https://trainer.ksi.fit.cvut.cz/lessons/519)
+* [Dynamická alokace - Dominové kostky](https://trainer.ksi.fit.cvut.cz/lessons/519)
 
 ---
 
-### Týden 9 — Složitost, vyhledávání, kvadratické řazení
+### Týden 9 - Složitost, vyhledávání, kvadratické řazení
 
 **Co umět / na co si dát bacha**
 
-* Co znamená „kolikrát se něco provede“ v závislosti na \(n\) — intuice O(n), O(n²).
+* Co znamená „kolikrát se něco provede“ v závislosti na \(n\) - intuice O(n), O(n²).
 * Lineární vs. binární vyhledávání (kdy smíš binárně).
-* Kvadratické sorty (bubble / insertion / selection — podle přednášky): umět **napsat a vysvětlit**, ne jen „znát název“.
+* Kvadratické sorty (bubble / insertion / selection - podle přednášky): umět **napsat a vysvětlit**, ne jen „znát název“.
 
 **Tipy**
 
-* Když Progtest timeoutí: často O(n²) tam, kde stačí líp, nebo zbytečná práce ve smyčce — ne hned „optimizuj mikro“.
+* Když Progtest timeoutí: často O(n²) tam, kde stačí líp, nebo zbytečná práce ve smyčce - ne hned „optimizuj mikro“.
 * Spoustu úloh **zrychlí seřazení dat**; umět udržovat seřazené pole i bez magie.
-* Ve stdlib existují **`qsort` a `bsearch`** — nemusíš vždy vynalézat kolo. → [zkouška · funkce](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
+* Ve stdlib existují **`qsort` a `bsearch`** - nemusíš vždy vynalézat kolo. → [zkouška · funkce](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)
 * `-O2` **nezachrání** špatnou asymptotiku (může ale odhalit UB).
 * Playlist intuice: [Epické algoritmy](https://youtube.com/playlist?list=PLnZHgAO8ocBv6XRqZkqQjrsIJijn82UUC) (sorting část).
 
 **Trainer**
 
-* [Složitost — množiny](https://trainer.ksi.fit.cvut.cz/lessons/523)
+* [Složitost - množiny](https://trainer.ksi.fit.cvut.cz/lessons/523)
 
 ---
 
-### Týden 10 — Rekurzivní algoritmy, MergeSort, úvod do QuickSortu
+### Týden 10 - Rekurzivní algoritmy, MergeSort, úvod do QuickSortu
 
 **Co umět / na co si dát bacha**
 
@@ -331,29 +331,29 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
     * **kontrola podmínky (base case)**
     * **výpočty**
     * **posunutí do nižšího stupně**  
-* MergeSort / náznak QuickSortu — idea „rozděl a spoj“, ne memorování 80 řádků bez pochopení.
+* MergeSort / náznak QuickSortu - idea „rozděl a spoj“, ne memorování 80 řádků bez pochopení.
 
 **Tipy**
 * U zkoušky: úlohy na **rekurzi a seznamy** bývají často jistější volba než dyn. alokace + řetězce.
 
 **Trainer**
 
-* [Rekurze — výklad + úlohy](https://trainer.ksi.fit.cvut.cz/lessons/525) - **tohle si musí každý povinně vyzkoušet**
+* [Rekurze - výklad + úlohy](https://trainer.ksi.fit.cvut.cz/lessons/525) - **tohle si musí každý povinně vyzkoušet**
 
 ---
 
-### Týden 11 — Spojové a stromové struktury v jazyce C
+### Týden 11 - Spojové a stromové struktury v jazyce C
 
 **Co umět / na co si dát bacha**
 
 * Uzel/Node = data + ukazatel na další uzly/nodes.
 * Průchod seznamem / stromem bez ztráty hlavy seznamu.
-* **Stromy 101** — kořen, list, potomek; rekurze sem sedí přirozeně (viz týden 11).
+* **Stromy 101** - kořen, list, potomek; rekurze sem sedí přirozeně (viz týden 11).
 
 **Tipy**
 
 * Kresli si uzly na papír. Fakt.
-* Memory: každý `malloc` uzlu má svůj `free` — [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
+* Memory: každý `malloc` uzlu má svůj `free` - [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
 * U seznamů/stromů se hodí **dvojhvězdičkový pointer** na manipulaci (viz zkouškové obraty).
 
 **Trainer**
@@ -362,12 +362,12 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 ---
 
-### Týden 12 — Práce se soubory a modulární programování v jazyce C
+### Týden 12 - Práce se soubory a modulární programování v jazyce C
 
 **Co umět / na co si dát bacha**
 
 * `FILE *`, `fopen` / `fclose`, čtení/zápis; kontrola, že se soubor otevřel.
-* * Modulární kód = méně „god file“ o 800 řádcích — souvisí se [strukturou kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
+* * Modulární kód = méně „god file“ o 800 řádcích - souvisí se [strukturou kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu).
 
 **Trainer**
 
@@ -375,37 +375,34 @@ g++ -Wall -Wextra -pedantic -g -fsanitize=undefined,address -o main main.c
 
 ---
 
-### Týden 13 — Abstraktní datové typy (boolean, complex, fronta, zásobník)
+### Týden 13 - Abstraktní datové typy (boolean, complex, fronta, zásobník)
 
 **Co umět / na co si dát bacha**
 
 * ADT = „co umí“ oddělené od „jak je to uvnitř“.
-* Fronta / zásobník — operace a typické použití.
+* Fronta / zásobník - operace a typické použití.
 * Celkový přehled semestru před zápočtem / zkouškou.
 
 **Tipy**
 
-* **Celé rady ke zkoušce (viditelně, ne zkrácené):** [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska)  
-  — obraty, „když nevím…“, knihovní funkce, časté chyby, postup u úlohy, taktika výběru.
-* Příprava: aspoň 1 HW / týden (i po termínu), Trainer, staré zkoušky ~2 h na úlohu.
-* Nesnaž se den před zkouškou učit C od nuly.
-* Pročti **obě** zadání, pak vyber; rekurze/seznamy často jistější než práce s dynamickou alokací.
+* Příprava na zkoušku: vyřešte alespoň 1 domácí úlohu týdně samostatně, procvičujte v Traineru a simulujte staré zkouškové písemky (~2 h na úlohu).
+* U zkoušky si nejprve důkladně pročtěte **obě** varianty zadání - rekurze a spojové seznamy bývají pro bioinformatiky často přímočařejší než složitá dynamická alokace 2D polí.
 
 **Trainer**
 
 * [Příprava na zkoušku I](https://trainer.ksi.fit.cvut.cz/lessons/546)
 * [Příprava na zkoušku II](https://trainer.ksi.fit.cvut.cz/lessons/549) / [navazující lekce](https://trainer.ksi.fit.cvut.cz/lessons/550)
+* Celý přehled lekcí: [Trainer KSI (kurz BI-PA1)](https://trainer.ksi.fit.cvut.cz/courses/81)
 
 ---
 
-## Jak to spravit (mimo týden)
-
-| Situace | Kam |
-|--------|-----|
-| Debug, flagy, paměť, pasty | [**Jak to spravit**](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit) |
-| Nestíháš se v kódu vyznat / obří main | [Struktura kódu](/obor-bioinformatika/1-semestr/bi-pa1/struktura-kodu) |
-| Manuální testování přes copy-paste | [Testovací skript v Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#4-lokalni-testovani-ze-souboru-testshellsh) |
-| Windows bez Linux nástrojů | [WSL](/obor-bioinformatika/1-semestr/bi-pa1/wsl-a-setup) |
-| Odevzdání / **zkouška (plné rady)** | [Progtest a zkouška](/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska) |
-
-Celý Trainer kurz: [courses/81](https://trainer.ksi.fit.cvut.cz/courses/81).
+<div class="my-6 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+  <div>
+    <div class="font-bold text-stone-900 dark:text-stone-100 text-sm">BI-PA1: Progtest a zkoušková strategie</div>
+    <div class="text-xs text-stone-600 dark:text-stone-400">Kompletní rady ke zkoušce, typické zkouškové obraty, knihovní funkce a strategie výběru úloh.</div>
+  </div>
+  <a href="/obor-bioinformatika/1-semestr/bi-pa1/progtest-a-zkouska" class="wiki-btn shrink-0">
+    <span>5 · Progtest a zkouška</span>
+    <span>→</span>
+  </a>
+</div>

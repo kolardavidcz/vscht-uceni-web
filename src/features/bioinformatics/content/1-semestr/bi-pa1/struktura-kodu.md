@@ -2,7 +2,7 @@
 
 ## Obecně
 
-* Všechny algoritmy jdou (zatím) často vměstnat do **2 (for/while) cyklů** — později zjistíte, kdy už to není pravda.
+* Všechny algoritmy jdou (zatím) často vměstnat do **2 (for/while) cyklů** - později zjistíte, kdy už to není pravda.
 * **Přehlednost kódu je důležitější** než počet proměnných nebo podmínek.
 
 ## Krátký checklist pro PA1
@@ -20,12 +20,12 @@
 
 ---
 
-* Neoptimalizuj předčasně — nejdřív správně napiš úlohu, pak (když máš čas) se můžeš pustit do času - měř (`perf`) a řeš složitost.
+* Neoptimalizuj předčasně - nejdřív správně napiš úlohu, pak (když máš čas) se můžeš pustit do času - měř (`perf`) a řeš složitost.
 
 <iframe src="https://www.youtube.com/embed/tKbV6BpH-C8?rel=0&wmode=transparent" class="w-full aspect-video rounded-xl my-4 border border-slate-200/85 shadow-sm" allowfullscreen></iframe>
 
-* **Jeden obří `main`** bez funkcí — v praxi u zkoušky často končí neúspěchem. Funkce = kámoš na debug (testuješ po kusech).  
-* **Žádné struktury** — data, která patří k sobě, dej do `struct` (např. dynamická paměť).
+* **Jeden obří `main`** bez funkcí - v praxi u zkoušky často končí neúspěchem. Funkce = kámoš na debug (testuješ po kusech).  
+* **Žádné struktury** - data, která patří k sobě, dej do `struct` (např. dynamická paměť).
 
 <div class="my-6 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 bg-stone-50 dark:bg-stone-900/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 <div>

@@ -140,9 +140,9 @@ export function addModule7Slides(pres) {
       { y }
     );
     y = renderDocList(slide, [
-      "**Paměť:** $\\Theta(n^2)$ — bez ohledu na počet hran $m$ (plýtvá pamětí pro řídké grafy).",
-      "**Test hrany {u, v}:** $O(1)$ — okamžitý přístup do pole.",
-      "**Průchod sousedů vrcholu u:** $\\Theta(n)$ — nutno projít celý řádek matice."
+      "**Paměť:** $\\Theta(n^2)$ - bez ohledu na počet hran $m$ (plýtvá pamětí pro řídké grafy).",
+      "**Test hrany {u, v}:** $O(1)$ - okamžitý přístup do pole.",
+      "**Průchod sousedů vrcholu u:** $\\Theta(n)$ - nutno projít celý řádek matice."
     ], { y });
 
     y = renderDocHeading(pres, slide, "1.2 Seznam Sousedů (Adjacency List)", { level: 3, y });
@@ -151,9 +151,9 @@ export function addModule7Slides(pres) {
       { y }
     );
     y = renderDocList(slide, [
-      "**Paměť:** $\\Theta(n + m)$ — **optimální pro řídké grafy** v biologii a internetu.",
-      "**Test hrany {u, v}:** $O(\\deg(u))$ — prohledání sousedů vrcholu $u$.",
-      "**Průchod sousedů vrcholu u:** $\\Theta(\\deg(u))$ — procházíme pouze reálné sousedy!"
+      "**Paměť:** $\\Theta(n + m)$ - **optimální pro řídké grafy** v biologii a internetu.",
+      "**Test hrany {u, v}:** $O(\\deg(u))$ - prohledání sousedů vrcholu $u$.",
+      "**Průchod sousedů vrcholu u:** $\\Theta(\\deg(u))$ - procházíme pouze reálné sousedy!"
     ], { y });
   }
 

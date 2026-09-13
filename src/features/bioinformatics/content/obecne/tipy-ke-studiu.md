@@ -1,7 +1,7 @@
 # 💡 Obecné tipy ke studiu
 
 > 🤝 **Kultura pomoci vs. plagiátorství**:  
-> Společná diskuze a vzájemné vysvětlování konceptů je žádoucí. **Nikdy nesdílejte hotový kód** — odevzdávací systémy (zejména Progtest na FIT) mají pokročilý antiplagiátor a za opisování hrozí disciplinární komise.
+> Společná diskuze a vzájemné vysvětlování konceptů je žádoucí. **Nikdy nesdílejte hotový kód** - odevzdávací systémy (zejména Progtest na FIT) mají pokročilý antiplagiátor a za opisování hrozí disciplinární komise.
 
 ---
 
@@ -16,7 +16,7 @@
 ## 📝 Jak efektivně dělat zápisky z přednášek
 
 * **Offline přednášky v posluchárnách**:
-  * **Psaní rukou vs. klávesnice**: Poznámky psané rukou (pero + sešit nebo tablet se stylusem) prokazatelně zlepšují zapamatování — nutí vás látku přeformulovat a syntetizovat v reálném čase namísto pasivního mechanického přepisování.
+  * **Psaní rukou vs. klávesnice**: Poznámky psané rukou (pero + sešit nebo tablet se stylusem) prokazatelně zlepšují zapamatování - nutí vás látku přeformulovat a syntetizovat v reálném čase namísto pasivního mechanického přepisování.
   * **Double-screen strategie**: Mějte prezentaci přednášejícího otevřenou na mobilu, tabletu nebo notebooku a do sešitu pište pouze doplňující komentáře, vysvětlující kontext a nákresy, které na slajdech přímo nejsou.
   * **Tisk klíčových přehledů**: Vytiskněte si periodickou tabulku prvků, přehled 20 proteinogenních aminokyselin a základní matematické či chemické vzorce na papír, abyste při studiu a psaní poznámek nemuseli neustále přepínat okna.
 * **Online přednášky a videozáznamy**:

@@ -375,7 +375,7 @@ export function PA2ToAX1Overview() {
   );
 
   // LVL4 user wording: "relevance 50%+ and in addition themes set as epic"
-  // Interpret as: (relevance >= 50) UNION (epic themes) — so epic below 50% still included
+  // Interpret as: (relevance >= 50) UNION (epic themes) - so epic below 50% still included
   // Alternative strict AND would drop non-epic 50%+ which defeats LVL3⊂LVL4. Using union of sets:
   // base: relevance >= 50, plus any epic/mega_epic even if lower relevance.
   // Re-read: "with relevance 50%+ and in addition to that themes set as epic"
@@ -388,22 +388,22 @@ export function PA2ToAX1Overview() {
       { title: string; description: string }
     > = {
       1: {
-        title: "LVL1 — Týdny 1 & 7 · relevance ≥ 70 %",
+        title: "LVL1 - Týdny 1 & 7 · relevance ≥ 70 %",
         description:
           "Minimální plán: speciálně zvýrazněné týdny (1. a 7.) a pouze témata s relevancí 70 % a více.",
       },
       2: {
-        title: "LVL2 — Relevance ≥ 70 %",
+        title: "LVL2 - Relevance ≥ 70 %",
         description:
           "Témata s relevancí 70 %+ k AX1 (barevný rámeček a pozadí v přehledu).",
       },
       3: {
-        title: "LVL3 — Relevance ≥ 50 %",
+        title: "LVL3 - Relevance ≥ 50 %",
         description:
           "Témata s relevancí 50 %+ (včetně barevného baru relevance).",
       },
       4: {
-        title: "LVL4 — Relevance ≥ 50 % + EPIC / MEGA EPIC",
+        title: "LVL4 - Relevance ≥ 50 % + EPIC / MEGA EPIC",
         description:
           "Vše z LVL3 a navíc témata s badge EPIC nebo MEGA EPIC (např. šablony).",
       },
@@ -513,7 +513,7 @@ export function PA2ToAX1Overview() {
             </li>
           </ul>
           <p className="text-xs text-stone-500">
-            Není třeba procházet jedno téma všemi zdroji — vyberte si to, které
+            Není třeba procházet jedno téma všemi zdroji - vyberte si to, které
             vám nejvíce sedne.
           </p>
         </div>
@@ -879,7 +879,7 @@ export function PA2ToAX1Overview() {
                         <div className="flex-1">
                           {leafTopics.length === 0 ? (
                             <p className="text-[10px] text-slate-350 italic py-1">
-                              —
+                              -
                             </p>
                           ) : (
                             <div className="flex flex-wrap gap-2">
@@ -944,7 +944,7 @@ export function PA2ToAX1Overview() {
                                           )
                                         : undefined
                                     }
-                                    title={`${stripMarkdownLinks(node.name)} (Relevance: ${relevance}%, Quality: ${quality ? "Good" : "Bad"})${nodeUrl ? " — Kliknutím otevřete" : ""}`}
+                                    title={`${stripMarkdownLinks(node.name)} (Relevance: ${relevance}%, Quality: ${quality ? "Good" : "Bad"})${nodeUrl ? " - Kliknutím otevřete" : ""}`}
                                   >
                                     <div className="flex flex-col gap-1.5 flex-1 min-w-0">
                                       {(node.badges || isLowQuality) && (

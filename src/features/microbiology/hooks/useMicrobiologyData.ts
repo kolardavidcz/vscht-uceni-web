@@ -52,7 +52,7 @@ function payloadLooksCorrupted(payload: Payload): boolean {
 /**
  * Data story (soft-upgrade, ~52 species catalog):
  *
- * 1. **Always** start from bundled static data — UI is interactive immediately
+ * 1. **Always** start from bundled static data - UI is interactive immediately
  *    (no wait on Redis for `/mikrobiologie` deep-links).
  * 2. **Background** `GET /api/get-data` soft-upgrades when Redis has a shared
  *    snapshot (classroom admin edits).
@@ -70,7 +70,7 @@ export function useMicrobiologyData() {
   const [isLocalMode, setIsLocalMode] = useState(true);
   const [kvAvailable, setKvAvailable] = useState(false);
   const [storageLabel, setStorageLabel] = useState("Balík (statická data)");
-  /** True immediately — never block the quiz on network */
+  /** True immediately - never block the quiz on network */
   const [ready] = useState(true);
 
   const applyPayload = useCallback((payload: Payload) => {
@@ -213,12 +213,12 @@ export function useMicrobiologyData() {
             ok: false,
             message:
               (err as { error?: string }).error ||
-              `API ${res.status} — uloženo jen do localStorage`,
+              `API ${res.status} - uloženo jen do localStorage`,
           };
         } catch {
           return {
             ok: false,
-            message: "KV nedostupné — uloženo jen do localStorage",
+            message: "KV nedostupné - uloženo jen do localStorage",
           };
         }
       }
@@ -297,12 +297,12 @@ export function useMicrobiologyData() {
           ok: false,
           message:
             (err as { error?: string }).error ||
-            `API ${res.status} — lokální náhled zachován`,
+            `API ${res.status} - lokální náhled zachován`,
         };
       } catch {
         return {
           ok: false,
-          message: "KV nedostupné — lokální náhled v localStorage",
+          message: "KV nedostupné - lokální náhled v localStorage",
         };
       }
     },

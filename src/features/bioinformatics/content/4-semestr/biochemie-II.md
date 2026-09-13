@@ -1,3 +1,5 @@
-# Biochemie II
+# 🧪 Biochemie II
 
-Zkouška je tématicky mnohem obsahlejší než přednášky během semestru. Pokud umíte prezentace z biochemie - máte pocit, že oproti ukázkových/zkouškovým otázekám jste teorve na začátku - tak že se z toho nepos*rte <3
+Zkouška je tematicky podstatně obsáhlejší než samotné přednášky během semestru. Pouhé pročtení prezentací často nestačí - reálné zkouškové otázky vyžadují hlubší porozumění souvislostem mezi metabolickými drahami a regulacemi.
+
+> 💡 **Doporučená strategie ke zkoušce:** Zaměřte se na aktivní procvičování vzorových zkouškových otázek z minulých let, kreslení metabolických cyklů na papír a mapování regulačních uzlů (klíčové enzymy, aktivátory a inhibitory).

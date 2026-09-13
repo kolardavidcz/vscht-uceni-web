@@ -53,7 +53,7 @@ def transform_source(text: str) -> str:
         inner = m.group(1)
         if any(ord(c) > 127 for c in inner[:4]):
             # escape only the emoji prefix chars, keep Czech text as UTF-8
-            # Actually keep full UTF-8 for Czech labels — only force-escape pure emoji fields.
+            # Actually keep full UTF-8 for Czech labels - only force-escape pure emoji fields.
             return m.group(0)
         return m.group(0)
 

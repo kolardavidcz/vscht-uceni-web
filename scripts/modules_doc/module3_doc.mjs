@@ -134,7 +134,7 @@ export function addModule3Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Klíčový most pro studenta:",
-      text: "Není to jiná látka — je to tentýž reálný svět zapsaný precizním matematickým jazykem, který umožňuje dokázat korektnost algoritmů.",
+      text: "Není to jiná látka - je to tentýž reálný svět zapsaný precizním matematickým jazykem, který umožňuje dokázat korektnost algoritmů.",
       y: y + 0.05,
     });
   }
@@ -155,7 +155,7 @@ export function addModule3Slides(pres) {
 
     y = renderDocList(slide, [
       "**Vrcholy V (Atomy):** Jednotlivé atomy tvoří uzly sítě $V = \\{v_1, v_2, \\dots, v_{12}\\}$ (atomy O, C₁–C₆ a substituenty OH).",
-      "**Hrany E (Kovalentní vazby):** Sdílený elektronový pár tvoří neorientovanou hranu $\\{u, v\\}$. Vazba působí vzájemně — nemá žádný „směr šipky“: $E = \\{e_1, e_2, \\dots, e_{12}\\}$."
+      "**Hrany E (Kovalentní vazby):** Sdílený elektronový pár tvoří neorientovanou hranu $\\{u, v\\}$. Vazba působí vzájemně - nemá žádný „směr šipky“: $E = \\{e_1, e_2, \\dots, e_{12}\\}$."
     ], { y });
 
     renderDocCallout(pres, slide, {
@@ -251,7 +251,7 @@ export function addModule3Slides(pres) {
     renderDocList(slide, [
       "**Vrcholy V (Metabolity):** Chemické látky v buňce: Glukóza (v₁), Glukóza-6-P (v₂), Fruktóza-6-P (v₃), Fruktóza-1,6-bisP (v₄).",
       "**Hrany E (Enzymatické reakce):** Orientované šipky $(u, v) \\in V \\times V$. Reakce jde ze substrátu $u$ do produktu $v$: $e_1 = (v_1, v_2), e_2 = (v_2, v_3), e_3 = (v_3, v_4)$.",
-      "**Acykličnost (DAG):** Glykolýza je přímá energetická dráha — metabolity se v ní netočí dokola, ale směřují k pyruvátu."
+      "**Acykličnost (DAG):** Glykolýza je přímá energetická dráha - metabolity se v ní netočí dokola, ale směřují k pyruvátu."
     ], { y });
   }
 

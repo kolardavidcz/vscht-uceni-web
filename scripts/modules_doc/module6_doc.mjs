@@ -35,14 +35,14 @@ export function addModule6Slides(pres) {
     y = renderDocHeading(pres, slide, "🕵️ Detektivní přístup k matematice", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "Sherlock Holmes říká: *„Když vyloučíš vše nemožné, co zbude — i kdyby to bylo sebenepravděpodobnější — musí to být pravda.“*",
+      "Sherlock Holmes říká: *„Když vyloučíš vše nemožné, co zbude - i kdyby to bylo sebenepravděpodobnější - musí to být pravda.“*",
       { y }
     );
 
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "Příklad z reálného světa:",
-      text: "Chceš dokázat, že v místnosti s 13 lidmi musí aspoň dva sdílet narozeninový měsíc. Předpokládej opak — každý má jiný měsíc. Ale měsíců je jen 12. To je spor — 13 lidí se do 12 měsíců nevejde po jednom. Opak neplatí, takže dva lidé sdílí měsíc!",
+      text: "Chceš dokázat, že v místnosti s 13 lidmi musí aspoň dva sdílet narozeninový měsíc. Předpokládej opak - každý má jiný měsíc. Ale měsíců je jen 12. To je spor - 13 lidí se do 12 měsíců nevejde po jednom. Opak neplatí, takže dva lidé sdílí měsíc!",
       y,
     });
   }
@@ -64,7 +64,7 @@ export function addModule6Slides(pres) {
     renderDocList(slide, [
       "1. Chceš dokázat, že tvrzení **B** platí.",
       "2. Předpokládej, že **B neplatí** (tedy předpokládej opak).",
-      "3. Z tohoto předpokladu logicky odvoď **nesmysl** — něco, co je zjevně nepravdivé (spor s tím, co víš).",
+      "3. Z tohoto předpokladu logicky odvoď **nesmysl** - něco, co je zjevně nepravdivé (spor s tím, co víš).",
       "4. Protože opak B vedl k nesmyslu, **B musí platit**."
     ], { y });
   }
@@ -390,13 +390,13 @@ export function addModule6Slides(pres) {
   }
 
   // --------------------------------------------------------------------------
-  // Slide 6.8a: 4. Extremální Princip v Grafech — Krok za Krokem
+  // Slide 6.8a: 4. Extremální Princip v Grafech - Krok za Krokem
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "4. 🔬 Extremální Princip v Grafech — Krok za Krokem", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "4. 🔬 Extremální Princip v Grafech - Krok za Krokem", { level: 2, y, showUnderline: true });
 
     y = renderDocCallout(pres, slide, {
       type: "note",
@@ -472,7 +472,7 @@ export function addModule6Slides(pres) {
     y = renderDocList(slide, [
       "**Krok 1 (Zvolíme nejdelší cestu):** Nechť $P = (v_0, v_1, \\dots, v_k)$ je **nejdelší jednoduchá cesta** v grafu $G$. (V konečném grafu zaručeně existuje).",
       "**Krok 2 (Zkoumáme koncový uzel v₀):** Má $\\deg(v_0) \\ge 2$ (z předpokladu $\\delta(G) \\ge 2$). Má tedy alespoň 2 různé sousedy.",
-      "**Krok 3 (Sousedé v₀ musí ležet na cestě P):** Předpokládejme pro spor, že $v_0$ má souseda $u \\notin P$. Pak $(u, v_0, v_1, \\dots, v_k)$ je cesta délky $k+1$ — delší než $P$. To je **💥 SPOR s maximalitou cesty P**! Všichni sousedé $v_0$ tedy leží přímo na cestě $P$.",
+      "**Krok 3 (Sousedé v₀ musí ležet na cestě P):** Předpokládejme pro spor, že $v_0$ má souseda $u \\notin P$. Pak $(u, v_0, v_1, \\dots, v_k)$ je cesta délky $k+1$ - delší než $P$. To je **💥 SPOR s maximalitou cesty P**! Všichni sousedé $v_0$ tedy leží přímo na cestě $P$.",
       "**Krok 4 (Nalezení cyklu):** Uzel $v_0$ má alespoň 2 sousedy na $P$. Jeden je $v_1$, druhý je $v_j$ ($j \\ge 2$). Hrana $\\{v_0, v_j\\}$ spolu s úsekem cesty $v_0, \\dots, v_j$ tvoří **cyklus**!"
     ], { y });
 
@@ -570,7 +570,7 @@ export function addModule6Slides(pres) {
     y = renderSolutionBanner(pres, slide, { title: "Vzorové Řešení Úlohy 2", y });
 
     y = renderDocList(slide, [
-      "1. Předpokládejme pro spor, že DAG neobsahuje žádný zdroj — tedy každý uzel má $\\text{deg}^-(v) \\ge 1$.",
+      "1. Předpokládejme pro spor, že DAG neobsahuje žádný zdroj - tedy každý uzel má $\\text{deg}^-(v) \\ge 1$.",
       "2. Vybereme libovolný uzel $u_0$. Protože má vstupní hranu, má předchůdce $u_1$, ten má předchůdce $u_2$, a tak dále.",
       "3. Vytváříme posloupnost kroků dozadu: $\\dots \\to u_2 \\to u_1 \\to u_0$.",
       "4. Protože graf má pouze $n$ vrcholů (konečná množina), podle Dirichletova principu se po nejvýše $n+1$ krocích musí alespoň jeden vrchol zopakovat: $u_i = u_j$.",

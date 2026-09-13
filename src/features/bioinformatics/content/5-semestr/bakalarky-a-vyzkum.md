@@ -12,9 +12,9 @@ Na ústavu jsou vypisována témata závěrečných prací ze dvou hlavních sm�
 
 ### 1. Bioinformatika & Genomika
 * **Školitelé**:
-  * **Dr. Jan Pačes** — `Jan.Paces@vscht.cz`
-  * **Dr. Michal Kolář** — `Michal.Kolar@vscht.cz`
-  * **Dr. Božena Klodová** — `bozena.klodova@psb.vib-ugent.be`
+  * **Dr. Jan Pačes** - `Jan.Paces@vscht.cz`
+  * **Dr. Michal Kolář** - `Michal.Kolar@vscht.cz`
+  * **Dr. Božena Klodová** - `bozena.klodova@psb.vib-ugent.be`
 * **Hlavní témata**:
   * Hledání a analýza v genomických databázích.
   * Vývoj nových algoritmů a přístupů ke zpracování genomických dat.
@@ -23,9 +23,9 @@ Na ústavu jsou vypisována témata závěrečných prací ze dvou hlavních sm�
 
 ### 2. Počítačový návrh léčiv (CADD) & Chemoinformatika
 * **Školitelé**:
-  * **Dr. Martin Šícho** — `Martin.Sicho@vscht.cz` *(garant Bc. programu)*
-  * **Dr. Wim Dehaen** — `Wim.Dehaen@vscht.cz`
-  * **Dr. Ivan Čmelo** — `Ivan.Cmelo@vscht.cz`
+  * **Dr. Martin Šícho** - `Martin.Sicho@vscht.cz` *(garant Bc. programu)*
+  * **Dr. Wim Dehaen** - `Wim.Dehaen@vscht.cz`
+  * **Dr. Ivan Čmelo** - `Ivan.Cmelo@vscht.cz`
 * **Hlavní témata**:
   * Návrh biologicky aktivních látek pomocí metod umělé inteligence (AI).
   * Prediktivní modelování interakce léčiva s organismem (docking, QSAR).
@@ -56,4 +56,4 @@ Na ústavu jsou vypisována témata závěrečných prací ze dvou hlavních sm�
 
 * **Skripta pro bioinformatiku**:  
   Pro přípravu na zkoušky z bioinformatických předmětů a především ke Státní závěrečné zkoušce doporučuje ústav skripta:  
-  👉 **Pfeiferová a kol. – Bioinformatika** ([Vydavatelství VŠCHT](https://vydavatelstvi.vscht.cz/katalog/publikace?uid=uid_isbn-978-80-7592-134-5))
+* **Pfeiferová a kol. – Bioinformatika** ([Vydavatelství VŠCHT](https://vydavatelstvi.vscht.cz/katalog/publikace?uid=uid_isbn-978-80-7592-134-5))

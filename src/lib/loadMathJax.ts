@@ -205,7 +205,7 @@ export function makeMathJaxContainerSelectable(container: HTMLElement): void {
 function ensureConfig() {
   if (typeof window === "undefined") return;
   if (!window.MathJax) {
-    // Cast through unknown to satisfy TypeScript — MathJax is a global
+    // Cast through unknown to satisfy TypeScript - MathJax is a global
     // configured before the script loads, so the full type isn't available yet.
     window.MathJax = {} as unknown as typeof window.MathJax;
   }

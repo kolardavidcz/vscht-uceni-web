@@ -17,10 +17,10 @@ export function addModule5Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 5,
     title: "Indukce na Grafech & Redukční Past",
-    goal: "Cíl kapitoly: Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky.",
+    goal: "Cíl kapitoly: Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou - a vyhnout se pasti, do které padne polovina studentů u zkoušky.",
     topics: [
       "🎯 Dominová analogie (vážně, takhle to funguje)",
-      "☕ Příklad: Platba mincemi (3 Kč a 5 Kč) — V(n) pro n ≥ 8",
+      "☕ Příklad: Platba mincemi (3 Kč a 5 Kč) - V(n) pro n ≥ 8",
       "Metoda 1: Důkaz Slabou Indukcí (Pravidlo výměny mincí)",
       "Metoda 2: Důkaz Silnou Indukcí (Krok o 3 Kč zpět: n+1 z n-2)",
       "1. Peano Axiomy a Princip Matematické Indukce",
@@ -72,7 +72,7 @@ export function addModule5Slides(pres) {
     items: [
       { bold: "Zadání úlohy:", text: "Dokážeme, že pomocí mincí s hodnotami 3 Kč a 5 Kč lze přesně vyplatit libovolnou celočíselnou částku ve výši alespoň 8 Kč (aniž by nám muselo být vraceno)." },
       { bold: "Formulace V(n):", text: "Pro všechna n ≥ 8 dokazujeme tvrzení V(n): „Částku n Kč lze přesně vyplatit pouze s použitím tříkorun a pětikorun.“" },
-      { bold: "Dva způsoby důkazu:", text: "Ukážeme si 2 způsoby důkazu: Metoda 1 (Důkaz Slabou Indukcí — pravidlo výměny mincí) a Metoda 2 (Důkaz Silnou Indukcí — krok o 3 Kč zpět)." }
+      { bold: "Dva způsoby důkazu:", text: "Ukážeme si 2 způsoby důkazu: Metoda 1 (Důkaz Slabou Indukcí - pravidlo výměny mincí) a Metoda 2 (Důkaz Silnou Indukcí - krok o 3 Kč zpět)." }
     ]
   });
 
@@ -115,7 +115,7 @@ export function addModule5Slides(pres) {
         { bold: "Pro n = 8:", text: "8 = 3 + 5 Kč. Platí V(8) ✅." },
         { bold: "Pro n = 9:", text: "9 = 3 + 3 + 3 Kč. Platí V(9) ✅." },
         { bold: "Pro n = 10:", text: "10 = 5 + 5 Kč. Platí V(10) ✅." },
-        { bold: "Proč 3 báze?:", text: "Zde si vystačíme bez jakékoliv výměny mincí v peněžence — stačí nám 3 základní bázové případy a v indukčním kroku se vždy odvoláme na stav o 3 Kč menší." }
+        { bold: "Proč 3 báze?:", text: "Zde si vystačíme bez jakékoliv výměny mincí v peněžence - stačí nám 3 základní bázové případy a v indukčním kroku se vždy odvoláme na stav o 3 Kč menší." }
       ]
     },
     rightCard: {
@@ -230,7 +230,7 @@ export function addModule5Slides(pres) {
       badge: "BEZ VÝMĚN",
       type: "neutral",
       items: [
-        { bold: "Podstata:", text: "Zatímco slabá indukce musí skákat o 1 (n+1 ➔ n), což u mincí vyžadovalo výměny, silná indukce výměny vůbec nepotřebuje — stačí odebrat celou minci či blok: (n + 1) = ((n + 1) - k) + k." },
+        { bold: "Podstata:", text: "Zatímco slabá indukce musí skákat o 1 (n+1 ➔ n), což u mincí vyžadovalo výměny, silná indukce výměny vůbec nepotřebuje - stačí odebrat celou minci či blok: (n + 1) = ((n + 1) - k) + k." },
         { bold: "3 fundamentální bloky rozkladu:", text: "Každá platba n ≥ 8 Kč obsahuje alespoň jeden z těchto bloků k odebrání:" },
         { bold: "• 3 + 5 = 8 Kč:", text: "(pokud máme 3 i 5)" },
         { bold: "• 3 + 3 + 3 = 9 Kč:", text: "(pokud máme jen trojky)" },
@@ -368,7 +368,7 @@ export function addModule5Slides(pres) {
       items: [
         { bold: "Nejdelší cesta:", text: "Zvolme ve stromu nejdelší možnou cestu P = (v₀, v₁, …, vk)." },
         { bold: "Koncový vrchol vk:", text: "Nemůže mít souseda mimo cestu (jinak by cesta nebyla nejdelší) ani jiného souseda na cestě (jinak by vznikl cyklus)." },
-        { bold: "Stupeň vk:", text: "Jediným sousedem vk je předchozí vrchol vk-1, což znamená deg(vk) = 1 — uzel vk je list! Ze stejného důvodu je listem i v₀. Strom má tedy alespoň 2 listy." }
+        { bold: "Stupeň vk:", text: "Jediným sousedem vk je předchozí vrchol vk-1, což znamená deg(vk) = 1 - uzel vk je list! Ze stejného důvodu je listem i v₀. Strom má tedy alespoň 2 listy." }
       ]
     }
   });
@@ -385,7 +385,7 @@ export function addModule5Slides(pres) {
         { bold: "Procesy tekoucí jedním směrem:", text: "V bioinformatice často nestudujeme jen obousměrné vztahy, ale procesy, které tečou jedním směrem:" },
         { bold: "Metabolické dráhy:", text: "Glykolýza začíná glukózou a přes sérii nevratných enzymatických reakcí končí pyruvátem." },
         { bold: "Signální a regulační kaskády:", text: "Aktivace receptoru ➔ fosforylace kinázy ➔ exprese genu." },
-        { bold: "Definice DAGu:", text: "Pokud v takovém procesu nedochází k nekonečným smyčkám (zpětným cyklům), nazýváme ho v informatice DAG (Directed Acyclic Graph — orientovaný acyklický graf)." }
+        { bold: "Definice DAGu:", text: "Pokud v takovém procesu nedochází k nekonečným smyčkám (zpětným cyklům), nazýváme ho v informatice DAG (Directed Acyclic Graph - orientovaný acyklický graf)." }
       ]
     },
     rightCard: {
@@ -395,7 +395,7 @@ export function addModule5Slides(pres) {
       items: [
         { bold: "1. Zdroj (Source):", text: "Počáteční metabolit, do kterého žádná reakce nevstupuje (deg⁻(u) = 0, např. vstupní glukóza)." },
         { bold: "2. Výtok (Sink):", text: "Finální metabolit, ze kterého už žádná reakce nepokračuje (deg⁺(w) = 0, např. finální odpadní produkt / pyruvát)." },
-        { bold: "Topologické uspořádání:", text: "Díky tomu lze celou metabolickou dráhu seřadit v čase zleva doprava — tomu se v informatice říká Topologické uspořádání." }
+        { bold: "Topologické uspořádání:", text: "Díky tomu lze celou metabolickou dráhu seřadit v čase zleva doprava - tomu se v informatice říká Topologické uspořádání." }
       ]
     }
   });

@@ -64,7 +64,7 @@ export function localApiPlugin(): Plugin {
           return;
         }
 
-        // Fully async path — never leave Connect without a response
+        // Fully async path - never leave Connect without a response
         void (async () => {
           try {
             if (req.method === "OPTIONS") {

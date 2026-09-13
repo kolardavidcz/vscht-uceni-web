@@ -103,9 +103,9 @@ export function addModule7Slides(pres) {
       badge: "SLOŽITOST",
       type: "warm",
       items: [
-        { bold: "Paměťová složitost:", text: "Θ(n²) — bez ohledu na počet hran m." },
-        { bold: "Test existence hrany {u, v}:", text: "O(1) — okamžitý přístup do pole." },
-        { bold: "Průchod sousedů vrcholu u:", text: "Θ(n) — projití celého řádku matice." }
+        { bold: "Paměťová složitost:", text: "Θ(n²) - bez ohledu na počet hran m." },
+        { bold: "Test existence hrany {u, v}:", text: "O(1) - okamžitý přístup do pole." },
+        { bold: "Průchod sousedů vrcholu u:", text: "Θ(n) - projití celého řádku matice." }
       ]
     }
   });
@@ -128,9 +128,9 @@ export function addModule7Slides(pres) {
       badge: "SLOŽITOST",
       type: "emerald",
       items: [
-        { bold: "Paměťová složitost:", text: "Θ(n + m) — optimální pro řídké grafy." },
-        { bold: "Test existence hrany {u, v}:", text: "O(deg(u)) — prohledání sousedů vrcholu u." },
-        { bold: "Průchod sousedů vrcholu u:", text: "Θ(deg(u)) — průchod pouze reálných sousedů." }
+        { bold: "Paměťová složitost:", text: "Θ(n + m) - optimální pro řídké grafy." },
+        { bold: "Test existence hrany {u, v}:", text: "O(deg(u)) - prohledání sousedů vrcholu u." },
+        { bold: "Průchod sousedů vrcholu u:", text: "Θ(deg(u)) - průchod pouze reálných sousedů." }
       ]
     }
   });
@@ -143,9 +143,9 @@ export function addModule7Slides(pres) {
     headers: ["Vlastnost / Operace", "Matice Sousedství (Adjacency Matrix)", "Seznam Sousedů (Adjacency List)"],
     colWidths: [3.4, 4.2, 4.1],
     rows: [
-      ["Paměťová složitost", "Θ(n²) — bez ohledu na počet hran m", "Θ(n + m) — optimální pro řídké grafy"],
-      ["Test existence hrany {u, v}", "O(1) — okamžitý přístup do pole", "O(deg(u)) — prohledání sousedů vrcholu u"],
-      ["Průchod sousedů vrcholu u", "Θ(n) — projití celého řádku matice", "Θ(deg(u)) — průchod pouze reálných sousedů"],
+      ["Paměťová složitost", "Θ(n²) - bez ohledu na počet hran m", "Θ(n + m) - optimální pro řídké grafy"],
+      ["Test existence hrany {u, v}", "O(1) - okamžitý přístup do pole", "O(deg(u)) - prohledání sousedů vrcholu u"],
+      ["Průchod sousedů vrcholu u", "Θ(n) - projití celého řádku matice", "Θ(deg(u)) - průchod pouze reálných sousedů"],
       ["Vhodnost pro typ grafu", "Husté grafy (m ≈ n²)", "Řídké grafy (m ≪ n², např. stromy a bio sítě)"]
     ]
   });

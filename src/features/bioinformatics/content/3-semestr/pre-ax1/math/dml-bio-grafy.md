@@ -48,7 +48,7 @@ Jakmile však vstoupíte do kurzu **AX1 (Algoritmy a Grafy 1)** na FIT ČVUT, ak
 
 V chemii vnímáme glukózu jako molekulu $C_6H_{12}O_6$. V teoretické informatice je to **neorientovaný graf** $G = (V, E)$:
 - **Vrcholy $V$ (Atomy):** Jednotlivé atomy tvoří uzly sítě ($C_1, \dots, C_6, O_{\text{kruh}}, \dots$).
-- **Hrany $E$ (Kovalentní vazby):** Sdílený elektronový pár mezi dvěma atomy tvoří neorientovanou hranu $\{u, v\}$. Vazba působí vzájemně — nemá žádný „směr šipky".
+- **Hrany $E$ (Kovalentní vazby):** Sdílený elektronový pár mezi dvěma atomy tvoří neorientovanou hranu $\{u, v\}$. Vazba působí vzájemně - nemá žádný „směr šipky".
 
 <div class="my-6 p-5 rounded-2xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs">
   <div class="flex items-center justify-between mb-3">
@@ -165,7 +165,7 @@ V chemii vnímáme glukózu jako molekulu $C_6H_{12}O_6$. V teoretické informat
 Při odbourávání cukru v buňce probíhá kaskáda enzymatických reakcí. Každá reakce je jednosměrná (spotřebovává energii či uvolňuje teplo):
 - **Vrcholy $V$ (Metabolity):** Chemické látky v buňce (Glukóza, Glukóza-6-fosfát, Fruktóza-6-fosfát, Pyruvát).
 - **Hrany $E$ (Enzymatické reakce):** Orientované šipky $(u, v) \in V \times V$. Reakce jde z výchozího substrátu $u$ do výsledného produktu $v$.
-- **Acykličnost (DAG):** Glykolýza je přímá energetická dráha — metabolity se v ní netočí dokola, ale směřují k pyruvátu.
+- **Acykličnost (DAG):** Glykolýza je přímá energetická dráha - metabolity se v ní netočí dokola, ale směřují k pyruvátu.
 
 <div class="my-6 p-5 rounded-2xl bg-stone-100/90 dark:bg-[#1a120c] border border-stone-200 dark:border-stone-800 shadow-xs">
   <div class="flex items-center justify-between mb-3">

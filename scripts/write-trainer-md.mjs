@@ -75,7 +75,7 @@ function weekMd(course, week) {
 
 function indexMd(course) {
   const lines = [];
-  lines.push(`# ${course.name} — Trainer outline`);
+  lines.push(`# ${course.name} - Trainer outline`);
   lines.push("");
   lines.push(`Zdroj: [${course.url}](${course.url})`);
   lines.push("");

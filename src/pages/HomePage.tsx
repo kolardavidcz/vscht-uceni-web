@@ -22,7 +22,7 @@ const prefetchPython = () => {
 
 export function HomePage() {
   useEffect(() => {
-    document.title = "VŠCHT Učení — Rozcestník";
+    document.title = "VŠCHT Učení - Rozcestník";
   }, []);
 
   return (
@@ -47,7 +47,7 @@ export function HomePage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full animate-[scale-in_0.35s_ease]">
-          {/* Systematika — whole card is the link */}
+          {/* Systematika - whole card is the link */}
           <Card
             variant="dark"
             hover
@@ -83,7 +83,7 @@ export function HomePage() {
             </div>
           </Card>
 
-          {/* Bioinformatika — full card + nested shortcut chips above the link */}
+          {/* Bioinformatika - full card + nested shortcut chips above the link */}
           <Card
             variant="dark"
             hover
@@ -139,7 +139,7 @@ export function HomePage() {
             </div>
           </Card>
 
-          {/* Python — whole card is the link */}
+          {/* Python - whole card is the link */}
           <Card
             variant="dark"
             hover
@@ -160,7 +160,7 @@ export function HomePage() {
               Python Analyzátor
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
-              Anotovaný skript pro analýzu DNA/RNA — kopírování a mock běh v
+              Anotovaný skript pro analýzu DNA/RNA - kopírování a mock běh v
               terminálu.
             </p>
             <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">

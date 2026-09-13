@@ -1,6 +1,6 @@
 # 5 · Progtest a zkouška (plné rady)
 
-Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** na přesnost formátu výstupu, rychlost a čistou práci s pamětí.
+Progtest je automat na odevzdávání na FIT ČVUT - **extrémně citlivý** na přesnost formátu výstupu, rychlost a čistou práci s pamětí.
 
 **Před submitem do Progtestu**
 
@@ -8,14 +8,14 @@ Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** n
 * Edge cases ze zadání (prázdné pole, 0 prvků, 1 prvek, maximální limit).  
 * Lokální sada: [lokální testovací skript](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit#lokalni-testovani-ze-souboru).  
 * Kompilace / paměť / warningy: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).  
-* Když program na Progtestu padá — **potrap ho většími vstupy** lokálně.
+* Když program na Progtestu padá - **potrap ho většími vstupy** lokálně.
 
 ---
 
 ## 💡 Strategické tipy pro Progtest (přímo z katedry)
 
 * **Odevzdávání na jistotu (pozor na limit ~20 pokusů)**: Na odevzdání každé úlohy máte přibližně 20 pokusů. **Nikdy neodevzdávejte stylem pokus-omyl!** Odevzdejte pouze kód, u kterého jste si lokálním otestováním jistí, že na 100 % splňuje základní testy z ukázky zadání a ošetřuje mezní stavy.
-* **Hledání na internetu (matematika vs. kód)**: Dohledat si matematické a geometrické vzorce nebo teoretický princip algoritmu je naprosto v pořádku — některá zadání mají divoké vzorce a počítá se s tím, že si je vygooglíte. Nikdy ale nehledejte hotový kód úloh: cizí řešení neprojdou přes antiplagiátor, často používají zakázané knihovny nebo shoří na paměťových a časových testech.
+* **Hledání na internetu (matematika vs. kód)**: Dohledat si matematické a geometrické vzorce nebo teoretický princip algoritmu je naprosto v pořádku - některá zadání mají divoké vzorce a počítá se s tím, že si je vygooglíte. Nikdy ale nehledejte hotový kód úloh: cizí řešení neprojdou přes antiplagiátor, často používají zakázané knihovny nebo shoří na paměťových a časových testech.
 * **2 nepenalizované nápovědy na úlohu (nástroj spolupráce)**: Každá progtestová úloha nabízí dvě nápovědy zdarma. Využijte je a **sdílejte mezi sebou vstupní data, na kterých vám kód selhal**. Zjistíte tak, jaké zákeřné vstupy Progtest testuje, aniž byste porušili zákaz sdílení kódu.
 * **Řešte nepovinná malá „Cvičení“ (cca 20 nápověd)**: Kromě velkých domácích úloh jsou v Progtestu k dispozici malé úlohy za minimum bodů. Vyučující je na cvičeních neprobírají, ale silně doporučují si je vyřešit: v jednoduché a izolované podobě představují nové principy (např. práci s pamětí, rekurzi či spojové seznamy), které se vzápětí objeví ve velké úloze. Máte v nich navíc k dispozici cca 20 nápověd!
 * **Aplikace Trainer**: Cvičebnice [Trainer KSI (kurz k PA1)](https://trainer.ksi.fit.cvut.cz/courses/81) nabízí praktické úkoly s teorií od úplných začátků kompilace až po několik ukázkových zkouškových zadání.
@@ -30,8 +30,8 @@ Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** n
 | Test | Co dělá |
 |------|---------|
 | **Základní test podle ukázky** | Spustí program na datech ze zadání. Pokud neprojde na 100 %, je zbytečné ho dávat do Progtestu. |
-| **Test mezních hodnot** | Pole délky 0, 1 nebo milión prvků — okrajové podmínky. |
-| **Test ošetření vstupních dat** | Nesprávné vstupy (nečíselné tam kde číslo, záporná délka…) — program musí správně odmítnout. |
+| **Test mezních hodnot** | Pole délky 0, 1 nebo milión prvků - okrajové podmínky. |
+| **Test ošetření vstupních dat** | Nesprávné vstupy (nečíselné tam kde číslo, záporná délka…) - program musí správně odmítnout. |
 | **Extenzivní test náhodnými hodnotami** | Větší náhodné vstupy, výsledky se srovnávají s referenčním řešením. |
 | **Kontrola práce s pamětí** | Stejně jako extenzivní, ale navíc kontroluje přístupy mimo alokovanou paměť a správné `free`. Za úniky paměti **−30 %**. |
 
@@ -76,8 +76,8 @@ Progtest je automat na odevzdávání na FIT ČVUT — **extrémně citlivý** n
 Detaily a příkazy: [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit). Stručně:
 
 * `-Wall -Wextra -pedantic` - nahlásí co nejvíce potenciálních problémů; doporučuji vyřešit všechny 
-* `-g` — přidá do zkompilovaného programu ladící informace (např. čísla řádků)  
-* `-O2` — neodstraní špatnou složitost; může shodit nekorektní kód  
+* `-g` - přidá do zkompilovaného programu ladící informace (např. čísla řádků)  
+* `-O2` - neodstraní špatnou složitost; může shodit nekorektní kód  
 * `-fsanitize=undefined,address` - přidá do programu kontroly nedefinovaného chování (např. práce s neinicializovanou proměnnou) a kontroly práce s pamětí
 
 * Ladicí nástroj `valgrind` umí spoustu věcí, nás primárně zajímá `memcheck` (výchozí nástroj, když pustíme `valgrind`). 
@@ -98,32 +98,32 @@ Funkce není nepřítel. Funkce je kámoš. Investujte čas do psaní ve funkcí
 
 ### Nepoužívání struktur
 
-Bez rozumné organizace dat se nikam nedostaneš. Ve zkouškových úlohách data spolu souvisí — **struktury** jsou přirozená reprezentace.
+Bez rozumné organizace dat se nikam nedostaneš. Ve zkouškových úlohách data spolu souvisí - **struktury** jsou přirozená reprezentace.
 
-**Typická střela do nohy:** nepoužít strukturu pro dynamické pole. Napíšeš funkci, která realokuje pole předané **třemi argumenty**… program nefunguje, paměť „mizí“, pointer ukazuje pořád stejně… protože pointer na pole musíš předat jako **výstupní argument** (`int **arrayPtr`)… přidáš hvězdičku… a dalším nepřítelem je **priorita operátorů** (`[]`, `.`, `->`, `++`, `--` mají přednost před `*`) — hromada závorek.
+**Typická střela do nohy:** nepoužít strukturu pro dynamické pole. Napíšeš funkci, která realokuje pole předané **třemi argumenty**… program nefunguje, paměť „mizí“, pointer ukazuje pořád stejně… protože pointer na pole musíš předat jako **výstupní argument** (`int **arrayPtr`)… přidáš hvězdičku… a dalším nepřítelem je **priorita operátorů** (`[]`, `.`, `->`, `++`, `--` mají přednost před `*`) - hromada závorek.
 
 Máš na to nervy? Radši **strukturu**.
 
 ### Neinicializované proměnné
 
-V C jsou proměnné běžně **neinicializované** — s hodnotou nemůžeš pracovat, dokud ji nenastavíš. Stejně tak paměť z alokace. To není „bug jazyka“, je to způsob rychlých programů; začátečníky to drtí. Proto sanitizer / Valgrind — [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
+V C jsou proměnné běžně **neinicializované** - s hodnotou nemůžeš pracovat, dokud ji nenastavíš. Stejně tak paměť z alokace. To není „bug jazyka“, je to způsob rychlých programů; začátečníky to drtí. Proto sanitizer / Valgrind - [Jak to spravit](/obor-bioinformatika/1-semestr/bi-pa1/jak-to-spravit).
 
 ### Zbytečná alokace paměti
 
-Příklad: `char **words` — při realokaci **nedává smysl** hned alokovat místo pro každé nové „prázdné“ slovo (`for … words[i] = malloc(WORD_LEN)`). V C je zvyk pracovat s věcmi, **až když je potřebuješ**: alokuj, až víš že použiješ; nastav hodnotu, až ji potřebuješ. Nic nezkazíš polem délky 0 a `NULL` pointerem — první alokaci zařídí `realloc`.
+Příklad: `char **words` - při realokaci **nedává smysl** hned alokovat místo pro každé nové „prázdné“ slovo (`for … words[i] = malloc(WORD_LEN)`). V C je zvyk pracovat s věcmi, **až když je potřebuješ**: alokuj, až víš že použiješ; nastav hodnotu, až ji potřebuješ. Nic nezkazíš polem délky 0 a `NULL` pointerem - první alokaci zařídí `realloc`.
 
 U sekvencí (typicky řetězce) se snaž **vyhnout zbytečnému kopírování** (pomalé + další chyby). Raději algoritmus, který kopíruje co nejméně.
 
 ### Nepoužívání knihovních funkcí
 
-Studenti často vynalézají kolo — chybné a zbytečná práce. Standardní knihovna C není tak velká, aby se nedalo těch pár užitečných funkcí naučit (viz seznam výše).
+Studenti často vynalézají kolo - chybné a zbytečná práce. Standardní knihovna C není tak velká, aby se nedalo těch pár užitečných funkcí naučit (viz seznam výše).
 
 ### Neefektivní práce se vstupem a s řetězci
 
 * Často: načíst **celý vstup do jednoho řetězce** a pak složitě parsnout. Ve většině případů stačí zpracovávat **po částech** přes `scanf` a známé konverze.  
 * Často se nevyužije, že `scanf(" ")` **přeskočí bílé znaky**.  
 * Často cyklus se **`strlen`**.  
-* Kontrola prázdného řetězce přes `strlen` — stačí `s[0] == '\0'` (nebo `strcmp` s `""`).  
+* Kontrola prázdného řetězce přes `strlen` - stačí `s[0] == '\0'` (nebo `strcmp` s `""`).  
 * Špatná práce s **ukončovací nulou** (zapomenutá, nebo naopak její šikovné vložení by zjednodušilo algoritmus).
 
 ---
@@ -132,22 +132,22 @@ Studenti často vynalézají kolo — chybné a zbytečná práce. Standardní k
 
 ### Taktika výběru úlohy
 
-* **Nejjistější:** pořádně rekurze a seznamy — úlohy na to bývají jednodušší.  
+* **Nejjistější:** pořádně rekurze a seznamy - úlohy na to bývají jednodušší.  
 * **Dynamická alokace + řetězce** vyžadují sebekázeň a nedělat si rány arzenálem C. Vypadá to přístupněji (bylo dřív v semestru), ale úlohy bývají **náročnější**.  
 * **Pročti si obě zadání. Až potom si vyber.**
 
 ---
 
 1. **Pozorně si přečti zadání.** I v **poslední poznámce** bývá rada nebo zjednodušení.  
-2. **Papír** od dozoru / vedle sebe — nakresli situaci.  
+2. **Papír** od dozoru / vedle sebe - nakresli situaci.  
 3. Začni od **datových struktur** reprezentujících problém.  
 4. Zvýrazni, **co musí být ve výstupu** a s čím se pracuje.  
 5. Zjednoduš, co jde.  
     * Ke každé struktuře **operace** a přemýšlej o **asymptotické složitosti**.  
     * Znovu: jde to ještě zjednodušit?  
-    * Když nevidíš algoritmus — šlo by **data seřadit** a pak je to snazší?  
+    * Když nevidíš algoritmus - šlo by **data seřadit** a pak je to snazší?  
 9. Až po rozmyšlení **programuj**: nejdřív struktury, pak funkce k nim.  
-10. Pořadí (vstup / realloc / jádro) je na tobě — důležité je, aby se různorodé věci **nemíchaly v jedné funkci**.  
+10. Pořadí (vstup / realloc / jádro) je na tobě - důležité je, aby se různorodé věci **nemíchaly v jedné funkci**.  
 11. Otestuj na stažených datech + **všechny ladicí nástroje**.  
 12. Padá Progtest → potrápěte lokální program většími vstupy.  
 13. V půlce času je pořád ještě možný jít na úlohu rekurze / spojený seznam / řasezní.

@@ -324,7 +324,7 @@ export function WorksheetRow({
               </p>
             )}
 
-            {/* Nápověda collapsed by default — open on click */}
+            {/* Nápověda collapsed by default - open on click */}
             {item.hint && !showResults && hasAnswerSlots && (
               <details className="mt-2.5 group">
                 <summary className="text-[10px] font-black uppercase tracking-widest text-stone-400 cursor-pointer hover:text-brand-orange transition-colors inline-flex items-center gap-1.5 list-none">

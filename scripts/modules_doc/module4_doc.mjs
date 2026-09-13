@@ -53,7 +53,7 @@ export function addModule4Slides(pres) {
     y = renderDocHeading(pres, slide, "🌱 Než začneme: Proč se biologové učí logiku?", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
-      "Představ si, že zkoumáš nový protein. Kolega tvrdí: *„Pokud je tento gen aktivní, pak se protein exprimuje.“* Jenže v experimentu vidíš buňky, kde gen aktivní **není** — a protein se tam taky neobjevuje. Potvrzuje to kolegovo tvrzení, nebo ho vyvrací?",
+      "Představ si, že zkoumáš nový protein. Kolega tvrdí: *„Pokud je tento gen aktivní, pak se protein exprimuje.“* Jenže v experimentu vidíš buňky, kde gen aktivní **není** - a protein se tam taky neobjevuje. Potvrzuje to kolegovo tvrzení, nebo ho vyvrací?",
       { y }
     );
 
@@ -411,7 +411,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
     y = renderDocCallout(pres, slide, {
       type: "note",
       title: "🧪 Vstup do Laboratoře na VŠCHT (Negace Konjunkce):",
-      text: "Vstup je povolen právě když: Plášť a brýle (A) ∧ Bezpečnostní test (B). Do laborky vás NEPUSTÍ (¬(A ∧ B)), pokud nastane ¬A ∨ ¬B — stačí zapomenout brýle, NEBO nemít test!",
+      text: "Vstup je povolen právě když: Plášť a brýle (A) ∧ Bezpečnostní test (B). Do laborky vás NEPUSTÍ (¬(A ∧ B)), pokud nastane ¬A ∨ ¬B - stačí zapomenout brýle, NEBO nemít test!",
       y,
     });
 
@@ -500,7 +500,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
     y = renderDocHeading(pres, slide, "🧠 Mnemotechnika ze života (Studenti & Chytrost):", { level: 3, y });
 
     y = renderDocList(slide, [
-      "**Negace ∀ ➔ ∃:** Původní: *„Každý student je chytrý.“* ➔ Negace: *„Existuje student, který NENÍ chytrý.“* (K vyvrácení nepotřebujete, aby byli všichni hloupí — stačí najít jediného, který chytrý není!).",
+      "**Negace ∀ ➔ ∃:** Původní: *„Každý student je chytrý.“* ➔ Negace: *„Existuje student, který NENÍ chytrý.“* (K vyvrácení nepotřebujete, aby byli všichni hloupí - stačí najít jediného, který chytrý není!).",
       "**Negace ∃ ➔ ∀:** Původní: *„Existuje chytrý student.“* ➔ Negace: *„Každý student je ne-chytrý (všichni jsou hloupí).“* (Pokud neexistuje ani jeden chytrý, všichni do jednoho chytří nejsou)."
     ], { y });
   }
@@ -557,8 +557,8 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
     y = renderDocTable(slide, {
       headers: ["Typ Důkazu", "Jak Funguje v Praxi", "Proč Může Zmást Studenta", "Význam pro Bioinformatiku a AX1"],
       rows: [
-        ["1. Heuristický / Objevný", "Ukazuje skutečný myšlenkový postup autora — od motivace a náčrtků po obecný vzorec.", "Bývá delší, neskrývá slepé uličky a experimentální intuici.", "Zásadní: tento důkaz často přímo generuje algoritmus a kód v C++."],
-        ["2. Formální / Úsporný", "Dokazuje tvrzení v co nejmenším počtu řádků a zkracuje všechno, co může.", "Působí jako kouzlo spadlé z nebe — autor zahodil náčrtky a ukáže jen geniální trik.", "Slouží k neprůstřelnému ověření, ale sám o sobě nenaučí, jak na řešení přijít."]
+        ["1. Heuristický / Objevný", "Ukazuje skutečný myšlenkový postup autora - od motivace a náčrtků po obecný vzorec.", "Bývá delší, neskrývá slepé uličky a experimentální intuici.", "Zásadní: tento důkaz často přímo generuje algoritmus a kód v C++."],
+        ["2. Formální / Úsporný", "Dokazuje tvrzení v co nejmenším počtu řádků a zkracuje všechno, co může.", "Působí jako kouzlo spadlé z nebe - autor zahodil náčrtky a ukáže jen geniální trik.", "Slouží k neprůstřelnému ověření, ale sám o sobě nenaučí, jak na řešení přijít."]
       ],
       colWidths: [2.5, 3.1, 3.1, 3.033],
       y,
@@ -751,7 +751,7 @@ if (ans != 'a' && ans != 'y')          // De Morgan: „když nezadal 'a' A ZÁR
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "💡 Intuitivní představa před formálním důkazem:",
-      text: "Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře (deg(v) ≥ 2), nikdy nemůžete uvíznout ve slepé uličce. Když budete bludištěm procházet stále kupředu a nikdy se nevrátíte stejnými dveřmi, v konečném počtu místností musíte narazit do místnosti, kde už jste byli — a tím jste uzavřeli cyklus!",
+      text: "Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře (deg(v) ≥ 2), nikdy nemůžete uvíznout ve slepé uličce. Když budete bludištěm procházet stále kupředu a nikdy se nevrátíte stejnými dveřmi, v konečném počtu místností musíte narazit do místnosti, kde už jste byli - a tím jste uzavřeli cyklus!",
       y,
     });
   }

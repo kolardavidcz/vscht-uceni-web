@@ -1,5 +1,5 @@
 /**
- * Vercel Ignored Build Step (node — reliable on Vercel Linux).
+ * Vercel Ignored Build Step (node - reliable on Vercel Linux).
  *
  * Exit 0  = SKIP deployment (you should see the SKIPPED line in build logs)
  * Exit 1  = proceed with build

@@ -28,7 +28,7 @@ export function addModule5Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "note",
       title: "Cíl kapitoly:",
-      text: "Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou — a vyhnout se pasti, do které padne polovina studentů u zkoušky z AX1.",
+      text: "Pochopit, jak se v matematice dokazuje tvrzení pro všechny grafy najednou - a vyhnout se pasti, do které padne polovina studentů u zkoušky z AX1.",
       y: y + 0.1,
     });
   }
@@ -56,19 +56,19 @@ export function addModule5Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "Intuice pro grafy:",
-      text: "Na grafech to funguje stejně — jen místo „kostky č. k“ říkáme „graf s k vrcholy“. A klíčový trik je, že nestavíme grafy od nuly nahoru, ale ROZEBÍRÁME JE OD VĚTŠÍCH K MENŠÍM (dekonstrukce)!",
+      text: "Na grafech to funguje stejně - jen místo „kostky č. k“ říkáme „graf s k vrcholy“. A klíčový trik je, že nestavíme grafy od nuly nahoru, ale ROZEBÍRÁME JE OD VĚTŠÍCH K MENŠÍM (dekonstrukce)!",
       y: y + 0.05,
     });
   }
 
   // --------------------------------------------------------------------------
-  // Slide 5.2a: Příklad: Platba mincemi (3 Kč a 5 Kč) — Báze a Krok
+  // Slide 5.2a: Příklad: Platba mincemi (3 Kč a 5 Kč) - Báze a Krok
   // --------------------------------------------------------------------------
   {
     const slide = createDocSlide(pres, { breadcrumb });
     let y = 0.85;
 
-    y = renderDocHeading(pres, slide, "☕ Příklad: Platba mincemi (3 Kč a 5 Kč) — Slabá vs. Silná Indukce", { level: 2, y, showUnderline: true });
+    y = renderDocHeading(pres, slide, "☕ Příklad: Platba mincemi (3 Kč a 5 Kč) - Slabá vs. Silná Indukce", { level: 2, y, showUnderline: true });
 
     y = renderDocParagraph(slide,
       "Dokážeme, že pomocí mincí s hodnotami **3 Kč a 5 Kč** lze přesně vyplatit libovolnou celočíselnou částku ve výši **alespoň 8 Kč** ($n \\ge 8$).",
@@ -117,7 +117,7 @@ export function addModule5Slides(pres) {
     y = renderDocHeading(pres, slide, "Metoda 2: Důkaz Silnou Indukcí (Krok o 3 Kč zpět)", { level: 3, y });
 
     y = renderDocParagraph(slide,
-      "Zde si vystačíme bez jakékoliv výměny mincí v peněžence — stačí nám **3 základní bázové případy** a v indukčním kroku se vždy odvoláme na stav o **3 Kč menší**:",
+      "Zde si vystačíme bez jakékoliv výměny mincí v peněžence - stačí nám **3 základní bázové případy** a v indukčním kroku se vždy odvoláme na stav o **3 Kč menší**:",
       { y }
     );
 
@@ -464,7 +464,7 @@ export function addModule5Slides(pres) {
     renderDocCallout(pres, slide, {
       type: "tip",
       title: "Formální znění a důkaz:",
-      text: "Zvolme ve stromu nejdelší jednoduchou cestu P = (v₀, v₁, …, vₖ). Koncový vrchol vₖ nemůže mít souseda mimo cestu (spor s maximalitou P) ani jiného souseda na cestě než vₖ₋₁ (jinak by vznikl cyklus!). Jediným sousedem vₖ je tedy vₖ₋₁, což znamená deg(vₖ) = 1 — uzel vₖ je list! Strom má alespoň 2 listy (v₀ a vₖ).",
+      text: "Zvolme ve stromu nejdelší jednoduchou cestu P = (v₀, v₁, …, vₖ). Koncový vrchol vₖ nemůže mít souseda mimo cestu (spor s maximalitou P) ani jiného souseda na cestě než vₖ₋₁ (jinak by vznikl cyklus!). Jediným sousedem vₖ je tedy vₖ₋₁, což znamená deg(vₖ) = 1 - uzel vₖ je list! Strom má alespoň 2 listy (v₀ a vₖ).",
       y,
     });
   }

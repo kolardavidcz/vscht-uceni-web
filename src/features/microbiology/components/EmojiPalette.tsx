@@ -130,7 +130,7 @@ export function EmojiPalette({
         </button>
       </div>
 
-      {/* Selected strip on desktop pin — quick overview */}
+      {/* Selected strip on desktop pin - quick overview */}
       {isPinned && currentEmojis.length > 0 && (
         <div className="flex-shrink-0 flex flex-wrap gap-1 mb-3 p-2 rounded-xl bg-orange-50/80 border border-orange-100/80">
           {currentEmojis.map((e) => (

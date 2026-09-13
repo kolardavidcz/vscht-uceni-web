@@ -6,16 +6,16 @@
 
 ## 🕵️ Detektivní přístup k matematice
 
-Sherlock Holmes říká: *„Když vyloučíš vše nemožné, co zbude — i kdyby to bylo sebenepravděpodobnější — musí to být pravda."*
+Sherlock Holmes říká: *„Když vyloučíš vše nemožné, co zbude - i kdyby to bylo sebenepravděpodobnější - musí to být pravda."*
 
 Důkaz sporem funguje přesně takhle:
 
 1. Chceš dokázat, že tvrzení **B** platí.
 2. Předpokládej, že **B neplatí** (tedy předpokládej opak).
-3. Z tohoto předpokladu logicky odvoď **nesmysl** — něco, co je zjevně nepravdivé (spor s tím, co víš).
+3. Z tohoto předpokladu logicky odvoď **nesmysl** - něco, co je zjevně nepravdivé (spor s tím, co víš).
 4. Protože opak B vedl k nesmyslu, **B musí platit**.
 
-**Příklad z reálného světa:** Chceš dokázat, že v místnosti s 13 lidmi musí aspoň dva sdílet narozeninový měsíc. Předpokládej opak — každý má jiný měsíc. Ale měsíců je jen 12. To je spor — 13 lidí se do 12 měsíců nevejde jeden do každého. Předpoklad byl špatný, takže dva lidi sdílí měsíc. ✅
+**Příklad z reálného světa:** Chceš dokázat, že v místnosti s 13 lidmi musí aspoň dva sdílet narozeninový měsíc. Předpokládej opak - každý má jiný měsíc. Ale měsíců je jen 12. To je spor - 13 lidí se do 12 měsíců nevejde jeden do každého. Předpoklad byl špatný, takže dva lidi sdílí měsíc. ✅
 
 > **Intuice bez vzorce:** Důkaz sporem = „řeknu opak, a pak ukážu, proč to nemůže být pravda."
 
@@ -37,7 +37,7 @@ Schéma myšlenkového toku u důkazu sporem:
                          ▼ (Logické odvozování krok za krokem)
                          │
                          ▼
-        💥 SPOR (Rozpor s faktem, definicí nebo A = 1)
+        SPOR (Rozpor s faktem, definicí nebo A = 1)
                          │
                          ▼
     ZÁVĚR: Náš předpoklad ¬B byl chybný, tedy platí B!
@@ -59,8 +59,8 @@ FORMÁLNÍ ŠABLONA ZÁPISU DŮKAZU SPOREM:
    - "Z platnosti ¬B plyne vlastnost X..."
    - "Z vlastnosti X a předpokladu A odvodíme vlastnost Y..."
 
-3. DOSAŽENÍ SPORU (Rozporu ⚡ / 💥 / ⊥):
-   - "To je ale SPOR (⚡) s [definicí Z / předpokladem A / dokázanou větou]!"
+3. DOSAŽENÍ SPORU (Rozporu / ⊥):
+   - "To je ale SPOR (⊥) s [definicí Z / předpokladem A / dokázanou větou]!"
 
 4. ZÁVĚR:
    - "Proto náš předpoklad pro spor nemohl platit, a tedy původní tvrzení A => B platí. Q.E.D."
@@ -178,7 +178,7 @@ Navštívené uzly:   u₀ ─────> u₁ ─────> u₂ ───
 
 ---
 
-## 4. 🔬 Extremální Princip v Grafech — Krok za Krokem
+## 4. 🔬 Extremální Princip v Grafech - Krok za Krokem
 
 ### Princip
 
@@ -206,19 +206,19 @@ Zde každý vrchol má stupeň 2. Cyklus $1 \to 2 \to 3 \to 4 \to 5 \to 1$ zjevn
 
 ### ✍️ Formální důkaz extremálním principem
 
-1. **Krok 1 — Zvolíme nejdelší jednoduchou cestu:**  
+1. **Krok 1 - Zvolíme nejdelší jednoduchou cestu:**  
    Nechť $P = (v_0, v_1, v_2, \ldots, v_k)$ je **nejdelší jednoduchá cesta** v grafu $G$. (Takový extremální objekt v konečném grafu zaručeně existuje.)
 
-2. **Krok 2 — Zkoumáme krajní vrchol $v_0$:**  
+2. **Krok 2 - Zkoumáme krajní vrchol $v_0$:**  
    Stupeň $\deg(v_0) \ge 2$ (z předpokladu $\delta(G) \ge 2$). Vrchol $v_0$ tedy má alespoň 2 sousedy.
 
-3. **Krok 3 — Sousedé $v_0$ musí být na cestě $P$:**  
+3. **Krok 3 - Sousedé $v_0$ musí být na cestě $P$:**  
    Předpokládejme pro spor, že $v_0$ má souseda $u \notin \{v_1, v_2, \ldots, v_k\}$ (mimo cestu $P$).  
-   Pak $(u, v_0, v_1, \ldots, v_k)$ je jednoduchá cesta délky $k+1$ — delší než $P$.  
-   To je **💥 SPOR s maximalitou cesty $P$**!  
+   Pak $(u, v_0, v_1, \ldots, v_k)$ je jednoduchá cesta délky $k+1$ - delší než $P$.  
+   To je **SPOR ($\bot$) s maximalitou cesty $P$**!  
    Tedy **všichni sousedé $v_0$ leží přímo na cestě $P$**: $v_0$ sousedí pouze s vrcholy $v_1, v_2, \ldots, v_k$.
 
-4. **Krok 4 — Najdeme cyklus:**  
+4. **Krok 4 - Najdeme cyklus:**  
    Víme, že $v_0$ má alespoň 2 sousedy a všichni leží na $P$.  
    Jeden soused je $v_1$ (hrana $\{v_0, v_1\}$ je součástí $P$). Druhý soused $v_j$ (pro $j \ge 2$) dává hranu $\{v_0, v_j\}$.  
    Hrana $\{v_0, v_j\}$ spolu s úsekem cesty $v_0, v_1, \ldots, v_j$ tvoří **cyklus**:
@@ -269,7 +269,7 @@ Graf: $V = \{1,2,3,4,5\}$, hrany: $\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{5,1\},\{1,3
 3. Vynecháním cyklu $C$ získáme novou cestu $P': s \xrightarrow{P_1} u \xrightarrow{P_2} t$.
 4. Protože váhy jsou nezáporné, platí $w(C) \ge 0$.  
    - Je-li $w(C) > 0$, pak $w(P') < w(P)$, což je **SPOR** s tím, že $P$ byla nejkratší.
-   - Je-li $w(C) = 0$, nová cesta $P'$ má stejnou váhu, ale striktně méně hran — což vylučuje nutnost cyklu na nejkratší jednoduché trase.
+   - Je-li $w(C) = 0$, nová cesta $P'$ má stejnou váhu, ale striktně méně hran - což vylučuje nutnost cyklu na nejkratší jednoduché trase.
 
 ---
 
@@ -282,7 +282,7 @@ Graf: $V = \{1,2,3,4,5\}$, hrany: $\{1,2\},\{2,3\},\{3,4\},\{4,5\},\{5,1\},\{1,3
   </p>
   <ul class="text-xs sm:text-sm text-stone-600 dark:text-stone-300 space-y-1 list-disc pl-4">
     <li><strong>Nekonstruktivní existence:</strong> Dokážou, že hledaný prvek (dva vrcholy se stejným stupněm, cyklus, nejkratší cesta) <em>musí zaručeně existovat</em>, ale <strong>nedávají žádný recept ani algoritmus</strong>, jak ho v datech najít či sestrojit.</li>
-    <li><strong>Konstruktivní existence (zlatý standard v informatice):</strong> Existenci dokážeme tím, že předložíme konkrétní funkční <strong>algoritmus (kód v C++)</strong>, který řešení krok za krokem spolehlivě sestrojí — po doběhnutí kódu držíme výsledek přímo v ruce.</li>
+    <li><strong>Konstruktivní existence (zlatý standard v informatice):</strong> Existenci dokážeme tím, že předložíme konkrétní funkční <strong>algoritmus (kód v C++)</strong>, který řešení krok za krokem spolehlivě sestrojí - po doběhnutí kódu držíme výsledek přímo v ruce.</li>
   </ul>
 </div>
 
@@ -316,7 +316,7 @@ Dokažte sporem, že v každém konečném orientovaném acyklickém grafu exist
 <summary>🔍 Zobrazit vzorové řešení</summary>
 <div class="p-4 text-xs sm:text-sm text-stone-700 dark:text-stone-300 space-y-2">
 <ol class="list-decimal pl-5 space-y-1">
-<li>Předpokládejme pro spor, že DAG neobsahuje žádný zdroj — tedy každý uzel má $\deg^-(v) \ge 1$.</li>
+<li>Předpokládejme pro spor, že DAG neobsahuje žádný zdroj - tedy každý uzel má $\deg^-(v) \ge 1$.</li>
 <li>Vybereme libovolný uzel $u_0$. Protože má vstupní hranu, má předchůdce $u_1$, ten má předchůdce $u_2$, a tak dále.</li>
 <li>Vytváříme nekonečnou posloupnost kroků dozadu: $\dots \to u_2 \to u_1 \to u_0$.</li>
 <li>Protože graf má pouze $n$ vrcholů (konečná množina), podle Dirichletova principu se po nejvýše $n+1$ krocích musí alespoň jeden vrchol zopakovat: $u_i = u_j$.</li>

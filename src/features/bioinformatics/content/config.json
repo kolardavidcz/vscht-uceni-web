@@ -30,7 +30,7 @@
           "title": "Průvodce prváka: Začátek 1. semestru"
         },
         "bi-pa1": {
-          "title": "BI-PA1 — Programování v C",
+          "title": "BI-PA1 - Programování v C",
           "files": {
             "behem-semestru-a-pred-nim": {
               "title": "0 · Během semestru"
@@ -75,10 +75,10 @@
       "label": "3. Semestr",
       "files": {
         "prihlasovani-na-predmety-a-rozvrh": {
-          "title": "Přihlašování na předměty & rozvrh (ČVUT / KOS)"
+          "title": "Průvodce druháka: Přihlašování na předměty & rozvrh (ČVUT / KOS)"
         },
         "pre-ax1": {
-          "title": "Před-AX1 — Příprava na Algoritmy a Grafy",
+          "title": "Před-AX1 - Příprava na Algoritmy a Grafy",
           "files": {
             "coding": {
               "title": "Programování & C++",
@@ -123,7 +123,7 @@
           }
         },
         "ax1": {
-          "title": "BI-AX1 — Algoritmy a grafy"
+          "title": "BI-AX1 - Algoritmy a grafy"
         },
         "fyzikalni-chemie": {
           "title": "Fyzikální chemie"

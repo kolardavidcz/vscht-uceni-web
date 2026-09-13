@@ -4,7 +4,7 @@ import configJson from "../content/config.json";
 export type FileConfig = {
   title?: string;
   order?: number;
-  /** Nested children — folder node in the sidebar tree */
+  /** Nested children - folder node in the sidebar tree */
   files?: Record<string, FileConfig>;
   /** Optional external URL for direct redirect/transfer */
   externalUrl?: string;
@@ -108,7 +108,7 @@ function resolveConfigPath(
     const part = relParts[i];
     const node = files?.[part];
     if (!node) {
-      // No config entry — still allow default orders
+      // No config entry - still allow default orders
       pathOrders.push(999);
       if (i < relParts.length - 1) folderTitles.push(part.replace(/-/g, " "));
       continue;

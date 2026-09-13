@@ -7,7 +7,7 @@
   <div class="space-y-1">
     <div class="flex items-center gap-2">
       <span class="px-2 py-0.5 rounded text-[11px] font-black bg-brand-orange text-white uppercase tracking-wider">C++20 Showcase</span>
-      <h3 class="text-base font-black text-stone-900 dark:text-white tracking-tight">rekurze_bro.cpp — Cvičení a Testovací Sada</h3>
+      <h3 class="text-base font-black text-stone-900 dark:text-white tracking-tight">rekurze_bro.cpp - Cvičení a Testovací Sada</h3>
     </div>
     <p class="text-xs text-stone-600 dark:text-stone-300 leading-relaxed">
       Kompletní samostatný soubor připravený ke kompilaci. Obsahuje struktury grafů, kostry funkcí k doplnění a sadu automatických assert testů.

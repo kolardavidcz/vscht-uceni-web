@@ -39,7 +39,7 @@ void solve(int step, int max_steps) {
 void process(const std::vector<int> &data); // Read-only předání bez kopie
 void swap(int &a, int &b) { int tmp = a; a = b; b = tmp; } // Změna originálu
 ```
-- ⚠️ **Past**: Nikdy nevracejte referenci na lokální proměnnou z funkce — po návratu proměnná zanikne (*dangling reference* / segfault).
+- ⚠️ **Past**: Nikdy nevracejte referenci na lokální proměnnou z funkce - po návratu proměnná zanikne (*dangling reference* / segfault).
 
 ### 2. Výchozí (implicitní) argumenty `[100% · Trainer]`
 - **Princip**: Umožňují volat funkci bez zadání parametrů zprava, kompilátor doplní výchozí hodnoty.
@@ -151,7 +151,7 @@ for (auto it = v.begin(); it != v.end(); ++it) { ... }
 for (auto it = v.rbegin(); it != v.rend(); ++it) { ... } // Výpis pozpátku
 ```
 
-### 12. `std::vector<T>` — Dynamické pole `[100% Trainer · 90% E-learning]`
+### 12. `std::vector<T>` - Dynamické pole `[100% Trainer · 90% E-learning]`
 - **Princip**: Data leží v souvislém bloku paměti. Přímý přístup v $O(1)$, amortizované vkládání na konec v $O(1)$.
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
@@ -180,7 +180,7 @@ for (auto it = v.rbegin(); it != v.rend(); ++it) { ... } // Výpis pozpátku
 - 💡 **`emplace_back` vs `push_back`**: `emplace_back` předává argumenty přímo konstruktoru prvku v paměti vektoru, čímž šetří kopírování/přesun dočasných objektů.
 - ⚠️ **Past**: Při překročení kapacity se vektor přealokuje v RAM -> **všechny dřívější iterátory a ukazatele na prvky zaniknou (invalidace)!**
 
-### 13. `std::array<T, N>` — Statické pole `[60% · E-learning]`
+### 13. `std::array<T, N>` - Statické pole `[60% · E-learning]`
 - **Princip**: Pole pevné velikosti alokované přímo na zásobníku (stack) s nulovou režií na haldě.
 - **Kód**:
 ```cpp
@@ -191,7 +191,7 @@ constexpr std::array<int, 4> dx = {0, 0, 1, -1}; // Směrové posuny v mřížce
 
 ## 📅 Týden 5: Pokročilé STL kontejnery
 
-### 14. `std::queue<T>` — Fronta (FIFO) `[100% · E-learning]`
+### 14. `std::queue<T>` - Fronta (FIFO) `[100% · E-learning]`
 - **Princip**: First-In, First-Out (kdo dřív přijde, dřív odejde). Klíčová datová struktura pro **BFS**.
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
@@ -216,7 +216,7 @@ constexpr std::array<int, 4> dx = {0, 0, 1, -1}; // Směrové posuny v mřížce
 
 ---
 
-### 15. `std::priority_queue<T>` — Prioritní fronta / Halda `[100% · E-learning]`
+### 15. `std::priority_queue<T>` - Prioritní fronta / Halda `[100% · E-learning]`
 - **Princip**: Binární halda. Na vrcholu `top()` udržuje nejvyšší prvek v $O(1)$, vkládání a mazání trvá $O(\log n)$.
 - **Metody**: `push(x)` (vloží v $O(\log n)$), `pop()` (odebere extrém v $O(\log n)$), `top()` (náhled na extrém v $O(1)$), `empty()`.
 - **Kód (Přepnutí na MIN-HEAP pro Dijkstrův algoritmus)**:
@@ -228,7 +228,7 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 
 ---
 
-### 16. `std::stack<T>` — Zásobník (LIFO) `[90% · E-learning]`
+### 16. `std::stack<T>` - Zásobník (LIFO) `[90% · E-learning]`
 - **Princip**: Last-In, First-Out (poslední vložený jde první ven). Využití pro **iterativní DFS** a párování závorek.
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
@@ -252,7 +252,7 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 
 ---
 
-### 17. `std::deque<T>` — Oboustranná fronta `[80% · E-learning]`
+### 17. `std::deque<T>` - Oboustranná fronta `[80% · E-learning]`
 - **Princip**: Umožňuje $O(1)$ vkládání i mazání na **obou koncích** a přímý přístup přes `[]`. Vkládání na konce nikdy neinvaliduje ukazatele na stávající prvky.
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
@@ -274,7 +274,7 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 
 ---
 
-### 18. `std::list<T>` — Obousměrný spojový seznam `[80% · E-learning]`
+### 18. `std::list<T>` - Obousměrný spojový seznam `[80% · E-learning]`
 - **Princip**: Uzly v paměti propojené obousměrnými ukazateli. Umožňuje $O(1)$ vkládání kdekoliv, pokud již máme iterátor.
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center my-3">
@@ -298,7 +298,7 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 
 ---
 
-### 19. `std::map<Key, Value>` — Asociativní strom `[70% · E-learning]`
+### 19. `std::map<Key, Value>` - Asociativní strom `[70% · E-learning]`
 - **Princip**: Samovyvažující se červeno-černý strom seřazených párů klíč-hodnota. Operace `insert`, `find`, `erase` trvají garantovaně $O(\log n)$.
 
 | Metoda | Popis | Příklad |
@@ -312,7 +312,7 @@ std::priority_queue<PII, std::vector<PII>, std::greater<PII>> minHeap;
 
 ---
 
-### 20. `std::set<T>` — Uspořádaná množina `[60% · E-learning]`
+### 20. `std::set<T>` - Uspořádaná množina `[60% · E-learning]`
 - **Princip**: Červeno-černý strom uchovávající unikátní hodnoty v seřazeném pořadí.
 - **Kód**:
 ```cpp
@@ -405,12 +405,12 @@ struct Node { T val; Node *next = nullptr; }; // Šablona třídy/struktury
 ## 📅 Po Týdnu 8: Chytré ukazatele (`std::unique_ptr` vs `std::shared_ptr`)
 
 ### 26. Automatická správa paměti (Smart Pointers)
-- **Proč vznikly**: Zabraňují memory leakům díky RAII — alokovaná paměť se automaticky uvolní destruktorem při opuštění rozsahu platnosti.
-- **`std::shared_ptr<T>` — Snadnější na ovládání (Sdílené vlastnictví)**:
+- **Proč vznikly**: Zabraňují memory leakům díky RAII - alokovaná paměť se automaticky uvolní destruktorem při opuštění rozsahu platnosti.
+- **`std::shared_ptr<T>` - Snadnější na ovládání (Sdílené vlastnictví)**:
   - Dynamický objekt může vlastnit více ukazatelů současně.
   - Využívá **čítač referencí** (při zkopírování ukazatele se čítač zvýší, při zániku sníží; objekt se smaže až se zánikem posledního ukazatele).
   - **Proč se s ním pracuje lépe**: Můžete ho libovolně kopírovat, předávat hodnotou do funkcí i vkládat do STL kontejnerů bez složitého přesouvání.
-- **`std::unique_ptr<T>` — Nulová režie (Výhradní vlastnictví)**:
+- **`std::unique_ptr<T>` - Nulová režie (Výhradní vlastnictví)**:
   - Objekt smí vlastnit v daný okamžik právě **jeden** ukazatel.
   - **Co je zablokováno**: Kopírovací konstruktor i operátor přiřazení jsou **zakázány (`= delete`)**! Nelze ho zkopírovat `auto p2 = p1;` (chyba překladu).
   - **Jak s ním pracovat**: Vlastnictví lze pouze **přesunout** pomocí `std::move()`: `auto p2 = std::move(p1);` (tím se `p1` vynuluje na `nullptr`).

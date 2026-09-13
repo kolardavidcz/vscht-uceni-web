@@ -34,7 +34,7 @@ export function QuizPage({ data }: Props) {
   const quiz = useQuizState(emojiOptions);
 
   useEffect(() => {
-    document.title = "Systematika bakterií — VŠCHT Učení";
+    document.title = "Systematika bakterií - VŠCHT Učení";
   }, []);
 
   const total = countTotal(worksheetData);
@@ -66,7 +66,7 @@ export function QuizPage({ data }: Props) {
           </Link>
           <Link
             to="/mikrobiologie/admin"
-            title="Admin — úprava správných odpovědí"
+            title="Admin - úprava správných odpovědí"
             className="inline-flex items-center justify-center p-2.5 sm:p-3 rounded-xl border border-white/20 bg-white/10 text-white hover:bg-white/15 hover:border-white/30 transition-all"
           >
             <Settings size={22} strokeWidth={2} />
@@ -147,7 +147,7 @@ export function QuizPage({ data }: Props) {
           </div>
 
           {/* Desktop sticky sidebar when pinned */}
-          {/* Desktop sticky sidebar — old widths ~380–420px, full viewport height */}
+          {/* Desktop sticky sidebar - old widths ~380–420px, full viewport height */}
           {pinnedActive && (
             <aside
               className="hidden lg:block lg:w-[380px] xl:w-[420px] lg:sticky lg:top-[7.5rem] shrink-0 h-[calc(100vh-10rem)]"
@@ -175,7 +175,7 @@ export function QuizPage({ data }: Props) {
           )}
         </div>
 
-        {/* Mobile bottom sheet — half-ish viewport, pin + X in palette header */}
+        {/* Mobile bottom sheet - half-ish viewport, pin + X in palette header */}
         {pinnedActive && (
           <div
             className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-stone-200 shadow-[0_-12px_42px_rgba(0,0,0,0.1)] rounded-t-3xl p-4 sm:p-5 max-h-[48vh] flex flex-col"

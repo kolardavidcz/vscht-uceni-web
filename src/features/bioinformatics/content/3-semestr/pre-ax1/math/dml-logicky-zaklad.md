@@ -4,15 +4,15 @@
 
 ---
 
-## 🌱 Než začneme: Proč se biologové učí logiku?
+## Než začneme: Proč se biologové učí logiku?
 
-Představ si, že zkoumáš nový protein. Kolega tvrdí: *„Pokud je tento gen aktivní, pak se protein exprimuje."* Jenže v experimentu vidíš buňky, kde gen aktivní **není** — a protein se tam taky neobjevuje. Potvrzuje to kolegovo tvrzení, nebo ho vyvrací?
+Představ si, že zkoumáš nový protein. Kolega tvrdí: *„Pokud je tento gen aktivní, pak se protein exprimuje."* Jenže v experimentu vidíš buňky, kde gen aktivní **není** - a protein se tam taky neobjevuje. Potvrzuje to kolegovo tvrzení, nebo ho vyvrací?
 
-Odpověď závisí přesně na tom, **jak přečteme implikaci** „pokud A, pak B". A tady spousta biologů (a i počítačových vědců) dělá chyby — protože přirozený jazyk je nejednoznačný. Věta „Pokud prší, vezmu deštník" **nic neříká o tom, co uděláš, když neprší** — třeba deštník vezmeš stejně, protože je hezký.
+Odpověď závisí přesně na tom, **jak přečteme implikaci** „pokud A, pak B". A tady spousta biologů (a i počítačových vědců) dělá chyby - protože přirozený jazyk je nejednoznačný. Věta „Pokud prší, vezmu deštník" **nic neříká o tom, co uděláš, když neprší** - třeba deštník vezmeš stejně, protože je hezký.
 
-Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AX1 budeš formulovat tvrzení o grafech a dokazovat je — a každá nejednoznačnost v logickém zápisu = ztráta bodů.
+Matematická logika je nástroj, který tuto nejednoznačnost odstraňuje. Ve zkouškách z AX1 budeš formulovat tvrzení o grafech a dokazovat je - a každá nejednoznačnost v logickém zápisu = ztráta bodů.
 
-> 💡 **Příslib této kapitoly:** Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C — žádná teorie grafů není předem potřeba!
+> 💡 **Příslib této kapitoly:** Po přečtení budeš umět přesně přečíst jakékoliv formální tvrzení, bezchybně ho znegovat a zvolit správnou strategii důkazu. Všechny principy stavíme na situacích ze skutečného studentského života, chemické praxe a programování v C - žádná teorie grafů není předem potřeba!
 
 ---
 
@@ -51,7 +51,7 @@ Ještě v 16. století dnešní algebraické a logické symboly prakticky neexis
 >
 > Výsledné řešení pak získáš jako rozdíl třetích odmocnin těchto dvou proměnných.“
 
-Všimněte si, jakou úlevu přináší moderní symbolický jazyk — celou tuto básnickou sloku dnes zapíšeme do jediného algebraického řádku:
+Všimněte si, jakou úlevu přináší moderní symbolický jazyk - celou tuto básnickou sloku dnes zapíšeme do jediného algebraického řádku:
 $$x^3 + px = q \implies x = \sqrt[3]{u} - \sqrt[3]{v}, \quad \text{kde } u - v = q \ \land \ uv = \left(\frac{p}{3}\right)^3$$
 
 **Matematické symboly nevznikly jako překážka, ale jako záchrana před slovní mlhou.** Šetří kognitivní kapacitu, zamezují víceznačnosti a umožňují okamžitou kontrolu správnosti. Nyní se podívejme na základní symboly, se kterými budeme v AX1 pracovat:
@@ -331,7 +331,7 @@ $$\neg (A \land B) \quad \equiv \quad \neg A \lor \neg B$$
 > - **NEBO** jste nenapsali test bezpečnosti ($\neg B$).  
 > Jakmile nastane alespoň jedno z toho (stačí zapomenout brýle, i když test máte na 100 bodů), do laborky nesmíte!
 
-#### 🚆 Příklad z Běžného Života: Studentská Sleva na Jízdenku (2. Zákon: Negace Disjunkce)
+#### Příklad z běžného života: Studentská sleva na jízdenku (2. zákon: Negace disjunkce)
 
 Druhý De Morganův zákon ($\neg(A \lor B) \equiv \neg A \land \neg B$) si představte na studentské slevě na vlak či autobus. Nárok na slevu máte, pokud:
 - Je vám méně než 18 let ($A$), **NEBO** předložíte platný průkaz ISIC ($B$).
@@ -415,7 +415,7 @@ $$\neg (\exists x \in M : P(x)) \quad \equiv \quad \forall x \in M : \neg P(x)$$
    - **Původní tvrzení:** *„Každý student je chytrý."* ($\forall x \in \text{Studenti} : P(x)$)
    - **Negace tvrzení:** *„Není pravda, že (každý student je chytrý)."*
    - **Logicky ekvivalentní tvar:** $\iff$ *„Existuje alespoň 1 student, který **není chytrý**."* ($\exists x \in \text{Studenti} : \neg P(x)$)
-   - 💡 *K vyvrácení tvrzení, že jsou všichni chytří, nepotřebujete, aby byli všichni hloupí — stačí vám najít jediného studenta, který chytrý není!*
+   - 💡 *K vyvrácení tvrzení, že jsou všichni chytří, nepotřebujete, aby byli všichni hloupí - stačí vám najít jediného studenta, který chytrý není!*
 
 2. **Negace existenčního kvantifikátoru ($\exists \longrightarrow \forall$):**
    - **Původní tvrzení:** *„Existuje chytrý student."* ($\exists x \in \text{Studenti} : P(x)$)
@@ -431,9 +431,9 @@ V reálných testech z AX1 potkáte výroky s více vrstvami kvantifikátorů. P
 
 #### Případ 1: Souvislost Sítě (Grafu)
 Představme si síť uzlů $V$ (např. biochemické metabolity propojené enzymovými reakcemi nebo servery na internetu):
-- **Původní tvrzení $S$ (Síť je souvislá — ze všeho se lze dostat všude):**
+- **Původní tvrzení $S$ (Síť je souvislá - ze všeho se lze dostat všude):**
   $$\forall u, v \in V : (u \neq v \implies \exists \text{ cesta } P \text{ z } u \text{ do } v)$$
-- **Formální Negace $\neg S$ (Síť je nesouvislá — rozpadlá na oddělené části):**
+- **Formální Negace $\neg S$ (Síť je nesouvislá - rozpadlá na oddělené části):**
   Aplikujeme pravidlo negace zvenčí dovnitř:
   1. Zaměníme $\forall u, v$ za $\exists u, v$.
   2. Znegujeme implikaci $\neg (A \implies B) \equiv A \land \neg B$.
@@ -464,7 +464,7 @@ V odborné literatuře i na přednáškách se setkáte se **dvěma zásadními 
 
 | Typ Důkazu | Jak Funguje v Praxi | Proč Může Zmást Studenta | Význam pro Bioinformatiku a AX1 |
 | :--- | :--- | :--- | :--- |
-| **1. Důkaz Heuristický / Objevný** *(Cesta k výsledku)* | Ukazuje **skutečný myšlenkový postup autora** — od prvotní motivace přes jednoduché náčrtky až po obecný vzorec. | Bývá delší na čtení, protože neskrývá slepé uličky a experimentální intuici. | **Zásadní pro algoritmy:** Tento důkaz často *přímo generuje samotný algoritmus a kód v C++* (např. konstrukce Eulerova tahu). |
+| **1. Důkaz Heuristický / Objevný** *(Cesta k výsledku)* | Ukazuje **skutečný myšlenkový postup autora** - od prvotní motivace přes jednoduché náčrtky až po obecný vzorec. | Bývá delší na čtení, protože neskrývá slepé uličky a experimentální intuici. | **Zásadní pro algoritmy:** Tento důkaz často *přímo generuje samotný algoritmus a kód v C++* (např. konstrukce Eulerova tahu). |
 | **2. Důkaz Formální / Úsporný** *(Čistá verifikace)* | Dokazuje tvrzení v co nejmenším počtu řádků a **zkracuje všechno, co může**. | **Působí jako kouzlo spadlé z nebe.** Autor zahodil všechny papíry s náčrtky a předloží jen finální geniální trik. | Slouží k rychlému a neprůstřelnému ověření, ale sám o sobě vás nenaučí, jak na řešení přijít. |
 
 ```text
@@ -484,7 +484,7 @@ JAK VE SKUTEČNOSTI VZNIKÁ MATEMATICKÝ A ALGORITMICKÝ OBJEV:
 
 > [!TIP]
 > **💡 Tajemství zkouškových premiantů:**  
-> Když lidé (včetně slavných matematiků a informatiků) přijdou na něco nového, **rozhodně to není tím, že by seděli doma a z hlavy psali abstraktní formule na papír** *(s nadsázkou to neplatí snad jedině pro teoretické fyziky! 😉)*.  
+> Když lidé (včetně slavných matematiků a informatiků) přijdou na něco nového, **rozhodně to není tím, že by seděli doma a z hlavy psali abstraktní formule na papír** *(s nadsázkou to neplatí snad jedině pro teoretické fyziky)*.  
 > Skutečné poznání začíná tím, že si **něco zkoušíte, kreslíte náčrtky a hledáte invarianty a skryté vlastnosti**. Formální důkaz je až slavnostní obal, kterým svou intuici obhájíte před světem.
 
 ---
@@ -565,7 +565,7 @@ Dokážeme tvrzení pro libovolnou konečnou síť (graf) $G = (V, E)$, kde $V$ 
 *"Pokud z každého uzlu $v \in V$ vycházejí alespoň 2 spojnice ($\deg(v) \ge 2$), pak síť $G$ nutně obsahuje alespoň jednu uzavřenou smyčku (cyklus)."*
 
 > 💡 **Intuitivní představa před formálním důkazem:**  
-> Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře ($\deg(v) \ge 2$), nikdy nemůžete uvíznout ve slepé uličce. Když budete bludištěm procházet stále kupředu a nikdy se nevrátíte stejnými dveřmi zpět, v konečném počtu místností musíte dříve či později narazit do místnosti, kde už jste jednou byli — a tím jste uzavřeli kruh (cyklus)!
+> Představte si chodby v bludišti. Pokud z každé místnosti vedou alespoň 2 dveře ($\deg(v) \ge 2$), nikdy nemůžete uvíznout ve slepé uličce. Když budete bludištěm procházet stále kupředu a nikdy se nevrátíte stejnými dveřmi zpět, v konečném počtu místností musíte dříve či později narazit do místnosti, kde už jste jednou byli - a tím jste uzavřeli kruh (cyklus)!
 
 <details>
 <summary>🔍 Zobrazit vzorový důkaz (Kontrapozicí i Přímým způsobem)</summary>
@@ -604,7 +604,7 @@ Tvrzení lze dokázat také **zcela přímo** ($A \implies B$) bez přechodu k n
    - Ze zadání víme, že má $\deg(v_k) \ge 2$ (musí mít alespoň 2 různé sousedy).
    - Prvním sousedem je uzel bezprostředně nalevo na trase ($v_{k-1}$).
    - **Kde leží jeho druhý soused?**
-     - Nemůže ležet vně trasy jako nový vrchol $v_{k+1}$ doprava — to by byla trasa delší, což odporuje tomu, že $P$ byla zvolena jako nejdelší možná.
+     - Nemůže ležet vně trasy jako nový vrchol $v_{k+1}$ doprava - to by byla trasa delší, což odporuje tomu, že $P$ byla zvolena jako nejdelší možná.
      - Nemůže být „na kraji“ bez napojení, protože má $\deg(v_k) \ge 2$.
      - Druhý soused vrcholu $v_k$ proto **nutně musí být některý z již navštívených vrcholů $v_i$ nalevo na trase** ($1 \le i \le k-2$).
      - V krajním případě tato hrana vede z $v_k$ přímo zpět do počátečního uzlu $v_1$!

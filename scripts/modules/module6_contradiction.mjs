@@ -24,7 +24,7 @@ export function addModule6Slides(pres) {
       "3. 🐦 Dirichletův princip v Teorii Grafů (Pigeonhole Principle)",
       "Příklad 1: Dva vrcholy se stejným stupněm v každém grafu",
       "Příklad 2: Cesta délky n v grafu o n vrcholech nutně tvoří cyklus",
-      "4. 🔬 Extremální Princip v Grafech — Krok za Krokem",
+      "4. 🔬 Extremální Princip v Grafech - Krok za Krokem",
       "Pracovaný příklad 1: Pokud δ(G) ≥ 2, pak G obsahuje cyklus",
       "Pracovaný příklad 2: Nejkratší cesta s nezápornými vahami neobsahuje cyklus",
       "Konstruktivní vs. Nekonstruktivní existence v informatice",
@@ -41,10 +41,10 @@ export function addModule6Slides(pres) {
       badge: "PRINCIP",
       type: "neutral",
       items: [
-        { bold: "Sherlock Holmes říká:", text: "„Když vyloučíš vše nemožné, co zbude — i kdyby to bylo sebenepravděpodobnější — musí to být pravda.“" },
+        { bold: "Sherlock Holmes říká:", text: "„Když vyloučíš vše nemožné, co zbude - i kdyby to bylo sebenepravděpodobnější - musí to být pravda.“" },
         { bold: "1. Krok:", text: "Chceš dokázat, že tvrzení B platí." },
         { bold: "2. Krok:", text: "Předpokládej, že B neplatí (tedy předpokládej opak)." },
-        { bold: "3. Krok:", text: "Z tohoto předpokladu logicky odvoď nesmysl — něco, co je zjevně nepravdivé (spor s tím, co víš)." },
+        { bold: "3. Krok:", text: "Z tohoto předpokladu logicky odvoď nesmysl - něco, co je zjevně nepravdivé (spor s tím, co víš)." },
         { bold: "4. Krok:", text: "Protože opak B vedl k nesmyslu, B musí platit." }
       ]
     },
@@ -55,7 +55,7 @@ export function addModule6Slides(pres) {
       items: [
         { bold: "Zadání:", text: "Chceš dokázat, že v místnosti s 13 lidmi musí aspoň dva sdílet narozeninový měsíc." },
         { bold: "Předpoklad opaku:", text: "Každý má jiný měsíc." },
-        { bold: "Dosažení sporu:", text: "Ale měsíců je jen 12. To je spor — 13 lidí se do 12 měsíců nevejde jeden do každého." },
+        { bold: "Dosažení sporu:", text: "Ale měsíců je jen 12. To je spor - 13 lidí se do 12 měsíců nevejde jeden do každého." },
         { bold: "Závěr:", text: "Předpoklad byl špatný, takže dva lidi sdílí měsíc. ✅" },
         { bold: "Intuice bez vzorce:", text: "Důkaz sporem = „řeknu opak, a pak ukážu, proč to nemůže být pravda.“" }
       ]
@@ -177,7 +177,7 @@ export function addModule6Slides(pres) {
       type: "warm",
       items: [
         { bold: "V proteinové síti:", text: "V protein-proteinové interakční síti (PPI síť) o n proteinech vždy existují alespoň dva proteiny, které mají navlas stejný počet interakčních partnerů." },
-        { bold: "Vizuální znázornění pro n = 4:", text: "Vrcholy A, B, C, D padají do škatułek deg 1, deg 2, deg 3. Kolize je nevyhnutelná — např. vrcholy B a C mají shodně stupeň 2!" }
+        { bold: "Vizuální znázornění pro n = 4:", text: "Vrcholy A, B, C, D padají do škatułek deg 1, deg 2, deg 3. Kolize je nevyhnutelná - např. vrcholy B a C mají shodně stupeň 2!" }
       ]
     }
   });
@@ -241,17 +241,17 @@ export function addModule6Slides(pres) {
       badge: "NEJDELŠÍ CESTA",
       type: "neutral",
       items: [
-        { bold: "Krok 1 — Nejdelší jednoduchá cesta:", text: "Nechť P = (v₀, v₁, v₂, …, vk) je nejdelší jednoduchá cesta v grafu G. (Takový extremální objekt v konečném grafu zaručeně existuje)." },
-        { bold: "Krok 2 — Zkoumáme krajní vrchol v₀:", text: "Stupeň deg(v₀) ≥ 2 (z předpokladu δ(G) ≥ 2). Vrchol v₀ tedy má alespoň 2 sousedy." }
+        { bold: "Krok 1 - Nejdelší jednoduchá cesta:", text: "Nechť P = (v₀, v₁, v₂, …, vk) je nejdelší jednoduchá cesta v grafu G. (Takový extremální objekt v konečném grafu zaručeně existuje)." },
+        { bold: "Krok 2 - Zkoumáme krajní vrchol v₀:", text: "Stupeň deg(v₀) ≥ 2 (z předpokladu δ(G) ≥ 2). Vrchol v₀ tedy má alespoň 2 sousedy." }
       ]
     },
     rightCard: {
-      title: "Krok 3 — Sousedé v₀ Musí Být na Cestě P",
+      title: "Krok 3 - Sousedé v₀ Musí Být na Cestě P",
       badge: "SPOR S MAXIMALITOU",
       type: "rose",
       items: [
         { bold: "Předpokládejme pro spor:", text: "že v₀ má souseda u ∉ {v₁, v₂, …, vk} (mimo cestu P)." },
-        { bold: "Delší cesta:", text: "Pak (u, v₀, v₁, …, vk) je jednoduchá cesta délky k+1 — delší než P." },
+        { bold: "Delší cesta:", text: "Pak (u, v₀, v₁, …, vk) je jednoduchá cesta délky k+1 - delší než P." },
         { bold: "💥 SPOR:", text: "To je SPOR s maximalitou cesty P! Tedy všichni sousedé v₀ leží přímo na cestě P: v₀ sousedí pouze s vrcholy v₁, v₂, …, vk." }
       ]
     }
@@ -262,7 +262,7 @@ export function addModule6Slides(pres) {
     breadcrumb,
     title: "Důkaz Extremálním Principem: Cyklus a Tracování",
     leftCard: {
-      title: "Krok 4 — Nalezení Cyklu",
+      title: "Krok 4 - Nalezení Cyklu",
       badge: "CYKLUS",
       type: "emerald",
       items: [
@@ -306,7 +306,7 @@ export function addModule6Slides(pres) {
         { bold: "3. Nová cesta P':", text: "Vynecháním cyklu C získáme novou cestu P': s ──(P₁)──> u ──(P₂)──> t." },
         { bold: "4. Nezápory vah:", text: "Protože váhy jsou nezáporné, platí w(C) ≥ 0." },
         { bold: "Případ w(C) > 0:", text: "Pak w(P') < w(P), což je SPOR s tím, že P byla nejkratší." },
-        { bold: "Případ w(C) = 0:", text: "Nová cesta P' má stejnou váhu, ale striktně méně hran — což vylučuje nutnost cyklu na nejkratší jednoduché trase." }
+        { bold: "Případ w(C) = 0:", text: "Nová cesta P' má stejnou váhu, ale striktně méně hran - což vylučuje nutnost cyklu na nejkratší jednoduché trase." }
       ]
     }
   });
@@ -331,7 +331,7 @@ export function addModule6Slides(pres) {
       type: "emerald",
       items: [
         { bold: "Zlatý standard v informatice:", text: "Existenci dokážeme tím, že předložíme konkrétní funkční algoritmus (kód v C++)." },
-        { bold: "Spolehlivý výsledek:", text: "Algoritmus řešení krok za krokem spolehlivě sestrojí — po doběhnutí kódu držíme výsledek přímo v ruce." }
+        { bold: "Spolehlivý výsledek:", text: "Algoritmus řešení krok za krokem spolehlivě sestrojí - po doběhnutí kódu držíme výsledek přímo v ruce." }
       ]
     }
   });
@@ -346,7 +346,7 @@ export function addModule6Slides(pres) {
       type: "neutral",
       items: [
         { bold: "Tvrzení:", text: "Každý souvislý graf G s deg(v) ≤ 2 je buď cesta (P_n), nebo kružnice (C_n)." },
-        { bold: "Důkaz sporem:", text: "Zvolme nejdelší cestu P = (v₀, …, vk). Předpokládejme pro spor uzel u ∉ P. Protože G je souvislý, existuje hrana do P. Vnitřní vrcholy již mají stupeň 2. Hrana z u by musela vést do v₀ nebo vk — to by však prodloužilo P, což je SPOR s maximalitou cesty P! Žádný uzel mimo P neexistuje." }
+        { bold: "Důkaz sporem:", text: "Zvolme nejdelší cestu P = (v₀, …, vk). Předpokládejme pro spor uzel u ∉ P. Protože G je souvislý, existuje hrana do P. Vnitřní vrcholy již mají stupeň 2. Hrana z u by musela vést do v₀ nebo vk - to by však prodloužilo P, což je SPOR s maximalitou cesty P! Žádný uzel mimo P neexistuje." }
       ]
     },
     rightCard: {

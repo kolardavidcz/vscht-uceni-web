@@ -7,7 +7,7 @@ import { localApiPlugin } from "./vite-plugin-local-api";
 /**
  * Multi-chunk production build (default).
  * Single-file was previously used via vite-plugin-singlefile but is not needed
- * for Vercel — hashed JS/CSS chunks cache better for the common
+ * for Vercel - hashed JS/CSS chunks cache better for the common
  * `/mikrobiologie` entry path.
  */
 export default defineConfig({

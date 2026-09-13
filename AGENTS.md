@@ -1,4 +1,4 @@
-# Agent instructions — VŠCHT Učení
+# Agent instructions - VŠCHT Učení
 
 This file is for AI agents and maintainers working on this repo.  
 Human-facing product docs live in `README.md`. Prefer this file for architecture, env, deploy gotchas, and non-obvious invariants.
@@ -32,19 +32,19 @@ Stack (do not casually upgrade major versions without reason):
 
 ~95% of users deep-link to micro. Keep wiki/markdown/MathJax off that path:
 
-1. **Lazy routes** in `App.tsx` — micro / wiki / python are separate chunks.
-2. **MathJax** loads on demand via `src/lib/loadMathJax.ts` only when wiki MD looks like it has math — never in `index.html`.
+1. **Lazy routes** in `App.tsx` - micro / wiki / python are separate chunks.
+2. **MathJax** loads on demand via `src/lib/loadMathJax.ts` only when wiki MD looks like it has math - never in `index.html`.
 3. **PA2 overview** + `materialsData` load only when that wiki page opens (`React.lazy` in `WikiPage`).
-4. **highlight.js** — only C/C++/bash/python/json grammars in `MarkdownView` (not the full language pack).
-5. Prefer growing wiki content carefully; still eager-glob MD today — async MD is a future win if content balloons.
+4. **highlight.js** - only C/C++/bash/python/json grammars in `MarkdownView` (not the full language pack).
+5. Prefer growing wiki content carefully; still eager-glob MD today - async MD is a future win if content balloons.
 
 ### Microbiology catalog (soft-upgrade)
 
-- **~52 species** — lives in `zastupci.ts` / `emojis.ts` (small; micro chunk).
+- **~52 species** - lives in `zastupci.ts` / `emojis.ts` (small; micro chunk).
 - **Paint first from bundle** (`ready` immediately); then **soft-upgrade** via background `GET /api/get-data` when Redis has admin edits.
 - Fallback: localStorage offline admin mirror if Redis empty/unavailable.
 - Admin: `POST /api/save-data` (vectoral patches) still works.
-- **Do not use Vercel `/tmp`** for this catalog — ephemeral, not shared. Bundle + optional Redis only.
+- **Do not use Vercel `/tmp`** for this catalog - ephemeral, not shared. Bundle + optional Redis only.
 - Short CDN cache on get-data (`s-maxage=60`) so reads stay cheap without freezing writes.
 
 ---
@@ -57,7 +57,7 @@ api/                          # Vercel serverless handlers ONLY (one file = one 
   save-data.ts                # POST admin password + changes/data
   suggest-edit.ts             # POST wiki → GitHub branch + PR
 
-lib/server/                   # Shared Node logic — NOT under api/
+lib/server/                   # Shared Node logic - NOT under api/
   githubSuggest.ts            # createSuggestBranch, path allowlist, GitHub API
   redis.ts                    # @upstash/redis client + env fallbacks
 
@@ -87,7 +87,7 @@ vercel.json
    import { createSuggestBranch, getGithubConfigFromEnv } from "../lib/server/githubSuggest.js";
    ```
    Source files are still `.ts`. Omitting `.js` → production `ERR_MODULE_NOT_FOUND` / empty 500 / `FUNCTION_INVOCATION_FAILED`.  
-   The Vite local plugin imports TypeScript paths without `.js` (bundler/ts resolution) — that is intentional and separate.
+   The Vite local plugin imports TypeScript paths without `.js` (bundler/ts resolution) - that is intentional and separate.
 
 3. **Client code stays in `src/`.** Alias `@/*` → `src/*` (Vite + tsconfig). Do not import `lib/server/*` from React components.
 
@@ -109,7 +109,7 @@ pnpm preview
 
 ### Env (local)
 
-Create `.env.local` (gitignored). Vite loads it **only on process start** — always restart `pnpm dev` after edits.
+Create `.env.local` (gitignored). Vite loads it **only on process start** - always restart `pnpm dev` after edits.
 
 | Variable | Purpose |
 |----------|---------|
@@ -187,7 +187,7 @@ Behavior (`lib/server/githubSuggest.ts`):
 1. Allow only paths under `src/features/bioinformatics/content/` ending in `.md` (no `..`).
 2. Create branch `suggest/<slug>-<timestamp>` from default branch SHA.
 3. Commit file via Contents API as **token owner** identity (not fake noreply-only author that confuses Vercel).
-4. Open **PR into main — never auto-merge**.
+4. Open **PR into main - never auto-merge**.
 5. Commit message and PR body include `[skip vercel]` as backup.
 
 Required GitHub token permissions (fine-grained):
@@ -215,7 +215,7 @@ Required GitHub token permissions (fine-grained):
 - Log line example: `SKIPPED because of [skip vercel] / suggest/* branch`
 - Skip is **intentional** for wiki suggestion branches. Do not “fix” skip by removing `ignoreCommand` unless product requirements change.
 
-### Production empty 500 on `/api/*` — checklist
+### Production empty 500 on `/api/*` - checklist
 
 If Network tab shows status 500 with **empty body** / `FUNCTION_INVOCATION_FAILED`:
 
@@ -249,7 +249,7 @@ Defined in `src/App.tsx`:
 
 Cards use a full-card absolute `Link` with `z-[1]`. Nested shortcut chips (PA1, AX1, Wiki) use `relative z-[2]` so they receive clicks.
 
-**Do not** put the overlay link under content with `z-0` while content is `z-10` without `pointer-events-none` on non-interactive chrome — icons and text will intercept clicks and navigation will feel broken.
+**Do not** put the overlay link under content with `z-0` while content is `z-10` without `pointer-events-none` on non-interactive chrome - icons and text will intercept clicks and navigation will feel broken.
 
 Pattern:
 
@@ -352,7 +352,7 @@ Storage key versioning exists so bad encodings do not poison UI forever.
 ## 9. Safe change guidelines for agents
 
 1. **Prefer smallest fix** that preserves product behavior (three tools + suggest-edit PR flow + Redis admin).
-2. **Touch `api/` and `lib/server/` carefully** — production ESM and env coupling.
+2. **Touch `api/` and `lib/server/` carefully** - production ESM and env coupling.
 3. After API changes: verify both **local** (where applicable) and reason about **Vercel ESM** (`.js` imports).
 4. After UI navigation changes: click **padding, text, and icons** on home cards, plus bio chips.
 5. Do not add new frameworks (Next, Express, etc.) without an explicit human request.
@@ -361,7 +361,7 @@ Storage key versioning exists so bad encodings do not poison UI forever.
 
 ---
 
-## 10. Quick reference — env on Vercel
+## 10. Quick reference - env on Vercel
 
 | Name | Required for |
 |------|----------------|

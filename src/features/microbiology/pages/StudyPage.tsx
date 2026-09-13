@@ -391,7 +391,7 @@ function MatrixPanel({
             onChange={(e) => setCompareId(e.target.value)}
             className="px-2 py-1 bg-stone-50 border border-stone-200 rounded-lg text-[10px] font-bold max-w-[14rem] cursor-pointer"
           >
-            <option value="">— žádný referenční taxon —</option>
+            <option value="">- žádný referenční taxon -</option>
             {sortedRows.map((r) => (
               <option key={r.id} value={r.id}>
                 {r.name}
@@ -428,7 +428,7 @@ function MatrixPanel({
 
       {sortedRows.length > 0 ? (
         <Card className="overflow-hidden p-0 border border-stone-200">
-          {/* Full height table — page scrolls, no inner max-height */}
+          {/* Full height table - page scrolls, no inner max-height */}
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[640px]">
               <thead className="sticky top-0 z-20">
@@ -450,7 +450,7 @@ function MatrixPanel({
                         "p-2 text-center border-r border-stone-200 min-w-[3rem] cursor-pointer hover:bg-orange-50/80 transition-colors",
                         selectedTraits.includes(h.emoji) && "bg-orange-50"
                       )}
-                      title={`${h.label} — klik pro filtr podle znaku`}
+                      title={`${h.label} - klik pro filtr podle znaku`}
                       onClick={() => toggleTraitFilterFromHeader(h.emoji)}
                     >
                       <div className="flex flex-col items-center gap-0.5">
@@ -498,7 +498,7 @@ function MatrixPanel({
                             styles.bg
                           )}
                         >
-                          {t.type || "—"}
+                          {t.type || "-"}
                         </span>
                       </td>
                       <td className="p-2 border-r border-stone-200 text-center tabular-nums text-[10px] font-black text-brand-orange-text">
@@ -620,7 +620,7 @@ export function StudyPage({ data }: Props) {
   >({});
 
   useEffect(() => {
-    document.title = "Studijní přehled — Systematika bakterií";
+    document.title = "Studijní přehled - Systematika bakterií";
   }, []);
 
   const taxonFlatList = useMemo(() => {

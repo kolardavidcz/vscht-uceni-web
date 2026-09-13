@@ -17,7 +17,7 @@ export function addModule2Slides(pres) {
   createLectureDividerSlide(pres, {
     lectureNumber: 2,
     title: "☀️ Letní průvodce grafovou matematikou pro bioinformatiky",
-    goal: "Pro koho? Studenti Bioinformatiky na VŠCHT, kteří v září nastupují do 3. semestru a čeká je AX1 na FIT ČVUT. Vibe? Žádné tlusté skripta, žádný stres. Letní četba u kafe — jako kdyby ti to starší spolužák vysvětloval u oběda.",
+    goal: "Pro koho? Studenti Bioinformatiky na VŠCHT, kteří v září nastupují do 3. semestru a čeká je AX1 na FIT ČVUT. Vibe? Žádné tlusté skripta, žádný stres. Letní četba u kafe - jako kdyby ti to starší spolužák vysvětloval u oběda.",
     topics: [
       "👋 Hele, tohle není strašidelný kurz",
       "3. Myšlení v Důkazech: Jak Funguje Matematický a Algoritmický Mozek?",
@@ -42,7 +42,7 @@ export function addModule2Slides(pres) {
       type: "neutral",
       items: [
         { bold: "Pocit z gymplu:", text: "Spousta bioinformatiků slyší „diskrétní matematika a důkazy\" a dostane špatný pocit z gymplu. Nemusíš." },
-        { bold: "Co je tento materiál:", text: "Tohle je přípravný letní materiál — přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce." },
+        { bold: "Co je tento materiál:", text: "Tohle je přípravný letní materiál - přečteš ho pohodlně za pár dní a do září budeš mít jasno v tom, co AX1 po tobě vůbec chce." },
         { bold: "Co tady NENÍ:", text: "Žádné integrály, žádné matice, žádná pravděpodobnost. Jen logika, grafy a pár hezkých triků na důkazy." }
       ]
     },
@@ -53,8 +53,8 @@ export function addModule2Slides(pres) {
       items: [
         { bold: "Čtení formalismu:", text: "Jak číst a psát matematická tvrzení o grafech (aniž by to bylo strašidelné)." },
         { bold: "Správnost algoritmů:", text: "Jak dokázat, že algoritmus funguje správně (stačí 3 kroky, fakt)." },
-        { bold: "Matematické myšlení:", text: "Jak myslet jako matematik, když řešíš strukturální problémy — a to ti pomůže i v bioinformatice." },
-        { bold: "Srovnání s FIT:", text: "Studenti FIT prošli celým předmětem BI-DML. Ty máš tento kurz — komprimovanou verzi toho nejdůležitějšího pro AX1." }
+        { bold: "Matematické myšlení:", text: "Jak myslet jako matematik, když řešíš strukturální problémy - a to ti pomůže i v bioinformatice." },
+        { bold: "Srovnání s FIT:", text: "Studenti FIT prošli celým předmětem BI-DML. Ty máš tento kurz - komprimovanou verzi toho nejdůležitějšího pro AX1." }
       ]
     }
   });
@@ -94,7 +94,7 @@ export function addModule2Slides(pres) {
     rows: [
       [
         "1. Důkaz Heuristický / Objevný\n(Cesta k výsledku)",
-        "Ukazuje skutečný myšlenkový postup autora — od prvotní motivace přes jednoduché náčrtky až po obecný vzorec.",
+        "Ukazuje skutečný myšlenkový postup autora - od prvotní motivace přes jednoduché náčrtky až po obecný vzorec.",
         "Bývá delší na čtení, protože neskrývá slepé uličky a experimentální intuici.",
         "Zásadní pro algoritmy: Tento důkaz často přímo generuje samotný algoritmus a kód v C++ (např. konstrukce Eulerova tahu)."
       ],
@@ -145,7 +145,7 @@ export function addModule2Slides(pres) {
       items: [
         { bold: "Situace v učebně:", text: "Představte si své první cvičení z diskrétní matematiky na univerzitě. Vstoupí vyučující, beze slova vezme křídu, nakreslí na tabuli geometrický útvar se středem S[m, n], poloměrem r a bodem X[x, y] na obvodu, otočí se do ztichlé učebny a položí zdánlivě nevinnou otázku:" },
         { bold: "Otázka od tabule:", text: "„Je dán geometrický útvar v kartézské rovině (viz obrázek). Dokažte, že se jedná o kružnici!“" },
-        { bold: "Ticho v hlavě 95 % studentů:", text: "„Co po mně proboha chce?! Vždyť to vidím na vlastní oči — je to kulaté, je to kružnice, co na tom mám dokazovat?! Mám vytáhnout kružítko a pravítko a změřit to?“" }
+        { bold: "Ticho v hlavě 95 % studentů:", text: "„Co po mně proboha chce?! Vždyť to vidím na vlastní oči - je to kulaté, je to kružnice, co na tom mám dokazovat?! Mám vytáhnout kružítko a pravítko a změřit to?“" }
       ]
     },
     rightCard: {
@@ -197,7 +197,7 @@ export function addModule2Slides(pres) {
       items: [
         { bold: "Klasická bivalentní logika:", text: "Každý výrok A je buď pravdivý, nebo nepravdivý. Neexistuje žádný třetí mezistav: ⊨ A ∨ ¬A." },
         { bold: "Zákon sporu:", text: "Žádný výrok nemůže být zároveň pravdivý i nepravdivý: ⊨ ¬(A ∧ ¬A)." },
-        { bold: "Aplikace na dělitelnost 2:", text: "∀n ∈ ℕ: sudé(n) ∨ liché(n). Každé číslo n musí bezpodmínečně spadnout do jedné ze dvou kategorií — žádné číslo nemůže být „napůl sudé“, ani nemůže existovat číslo, které není ani jedno." }
+        { bold: "Aplikace na dělitelnost 2:", text: "∀n ∈ ℕ: sudé(n) ∨ liché(n). Každé číslo n musí bezpodmínečně spadnout do jedné ze dvou kategorií - žádné číslo nemůže být „napůl sudé“, ani nemůže existovat číslo, které není ani jedno." }
       ]
     },
     rightCard: {
@@ -224,7 +224,7 @@ export function addModule2Slides(pres) {
       items: [
         { bold: "Proč se nezacyklí?:", text: "V sudé větvi: pro n ≥ 2 platí n/2 < n. V liché větvi: pro n ≥ 1 platí n - 1 < n." },
         { bold: "Ostrý pokles:", text: "V každém rekurzivním kroku hodnota exponentu ostře klesá (n' < n)." },
-        { bold: "Dobré uspořádání ℕ:", text: "Množina přirozených čísel ℕ je dobře uspořádaná (well-founded set) — neexistuje v ní žádná nekonečná klesající posloupnost. Algoritmus v konečném počtu kroků nevyhnutelně narazí na bázi n = 0 a korektně skončí." }
+        { bold: "Dobré uspořádání ℕ:", text: "Množina přirozených čísel ℕ je dobře uspořádaná (well-founded set) - neexistuje v ní žádná nekonečná klesající posloupnost. Algoritmus v konečném počtu kroků nevyhnutelně narazí na bázi n = 0 a korektně skončí." }
       ]
     },
     rightCard: {
