@@ -11,11 +11,16 @@
   </a>
 </div>
 
+## 📝 Průběh cvičení a hodnocení (AG1)
+
+* 🧠 **Kvízy ze cvičení probíhají v Marastu**: Průběžné cvičební testy a kvízy se píší v testovacím prostředí **[Marast FIT](https://marast.fit.cvut.cz/)**. Doporučujeme si předem projít tamní cvičné úlohy na grafy a algoritmy.
+* 📊 **Zapisování bodů a známek do Grades**: Získané body z kvízů i celkové průběžné hodnocení se nově zapisují do systému **[Grades FIT](https://grades.fit.cvut.cz/)**.
+
 ## 📚 Užitečné odkazy a systémy pro studium AX1:
 
 * 📐 **[Procvičení před cvičením z AX1](https://courses.fit.cvut.cz/BI-AX1/prerekvizity/index.html)**
-* 🧠 **[Marast FIT](https://marast.fit.cvut.cz/)** - matematické cvičebnice a testovací prostředí ČVUT (cvičné úlohy na grafy a algoritmy)
-* 📊 **[Grades FIT](https://grades.fit.cvut.cz/)** - přehled průběžných bodů ze cvičení a testů na FITu
+* 🧠 **[Marast FIT](https://marast.fit.cvut.cz/)** - matematické cvičebnice a testovací prostředí (zde se píší cvičební kvízy)
+* 📊 **[Grades FIT](https://grades.fit.cvut.cz/)** - přehled průběžných bodů ze cvičení a testů
 * 🌐 **[Graph Online](https://graphonline.top/en/)** - převod ze schématu grafu na text
 * 📝 **[Studentská skripta](https://truepeak78.github.io/ax1/)**
 * 📑 **[Anki kartičky](https://gitlab.com/xskoda/fit-cvut-anki)** - na procvičování pojmů, konceptů a definic
