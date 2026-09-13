@@ -58,8 +58,12 @@ api/                          # Vercel serverless handlers ONLY (one file = one 
   suggest-edit.ts             # POST wiki → GitHub branch + PR
 
 lib/server/                   # Shared Node logic - NOT under api/
+  adminPatcher.ts             # pure tree mutation & vectoral patch ops (tested in adminPatcher.test.ts)
   githubSuggest.ts            # createSuggestBranch, path allowlist, GitHub API
   redis.ts                    # @upstash/redis client + env fallbacks
+
+tests/                        # End-to-end invariant validation test suites
+  api/esmImports.test.ts      # Enforces Rule 1 (no subdirs) & Rule 2 (.js ESM imports)
 
 docs/screenshots/             # README screenshot assets
 
@@ -67,7 +71,7 @@ src/
   pages/HomePage.tsx          # Landing (stretched-link cards)
   components/{ui,layout}/     # Shared UI
   features/
-    microbiology/             # Quiz, study modes, admin, domain data
+    microbiology/             # Quiz, study modes, admin, domain data (lib/traits.ts, lib/scoring.ts)
     bioinformatics/           # Wiki, SuggestEditModal, content/*.md, PA2ToAX1Overview
     python-analyzer/
 
@@ -85,6 +89,7 @@ vercel.json
    ```ts
    import { getRedis } from "../lib/server/redis.js";
    import { createSuggestBranch, getGithubConfigFromEnv } from "../lib/server/githubSuggest.js";
+   import { applyChanges, checkPassword } from "../lib/server/adminPatcher.js";
    ```
    Source files are still `.ts`. Omitting `.js` → production `ERR_MODULE_NOT_FOUND` / empty 500 / `FUNCTION_INVOCATION_FAILED`.  
    The Vite local plugin imports TypeScript paths without `.js` (bundler/ts resolution) - that is intentional and separate.
@@ -93,19 +98,36 @@ vercel.json
 
 4. **Do not reintroduce `@vercel/kv`.** Use `@upstash/redis` via `lib/server/redis.ts`.
 
-5. **Package Manager:** Use `pnpm` exclusively (`pnpm dev`, `pnpm build`, `pnpm typecheck`). Never run `node_modules/.bin` binaries directly.
+5. **Package Manager:** Use `pnpm` exclusively (`pnpm dev`, `pnpm build`, `pnpm typecheck`, `pnpm test`). Never run `node_modules/.bin` binaries directly.
 
 ---
 
-## 3. Local development
+## 3. Local development & Verification
+
+Always run package commands through `pnpm` (in WSL2 or terminal):
 
 ```bash
 pnpm install
 pnpm dev        # http://localhost:34020
-pnpm build      # tsc --noEmit && vite build (multi-chunk dist; no singlefile)
+pnpm test       # vitest run (12 test suites, 77+ invariant tests)
 pnpm typecheck  # tsc --noEmit
+pnpm build      # tsc --noEmit && vite build (multi-chunk dist; no singlefile)
 pnpm preview
 ```
+
+### Test suites guarding AI edits
+
+To ensure AI changes do not cause silent regressions, 12 test suites enforce key invariants:
+
+| Test suite | Invariant tested |
+|------------|------------------|
+| `tests/api/esmImports.test.ts` | Validates Rule 1 (no subdirs under `api/`) and Rule 2 (all relative imports in `api/*.ts` use explicit `.js` extensions) |
+| `lib/server/githubSuggest.test.ts` | Tests security path allowlist, traversal rejection (`..`), slugification of Czech titles, and payload limits |
+| `lib/server/adminPatcher.test.ts` | Tests pure vectoral patch ops (`UPDATE_ITEM`, `DELETE_ITEM`, `ADD_ITEM`, `MOVE_ITEM`, cascading emoji rewrites) and password checks |
+| `src/features/microbiology/lib/scoring.test.ts` | Tests quiz score metrics (`countTotal`, `countAnswered`, `countCorrect`), tree flattening, and answer matching |
+| `src/features/microbiology/data/taxonomyIntegrity.test.ts` | Validates that all ~52 taxa/groups have unique IDs and that all species emojis exist in `emojiOptions` |
+| `src/features/bioinformatics/content/wikiIntegrity.test.ts` | Asserts all materials in `config.json` exist on disk and ensures no lecture title uses forbidden `Modul <X>` prefix |
+| `src/features/bioinformatics/lib/markdownTransforms.test.ts` | Verifies math syntax underscore protection (no broken `<em>`), vector check/cross replacements, and single-pass sidebar search |
 
 ### Env (local)
 
@@ -384,12 +406,12 @@ Optional overrides: `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_DEFAULT_BRANCH`.
 | Wiki suggest UI | `src/features/bioinformatics/components/SuggestEditModal.tsx` |
 | GitHub PR logic | `lib/server/githubSuggest.ts` |
 | Production handler | `api/suggest-edit.ts` |
-| Local API | `vite-plugin-local-api.ts` |
-| Redis | `lib/server/redis.ts`, `api/get-data.ts`, `api/save-data.ts` |
+| Redis & Admin Patching | `lib/server/redis.ts`, `lib/server/adminPatcher.ts`, `api/save-data.ts`, `api/get-data.ts` |
+| Micro Traits & Scoring | `src/features/microbiology/lib/traits.ts`, `src/features/microbiology/lib/scoring.ts` |
 | Micro client data | `src/features/microbiology/hooks/useMicrobiologyData.ts` |
 | Skip preview builds | `scripts/vercel-ignore-build.mjs`, `vercel.json` |
 | Product deploy docs | `README.md` |
 
 ---
 
-*Last updated: ESM import layout (`lib/server` + `.js`), pnpm command enforcement, cleanup of legacy directories (.old, public, backups, materials).*
+*Last updated: Linus-style data structure refactorings, pure adminPatcher extraction, traits normalization, 12 invariant test suites (77+ tests), and dead code & temporary script pruning.*

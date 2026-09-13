@@ -1,4 +1,8 @@
-import { latexToUnicode } from "./latexToUnicode";
+import {
+  latexToUnicode,
+  SUBSCRIPTS as SUB_MAP,
+  SUPERSCRIPTS as SUPER_MAP,
+} from "./latexToUnicode";
 
 /**
  * Load MathJax 3 only when wiki markdown may contain math.
@@ -108,21 +112,6 @@ export function setupMathJaxCopyListener(): void {
   });
 }
 
-const SUPER_MAP: Record<string, string> = {
-  "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴",
-  "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹",
-  "+": "⁺", "-": "⁻", "=": "⁼", "(": "⁽", ")": "⁾",
-  "n": "ⁿ", "i": "ⁱ", "x": "ˣ", "y": "ʸ", "k": "ᵏ", "m": "ᵐ"
-};
-
-const SUB_MAP: Record<string, string> = {
-  "0": "₀", "1": "₁", "2": "₂", "3": "₃", "4": "₄",
-  "5": "₅", "6": "₆", "7": "₇", "8": "₈", "9": "₉",
-  "+": "₊", "-": "₋", "=": "₌", "(": "₍", ")": "₎",
-  "a": "ₐ", "e": "ₑ", "i": "ᵢ", "j": "ⱼ", "k": "ₖ", "m": "ₘ",
-  "n": "ₙ", "o": "ₒ", "p": "ₚ", "r": "ᵣ", "s": "ₛ", "t": "ₜ",
-  "u": "ᵤ", "v": "ᵥ", "x": "ₓ"
-};
 
 export function makeMathJaxContainerSelectable(container: HTMLElement): void {
   // Remove assistive MathML which MathJax marks unselectable="on" with user-select: none

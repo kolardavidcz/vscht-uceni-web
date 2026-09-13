@@ -31,4 +31,5 @@ pnpm-debug.log*
 # Presentation previews
 /dist_slides/
 *.pdf
+*.pptx
 

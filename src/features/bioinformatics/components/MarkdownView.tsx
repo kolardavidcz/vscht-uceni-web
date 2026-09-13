@@ -118,7 +118,7 @@ function normalizeMarkdownLists(content: string): string {
  * so that CommonMark does not mistakenly parse subscripts as <em> emphasis tags
  * or strip backslashes from \{ and \} before MathJax runs in the DOM.
  */
-function protectMathSyntax(content: string): string {
+export function protectMathSyntax(content: string): string {
   const protect = (math: string) => {
     return math
       .replace(/(?<!\\)_/g, "\\_")
@@ -140,7 +140,7 @@ function protectMathSyntax(content: string): string {
 /**
  * Replaces checkmark and cross emojis outside code blocks with clean SVG badge spans.
  */
-function replaceEmojis(content: string): string {
+export function replaceEmojis(content: string): string {
   const parts = content.split(/(```[\s\S]*?```|`[^`\n]+`)/g);
   return parts
     .map((part, i) => {
@@ -214,14 +214,6 @@ export function MarkdownView({ content }: Props) {
         ]}
         components={{
           code({ className, children, ...props }: CodeProps) {
-            const isBlock = Boolean(className?.includes("language-"));
-            if (!isBlock) {
-              return (
-                <code className={className} {...props}>
-                  {children}
-                </code>
-              );
-            }
             return (
               <code className={className} {...props}>
                 {children}

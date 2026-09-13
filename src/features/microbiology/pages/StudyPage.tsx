@@ -21,6 +21,7 @@ import { cn } from "@/lib/cn";
 import { CellMorphology } from "../components/CellMorphology";
 import type { MicrobiologyData } from "../hooks/useMicrobiologyData";
 import { sortEmojis } from "../data/emojis";
+import { matchesTrait } from "../lib/traits";
 import type { EmojiOption, WorksheetItem } from "../types";
 
 type Tab = "tree" | "flashcards" | "matrix";
@@ -118,18 +119,6 @@ function allItemEmojis(item: {
     ...(item.correctEmojis || []),
     ...(item.groups?.flatMap((g) => g.correctEmojis || []) || []),
   ];
-}
-
-function matchesTrait(allEmojis: string[], traitEmoji: string): boolean {
-  if (traitEmoji === "🌭") {
-    return allEmojis.some((e) => ["🌭", "🌭🌭", "🌭🌭🌭"].includes(e));
-  }
-  if (traitEmoji === "⚪") {
-    return allEmojis.some((e) =>
-      ["⚪", "🟣", "🟣🟣", "🟣🟣🟣", "🍇", "8", "⛓️"].includes(e)
-    );
-  }
-  return allEmojis.includes(traitEmoji);
 }
 
 function labelEmojis(emojis: string[], options: EmojiOption[]) {

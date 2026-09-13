@@ -72,7 +72,58 @@ function renderNameWithLinks(
   return parts.length > 0 ? parts : name;
 }
 
+const TRAINER_WEEK_MAP: Record<number, number> = {
+  1: 1, 2: 2, 3: 4, 4: 3, 5: 6, 6: 5, 7: 7, 8: 10, 9: 11, 10: 8, 11: 9, 12: 12,
+};
 
+const LECTURE_WEEK_MAP: Record<number, number> = {
+  1: 1, 2: 2, 3: 3, 4: 6, 5: 4, 6: 7, 7: 10, 8: 11, 9: 8, 10: 9, 11: 5, 12: 12,
+};
+
+const SEMINAR_WEEK_MAP: Record<number, number> = {
+  1: 1, 2: 2, 3: 3, 4: 8, 5: 10, 6: 12,
+};
+
+const ELEARNING_CHAPTER_WEEK_MAP: Record<number, number> = {
+  2: 1, 3: 1, 4: 2, 5: 2, 6: 3, 7: 6, 8: 4, 9: 7, 10: 8, 11: 5, 12: 7, 13: 10,
+};
+
+function getWeekNumber(item: SchoolMaterial): number {
+  if (item.category === "Trainer") {
+    const match = item.name.match(/(?:Tyden|Týden)\s+(\d+)/i);
+    if (match) {
+      const weekNum = parseInt(match[1], 10);
+      return TRAINER_WEEK_MAP[weekNum] ?? weekNum;
+    }
+    return 12;
+  }
+  if (item.category === "Lectures") {
+    const match = item.name.match(/Téma\s+(\d+)/i);
+    if (match) {
+      const temaNum = parseInt(match[1], 10);
+      return LECTURE_WEEK_MAP[temaNum] ?? temaNum;
+    }
+    return 12;
+  }
+  if (item.category === "Seminars") {
+    const match = item.name.match(/(?:Proseminář|Proseminar)\s+(\d+)/i);
+    if (match) {
+      const semNum = parseInt(match[1], 10);
+      return SEMINAR_WEEK_MAP[semNum] ?? semNum;
+    }
+    return 12;
+  }
+  if (item.category === "E-learning") {
+    if (item.id === "el-ch11-pt1") return 4;
+    if (item.id === "el-ch11-pt2") return 5;
+    const match = item.name.match(/Kapitola\s+(\d+)/i);
+    if (match) {
+      const cap = parseInt(match[1], 10);
+      return ELEARNING_CHAPTER_WEEK_MAP[cap] ?? 1;
+    }
+  }
+  return 12;
+}
 
 export function PA2ToAX1Overview() {
   // Default: LVL1 weeks expanded (1 & 7)
@@ -162,137 +213,7 @@ export function PA2ToAX1Overview() {
     setExpandedWeeks(weekInfo.map((w) => w.num));
   const collapseAll = () => setExpandedWeeks([]);
 
-  const getWeekNumber = (item: SchoolMaterial): number => {
-    if (item.category === "Trainer") {
-      const match = item.name.match(/(?:Tyden|Týden)\s+(\d+)/i);
-      if (match) {
-        const weekNum = parseInt(match[1], 10);
-        switch (weekNum) {
-          case 1:
-            return 1;
-          case 2:
-            return 2;
-          case 3:
-            return 4;
-          case 4:
-            return 3;
-          case 5:
-            return 6;
-          case 6:
-            return 5;
-          case 7:
-            return 7;
-          case 8:
-            return 10;
-          case 9:
-            return 11;
-          case 10:
-            return 8;
-          case 11:
-            return 9;
-          case 12:
-            return 12;
-          default:
-            return weekNum;
-        }
-      }
-      return 12;
-    }
-    if (item.category === "Lectures") {
-      const match = item.name.match(/Téma\s+(\d+)/i);
-      if (match) {
-        const temaNum = parseInt(match[1], 10);
-        switch (temaNum) {
-          case 1:
-            return 1;
-          case 2:
-            return 2;
-          case 3:
-            return 3;
-          case 4:
-            return 6;
-          case 5:
-            return 4;
-          case 6:
-            return 7;
-          case 7:
-            return 10;
-          case 8:
-            return 11;
-          case 9:
-            return 8;
-          case 10:
-            return 9;
-          case 11:
-            return 5;
-          case 12:
-            return 12;
-          default:
-            return temaNum;
-        }
-      }
-      return 12;
-    }
-    if (item.category === "Seminars") {
-      const match = item.name.match(/(?:Proseminář|Proseminar)\s+(\d+)/i);
-      if (match) {
-        const semNum = parseInt(match[1], 10);
-        switch (semNum) {
-          case 1:
-            return 1;
-          case 2:
-            return 2;
-          case 3:
-            return 3;
-          case 4:
-            return 8;
-          case 5:
-            return 10;
-          case 6:
-            return 12;
-          default:
-            return semNum;
-        }
-      }
-      return 12;
-    }
-    if (item.category === "E-learning") {
-      if (item.id === "el-ch11-pt1") return 4;
-      if (item.id === "el-ch11-pt2") return 5;
-      const match = item.name.match(/Kapitola\s+(\d+)/i);
-      if (match) {
-        const cap = parseInt(match[1], 10);
-        switch (cap) {
-          case 2:
-          case 3:
-            return 1;
-          case 4:
-            return 2;
-          case 5:
-            return 2;
-          case 6:
-            return 3;
-          case 7:
-            return 6;
-          case 8:
-            return 4;
-          case 9:
-            return 7;
-          case 10:
-            return 8;
-          case 11:
-            return 5;
-          case 12:
-            return 7;
-          case 13:
-            return 10;
-          default:
-            return 1;
-        }
-      }
-    }
-    return 12;
-  };
+
 
   const groupedByWeek = useMemo(() => {
     const groups: Record<number, Record<string, SchoolMaterial[]>> = {};

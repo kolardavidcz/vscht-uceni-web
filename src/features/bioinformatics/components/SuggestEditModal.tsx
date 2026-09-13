@@ -85,7 +85,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
       if (!text.trim()) {
         setError(
           `API ${res.status}: prázdná odpověď. ` +
-            `1) Zastavte a znovu spusťte \`npm run dev\` (po změně .env.local / vite pluginu). ` +
+            `1) Zastavte a znovu spusťte \`pnpm dev\` (po změně .env.local / vite pluginu). ` +
             `2) Ověřte v Network tabu, že POST jde na /api/suggest-edit. ` +
             `3) Token: GITHUB_TOKEN v .env.local.`
         );

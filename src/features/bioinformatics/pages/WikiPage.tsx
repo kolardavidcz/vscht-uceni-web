@@ -24,12 +24,12 @@ import {
   materialToRepoPath,
 } from "../components/SuggestEditModal";
 import {
-  filterNavTree,
   findMaterial,
   groupByCategoryTree,
   loadWikiMaterials,
   materialHref,
   navNodeContainsPath,
+  searchNavTree,
   type NavNode,
   type WikiMaterial,
 } from "../lib/contentLoader";
@@ -270,19 +270,10 @@ export function WikiPage() {
     if (!q) return groups;
 
     return groups
-      .map((g) => {
-        const byMaterial = filterNavTree(g.tree, (m) => {
-          return (
-            m.title.toLowerCase().includes(q) ||
-            m.key.toLowerCase().includes(q) ||
-            m.segments.some((s) => s.toLowerCase().includes(q))
-          );
-        });
-        // Folder title match (e.g. "pa1") → whole subject subtree
-        const byFolderTitle = expandFoldersMatchingTitle(g.tree, q);
-        const tree = mergeNavTrees(byMaterial, byFolderTitle);
-        return { ...g, tree };
-      })
+      .map((g) => ({
+        ...g,
+        tree: searchNavTree(g.tree, q),
+      }))
       .filter((g) => g.tree.length > 0);
   }, [groups, query]);
 
@@ -551,47 +542,4 @@ export function WikiPage() {
   );
 }
 
-/** If a folder title matches the query, include the full original subtree. */
-function expandFoldersMatchingTitle(nodes: NavNode[], q: string): NavNode[] {
-  const out: NavNode[] = [];
-  for (const node of nodes) {
-    if (node.type === "folder") {
-      if (node.title.toLowerCase().includes(q) || node.key.toLowerCase().includes(q)) {
-        out.push(node);
-      } else {
-        const children = expandFoldersMatchingTitle(node.children, q);
-        if (children.length > 0) {
-          out.push({ ...node, children });
-        }
-      }
-    } else if (
-      node.title.toLowerCase().includes(q) ||
-      node.key.toLowerCase().includes(q)
-    ) {
-      out.push(node);
-    }
-  }
-  return out;
-}
 
-function mergeNavTrees(a: NavNode[], b: NavNode[]): NavNode[] {
-  const byKey = new Map<string, NavNode>();
-  for (const n of [...a, ...b]) {
-    const k = `${n.type}:${n.key}`;
-    const prev = byKey.get(k);
-    if (!prev) {
-      byKey.set(k, n);
-      continue;
-    }
-    if (prev.type === "folder" && n.type === "folder") {
-      byKey.set(k, {
-        ...prev,
-        children: mergeNavTrees(prev.children, n.children),
-      });
-    }
-  }
-  return Array.from(byKey.values()).sort((x, y) => {
-    if (x.order !== y.order) return x.order - y.order;
-    return x.title.localeCompare(y.title, "cs");
-  });
-}

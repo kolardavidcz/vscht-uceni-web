@@ -71,17 +71,7 @@ export const emojiCategories = [
   { key: "Patogenita", label: "\u26A0\uFE0F Patogenita a parazitismus" },
 ];
 
-// Flatten all emoji options for palette display
-export function getEmojisByCategory() {
-  const map = new Map<string, EmojiOption[]>();
-  for (const option of emojiOptions) {
-    if (!map.has(option.category)) {
-      map.set(option.category, []);
-    }
-    map.get(option.category)!.push(option);
-  }
-  return map;
-}
+
 
 export function sortEmojis(emojis: string[], options: EmojiOption[] = emojiOptions): string[] {
   const orderMap = new Map<string, number>();

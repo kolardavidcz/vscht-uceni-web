@@ -1,5 +1,5 @@
 /**
- * Shared logic: create GitHub branch + commit (no PR).
+ * Shared logic: create GitHub branch, commit, and open PR.
  * Used by Vercel serverless handler and Vite local middleware.
  */
 
@@ -49,7 +49,7 @@ export function getGithubConfigFromEnv(
   };
 }
 
-function isAllowedPath(filePath: string): boolean {
+export function isAllowedPath(filePath: string): boolean {
   const normalized = filePath.replace(/\\/g, "/");
   if (normalized.includes("..")) return false;
   return (
@@ -58,7 +58,7 @@ function isAllowedPath(filePath: string): boolean {
   );
 }
 
-function slugify(input: string): string {
+export function slugify(input: string): string {
   return input
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")

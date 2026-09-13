@@ -344,6 +344,53 @@ export function filterNavTree(
   return out;
 }
 
+/**
+ * Filter a navigation tree by a search query in a single recursive pass.
+ * If a folder matches query directly, its whole subtree is preserved.
+ * Otherwise, only branches containing matching files or subfolders are kept.
+ */
+export function searchNavTree(nodes: NavNode[], query: string): NavNode[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return nodes;
+
+  const filterNodes = (list: NavNode[]): NavNode[] => {
+    const out: NavNode[] = [];
+    for (const node of list) {
+      if (node.type === "folder") {
+        const folderMatches =
+          node.title.toLowerCase().includes(q) ||
+          node.key.toLowerCase().includes(q) ||
+          (node.hub && (
+            node.hub.title.toLowerCase().includes(q) ||
+            node.hub.key.toLowerCase().includes(q) ||
+            node.hub.segments.some((s) => s.toLowerCase().includes(q))
+          ));
+
+        if (folderMatches) {
+          out.push(node);
+        } else {
+          const filteredChildren = filterNodes(node.children);
+          if (filteredChildren.length > 0) {
+            out.push({ ...node, children: filteredChildren });
+          }
+        }
+      } else {
+        const m = node.material;
+        const fileMatches =
+          m.title.toLowerCase().includes(q) ||
+          m.key.toLowerCase().includes(q) ||
+          m.segments.some((s) => s.toLowerCase().includes(q));
+        if (fileMatches) {
+          out.push(node);
+        }
+      }
+    }
+    return out;
+  };
+
+  return filterNodes(nodes);
+}
+
 export function findMaterial(
   materials: WikiMaterial[],
   segments: string[]

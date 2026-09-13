@@ -1,4 +1,5 @@
 import { cn } from "@/lib/cn";
+import { isCoccus as checkIsCoccus, isRod as checkIsRod } from "../lib/traits";
 
 /** Lightweight 2D morphology preview from emoji trait set. */
 export function CellMorphology({
@@ -11,10 +12,8 @@ export function CellMorphology({
   const isGramPositive = taxonEmojis.includes("🔵");
   const isGramNegative = taxonEmojis.includes("🔴");
   const isWallLess = taxonEmojis.includes("🧱❌");
-  const isRod = taxonEmojis.includes("🌭");
-  const isCoccus = taxonEmojis.some((e) =>
-    ["⚪", "🍇", "⛓️"].includes(e)
-  );
+  const isRod = checkIsRod(taxonEmojis);
+  const isCoccus = checkIsCoccus(taxonEmojis);
   const isSpirillum = taxonEmojis.includes("〰️");
   const isFilamentous = taxonEmojis.includes("🌿");
   const isChain = taxonEmojis.includes("⛓️");

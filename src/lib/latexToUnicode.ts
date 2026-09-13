@@ -157,7 +157,7 @@ const SYMBOLS: Record<string, string> = {
 };
 
 // Unicode superscripts
-const SUPERSCRIPTS: Record<string, string> = {
+export const SUPERSCRIPTS: Record<string, string> = {
   "0": "⁰",
   "1": "¹",
   "2": "²",
@@ -183,7 +183,7 @@ const SUPERSCRIPTS: Record<string, string> = {
 };
 
 // Unicode subscripts
-const SUBSCRIPTS: Record<string, string> = {
+export const SUBSCRIPTS: Record<string, string> = {
   "0": "₀",
   "1": "₁",
   "2": "₂",
