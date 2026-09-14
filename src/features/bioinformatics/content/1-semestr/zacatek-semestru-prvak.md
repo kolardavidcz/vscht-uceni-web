@@ -18,9 +18,9 @@
 
 ## ⚡ Checklist prvních dvou týdnů
 
-### 💬 Komunita, Discord & Notebook
+### Základ
 * [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní oficiální komunikační kanál ústavu a spolužáků).
-* [ ] **Výběr a pořízení notebooku (lehkost vítězí):** Notebook budete nosit na přednášky, cvičení i do NTK prakticky denně. Jednoznačně preferujte **lehký, tenký a snadno přenosný notebook s dlouhou výdrží baterie** před těžkým herním strojem s extrémním výkonem a obřím napájecím adaptérem. V 1. ročníku brutální výkon nepotřebujete (překlad úloh v C pro PA1 je otázkou okamžiku a Progtest testuje kód na vzdálených serverech ČVUT). Nízká váha v batohu při celodenním běhání po kampusu a tichý chod na přednáškách jsou k nezaplacení.
+* [ ] **Výběr a pořízení notebooku:** Notebook budete nosit na prosemináře, cvičení i do NTK prakticky denně. Jednoznačně preferujte **lehký a snadno přenosný notebook** s dlouhou výdrží baterie před těžkým herním počítačem s extrémním výkonem. V 1. ročníku brutální výkon nepotřebujete (překlad úloh v C pro PA1 je otázkou okamžiku a Progtest testuje kód na vzdálených serverech ČVUT), na cokoliv náročnějšího můžete používat školní servery. Nízká váha v batohu při celodenním běhání po kampusu jsou k nezaplacení.
 
 ### 💳 Karty a vstup na FIT ČVUT
 * [ ] **Karta VŠCHT / ISIC:** Karta se nevydává při zápisu - je nutné si ji osobně vyzvednout v [Kartovém centru VŠCHT](https://vc.vscht.cz/idkarty) (fotka vám zůstává po celou dobu studia).
