@@ -98,7 +98,7 @@
 <tr>
 <td>
 <ul class="list-disc pl-4 space-y-0.5 my-0">
-<li><strong><a href="https://studium.vscht.cz/#kotva100609">Průvodce studiem VŠCHT</a></strong> - portál pro začínající studenty: první kroky, předpisy, organizace výuky a zázemí.</li>
+<li><strong><a href="https://pkc.vscht.cz/pruvodce-prvaka">Průvodce prváka VŠCHT</a></strong> - portál pro začínající studenty: první kroky, předpisy, organizace výuky a zázemí.</li>
 <li><strong><a href="https://emil.vscht.cz/maps">Mapy Emil VŠCHT</a></strong> - interaktivní plánek budov A a B a hledání učeben.</li>
 </ul>
 </td>
@@ -142,7 +142,7 @@ Předměty VŠCHT se řídí [harmonogramem VŠCHT](https://www.vscht.cz/studium
 
 ## 📊 The Great Filter: Tři pilíře 1. semestru & výzva v BI-PA1
 
-Zimní semestr stojí na trojici 8kreditových předmětů (celkem 24 kreditů): **BI-PA1**, **Matematika A** a **OACH I**.
+Zimní semestr stojí na trojici klíčových předmětů (celkem 23 kreditů): **BI-PA1**, **Matematika A** a **OACH I**.
 
 ### 💻 BI-PA1 jako hlavní síto:
 * **Týdenní deadliny v Progtestu:** Úlohy nelze napsat za večer před deadlinem. Začněte programovat hned v den zadání.

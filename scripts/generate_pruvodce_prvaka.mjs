@@ -396,12 +396,12 @@ function card(slide, x, y, w, h, fill) {
   });
   s.addText("Tři pilíře 1. semestru", { x: 0.55, y: 0.9, w: 11, h: 0.8, fontFace: TITLE_FONT, fontSize: 34, bold: true, color: WHITE, isTextBox: true, margin: 0 });
 
-  s.addText("24", { x: 0.6, y: 1.9, w: 2.6, h: 1.3, fontFace: TITLE_FONT, fontSize: 72, bold: true, color: ACCENT, isTextBox: true, margin: 0, align: "left" });
-  s.addText("kreditů celkem\nve třech 8kreditových\npředmětech", { x: 0.65, y: 3.15, w: 2.7, h: 1.1, fontFace: BODY_FONT, fontSize: 12.5, color: "AFC3D6", isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
+  s.addText("23", { x: 0.6, y: 1.9, w: 2.6, h: 1.3, fontFace: TITLE_FONT, fontSize: 72, bold: true, color: ACCENT, isTextBox: true, margin: 0, align: "left" });
+  s.addText("kreditů celkem\nve třech klíčových\npředmětech", { x: 0.65, y: 3.15, w: 2.7, h: 1.1, fontFace: BODY_FONT, fontSize: 12.5, color: "AFC3D6", isTextBox: true, margin: 0, lineSpacingMultiple: 1.15 });
 
   const pillars = [
     ["BI-PA1", "Programování — hlavní síto semestru"],
-    ["Matematika A", "8kreditový základní předmět"],
+    ["Matematika A", "Základní předmět"],
     ["OACH I", "Anorganická chemie I"],
   ];
   let x = 3.7;
