@@ -18,8 +18,9 @@
 
 ## ⚡ Checklist prvních dvou týdnů
 
-### 💬 Komunita & Discord BioCord
+### 💬 Komunita, Discord & Notebook
 * [ ] **Discord BioCord:** Připojte se přes **[discord.gg/yWxFJmM6Qg](https://discord.gg/yWxFJmM6Qg)** a změňte si nickname na civilní **Jméno Příjmení** (hlavní oficiální komunikační kanál ústavu a spolužáků).
+* [ ] **Výběr a pořízení notebooku (lehkost vítězí):** Notebook budete nosit na přednášky, cvičení i do NTK prakticky denně. Jednoznačně preferujte **lehký, tenký a snadno přenosný notebook s dlouhou výdrží baterie** před těžkým herním strojem s extrémním výkonem a obřím napájecím adaptérem. V 1. ročníku brutální výkon nepotřebujete (překlad úloh v C pro PA1 je otázkou okamžiku a Progtest testuje kód na vzdálených serverech ČVUT). Nízká váha v batohu při celodenním běhání po kampusu a tichý chod na přednáškách jsou k nezaplacení.
 
 ### 💳 Karty a vstup na FIT ČVUT
 * [ ] **Karta VŠCHT / ISIC:** Karta se nevydává při zápisu - je nutné si ji osobně vyzvednout v [Kartovém centru VŠCHT](https://vc.vscht.cz/idkarty) (fotka vám zůstává po celou dobu studia).
@@ -196,6 +197,7 @@ Zimní semestr stojí na trojici klíčových předmětů (celkem 23 kreditů): 
 </a>
 </div>
 
+* **Volba notebooku na každodenní studium:** Pokud teprve vybíráte notebook, hledejte především **nízkou hmotnost (ideálně do ~1,4 kg), kompaktní rozměry a solidní výdrž baterie** před herním výkonem. Těžký herní notebook s masivní nabíječkou se při každodenním nošení do školy rychle pronese, zatímco kód v C i skripty bez potíží zvládne jakýkoliv moderní lehký procesor.
 * **Zářijový instalační den na FITu:** Koncem září pořádají studenti FITu akci, kde vám zdarma pomohou nastavit Linux, dual-boot i WSL.
 
 ---
