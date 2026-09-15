@@ -40,7 +40,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.error("get-data failed", err);
     return res.status(500).json({
       error: "Redis unavailable",
-      detail: err instanceof Error ? err.message : String(err),
     });
   }
 }

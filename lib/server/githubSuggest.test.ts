@@ -3,6 +3,8 @@ import {
   createSuggestBranch,
   getGithubConfigFromEnv,
   isAllowedPath,
+  neutralizeMentions,
+  sanitizeHeader,
   slugify,
   type GithubSuggestConfig,
 } from "./githubSuggest";
@@ -71,6 +73,24 @@ describe("githubSuggest security allowlist & helpers", () => {
       const slug = slugify(longTitle);
       expect(slug.length).toBeLessThanOrEqual(40);
       expect(slugify("---hello---world---")).toBe("hello-world");
+    });
+  });
+
+  describe("neutralizeMentions", () => {
+    it("inserts zero-width spaces into @ mentions to prevent pinging users", () => {
+      expect(neutralizeMentions("Hello @octocat and @admin")).toBe(
+        "Hello @\u200Boctocat and @\u200Badmin"
+      );
+      expect(neutralizeMentions("No mentions here")).toBe("No mentions here");
+    });
+  });
+
+  describe("sanitizeHeader", () => {
+    it("strips newlines and carriage returns to prevent CRLF injection in commit and PR titles", () => {
+      expect(sanitizeHeader("Title\r\nwith\nnewlines")).toBe(
+        "Title with newlines"
+      );
+      expect(sanitizeHeader("  spaced  ")).toBe("spaced");
     });
   });
 

@@ -177,5 +177,22 @@ describe("adminPatcher pure vectoral patching engine", () => {
       ]);
       expect(result.worksheetData).toEqual([{ id: "reset", name: "Reset" }]);
     });
+
+    it("UPDATE_ITEM: rejects prototype pollution payloads", () => {
+      const maliciousPayload = JSON.parse(
+        '{"__proto__": {"polluted": true}, "constructor": {"polluted": true}, "name": "SafeName"}'
+      );
+      const changes: AdminChange[] = [
+        {
+          type: "UPDATE_ITEM",
+          id: "rod-1",
+          fields: maliciousPayload,
+        },
+      ];
+      const result = applyChanges(samplePayload, changes);
+      expect((Object.prototype as Record<string, unknown>).polluted).toBeUndefined();
+      expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+      expect(result.worksheetData[0].children?.[0].name).toBe("SafeName");
+    });
   });
 });

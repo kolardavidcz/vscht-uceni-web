@@ -256,7 +256,19 @@ export function WikiPage() {
 
   useEffect(() => {
     if (active?.externalUrl) {
-      window.location.replace(active.externalUrl);
+      try {
+        const parsed = new URL(active.externalUrl, window.location.origin);
+        if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+          window.location.replace(parsed.href);
+        } else {
+          console.warn(
+            "Zablokován pokus o přesměrování na nepovolený protokol:",
+            active.externalUrl
+          );
+        }
+      } catch {
+        console.error("Neplatná externí URL:", active.externalUrl);
+      }
     }
   }, [active?.externalUrl]);
 

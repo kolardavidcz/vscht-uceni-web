@@ -66,6 +66,8 @@ export function checkPassword(password: unknown): boolean {
   return timingSafeEqual(hashA, hashB);
 }
 
+const DANGEROUS_PROPERTIES = new Set(["__proto__", "constructor", "prototype"]);
+
 /**
  * Recursively updates fields of an item with matching id in the taxonomy tree.
  */
@@ -76,7 +78,11 @@ export function walkUpdate(
 ): boolean {
   for (const item of items) {
     if (item.id === id) {
-      Object.assign(item, fields);
+      for (const [key, value] of Object.entries(fields)) {
+        if (!DANGEROUS_PROPERTIES.has(key)) {
+          item[key] = value;
+        }
+      }
       return true;
     }
     if (item.children && walkUpdate(item.children, id, fields)) return true;

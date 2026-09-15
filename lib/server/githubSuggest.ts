@@ -93,8 +93,18 @@ async function gh<T>(
   return { ok: res.ok, status: res.status, data, raw };
 }
 
-function encodeRepoPath(filePath: string): string {
-  return filePath.split("/").map(encodeURIComponent).join("/");
+/**
+ * Neutralizes GitHub @mentions to prevent mention bombing / notification spam.
+ */
+export function neutralizeMentions(text: string): string {
+  return text.replace(/@/g, "@\u200B");
+}
+
+/**
+ * Strips carriage returns and newlines from single-line metadata fields.
+ */
+export function sanitizeHeader(text: string): string {
+  return text.replace(/[\r\n]+/g, " ").trim();
 }
 
 export async function createSuggestBranch(
@@ -102,10 +112,12 @@ export async function createSuggestBranch(
   input: SuggestEditInput
 ): Promise<SuggestEditResult> {
   const filePath = String(input.filePath || "").replace(/\\/g, "/");
-  const title = String(input.title || "wiki").trim();
+  const title = sanitizeHeader(String(input.title || "wiki")).slice(0, 150);
   const markdown = String(input.markdown ?? "");
-  const note = String(input.note || "").trim();
-  const authorName = String(input.authorName || "").trim().slice(0, 80);
+  const note = neutralizeMentions(String(input.note || "")).trim().slice(0, 2000);
+  const authorName = sanitizeHeader(
+    neutralizeMentions(String(input.authorName || ""))
+  ).slice(0, 80);
 
   if (!isAllowedPath(filePath)) {
     return {

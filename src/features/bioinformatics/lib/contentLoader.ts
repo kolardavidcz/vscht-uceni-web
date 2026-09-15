@@ -69,11 +69,27 @@ function titleFromMarkdown(raw: string, fallback: string): string {
   return match?.[1]?.trim() || fallback;
 }
 
+/**
+ * Validates that an external URL uses http or https protocol, preventing javascript: or data: URIs.
+ */
+export function isSafeExternalUrl(url: string | undefined): boolean {
+  if (!url || typeof url !== "string") return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "http:" || parsed.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 function externalUrlFromMarkdown(raw: string): string | undefined {
   const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (fmMatch) {
     const urlMatch = fmMatch[1].match(/externalUrl:\s*(.+)$/m);
-    if (urlMatch) return urlMatch[1].trim();
+    if (urlMatch) {
+      const url = urlMatch[1].trim();
+      return isSafeExternalUrl(url) ? url : undefined;
+    }
   }
   return undefined;
 }
@@ -151,7 +167,8 @@ export function loadWikiMaterials(): WikiMaterial[] {
     const fallbackTitle = fileKey.replace(/-/g, " ");
     const title = leaf?.title || titleFromMarkdown(raw, fallbackTitle);
     const fileOrder = pathOrders[pathOrders.length - 1] ?? 999;
-    const externalUrl = leaf?.externalUrl || externalUrlFromMarkdown(raw);
+    const rawExternal = leaf?.externalUrl || externalUrlFromMarkdown(raw);
+    const externalUrl = isSafeExternalUrl(rawExternal) ? rawExternal : undefined;
 
     materials.push({
       key: fileKey,

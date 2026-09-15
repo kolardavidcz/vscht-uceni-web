@@ -69,8 +69,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   } catch (err) {
     console.error("suggest-edit failed", err);
     return res.status(500).json({
-      error: "Interní chyba",
-      detail: err instanceof Error ? err.message : String(err),
+      error: "Interní chyba serveru",
     });
   }
 }

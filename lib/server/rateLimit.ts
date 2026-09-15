@@ -99,16 +99,26 @@ export async function checkRateLimit(
 export function getClientIp(
   headers: Record<string, string | string[] | undefined>
 ): string {
-  const xForwardedFor = headers["x-forwarded-for"];
-  if (typeof xForwardedFor === "string") {
-    return xForwardedFor.split(",")[0].trim();
-  }
-  if (Array.isArray(xForwardedFor) && xForwardedFor.length > 0) {
-    return xForwardedFor[0].split(",")[0].trim();
-  }
+  // 1. On Vercel, x-real-ip is reliably set by the edge network and cannot be spoofed by clients
   const xRealIp = headers["x-real-ip"];
-  if (typeof xRealIp === "string") {
+  if (typeof xRealIp === "string" && xRealIp.trim()) {
     return xRealIp.trim();
   }
+
+  // 2. Fallback to x-forwarded-for when running behind custom proxies without x-real-ip
+  const xForwardedFor = headers["x-forwarded-for"];
+  if (typeof xForwardedFor === "string" && xForwardedFor.trim()) {
+    const parts = xForwardedFor.split(",").map((p) => p.trim()).filter(Boolean);
+    if (parts.length > 0) {
+      return parts[0];
+    }
+  }
+  if (Array.isArray(xForwardedFor) && xForwardedFor.length > 0) {
+    const first = xForwardedFor[0];
+    if (typeof first === "string" && first.trim()) {
+      return first.split(",")[0].trim();
+    }
+  }
+
   return "127.0.0.1";
 }

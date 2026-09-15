@@ -25,6 +25,14 @@ describe("rateLimiter (in-memory & header handling)", () => {
     expect(ip).toBe("192.0.2.1");
   });
 
+  it("prioritizes x-real-ip over client-supplied x-forwarded-for to prevent spoofing", () => {
+    const ip = getClientIp({
+      "x-forwarded-for": "1.2.3.4",
+      "x-real-ip": "198.51.100.42",
+    });
+    expect(ip).toBe("198.51.100.42");
+  });
+
   it("falls back to 127.0.0.1 when headers are missing", () => {
     const ip = getClientIp({});
     expect(ip).toBe("127.0.0.1");
