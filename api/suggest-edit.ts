@@ -3,6 +3,10 @@ import {
   createSuggestBranch,
   getGithubConfigFromEnv,
 } from "../lib/server/githubSuggest.js";
+import {
+  checkRateLimit,
+  getClientIp,
+} from "../lib/server/rateLimit.js";
 
 /**
  * POST /api/suggest-edit
@@ -12,6 +16,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  // Rate limiting: max 10 edit suggestions per hour per IP
+  const clientIp = getClientIp(req.headers);
+  const rateLimit = await checkRateLimit(clientIp, "suggest-edit", 10, 3600);
+  res.setHeader("X-RateLimit-Limit", rateLimit.limit);
+  res.setHeader("X-RateLimit-Remaining", rateLimit.remaining);
+  res.setHeader("X-RateLimit-Reset", rateLimit.resetSeconds);
+
+  if (!rateLimit.allowed) {
+    res.setHeader("Retry-After", rateLimit.resetSeconds);
+    return res.status(429).json({
+      error: "Příliš mnoho návrhů úprav. Zkuste to prosím později.",
+      detail: `Limit 10 požadavků za hodinu byl vyčerpán. Reset za ${Math.ceil(
+        rateLimit.resetSeconds / 60
+      )} minut.`,
+    });
   }
 
   const config = getGithubConfigFromEnv(process.env);

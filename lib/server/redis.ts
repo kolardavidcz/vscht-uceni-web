@@ -27,3 +27,11 @@ export function getRedis(): Redis {
   client = new Redis({ url, token });
   return client;
 }
+
+export function tryGetRedis(): Redis | null {
+  try {
+    return getRedis();
+  } catch {
+    return null;
+  }
+}

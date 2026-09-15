@@ -5,6 +5,10 @@ import {
   applyChanges,
   type MicrobiologyPayload,
 } from "../lib/server/adminPatcher.js";
+import {
+  checkRateLimit,
+  getClientIp,
+} from "../lib/server/rateLimit.js";
 
 const DATA_KEY = "microbiology:data";
 
@@ -24,11 +28,40 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
+  // Rate limiting: max 15 attempts per minute per IP
+  const clientIp = getClientIp(req.headers);
+  const rateLimit = await checkRateLimit(clientIp, "save-data", 15, 60);
+  res.setHeader("X-RateLimit-Limit", rateLimit.limit);
+  res.setHeader("X-RateLimit-Remaining", rateLimit.remaining);
+  res.setHeader("X-RateLimit-Reset", rateLimit.resetSeconds);
+
+  if (!rateLimit.allowed) {
+    res.setHeader("Retry-After", rateLimit.resetSeconds);
+    return res.status(429).json({
+      error: "Příliš mnoho pokusů o uložení. Zkuste to prosím za chvíli.",
+      detail: `Limit vyčerpán. Reset za ${rateLimit.resetSeconds} sekund.`,
+    });
+  }
+
   try {
+    const rawBody =
+      typeof req.body === "string" ? req.body : JSON.stringify(req.body || {});
+    if (Buffer.byteLength(rawBody, "utf8") > 2_000_000) {
+      return res
+        .status(413)
+        .json({ error: "Payload je příliš velký (maximum je 2 MB)" });
+    }
+
     const redis = getRedis();
     const body = req.body || {};
     if (!checkPassword(body.password)) {
       return res.status(401).json({ error: "Neplatné heslo" });
+    }
+
+    if (Array.isArray(body.changes) && body.changes.length > 1000) {
+      return res
+        .status(400)
+        .json({ error: "Příliš mnoho změn v jednom požadavku (max 1000)" });
     }
 
     let payload: MicrobiologyPayload;

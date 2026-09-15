@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   protectMathSyntax,
   replaceEmojis,
+  wikiSanitizeSchema,
 } from "../components/MarkdownView";
 import { searchNavTree, type NavNode } from "./contentLoader";
 
@@ -127,4 +128,57 @@ describe("markdownTransforms & nav tree search", () => {
       expect(results).toHaveLength(0);
     });
   });
+
+  describe("wikiSanitizeSchema (XSS prevention & safe HTML allowlist)", () => {
+    it("allows safe semantic elements like div, span, details, summary, and iframe", () => {
+      expect(wikiSanitizeSchema.tagNames).toContain("div");
+      expect(wikiSanitizeSchema.tagNames).toContain("span");
+      expect(wikiSanitizeSchema.tagNames).toContain("details");
+      expect(wikiSanitizeSchema.tagNames).toContain("summary");
+      expect(wikiSanitizeSchema.tagNames).toContain("iframe");
+    });
+
+    it("does not allow dangerous tags like script, object, or embed", () => {
+      expect(wikiSanitizeSchema.tagNames).not.toContain("script");
+      expect(wikiSanitizeSchema.tagNames).not.toContain("object");
+      expect(wikiSanitizeSchema.tagNames).not.toContain("embed");
+      expect(wikiSanitizeSchema.tagNames).not.toContain("base");
+    });
+
+    it("does not allow inline event handlers in allowed attributes", () => {
+      const allAttrs = [
+        ...(wikiSanitizeSchema.attributes?.["*"] || []),
+        ...(wikiSanitizeSchema.attributes?.a || []),
+      ];
+      const eventHandlers = allAttrs.filter(
+        (attr) => typeof attr === "string" && attr.startsWith("on")
+      );
+      expect(eventHandlers).toEqual([]);
+    });
+
+    it("restricts iframe src attribute strictly to YouTube embeds", () => {
+      const iframeAttrs = wikiSanitizeSchema.attributes?.iframe || [];
+      const srcRule = iframeAttrs.find(
+        (rule) => Array.isArray(rule) && rule[0] === "src"
+      );
+      expect(srcRule).toBeDefined();
+      if (Array.isArray(srcRule) && srcRule[1] instanceof RegExp) {
+        const regex = srcRule[1] as RegExp;
+        expect(regex.test("https://www.youtube.com/embed/9zpToW-YgwE")).toBe(true);
+        expect(regex.test("https://www.youtube-nocookie.com/embed/9zpToW-YgwE")).toBe(true);
+        expect(regex.test("https://malicious-site.com/embed/123")).toBe(false);
+        expect(regex.test("javascript:alert(1)")).toBe(false);
+      }
+    });
+
+    it("strictly limits protocols to http, https, and mailto for hrefs", () => {
+      const hrefProtocols = wikiSanitizeSchema.protocols?.href || [];
+      expect(hrefProtocols).toContain("http");
+      expect(hrefProtocols).toContain("https");
+      expect(hrefProtocols).toContain("mailto");
+      expect(hrefProtocols).not.toContain("javascript");
+      expect(hrefProtocols).not.toContain("data");
+    });
+  });
 });
+

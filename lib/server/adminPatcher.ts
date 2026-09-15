@@ -3,6 +3,8 @@
  * Contains pure tree transformation operations applied by POST /api/save-data.
  */
 
+import { createHash, timingSafeEqual } from "node:crypto";
+
 export interface TreeItem {
   id: string;
   name?: string;
@@ -57,7 +59,11 @@ export type AdminChange = {
 export function checkPassword(password: unknown): boolean {
   const expected =
     process.env.MICROBIOLOGY_ADMIN_PASSWORD || "bavi_nas_mikrobiologie";
-  return typeof password === "string" && password === expected;
+  if (typeof password !== "string" || !password) return false;
+
+  const hashA = createHash("sha256").update(password).digest();
+  const hashB = createHash("sha256").update(expected).digest();
+  return timingSafeEqual(hashA, hashB);
 }
 
 /**

@@ -2,6 +2,7 @@ import { useEffect, useRef, useMemo, type ComponentPropsWithoutRef } from "react
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import rehypeHighlight from "rehype-highlight";
 // Subset only languages we use in wiki fences - full highlight.js is huge
 import c from "highlight.js/lib/languages/c";
@@ -31,6 +32,49 @@ const highlightLanguages = {
   json,
   plaintext,
   text: plaintext,
+};
+
+export const wikiSanitizeSchema = {
+  ...defaultSchema,
+  tagNames: [
+    ...(defaultSchema.tagNames || []),
+    "div",
+    "span",
+    "details",
+    "summary",
+    "iframe",
+  ],
+  attributes: {
+    ...defaultSchema.attributes,
+    "*": [
+      ...(defaultSchema.attributes?.["*"] || []),
+      "className",
+      "style",
+      "ariaLabel",
+      "aria-label",
+    ],
+    a: [
+      ...(defaultSchema.attributes?.a || []),
+      "target",
+      "rel",
+    ],
+    iframe: [
+      [
+        "src",
+        /^https:\/\/(www\.)?(youtube\.com|youtube-nocookie\.com)\/embed\/[a-zA-Z0-9_-]+(\?.*)?$/,
+      ],
+      "allowfullscreen",
+      "width",
+      "height",
+      "frameborder",
+      "className",
+    ],
+  },
+  protocols: {
+    ...defaultSchema.protocols,
+    href: ["http", "https", "mailto"],
+    src: ["http", "https"],
+  },
 };
 
 /**
@@ -203,6 +247,7 @@ export function MarkdownView({ content }: Props) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[
           rehypeRaw,
+          [rehypeSanitize, wikiSanitizeSchema],
           [
             rehypeHighlight,
             {
