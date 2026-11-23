@@ -4,10 +4,13 @@ import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import {
+  ArrowLeft,
+  ArrowRight,
   BookOpen,
   ChevronDown,
   ChevronRight,
   ExternalLink,
+  List,
   Menu,
   MessageSquarePlus,
   PanelLeftClose,
@@ -17,12 +20,13 @@ import {
   X,
 } from "lucide-react";
 import { Suspense, useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { MarkdownView } from "../components/MarkdownView";
 import {
   SuggestEditModal,
   materialToRepoPath,
 } from "../components/SuggestEditModal";
+import { WikiSearchModal } from "../components/WikiSearchModal";
 import {
   findMaterial,
   groupByCategoryTree,
@@ -33,9 +37,14 @@ import {
   type NavNode,
   type WikiMaterial,
 } from "../lib/contentLoader";
+import {
+  extractHeadings,
+  flattenNavOrder,
+  type WikiHeading,
+} from "../lib/wikiHelpers";
 
 const prefetchPA2 = () => {
-  void import("../components/PA2ToAX1Overview").catch(() => { });
+  void import("../components/PA2ToAX1Overview").catch(() => {});
 };
 
 /** Heavy materialsData tree - only load when opening the PA2 overview page */
@@ -138,7 +147,8 @@ function NavTreeItem({
     );
   }
 
-  const hubHref = node.hub ? materialHref(node.hub) : undefined;
+  const hubHref =
+    node.hub && !node.hub.externalUrl ? materialHref(node.hub) : undefined;
   const folderActive =
     node.hub && activePath === node.hub.path && node.children.length > 0;
   const isOpen = isSearching || open;
@@ -193,18 +203,73 @@ function NavTreeItem({
   );
 }
 
+function TableOfContents({
+  headings,
+  activeId,
+}: {
+  headings: WikiHeading[];
+  activeId: string;
+}) {
+  if (headings.length < 2) return null;
+
+  const jumpTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      window.history.replaceState(null, "", `#${id}`);
+    }
+  };
+
+  return (
+    <aside className="hidden xl:flex flex-col w-56 shrink-0 sticky top-24 self-start max-h-[calc(100vh-8rem)] print:hidden">
+      <div className="rounded-2xl border border-stone-200/80 bg-white/90 p-3.5 shadow-xs flex flex-col min-h-0">
+        <div className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-stone-400 mb-2.5 shrink-0">
+          <List size={12} className="text-brand-orange" />
+          <span>Na této stránce</span>
+        </div>
+        <nav className="overflow-y-auto space-y-1 pr-1 [scrollbar-width:thin]">
+          {headings.map((h) => {
+            const isActive = activeId === h.id;
+            return (
+              <button
+                key={h.id}
+                type="button"
+                onClick={() => jumpTo(h.id)}
+                title={h.text}
+                className={cn(
+                  "block w-full text-left text-[11px] leading-snug rounded-lg px-2 py-1 transition-colors cursor-pointer truncate",
+                  h.level === 3 && "pl-4 text-[10.5px]",
+                  isActive
+                    ? "bg-orange-50 text-brand-orange-text font-bold border-l-2 border-brand-orange rounded-l-none"
+                    : "text-stone-500 hover:text-stone-900 hover:bg-stone-50 font-medium"
+                )}
+              >
+                {h.text}
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+    </aside>
+  );
+}
+
 export function WikiPage() {
   const params = useParams();
+  const location = useLocation();
   const splat = params["*"] || "";
   const segments = splat ? splat.split("/").filter(Boolean) : [];
 
   const materials = useMemo(() => loadWikiMaterials(), []);
   const groups = useMemo(() => groupByCategoryTree(materials), [materials]);
+  const linearMaterials = useMemo(() => flattenNavOrder(groups), [groups]);
   const active = findMaterial(materials, segments);
 
   const [query, setQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [suggestOpen, setSuggestOpen] = useState(false);
+  const [searchModalOpen, setSearchModalOpen] = useState(false);
+  const [activeHeadingId, setActiveHeadingId] = useState("");
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(() => {
     if (typeof window === "undefined") return false;
     try {
@@ -217,20 +282,48 @@ export function WikiPage() {
     }
   });
 
+  const isSpecial = active?.key === "pa2-ax1-overview";
+  /** Interactive special pages & external redirect pages aren't a single .md source for full-file PR */
+  const canSuggestMarkdown = Boolean(
+    active && !isSpecial && !active.externalUrl
+  );
+
+  const headings = useMemo(() => {
+    if (!active || isSpecial || active.externalUrl) return [];
+    return extractHeadings(active.raw);
+  }, [active, isSpecial]);
+
+  const { prevMaterial, nextMaterial } = useMemo(() => {
+    if (!active) return { prevMaterial: undefined, nextMaterial: undefined };
+    const idx = linearMaterials.findIndex((m) => m.path === active.path);
+    if (idx < 0) return { prevMaterial: undefined, nextMaterial: undefined };
+    return {
+      prevMaterial: idx > 0 ? linearMaterials[idx - 1] : undefined,
+      nextMaterial:
+        idx < linearMaterials.length - 1 ? linearMaterials[idx + 1] : undefined,
+    };
+  }, [active, linearMaterials]);
+
   const toggleSidebar = () => {
     setIsSidebarCollapsed((prev) => {
       const next = !prev;
       try {
         localStorage.setItem("wiki_sidebar_collapsed", String(next));
         localStorage.setItem("wiki_sidebar_hidden", String(next));
-      } catch { }
+      } catch {}
       return next;
     });
   };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "b") {
+      const key = e.key.toLowerCase();
+      if ((e.metaKey || e.ctrlKey) && key === "k") {
+        e.preventDefault();
+        setSearchModalOpen((prev) => !prev);
+        return;
+      }
+      if ((e.metaKey || e.ctrlKey) && key === "b") {
         const target = e.target as HTMLElement;
         if (
           target &&
@@ -272,13 +365,71 @@ export function WikiPage() {
     }
   }, [active?.externalUrl]);
 
+  // Reset transient overlays and scroll cleanly on route or hash changes
   useEffect(() => {
     setSidebarOpen(false);
     setSuggestOpen(false);
-  }, [splat]);
+
+    const rawHash = location.hash.replace(/^#/, "");
+    if (!rawHash) {
+      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      return;
+    }
+
+    const decodedHash = decodeURIComponent(rawHash);
+    const timer = window.setTimeout(() => {
+      let target = document.getElementById(decodedHash);
+      if (!target) {
+        // Forgiving suffix/substring match for legacy section hashes (e.g. without leading number)
+        const allHeadings = Array.from(
+          document.querySelectorAll<HTMLElement>(".wiki-prose h2[id], .wiki-prose h3[id]")
+        );
+        target =
+          allHeadings.find(
+            (el) => el.id.endsWith(decodedHash) || el.id.includes(decodedHash)
+          ) ?? null;
+      }
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 60);
+
+    return () => window.clearTimeout(timer);
+  }, [splat, location.hash]);
+
+  // Track active heading in Table of Contents
+  useEffect(() => {
+    if (headings.length < 2 || typeof IntersectionObserver === "undefined") {
+      setActiveHeadingId("");
+      return;
+    }
+    setActiveHeadingId(headings[0].id);
+
+    const elements = headings
+      .map((h) => document.getElementById(h.id))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+          );
+        if (visible[0]?.target?.id) {
+          setActiveHeadingId(visible[0].target.id);
+        }
+      },
+      { rootMargin: "-90px 0px -65% 0px", threshold: 0.1 }
+    );
+
+    for (const el of elements) observer.observe(el);
+    return () => observer.disconnect();
+  }, [headings, active?.path]);
 
   const filteredGroups = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.trim();
     if (!q) return groups;
 
     return groups
@@ -288,10 +439,6 @@ export function WikiPage() {
       }))
       .filter((g) => g.tree.length > 0);
   }, [groups, query]);
-
-  const isSpecial = active?.key === "pa2-ax1-overview";
-  /** Interactive special pages & external redirect pages aren't a single .md source for full-file PR */
-  const canSuggestMarkdown = Boolean(active && !isSpecial && !active.externalUrl);
 
   const renderSidebarContent = (collapsed: boolean) => (
     <aside className="flex flex-col h-full min-h-0 max-h-full">
@@ -322,9 +469,19 @@ export function WikiPage() {
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Hledat materiály…"
-                className="w-full rounded-xl border border-stone-200 bg-white pl-8 pr-2.5 py-1.5 text-xs focus:outline-none focus:border-brand-orange"
+                placeholder="Filtrovat materiály…"
+                className="w-full rounded-xl border border-stone-200 bg-white pl-8 pr-7 py-1.5 text-xs focus:outline-none focus:border-brand-orange"
               />
+              {query && (
+                <button
+                  type="button"
+                  onClick={() => setQuery("")}
+                  aria-label="Vymazat filtr"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 cursor-pointer"
+                >
+                  <X size={13} />
+                </button>
+              )}
             </div>
             <button
               type="button"
@@ -361,8 +518,54 @@ export function WikiPage() {
     </aside>
   );
 
+  const prevNextFooter =
+    prevMaterial || nextMaterial ? (
+      <div className="mt-8 pt-5 border-t border-stone-100 grid grid-cols-1 sm:grid-cols-2 gap-3 print:hidden">
+        {prevMaterial ? (
+          <Link
+            to={materialHref(prevMaterial)}
+            className="group flex items-center gap-3 p-3.5 rounded-xl border border-stone-200/90 hover:border-brand-orange/40 hover:bg-orange-50/30 transition-colors min-w-0"
+          >
+            <ArrowLeft
+              size={16}
+              className="shrink-0 text-stone-400 group-hover:text-brand-orange group-hover:-translate-x-0.5 transition-all"
+            />
+            <div className="min-w-0">
+              <div className="text-[10px] font-black uppercase tracking-wider text-stone-400">
+                Předchozí
+              </div>
+              <div className="text-xs sm:text-sm font-bold text-stone-800 group-hover:text-brand-orange-text truncate">
+                {prevMaterial.title}
+              </div>
+            </div>
+          </Link>
+        ) : (
+          <div className="hidden sm:block" />
+        )}
+        {nextMaterial && (
+          <Link
+            to={materialHref(nextMaterial)}
+            className="group flex items-center justify-end gap-3 p-3.5 rounded-xl border border-stone-200/90 hover:border-brand-orange/40 hover:bg-orange-50/30 transition-colors text-right min-w-0"
+          >
+            <div className="min-w-0">
+              <div className="text-[10px] font-black uppercase tracking-wider text-stone-400">
+                Další
+              </div>
+              <div className="text-xs sm:text-sm font-bold text-stone-800 group-hover:text-brand-orange-text truncate">
+                {nextMaterial.title}
+              </div>
+            </div>
+            <ArrowRight
+              size={16}
+              className="shrink-0 text-stone-400 group-hover:text-brand-orange group-hover:translate-x-0.5 transition-all"
+            />
+          </Link>
+        )}
+      </div>
+    ) : null;
+
   const suggestFooter = (material: WikiMaterial) => (
-    <div className="mt-8 pt-5 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3 print:hidden">
+    <div className="mt-6 pt-5 border-t border-stone-100 flex flex-wrap items-center justify-between gap-3 print:hidden">
       <p className="text-xs text-stone-500 font-medium">
         Našli jste chybu nebo máte doplnění k tomuto materiálu?
       </p>
@@ -401,6 +604,19 @@ export function WikiPage() {
       maxWidth="max-w-[1600px]"
       actions={
         <div className="flex items-center gap-2">
+          <Button
+            variant="dark"
+            size="sm"
+            onClick={() => setSearchModalOpen(true)}
+            title="Fulltextové vyhledávání ve všech materiálech (Ctrl+K)"
+            className="text-xs font-bold gap-1.5 border-white/20 bg-white/10 text-white hover:bg-white/15 hover:border-brand-orange/50 hover:text-brand-orange cursor-pointer"
+          >
+            <Search size={14} className="text-brand-orange" />
+            <span className="hidden sm:inline">Hledat</span>
+            <kbd className="hidden md:inline-block ml-0.5 px-1 py-0.5 text-[9px] rounded bg-white/10 text-orange-100/90 border border-white/15">
+              Ctrl+K
+            </kbd>
+          </Button>
           <Button
             variant="dark"
             size="sm"
@@ -485,8 +701,13 @@ export function WikiPage() {
           <div className="rounded-2xl border border-stone-200 bg-white shadow-sm p-5 sm:p-8 lg:p-10 print:border-none print:shadow-none print:p-0 print:m-0 print:rounded-none">
             {!active ? (
               <div className="text-center py-16 text-stone-500">
-                <BookOpen className="mx-auto mb-3 text-brand-orange" size={32} />
-                <p className="font-semibold">Vyberte materiál v bočním panelu</p>
+                <BookOpen
+                  className="mx-auto mb-3 text-brand-orange"
+                  size={32}
+                />
+                <p className="font-semibold">
+                  Vyberte materiál v bočním panelu
+                </p>
               </div>
             ) : active.externalUrl ? (
               <div className="text-center py-16 px-4 max-w-md mx-auto">
@@ -531,16 +752,20 @@ export function WikiPage() {
                     <PA2ToAX1Overview />
                   </Suspense>
                 </ErrorBoundary>
+                {prevNextFooter}
                 {suggestFooter(active)}
               </>
             ) : (
               <>
                 <MarkdownView key={active.path} content={active.raw} />
+                {prevNextFooter}
                 {suggestFooter(active)}
               </>
             )}
           </div>
         </div>
+
+        <TableOfContents headings={headings} activeId={activeHeadingId} />
       </div>
 
       {suggestOpen && active && canSuggestMarkdown && (
@@ -550,8 +775,13 @@ export function WikiPage() {
           onClose={() => setSuggestOpen(false)}
         />
       )}
+
+      {searchModalOpen && (
+        <WikiSearchModal
+          materials={materials}
+          onClose={() => setSearchModalOpen(false)}
+        />
+      )}
     </PageShell>
   );
 }
-
-

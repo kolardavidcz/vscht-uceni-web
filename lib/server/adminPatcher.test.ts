@@ -145,6 +145,15 @@ describe("adminPatcher pure vectoral patching engine", () => {
       ]);
     });
 
+    it("MOVE_CATEGORY: ignores negative, non-integer, or out-of-bounds indices without corrupting array", () => {
+      const result = applyChanges(samplePayload, [
+        { type: "MOVE_CATEGORY", index: -1, direction: "down" },
+        { type: "MOVE_CATEGORY", index: 99, direction: "up" },
+        { type: "MOVE_CATEGORY", index: 0.5, direction: "down" },
+      ]);
+      expect(result.emojiCategories).toEqual(samplePayload.emojiCategories);
+    });
+
     it("UPDATE_EMOJI: updates emoji in options and cascades rewrite into all tree nodes and groups", () => {
       const changes: AdminChange[] = [
         {

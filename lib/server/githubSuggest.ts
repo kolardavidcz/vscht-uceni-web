@@ -50,12 +50,21 @@ export function getGithubConfigFromEnv(
 }
 
 export function isAllowedPath(filePath: string): boolean {
+  if (!filePath || /[\0\r\n]/.test(filePath)) return false;
   const normalized = filePath.replace(/\\/g, "/");
-  if (normalized.includes("..")) return false;
+  if (normalized.includes("..") || normalized.includes("//")) return false;
   return (
     normalized.startsWith("src/features/bioinformatics/content/") &&
     normalized.endsWith(".md")
   );
+}
+
+export function encodeRepoPath(filePath: string): string {
+  return filePath
+    .replace(/\\/g, "/")
+    .split("/")
+    .map(encodeURIComponent)
+    .join("/");
 }
 
 export function slugify(input: string): string {

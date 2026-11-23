@@ -11,6 +11,30 @@ import {
 const STORAGE_KEY = "microbiology_data_v2";
 const LEGACY_STORAGE_KEYS = ["microbiology_data", "microbiology_data_v1"];
 
+function safeStorageGet(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeStorageSet(key: string, value: string): void {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    /* private mode or quota exceeded */
+  }
+}
+
+function safeStorageRemove(key: string): void {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    /* ignore */
+  }
+}
+
 type Payload = {
   worksheetData?: WorksheetItem[];
   emojiOptions?: EmojiOption[];
@@ -87,18 +111,18 @@ export function useMicrobiologyData() {
 
     const purgeLegacy = () => {
       for (const key of LEGACY_STORAGE_KEYS) {
-        localStorage.removeItem(key);
+        safeStorageRemove(key);
       }
     };
 
     const fromStorage = (): boolean => {
       purgeLegacy();
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = safeStorageGet(STORAGE_KEY);
       if (!raw) return false;
       try {
         const parsed = JSON.parse(raw) as Payload;
         if (payloadLooksCorrupted(parsed)) {
-          localStorage.removeItem(STORAGE_KEY);
+          safeStorageRemove(STORAGE_KEY);
           return false;
         }
         if (!cancelled) {
@@ -122,11 +146,12 @@ export function useMicrobiologyData() {
         const res = await fetch("/api/get-data");
         if (res.ok) {
           const data = (await res.json()) as Payload;
-          if (data.worksheetData || Array.isArray(data)) {
+          const normalized: Payload = Array.isArray(data)
+            ? { worksheetData: data }
+            : data;
+          if (normalized.worksheetData && !payloadLooksCorrupted(normalized)) {
             if (!cancelled) {
-              applyPayload(
-                Array.isArray(data) ? { worksheetData: data } : data
-              );
+              applyPayload(normalized);
               setKvAvailable(true);
               setStorageLabel("Upstash Redis");
             }
@@ -158,7 +183,7 @@ export function useMicrobiologyData() {
       opts: EmojiOption[],
       cats: EmojiCategory[]
     ) => {
-      localStorage.setItem(
+      safeStorageSet(
         STORAGE_KEY,
         JSON.stringify({
           worksheetData: enriched,
@@ -247,6 +272,14 @@ export function useMicrobiologyData() {
         return { ok: true, message: "Žádné změny k uložení" };
       }
 
+      // Capture pre-change baseline BEFORE optimistic local preview update so
+      // seeding an empty Redis store never double-applies the pending patches.
+      const preChangeBaseline = {
+        worksheetData,
+        emojiOptions,
+        emojiCategories,
+      };
+
       if (localPreview) {
         const opts = localPreview.emojiOptions;
         const cats = localPreview.emojiCategories;
@@ -264,11 +297,7 @@ export function useMicrobiologyData() {
           body: JSON.stringify({
             password,
             changes,
-            baseline: {
-              worksheetData: localPreview?.worksheetData ?? worksheetData,
-              emojiOptions: localPreview?.emojiOptions ?? emojiOptions,
-              emojiCategories: localPreview?.emojiCategories ?? emojiCategories,
-            },
+            baseline: preChangeBaseline,
           }),
         });
 
@@ -310,7 +339,7 @@ export function useMicrobiologyData() {
   );
 
   const resetToDefaults = useCallback(async (password?: string) => {
-    localStorage.removeItem(STORAGE_KEY);
+    safeStorageRemove(STORAGE_KEY);
     const enriched = enrichWorksheetData(staticWorksheet, staticEmojis);
     setEmojiOptions(staticEmojis);
     setEmojiCategories(staticCategories);

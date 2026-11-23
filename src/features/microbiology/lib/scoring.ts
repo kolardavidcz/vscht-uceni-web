@@ -127,3 +127,157 @@ export function updateItemInTree(
     return item;
   });
 }
+
+export type QuizScoreBreakdown = {
+  total: number;
+  answered: number;
+  correct: number;
+  partial: number;
+  wrong: number;
+};
+
+/** Computes detailed score breakdown across all answer slots in the tree. */
+export function getQuizScoreBreakdown(
+  items: WorksheetItem[],
+  selected: Record<string, string[]>
+): QuizScoreBreakdown {
+  const stats: QuizScoreBreakdown = {
+    total: 0,
+    answered: 0,
+    correct: 0,
+    partial: 0,
+    wrong: 0,
+  };
+
+  const evaluateSlot = (fieldId: string, correct: string[]) => {
+    stats.total++;
+    const sel = selected[fieldId] || [];
+    if (sel.length === 0) return;
+    stats.answered++;
+    if (correct.length > 0 && setsEqual(sel, correct)) {
+      stats.correct++;
+    } else if (sel.some((e) => correct.includes(e))) {
+      stats.partial++;
+    } else {
+      stats.wrong++;
+    }
+  };
+
+  const walk = (nodes: WorksheetItem[]) => {
+    for (const item of nodes) {
+      if (item.groups && item.groups.length > 0) {
+        for (const g of item.groups) {
+          evaluateSlot(fieldIdFor(item, g.id), g.correctEmojis || []);
+        }
+      } else if (item.correctEmojis && item.correctEmojis.length > 0) {
+        evaluateSlot(item.id, item.correctEmojis);
+      }
+      if (item.children) walk(item.children);
+    }
+  };
+
+  walk(items);
+  return stats;
+}
+
+/** Checks whether a single worksheet item has at least one incorrect or incomplete answer slot. */
+export function itemHasMistake(
+  item: WorksheetItem,
+  selected: Record<string, string[]>
+): boolean {
+  if (item.groups && item.groups.length > 0) {
+    return item.groups.some((g) => {
+      const corr = g.correctEmojis || [];
+      if (corr.length === 0) return false;
+      return !setsEqual(selected[fieldIdFor(item, g.id)] || [], corr);
+    });
+  }
+  if (item.correctEmojis && item.correctEmojis.length > 0) {
+    return !setsEqual(selected[item.id] || [], item.correctEmojis);
+  }
+  return false;
+}
+
+/** Filters worksheet tree for QuizPage search, phylum filter, and "mistakes only" review mode. */
+export function filterWorksheetTree(
+  items: WorksheetItem[],
+  opts: {
+    query: string;
+    phylum: string;
+    onlyMistakes: boolean;
+    selected: Record<string, string[]>;
+  }
+): WorksheetItem[] {
+  const q = opts.query
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+  const norm = (s?: string) =>
+    (s || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase();
+
+  const walk = (nodes: WorksheetItem[]): WorksheetItem[] => {
+    const out: WorksheetItem[] = [];
+    for (const item of nodes) {
+      const filteredChildren = item.children ? walk(item.children) : [];
+      const hasSlots =
+        Boolean(item.groups?.length) || Boolean(item.correctEmojis?.length);
+      const matchesText =
+        !q ||
+        norm(item.name).includes(q) ||
+        norm(item.description).includes(q) ||
+        norm(item.hint).includes(q);
+      const matchesMistake =
+        !opts.onlyMistakes || (hasSlots && itemHasMistake(item, opts.selected));
+
+      const selfMatches = matchesText && matchesMistake;
+      if (selfMatches || filteredChildren.length > 0) {
+        out.push(
+          item.children
+            ? { ...item, children: filteredChildren }
+            : item
+        );
+      }
+    }
+    return out;
+  };
+
+  const rootPool =
+    opts.phylum && opts.phylum !== "Vše"
+      ? items.filter((i) => i.name === opts.phylum)
+      : items;
+
+  if (!q && !opts.onlyMistakes) return rootPool;
+  return walk(rootPool);
+}
+
+/** Unbiased Fisher-Yates shuffle returning a new array. */
+export function fisherYatesShuffle<T>(items: readonly T[]): T[] {
+  const arr = [...items];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/**
+ * Re-inserts a missed ("hard") flashcard a few positions ahead in the deck
+ * so the student actively re-practices it within the same session.
+ */
+export function requeueHardCard<T>(
+  pool: readonly T[],
+  currentIndex: number,
+  offset = 3
+): T[] {
+  if (currentIndex < 0 || currentIndex >= pool.length) return [...pool];
+  const card = pool[currentIndex];
+  const next = [...pool];
+  const insertAt = Math.min(next.length, currentIndex + 1 + offset);
+  next.splice(insertAt, 0, card);
+  return next;
+}

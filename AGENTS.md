@@ -109,25 +109,26 @@ Always run package commands through `pnpm` (in WSL2 or terminal):
 ```bash
 pnpm install
 pnpm dev        # http://localhost:34020
-pnpm test       # vitest run (12 test suites, 77+ invariant tests)
-pnpm typecheck  # tsc --noEmit
-pnpm build      # tsc --noEmit && vite build (multi-chunk dist; no singlefile)
+pnpm test       # vitest run (14 test suites, 108+ invariant tests)
+pnpm typecheck  # tsc --noEmit && tsc -p tsconfig.server.json --noEmit
+pnpm build      # pnpm typecheck && vite build (multi-chunk dist; no singlefile)
 pnpm preview
 ```
 
 ### Test suites guarding AI edits
 
-To ensure AI changes do not cause silent regressions, 12 test suites enforce key invariants:
+To ensure AI changes do not cause silent regressions, 14 test suites enforce key invariants:
 
 | Test suite | Invariant tested |
 |------------|------------------|
-| `tests/api/esmImports.test.ts` | Validates Rule 1 (no subdirs under `api/`) and Rule 2 (all relative imports in `api/*.ts` use explicit `.js` extensions) |
-| `lib/server/githubSuggest.test.ts` | Tests security path allowlist, traversal rejection (`..`), slugification of Czech titles, and payload limits |
-| `lib/server/adminPatcher.test.ts` | Tests pure vectoral patch ops (`UPDATE_ITEM`, `DELETE_ITEM`, `ADD_ITEM`, `MOVE_ITEM`, cascading emoji rewrites) and password checks |
-| `src/features/microbiology/lib/scoring.test.ts` | Tests quiz score metrics (`countTotal`, `countAnswered`, `countCorrect`), tree flattening, and answer matching |
+| `tests/api/esmImports.test.ts` | Validates Rule 1 (no subdirs under `api/`) and Rule 2 (all relative imports in `api/*.ts` and `lib/server/*.ts` use explicit `.js` extensions) |
+| `lib/server/githubSuggest.test.ts` | Tests security path allowlist, traversal rejection (`..`), `encodeRepoPath`, slugification of Czech titles, payload limits, and full mocked `createSuggestBranch` PR flow |
+| `lib/server/adminPatcher.test.ts` | Tests pure vectoral patch ops (`UPDATE_ITEM`, `DELETE_ITEM`, `ADD_ITEM`, `MOVE_ITEM`, `MOVE_CATEGORY` bounds, cascading emoji rewrites) and password checks |
+| `src/features/microbiology/lib/scoring.test.ts` | Tests quiz score metrics (`countTotal`, `countAnswered`, `countCorrect`, `getQuizScoreBreakdown`), mistakes filtering, Fisher-Yates shuffle, and hard-card re-queueing |
 | `src/features/microbiology/data/taxonomyIntegrity.test.ts` | Validates that all ~52 taxa/groups have unique IDs and that all species emojis exist in `emojiOptions` |
 | `src/features/bioinformatics/content/wikiIntegrity.test.ts` | Asserts all materials in `config.json` exist on disk and ensures no lecture title uses forbidden `Modul <X>` prefix |
-| `src/features/bioinformatics/lib/markdownTransforms.test.ts` | Verifies math syntax underscore protection (no broken `<em>`), vector check/cross replacements, and single-pass sidebar search |
+| `src/features/bioinformatics/lib/markdownTransforms.test.ts` | Verifies math syntax underscore protection (including skipping code blocks), vector check/cross replacements, `rehype-sanitize` SVG/YouTube/XSS end-to-end rendering, TOC slug extraction, and full-text search |
+| `src/features/python-analyzer/lib/sequenceAnalyzer.test.ts` | Tests live DNA/RNA FASTA parsing, GC%, $T_m$, reverse complement, 3-frame translation, and ORF detection |
 
 ### Env (local)
 

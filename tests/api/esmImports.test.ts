@@ -17,27 +17,39 @@ describe("Serverless API Architecture & ESM Imports (AGENTS.md invariants)", () 
     ).toEqual([]);
   });
 
-  it("ensures all relative imports in api/*.ts use explicit .js extensions (AGENTS.md Rule 2)", () => {
-    const entries = fs.readdirSync(apiDir, { withFileTypes: true });
-    const tsFiles = entries
-      .filter((entry) => entry.isFile() && entry.name.endsWith(".ts"))
-      .map((entry) => entry.name);
-
-    expect(tsFiles.length).toBeGreaterThan(0);
+  it("ensures all relative imports in api/*.ts and lib/server/*.ts use explicit .js extensions (AGENTS.md Rule 2)", () => {
+    const serverDirs = [
+      apiDir,
+      path.resolve(__dirname, "../../lib/server"),
+    ];
 
     const relativeImportRegex = /from\s+["'](\.\.?\/[^"']+)["']/g;
 
-    for (const filename of tsFiles) {
-      const filePath = path.join(apiDir, filename);
-      const content = fs.readFileSync(filePath, "utf-8");
+    for (const dir of serverDirs) {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      const tsFiles = entries
+        .filter(
+          (entry) =>
+            entry.isFile() &&
+            entry.name.endsWith(".ts") &&
+            !entry.name.endsWith(".test.ts")
+        )
+        .map((entry) => entry.name);
 
-      let match: RegExpExecArray | null;
-      while ((match = relativeImportRegex.exec(content)) !== null) {
-        const importPath = match[1];
-        expect(
-          importPath.endsWith(".js"),
-          `In ${filename}: Relative import "${importPath}" must have an explicit ".js" extension to prevent Vercel ESM runtime MODULE_NOT_FOUND errors.`
-        ).toBe(true);
+      expect(tsFiles.length).toBeGreaterThan(0);
+
+      for (const filename of tsFiles) {
+        const filePath = path.join(dir, filename);
+        const content = fs.readFileSync(filePath, "utf-8");
+
+        let match: RegExpExecArray | null;
+        while ((match = relativeImportRegex.exec(content)) !== null) {
+          const importPath = match[1];
+          expect(
+            importPath.endsWith(".js"),
+            `In ${filename}: Relative import "${importPath}" must have an explicit ".js" extension to prevent Vercel ESM runtime MODULE_NOT_FOUND errors.`
+          ).toBe(true);
+        }
       }
     }
   });

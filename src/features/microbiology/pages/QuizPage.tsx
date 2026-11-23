@@ -1,22 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
+  AlertCircle,
   BookOpen,
   CheckCheck,
+  ChevronsDownUp,
+  ChevronsUpDown,
   FileDown,
   RotateCcw,
+  Search,
   Settings,
+  X,
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Card } from "@/components/ui/Card";
+import { cn } from "@/lib/cn";
 import { EmojiPalette } from "../components/EmojiPalette";
 import { WorksheetRow } from "../components/WorksheetRow";
 import type { MicrobiologyData } from "../hooks/useMicrobiologyData";
 import { useQuizState } from "../hooks/useQuizState";
-import { countAnswered, countCorrect, countTotal } from "../lib/scoring";
+import {
+  filterWorksheetTree,
+  getQuizScoreBreakdown,
+} from "../lib/scoring";
 
 type Props = {
   data: MicrobiologyData;
@@ -32,21 +41,57 @@ export function QuizPage({ data }: Props) {
   } = data;
 
   const quiz = useQuizState(emojiOptions);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [phylumFilter, setPhylumFilter] = useState("Vše");
+  const [onlyMistakes, setOnlyMistakes] = useState(false);
+  const [expandCommand, setExpandCommand] = useState<{
+    open: boolean;
+    seq: number;
+  } | null>(null);
 
   useEffect(() => {
     document.title = "Systematika bakterií - VŠCHT Učení";
   }, []);
 
-  const total = countTotal(worksheetData);
-  const answered = countAnswered(worksheetData, quiz.selectedEmojis);
-  const correct = quiz.showResults
-    ? countCorrect(worksheetData, quiz.selectedEmojis)
-    : 0;
+  const availablePhyla = useMemo(() => {
+    const names = worksheetData
+      .filter((i) => i.type === "Kmen" && i.name)
+      .map((i) => i.name);
+    return Array.from(new Set(names)).sort((a, b) => a.localeCompare(b, "cs"));
+  }, [worksheetData]);
+
+  const stats = useMemo(
+    () => getQuizScoreBreakdown(worksheetData, quiz.selectedEmojis),
+    [worksheetData, quiz.selectedEmojis]
+  );
+
+  const visibleTree = useMemo(
+    () =>
+      filterWorksheetTree(worksheetData, {
+        query: searchQuery,
+        phylum: phylumFilter,
+        onlyMistakes: onlyMistakes && quiz.showResults,
+        selected: quiz.selectedEmojis,
+      }),
+    [
+      worksheetData,
+      searchQuery,
+      phylumFilter,
+      onlyMistakes,
+      quiz.showResults,
+      quiz.selectedEmojis,
+    ]
+  );
 
   const activeSelected =
     (quiz.activeFieldId && quiz.selectedEmojis[quiz.activeFieldId]) || [];
 
   const pinnedActive = Boolean(quiz.activeFieldId && quiz.isPalettePinned);
+
+  const handleReset = () => {
+    quiz.resetAll();
+    setOnlyMistakes(false);
+  };
 
   return (
     <PageShell
@@ -76,78 +121,195 @@ export function QuizPage({ data }: Props) {
     >
       <div
         className={
-          pinnedActive
-            ? "pb-[280px] sm:pb-[340px] lg:pb-8"
-            : "pb-8"
+          pinnedActive ? "pb-[280px] sm:pb-[340px] lg:pb-8" : "pb-8"
         }
       >
         {/* Action bar */}
-        <Card className="p-4 mb-6 flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-3 text-sm text-stone-700">
-            <div className="p-2 bg-orange-50 rounded-xl text-brand-orange border border-orange-100">
-              <FileDown size={18} />
+        <Card className="p-4 mb-5 space-y-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="flex items-center gap-3 text-sm text-stone-700">
+              <div className="p-2 bg-orange-50 rounded-xl text-brand-orange border border-orange-100">
+                <FileDown size={18} />
+              </div>
+              <div>
+                <span className="font-bold tracking-wide text-xs uppercase text-stone-500">
+                  Vyplňovací tabulka
+                </span>
+                {isLocalMode && (
+                  <p className="text-[10px] text-brand-orange-text font-semibold">
+                    {storageLabel}
+                  </p>
+                )}
+              </div>
             </div>
-            <div>
-              <span className="font-bold tracking-wide text-xs uppercase text-stone-500">
-                Vyplňovací tabulka
-              </span>
-              {isLocalMode && (
-                <p className="text-[10px] text-brand-orange-text font-semibold">
-                  {storageLabel}
-                </p>
+            <div className="flex-1" />
+            <Button onClick={quiz.checkAnswers} disabled={stats.answered === 0}>
+              <CheckCheck size={16} />
+              Zkontrolovat
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleReset}
+              disabled={stats.answered === 0 && !quiz.showResults}
+            >
+              <RotateCcw size={16} />
+              Reset
+            </Button>
+          </div>
+
+          {/* Search, phylum filter, expand/collapse & mistakes-only toggle */}
+          <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-stone-200/60">
+            <div className="relative flex-1 min-w-[180px]">
+              <Search
+                size={14}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none"
+              />
+              <input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Najít taxon v listu…"
+                className="w-full pl-8 pr-7 py-1.5 rounded-xl border border-stone-200 bg-white text-xs font-medium focus:outline-none focus:border-brand-orange"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Vymazat hledání"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600 cursor-pointer"
+                >
+                  <X size={13} />
+                </button>
               )}
             </div>
+            <select
+              value={phylumFilter}
+              onChange={(e) => setPhylumFilter(e.target.value)}
+              className="px-2.5 py-1.5 rounded-xl border border-stone-200 bg-white text-xs font-bold text-stone-700 cursor-pointer"
+            >
+              <option value="Vše">Všechny kmeny</option>
+              {availablePhyla.map((p) => (
+                <option key={p} value={p}>
+                  {p}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              onClick={() =>
+                setExpandCommand((prev) => ({
+                  open: true,
+                  seq: (prev?.seq ?? 0) + 1,
+                }))
+              }
+              title="Rozbalit vše"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-stone-200 bg-white hover:bg-stone-50 text-stone-600 text-[11px] font-bold cursor-pointer"
+            >
+              <ChevronsUpDown size={13} />
+              <span className="hidden sm:inline">Rozbalit</span>
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                setExpandCommand((prev) => ({
+                  open: false,
+                  seq: (prev?.seq ?? 0) + 1,
+                }))
+              }
+              title="Zabalit vše"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl border border-stone-200 bg-white hover:bg-stone-50 text-stone-600 text-[11px] font-bold cursor-pointer"
+            >
+              <ChevronsDownUp size={13} />
+              <span className="hidden sm:inline">Zabalit</span>
+            </button>
+            {quiz.showResults && stats.correct < stats.total && (
+              <button
+                type="button"
+                onClick={() => setOnlyMistakes((v) => !v)}
+                className={cn(
+                  "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-[11px] font-bold transition-colors cursor-pointer",
+                  onlyMistakes
+                    ? "bg-rose-600 text-white border-rose-600 shadow-xs"
+                    : "bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100"
+                )}
+              >
+                <AlertCircle size={13} />
+                Jen chyby ({stats.total - stats.correct})
+              </button>
+            )}
           </div>
-          <div className="flex-1" />
-          <Button onClick={quiz.checkAnswers} disabled={answered === 0}>
-            <CheckCheck size={16} />
-            Zkontrolovat
-          </Button>
-          <Button variant="secondary" onClick={quiz.resetAll}>
-            <RotateCcw size={16} />
-            Reset
-          </Button>
         </Card>
 
         <div className="mb-6">
           <ProgressBar
-            value={answered}
-            max={total}
+            value={stats.answered}
+            max={stats.total}
             label="Vyplněno"
           />
           {quiz.showResults && (
-            <div className="mt-2">
+            <div className="mt-2.5 flex flex-wrap items-center gap-2">
               <Badge tone="success">
-                ✅ {correct} / {total} správně
+                ✓ {stats.correct} / {stats.total} správně
               </Badge>
+              {stats.partial > 0 && (
+                <Badge tone="amber">≈ {stats.partial} částečně</Badge>
+              )}
+              {stats.wrong > 0 && (
+                <Badge tone="danger">✕ {stats.wrong} špatně</Badge>
+              )}
+              {stats.total - stats.answered > 0 && (
+                <Badge tone="stone">
+                  {stats.total - stats.answered} nevyplněno
+                </Badge>
+              )}
             </div>
           )}
         </div>
 
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           <div className="flex-1 min-w-0 w-full bg-white rounded-3xl shadow-xl shadow-stone-200/50 border border-stone-200 p-4 sm:p-6">
-            {worksheetData.map((item) => (
-              <WorksheetRow
-                key={item.id}
-                item={item}
-                selectedEmojis={quiz.selectedEmojis}
-                activeFieldId={quiz.activeFieldId}
-                showResults={quiz.showResults}
-                isPalettePinned={quiz.isPalettePinned}
-                emojiOptions={emojiOptions}
-                emojiCategories={emojiCategories}
-                onActivate={quiz.activate}
-                onSelectEmoji={quiz.selectEmoji}
-                onRemoveEmoji={quiz.removeEmoji}
-                onClearField={quiz.clearField}
-                onClosePalette={quiz.closePalette}
-                onTogglePin={quiz.togglePin}
-              />
-            ))}
+            {visibleTree.length > 0 ? (
+              visibleTree.map((item) => (
+                <WorksheetRow
+                  key={item.id}
+                  item={item}
+                  selectedEmojis={quiz.selectedEmojis}
+                  activeFieldId={quiz.activeFieldId}
+                  showResults={quiz.showResults}
+                  isPalettePinned={quiz.isPalettePinned}
+                  emojiOptions={emojiOptions}
+                  emojiCategories={emojiCategories}
+                  onActivate={quiz.activate}
+                  onSelectEmoji={quiz.selectEmoji}
+                  onRemoveEmoji={quiz.removeEmoji}
+                  onClearField={quiz.clearField}
+                  onClosePalette={quiz.closePalette}
+                  onTogglePin={quiz.togglePin}
+                  expandCommand={expandCommand}
+                />
+              ))
+            ) : (
+              <div className="py-12 text-center space-y-3">
+                <p className="text-sm font-bold text-stone-700">
+                  {onlyMistakes && quiz.showResults
+                    ? "Všechno máš správně!"
+                    : "Žádný taxon neodpovídá filtru."}
+                </p>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={() => {
+                    setSearchQuery("");
+                    setPhylumFilter("Vše");
+                    setOnlyMistakes(false);
+                  }}
+                >
+                  Zobrazit vše
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Desktop sticky sidebar when pinned */}
-          {/* Desktop sticky sidebar - old widths ~380–420px, full viewport height */}
           {pinnedActive && (
             <aside
               className="hidden lg:block lg:w-[380px] xl:w-[420px] lg:sticky lg:top-[7.5rem] shrink-0 h-[calc(100vh-10rem)]"

@@ -1,6 +1,7 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   createSuggestBranch,
+  encodeRepoPath,
   getGithubConfigFromEnv,
   isAllowedPath,
   neutralizeMentions,
@@ -159,6 +160,100 @@ describe("githubSuggest security allowlist & helpers", () => {
         expect(res.status).toBe(400);
         expect(res.error).toContain("velký");
       }
+    });
+
+    it("encodes repository paths segment-by-segment without encoding slashes", () => {
+      expect(
+        encodeRepoPath(
+          "src/features/bioinformatics/content/1-semestr/bi-pa1/wsl a setup.md"
+        )
+      ).toBe(
+        "src/features/bioinformatics/content/1-semestr/bi-pa1/wsl%20a%20setup.md"
+      );
+    });
+  });
+
+  describe("createSuggestBranch end-to-end mocked GitHub flow", () => {
+    afterEach(() => {
+      vi.restoreAllMocks();
+    });
+
+    it("creates branch, commits encoded file path, and opens PR without ReferenceErrors", async () => {
+      const calls: Array<{ url: string; method: string }> = [];
+      const mockFetch = vi.fn(async (url: string | URL | Request, init?: RequestInit) => {
+        const urlStr = String(url);
+        const method = init?.method || "GET";
+        calls.push({ url: urlStr, method });
+
+        const jsonResp = (data: unknown, status = 200) =>
+          new Response(JSON.stringify(data), {
+            status,
+            headers: { "Content-Type": "application/json" },
+          });
+
+        if (urlStr.endsWith("/git/ref/heads/main")) {
+          return jsonResp({ object: { sha: "base-sha-123" } });
+        }
+        if (urlStr.endsWith("/git/refs") && method === "POST") {
+          return jsonResp({ ref: "refs/heads/suggest/test" }, 201);
+        }
+        if (urlStr.includes("/contents/") && method === "GET") {
+          return jsonResp({ sha: "file-sha-456" });
+        }
+        if (urlStr.endsWith("/user")) {
+          return jsonResp({
+            id: 42,
+            login: "kolardavidcz",
+            name: "David Kolar",
+            email: "test@example.com",
+          });
+        }
+        if (urlStr.includes("/contents/") && method === "PUT") {
+          return jsonResp({ commit: { sha: "commit-sha-789" } });
+        }
+        if (urlStr.endsWith("/pulls") && method === "POST") {
+          return jsonResp({
+            html_url: "https://github.com/mock-owner/mock-repo/pull/99",
+            number: 99,
+          });
+        }
+        return jsonResp({ message: "unexpected" }, 404);
+      });
+
+      vi.stubGlobal("fetch", mockFetch);
+
+      const res = await createSuggestBranch(
+        {
+          token: "tok",
+          owner: "mock-owner",
+          repo: "mock-repo",
+          defaultBranch: "main",
+        },
+        {
+          filePath:
+            "src/features/bioinformatics/content/1-semestr/bi-pa1/wsl-a-setup.md",
+          title: "WSL a setup",
+          markdown: "# WSL a setup\n\nOpravený návod",
+          note: "Oprava překlepu @ping",
+          authorName: "Student\nInjected",
+        }
+      );
+
+      expect(res.ok).toBe(true);
+      if (res.ok) {
+        expect(res.prNumber).toBe(99);
+        expect(res.branch).toMatch(/^suggest\/wsl-a-setup-/);
+        expect(res.prUrl).toBe("https://github.com/mock-owner/mock-repo/pull/99");
+      }
+      expect(
+        calls.some(
+          (c) =>
+            c.method === "PUT" &&
+            c.url.includes(
+              "/contents/src/features/bioinformatics/content/1-semestr/bi-pa1/wsl-a-setup.md"
+            )
+        )
+      ).toBe(true);
     });
   });
 });

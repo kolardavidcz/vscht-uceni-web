@@ -41,7 +41,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const body = req.body || {};
+    res.setHeader("Cache-Control", "no-store");
+    let body: Record<string, unknown> = {};
+    if (typeof req.body === "string") {
+      try {
+        const parsed = req.body.trim() ? JSON.parse(req.body) : {};
+        body = parsed && typeof parsed === "object" ? (parsed as Record<string, unknown>) : {};
+      } catch {
+        return res.status(400).json({ error: "Neplatný JSON payload" });
+      }
+    } else if (req.body && typeof req.body === "object") {
+      body = req.body as Record<string, unknown>;
+    }
     const result = await createSuggestBranch(config, {
       filePath: String(body.filePath || ""),
       title: String(body.title || "wiki"),

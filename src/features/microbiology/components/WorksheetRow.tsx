@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Check,
   CheckCircle,
@@ -29,6 +29,7 @@ type Props = {
   onClearField: (fieldId: string) => void;
   onClosePalette: () => void;
   onTogglePin: () => void;
+  expandCommand?: { open: boolean; seq: number } | null;
 };
 
 const rankTone: Record<string, "orange" | "amber" | "stone" | "danger"> = {
@@ -219,6 +220,7 @@ export function WorksheetRow({
   onClearField,
   onClosePalette,
   onTogglePin,
+  expandCommand,
 }: Props) {
   // Expand Kmen → Třída → Čeleď → Rod by default; only Zástupce/deep leaves start collapsed
   const [open, setOpen] = useState(() => {
@@ -234,6 +236,12 @@ export function WorksheetRow({
       depth < 3
     );
   });
+
+  useEffect(() => {
+    if (expandCommand && item.children?.length) {
+      setOpen(expandCommand.open);
+    }
+  }, [expandCommand, item.children?.length]);
   const hasChildren = Boolean(item.children?.length);
   const hasAnswerSlots =
     (item.groups && item.groups.length > 0) ||
@@ -404,6 +412,7 @@ export function WorksheetRow({
             onClearField={onClearField}
             onClosePalette={onClosePalette}
             onTogglePin={onTogglePin}
+            expandCommand={expandCommand}
           />
         ))}
     </div>

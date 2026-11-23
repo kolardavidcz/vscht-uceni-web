@@ -2,6 +2,7 @@
  * Local /api/* for Vite dev.
  * Vercel serverless handlers under /api are NOT executed by `npm run dev`.
  */
+import type { ServerResponse } from "node:http";
 import type { Plugin, Connect } from "vite";
 import { loadEnv } from "vite";
 import {
@@ -19,7 +20,7 @@ function readBody(req: Connect.IncomingMessage): Promise<string> {
 }
 
 function sendJson(
-  res: Connect.ServerResponse,
+  res: ServerResponse,
   status: number,
   payload: unknown
 ) {

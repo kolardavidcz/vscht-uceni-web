@@ -29,7 +29,24 @@ import type { EmojiOption, WorksheetItem } from "../types";
 
 const ADMIN_PASSWORD = "bavi_nas_mikrobiologie";
 const AUTH_KEY = "microbiology_admin_ok";
+const AUTH_PASS_KEY = "microbiology_admin_pass";
 const SHOW_TEMP_PASSWORD = true;
+
+function safeSessionGet(key: string): string | null {
+  try {
+    return sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeSessionSet(key: string, value: string): void {
+  try {
+    sessionStorage.setItem(key, value);
+  } catch {
+    /* ignore */
+  }
+}
 
 type Props = { data: MicrobiologyData };
 type AdminTab = "answers" | "emojis";
@@ -98,9 +115,12 @@ function findAndMap(
 
 export function AdminPage({ data }: Props) {
   const [authed, setAuthed] = useState(
-    () => sessionStorage.getItem(AUTH_KEY) === "1"
+    () => safeSessionGet(AUTH_KEY) === "1"
   );
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(
+    () => safeSessionGet(AUTH_PASS_KEY) || ""
+  );
+  const [verifying, setVerifying] = useState(false);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<AdminTab>("answers");
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -122,11 +142,13 @@ export function AdminPage({ data }: Props) {
     document.title = "Admin - Systematika bakterií";
   }, []);
 
+  // Only sync background data updates when there are no unsaved local edits
   useEffect(() => {
+    if (pending.length > 0) return;
     setLocalData(data.worksheetData);
     setLocalEmojis(data.emojiOptions);
     setLocalCategories(data.emojiCategories);
-  }, [data.worksheetData, data.emojiOptions, data.emojiCategories]);
+  }, [data.worksheetData, data.emojiOptions, data.emojiCategories, pending.length]);
 
   const flatItems = useMemo(() => flattenItems(localData), [localData]);
   const selectedItem = flatItems.find((f) => f.item.id === selectedId)?.item;
@@ -162,13 +184,49 @@ export function AdminPage({ data }: Props) {
   const queue = (change: AdminChange) =>
     setPending((prev) => [...prev, change]);
 
-  const login = (e: React.FormEvent) => {
+  const login = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!password.trim()) {
+      setError("Zadejte heslo.");
+      return;
+    }
+    setVerifying(true);
+    setError("");
+    try {
+      // Verify against server so custom MICROBIOLOGY_ADMIN_PASSWORD env works in production
+      const res = await fetch("/api/save-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password, verifyOnly: true }),
+      });
+      if (res.ok) {
+        safeSessionSet(AUTH_KEY, "1");
+        safeSessionSet(AUTH_PASS_KEY, password);
+        setAuthed(true);
+        return;
+      }
+      if (res.status === 401) {
+        setError("Nesprávné heslo.");
+        return;
+      }
+      if (res.status === 429) {
+        setError("Příliš mnoho pokusů. Zkuste to za chvíli.");
+        return;
+      }
+    } catch {
+      // Local dev / offline fallback (no serverless /api/save-data)
+    } finally {
+      setVerifying(false);
+    }
+
     if (password === ADMIN_PASSWORD) {
-      sessionStorage.setItem(AUTH_KEY, "1");
+      safeSessionSet(AUTH_KEY, "1");
+      safeSessionSet(AUTH_PASS_KEY, password);
       setAuthed(true);
       setError("");
-    } else setError("Nesprávné heslo.");
+    } else {
+      setError("Nesprávné heslo.");
+    }
   };
 
   const toggleEmoji = (id: string, emoji: string) => {
@@ -406,8 +464,8 @@ export function AdminPage({ data }: Props) {
             {error && (
               <p className="text-rose-400 text-xs font-semibold">{error}</p>
             )}
-            <Button type="submit" className="w-full">
-              Vstoupit
+            <Button type="submit" className="w-full" disabled={verifying}>
+              {verifying ? "Ověřuji…" : "Vstoupit"}
             </Button>
             <Link
               to="/mikrobiologie"
@@ -499,8 +557,13 @@ export function AdminPage({ data }: Props) {
       <div className="flex-1 flex overflow-hidden min-h-0">
         {activeTab === "answers" && (
           <>
-            {/* Left taxon list */}
-            <div className="w-full sm:w-2/5 lg:w-1/3 border-r border-stone-200 bg-white flex flex-col min-h-0">
+            {/* Left taxon list (hidden on mobile when a taxon is open in the editor) */}
+            <div
+              className={cn(
+                "w-full sm:w-2/5 lg:w-1/3 border-r border-stone-200 bg-white flex flex-col min-h-0",
+                selectedId ? "hidden sm:flex" : "flex"
+              )}
+            >
               <div className="p-3 bg-stone-50 border-b border-stone-200 flex items-center justify-between">
                 <h2 className="text-[10px] font-black text-stone-400 uppercase tracking-widest">
                   Taxony ({flatItems.length})
@@ -527,10 +590,11 @@ export function AdminPage({ data }: Props) {
                         item.checked && "opacity-40"
                       )}
                     >
-                      <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-center opacity-0 group-hover:opacity-100 bg-white/95 border-r border-stone-200 z-10 px-0.5">
+                      <div className="absolute left-0 top-0 bottom-0 flex flex-col justify-center opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 bg-white/95 border-r border-stone-200 z-10 px-0.5">
                         <button
                           type="button"
                           onClick={() => moveItem(item.id, "up")}
+                          aria-label="Posunout nahoru"
                           className="p-1 text-stone-400 hover:text-brand-orange cursor-pointer"
                         >
                           <ChevronUp size={14} />
@@ -538,6 +602,7 @@ export function AdminPage({ data }: Props) {
                         <button
                           type="button"
                           onClick={() => moveItem(item.id, "down")}
+                          aria-label="Posunout dolů"
                           className="p-1 text-stone-400 hover:text-brand-orange cursor-pointer"
                         >
                           <ChevronDown size={14} />
@@ -605,7 +670,7 @@ export function AdminPage({ data }: Props) {
                           fill={item.checked ? "currentColor" : "none"}
                         />
                       </button>
-                      <div className="flex flex-col justify-center gap-1 px-1.5 opacity-0 group-hover:opacity-100">
+                      <div className="flex flex-col justify-center gap-1 px-1.5 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
                         <button
                           type="button"
                           onClick={() => addNewItem(item.id)}
@@ -617,6 +682,7 @@ export function AdminPage({ data }: Props) {
                         <button
                           type="button"
                           onClick={() => deleteItem(item.id)}
+                          aria-label="Smazat taxon"
                           className="p-1 text-stone-300 hover:text-rose-500 cursor-pointer"
                         >
                           <Trash2 size={13} />
@@ -628,10 +694,22 @@ export function AdminPage({ data }: Props) {
               </div>
             </div>
 
-            {/* Right editor */}
-            <div className="hidden sm:block flex-1 overflow-y-auto p-6 bg-stone-50/50">
+            {/* Right editor (full width on mobile when a taxon is selected) */}
+            <div
+              className={cn(
+                "flex-1 overflow-y-auto p-4 sm:p-6 bg-stone-50/50",
+                selectedId ? "block" : "hidden sm:block"
+              )}
+            >
               {selectedItem ? (
                 <div className="max-w-3xl mx-auto space-y-5">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedId(null)}
+                    className="sm:hidden inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-brand-orange cursor-pointer"
+                  >
+                    <ArrowLeft size={14} /> Zpět na seznam taxonů
+                  </button>
                   <div className="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm">
                     <div className="flex flex-wrap gap-3 justify-between items-start mb-4 pb-3 border-b border-stone-100">
                       <div>

@@ -3,21 +3,63 @@ import { sortEmojis } from "../data/emojis";
 import type { EmojiOption } from "../types";
 
 const PIN_KEY = "microbiology_palette_pinned";
+const ANSWERS_KEY = "microbiology_quiz_answers_v1";
+
+function loadSavedAnswers(): Record<string, string[]> {
+  try {
+    const raw = localStorage.getItem(ANSWERS_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return {};
+    }
+    const clean: Record<string, string[]> = {};
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      if (Array.isArray(v) && v.every((x) => typeof x === "string") && v.length > 0) {
+        clean[k] = v;
+      }
+    }
+    return clean;
+  } catch {
+    return {};
+  }
+}
 
 export function useQuizState(emojiOptions: EmojiOption[]) {
   const [selectedEmojis, setSelectedEmojis] = useState<Record<string, string[]>>(
-    {}
+    loadSavedAnswers
   );
   const [activeFieldId, setActiveFieldId] = useState<string | null>(null);
   const [showResults, setShowResults] = useState(false);
-  const [isPalettePinned, setIsPalettePinned] = useState(
-    () => localStorage.getItem(PIN_KEY) === "true"
-  );
+  const [isPalettePinned, setIsPalettePinned] = useState(() => {
+    try {
+      return localStorage.getItem(PIN_KEY) === "true";
+    } catch {
+      return false;
+    }
+  });
+
+  // Persist quiz progress so accidental reloads or visiting Atlas keep filled answers
+  useEffect(() => {
+    try {
+      if (Object.keys(selectedEmojis).length === 0) {
+        localStorage.removeItem(ANSWERS_KEY);
+      } else {
+        localStorage.setItem(ANSWERS_KEY, JSON.stringify(selectedEmojis));
+      }
+    } catch {
+      /* ignore storage errors */
+    }
+  }, [selectedEmojis]);
 
   const togglePin = useCallback(() => {
     setIsPalettePinned((prev) => {
       const next = !prev;
-      localStorage.setItem(PIN_KEY, String(next));
+      try {
+        localStorage.setItem(PIN_KEY, String(next));
+      } catch {
+        /* ignore */
+      }
       return next;
     });
   }, []);

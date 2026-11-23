@@ -4,7 +4,11 @@ import {
   countCorrect,
   countTotal,
   fieldIdFor,
+  filterWorksheetTree,
+  fisherYatesShuffle,
   flattenTaxa,
+  getQuizScoreBreakdown,
+  requeueHardCard,
   setsEqual,
   updateItemInTree,
 } from "./scoring";
@@ -137,6 +141,67 @@ describe("microbiology quiz scoring & tree utilities", () => {
       }));
       expect(updated[0].name).toBe("New Name");
       expect(updated[0].children?.[0].name).toBe("Child");
+    });
+  });
+
+  describe("getQuizScoreBreakdown & filterWorksheetTree", () => {
+    const tree: WorksheetItem[] = [
+      {
+        id: "p1",
+        name: "Proteobacteria",
+        type: "Kmen",
+        correctEmojis: [],
+        children: [
+          { id: "s1", name: "Escherichia coli", correctEmojis: ["🔴", "🌭"] },
+          { id: "s2", name: "Salmonella", correctEmojis: ["🔴", "🏃"] },
+          { id: "s3", name: "Vibrio", correctEmojis: ["🔴", "💧"] },
+        ],
+      },
+    ];
+
+    it("computes exact, partial, and wrong counts accurately", () => {
+      const stats = getQuizScoreBreakdown(tree, {
+        s1: ["🔴", "🌭"], // exact
+        s2: ["🔴"], // partial
+        s3: ["🔵"], // wrong
+      });
+      expect(stats).toEqual({
+        total: 3,
+        answered: 3,
+        correct: 1,
+        partial: 1,
+        wrong: 1,
+      });
+    });
+
+    it("filters only mistaken items when onlyMistakes is enabled", () => {
+      const filtered = filterWorksheetTree(tree, {
+        query: "",
+        phylum: "Vše",
+        onlyMistakes: true,
+        selected: {
+          s1: ["🔴", "🌭"],
+          s2: ["🔴"],
+        },
+      });
+      expect(filtered).toHaveLength(1);
+      expect(filtered[0].children?.map((c) => c.id)).toEqual(["s2", "s3"]);
+    });
+  });
+
+  describe("flashcard deck helpers (fisherYatesShuffle & requeueHardCard)", () => {
+    it("fisherYatesShuffle preserves all items without mutating input", () => {
+      const orig = [1, 2, 3, 4, 5, 6];
+      const shuffled = fisherYatesShuffle(orig);
+      expect(shuffled).toHaveLength(orig.length);
+      expect([...shuffled].sort((a, b) => a - b)).toEqual(orig);
+      expect(orig).toEqual([1, 2, 3, 4, 5, 6]);
+    });
+
+    it("requeueHardCard re-inserts missed card ahead in the deck", () => {
+      const deck = ["A", "B", "C", "D", "E"];
+      expect(requeueHardCard(deck, 0, 2)).toEqual(["A", "B", "C", "A", "D", "E"]);
+      expect(requeueHardCard(deck, 4, 3)).toEqual(["A", "B", "C", "D", "E", "E"]);
     });
   });
 });

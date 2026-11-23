@@ -325,7 +325,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
                     ) : (
                       <GitPullRequest size={14} />
                     )}
-                    {submitting ? "Odesílám…" : "Submit change"}
+                    {submitting ? "Odesílám…" : "Odeslat návrh"}
                   </Button>
                 </div>
               </div>

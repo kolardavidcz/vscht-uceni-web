@@ -1,10 +1,19 @@
 import { describe, expect, it } from "vitest";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { MemoryRouter } from "react-router-dom";
 import {
+  MarkdownView,
   protectMathSyntax,
   replaceEmojis,
   wikiSanitizeSchema,
 } from "../components/MarkdownView";
 import { searchNavTree, type NavNode } from "./contentLoader";
+import {
+  extractHeadings,
+  searchMaterialsFullText,
+  slugifyHeading,
+} from "./wikiHelpers";
 
 describe("markdownTransforms & nav tree search", () => {
   describe("protectMathSyntax", () => {
@@ -32,6 +41,21 @@ describe("markdownTransforms & nav tree search", () => {
       const input = "Price is \\$100 and formula is $x_1$";
       const protectedText = protectMathSyntax(input);
       expect(protectedText).toBe("Price is \\$100 and formula is $x\\_1$");
+    });
+
+    it("does NOT corrupt shell variables with $ and _ inside fenced or inline code blocks", () => {
+      const input = [
+        "Inline `$PROG < $IN_FILE` and math $a_b$.",
+        "```bash",
+        'for IN_FILE in $REFERENCE_FOLDER; do',
+        '  "$PROG" < "$IN_FILE" > my_out.txt',
+        "done",
+        "```",
+      ].join("\n");
+      const protectedText = protectMathSyntax(input);
+      expect(protectedText).toContain("`$PROG < $IN_FILE`");
+      expect(protectedText).toContain('"$PROG" < "$IN_FILE" > my_out.txt');
+      expect(protectedText).toContain("$a\\_b$");
     });
   });
 
@@ -178,6 +202,88 @@ describe("markdownTransforms & nav tree search", () => {
       expect(hrefProtocols).toContain("mailto");
       expect(hrefProtocols).not.toContain("javascript");
       expect(hrefProtocols).not.toContain("data");
+    });
+
+    it("preserves safe inline SVG diagrams, data-label, download, and YouTube embeds while stripping XSS", () => {
+      const md = [
+        "## 4. Lokální testování ze souborů (`testshell.sh`)",
+        "",
+        '<div class="print-tablet-workspace" data-label="Místo pro řešení"></div>',
+        '<a href="/rekurze_bro.cpp" download="rekurze_bro.cpp">Stáhnout</a>',
+        '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="10" fill="#f95d12" /><text x="50" y="50" text-anchor="middle">v1</text></svg>',
+        '<iframe src="https://www.youtube.com/embed/9zpToW-YgwE" allowfullscreen></iframe>',
+        '<iframe src="https://evil.example/embed/123"></iframe>',
+        '<script>alert(1)</script><img src="x" onerror="alert(2)" /><a href="javascript:alert(3)">bad</a><svg><foreignObject><div>bad</div></foreignObject></svg>',
+      ].join("\n");
+
+      const html = renderToStaticMarkup(
+        createElement(MemoryRouter, null, createElement(MarkdownView, { content: md }))
+      );
+
+      // Legitimate features preserved
+      expect(html).toContain('id="4-lokalni-testovani-ze-souboru-testshellsh"');
+      expect(html).toContain('data-label="Místo pro řešení"');
+      expect(html).toContain('download="rekurze_bro.cpp"');
+      expect(html).toContain("<svg");
+      expect(html).toContain("<circle");
+      expect(html).toContain('cx="50"');
+      expect(html).toContain("https://www.youtube.com/embed/9zpToW-YgwE");
+      expect(html.toLowerCase()).toContain("allowfullscreen");
+      expect(html).not.toContain('node="[object Object]"');
+
+      // XSS vectors stripped
+      expect(html).not.toContain("<script");
+      expect(html).not.toContain("onerror");
+      expect(html).not.toContain("javascript:alert");
+      expect(html).not.toContain("evil.example");
+      expect(html).not.toContain("foreignObject");
+    });
+  });
+
+  describe("wikiHelpers (heading slugs, TOC extraction, full-text search)", () => {
+    it("generates Czech diacritic-free slugs matching existing anchor links", () => {
+      expect(
+        slugifyHeading("4. Lokální testování ze souborů (`testshell.sh`)")
+      ).toBe("4-lokalni-testovani-ze-souboru-testshellsh");
+    });
+
+    it("extracts h2/h3 headings while skipping fenced code blocks and deduplicating IDs", () => {
+      const md = [
+        "# Main Title",
+        "## Úvod",
+        "```bash",
+        "## Not a heading",
+        "```",
+        "### Detail",
+        "## Úvod",
+      ].join("\n");
+      const headings = extractHeadings(md);
+      expect(headings).toEqual([
+        { level: 2, text: "Úvod", id: "uvod" },
+        { level: 3, text: "Detail", id: "detail" },
+        { level: 2, text: "Úvod", id: "uvod-2" },
+      ]);
+    });
+
+    it("performs diacritic-insensitive full-text search across body content", () => {
+      const sample = [
+        {
+          key: "debug",
+          title: "Jak to spravit",
+          categoryKey: "1-semestr",
+          categoryLabel: "1. Semestr",
+          categoryOrder: 1,
+          fileOrder: 1,
+          pathOrders: [1],
+          path: "1-semestr/debug.md",
+          segments: ["1-semestr", "debug"],
+          raw: "# Debug\n\nPoužijte Valgrind pro kontrolu úniků paměti.",
+        },
+      ];
+      const hits = searchMaterialsFullText(sample, "uniku pameti");
+      expect(hits).toHaveLength(1);
+      expect(hits[0].material.key).toBe("debug");
+      expect(hits[0].snippet).toContain("úniků paměti");
     });
   });
 });

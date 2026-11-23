@@ -308,16 +308,22 @@ export function buildCategoryTree(
       } else {
         const folder = node as MutableFolder;
         const children = finalize(folder.children);
-        // hub = first file in sorted children (or nested)
-        const hub =
-          children.find((c) => c.type === "file")?.material ??
-          children.find((c) => c.type === "folder")?.hub;
+        // hub = first internal file in sorted children (or nested), avoiding external redirect hubs
+        const firstInternalFile = children.find(
+          (c): c is Extract<NavNode, { type: "file" }> =>
+            c.type === "file" && !c.material.externalUrl
+        );
+        const firstInternalFolder = children.find(
+          (c): c is Extract<NavNode, { type: "folder" }> =>
+            c.type === "folder" && Boolean(c.hub && !c.hub.externalUrl)
+        );
+        const hub = firstInternalFile?.material ?? firstInternalFolder?.hub;
         nodes.push({
           type: "folder",
           key: folder.key,
           title: folder.title,
           order: folder.order,
-          hub: hub ?? folder.hub,
+          hub: hub ?? (folder.hub?.externalUrl ? undefined : folder.hub),
           children,
         });
       }
@@ -361,13 +367,20 @@ export function filterNavTree(
   return out;
 }
 
+function normalizeSearch(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 /**
- * Filter a navigation tree by a search query in a single recursive pass.
+ * Filter a navigation tree by a search query in a single recursive pass (diacritic-insensitive).
  * If a folder matches query directly, its whole subtree is preserved.
  * Otherwise, only branches containing matching files or subfolders are kept.
  */
 export function searchNavTree(nodes: NavNode[], query: string): NavNode[] {
-  const q = query.trim().toLowerCase();
+  const q = normalizeSearch(query.trim());
   if (!q) return nodes;
 
   const filterNodes = (list: NavNode[]): NavNode[] => {
@@ -375,13 +388,12 @@ export function searchNavTree(nodes: NavNode[], query: string): NavNode[] {
     for (const node of list) {
       if (node.type === "folder") {
         const folderMatches =
-          node.title.toLowerCase().includes(q) ||
-          node.key.toLowerCase().includes(q) ||
-          (node.hub && (
-            node.hub.title.toLowerCase().includes(q) ||
-            node.hub.key.toLowerCase().includes(q) ||
-            node.hub.segments.some((s) => s.toLowerCase().includes(q))
-          ));
+          normalizeSearch(node.title).includes(q) ||
+          normalizeSearch(node.key).includes(q) ||
+          (node.hub &&
+            (normalizeSearch(node.hub.title).includes(q) ||
+              normalizeSearch(node.hub.key).includes(q) ||
+              node.hub.segments.some((s) => normalizeSearch(s).includes(q))));
 
         if (folderMatches) {
           out.push(node);
@@ -394,9 +406,10 @@ export function searchNavTree(nodes: NavNode[], query: string): NavNode[] {
       } else {
         const m = node.material;
         const fileMatches =
-          m.title.toLowerCase().includes(q) ||
-          m.key.toLowerCase().includes(q) ||
-          m.segments.some((s) => s.toLowerCase().includes(q));
+          normalizeSearch(m.title).includes(q) ||
+          normalizeSearch(m.key).includes(q) ||
+          m.segments.some((s) => normalizeSearch(s).includes(q)) ||
+          normalizeSearch(m.raw).includes(q);
         if (fileMatches) {
           out.push(node);
         }

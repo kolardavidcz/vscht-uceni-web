@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Brain,
+  CheckCircle2,
   ChevronDown,
   ChevronRight,
   Filter,
@@ -12,6 +13,7 @@ import {
   Search,
   Smile,
   Table2,
+  Trash2,
   X,
 } from "lucide-react";
 import { PageShell } from "@/components/layout/PageShell";
@@ -21,8 +23,29 @@ import { cn } from "@/lib/cn";
 import { CellMorphology } from "../components/CellMorphology";
 import type { MicrobiologyData } from "../hooks/useMicrobiologyData";
 import { sortEmojis } from "../data/emojis";
+import { fisherYatesShuffle, requeueHardCard } from "../lib/scoring";
 import { matchesTrait } from "../lib/traits";
 import type { EmojiOption, WorksheetItem } from "../types";
+
+const FLASHCARD_HISTORY_KEY = "microbiology_flashcard_history_v1";
+
+function loadFlashcardHistory(): Record<string, "easy" | "medium" | "hard"> {
+  try {
+    const raw = localStorage.getItem(FLASHCARD_HISTORY_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return {};
+    }
+    const clean: Record<string, "easy" | "medium" | "hard"> = {};
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      if (v === "easy" || v === "medium" || v === "hard") clean[k] = v;
+    }
+    return clean;
+  } catch {
+    return {};
+  }
+}
 
 type Tab = "tree" | "flashcards" | "matrix";
 
@@ -602,11 +625,29 @@ export function StudyPage({ data }: Props) {
   const [flashcardPool, setFlashcardPool] = useState<TaxonContext[]>([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [showFlashcardAnswer, setShowFlashcardAnswer] = useState(false);
+  const [flashcardCompleted, setFlashcardCompleted] = useState(false);
   const [flashcardFilterPhylum, setFlashcardFilterPhylum] = useState("Vše");
   const [flashcardFilterRank, setFlashcardFilterRank] = useState("Vše");
+  const [flashcardOnlyUnmastered, setFlashcardOnlyUnmastered] = useState(false);
   const [flashcardHistory, setFlashcardHistory] = useState<
     Record<string, "easy" | "medium" | "hard">
-  >({});
+  >(loadFlashcardHistory);
+  const [requeuedCount, setRequeuedCount] = useState(0);
+
+  useEffect(() => {
+    try {
+      if (Object.keys(flashcardHistory).length === 0) {
+        localStorage.removeItem(FLASHCARD_HISTORY_KEY);
+      } else {
+        localStorage.setItem(
+          FLASHCARD_HISTORY_KEY,
+          JSON.stringify(flashcardHistory)
+        );
+      }
+    } catch {
+      /* ignore */
+    }
+  }, [flashcardHistory]);
 
   useEffect(() => {
     document.title = "Studijní přehled - Systematika bakterií";
@@ -771,39 +812,108 @@ export function StudyPage({ data }: Props) {
     emojiOptions,
   ]);
 
-  const initFlashcards = () => {
-    const pool = taxonFlatList.filter((t) => {
-      const matchesPhylum =
-        flashcardFilterPhylum === "Vše" ||
-        t.name === flashcardFilterPhylum ||
-        t.breadcrumbs.some((b) => b.name === flashcardFilterPhylum);
-      const matchesRank =
-        flashcardFilterRank === "Vše" || t.type === flashcardFilterRank;
-      return matchesPhylum && matchesRank;
-    });
-    const shuffled = [...pool].sort(() => Math.random() - 0.5);
-    setFlashcardPool(shuffled);
-    setFlashcardIndex(0);
-    setShowFlashcardAnswer(false);
-  };
+  const initFlashcards = useCallback(
+    (historyOverride?: Record<string, "easy" | "medium" | "hard">) => {
+      const hist = historyOverride ?? flashcardHistory;
+      const pool = taxonFlatList.filter((t) => {
+        const matchesPhylum =
+          flashcardFilterPhylum === "Vše" ||
+          t.name === flashcardFilterPhylum ||
+          t.breadcrumbs.some((b) => b.name === flashcardFilterPhylum);
+        const matchesRank =
+          flashcardFilterRank === "Vše" || t.type === flashcardFilterRank;
+        const matchesMastery =
+          !flashcardOnlyUnmastered || hist[t.id] !== "easy";
+        return matchesPhylum && matchesRank && matchesMastery;
+      });
+      setFlashcardPool(fisherYatesShuffle(pool));
+      setFlashcardIndex(0);
+      setShowFlashcardAnswer(false);
+      setFlashcardCompleted(false);
+      setRequeuedCount(0);
+    },
+    [
+      taxonFlatList,
+      flashcardFilterPhylum,
+      flashcardFilterRank,
+      flashcardOnlyUnmastered,
+      flashcardHistory,
+    ]
+  );
 
   useEffect(() => {
     if (tab === "flashcards") initFlashcards();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-init when filters/tab change
-  }, [tab, flashcardFilterPhylum, flashcardFilterRank, taxonFlatList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-init only when filters/tab/dataset change (not on every card rating)
+  }, [
+    tab,
+    flashcardFilterPhylum,
+    flashcardFilterRank,
+    flashcardOnlyUnmastered,
+    taxonFlatList,
+  ]);
 
   const currentCard = flashcardPool[flashcardIndex];
 
-  const rateCard = (difficulty: "easy" | "medium" | "hard") => {
-    if (!currentCard) return;
-    setFlashcardHistory((h) => ({ ...h, [currentCard.id]: difficulty }));
-    if (flashcardIndex < flashcardPool.length - 1) {
-      setFlashcardIndex((i) => i + 1);
-      setShowFlashcardAnswer(false);
-    } else {
-      initFlashcards();
-    }
-  };
+  const rateCard = useCallback(
+    (difficulty: "easy" | "medium" | "hard") => {
+      if (!currentCard) return;
+      setFlashcardHistory((h) => ({ ...h, [currentCard.id]: difficulty }));
+
+      // Active recall: re-queue "hard" cards 3 slots ahead (capped so deck never grows infinitely)
+      if (difficulty === "hard" && requeuedCount < 15) {
+        setFlashcardPool((prev) => requeueHardCard(prev, flashcardIndex, 3));
+        setRequeuedCount((c) => c + 1);
+        setFlashcardIndex((i) => i + 1);
+        setShowFlashcardAnswer(false);
+        return;
+      }
+
+      if (flashcardIndex < flashcardPool.length - 1) {
+        setFlashcardIndex((i) => i + 1);
+        setShowFlashcardAnswer(false);
+      } else {
+        setFlashcardCompleted(true);
+        setShowFlashcardAnswer(false);
+      }
+    },
+    [currentCard, flashcardIndex, flashcardPool.length, requeuedCount]
+  );
+
+  // Keyboard shortcuts for rapid flashcard study: Space/Enter reveal, 1/2/3 rate
+  useEffect(() => {
+    if (tab !== "flashcards" || !currentCard || flashcardCompleted) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+      if (!showFlashcardAnswer) {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          setShowFlashcardAnswer(true);
+        }
+      } else {
+        if (e.key === "1") {
+          e.preventDefault();
+          rateCard("hard");
+        } else if (e.key === "2") {
+          e.preventDefault();
+          rateCard("medium");
+        } else if (e.key === "3") {
+          e.preventDefault();
+          rateCard("easy");
+        }
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [tab, currentCard, flashcardCompleted, showFlashcardAnswer, rateCard]);
 
   const expandAll = () => {
     const expanded: Record<string, boolean> = {};
@@ -1120,42 +1230,118 @@ export function StudyPage({ data }: Props) {
       {/* FLASHCARDS */}
       {tab === "flashcards" && (
         <div className="max-w-xl mx-auto space-y-5">
-          <Card className="p-3.5 flex flex-wrap gap-3 items-center justify-between">
-            <div className="flex flex-wrap gap-2 items-center">
-              <span className="text-[10px] text-stone-400 font-black uppercase tracking-wider flex items-center gap-1">
-                <Filter size={11} /> Procvičit:
-              </span>
-              <select
-                value={flashcardFilterPhylum}
-                onChange={(e) => setFlashcardFilterPhylum(e.target.value)}
-                className="px-2 py-1 bg-stone-50 border border-stone-200 rounded-lg text-xs font-extrabold cursor-pointer"
-              >
-                <option value="Vše">Všechny kmeny</option>
-                {availablePhyla.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={flashcardFilterRank}
-                onChange={(e) => setFlashcardFilterRank(e.target.value)}
-                className="px-2 py-1 bg-stone-50 border border-stone-200 rounded-lg text-xs font-extrabold cursor-pointer"
-              >
-                <option value="Vše">Všechny ranky</option>
-                {["Kmen", "Třída", "Čeleď", "Rod", "Zástupce"].map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-              </select>
+          <Card className="p-3.5 space-y-2.5">
+            <div className="flex flex-wrap gap-2 items-center justify-between">
+              <div className="flex flex-wrap gap-2 items-center">
+                <span className="text-[10px] text-stone-400 font-black uppercase tracking-wider flex items-center gap-1">
+                  <Filter size={11} /> Procvičit:
+                </span>
+                <select
+                  value={flashcardFilterPhylum}
+                  onChange={(e) => setFlashcardFilterPhylum(e.target.value)}
+                  className="px-2 py-1 bg-stone-50 border border-stone-200 rounded-lg text-xs font-extrabold cursor-pointer"
+                >
+                  <option value="Vše">Všechny kmeny</option>
+                  {availablePhyla.map((p) => (
+                    <option key={p} value={p}>
+                      {p}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={flashcardFilterRank}
+                  onChange={(e) => setFlashcardFilterRank(e.target.value)}
+                  className="px-2 py-1 bg-stone-50 border border-stone-200 rounded-lg text-xs font-extrabold cursor-pointer"
+                >
+                  <option value="Vše">Všechny ranky</option>
+                  {["Kmen", "Třída", "Čeleď", "Rod", "Zástupce"].map((r) => (
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Button size="sm" variant="secondary" onClick={() => initFlashcards()}>
+                  <RefreshCw size={11} /> Zamíchat
+                </Button>
+                {Object.keys(flashcardHistory).length > 0 && (
+                  <button
+                    type="button"
+                    title="Vynulovat uložený pokrok kartiček"
+                    onClick={() => {
+                      setFlashcardHistory({});
+                      initFlashcards({});
+                    }}
+                    className="p-1.5 rounded-lg border border-stone-200 text-stone-400 hover:text-rose-500 hover:border-rose-200 cursor-pointer"
+                  >
+                    <Trash2 size={13} />
+                  </button>
+                )}
+              </div>
             </div>
-            <Button size="sm" variant="secondary" onClick={initFlashcards}>
-              <RefreshCw size={11} /> Restart
-            </Button>
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-stone-100">
+              <label className="inline-flex items-center gap-1.5 text-[11px] font-bold text-stone-600 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={flashcardOnlyUnmastered}
+                  onChange={(e) => setFlashcardOnlyUnmastered(e.target.checked)}
+                  className="accent-brand-orange"
+                />
+                Jen neprocvičené & těžké
+              </label>
+              <span className="text-[10px] font-semibold text-stone-400 hidden sm:inline">
+                Klávesy: <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-200 text-stone-600">Mezerník</kbd> odhalit ·{" "}
+                <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-200 text-stone-600">1</kbd>{" "}
+                <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-200 text-stone-600">2</kbd>{" "}
+                <kbd className="px-1 py-0.5 rounded bg-stone-100 border border-stone-200 text-stone-600">3</kbd> hodnotit
+              </span>
+            </div>
           </Card>
 
-          {currentCard ? (
+          {flashcardCompleted ? (
+            <Card className="py-10 px-6 text-center space-y-4">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 mx-auto flex items-center justify-center">
+                <CheckCircle2 size={26} />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg font-black text-stone-900">
+                  Balíček dokončen!
+                </h3>
+                <p className="text-xs text-stone-500 font-medium">
+                  Celkem zvládnuto (Umím):{" "}
+                  <strong className="text-brand-orange-text">
+                    {
+                      Object.values(flashcardHistory).filter((v) => v === "easy")
+                        .length
+                    }{" "}
+                    / {taxonFlatList.length}
+                  </strong>
+                  {" · "}Těžké k opakování:{" "}
+                  <strong className="text-stone-700">
+                    {
+                      Object.values(flashcardHistory).filter((v) => v === "hard")
+                        .length
+                    }
+                  </strong>
+                </p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-2 pt-2">
+                <Button onClick={() => initFlashcards()}>
+                  <RefreshCw size={14} /> Další kolo
+                </Button>
+                {!flashcardOnlyUnmastered &&
+                  Object.values(flashcardHistory).some((v) => v === "easy") && (
+                    <Button
+                      variant="secondary"
+                      onClick={() => setFlashcardOnlyUnmastered(true)}
+                    >
+                      Procvičit jen nezvládnuté
+                    </Button>
+                  )}
+              </div>
+            </Card>
+          ) : currentCard ? (
             <div className="space-y-4">
               <div className="flex justify-between text-[10px] font-bold text-stone-400 px-1">
                 <span>
@@ -1166,7 +1352,8 @@ export function StudyPage({ data }: Props) {
                   {
                     Object.values(flashcardHistory).filter((v) => v === "easy")
                       .length
-                  }
+                  }{" "}
+                  / {taxonFlatList.length}
                 </span>
               </div>
 
@@ -1243,6 +1430,7 @@ export function StudyPage({ data }: Props) {
                           <button
                             type="button"
                             onClick={() => rateCard("hard")}
+                            title="Vrátí kartičku za 3 otázky (klávesa 1)"
                             className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-1.5 bg-orange-50 hover:bg-orange-100 text-orange-700 border border-orange-200 rounded-lg text-[11px] font-bold cursor-pointer"
                           >
                             <Frown size={13} /> Neumím
@@ -1250,6 +1438,7 @@ export function StudyPage({ data }: Props) {
                           <button
                             type="button"
                             onClick={() => rateCard("medium")}
+                            title="Klávesa 2"
                             className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3 py-1.5 bg-amber-100/70 text-amber-900 border border-amber-200 rounded-lg text-[11px] font-bold cursor-pointer"
                           >
                             <HelpCircle size={13} /> Skoro
@@ -1257,6 +1446,7 @@ export function StudyPage({ data }: Props) {
                           <button
                             type="button"
                             onClick={() => rateCard("easy")}
+                            title="Klávesa 3"
                             className="flex-1 sm:flex-none flex items-center justify-center gap-1 px-3.5 py-1.5 bg-brand-orange hover:bg-brand-orange-text text-white rounded-lg text-[11px] font-extrabold cursor-pointer"
                           >
                             <Smile size={13} /> Umím!
@@ -1271,14 +1461,19 @@ export function StudyPage({ data }: Props) {
           ) : (
             <Card className="py-12 text-center space-y-3">
               <Brain className="mx-auto text-stone-400" size={24} />
-              <p className="text-sm font-bold text-stone-800">Prázdný balíček</p>
+              <p className="text-sm font-bold text-stone-800">
+                {flashcardOnlyUnmastered
+                  ? "Všechny kartičky v tomto filtru už umíš!"
+                  : "Prázdný balíček"}
+              </p>
               <Button
                 onClick={() => {
                   setFlashcardFilterPhylum("Vše");
                   setFlashcardFilterRank("Vše");
+                  setFlashcardOnlyUnmastered(false);
                 }}
               >
-                Resetovat filtry
+                Zobrazit všechny kartičky
               </Button>
             </Card>
           )}

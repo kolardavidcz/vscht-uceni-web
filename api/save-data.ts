@@ -44,19 +44,40 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const rawBody =
-      typeof req.body === "string" ? req.body : JSON.stringify(req.body || {});
-    if (Buffer.byteLength(rawBody, "utf8") > 2_000_000) {
-      return res
-        .status(413)
-        .json({ error: "Payload je příliš velký (maximum je 2 MB)" });
+    res.setHeader("Cache-Control", "no-store");
+
+    let body: Record<string, unknown> = {};
+    if (typeof req.body === "string") {
+      if (Buffer.byteLength(req.body, "utf8") > 2_000_000) {
+        return res
+          .status(413)
+          .json({ error: "Payload je příliš velký (maximum je 2 MB)" });
+      }
+      try {
+        const parsed = req.body.trim() ? JSON.parse(req.body) : {};
+        body = parsed && typeof parsed === "object" ? (parsed as Record<string, unknown>) : {};
+      } catch {
+        return res.status(400).json({ error: "Neplatný JSON payload" });
+      }
+    } else if (req.body && typeof req.body === "object") {
+      const rawBody = JSON.stringify(req.body);
+      if (Buffer.byteLength(rawBody, "utf8") > 2_000_000) {
+        return res
+          .status(413)
+          .json({ error: "Payload je příliš velký (maximum je 2 MB)" });
+      }
+      body = req.body as Record<string, unknown>;
     }
 
-    const redis = getRedis();
-    const body = req.body || {};
     if (!checkPassword(body.password)) {
       return res.status(401).json({ error: "Neplatné heslo" });
     }
+
+    if (body.verifyOnly === true) {
+      return res.status(200).json({ success: true, verified: true });
+    }
+
+    const redis = getRedis();
 
     if (Array.isArray(body.changes) && body.changes.length > 1000) {
       return res
@@ -65,6 +86,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     let payload: MicrobiologyPayload;
+    const baseline = body.baseline as Partial<MicrobiologyPayload> | undefined;
+    const dataBody = body.data as Partial<MicrobiologyPayload> | undefined;
 
     if (Array.isArray(body.changes) && body.changes.length > 0) {
       // Always patch against the freshest shared snapshot
@@ -77,17 +100,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       // If store empty but client sent baseline, seed first then patch
       if (
         (!current.worksheetData || current.worksheetData.length === 0) &&
-        body.baseline?.worksheetData
+        baseline?.worksheetData
       ) {
-        payload = applyChanges(body.baseline as MicrobiologyPayload, body.changes);
+        payload = applyChanges(
+          {
+            worksheetData: baseline.worksheetData,
+            emojiOptions: baseline.emojiOptions || [],
+            emojiCategories: baseline.emojiCategories || [],
+          },
+          body.changes
+        );
       } else {
         payload = applyChanges(current, body.changes);
       }
-    } else if (body.data?.worksheetData) {
+    } else if (dataBody?.worksheetData) {
       payload = {
-        worksheetData: body.data.worksheetData,
-        emojiOptions: body.data.emojiOptions || [],
-        emojiCategories: body.data.emojiCategories || [],
+        worksheetData: dataBody.worksheetData,
+        emojiOptions: dataBody.emojiOptions || [],
+        emojiCategories: dataBody.emojiCategories || [],
       };
     } else {
       return res.status(400).json({

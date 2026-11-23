@@ -115,7 +115,7 @@ export function HomePage() {
                 PA1
               </Link>
               <Link
-                to="/obor-bioinformatika/ax1/pa2-ax1-overview"
+                to="/obor-bioinformatika/3-semestr/pre-ax1/coding/pa2-ax1-overview"
                 className="px-2.5 py-1 bg-orange-600/10 hover:bg-orange-600/20 text-orange-400 text-[10px] font-black tracking-wider uppercase rounded-md border border-orange-600/20"
               >
                 AX1
@@ -160,13 +160,13 @@ export function HomePage() {
               Python Analyzátor
             </h2>
             <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
-              Anotovaný skript pro analýzu DNA/RNA - kopírování a mock běh v
-              terminálu.
+              Živá analýza DNA/RNA (GC %, Tₘ, reverzní komplement, ORF a překlad)
+              i čistý Python 3 skript ke stažení.
             </p>
             <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
               <span className="flex items-center gap-1.5">
                 <Terminal size={14} />
-                Skript & demo
+                Živá analýza & skript
               </span>
               <ChevronRight
                 size={16}

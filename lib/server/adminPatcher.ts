@@ -248,12 +248,14 @@ export function applyChanges(
       case "MOVE_CATEGORY": {
         const index = Number(change.index);
         const direction = change.direction;
+        const cats = [...next.emojiCategories];
         if (
-          Number.isFinite(index) &&
+          Number.isInteger(index) &&
+          index >= 0 &&
+          index < cats.length &&
           (direction === "up" || direction === "down")
         ) {
           const target = direction === "up" ? index - 1 : index + 1;
-          const cats = [...next.emojiCategories];
           if (target >= 0 && target < cats.length) {
             [cats[index], cats[target]] = [cats[target], cats[index]];
             next.emojiCategories = cats;
