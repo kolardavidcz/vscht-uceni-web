@@ -22,11 +22,6 @@ const WikiPage = lazyWithRetry(() =>
     default: m.WikiPage,
   }))
 );
-const PythonAnalyzerPage = lazyWithRetry(() =>
-  import("@/features/python-analyzer/pages/PythonAnalyzerPage").then((m) => ({
-    default: m.PythonAnalyzerPage,
-  }))
-);
 const BioinformaticsPipelinePage = lazyWithRetry(() =>
   import(
     "@/features/bioinformatics-pipeline/pages/BioinformaticsPipelinePage"
@@ -61,16 +56,6 @@ export default function App() {
           }
         />
         <Route
-          path="/python-analyza"
-          element={
-            <ErrorBoundary>
-              <Suspense fallback={<RouteFallback label="Načítám analyzátor…" />}>
-                <PythonAnalyzerPage />
-              </Suspense>
-            </ErrorBoundary>
-          }
-        />
-        <Route
           path="/bioinformatika-pipeline"
           element={
             <ErrorBoundary>
@@ -79,6 +64,10 @@ export default function App() {
               </Suspense>
             </ErrorBoundary>
           }
+        />
+        <Route
+          path="/python-analyza"
+          element={<Navigate to="/bioinformatika-pipeline" replace />}
         />
         <Route path="/admin" element={<Navigate to="/mikrobiologie/admin" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />

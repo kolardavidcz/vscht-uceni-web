@@ -18,7 +18,6 @@ Greenfield SPA (not Next.js) with three features:
 | Systematika bakterií | `/mikrobiologie/*` | Bundled taxonomy + Upstash Redis admin store |
 | Obor Bioinformatika | `/obor-bioinformatika/*` | Markdown under `src/features/bioinformatics/content/` + Upstash Redis live overrides |
 | GH48 Bioinformatická pipeline | `/bioinformatika-pipeline` | 100% client-side bioinformatics workbench + curated GH48 showcase dataset (`lazyWithRetry`) |
-| Python Analyzátor | `/python-analyza` | Live browser DNA/RNA analyzer + downloadable Python 3 script |
 
 Stack (do not casually upgrade major versions without reason):
 
@@ -77,7 +76,6 @@ src/
     microbiology/             # Quiz, study modes, admin, domain data (lib/traits.ts, lib/scoring.ts)
     bioinformatics/           # Wiki, SuggestEditModal, content/*.md, PA2ToAX1Overview
     bioinformatics-pipeline/  # Client-side GH48 workflow (FASTA, HMMER, Newick/Fitch RI, FIMO, iTOL, chi2)
-    python-analyzer/
 
 vite-plugin-local-api.ts      # Dev-only middleware for POST /api/suggest-edit
 scripts/vercel-ignore-build.mjs
@@ -133,7 +131,6 @@ To ensure AI changes do not cause silent regressions, 14 test suites enforce key
 | `src/features/microbiology/data/taxonomyIntegrity.test.ts` | Validates that all ~52 taxa/groups have unique IDs and that all species emojis exist in `emojiOptions` |
 | `src/features/bioinformatics/content/wikiIntegrity.test.ts` | Asserts all materials in `config.json` exist on disk and ensures no lecture title uses forbidden `Modul <X>` prefix |
 | `src/features/bioinformatics/lib/markdownTransforms.test.ts` | Verifies math syntax underscore protection (including skipping code blocks), vector check/cross replacements, `rehype-sanitize` SVG/YouTube/XSS end-to-end rendering, TOC slug extraction, and full-text search |
-| `src/features/python-analyzer/lib/sequenceAnalyzer.test.ts` | Tests live DNA/RNA FASTA parsing, GC%, $T_m$, reverse complement, 3-frame translation, and ORF detection |
 | `src/features/bioinformatics-pipeline/lib/pipeline.test.ts` | Tests full end-to-end GH48 pipeline: FASTA filtering, HMMER domtblout cutting, greedy clustering, BLOSUM62 MSA & trimAl, NJ bootstrap phylogeny, PWM motif discovery, Fitch RI, iTOL & PKZIP exports, auto file routing, characterized mapping, and exact χ² test |
 
 ### Env (local)
@@ -239,7 +236,7 @@ Defined in `src/App.tsx`:
 - `/` → `HomePage`
 - `/mikrobiologie/*` → nested quiz / study / admin (data hook at layout level)
 - `/obor-bioinformatika/*` → `WikiPage`
-- `/python-analyza` → analyzer
+- `/bioinformatika-pipeline` → `BioinformaticsPipelinePage` (`/python-analyza` redirects here)
 - Unknown → redirect home
 
 ### HomePage click / navigation (stretched link)

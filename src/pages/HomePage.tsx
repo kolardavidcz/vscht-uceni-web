@@ -7,7 +7,6 @@ import {
   ClipboardList,
   Dna,
   GitBranch,
-  Terminal,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -17,9 +16,6 @@ const prefetchMicrobiology = () => {
 };
 const prefetchWiki = () => {
   void import("@/features/bioinformatics/pages/WikiPage").catch(() => { });
-};
-const prefetchPython = () => {
-  void import("@/features/python-analyzer/pages/PythonAnalyzerPage").catch(() => { });
 };
 const prefetchPipeline = () => {
   void import(
@@ -53,7 +49,7 @@ export function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl animate-[scale-in_0.35s_ease]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full animate-[scale-in_0.35s_ease]">
           {/* Systematika - whole card is the link */}
           <Card
             variant="dark"
@@ -180,42 +176,6 @@ export function HomePage() {
               <span className="flex items-center gap-1.5">
                 <GitBranch size={14} />
                 Fylogeneze, MEME & iTOL
-              </span>
-              <ChevronRight
-                size={16}
-                className="group-hover:translate-x-1 transition-transform"
-              />
-            </div>
-          </Card>
-
-          {/* Python - whole card is the link */}
-          <Card
-            variant="dark"
-            hover
-            onMouseEnter={prefetchPython}
-            onTouchStart={prefetchPython}
-            className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
-          >
-            <Link
-              to="/python-analyza"
-              className="absolute inset-0 z-[1] rounded-2xl"
-              aria-label="Python Analyzátor"
-            />
-            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all pointer-events-none" />
-            <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform">
-              <Terminal size={24} />
-            </div>
-            <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
-              Python Analyzátor
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
-              Živá analýza DNA/RNA (GC %, Tₘ, reverzní komplement, ORF a překlad)
-              i čistý Python 3 skript ke stažení.
-            </p>
-            <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
-              <span className="flex items-center gap-1.5">
-                <Terminal size={14} />
-                Živá analýza & skript
               </span>
               <ChevronRight
                 size={16}

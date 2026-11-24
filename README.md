@@ -5,7 +5,6 @@ Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** - moderní Web Appl
 1. 🦠 **Systematika bakterií** - interaktivní emoji kvíz (s ukládáním rozpracovaného listu a režimem „Jen chyby“), taxonomický atlas, kartičky s aktivním opakováním a klávesovými zkratkami i srovnávací matice.
 2. 📚 **Obor: Bioinformatika** - komunitní Markdown wiki s fulltextovým vyhledáváním (`Ctrl+K`), osnovou stránky, podporou MathJax i SVG grafových schémat, přehledem předmětů a průvodcem studia (PA2→AX1).
 3. 🧬 **GH48 Bioinformatická pipeline** (`/bioinformatika-pipeline`) - 100 % klientské pracovní prostředí pro semestrální fylogenetickou analýzu proteinových rodin (podle projektu [`kolardavidcz/GH48`](https://github.com/kolardavidcz/GH48)): chytrý hromadný vstup souborů (auto-detekce formátu) a automatický běh celé pipeline (FASTA filtr → HMMER ořez → shlukování → BLOSUM62 MSA → trimAl → Neighbor-Joining + bootstrap → PWM motivy/FIMO → Fitchův RI → charakterizované enzymy → χ² taxonomie), přímé odkazy na externí webové nástroje (MAFFT, IQ-TREE, HMMER, Galaxy, MEME Suite, iTOL) a 1-klik export všech výstupů do `.zip` včetně Markdown protokolu.
-4. 🐍 **DNA/RNA & Python Analyzátor** - živý bioinformatický analyzátor sekvencí přímo v prohlížeči (FASTA, GC %, $T_m$, reverzní komplement, 3 čtecí rámce a nejdelší ORF) + čistý Python 3 skript ke stažení.
 
 ---
 
@@ -74,8 +73,7 @@ src/
 └── features/
     ├── microbiology/     # Systematika bakterií (kvíz, strom, kartičky, matice, admin)
     ├── bioinformatics/          # Bioinformatická wiki (články v markdownu, PA2→AX1 přehled)
-    ├── bioinformatics-pipeline/ # GH48 fylogenetická & MEME/FIMO/iTOL pipeline v prohlížeči
-    └── python-analyzer/         # Živý DNA/RNA analyzátor a Python 3 skript
+    └── bioinformatics-pipeline/ # GH48 fylogenetická & MEME/FIMO/iTOL pipeline v prohlížeči
 ```
 
 ---
@@ -92,7 +90,6 @@ src/
 | `/mikrobiologie/admin` | Správa správných odpovědí | Administrace databáze vlastností a katalogu emoji (Upstash Redis) |
 | `/obor-bioinformatika/*` | Bioinformatická Wiki | Studijní zápisky, návody, MathJax vzorce a rady k předmětům |
 | `/bioinformatika-pipeline` | GH48 Bioinformatická pipeline | Klientský workbench pro FASTA, HMMER, MMseqs2, FIMO/RI, strom, χ² a iTOL |
-| `/python-analyza` | Python Analyzátor | Živá analýza DNA/RNA a stažitelný Python 3 skript |
 
 ---
 
