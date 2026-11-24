@@ -4,7 +4,7 @@ Studijní portál pro studenty **VŠCHT Praha (UCT Prague)** - moderní Web Appl
 
 1. 🦠 **Systematika bakterií** - interaktivní emoji kvíz (s ukládáním rozpracovaného listu a režimem „Jen chyby“), taxonomický atlas, kartičky s aktivním opakováním a klávesovými zkratkami i srovnávací matice.
 2. 📚 **Obor: Bioinformatika** - komunitní Markdown wiki s fulltextovým vyhledáváním (`Ctrl+K`), osnovou stránky, podporou MathJax i SVG grafových schémat, přehledem předmětů a průvodcem studia (PA2→AX1).
-3. 🧬 **GH48 Bioinformatická pipeline** (`/bioinformatika-pipeline`) - 100 % klientské pracovní prostředí pro semestrální fylogenetickou analýzu proteinových rodin (podle projektu [`kolardavidcz/GH48`](https://github.com/kolardavidcz/GH48)): chytrý hromadný vstup souborů (auto-detekce formátu) a automatický běh celé pipeline (FASTA filtr → HMMER ořez → shlukování → BLOSUM62 MSA → trimAl → Neighbor-Joining + bootstrap → PWM motivy/FIMO → Fitchův RI → charakterizované enzymy → χ² taxonomie), přímé odkazy na externí webové nástroje (MAFFT, IQ-TREE, HMMER, Galaxy, MEME Suite, iTOL) a 1-klik export všech výstupů do `.zip` včetně Markdown protokolu.
+3. 🧬 **GH48 Bioinformatická pipeline** (`/bioinformatika-pipeline`) - sekvenční pracovní tok shora dolů v prohlížeči pro fylogenetickou a motivovou analýzu proteinových rodin (podle [`kolardavidcz/GH48`](https://github.com/kolardavidcz/GH48)): hromadné rozpoznání vstupů, filtrace FASTA, ořez domén `--domtblout`, shlukování, BLOSUM62 MSA + trimAl, Neighbor-Joining strom s bootstrapem (nebo externí MAFFT / IQ-TREE), FIMO motivy s Fitchovým Retention Indexem, mapování charakterizovaných enzymů, Pearsonův $\chi^2$ test taxonomie a export datasetů iTOL / `.zip`.
 
 ---
 

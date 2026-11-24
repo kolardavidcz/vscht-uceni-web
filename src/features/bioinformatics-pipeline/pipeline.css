@@ -1,82 +1,51 @@
-/* Scoped styles for Bioinformatics Pipeline Workbench (modern-web-guidance: tabs, responsive-table, sortable-table) */
+/* Scoped styles for GH48 Pipeline (modern-web-guidance: responsive-table, sortable-table, progress, brand-consistent-forms) */
 
-@property --bio-fade-start {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
+.bio-pipeline-root {
+  accent-color: var(--color-brand-orange);
+  color-scheme: dark;
 }
 
-@property --bio-fade-end {
-  syntax: "<length>";
-  inherits: false;
-  initial-value: 0px;
+/* Native <progress> bar */
+.bio-progress {
+  appearance: none;
+  border: 0 solid;
+  overflow: clip;
+  inline-size: 100%;
+  block-size: 0.5rem;
+  --bio-progress-radius: 1e5px;
+  border-radius: var(--bio-progress-radius);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.35);
 }
 
-/* Single-row horizontally scrollable tablist with scroll-driven edge fades */
-.bio-tablist {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  scrollbar-width: none;
-  scroll-snap-type: inline proximity;
-  scroll-padding-inline: 2.5rem;
-  --bio-fade-size: 2.5rem;
-  mask:
-    linear-gradient(black, black) no-clip subtract,
-    linear-gradient(to right, black, transparent) 0 0 / var(--bio-fade-start) 100% no-repeat no-clip,
-    linear-gradient(to right, transparent, black) 100% 0 / var(--bio-fade-end) 100% no-repeat no-clip;
-  animation: bio-reveal-fade-start linear both, bio-hide-fade-end linear both;
-  animation-timeline: scroll(self inline);
-  animation-range: 0 var(--bio-fade-size), calc(100% - var(--bio-fade-size)) 100%;
+.bio-progress::-webkit-progress-bar {
+  background: transparent;
 }
 
-.bio-tablist::-webkit-scrollbar {
-  display: none;
+.bio-progress::-webkit-progress-value {
+  background: var(--color-brand-orange);
+  border-radius: var(--bio-progress-radius);
+  transition: inline-size 0.25s ease;
 }
 
-@keyframes bio-reveal-fade-start {
-  to {
-    --bio-fade-start: var(--bio-fade-size);
-  }
-}
-
-@keyframes bio-hide-fade-end {
-  from {
-    --bio-fade-end: var(--bio-fade-size);
-  }
-}
-
-/* Tab button: selected indicator driven by aria-selected with border on ::after (forced-colors safe, zero layout shift) */
-.bio-tab {
-  position: relative;
-  flex: none;
-  scroll-snap-align: start;
-  white-space: nowrap;
-}
-
-.bio-tab[aria-selected="true"] {
-  color: var(--color-brand-orange);
-}
-
-.bio-tab[aria-selected="true"]::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  border-block-end: 3px solid var(--color-brand-orange);
+.bio-progress::-moz-progress-bar {
+  background: var(--color-brand-orange);
+  border-radius: var(--bio-progress-radius);
+  transition: inline-size 0.25s ease;
 }
 
 /* Responsive & sortable data tables */
 .bio-table-wrapper {
   overflow: auto;
   max-inline-size: 100%;
-  max-block-size: min(520px, 70vh);
+  max-block-size: min(440px, 62vh);
   container-type: inline-size;
   overscroll-behavior: contain;
 }
 
 .bio-table {
   width: 100%;
-  min-inline-size: 560px;
+  min-inline-size: 540px;
   border-collapse: separate;
   border-spacing: 0;
 }
@@ -135,38 +104,3 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
-
-/* Native <progress> bar & brand-consistent form controls (modern-web-guidance: progress, brand-consistent-forms) */
-.bio-pipeline-root {
-  accent-color: var(--color-brand-orange);
-  color-scheme: dark;
-}
-
-.bio-progress {
-  appearance: none;
-  border: 0 solid;
-  overflow: clip;
-  inline-size: 100%;
-  block-size: 0.625rem;
-  --bio-progress-radius: 1e5px;
-  border-radius: var(--bio-progress-radius);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.35);
-}
-
-.bio-progress::-webkit-progress-bar {
-  background: transparent;
-}
-
-.bio-progress::-webkit-progress-value {
-  background: var(--color-brand-orange);
-  border-radius: var(--bio-progress-radius);
-  transition: inline-size 0.25s ease;
-}
-
-.bio-progress::-moz-progress-bar {
-  background: var(--color-brand-orange);
-  border-radius: var(--bio-progress-radius);
-  transition: inline-size 0.25s ease;
-}
-

@@ -106,8 +106,8 @@ export interface FullPipelineOutput {
 
 const yieldFrame = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
 
-/** Synthesize a clean `taxonomy.tsv` directly from FASTA `[Genus species]` organism headers when NCBI taxonomy.tsv wasn't uploaded. */
-function synthesizeTaxonomyFromFasta(records: FastaRecord[]): string {
+/** Synthesize `taxonomy.tsv` from FASTA `[Genus species]` organism headers when no NCBI taxonomy file is provided. */
+export function synthesizeTaxonomyFromFasta(records: FastaRecord[]): string {
   const header =
     "accession\ttaxid\tscientific_name\tsuperkingdom\tkingdom\tphylum\tclass\torder\tfamily\tgenus\tspecies\ttitle";
   const rows = records.map((r) => {
@@ -595,22 +595,22 @@ export async function runFullPipeline(
   const durationMs = Math.max(1, Math.round(t1 - t0));
 
   const reportLines = [
-    "# Souhrnný protokol bioinformatické pipeline (VŠCHT Učení · GH48 Workbench)",
+    "# Protokol bioinformatické pipeline (GH48)",
     "",
-    `- **Datum běhu:** ${new Date().toISOString().slice(0, 19).replace("T", " ")} UTC`,
-    `- **Doba výpočtu v prohlížeči:** ${durationMs} ms`,
-    `- **Vygenerované výstupní soubory:** ${artifacts.length + 1}`,
+    `- **Čas běhu (UTC):** ${new Date().toISOString().slice(0, 19).replace("T", " ")}`,
+    `- **Výpočet:** ${durationMs} ms`,
+    `- **Výstupní soubory:** ${artifacts.length + 1}`,
     "",
-    "## Přehled provedených kroků",
+    "## Přehled kroků",
     "",
     "| Krok | Název | Zdroj | Výsledek |",
     "|---:|---|---|---|",
     ...stages.map((s) => {
       const originCz =
         s.origin === "uploaded"
-          ? "Ze souboru"
+          ? "Soubor"
           : s.origin === "computed"
-          ? "Vypočteno v prohlížeči"
+          ? "Lokální výpočet"
           : "Přeskočeno";
       return `| ${s.step} | ${s.title} | ${originCz} | ${s.detail} |`;
     }),
@@ -618,7 +618,7 @@ export async function runFullPipeline(
   ];
 
   if (fimoAnalysis && fimoAnalysis.motifs.length > 0) {
-    reportLines.push("## Top motivy (Fitchův Retention Index & pokrytí)", "");
+    reportLines.push("## Motivy (Fitchův Retention Index a pokrytí)", "");
     reportLines.push("| Motiv | Typ | Pokrytí | Rozptyl | Fitch RI | Konsenzus |");
     reportLines.push("|---|---|---:|---:|---:|---|");
     for (const m of fimoAnalysis.motifs.slice(0, 15)) {
@@ -632,12 +632,14 @@ export async function runFullPipeline(
   }
 
   reportLines.push(
-    "## Doporučené externí webové nástroje pro finální publikační kvalitu",
+    "## Externí nástroje (referenční parametry)",
     "",
-    "- **MAFFT (L-INS-i zarovnání):** https://www.ebi.ac.uk/jdispatcher/msa/mafft",
-    "- **IQ-TREE 2 (ML fylogeneze + UFBoot):** https://iqtree.cibiv.univie.ac.at/",
-    "- **MEME Suite (MEME / TOMTOM / FIMO):** https://meme-suite.org/",
-    "- **iTOL (vizualizace stromu & drag-and-drop datasetů):** https://itol.embl.de/upload.cgi",
+    "- **NCBI Protein:** https://www.ncbi.nlm.nih.gov/protein/",
+    "- **EBI HMMER (`hmmsearch --domtblout`):** https://www.ebi.ac.uk/Tools/hmmer/search/hmmsearch",
+    "- **MAFFT (`L-INS-i`):** https://www.ebi.ac.uk/jdispatcher/msa/mafft",
+    "- **IQ-TREE (`-m MFP -B 1000 --alrt 1000`):** https://iqtree.cibiv.univie.ac.at/",
+    "- **MEME Suite (`MEME / TOMTOM / FIMO`):** https://meme-suite.org/",
+    "- **iTOL:** https://itol.embl.de/upload.cgi",
     ""
   );
 
