@@ -55,11 +55,13 @@ Stack (do not casually upgrade major versions without reason):
 api/                          # Vercel serverless handlers ONLY (one file = one endpoint)
   get-data.ts                 # GET  microbiology snapshot
   save-data.ts                # POST admin password + changes/data
-  suggest-edit.ts             # POST wiki → GitHub branch + PR
+  suggest-edit.ts             # POST wiki edit suggestion → Upstash Redis (wiki:suggestions)
+  wiki-data.ts                # GET  approved live wiki overrides / POST admin review actions
 
 lib/server/                   # Shared Node logic - NOT under api/
   adminPatcher.ts             # pure tree mutation & vectoral patch ops (tested in adminPatcher.test.ts)
-  githubSuggest.ts            # createSuggestBranch, path allowlist, GitHub API
+  wikiStore.ts                # Upstash Redis wiki suggestions & live overrides (tested in wikiStore.test.ts)
+  rateLimit.ts                # Upstash Redis + in-memory fallback rate limiter
   redis.ts                    # @upstash/redis client + env fallbacks
 
 tests/                        # End-to-end invariant validation test suites
@@ -88,7 +90,7 @@ vercel.json
 2. **API handler imports must use explicit `.js` extensions** when importing local modules (Node ESM on Vercel):
    ```ts
    import { getRedis } from "../lib/server/redis.js";
-   import { createSuggestBranch, getGithubConfigFromEnv } from "../lib/server/githubSuggest.js";
+   import { submitWikiSuggestion } from "../lib/server/wikiStore.js";
    import { applyChanges, checkPassword } from "../lib/server/adminPatcher.js";
    ```
    Source files are still `.ts`. Omitting `.js` → production `ERR_MODULE_NOT_FOUND` / empty 500 / `FUNCTION_INVOCATION_FAILED`.  
@@ -122,7 +124,8 @@ To ensure AI changes do not cause silent regressions, 14 test suites enforce key
 | Test suite | Invariant tested |
 |------------|------------------|
 | `tests/api/esmImports.test.ts` | Validates Rule 1 (no subdirs under `api/`) and Rule 2 (all relative imports in `api/*.ts` and `lib/server/*.ts` use explicit `.js` extensions) |
-| `lib/server/githubSuggest.test.ts` | Tests security path allowlist, traversal rejection (`..`), `encodeRepoPath`, slugification of Czech titles, payload limits, and full mocked `createSuggestBranch` PR flow |
+| `lib/server/wikiStore.test.ts` | Tests wiki path allowlist, traversal rejection (`..`), suggestion validation/caps, and live override upsert/revert ops |
+| `src/features/bioinformatics/lib/lineDiff.test.ts` | Tests line-by-line diff computation and compact context collapsing for the Admin wiki review panel |
 | `lib/server/adminPatcher.test.ts` | Tests pure vectoral patch ops (`UPDATE_ITEM`, `DELETE_ITEM`, `ADD_ITEM`, `MOVE_ITEM`, `MOVE_CATEGORY` bounds, cascading emoji rewrites) and password checks |
 | `src/features/microbiology/lib/scoring.test.ts` | Tests quiz score metrics (`countTotal`, `countAnswered`, `countCorrect`, `getQuizScoreBreakdown`), mistakes filtering, Fisher-Yates shuffle, and hard-card re-queueing |
 | `src/features/microbiology/data/taxonomyIntegrity.test.ts` | Validates that all ~52 taxa/groups have unique IDs and that all species emojis exist in `emojiOptions` |
@@ -179,45 +182,13 @@ Or full replace:
 - Password: `MICROBIOLOGY_ADMIN_PASSWORD` or built-in legacy default (see `api/save-data.ts`).
 - Patches apply against latest Redis snapshot (not only client state).
 
-### `POST /api/suggest-edit`
+### `POST /api/suggest-edit` & `GET/POST /api/wiki-data`
 
-```json
-{
-  "filePath": "src/features/bioinformatics/content/....md",
-  "title": "page title",
-  "markdown": "...",
-  "note": "optional",
-  "authorName": "optional"
-}
-```
+Wiki community edit proposals and live overrides are stored in Upstash Redis (`wiki:suggestions` and `wiki:overrides`, no `GITHUB_TOKEN` required):
 
-Success (200):
-
-```json
-{
-  "success": true,
-  "branch": "suggest/...",
-  "branchUrl": "...",
-  "compareUrl": "...",
-  "prUrl": "...",
-  "prNumber": 8,
-  "message": "..."
-}
-```
-
-Behavior (`lib/server/githubSuggest.ts`):
-
-1. Allow only paths under `src/features/bioinformatics/content/` ending in `.md` (no `..`).
-2. Create branch `suggest/<slug>-<timestamp>` from default branch SHA.
-3. Commit file via Contents API as **token owner** identity (not fake noreply-only author that confuses Vercel).
-4. Open **PR into main - never auto-merge**.
-5. Commit message and PR body include `[skip vercel]` as backup.
-
-Required GitHub token permissions (fine-grained):
-
-- Contents: Read and write  
-- Pull requests: Read and write  
-- Metadata: Read-only  
+- `POST /api/suggest-edit` stores a pending suggestion (`filePath`, `title`, `markdown`, `note?`, `authorName?`) in `wiki:suggestions` (rate-limited: 10/hour/IP + Vercel WAF edge rule).
+- `GET /api/wiki-data` returns `{ overrides }` (CDN cached `s-maxage=60` + `ETag`) for paint-first soft-upgrade on `/obor-bioinformatika/*`.
+- `POST /api/wiki-data` (admin password protected via `MICROBIOLOGY_ADMIN_PASSWORD`) supports `action: "list" | "approve" | "reject" | "revert" | "save_override"` for reviewing line diffs in the Admin Panel (`/mikrobiologie/admin` → „Wiki návrhy“ or `/admin`) and publishing live immediately without redeploys.
 
 ---
 
@@ -405,8 +376,7 @@ Optional overrides: `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_DEFAULT_BRANCH`.
 | Home navigation / cards | `src/pages/HomePage.tsx` |
 | Routes | `src/App.tsx` |
 | Wiki suggest UI | `src/features/bioinformatics/components/SuggestEditModal.tsx` |
-| GitHub PR logic | `lib/server/githubSuggest.ts` |
-| Production handler | `api/suggest-edit.ts` |
+| Wiki suggest & live overrides | `lib/server/wikiStore.ts`, `api/suggest-edit.ts`, `api/wiki-data.ts`, `src/features/bioinformatics/components/WikiAdminPanel.tsx` |
 | Redis & Admin Patching | `lib/server/redis.ts`, `lib/server/adminPatcher.ts`, `api/save-data.ts`, `api/get-data.ts` |
 | Micro Traits & Scoring | `src/features/microbiology/lib/traits.ts`, `src/features/microbiology/lib/scoring.ts` |
 | Micro client data | `src/features/microbiology/hooks/useMicrobiologyData.ts` |

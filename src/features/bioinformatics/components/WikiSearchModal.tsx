@@ -17,8 +17,19 @@ type Props = {
   onClose: () => void;
 };
 
+function isPointerOutside(e: PointerEvent, dialog: HTMLDialogElement): boolean {
+  const r = dialog.getBoundingClientRect();
+  return (
+    e.clientX < r.left ||
+    e.clientX > r.right ||
+    e.clientY < r.top ||
+    e.clientY > r.bottom
+  );
+}
+
 export function WikiSearchModal({ materials, onClose }: Props) {
   const navigate = useNavigate();
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -28,21 +39,53 @@ export function WikiSearchModal({ materials, onClose }: Props) {
     [materials, query]
   );
 
+  // Open native modal dialog in top layer (Esc, inert background, focus return handled natively)
   useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (!dialog.open) {
+      dialog.showModal();
+    }
     inputRef.current?.focus();
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prevOverflow;
+
+    const handleClose = () => {
+      dialog.returnValue = "";
+      onClose();
     };
-  }, []);
+    dialog.addEventListener("close", handleClose);
+
+    // Light-dismiss fallback for browsers without native `closedby` (e.g. Safari)
+    let pressedOutside = false;
+    const needsFallback = !("closedBy" in HTMLDialogElement.prototype);
+    const onDown = (e: PointerEvent) => {
+      pressedOutside = isPointerOutside(e, dialog);
+    };
+    const onUp = (e: PointerEvent) => {
+      if (pressedOutside && isPointerOutside(e, dialog)) {
+        dialog.close();
+      }
+      pressedOutside = false;
+    };
+    if (needsFallback) {
+      dialog.addEventListener("pointerdown", onDown);
+      dialog.addEventListener("pointerup", onUp);
+    }
+
+    return () => {
+      dialog.removeEventListener("close", handleClose);
+      if (needsFallback) {
+        dialog.removeEventListener("pointerdown", onDown);
+        dialog.removeEventListener("pointerup", onUp);
+      }
+    };
+  }, [onClose]);
 
   useEffect(() => {
     setSelectedIndex(0);
   }, [query]);
 
   const openMaterial = (material: WikiMaterial) => {
-    onClose();
+    dialogRef.current?.close();
     if (material.externalUrl) {
       window.open(material.externalUrl, "_blank", "noopener,noreferrer");
       return;
@@ -50,27 +93,20 @@ export function WikiSearchModal({ materials, onClose }: Props) {
     navigate(materialHref(material));
   };
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        onClose();
-      } else if (e.key === "ArrowDown") {
-        e.preventDefault();
-        setSelectedIndex((i) => (hits.length ? (i + 1) % hits.length : 0));
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        setSelectedIndex((i) =>
-          hits.length ? (i - 1 + hits.length) % hits.length : 0
-        );
-      } else if (e.key === "Enter" && hits[selectedIndex]) {
-        e.preventDefault();
-        openMaterial(hits[selectedIndex].material);
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [hits, selectedIndex, onClose]);
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((i) => (hits.length ? (i + 1) % hits.length : 0));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((i) =>
+        hits.length ? (i - 1 + hits.length) % hits.length : 0
+      );
+    } else if (e.key === "Enter" && hits[selectedIndex]) {
+      e.preventDefault();
+      openMaterial(hits[selectedIndex].material);
+    }
+  };
 
   const quickTopics = [
     "Valgrind",
@@ -82,23 +118,19 @@ export function WikiSearchModal({ materials, onClose }: Props) {
   ];
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-start justify-center pt-[10vh] px-3 sm:px-4 print:hidden">
-      <button
-        type="button"
-        aria-label="Zavřít vyhledávání"
-        onClick={onClose}
-        className="absolute inset-0 bg-black/50 backdrop-blur-[2px] cursor-default"
-      />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Fulltextové vyhledávání ve Wiki"
-        className="relative z-10 w-full max-w-2xl rounded-2xl border border-stone-200 bg-white shadow-2xl overflow-hidden flex flex-col max-h-[75vh]"
-      >
+    <dialog
+      ref={dialogRef}
+      aria-label="Fulltextové vyhledávání ve Wiki"
+      {...({ closedby: "any" } as Record<string, string>)}
+      onKeyDown={handleKeyDown}
+      className="mx-auto mt-[10vh] mb-auto p-0 bg-transparent border-0 max-w-none w-[min(94vw,42rem)] max-h-[75vh] open:flex flex-col overflow-visible print:hidden"
+    >
+      <div className="w-full max-h-[75vh] rounded-2xl border border-stone-200 bg-white shadow-2xl overflow-hidden flex flex-col">
         <div className="flex items-center gap-2.5 px-4 py-3 border-b border-stone-200 bg-stone-50/70">
           <Search size={18} className="text-brand-orange shrink-0" />
           <input
             ref={inputRef}
+            autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Hledat v názvech, nadpisech i obsahu článků…"
@@ -114,9 +146,14 @@ export function WikiSearchModal({ materials, onClose }: Props) {
               <X size={15} />
             </button>
           )}
-          <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-bold text-stone-400 bg-white border border-stone-200 rounded-md">
+          <button
+            type="button"
+            onClick={() => dialogRef.current?.close()}
+            aria-label="Zavřít vyhledávání"
+            className="px-1.5 py-0.5 text-[10px] font-bold text-stone-400 hover:text-stone-700 bg-white border border-stone-200 rounded-md cursor-pointer"
+          >
             ESC
-          </kbd>
+          </button>
         </div>
 
         <div className="flex-1 overflow-y-auto p-2">
@@ -221,6 +258,6 @@ export function WikiSearchModal({ materials, onClose }: Props) {
           <span>Ctrl+K / ⌘K</span>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }

@@ -111,26 +111,14 @@ src/
 
 ---
 
-## 🚀 Nasazení & Vývoj (Vercel & GitHub PR Flow)
-
-### Vývojový server a navrhování úprav ve Wiki
+## 🚀 Navrhování úprav ve Wiki (Upstash Redis & Admin diff)
 
 Portál obsahuje funkci **„Navrhnout úpravu“** přímo na stránkách Wiki:
 
-1. Uživatel klikne na úpravu návodu/zápisku a odešle změnu.
-2. Endpoint `POST /api/suggest-edit` vytvoří větev na GitHubu (`suggest/*`).
-3. Automaticky zaloguje změny a otevře **Pull Request** do větve `main` v repositáři [kolardavidcz/vscht-uceni-web](https://github.com/kolardavidcz/vscht-uceni-web).
-4. Změny se **nefúzují automaticky** - úpravu schvaluje správce v rozhraní GitHubu.
-
-#### Nastavení GitHub PAT (Personal Access Token)
-
-Pro lokální testování navrhování úprav:
-1. Vygenerujte **Fine-grained Personal Access Token** na GitHubu s oprávněními `Contents` (Read/Write) a `Pull requests` (Read/Write) pro repo `vscht-uceni-web`.
-2. Uložte token do `.env.local`:
-   ```env
-   GITHUB_TOKEN=github_pat_...
-   ```
-3. Na Vercelu přidejte stejný `GITHUB_TOKEN` do **Settings → Environment Variables**.
+1. Student upraví text v editoru s živým náhledem a odešle návrh (`POST /api/suggest-edit`).
+2. Návrh se uloží do **Upstash Redis** (`wiki:suggestions`) — bez potřeby GitHub tokenu, větví nebo redeploye.
+3. Správce v administraci (`/admin` → záložka **Wiki návrhy**) zkontroluje řádkový diff a jedním klikem úpravu **publikuje živě** (případně zamítne nebo stáhne `.md` do gitu).
+4. Schválené úpravy se na Wiki načítají na pozadí (`GET /api/wiki-data` s CDN cache a ETagem) nad výchozími Markdown soubory v balíku.
 
 ---
 

@@ -1,16 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import {
-  createSuggestBranch,
-  getGithubConfigFromEnv,
-} from "../lib/server/githubSuggest.js";
-import {
-  checkRateLimit,
-  getClientIp,
-} from "../lib/server/rateLimit.js";
+import { checkRateLimit, getClientIp } from "../lib/server/rateLimit.js";
+import { submitWikiSuggestion } from "../lib/server/wikiStore.js";
 
 /**
  * POST /api/suggest-edit
- * Creates branch + commit + PR (manual merge). See lib/server/githubSuggest.ts
+ * Stores a community wiki edit proposal in Upstash Redis for review in the Admin Panel.
  */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
@@ -35,25 +29,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   }
 
-  const config = getGithubConfigFromEnv(process.env);
-  if ("error" in config) {
-    return res.status(503).json({ error: config.error });
-  }
-
   try {
     res.setHeader("Cache-Control", "no-store");
+
     let body: Record<string, unknown> = {};
     if (typeof req.body === "string") {
       try {
         const parsed = req.body.trim() ? JSON.parse(req.body) : {};
-        body = parsed && typeof parsed === "object" ? (parsed as Record<string, unknown>) : {};
+        body =
+          parsed && typeof parsed === "object"
+            ? (parsed as Record<string, unknown>)
+            : {};
       } catch {
         return res.status(400).json({ error: "Neplatný JSON payload" });
       }
     } else if (req.body && typeof req.body === "object") {
       body = req.body as Record<string, unknown>;
     }
-    const result = await createSuggestBranch(config, {
+
+    const result = await submitWikiSuggestion({
       filePath: String(body.filePath || ""),
       title: String(body.title || "wiki"),
       markdown: String(body.markdown ?? ""),
@@ -70,17 +64,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     return res.status(200).json({
       success: true,
-      branch: result.branch,
-      branchUrl: result.branchUrl,
-      compareUrl: result.compareUrl,
-      prUrl: result.prUrl,
-      prNumber: result.prNumber,
-      message: result.message,
+      id: result.suggestion.id,
+      createdAt: result.suggestion.createdAt,
+      message:
+        "Návrh úpravy byl uložen do databáze a čeká na schválení v administraci.",
     });
   } catch (err) {
     console.error("suggest-edit failed", err);
     return res.status(500).json({
-      error: "Interní chyba serveru",
+      error: "Uložení návrhu do databáze selhalo",
     });
   }
 }

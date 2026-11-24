@@ -492,6 +492,18 @@ h4,
   color: inherit;
 }
 
+/* Native modal <dialog> scroll containment & backdrop (modern-web-guidance) */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  background-color: rgba(15, 9, 6, 0.5);
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
 /* ==========================================================================
    MathJax Selectable Text & Formulas
    ========================================================================== */

@@ -27,6 +27,7 @@ import {
   materialToRepoPath,
 } from "../components/SuggestEditModal";
 import { WikiSearchModal } from "../components/WikiSearchModal";
+import { useWikiOverrides } from "../hooks/useWikiOverrides";
 import {
   findMaterial,
   groupByCategoryTree,
@@ -260,10 +261,22 @@ export function WikiPage() {
   const splat = params["*"] || "";
   const segments = splat ? splat.split("/").filter(Boolean) : [];
 
-  const materials = useMemo(() => loadWikiMaterials(), []);
+  const bundledMaterials = useMemo(() => loadWikiMaterials(), []);
+  const wikiOverrides = useWikiOverrides();
+  const materials = useMemo(() => {
+    if (Object.keys(wikiOverrides).length === 0) return bundledMaterials;
+    return bundledMaterials.map((m) => {
+      const repoPath = materialToRepoPath(m);
+      const override = wikiOverrides[repoPath];
+      return override ? { ...m, raw: override.markdown } : m;
+    });
+  }, [bundledMaterials, wikiOverrides]);
   const groups = useMemo(() => groupByCategoryTree(materials), [materials]);
   const linearMaterials = useMemo(() => flattenNavOrder(groups), [groups]);
   const active = findMaterial(materials, segments);
+  const activeOverride = active
+    ? wikiOverrides[materialToRepoPath(active)]
+    : undefined;
 
   const [query, setQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -757,6 +770,19 @@ export function WikiPage() {
               </>
             ) : (
               <>
+                {activeOverride && (
+                  <div className="mb-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-orange-50 border border-brand-orange/20 text-[11px] font-bold text-brand-orange-text print:hidden">
+                    <span>
+                      Komunitně aktualizováno{" "}
+                      {new Date(activeOverride.updatedAt).toLocaleDateString("cs-CZ")}
+                    </span>
+                    {activeOverride.updatedBy && (
+                      <span className="text-stone-500 font-semibold">
+                        · {activeOverride.updatedBy}
+                      </span>
+                    )}
+                  </div>
+                )}
                 <MarkdownView key={active.path} content={active.raw} />
                 {prevNextFooter}
                 {suggestFooter(active)}

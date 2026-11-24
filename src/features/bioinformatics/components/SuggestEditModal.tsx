@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Check, Eye, FileEdit, GitPullRequest, Loader2, X } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
+import { Check, Database, Eye, FileEdit, Loader2, Send, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
 import { MarkdownView } from "./MarkdownView";
@@ -14,7 +14,20 @@ type Props = {
 
 type Mode = "edit" | "preview";
 
+function isPointerOutside(e: PointerEvent, dialog: HTMLDialogElement): boolean {
+  const r = dialog.getBoundingClientRect();
+  return (
+    e.clientX < r.left ||
+    e.clientX > r.right ||
+    e.clientY < r.top ||
+    e.clientY > r.bottom
+  );
+}
+
 export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+
   const [draft, setDraft] = useState(material.raw);
   const [note, setNote] = useState("");
   const [authorName, setAuthorName] = useState("");
@@ -22,11 +35,9 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState<{
-    branch: string;
-    branchUrl: string;
-    compareUrl: string;
-    prUrl: string;
-    prNumber: number;
+    id: string;
+    createdAt: string;
+    message: string;
   } | null>(null);
 
   const dirty = draft !== material.raw;
@@ -39,18 +50,49 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
     setMode("edit");
   }, [material.path, material.raw]);
 
+  // Open as native modal dialog in top layer (handles inert page, focus trap, Esc, focus return)
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+    const handleClose = () => {
+      dialog.returnValue = "";
+      onClose();
     };
-    document.addEventListener("keydown", onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    dialog.addEventListener("close", handleClose);
     return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = prev;
+      dialog.removeEventListener("close", handleClose);
     };
   }, [onClose]);
+
+  // Light-dismiss fallback for browsers without native `closedby` (e.g. Safari) when form is clean
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog || "closedBy" in HTMLDialogElement.prototype) return;
+
+    let pressedOutside = false;
+    const onDown = (e: PointerEvent) => {
+      pressedOutside = !dirty && isPointerOutside(e, dialog);
+    };
+    const onUp = (e: PointerEvent) => {
+      if (pressedOutside && !dirty && isPointerOutside(e, dialog)) {
+        dialog.close();
+      }
+      pressedOutside = false;
+    };
+    dialog.addEventListener("pointerdown", onDown);
+    dialog.addEventListener("pointerup", onUp);
+    return () => {
+      dialog.removeEventListener("pointerdown", onDown);
+      dialog.removeEventListener("pointerup", onUp);
+    };
+  }, [dirty]);
+
+  const requestClose = () => {
+    dialogRef.current?.close();
+  };
 
   const submit = async () => {
     if (!dirty) {
@@ -73,22 +115,16 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
       });
       const text = await res.text();
       let data: {
+        success?: boolean;
+        id?: string;
+        createdAt?: string;
+        message?: string;
         error?: string;
         detail?: string;
-        branch?: string;
-        branchUrl?: string;
-        compareUrl?: string;
-        prUrl?: string;
-        prNumber?: number;
       } = {};
 
       if (!text.trim()) {
-        setError(
-          `API ${res.status}: prázdná odpověď. ` +
-            `1) Zastavte a znovu spusťte \`pnpm dev\` (po změně .env.local / vite pluginu). ` +
-            `2) Ověřte v Network tabu, že POST jde na /api/suggest-edit. ` +
-            `3) Token: GITHUB_TOKEN v .env.local.`
-        );
+        setError(`API ${res.status}: prázdná odpověď serveru.`);
         return;
       }
 
@@ -108,25 +144,14 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
         );
         return;
       }
-      if (
-        data.branch &&
-        data.branchUrl &&
-        data.compareUrl &&
-        data.prUrl &&
-        data.prNumber != null
-      ) {
-        setResult({
-          branch: data.branch,
-          branchUrl: data.branchUrl,
-          compareUrl: data.compareUrl,
-          prUrl: data.prUrl,
-          prNumber: data.prNumber,
-        });
-      } else {
-        setError(
-          "Odesláno, ale chybí odkaz na PR. Zkontrolujte oprávnění tokenu (Pull requests: write)."
-        );
-      }
+
+      setResult({
+        id: data.id || "ok",
+        createdAt: data.createdAt || new Date().toISOString(),
+        message:
+          data.message ||
+          "Návrh úpravy byl uložen do databáze a čeká na schválení v administraci.",
+      });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Síťová chyba");
     } finally {
@@ -135,19 +160,13 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-end sm:items-center justify-center p-0 sm:p-4">
-      <button
-        type="button"
-        className="absolute inset-0 bg-black/45 backdrop-blur-[2px] cursor-default"
-        aria-label="Zavřít"
-        onClick={onClose}
-      />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="suggest-edit-title"
-        className="relative z-10 w-full sm:max-w-5xl max-h-[min(94vh,900px)] flex flex-col rounded-t-2xl sm:rounded-2xl border border-stone-200 bg-white shadow-2xl overflow-hidden"
-      >
+    <dialog
+      ref={dialogRef}
+      aria-labelledby={titleId}
+      {...({ closedby: dirty ? "closerequest" : "any" } as Record<string, string>)}
+      className="m-auto p-0 bg-transparent border-0 max-w-none w-[min(100vw,64rem)] sm:w-[min(94vw,64rem)] max-h-[min(94vh,900px)] open:flex flex-col overflow-visible"
+    >
+      <div className="w-full max-h-[min(94vh,900px)] flex flex-col rounded-t-2xl sm:rounded-2xl border border-stone-200 bg-white shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="shrink-0 flex items-start gap-3 px-4 sm:px-5 py-3.5 border-b border-stone-200 bg-gradient-to-r from-orange-50/80 to-white">
           <div className="p-2 rounded-xl bg-brand-orange/10 text-brand-orange shrink-0">
@@ -155,7 +174,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
           </div>
           <div className="min-w-0 flex-1">
             <h2
-              id="suggest-edit-title"
+              id={titleId}
               className="font-display font-black text-stone-900 text-base sm:text-lg leading-tight"
             >
               Navrhnout úpravu
@@ -173,7 +192,8 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={requestClose}
+            aria-label="Zavřít"
             className="p-2 rounded-xl border border-stone-200 text-stone-400 hover:text-stone-700 hover:bg-stone-50 cursor-pointer"
           >
             <X size={18} />
@@ -187,47 +207,13 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
             </div>
             <div>
               <p className="font-black text-stone-900 text-lg">
-                Pull request vytvořen
+                Návrh uložen ke schválení
               </p>
-              <p className="text-sm text-stone-500 mt-1 max-w-md">
-                Návrh je na GitHubu jako{" "}
-                <strong>PR #{result.prNumber}</strong> (větev{" "}
-                <code className="text-xs bg-stone-100 px-1.5 py-0.5 rounded">
-                  {result.branch}
-                </code>
-                ).{" "}
-                <strong className="text-stone-700">
-                  Neslučuje se automaticky
-                </strong>{" "}
-                - zkontrolujte diff a merge ručně.
+              <p className="text-sm text-stone-500 mt-1 max-w-md leading-relaxed">
+                {result.message}
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <a
-                href={result.prUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-brand-orange text-white text-sm font-bold shadow-md shadow-brand-orange/20 hover:bg-brand-orange-text"
-              >
-                <GitPullRequest size={16} />
-                Otevřít PR #{result.prNumber}
-              </a>
-              <a
-                href={result.branchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-stone-200 bg-white text-stone-700 text-sm font-bold hover:bg-stone-50"
-              >
-                Zobrazit větev
-              </a>
-            </div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="text-xs font-bold text-stone-500 hover:text-stone-800 cursor-pointer"
-            >
-              Zavřít
-            </button>
+            <Button onClick={requestClose}>Zavřít</Button>
           </div>
         ) : (
           <>
@@ -271,6 +257,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   spellCheck={false}
+                  autoFocus
                   className="w-full h-full min-h-[280px] sm:min-h-[360px] resize-none rounded-xl border border-stone-200 bg-stone-50/50 px-3.5 py-3 font-mono text-[12px] sm:text-[13px] leading-relaxed text-stone-800 focus:outline-none focus:ring-2 focus:ring-brand-orange/25 focus:border-brand-orange"
                   placeholder="# Nadpis&#10;&#10;Text materiálu…"
                 />
@@ -293,7 +280,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
                 <input
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  placeholder="Krátká poznámka"
+                  placeholder="Krátká poznámka co jste upravili"
                   className="rounded-xl border border-stone-200 bg-white px-3 py-2 text-xs font-medium focus:outline-none focus:border-brand-orange"
                 />
               </div>
@@ -303,16 +290,15 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
                 </p>
               )}
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[10px] text-stone-400 font-medium max-w-md">
-                  Odesláním vznikne větev, commit a pull request na GitHubu.
-                  Merge je ruční - Vercel preview se pro větve{" "}
-                  <code className="text-[9px] bg-stone-200/80 px-1 rounded">
-                    suggest/*
-                  </code>{" "}
-                  přeskočí.
+                <p className="text-[10px] text-stone-400 font-medium max-w-md inline-flex items-center gap-1.5">
+                  <Database size={12} className="text-brand-orange shrink-0" />
+                  <span>
+                    Návrh se uloží do databáze a po schválení v administraci se
+                    okamžitě projeví na webu.
+                  </span>
                 </p>
                 <div className="flex gap-2">
-                  <Button variant="secondary" size="sm" onClick={onClose}>
+                  <Button variant="secondary" size="sm" onClick={requestClose}>
                     Zrušit
                   </Button>
                   <Button
@@ -323,7 +309,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
                     {submitting ? (
                       <Loader2 size={14} className="animate-spin" />
                     ) : (
-                      <GitPullRequest size={14} />
+                      <Send size={14} />
                     )}
                     {submitting ? "Odesílám…" : "Odeslat návrh"}
                   </Button>
@@ -333,7 +319,7 @@ export function SuggestEditModal({ material, repoFilePath, onClose }: Props) {
           </>
         )}
       </div>
-    </div>
+    </dialog>
   );
 }
 

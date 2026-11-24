@@ -63,6 +63,7 @@ export default function App() {
             </ErrorBoundary>
           }
         />
+        <Route path="/admin" element={<Navigate to="/mikrobiologie/admin" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

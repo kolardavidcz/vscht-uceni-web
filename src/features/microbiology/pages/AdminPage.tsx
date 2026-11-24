@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
+  BookOpen,
   Check,
   CheckCircle,
   ChevronDown,
@@ -18,6 +19,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { lazyWithRetry } from "@/lib/lazyWithRetry";
 import type { MicrobiologyData } from "../hooks/useMicrobiologyData";
 import type { AdminChange } from "../lib/adminChanges";
 import {
@@ -26,6 +28,13 @@ import {
   sortEmojis,
 } from "../data/emojis";
 import type { EmojiOption, WorksheetItem } from "../types";
+
+// Lazy-loaded so markdown/wiki chunks never enter the `/mikrobiologie` hot path
+const WikiAdminPanel = lazyWithRetry(() =>
+  import("@/features/bioinformatics/components/WikiAdminPanel").then((m) => ({
+    default: m.WikiAdminPanel,
+  }))
+);
 
 const ADMIN_PASSWORD = "bavi_nas_mikrobiologie";
 const AUTH_KEY = "microbiology_admin_ok";
@@ -49,7 +58,7 @@ function safeSessionSet(key: string, value: string): void {
 }
 
 type Props = { data: MicrobiologyData };
-type AdminTab = "answers" | "emojis";
+type AdminTab = "answers" | "emojis" | "wiki";
 
 const typeStyle = (type?: string) => {
   switch (type) {
@@ -137,6 +146,7 @@ export function AdminPage({ data }: Props) {
   const [editingEmoji, setEditingEmoji] = useState<string | null>(null);
   const [editEmojiChar, setEditEmojiChar] = useState("");
   const [editLabel, setEditLabel] = useState("");
+  const [wikiPendingCount, setWikiPendingCount] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = "Admin - Systematika bakterií";
@@ -528,6 +538,23 @@ export function AdminPage({ data }: Props) {
             )}
           >
             <Hash size={14} /> Emoji & Kategorie
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("wiki")}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold cursor-pointer",
+              activeTab === "wiki"
+                ? "bg-brand-orange text-white"
+                : "text-stone-300 hover:text-white"
+            )}
+          >
+            <BookOpen size={14} /> Wiki návrhy
+            {wikiPendingCount != null && wikiPendingCount > 0 && (
+              <span className="px-1.5 py-0.5 rounded-full text-[10px] font-black bg-white/20 text-white leading-none">
+                {wikiPendingCount}
+              </span>
+            )}
           </button>
         </nav>
 
@@ -1072,6 +1099,21 @@ export function AdminPage({ data }: Props) {
               })}
             </div>
           </div>
+        )}
+
+        {activeTab === "wiki" && (
+          <Suspense
+            fallback={
+              <div className="flex-1 flex items-center justify-center text-xs font-bold text-stone-400">
+                Načítám správu Wiki…
+              </div>
+            }
+          >
+            <WikiAdminPanel
+              password={password || ADMIN_PASSWORD}
+              onPendingCountChange={setWikiPendingCount}
+            />
+          </Suspense>
         )}
       </div>
     </div>
