@@ -27,6 +27,13 @@ const PythonAnalyzerPage = lazyWithRetry(() =>
     default: m.PythonAnalyzerPage,
   }))
 );
+const BioinformaticsPipelinePage = lazyWithRetry(() =>
+  import(
+    "@/features/bioinformatics-pipeline/pages/BioinformaticsPipelinePage"
+  ).then((m) => ({
+    default: m.BioinformaticsPipelinePage,
+  }))
+);
 
 export default function App() {
   return (
@@ -59,6 +66,16 @@ export default function App() {
             <ErrorBoundary>
               <Suspense fallback={<RouteFallback label="Načítám analyzátor…" />}>
                 <PythonAnalyzerPage />
+              </Suspense>
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/bioinformatika-pipeline"
+          element={
+            <ErrorBoundary>
+              <Suspense fallback={<RouteFallback label="Načítám GH48 pipeline…" />}>
+                <BioinformaticsPipelinePage />
               </Suspense>
             </ErrorBoundary>
           }

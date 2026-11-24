@@ -5,6 +5,8 @@ import {
   BookOpen,
   ChevronRight,
   ClipboardList,
+  Dna,
+  GitBranch,
   Terminal,
 } from "lucide-react";
 import { useEffect } from "react";
@@ -18,6 +20,11 @@ const prefetchWiki = () => {
 };
 const prefetchPython = () => {
   void import("@/features/python-analyzer/pages/PythonAnalyzerPage").catch(() => { });
+};
+const prefetchPipeline = () => {
+  void import(
+    "@/features/bioinformatics-pipeline/pages/BioinformaticsPipelinePage"
+  ).catch(() => { });
 };
 
 export function HomePage() {
@@ -46,7 +53,7 @@ export function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full animate-[scale-in_0.35s_ease]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl animate-[scale-in_0.35s_ease]">
           {/* Systematika - whole card is the link */}
           <Card
             variant="dark"
@@ -126,11 +133,53 @@ export function HomePage() {
               >
                 Wiki
               </Link>
+              <Link
+                to="/bioinformatika-pipeline"
+                className="px-2.5 py-1 bg-brand-orange/15 hover:bg-brand-orange/25 text-brand-orange text-[10px] font-black tracking-wider uppercase rounded-md border border-brand-orange/30"
+              >
+                GH48 Pipeline
+              </Link>
             </div>
             <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
               <span className="flex items-center gap-1.5">
                 <Binary size={14} />
                 Markdown wiki
+              </span>
+              <ChevronRight
+                size={16}
+                className="group-hover:translate-x-1 transition-transform"
+              />
+            </div>
+          </Card>
+
+          {/* GH48 Bioinformatická pipeline - whole card is the link */}
+          <Card
+            variant="dark"
+            hover
+            onMouseEnter={prefetchPipeline}
+            onTouchStart={prefetchPipeline}
+            className="p-6 sm:p-8 group flex flex-col h-full relative overflow-hidden"
+          >
+            <Link
+              to="/bioinformatika-pipeline"
+              className="absolute inset-0 z-[1] rounded-2xl"
+              aria-label="GH48 Bioinformatická pipeline"
+            />
+            <div className="absolute top-0 right-0 w-24 h-24 bg-brand-orange/5 rounded-full blur-2xl group-hover:bg-brand-orange/15 transition-all pointer-events-none" />
+            <div className="p-4 bg-brand-orange/10 rounded-2xl text-brand-orange w-max border border-brand-orange/20 group-hover:scale-110 transition-transform">
+              <Dna size={24} />
+            </div>
+            <h2 className="font-display text-lg sm:text-xl font-black tracking-tight mt-6 mb-2 text-white group-hover:text-brand-orange transition-colors">
+              GH48 Bioinformatická pipeline
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mb-6 flex-1">
+              Interaktivní workflow pro fylogenezi a motivy proteinových rodin:
+              FASTA filtr, HMMER ořez, MMseqs2 proxy, FIMO/Fitch RI, iTOL exporty a χ² taxonomie.
+            </p>
+            <div className="flex items-center justify-between mt-auto border-t border-white/5 pt-4 text-[10px] sm:text-xs font-black tracking-wider text-brand-orange uppercase gap-2">
+              <span className="flex items-center gap-1.5">
+                <GitBranch size={14} />
+                Fylogeneze, MEME & iTOL
               </span>
               <ChevronRight
                 size={16}

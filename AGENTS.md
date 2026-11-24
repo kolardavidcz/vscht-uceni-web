@@ -16,8 +16,9 @@ Greenfield SPA (not Next.js) with three features:
 | Feature | Routes | Data |
 |--------|--------|------|
 | Systematika bakterií | `/mikrobiologie/*` | Bundled taxonomy + Upstash Redis admin store |
-| Obor Bioinformatika | `/obor-bioinformatika/*` | Markdown under `src/features/bioinformatics/content/` |
-| Python Analyzátor | `/python-analyza` | In-bundle annotated script + mock terminal |
+| Obor Bioinformatika | `/obor-bioinformatika/*` | Markdown under `src/features/bioinformatics/content/` + Upstash Redis live overrides |
+| GH48 Bioinformatická pipeline | `/bioinformatika-pipeline` | 100% client-side bioinformatics workbench + curated GH48 showcase dataset (`lazyWithRetry`) |
+| Python Analyzátor | `/python-analyza` | Live browser DNA/RNA analyzer + downloadable Python 3 script |
 
 Stack (do not casually upgrade major versions without reason):
 
@@ -75,6 +76,7 @@ src/
   features/
     microbiology/             # Quiz, study modes, admin, domain data (lib/traits.ts, lib/scoring.ts)
     bioinformatics/           # Wiki, SuggestEditModal, content/*.md, PA2ToAX1Overview
+    bioinformatics-pipeline/  # Client-side GH48 workflow (FASTA, HMMER, Newick/Fitch RI, FIMO, iTOL, chi2)
     python-analyzer/
 
 vite-plugin-local-api.ts      # Dev-only middleware for POST /api/suggest-edit
@@ -132,6 +134,7 @@ To ensure AI changes do not cause silent regressions, 14 test suites enforce key
 | `src/features/bioinformatics/content/wikiIntegrity.test.ts` | Asserts all materials in `config.json` exist on disk and ensures no lecture title uses forbidden `Modul <X>` prefix |
 | `src/features/bioinformatics/lib/markdownTransforms.test.ts` | Verifies math syntax underscore protection (including skipping code blocks), vector check/cross replacements, `rehype-sanitize` SVG/YouTube/XSS end-to-end rendering, TOC slug extraction, and full-text search |
 | `src/features/python-analyzer/lib/sequenceAnalyzer.test.ts` | Tests live DNA/RNA FASTA parsing, GC%, $T_m$, reverse complement, 3-frame translation, and ORF detection |
+| `src/features/bioinformatics-pipeline/lib/pipeline.test.ts` | Tests FASTA filtering, HMMER domtblout domain cutting, Newick/NHX parsing & Fitch parsimony RI, FIMO matrix & iTOL exports, MMseqs2 characterized mapping, and exact χ² test |
 
 ### Env (local)
 

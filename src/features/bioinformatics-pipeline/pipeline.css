@@ -1,0 +1,137 @@
+/* Scoped styles for Bioinformatics Pipeline Workbench (modern-web-guidance: tabs, responsive-table, sortable-table) */
+
+@property --bio-fade-start {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@property --bio-fade-end {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+/* Single-row horizontally scrollable tablist with scroll-driven edge fades */
+.bio-tablist {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: inline proximity;
+  scroll-padding-inline: 2.5rem;
+  --bio-fade-size: 2.5rem;
+  mask:
+    linear-gradient(black, black) no-clip subtract,
+    linear-gradient(to right, black, transparent) 0 0 / var(--bio-fade-start) 100% no-repeat no-clip,
+    linear-gradient(to right, transparent, black) 100% 0 / var(--bio-fade-end) 100% no-repeat no-clip;
+  animation: bio-reveal-fade-start linear both, bio-hide-fade-end linear both;
+  animation-timeline: scroll(self inline);
+  animation-range: 0 var(--bio-fade-size), calc(100% - var(--bio-fade-size)) 100%;
+}
+
+.bio-tablist::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes bio-reveal-fade-start {
+  to {
+    --bio-fade-start: var(--bio-fade-size);
+  }
+}
+
+@keyframes bio-hide-fade-end {
+  from {
+    --bio-fade-end: var(--bio-fade-size);
+  }
+}
+
+/* Tab button: selected indicator driven by aria-selected with border on ::after (forced-colors safe, zero layout shift) */
+.bio-tab {
+  position: relative;
+  flex: none;
+  scroll-snap-align: start;
+  white-space: nowrap;
+}
+
+.bio-tab[aria-selected="true"] {
+  color: var(--color-brand-orange);
+}
+
+.bio-tab[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  border-block-end: 3px solid var(--color-brand-orange);
+}
+
+/* Responsive & sortable data tables */
+.bio-table-wrapper {
+  overflow: auto;
+  max-inline-size: 100%;
+  max-block-size: min(520px, 70vh);
+  container-type: inline-size;
+  overscroll-behavior: contain;
+}
+
+.bio-table {
+  width: 100%;
+  min-inline-size: 560px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.bio-table thead {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 2;
+}
+
+.bio-table th:has(> button) {
+  padding: 0;
+}
+
+.bio-table th > button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  min-block-size: 2.25rem;
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.bio-table th > button:focus-visible {
+  outline: 2px solid var(--color-brand-orange);
+  outline-offset: -2px;
+}
+
+/* Decorative sort chevron driven from th[aria-sort] in CSS */
+.bio-sort-icon {
+  opacity: 0.35;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  flex-shrink: 0;
+}
+
+.bio-table th[aria-sort] .bio-sort-icon {
+  opacity: 1;
+  color: var(--color-brand-orange);
+}
+
+.bio-table th[aria-sort="descending"] .bio-sort-icon {
+  transform: rotate(180deg);
+}
+
+.bio-sr-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
