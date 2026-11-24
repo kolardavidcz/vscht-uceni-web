@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 import {
   Archive,
-  ArrowDown,
   ArrowLeft,
   Check,
   Copy,
@@ -90,6 +89,12 @@ import {
 } from "../components/SortableDataTable";
 import { PhyloTreeSvg } from "../components/PhyloTreeSvg";
 import { MotifHeatmapSvg } from "../components/MotifHeatmapSvg";
+import {
+  ForkStepNode,
+  NeedInputNode,
+  ScriptStepNode,
+  VizNode,
+} from "../components/FlowNodes";
 
 function downloadBlob(filename: string, blob: Blob) {
   const url = URL.createObjectURL(blob);
@@ -149,9 +154,9 @@ function FileUploadButton({
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
-        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 transition-colors cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-semibold text-white transition-colors cursor-pointer"
       >
-        <Upload size={13} className="text-brand-orange" />
+        <Upload size={12} className="text-brand-orange" />
         {label}
       </button>
     </>
@@ -211,71 +216,6 @@ function MetricCell({
   );
 }
 
-interface StepConnectorProps {
-  nextInputLabel: string;
-  externalTools?: { label: string; url: string }[];
-  upstreamFile?: { filename: string; content: string; label?: string } | null;
-  localAction?: { label: string; onClick: () => void; disabled?: boolean } | null;
-}
-
-function StepConnector({
-  nextInputLabel,
-  externalTools,
-  upstreamFile,
-  localAction,
-}: StepConnectorProps) {
-  return (
-    <div className="relative pl-6 sm:pl-8 py-3">
-      <div
-        aria-hidden="true"
-        className="absolute left-4 sm:left-5 top-0 bottom-0 w-px bg-brand-orange/30"
-      />
-      <div className="rounded-xl border border-brand-orange/25 bg-[#190e08] px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-2.5 text-xs">
-        <div className="flex items-center gap-2 min-w-0">
-          <ArrowDown size={14} className="text-brand-orange shrink-0" />
-          <span className="text-slate-200">{nextInputLabel}</span>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-2 shrink-0">
-          {upstreamFile && upstreamFile.content.trim().length > 0 && (
-            <button
-              type="button"
-              onClick={() => downloadTextFile(upstreamFile.filename, upstreamFile.content)}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-mono font-semibold text-slate-200 transition-colors cursor-pointer"
-            >
-              <Download size={12} className="text-brand-orange" />
-              {upstreamFile.label ?? upstreamFile.filename}
-            </button>
-          )}
-          {externalTools?.map((tool) => (
-            <a
-              key={tool.label}
-              href={tool.url}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-semibold text-amber-200 hover:text-brand-orange transition-colors"
-            >
-              {tool.label}
-              <ExternalLink size={11} />
-            </a>
-          ))}
-          {localAction && (
-            <button
-              type="button"
-              disabled={localAction.disabled}
-              onClick={localAction.onClick}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-orange hover:bg-brand-orange-text disabled:opacity-40 text-white text-[11px] font-bold transition-colors cursor-pointer"
-            >
-              <Play size={11} />
-              {localAction.label}
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function MsaOccupancyChart({
   aligned,
   maxGapFraction,
@@ -313,12 +253,12 @@ function MsaOccupancyChart({
   const w = 640;
   const h = 72;
   const barW = w / bins.length;
-  const thresholdY = h * maxGapFraction; // y from top: occupancy 1 - maxGapFraction -> top offset = maxGapFraction * h
+  const thresholdY = h * maxGapFraction;
 
   return (
     <div className="rounded-lg border border-white/10 bg-[#110906] p-3 space-y-1.5">
       <div className="flex items-center justify-between text-[11px] text-slate-400">
-        <span>Profil obsazenosti sloupců MSA (ponechané vs. ořezané trimAl)</span>
+        <span>Obsazenost sloupců MSA (oranžová = ponecháno po trimAl)</span>
         <span className="font-mono">
           práh: ≥ {Math.round((1 - maxGapFraction) * 100)} % ne-mezer
         </span>
@@ -361,7 +301,7 @@ export function BioinformaticsPipelinePage() {
   const progressId = useId();
   const multiUploadRef = useRef<HTMLInputElement>(null);
 
-  // Stage inputs (initialized with GH48 showcase dataset)
+  // Stage inputs (initialized with real GH48 dataset)
   const [rawFastaText, setRawFastaText] = useState(GH48_DEMO_RAW_FASTA);
   const [hmmReportText, setHmmReportText] = useState(GH48_DEMO_HMM_REPORT);
   const [adjacencyText, setAdjacencyText] = useState(GH48_DEMO_ADJACENCY);
@@ -373,7 +313,6 @@ export function BioinformaticsPipelinePage() {
   const [dbDomainsText, setDbDomainsText] = useState(GH48_DEMO_DB_DOMAINS_FASTA);
   const [fimoText, setFimoText] = useState(GH48_DEMO_FIMO);
 
-  // Source tracking labels
   const [treeOrigin, setTreeOrigin] = useState<"uploaded" | "computed">("uploaded");
   const [fimoOrigin, setFimoOrigin] = useState<"uploaded" | "computed">("uploaded");
   const [taxOrigin, setTaxOrigin] = useState<"uploaded" | "computed">("uploaded");
@@ -429,7 +368,7 @@ export function BioinformaticsPipelinePage() {
   const [heatmapFilter, setHeatmapFilter] = useState<"all" | "heatmap" | "binary">("all");
   const [selectedMotifForStats, setSelectedMotifForStats] = useState("MEME-23");
 
-  // Dropzone & runner status
+  // Dropzone & runner state
   const [isDragging, setIsDragging] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [progressPct, setProgressPct] = useState(0);
@@ -614,7 +553,7 @@ export function BioinformaticsPipelinePage() {
     return { acc: selectedLeaf, tax, presentMotifs, charMatch };
   }, [selectedLeaf, taxonomyByAcc, fimoAnalysis, charMappingResult]);
 
-  // --- Bundle all active outputs for bottom export bar & ZIP ---
+  // Bundle all active outputs for bottom export & .zip
   const activeArtifacts = useMemo<ZipEntry[]>(() => {
     const out: ZipEntry[] = [];
     if (filteredFastaText) {
@@ -828,7 +767,7 @@ export function BioinformaticsPipelinePage() {
     setStatusMessage("Vstupy vymazány.");
   };
 
-  // --- Step-by-step local compute actions ---
+  // --- Branch local compute handlers ---
   const runLocalClustering = () => {
     if (step2DomainRecords.length === 0) return;
     const cl = clusterSequencesGreedy(step2DomainRecords, {
@@ -850,10 +789,8 @@ export function BioinformaticsPipelinePage() {
 
   const runLocalMsa = () => {
     if (repRecords.length < 2) return;
-    const toAlign = repRecords.slice(0, 80);
-    const msa = buildCenterStarMsa(toAlign);
-    const msaText = serializeFasta(msa.aligned);
-    setAlignedFastaText(msaText);
+    const msa = buildCenterStarMsa(repRecords.slice(0, 80));
+    setAlignedFastaText(serializeFasta(msa.aligned));
     setLoadedFilenames((prev) => ({ ...prev, aligned_fasta: "lokální BLOSUM62 MSA" }));
     setStatusMessage(
       `Zarovnáno ${msa.aligned.length} sekvencí × ${msa.columns} sloupců.`
@@ -889,10 +826,7 @@ export function BioinformaticsPipelinePage() {
       }));
     }
     const parsed = parseNewick(nj.newick);
-    if (parsed) {
-      const first = getLeaves(parsed)[0]?.name ?? null;
-      setSelectedLeaf(first);
-    }
+    if (parsed) setSelectedLeaf(getLeaves(parsed)[0]?.name ?? null);
     setStatusMessage(
       `Rekonstruován NJ strom (${nj.taxonCount} listů, ${nj.bootstrapReplicates}× bootstrap).`
     );
@@ -1300,14 +1234,11 @@ export function BioinformaticsPipelinePage() {
     []
   );
 
-  const stageHeaderClass =
-    "rounded-2xl border border-white/10 bg-[#140b07] p-4 sm:p-5 space-y-4";
-
   return (
     <div className="bio-pipeline-root min-h-screen bg-brand-espresso text-slate-100 flex flex-col">
       {/* Top sticky header */}
       <header className="page-header-dark">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
             <Link
               to="/"
@@ -1338,7 +1269,10 @@ export function BioinformaticsPipelinePage() {
             </button>
             <button
               type="button"
-              disabled={isRunning || (!rawFastaText.trim() && !alignedFastaText.trim() && !newickText.trim())}
+              disabled={
+                isRunning ||
+                (!rawFastaText.trim() && !alignedFastaText.trim() && !newickText.trim())
+              }
               onClick={() => void runEntirePipeline()}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text disabled:opacity-40 text-white text-xs font-bold transition-colors cursor-pointer"
             >
@@ -1381,20 +1315,20 @@ export function BioinformaticsPipelinePage() {
         {statusMessage}
       </div>
 
-      <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-6 space-y-2">
-        {/* Compact Multi-File Smart Drop Bar */}
+      <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-6">
+        {/* ================= TOP RECTANGULAR INPUT BOX ================= */}
         <section
-          aria-label="Hromadné nahrání vstupních souborů"
+          aria-label="Vstup pipeline: celá sada souborů nebo první krok"
           onDragOver={(e) => {
             e.preventDefault();
             setIsDragging(true);
           }}
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
-          className={`rounded-2xl border-2 border-dashed p-4 transition-colors mb-4 ${
+          className={`max-w-2xl mx-auto rounded-lg border-2 p-4 sm:p-5 transition-colors ${
             isDragging
               ? "border-brand-orange bg-brand-orange/15"
-              : "border-white/15 bg-[#140b07]"
+              : "border-white/30 bg-[#140b07]"
           }`}
         >
           <input
@@ -1406,34 +1340,50 @@ export function BioinformaticsPipelinePage() {
             className="hidden"
           />
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-3 min-w-0">
-              <UploadCloud size={22} className="text-brand-orange shrink-0" />
-              <div className="text-xs text-slate-300">
-                Přetáhněte libovolné soubory (<span className="font-mono">.fasta</span>,{" "}
-                <span className="font-mono">--domtblout</span>,{" "}
-                <span className="font-mono">MAFFT</span>,{" "}
-                <span className="font-mono">.treefile</span>,{" "}
-                <span className="font-mono">fimo.tsv</span>,{" "}
-                <span className="font-mono">taxonomy.tsv</span>) — formát se určí podle obsahu.
+            <div className="flex items-center gap-2.5 min-w-0">
+              <UploadCloud size={20} className="text-brand-orange shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm font-black text-white">
+                  Vstup: všechny soubory nebo jen 1. krok (.fasta)
+                </div>
+                <div className="text-[11px] text-slate-400">
+                  Přetáhněte soubory (<span className="font-mono">.fasta</span>,{" "}
+                  <span className="font-mono">--domtblout</span>,{" "}
+                  <span className="font-mono">MAFFT</span>,{" "}
+                  <span className="font-mono">.treefile</span>,{" "}
+                  <span className="font-mono">fimo.tsv</span>,{" "}
+                  <span className="font-mono">taxonomy.tsv</span>)
+                </div>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => multiUploadRef.current?.click()}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-xs font-bold text-white transition-colors cursor-pointer shrink-0"
-            >
-              <Upload size={13} className="text-brand-orange" />
-              Vybrat soubory
-            </button>
+            <div className="flex flex-wrap items-center gap-2 shrink-0">
+              <a
+                href="https://www.ncbi.nlm.nih.gov/protein/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-black/35 hover:border-brand-orange border border-white/15 text-[11px] font-semibold text-amber-200"
+              >
+                NCBI Protein
+                <ExternalLink size={10} />
+              </a>
+              <button
+                type="button"
+                onClick={() => multiUploadRef.current?.click()}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/20 text-xs font-bold text-white cursor-pointer"
+              >
+                <Upload size={13} className="text-brand-orange" />
+                Vybrat soubory
+              </button>
+            </div>
           </div>
 
           {Object.keys(loadedFilenames).length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-white/5">
+            <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-white/10">
               {(Object.entries(loadedFilenames) as [DetectedFileKind, string][]).map(
                 ([kind, fname]) => (
                   <span
                     key={kind}
-                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-black/40 border border-white/10 text-[11px] font-mono text-slate-300"
+                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-black/45 border border-white/10 text-[11px] font-mono text-slate-300"
                   >
                     <span className="text-brand-orange">{fname}</span>
                     <button
@@ -1470,58 +1420,25 @@ export function BioinformaticsPipelinePage() {
           )}
         </section>
 
-        {/* ================= KROK 1 · FILTRACE FASTA ================= */}
-        <section aria-labelledby="step-1-heading" className={stageHeaderClass}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
-              <span className="w-6 h-6 rounded-lg bg-brand-orange/20 border border-brand-orange/40 text-brand-orange font-mono text-xs font-black flex items-center justify-center">
-                1
-              </span>
-              <h2 id="step-1-heading" className="font-display text-base font-black text-white">
-                Filtrace vstupních FASTA sekvencí
-              </h2>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
-                {parsedRawFasta.length > 0
-                  ? `${parsedRawFasta.length} → ${fastaFilterResult.kept.length}`
-                  : "čeká na .fasta"}
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <FileUploadButton
-                label="Nahrát .fasta"
-                accept=".fasta,.fa,.faa,.txt"
-                onLoad={(txt, name) => routeSingleFile("raw_fasta", txt, name)}
-              />
-              {fastaFilterResult.kept.length > 0 && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    downloadTextFile("02_filtered_sequences.fasta", filteredFastaText)
-                  }
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-xs font-bold transition-colors cursor-pointer"
-                >
-                  <Download size={13} />
-                  02_filtered.fasta
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Inline parameters */}
-          <div className="flex flex-wrap items-end gap-3 text-xs bg-black/25 rounded-xl p-3 border border-white/5">
-            <label className="flex-1 min-w-[210px] space-y-1">
+        {/* ================= KROK 1 · SCRIPT -> VIZ ================= */}
+        <ScriptStepNode
+          scriptName="partial_filter_script.py"
+          githubPath="02_remove_partial/partial_filter_script.py"
+          arrowLabel="lokální skript"
+        >
+          <div className="flex flex-wrap items-end gap-2.5 text-xs">
+            <label className="flex-1 min-w-[180px] space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
-                Vyloučit hlavičky obsahující (oddělené čárkou)
+                Vyloučit klíčová slova
               </span>
               <input
                 type="text"
                 value={excludeTermsText}
                 onChange={(e) => setExcludeTermsText(e.target.value)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 text-xs text-white"
+                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1 text-xs text-white"
               />
             </label>
-            <label className="w-24 space-y-1">
+            <label className="w-20 space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
                 Min (aa)
               </span>
@@ -1530,10 +1447,10 @@ export function BioinformaticsPipelinePage() {
                 min={0}
                 value={minLen}
                 onChange={(e) => setMinLen(Number(e.target.value) || 0)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
+                className="w-full rounded-lg bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
               />
             </label>
-            <label className="w-24 space-y-1">
+            <label className="w-20 space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
                 Max (aa)
               </span>
@@ -1542,43 +1459,76 @@ export function BioinformaticsPipelinePage() {
                 min={1}
                 value={maxLen}
                 onChange={(e) => setMaxLen(Number(e.target.value) || 10000)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
+                className="w-full rounded-lg bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
               />
-            </label>
-            <label className="inline-flex items-center gap-1.5 pb-1.5 cursor-pointer text-slate-300">
-              <input
-                type="checkbox"
-                checked={dedupId}
-                onChange={(e) => setDedupId(e.target.checked)}
-              />
-              Duplicitní ID
-            </label>
-            <label className="inline-flex items-center gap-1.5 pb-1.5 cursor-pointer text-slate-300">
-              <input
-                type="checkbox"
-                checked={dedupSeq}
-                onChange={(e) => setDedupSeq(e.target.checked)}
-              />
-              Identické sekvence
             </label>
           </div>
-
+          <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-300">
+            <div className="flex flex-wrap gap-3">
+              <label className="inline-flex items-center gap-1.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={dedupId}
+                  onChange={(e) => setDedupId(e.target.checked)}
+                />
+                Duplicitní ID
+              </label>
+              <label className="inline-flex items-center gap-1.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={dedupSeq}
+                  onChange={(e) => setDedupSeq(e.target.checked)}
+                />
+                Identické sekvence
+              </label>
+            </div>
+            <FileUploadButton
+              label="Nahrát .fasta"
+              accept=".fasta,.fa,.faa,.txt"
+              onLoad={(txt, name) => routeSingleFile("raw_fasta", txt, name)}
+            />
+          </div>
           <details className="text-xs text-slate-400">
             <summary className="cursor-pointer hover:text-slate-200 select-none">
-              Vložit nebo upravit surovou FASTA ({parsedRawFasta.length} záznamů)
+              Upravit text FASTA ({parsedRawFasta.length} záznamů)
             </summary>
             <textarea
               value={rawFastaText}
               onChange={(e) => setRawFastaText(e.target.value)}
-              rows={5}
+              rows={4}
               spellCheck={false}
-              placeholder=">AAA91086.1 cellulase [Caldicellulosiruptor saccharolyticus]&#10;MKTAYIAK..."
-              className="mt-2 w-full rounded-lg bg-black/40 border border-white/10 p-2.5 font-mono text-xs text-slate-200"
+              className="mt-2 w-full rounded-lg bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
             />
           </details>
+        </ScriptStepNode>
 
-          {parsedRawFasta.length > 0 && (
-            <div className="space-y-4">
+        <VizNode
+          id="viz-step-1"
+          step={1}
+          title="Filtrace FASTA"
+          ready={parsedRawFasta.length > 0}
+          status={
+            parsedRawFasta.length > 0
+              ? `${fastaFilterResult.kept.length} / ${fastaFilterResult.total} sekvencí`
+              : "čeká na .fasta"
+          }
+          actions={
+            filteredFastaText && (
+              <button
+                type="button"
+                onClick={() =>
+                  downloadTextFile("02_filtered_sequences.fasta", filteredFastaText)
+                }
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
+              >
+                <Download size={12} />
+                02_filtered.fasta
+              </button>
+            )
+          }
+        >
+          {parsedRawFasta.length > 0 ? (
+            <div className="space-y-3">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <MetricCell label="Vstup" value={fastaFilterResult.total} />
                 <MetricCell
@@ -1588,7 +1538,7 @@ export function BioinformaticsPipelinePage() {
                 />
                 <MetricCell label="Vyřazeno" value={fastaFilterResult.removed.length} />
                 <MetricCell
-                  label="Medián délky"
+                  label="Medián [min–max]"
                   value={`${fastaFilterResult.lengthStats.median} aa`}
                   hint={`${fastaFilterResult.lengthStats.min}–${fastaFilterResult.lengthStats.max} aa`}
                 />
@@ -1596,7 +1546,7 @@ export function BioinformaticsPipelinePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div className="rounded-xl border border-white/10 bg-black/25 p-3 space-y-1.5">
-                  <div className="text-[11px] font-bold uppercase text-slate-400 mb-2">
+                  <div className="text-[10px] font-bold uppercase text-slate-400 mb-1.5">
                     Distribuce délek (aa)
                   </div>
                   {(() => {
@@ -1607,7 +1557,7 @@ export function BioinformaticsPipelinePage() {
                     return fastaFilterResult.histogram.map((b) => (
                       <div
                         key={b.label}
-                        className="grid grid-cols-[84px_1fr_32px] items-center gap-2 text-[11px]"
+                        className="grid grid-cols-[84px_1fr_28px] items-center gap-2 text-[11px]"
                       >
                         <span className="font-mono text-slate-400 text-right">
                           {b.label}
@@ -1633,7 +1583,7 @@ export function BioinformaticsPipelinePage() {
                 </div>
 
                 <div className="rounded-xl border border-white/10 bg-black/25 p-3">
-                  <div className="text-[11px] font-bold uppercase text-slate-400 mb-2">
+                  <div className="text-[10px] font-bold uppercase text-slate-400 mb-1.5">
                     Důvody vyřazení
                   </div>
                   {Object.keys(fastaFilterResult.removedByReason).length === 0 ? (
@@ -1674,72 +1624,46 @@ export function BioinformaticsPipelinePage() {
                 </div>
               </details>
             </div>
+          ) : (
+            <div className="text-xs text-slate-400">
+              Vložte vstupní FASTA výše nebo klikněte na <strong className="text-white">GH48 vzor</strong>.
+            </div>
           )}
-        </section>
+        </VizNode>
 
-        <StepConnector
-          nextInputLabel="Další vstup pro krok 2: výstup hmmsearch --domtblout nad 02_filtered.fasta (volitelné — bez něj se použijí plné sekvence)."
+        {/* ================= KROK 2 · NEED INPUT -> SCRIPT -> VIZ ================= */}
+        <NeedInputNode
+          needTitle="hmmsearch --domtblout nad 02_filtered.fasta pro ořez katalytické domény (volitelné — bez něj pokračují plné sekvence)"
           upstreamFile={
             filteredFastaText
               ? { filename: "02_filtered_sequences.fasta", content: filteredFastaText }
               : null
           }
-          externalTools={[
+          links={[
             {
               label: "EBI HMMER",
               url: "https://www.ebi.ac.uk/Tools/hmmer/search/hmmsearch",
             },
             {
-              label: "NCBI Protein",
-              url: "https://www.ncbi.nlm.nih.gov/protein/",
+              label: "Pfam / InterPro",
+              url: "https://www.ebi.ac.uk/interpro/entry/pfam/",
             },
           ]}
+          actions={
+            <FileUploadButton
+              label="Nahrát --domtblout"
+              accept=".txt,.tsv,.out,.tbl"
+              onLoad={(txt, name) => routeSingleFile("hmm_domtblout", txt, name)}
+            />
+          }
         />
 
-        {/* ================= KROK 2 · HMMER OŘEZ DOMÉN ================= */}
-        <section aria-labelledby="step-2-heading" className={stageHeaderClass}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
-              <span className="w-6 h-6 rounded-lg bg-brand-orange/20 border border-brand-orange/40 text-brand-orange font-mono text-xs font-black flex items-center justify-center">
-                2
-              </span>
-              <h2 id="step-2-heading" className="font-display text-base font-black text-white">
-                Ořez domén podle HMMER (`--domtblout`)
-              </h2>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
-                {hmmCutResult.croppedRecords.length > 0
-                  ? `${hmmCutResult.croppedRecords.length} domén`
-                  : `${hmmBaseRecords.length} plných sekvencí`}
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <FileUploadButton
-                label="Nahrát --domtblout"
-                accept=".txt,.tsv,.out,.tbl"
-                onLoad={(txt, name) => routeSingleFile("hmm_domtblout", txt, name)}
-              />
-              {step2DomainRecords.length > 0 && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    downloadTextFile(
-                      hmmCutResult.croppedRecords.length > 0
-                        ? "03_cropped_domains.fasta"
-                        : "03_sequences.fasta",
-                      croppedDomainsFastaText
-                    )
-                  }
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-xs font-bold transition-colors cursor-pointer"
-                >
-                  <Download size={13} />
-                  03_domains.fasta
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-end gap-3 text-xs bg-black/25 rounded-xl p-3 border border-white/5">
+        <ScriptStepNode
+          scriptName="hmm_to_fasta_script.py"
+          githubPath="03_hmmsearch_cutting/hmm_to_fasta_script.py"
+          arrowLabel="lokální skript"
+        >
+          <div className="flex flex-wrap items-end gap-2.5 text-xs">
             <label className="space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
                 Souřadnice
@@ -1747,10 +1671,10 @@ export function BioinformaticsPipelinePage() {
               <select
                 value={coordMode}
                 onChange={(e) => setCoordMode(e.target.value as "env" | "ali")}
-                className="rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 text-white"
+                className="rounded-lg bg-black/50 border border-white/15 px-2 py-1 text-white"
               >
-                <option value="env">Envelope (env)</option>
-                <option value="ali">Alignment (ali)</option>
+                <option value="env">env</option>
+                <option value="ali">ali</option>
               </select>
             </label>
             <label className="space-y-1">
@@ -1762,11 +1686,11 @@ export function BioinformaticsPipelinePage() {
                 onChange={(e) =>
                   setDedupMode(e.target.value as "longest" | "best-evalue" | "all")
                 }
-                className="rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 text-white"
+                className="rounded-lg bg-black/50 border border-white/15 px-2 py-1 text-white"
               >
-                <option value="longest">Nejdelší</option>
-                <option value="best-evalue">Nejnižší i-Evalue</option>
-                <option value="all">Všechny (_domN)</option>
+                <option value="longest">nejdelší</option>
+                <option value="best-evalue">i-Evalue</option>
+                <option value="all">všechny</option>
               </select>
             </label>
             <label className="space-y-1">
@@ -1780,12 +1704,12 @@ export function BioinformaticsPipelinePage() {
                 step={5}
                 value={padding}
                 onChange={(e) => setPadding(Number(e.target.value))}
-                className="w-28"
+                className="w-24"
               />
             </label>
-            <label className="w-24 space-y-1">
+            <label className="w-20 space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
-                i-Evalue (10^{maxIEvalueExp})
+                10^{maxIEvalueExp}
               </span>
               <input
                 type="number"
@@ -1793,37 +1717,62 @@ export function BioinformaticsPipelinePage() {
                 max={0}
                 value={maxIEvalueExp}
                 onChange={(e) => setMaxIEvalueExp(Number(e.target.value))}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
+                className="w-full rounded-lg bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
               />
             </label>
-            <label className="w-24 space-y-1">
+            <label className="w-20 space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
-                Min (aa)
+                Min aa
               </span>
               <input
                 type="number"
                 min={1}
                 value={minDomainLen}
                 onChange={(e) => setMinDomainLen(Number(e.target.value) || 1)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
+                className="w-full rounded-lg bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
               />
             </label>
           </div>
-
           <details className="text-xs text-slate-400">
             <summary className="cursor-pointer hover:text-slate-200 select-none">
-              Vložit nebo upravit `--domtblout` ({hmmCutResult.totalHitsParsed} hitů)
+              Upravit `--domtblout` ({hmmCutResult.totalHitsParsed} hitů)
             </summary>
             <textarea
               value={hmmReportText}
               onChange={(e) => setHmmReportText(e.target.value)}
-              rows={5}
+              rows={4}
               spellCheck={false}
-              className="mt-2 w-full rounded-lg bg-black/40 border border-white/10 p-2.5 font-mono text-xs text-slate-200"
+              className="mt-2 w-full rounded-lg bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
             />
           </details>
+        </ScriptStepNode>
 
-          {hmmCutResult.rows.length > 0 && (
+        <VizNode
+          id="viz-step-2"
+          step={2}
+          title="Ořez domén (HMMER)"
+          ready={hmmCutResult.rows.length > 0}
+          status={
+            hmmCutResult.croppedRecords.length > 0
+              ? `${hmmCutResult.croppedRecords.length} domén`
+              : `${hmmBaseRecords.length} plných (bez ořezu)`
+          }
+          actions={
+            croppedDomainsFastaText && (
+              <button
+                type="button"
+                onClick={() =>
+                  downloadTextFile("03_cropped_domains.fasta", croppedDomainsFastaText)
+                }
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
+              >
+                <Download size={12} />
+                03_domains.fasta
+              </button>
+            )
+          }
+        >
+          {hmmCutResult.rows.length > 0 ? (
             <div className="space-y-3">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <MetricCell label="HMM hity" value={hmmCutResult.totalHitsParsed} />
@@ -1851,115 +1800,110 @@ export function BioinformaticsPipelinePage() {
                 defaultSortDir="descending"
               />
             </div>
+          ) : (
+            <div className="text-xs text-slate-400">
+              Bez `--domtblout` postupují do dalšího kroku plné filtrované sekvence (n = {hmmBaseRecords.length}).
+            </div>
           )}
-        </section>
+        </VizNode>
 
-        <StepConnector
-          nextInputLabel="Další vstup pro krok 3: MMseqs2 adjacency_list.tabular nad 03_domains.fasta, nebo lokální greedy shlukování."
+        {/* ================= KROK 3 · FORK (SHLUKOVÁNÍ: LOKÁLNÍ VS MMSEQS2) ================= */}
+        <ForkStepNode
+          altLabel="oficiální alternativa: MMseqs2 easy-cluster"
+          localTitle="greedy shlukování"
+          localButtonLabel="Pokračovat lokálně (shlukovat)"
+          onLocalRun={runLocalClustering}
+          localDisabled={step2DomainRecords.length === 0}
+          localParams={
+            <>
+              <label className="w-24 space-y-1">
+                <span className="block text-[10px] font-bold uppercase text-slate-400">
+                  Identita ≥ ({clusterSeqIdPct} %)
+                </span>
+                <input
+                  type="number"
+                  min={40}
+                  max={100}
+                  value={clusterSeqIdPct}
+                  onChange={(e) => setClusterSeqIdPct(Number(e.target.value) || 90)}
+                  className="w-full rounded bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
+                />
+              </label>
+              <label className="w-24 space-y-1">
+                <span className="block text-[10px] font-bold uppercase text-slate-400">
+                  Pokrytí ≥ ({clusterCovPct} %)
+                </span>
+                <input
+                  type="number"
+                  min={30}
+                  max={100}
+                  value={clusterCovPct}
+                  onChange={(e) => setClusterCovPct(Number(e.target.value) || 80)}
+                  className="w-full rounded bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
+                />
+              </label>
+            </>
+          }
+          localMiniSummary={
+            adjacencySummary.totalClusters > 0
+              ? `${adjacencySummary.totalClusters} klastrů`
+              : `${step2DomainRecords.length} sekvencí`
+          }
+          providerTitle="MMseqs2"
           upstreamFile={
             croppedDomainsFastaText
               ? { filename: "03_cropped_domains.fasta", content: croppedDomainsFastaText }
               : null
           }
-          externalTools={[{ label: "UseGalaxy.eu", url: "https://usegalaxy.eu/" }]}
-          localAction={{
-            label: "Shlukovat lokálně",
-            onClick: runLocalClustering,
-            disabled: step2DomainRecords.length === 0,
-          }}
+          providerLinks={[
+            { label: "UseGalaxy.eu (MMseqs2)", url: "https://usegalaxy.eu/" },
+          ]}
+          uploadLabel="Výstup poskytovatele → nahrát adjacency_list.tabular"
+          uploadAccept=".tabular,.tsv,.txt"
+          uploadedName={loadedFilenames.adjacency_tsv}
+          onUploadFile={(txt, name) => routeSingleFile("adjacency_tsv", txt, name)}
         />
 
-        {/* ================= KROK 3 · SHLUKOVÁNÍ ================= */}
-        <section aria-labelledby="step-3-heading" className={stageHeaderClass}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
-              <span className="w-6 h-6 rounded-lg bg-brand-orange/20 border border-brand-orange/40 text-brand-orange font-mono text-xs font-black flex items-center justify-center">
-                3
-              </span>
-              <h2 id="step-3-heading" className="font-display text-base font-black text-white">
-                Shlukování sekvencí (MMseqs2 / greedy)
-              </h2>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
-                {adjacencySummary.totalClusters > 0
-                  ? `${adjacencySummary.totalClusters} klastrů`
-                  : `${step2DomainRecords.length} sekvencí bez shlukování`}
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <FileUploadButton
-                label="Nahrát adjacency_list"
-                accept=".tabular,.tsv,.txt"
-                onLoad={(txt, name) => routeSingleFile("adjacency_tsv", txt, name)}
-              />
-              {adjacencySummary.totalClusters > 0 && (
-                <>
-                  {repsFastaText && (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        downloadTextFile("04_clustered_reps.fasta", repsFastaText)
-                      }
-                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-xs font-bold transition-colors cursor-pointer"
-                    >
-                      <Download size={13} />
-                      04_reps.fasta
-                    </button>
-                  )}
+        <VizNode
+          id="viz-step-3"
+          step={3}
+          title="Shlukování sekvencí (klastry a reprezentanti)"
+          ready={adjacencySummary.totalClusters > 0}
+          status={
+            adjacencySummary.totalClusters > 0
+              ? `${adjacencySummary.totalClusters} klastrů (${adjacencySummary.totalMembers} členů)`
+              : "bez shlukování"
+          }
+          actions={
+            adjacencySummary.totalClusters > 0 && (
+              <>
+                {repsFastaText && (
                   <button
                     type="button"
                     onClick={() =>
-                      downloadTextFile("04_adjacency_list.tabular", adjacencyText)
+                      downloadTextFile("04_clustered_reps.fasta", repsFastaText)
                     }
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
                   >
-                    <Download size={13} className="text-brand-orange" />
-                    adjacency.tabular
+                    <Download size={12} />
+                    04_reps.fasta
                   </button>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-end gap-3 text-xs bg-black/25 rounded-xl p-3 border border-white/5">
-            <label className="w-32 space-y-1">
-              <span className="block text-[10px] font-bold uppercase text-slate-400">
-                Identita ≥ ({clusterSeqIdPct} %)
-              </span>
-              <input
-                type="number"
-                min={40}
-                max={100}
-                value={clusterSeqIdPct}
-                onChange={(e) => setClusterSeqIdPct(Number(e.target.value) || 90)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
-              />
-            </label>
-            <label className="w-32 space-y-1">
-              <span className="block text-[10px] font-bold uppercase text-slate-400">
-                Pokrytí ≥ ({clusterCovPct} %)
-              </span>
-              <input
-                type="number"
-                min={30}
-                max={100}
-                value={clusterCovPct}
-                onChange={(e) => setClusterCovPct(Number(e.target.value) || 80)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
-              />
-            </label>
-            <button
-              type="button"
-              disabled={step2DomainRecords.length === 0}
-              onClick={runLocalClustering}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 disabled:opacity-40 border border-white/15 text-xs font-bold text-white cursor-pointer"
-            >
-              <Play size={12} className="text-brand-orange" />
-              Přepočítat lokálně
-            </button>
-          </div>
-
-          {adjacencySummary.totalClusters > 0 && (
+                )}
+                <button
+                  type="button"
+                  onClick={() =>
+                    downloadTextFile("04_adjacency_list.tabular", adjacencyText)
+                  }
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-white cursor-pointer"
+                >
+                  <Download size={12} className="text-brand-orange" />
+                  adjacency.tabular
+                </button>
+              </>
+            )
+          }
+        >
+          {adjacencySummary.totalClusters > 0 ? (
             <div className="space-y-3">
               <div className="grid grid-cols-3 gap-2.5">
                 <MetricCell
@@ -1975,10 +1919,9 @@ export function BioinformaticsPipelinePage() {
                   ).toFixed(1)}×`}
                 />
               </div>
-
               <div className="rounded-xl border border-white/10 bg-black/25 p-3 space-y-1.5">
-                <div className="text-[11px] font-bold uppercase text-slate-400 mb-1.5">
-                  Největší klastry (reprezentant / počet členů)
+                <div className="text-[10px] font-bold uppercase text-slate-400 mb-1">
+                  Největší klastry (reprezentant / členové)
                 </div>
                 {(() => {
                   const maxSz = Math.max(
@@ -1988,7 +1931,7 @@ export function BioinformaticsPipelinePage() {
                   return adjacencySummary.largestClusters.slice(0, 8).map((c) => (
                     <div
                       key={c.rep}
-                      className="grid grid-cols-[120px_1fr_32px] items-center gap-2 text-[11px]"
+                      className="grid grid-cols-[120px_1fr_28px] items-center gap-2 text-[11px]"
                     >
                       <span className="font-mono text-slate-200 truncate">{c.rep}</span>
                       <div className="h-2 rounded bg-white/5 overflow-hidden">
@@ -2003,80 +1946,24 @@ export function BioinformaticsPipelinePage() {
                 })()}
               </div>
             </div>
+          ) : (
+            <div className="text-xs text-slate-400">
+              Spusťte lokální shlukování nebo nahrajte `adjacency_list.tabular` z MMseqs2.
+            </div>
           )}
-        </section>
+        </VizNode>
 
-        <StepConnector
-          nextInputLabel="Další vstup pro krok 4: zarovnaná FASTA z MAFFT Web (L-INS-i) nad 04_reps.fasta, nebo lokální BLOSUM62 MSA + trimAl."
-          upstreamFile={
-            repsFastaText ? { filename: "04_clustered_reps.fasta", content: repsFastaText } : null
-          }
-          externalTools={[
-            {
-              label: "MAFFT Web",
-              url: "https://www.ebi.ac.uk/jdispatcher/msa/mafft",
-            },
-            { label: "Galaxy trimAl", url: "https://usegalaxy.eu/" },
-          ]}
-          localAction={{
-            label: "Zarovnat & oříznout lokálně",
-            onClick: runLocalMsa,
-            disabled: repRecords.length < 2,
-          }}
-        />
-
-        {/* ================= KROK 4 · MSA A TRIMAL ================= */}
-        <section aria-labelledby="step-4-heading" className={stageHeaderClass}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
-              <span className="w-6 h-6 rounded-lg bg-brand-orange/20 border border-brand-orange/40 text-brand-orange font-mono text-xs font-black flex items-center justify-center">
-                4
-              </span>
-              <h2 id="step-4-heading" className="font-display text-base font-black text-white">
-                Mnohonásobné zarovnání (MSA) a ořez mezer (`trimAl`)
-              </h2>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
-                {alignedRecords.length >= 2
-                  ? `${trimResult.originalColumns} → ${trimResult.trimmedColumns} pozic`
-                  : "čeká na MSA .fasta"}
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <FileUploadButton
-                label="Nahrát MSA .fasta"
-                accept=".fasta,.fa,.faa,.aln,.txt"
-                onLoad={(txt, name) => routeSingleFile("aligned_fasta", txt, name)}
-              />
-              {trimmedFastaText && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => downloadTextFile("05_msa_aligned.fasta", alignedFastaText)}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 cursor-pointer"
-                  >
-                    <Download size={13} className="text-brand-orange" />
-                    05_msa.fasta
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      downloadTextFile("06_trimmed_alignment.fasta", trimmedFastaText)
-                    }
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-xs font-bold cursor-pointer"
-                  >
-                    <Download size={13} />
-                    06_trimmed.fasta
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-end gap-3 text-xs bg-black/25 rounded-xl p-3 border border-white/5">
-            <label className="w-40 space-y-1">
+        {/* ================= KROK 4 · FORK (MSA: LOKÁLNÍ VS MAFFT WEB) ================= */}
+        <ForkStepNode
+          altLabel="oficiální alternativa: MAFFT (L-INS-i) + trimAl"
+          localTitle="BLOSUM62 MSA + trimAl"
+          localButtonLabel={`Pokračovat lokálně (${Math.min(80, repRecords.length)} sekv.)`}
+          onLocalRun={runLocalMsa}
+          localDisabled={repRecords.length < 2}
+          localParams={
+            <label className="w-36 space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
-                Max mezer ve sloupci ({trimalMaxGapPct} %)
+                trimAl max mezer ({trimalMaxGapPct} %)
               </span>
               <input
                 type="number"
@@ -2084,24 +1971,73 @@ export function BioinformaticsPipelinePage() {
                 max={95}
                 value={trimalMaxGapPct}
                 onChange={(e) => setTrimalMaxGapPct(Number(e.target.value) || 50)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
+                className="w-full rounded bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
               />
             </label>
-            <button
-              type="button"
-              disabled={repRecords.length < 2}
-              onClick={runLocalMsa}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 disabled:opacity-40 border border-white/15 text-xs font-bold text-white cursor-pointer"
-            >
-              <Play size={12} className="text-brand-orange" />
-              Spočítat BLOSUM62 MSA ({Math.min(80, repRecords.length)} sekv.)
-            </button>
-          </div>
+          }
+          localMiniSummary={
+            alignedRecords.length >= 2
+              ? `${trimResult.trimmedColumns} pozic (${trimResult.meanGapAfterPct} % mezer)`
+              : "bez zarovnání"
+          }
+          providerTitle="MAFFT + trimAl"
+          upstreamFile={
+            repsFastaText
+              ? { filename: "04_clustered_reps.fasta", content: repsFastaText }
+              : null
+          }
+          providerLinks={[
+            {
+              label: "MAFFT Web (EBI)",
+              url: "https://www.ebi.ac.uk/jdispatcher/msa/mafft",
+            },
+            { label: "Galaxy trimAl", url: "https://usegalaxy.eu/" },
+          ]}
+          uploadLabel="Výstup poskytovatele → nahrát zarovnanou MSA .fasta"
+          uploadAccept=".fasta,.fa,.faa,.aln,.txt"
+          uploadedName={loadedFilenames.aligned_fasta}
+          onUploadFile={(txt, name) => routeSingleFile("aligned_fasta", txt, name)}
+        />
 
+        <VizNode
+          id="viz-step-4"
+          step={4}
+          title="Mnohonásobné zarovnání (MSA) a ořez mezer (`trimAl`)"
+          ready={alignedRecords.length >= 2}
+          status={
+            alignedRecords.length >= 2
+              ? `${trimResult.originalColumns} → ${trimResult.trimmedColumns} pozic`
+              : "čeká na MSA"
+          }
+          actions={
+            trimmedFastaText && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => downloadTextFile("05_msa_aligned.fasta", alignedFastaText)}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-white cursor-pointer"
+                >
+                  <Download size={12} className="text-brand-orange" />
+                  05_msa.fasta
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    downloadTextFile("06_trimmed_alignment.fasta", trimmedFastaText)
+                  }
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
+                >
+                  <Download size={12} />
+                  06_trimmed.fasta
+                </button>
+              </>
+            )
+          }
+        >
           {alignedRecords.length >= 2 ? (
             <div className="space-y-3">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                <MetricCell label="Sekvence v MSA" value={alignedRecords.length} />
+                <MetricCell label="Sekvence" value={alignedRecords.length} />
                 <MetricCell
                   label="Pozice před → po"
                   value={`${trimResult.originalColumns} → ${trimResult.trimmedColumns}`}
@@ -2124,13 +2060,28 @@ export function BioinformaticsPipelinePage() {
             </div>
           ) : (
             <div className="text-xs text-slate-400">
-              Zarovnání zatím není načteno (můžete jej nahrát z MAFFT nebo spočítat lokálně výše).
+              Klikněte na <strong className="text-white">Pokračovat lokálně</strong> nebo nahrajte zarovnání z MAFFT Web.
             </div>
           )}
-        </section>
+        </VizNode>
 
-        <StepConnector
-          nextInputLabel="Další vstup pro krok 5: fylogenetický strom (.treefile / .nhx / .nwk) z IQ-TREE Web nad 06_trimmed.fasta + volitelné taxonomy.tsv a charakterizované sekvence."
+        {/* ================= KROK 5 · FORK (FYLOGENEZE: NJ VS IQ-TREE) + NEED TAXONOMY -> SCRIPT -> VIZ ================= */}
+        <ForkStepNode
+          altLabel="oficiální alternativa: IQ-TREE 2 (MFP + UFBoot)"
+          localTitle="Kimura NJ + 40× bootstrap"
+          localButtonLabel="Pokračovat lokálně (NJ strom)"
+          onLocalRun={runLocalNjTree}
+          localDisabled={
+            trimResult.trimmed.length < 3 &&
+            alignedRecords.length < 3 &&
+            repRecords.length < 3
+          }
+          localMiniSummary={
+            treeLeafSet.size > 0
+              ? `${treeOrigin === "computed" ? "NJ" : "Externí"}: ${treeLeafSet.size} listů`
+              : "bez stromu"
+          }
+          providerTitle="IQ-TREE Web"
           upstreamFile={
             trimmedFastaText
               ? { filename: "06_trimmed_alignment.fasta", content: trimmedFastaText }
@@ -2138,42 +2089,47 @@ export function BioinformaticsPipelinePage() {
               ? { filename: "04_clustered_reps.fasta", content: repsFastaText }
               : null
           }
-          externalTools={[
+          providerLinks={[
             { label: "IQ-TREE Web", url: "https://iqtree.cibiv.univie.ac.at/" },
-            { label: "UniProt", url: "https://www.uniprot.org/" },
           ]}
-          localAction={{
-            label: "Spočítat NJ strom lokálně",
-            onClick: runLocalNjTree,
-            disabled: trimResult.trimmed.length < 3 && alignedRecords.length < 3 && repRecords.length < 3,
-          }}
+          uploadLabel="Výstup poskytovatele → nahrát .treefile / .nhx / .nwk"
+          uploadAccept=".nwk,.nhx,.treefile,.tre,.txt"
+          uploadedName={loadedFilenames.newick}
+          onUploadFile={(txt, name) => routeSingleFile("newick", txt, name)}
+          rawEditor={
+            <details className="text-xs text-slate-400">
+              <summary className="cursor-pointer hover:text-slate-200 select-none">
+                Upravit Newick text
+              </summary>
+              <textarea
+                aria-label="Newick strom"
+                value={newickText}
+                onChange={(e) => {
+                  setNewickText(e.target.value);
+                  setTreeOrigin("uploaded");
+                }}
+                rows={3}
+                spellCheck={false}
+                className="mt-1.5 w-full rounded bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
+              />
+            </details>
+          }
         />
 
-        {/* ================= KROK 5 · FYLOGENEZE, TAXONOMIE & CHARAKTERIZOVANÉ ================= */}
-        <section aria-labelledby="step-5-heading" className={stageHeaderClass}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
-              <span className="w-6 h-6 rounded-lg bg-brand-orange/20 border border-brand-orange/40 text-brand-orange font-mono text-xs font-black flex items-center justify-center">
-                5
-              </span>
-              <h2 id="step-5-heading" className="font-display text-base font-black text-white">
-                Fylogenetický strom, taxonomie a charakterizované enzymy
-              </h2>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
-                {treeLeafSet.size > 0
-                  ? `${treeLeafSet.size} listů (${treeOrigin === "uploaded" ? "soubor" : "NJ"})`
-                  : "čeká na Newick"}
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
+        <NeedInputNode
+          needTitle="taxonomy.tsv a volitelně charakterizované enzymy (.fasta) pro iTOL anotaci a χ² statistiku"
+          links={[
+            {
+              label: "NCBI Taxonomy",
+              url: "https://www.ncbi.nlm.nih.gov/taxonomy",
+            },
+            { label: "UniProtKB", url: "https://www.uniprot.org/" },
+            { label: "CAZy GH48", url: "https://www.cazy.org/GH48.html" },
+          ]}
+          actions={
+            <>
               <FileUploadButton
-                label="Newick / .treefile"
-                accept=".nwk,.nhx,.treefile,.tre,.txt"
-                onLoad={(txt, name) => routeSingleFile("newick", txt, name)}
-              />
-              <FileUploadButton
-                label="taxonomy.tsv"
+                label="Nahrát taxonomy.tsv"
                 accept=".tsv,.txt,.tab"
                 onLoad={(txt, name) => routeSingleFile("taxonomy_tsv", txt, name)}
               />
@@ -2182,10 +2138,33 @@ export function BioinformaticsPipelinePage() {
                 accept=".fasta,.fa,.faa,.txt"
                 onLoad={(txt, name) => routeSingleFile("characterized_fasta", txt, name)}
               />
-            </div>
-          </div>
+              {repRecords.length > 0 && taxonomyRecords.length === 0 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setTaxonomyText(synthesizeTaxonomyFromFasta(repRecords));
+                    setTaxOrigin("computed");
+                    setTaxRank("genus");
+                    setLoadedFilenames((prev) => ({
+                      ...prev,
+                      taxonomy_tsv: "odvozeno z FASTA",
+                    }));
+                  }}
+                  className="px-2.5 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
+                >
+                  Odvozit taxonomii z FASTA
+                </button>
+              )}
+            </>
+          }
+        />
 
-          <div className="flex flex-wrap items-end gap-3 text-xs bg-black/25 rounded-xl p-3 border border-white/5">
+        <ScriptStepNode
+          scriptName="2_make_to_iTOL.py & nalezeni_v_db.py"
+          githubPath="11_itol/conclusion/2_make_to_iTOL.py"
+          arrowLabel="iTOL anotace"
+        >
+          <div className="flex flex-wrap items-end gap-2.5 text-xs">
             <label className="space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
                 Barvení listů
@@ -2193,10 +2172,10 @@ export function BioinformaticsPipelinePage() {
               <select
                 value={colorMode}
                 onChange={(e) => setColorMode(e.target.value as "taxonomy" | "motif")}
-                className="rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 text-white"
+                className="rounded-lg bg-black/50 border border-white/15 px-2 py-1 text-white"
               >
-                <option value="taxonomy">Podle taxonomie</option>
-                <option value="motif">Podle motivu ({activeMotifName || "—"})</option>
+                <option value="taxonomy">taxonomie</option>
+                <option value="motif">motiv ({activeMotifName || "—"})</option>
               </select>
             </label>
             <label className="space-y-1">
@@ -2206,7 +2185,7 @@ export function BioinformaticsPipelinePage() {
               <select
                 value={taxRank}
                 onChange={(e) => setTaxRank(e.target.value as TaxRank)}
-                className="rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 text-white"
+                className="rounded-lg bg-black/50 border border-white/15 px-2 py-1 text-white"
               >
                 <option value="kingdom">kingdom</option>
                 <option value="phylum">phylum</option>
@@ -2216,7 +2195,7 @@ export function BioinformaticsPipelinePage() {
                 <option value="genus">genus</option>
               </select>
             </label>
-            <label className="inline-flex items-center gap-1.5 pb-1.5 cursor-pointer text-slate-300">
+            <label className="inline-flex items-center gap-1.5 pb-1 cursor-pointer text-slate-300">
               <input
                 type="checkbox"
                 checked={cladogram}
@@ -2224,48 +2203,73 @@ export function BioinformaticsPipelinePage() {
               />
               Kladogram
             </label>
-            <label className="inline-flex items-center gap-1.5 pb-1.5 cursor-pointer text-slate-300">
+            <label className="inline-flex items-center gap-1.5 pb-1 cursor-pointer text-slate-300">
               <input
                 type="checkbox"
                 checked={showBootstrap}
                 onChange={(e) => setShowBootstrap(e.target.checked)}
               />
-              Podpora ≥ {bootstrapThreshold}
+              ≥ {bootstrapThreshold}
             </label>
             {showBootstrap && (
               <input
                 type="range"
-                aria-label="Prahová hodnota bootstrapu"
+                aria-label="Prahová hodnota podpory"
                 min={50}
                 max={100}
                 step={5}
                 value={bootstrapThreshold}
                 onChange={(e) => setBootstrapThreshold(Number(e.target.value))}
-                className="w-24 mb-1.5"
+                className="w-20 mb-1"
               />
             )}
-
-            {repRecords.length > 0 && taxonomyRecords.length === 0 && (
-              <button
-                type="button"
-                onClick={() => {
-                  setTaxonomyText(synthesizeTaxonomyFromFasta(repRecords));
-                  setTaxOrigin("computed");
-                  setTaxRank("genus");
+          </div>
+          <details className="text-xs text-slate-400">
+            <summary className="cursor-pointer hover:text-slate-200 select-none">
+              Upravit taxonomy.tsv / charakterizované ({taxonomyRecords.length} taxonů)
+            </summary>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+              <textarea
+                aria-label="taxonomy.tsv"
+                value={taxonomyText}
+                onChange={(e) => {
+                  setTaxonomyText(e.target.value);
+                  setTaxOrigin("uploaded");
                 }}
-                className="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-bold text-amber-200 cursor-pointer"
-              >
-                Odvozit taxonomii z FASTA
-              </button>
-            )}
+                rows={4}
+                spellCheck={false}
+                className="rounded bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
+              />
+              <textarea
+                aria-label="Charakterizované enzymy FASTA"
+                value={charFastaText}
+                onChange={(e) => setCharFastaText(e.target.value)}
+                rows={4}
+                spellCheck={false}
+                className="rounded bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
+              />
+            </div>
+          </details>
+        </ScriptStepNode>
 
-            <div className="ml-auto flex flex-wrap gap-1.5">
+        <VizNode
+          id="viz-step-5"
+          step={5}
+          title="Fylogenetický strom, taxonomie a charakterizované enzymy"
+          ready={treeRoot !== null}
+          status={
+            treeLeafSet.size > 0
+              ? `${treeLeafSet.size} listů · ${taxonomyRecords.length} taxonů`
+              : "čeká na strom"
+          }
+          actions={
+            <>
               {newickText.trim() && (
                 <>
                   <button
                     type="button"
                     onClick={() => downloadTextFile("07_phylogeny.nwk", newickText)}
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-semibold text-slate-200 cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-white cursor-pointer"
                   >
                     <Download size={12} className="text-brand-orange" />
                     .nwk
@@ -2273,7 +2277,7 @@ export function BioinformaticsPipelinePage() {
                   <button
                     type="button"
                     onClick={exportTreeSvg}
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-semibold text-slate-200 cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-white cursor-pointer"
                   >
                     <Download size={12} className="text-brand-orange" />
                     .svg
@@ -2290,7 +2294,7 @@ export function BioinformaticsPipelinePage() {
                         generateItolTaxonomyColorstrip(taxonomyRecords, taxRank)
                       )
                     }
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
                   >
                     <Download size={12} />
                     iTOL COLORSTRIP
@@ -2303,10 +2307,10 @@ export function BioinformaticsPipelinePage() {
                         generateItolTaxonomyLabels(taxonomyRecords)
                       )
                     }
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-semibold text-slate-200 cursor-pointer"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-white cursor-pointer"
                   >
                     <Download size={12} className="text-brand-orange" />
-                    iTOL LABELS
+                    LABELS
                   </button>
                 </>
               )}
@@ -2314,324 +2318,205 @@ export function BioinformaticsPipelinePage() {
                 href="https://itol.embl.de/upload.cgi"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] font-semibold text-amber-200"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 text-[11px] font-semibold text-amber-200"
               >
                 iTOL
-                <ExternalLink size={11} />
+                <ExternalLink size={10} />
               </a>
-            </div>
-          </div>
-
-          <details className="text-xs text-slate-400">
-            <summary className="cursor-pointer hover:text-slate-200 select-none">
-              Vložit nebo upravit text: Newick, taxonomy.tsv, charakterizované FASTA
-            </summary>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
-              <textarea
-                aria-label="Newick strom"
-                value={newickText}
-                onChange={(e) => {
-                  setNewickText(e.target.value);
-                  setTreeOrigin("uploaded");
-                }}
-                rows={4}
-                spellCheck={false}
-                placeholder="(A:0.1,B:0.2);"
-                className="rounded-lg bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
-              />
-              <textarea
-                aria-label="taxonomy.tsv"
-                value={taxonomyText}
-                onChange={(e) => {
-                  setTaxonomyText(e.target.value);
-                  setTaxOrigin("uploaded");
-                }}
-                rows={4}
-                spellCheck={false}
-                placeholder="accession&#9;taxid&#9;scientific_name..."
-                className="rounded-lg bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
-              />
-              <textarea
-                aria-label="Charakterizované enzymy FASTA"
-                value={charFastaText}
-                onChange={(e) => setCharFastaText(e.target.value)}
-                rows={4}
-                spellCheck={false}
-                placeholder=">sp|A3DH67|..."
-                className="rounded-lg bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
-              />
-            </div>
-          </details>
-
+            </>
+          }
+        >
           {treeRoot ? (
-            <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-start">
-              <div className="xl:col-span-8 space-y-2.5">
-                {/* Legend */}
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
-                  {colorMode === "taxonomy" ? (
-                    [...taxonColorMap.entries()].map(([taxon, color]) => (
-                      <span key={taxon} className="inline-flex items-center gap-1.5">
-                        <span
-                          className="w-2.5 h-2.5 rounded-sm shrink-0"
-                          style={{ backgroundColor: color }}
-                        />
-                        <span className="text-slate-300">{taxon}</span>
-                      </span>
-                    ))
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 items-start">
+                <div className="xl:col-span-8 space-y-2.5">
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">
+                    {colorMode === "taxonomy" ? (
+                      [...taxonColorMap.entries()].map(([taxon, color]) => (
+                        <span key={taxon} className="inline-flex items-center gap-1.5">
+                          <span
+                            className="w-2.5 h-2.5 rounded-sm shrink-0"
+                            style={{ backgroundColor: color }}
+                          />
+                          <span className="text-slate-300">{taxon}</span>
+                        </span>
+                      ))
+                    ) : (
+                      <>
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-sm bg-brand-orange" />
+                          <span className="text-slate-200 font-mono">
+                            {activeMotifName || "motiv"}+
+                          </span>
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-sm bg-slate-700" />
+                          <span className="text-slate-400 font-mono">
+                            {activeMotifName || "motiv"}−
+                          </span>
+                        </span>
+                      </>
+                    )}
+                  </div>
+
+                  <PhyloTreeSvg
+                    root={treeRoot}
+                    cladogram={cladogram}
+                    showBootstrap={showBootstrap}
+                    bootstrapThreshold={bootstrapThreshold}
+                    taxonomyByAcc={taxonomyByAcc}
+                    colorMode={colorMode}
+                    taxRank={taxRank}
+                    taxonColorMap={taxonColorMap}
+                    highlightMotif={activeMotifName || null}
+                    presentMotifSet={
+                      activeMotifName
+                        ? fimoAnalysis.presentByMotif.get(activeMotifName) ?? null
+                        : null
+                    }
+                    charStatusByLeaf={charStatusByLeaf}
+                    selectedLeaf={selectedLeaf}
+                    onSelectLeaf={setSelectedLeaf}
+                  />
+                </div>
+
+                <div className="xl:col-span-4 rounded-xl border border-white/10 bg-black/25 p-4 space-y-2.5">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-brand-orange">
+                    Vybraný list
+                  </div>
+                  {inspectedLeafInfo ? (
+                    <div className="space-y-2 text-xs">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono font-bold text-sm text-white">
+                          {inspectedLeafInfo.acc}
+                        </span>
+                        {inspectedLeafInfo.charMatch && (
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/15 text-red-200 border border-red-500/35">
+                            {inspectedLeafInfo.charMatch.status}
+                          </span>
+                        )}
+                      </div>
+                      {inspectedLeafInfo.tax ? (
+                        <>
+                          <div className="italic text-slate-200 font-semibold">
+                            {inspectedLeafInfo.tax.scientificName}
+                          </div>
+                          <div className="text-[11px] text-slate-400 leading-relaxed">
+                            {[
+                              inspectedLeafInfo.tax.kingdom,
+                              inspectedLeafInfo.tax.phylum,
+                              inspectedLeafInfo.tax.class,
+                              inspectedLeafInfo.tax.order,
+                              inspectedLeafInfo.tax.family,
+                            ]
+                              .filter(Boolean)
+                              .join(" › ")}
+                          </div>
+                          {inspectedLeafInfo.tax.title && (
+                            <div className="text-[11px] text-slate-300 bg-black/30 rounded-lg p-2 border border-white/5">
+                              {inspectedLeafInfo.tax.title}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <div className="text-slate-500">
+                          Chybí záznam v taxonomy.tsv ({taxOrigin}).
+                        </div>
+                      )}
+
+                      <div>
+                        <div className="text-[11px] font-bold text-slate-400 mb-1">
+                          Detekované motivy ({inspectedLeafInfo.presentMotifs.length})
+                        </div>
+                        <div className="flex flex-wrap gap-1">
+                          {inspectedLeafInfo.presentMotifs.map((pm) => (
+                            <span
+                              key={pm.motif}
+                              className={`px-2 py-0.5 rounded font-mono text-[10px] border ${
+                                pm.motif === activeMotifName
+                                  ? "bg-brand-orange/25 text-orange-100 border-brand-orange/50 font-bold"
+                                  : "bg-white/5 text-slate-300 border-white/10"
+                              }`}
+                            >
+                              {pm.motif} ({pm.score.toFixed(0)})
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   ) : (
-                    <>
-                      <span className="inline-flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-sm bg-brand-orange" />
-                        <span className="text-slate-200 font-mono">
-                          {activeMotifName || "motiv"}+
-                        </span>
-                      </span>
-                      <span className="inline-flex items-center gap-1.5">
-                        <span className="w-2.5 h-2.5 rounded-sm bg-slate-700" />
-                        <span className="text-slate-400 font-mono">
-                          {activeMotifName || "motiv"}−
-                        </span>
-                      </span>
-                    </>
+                    <div className="text-xs text-slate-400">
+                      Klikněte na list stromu pro detail.
+                    </div>
                   )}
                 </div>
-
-                <PhyloTreeSvg
-                  root={treeRoot}
-                  cladogram={cladogram}
-                  showBootstrap={showBootstrap}
-                  bootstrapThreshold={bootstrapThreshold}
-                  taxonomyByAcc={taxonomyByAcc}
-                  colorMode={colorMode}
-                  taxRank={taxRank}
-                  taxonColorMap={taxonColorMap}
-                  highlightMotif={activeMotifName || null}
-                  presentMotifSet={
-                    activeMotifName
-                      ? fimoAnalysis.presentByMotif.get(activeMotifName) ?? null
-                      : null
-                  }
-                  charStatusByLeaf={charStatusByLeaf}
-                  selectedLeaf={selectedLeaf}
-                  onSelectLeaf={setSelectedLeaf}
-                />
               </div>
 
-              <div className="xl:col-span-4 rounded-xl border border-white/10 bg-black/25 p-4 space-y-2.5">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-brand-orange">
-                  Vybraný list
-                </div>
-                {inspectedLeafInfo ? (
-                  <div className="space-y-2 text-xs">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono font-bold text-sm text-white">
-                        {inspectedLeafInfo.acc}
-                      </span>
-                      {inspectedLeafInfo.charMatch && (
-                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/15 text-red-200 border border-red-500/35">
-                          Charakterizovaný ({inspectedLeafInfo.charMatch.status})
-                        </span>
-                      )}
-                    </div>
-                    {inspectedLeafInfo.tax ? (
-                      <>
-                        <div className="italic text-slate-200 font-semibold">
-                          {inspectedLeafInfo.tax.scientificName}
-                        </div>
-                        <div className="text-[11px] text-slate-400 leading-relaxed">
-                          {[
-                            inspectedLeafInfo.tax.kingdom,
-                            inspectedLeafInfo.tax.phylum,
-                            inspectedLeafInfo.tax.class,
-                            inspectedLeafInfo.tax.order,
-                            inspectedLeafInfo.tax.family,
-                          ]
-                            .filter(Boolean)
-                            .join(" › ")}
-                        </div>
-                        {inspectedLeafInfo.tax.title && (
-                          <div className="text-[11px] text-slate-300 bg-black/30 rounded-lg p-2 border border-white/5">
-                            {inspectedLeafInfo.tax.title}
-                          </div>
-                        )}
-                      </>
-                    ) : (
-                      <div className="text-slate-500">
-                        Chybí záznam v taxonomy.tsv ({taxOrigin}).
-                      </div>
-                    )}
-
-                    <div>
-                      <div className="text-[11px] font-bold text-slate-400 mb-1">
-                        Detekované motivy ({inspectedLeafInfo.presentMotifs.length})
-                      </div>
-                      <div className="flex flex-wrap gap-1">
-                        {inspectedLeafInfo.presentMotifs.map((pm) => (
-                          <span
-                            key={pm.motif}
-                            className={`px-2 py-0.5 rounded font-mono text-[10px] border ${
-                              pm.motif === activeMotifName
-                                ? "bg-brand-orange/25 text-orange-100 border-brand-orange/50 font-bold"
-                                : "bg-white/5 text-slate-300 border-white/10"
-                            }`}
-                          >
-                            {pm.motif} ({pm.score.toFixed(0)})
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+              {charMappingResult.matches.length > 0 && (
+                <details className="text-xs pt-2 border-t border-white/10">
+                  <summary className="cursor-pointer font-semibold text-slate-300 hover:text-white select-none flex flex-wrap items-center justify-between gap-2">
+                    <span>
+                      Charakterizované enzymy ({charMappingResult.directCount} přímých,{" "}
+                      {charMappingResult.proxyCount} proxy z{" "}
+                      {charMappingResult.matches.length})
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          downloadTextFile(
+                            "itol_char_tree_colors.txt",
+                            generateCharacterizedTreeColors(charMappingResult)
+                          );
+                        }}
+                        className="text-brand-orange hover:underline cursor-pointer"
+                      >
+                        TREE_COLORS
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          downloadTextFile(
+                            "itol_char_symbols.txt",
+                            generateCharacterizedSymbols(charMappingResult)
+                          );
+                        }}
+                        className="text-brand-orange hover:underline cursor-pointer"
+                      >
+                        SYMBOL
+                      </button>
+                    </span>
+                  </summary>
+                  <div className="mt-2">
+                    <SortableDataTable
+                      caption="Mapování charakterizovaných enzymů na listy stromu"
+                      rows={charMappingResult.matches}
+                      rowKey={(r) => r.charId}
+                      columns={charColumns}
+                      defaultSortKey="status"
+                      defaultSortDir="ascending"
+                    />
                   </div>
-                ) : (
-                  <div className="text-xs text-slate-400">
-                    Kliknutím na list stromu zobrazíte taxonomii a motivy.
-                  </div>
-                )}
-              </div>
+                </details>
+              )}
             </div>
           ) : (
             <div className="text-xs text-slate-400">
-              Strom zatím není načten.
+              Spusťte lokální NJ strom nebo nahrajte `.treefile` / `.nhx` v rozvětvení výše.
             </div>
           )}
+        </VizNode>
 
-          {charMappingResult.matches.length > 0 && (
-            <details className="text-xs pt-2 border-t border-white/5">
-              <summary className="cursor-pointer font-semibold text-slate-300 hover:text-white select-none flex flex-wrap items-center justify-between gap-2">
-                <span>
-                  Charakterizované enzymy ({charMappingResult.directCount} přímých,{" "}
-                  {charMappingResult.proxyCount} proxy z {charMappingResult.matches.length})
-                </span>
-                <span className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      downloadTextFile(
-                        "itol_char_tree_colors.txt",
-                        generateCharacterizedTreeColors(charMappingResult)
-                      );
-                    }}
-                    className="text-brand-orange hover:underline cursor-pointer"
-                  >
-                    iTOL TREE_COLORS
-                  </button>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      downloadTextFile(
-                        "itol_char_symbols.txt",
-                        generateCharacterizedSymbols(charMappingResult)
-                      );
-                    }}
-                    className="text-brand-orange hover:underline cursor-pointer"
-                  >
-                    iTOL SYMBOL
-                  </button>
-                </span>
-              </summary>
-              <div className="mt-2">
-                <SortableDataTable
-                  caption="Mapování charakterizovaných enzymů na listy stromu"
-                  rows={charMappingResult.matches}
-                  rowKey={(r) => r.charId}
-                  columns={charColumns}
-                  defaultSortKey="status"
-                  defaultSortDir="ascending"
-                />
-              </div>
-            </details>
-          )}
-        </section>
-
-        <StepConnector
-          nextInputLabel="Další vstup pro krok 6: tabulka fimo.tsv z MEME Suite → FIMO nad 04_reps.fasta (anotace proti PROSITE v TOMTOM), nebo lokální objev PWM motivů."
-          upstreamFile={
-            repsFastaText ? { filename: "04_clustered_reps.fasta", content: repsFastaText } : null
-          }
-          externalTools={[
-            { label: "MEME", url: "https://meme-suite.org/meme/tools/meme" },
-            { label: "TOMTOM", url: "https://meme-suite.org/meme/tools/tomtom" },
-            { label: "FIMO", url: "https://meme-suite.org/meme/tools/fimo" },
-          ]}
-          localAction={{
-            label: "Objevit PWM motivy lokálně",
-            onClick: runLocalMotifs,
-            disabled: alignedRecords.length < 2 && repRecords.length < 2,
-          }}
-        />
-
-        {/* ================= KROK 6 · MOTIVY, FITCH RI & CHI-SQUARE ================= */}
-        <section aria-labelledby="step-6-heading" className={stageHeaderClass}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5">
-              <span className="w-6 h-6 rounded-lg bg-brand-orange/20 border border-brand-orange/40 text-brand-orange font-mono text-xs font-black flex items-center justify-center">
-                6
-              </span>
-              <h2 id="step-6-heading" className="font-display text-base font-black text-white">
-                Motivy (MEME / FIMO), Fitchův RI a χ² test taxonomie
-              </h2>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-slate-300">
-                {fimoAnalysis.motifs.length > 0
-                  ? `${fimoAnalysis.motifs.length} motivů (${fimoOrigin === "uploaded" ? "fimo.tsv" : "PWM"})`
-                  : "čeká na fimo.tsv"}
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <FileUploadButton
-                label="Nahrát fimo.tsv"
-                accept=".tsv,.txt,.tab"
-                onLoad={(txt, name) => routeSingleFile("fimo_tsv", txt, name)}
-              />
-              {fimoAnalysis.motifs.length > 0 && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      downloadTextFile(
-                        "itol_meme_heatmap.txt",
-                        generateItolHeatmap(fimoAnalysis, { onlyPassingVariance: true })
-                      )
-                    }
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-xs font-bold cursor-pointer"
-                  >
-                    <Download size={13} />
-                    iTOL HEATMAP
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      downloadTextFile(
-                        "itol_meme_binary.txt",
-                        generateItolBinary(fimoAnalysis, { onlyInformative: true })
-                      )
-                    }
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 cursor-pointer"
-                  >
-                    <Download size={13} className="text-brand-orange" />
-                    iTOL BINARY
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      downloadTextFile(
-                        "motif_stats.tsv",
-                        generateMotifStatsTsv(fimoAnalysis),
-                        "text/tab-separated-values;charset=utf-8"
-                      )
-                    }
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-semibold text-slate-200 cursor-pointer"
-                  >
-                    <Download size={13} className="text-brand-orange" />
-                    motif_stats.tsv
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-end gap-3 text-xs bg-black/25 rounded-xl p-3 border border-white/5">
+        {/* ================= KROK 6 · FORK (MOTIVY) -> SCRIPT -> VIZ ================= */}
+        <ForkStepNode
+          altLabel="oficiální alternativa: MEME + TOMTOM + FIMO"
+          localTitle="PWM objev a FIMO sken"
+          localButtonLabel="Pokračovat lokálně (objevit motivy)"
+          onLocalRun={runLocalMotifs}
+          localDisabled={alignedRecords.length < 2 && repRecords.length < 2}
+          localParams={
             <label className="w-28 space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
                 Prahové p (10^{fimoPExp})
@@ -2642,10 +2527,57 @@ export function BioinformaticsPipelinePage() {
                 max={0}
                 value={fimoPExp}
                 onChange={(e) => setFimoPExp(Number(e.target.value))}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
+                className="w-full rounded bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
               />
             </label>
-            <label className="w-28 space-y-1">
+          }
+          localMiniSummary={
+            fimoAnalysis.motifs.length > 0
+              ? `${fimoAnalysis.motifs.length} motivů (${fimoAnalysis.passingHits} hitů)`
+              : "bez motivů"
+          }
+          providerTitle="MEME Suite"
+          upstreamFile={
+            repsFastaText
+              ? { filename: "04_clustered_reps.fasta", content: repsFastaText }
+              : null
+          }
+          providerLinks={[
+            { label: "MEME", url: "https://meme-suite.org/meme/tools/meme" },
+            { label: "TOMTOM", url: "https://meme-suite.org/meme/tools/tomtom" },
+            { label: "FIMO", url: "https://meme-suite.org/meme/tools/fimo" },
+          ]}
+          uploadLabel="Výstup poskytovatele → nahrát fimo.tsv"
+          uploadAccept=".tsv,.txt,.tab"
+          uploadedName={loadedFilenames.fimo_tsv}
+          onUploadFile={(txt, name) => routeSingleFile("fimo_tsv", txt, name)}
+          rawEditor={
+            <details className="text-xs text-slate-400">
+              <summary className="cursor-pointer hover:text-slate-200 select-none">
+                Upravit fimo.tsv ({fimoAnalysis.totalHitsParsed} hitů)
+              </summary>
+              <textarea
+                aria-label="Výstup fimo.tsv"
+                value={fimoText}
+                onChange={(e) => {
+                  setFimoText(e.target.value);
+                  setFimoOrigin("uploaded");
+                }}
+                rows={3}
+                spellCheck={false}
+                className="mt-1.5 w-full rounded bg-black/40 border border-white/10 p-2 font-mono text-[11px] text-slate-200"
+              />
+            </details>
+          }
+        />
+
+        <ScriptStepNode
+          scriptName="meme_visualization.py & 4_analyze_motif_taxonomy.py"
+          githubPath="11_itol/meme/meme_visualization.py"
+          arrowLabel="RI & χ² statistika"
+        >
+          <div className="flex flex-wrap items-end gap-2.5 text-xs">
+            <label className="w-24 space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
                 Min. rozptyl
               </span>
@@ -2654,10 +2586,10 @@ export function BioinformaticsPipelinePage() {
                 min={0}
                 value={minVariance}
                 onChange={(e) => setMinVariance(Number(e.target.value) || 0)}
-                className="w-full rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 font-mono text-white"
+                className="w-full rounded bg-black/50 border border-white/15 px-2 py-1 font-mono text-white"
               />
             </label>
-            <label className="w-24 space-y-1">
+            <label className="space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
                 Binární (%)
               </span>
@@ -2669,7 +2601,7 @@ export function BioinformaticsPipelinePage() {
                   max={100}
                   value={minCovPct}
                   onChange={(e) => setMinCovPct(Number(e.target.value) || 0)}
-                  className="w-12 rounded-lg bg-black/50 border border-white/15 px-1.5 py-1.5 font-mono text-white text-center"
+                  className="w-12 rounded bg-black/50 border border-white/15 px-1.5 py-1 font-mono text-white text-center"
                 />
                 <input
                   type="number"
@@ -2678,18 +2610,18 @@ export function BioinformaticsPipelinePage() {
                   max={100}
                   value={maxCovPct}
                   onChange={(e) => setMaxCovPct(Number(e.target.value) || 100)}
-                  className="w-12 rounded-lg bg-black/50 border border-white/15 px-1.5 py-1.5 font-mono text-white text-center"
+                  className="w-12 rounded bg-black/50 border border-white/15 px-1.5 py-1 font-mono text-white text-center"
                 />
               </div>
             </label>
-            <label className="space-y-1">
+            <label className="flex-1 min-w-[160px] space-y-1">
               <span className="block text-[10px] font-bold uppercase text-slate-400">
-                Testovaný motiv (χ² a strom)
+                Testovaný motiv (χ² &amp; strom)
               </span>
               <select
                 value={activeMotifName}
                 onChange={(e) => setSelectedMotifForStats(e.target.value)}
-                className="rounded-lg bg-black/50 border border-white/15 px-2.5 py-1.5 text-white font-mono"
+                className="w-full rounded bg-black/50 border border-white/15 px-2 py-1 text-white font-mono"
               >
                 {fimoAnalysis.motifs.map((m) => (
                   <option key={m.motif} value={m.motif}>
@@ -2699,24 +2631,66 @@ export function BioinformaticsPipelinePage() {
               </select>
             </label>
           </div>
+        </ScriptStepNode>
 
-          <details className="text-xs text-slate-400">
-            <summary className="cursor-pointer hover:text-slate-200 select-none">
-              Vložit nebo upravit surový `fimo.tsv` ({fimoAnalysis.totalHitsParsed} hitů)
-            </summary>
-            <textarea
-              value={fimoText}
-              onChange={(e) => {
-                setFimoText(e.target.value);
-                setFimoOrigin("uploaded");
-              }}
-              rows={5}
-              spellCheck={false}
-              className="mt-2 w-full rounded-lg bg-black/40 border border-white/10 p-2.5 font-mono text-xs text-slate-200"
-            />
-          </details>
-
-          {fimoAnalysis.motifs.length > 0 && (
+        <VizNode
+          id="viz-step-6"
+          step={6}
+          title="Motivy (FIMO), Fitchův Retention Index a χ² asociace"
+          ready={fimoAnalysis.motifs.length > 0}
+          status={
+            fimoAnalysis.motifs.length > 0
+              ? `${fimoAnalysis.motifs.length} motivů (${fimoOrigin === "uploaded" ? "fimo.tsv" : "PWM"})`
+              : "čeká na FIMO"
+          }
+          actions={
+            fimoAnalysis.motifs.length > 0 && (
+              <>
+                <button
+                  type="button"
+                  onClick={() =>
+                    downloadTextFile(
+                      "itol_meme_heatmap.txt",
+                      generateItolHeatmap(fimoAnalysis, { onlyPassingVariance: true })
+                    )
+                  }
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-brand-orange hover:bg-brand-orange-text text-white text-[11px] font-bold cursor-pointer"
+                >
+                  <Download size={12} />
+                  iTOL HEATMAP
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    downloadTextFile(
+                      "itol_meme_binary.txt",
+                      generateItolBinary(fimoAnalysis, { onlyInformative: true })
+                    )
+                  }
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-white cursor-pointer"
+                >
+                  <Download size={12} className="text-brand-orange" />
+                  iTOL BINARY
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    downloadTextFile(
+                      "motif_stats.tsv",
+                      generateMotifStatsTsv(fimoAnalysis),
+                      "text/tab-separated-values;charset=utf-8"
+                    )
+                  }
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-[11px] font-semibold text-white cursor-pointer"
+                >
+                  <Download size={12} className="text-brand-orange" />
+                  motif_stats.tsv
+                </button>
+              </>
+            )
+          }
+        >
+          {fimoAnalysis.motifs.length > 0 ? (
             <div className="space-y-4">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 <MetricCell label="Motivy" value={fimoAnalysis.motifs.length} />
@@ -2864,17 +2838,24 @@ export function BioinformaticsPipelinePage() {
                 </div>
               </div>
             </div>
+          ) : (
+            <div className="text-xs text-slate-400">
+              Spusťte lokální objev motivů nebo nahrajte `fimo.tsv` v rozvětvení výše.
+            </div>
           )}
-        </section>
+        </VizNode>
 
-        {/* ================= EXPORT & REFERENČNÍ PŘÍKAZY ================= */}
+        {/* ================= BOTTOM ZIP EXPORT & CLI REFERENCE ================= */}
         <section
           aria-labelledby="export-heading"
-          className="rounded-2xl border border-white/10 bg-[#140b07] p-4 sm:p-5 space-y-3 mt-4"
+          className="rounded-2xl border border-white/15 bg-[#140b07] p-4 sm:p-5 space-y-3 mt-5"
         >
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 id="export-heading" className="font-display text-sm font-black uppercase tracking-wider text-white">
-              Výstupy pipeline ({activeArtifacts.length})
+            <h2
+              id="export-heading"
+              className="font-display text-sm font-black uppercase tracking-wider text-white"
+            >
+              Výstupní soubory ({activeArtifacts.length})
             </h2>
             <div className="flex flex-wrap gap-2">
               {lastReportMarkdown && (
