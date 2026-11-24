@@ -78,10 +78,13 @@ import {
 } from "../components/SortableDataTable";
 import { PhyloTreeSvg } from "../components/PhyloTreeSvg";
 import { MotifHeatmapSvg } from "../components/MotifHeatmapSvg";
+import { FullPipelinePanel } from "../components/FullPipelinePanel";
+import type { FullPipelineOutput } from "../lib/fullPipelineRunner";
 
-type TabId = "overview" | "fasta" | "hmm" | "mmseqs" | "fimo" | "tree";
+type TabId = "runner" | "overview" | "fasta" | "hmm" | "mmseqs" | "fimo" | "tree";
 
 const TABS: { id: TabId; label: string; short: string }[] = [
+  { id: "runner", label: "Celá pipeline (Soubory → ZIP)", short: "Celá pipeline" },
   { id: "overview", label: "Přehled (11 kroků)", short: "Přehled" },
   { id: "fasta", label: "1–2 · FASTA filtr", short: "FASTA filtr" },
   { id: "hmm", label: "3 · HMM ořez domén", short: "HMM ořez" },
@@ -204,8 +207,9 @@ function MetricCard({
 }
 
 export function BioinformaticsPipelinePage() {
-  const [activeTab, setActiveTab] = useState<TabId>("overview");
+  const [activeTab, setActiveTab] = useState<TabId>("runner");
   const tabRefs = useRef<Record<TabId, HTMLButtonElement | null>>({
+    runner: null,
     overview: null,
     fasta: null,
     hmm: null,
@@ -755,8 +759,22 @@ export function BioinformaticsPipelinePage() {
     downloadTextFile("phylogeny_tree.svg", source, "image/svg+xml;charset=utf-8");
   };
 
+  const applyFullPipelineOutputs = (out: FullPipelineOutput) => {
+    const r = out.resolvedTexts;
+    if (r.rawFasta) setRawFastaText(r.rawFasta);
+    if (r.filteredFasta) setHmmFastaText(r.filteredFasta);
+    if (r.adjacencyTsv) setAdjacencyText(r.adjacencyTsv);
+    if (r.dbDomainsFasta) setDbDomainsText(r.dbDomainsFasta);
+    if (r.newick) setNewickText(r.newick);
+    if (r.fimoTsv) setFimoText(r.fimoTsv);
+    if (r.taxonomyTsv) setTaxonomyText(r.taxonomyTsv);
+    flashNotice(
+      `Celá pipeline dokončena (${out.durationMs} ms) — všechny záložky aktualizovány (${out.artifacts.length} výstupů).`
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-brand-espresso text-slate-100 flex flex-col">
+    <div className="bio-pipeline-root min-h-screen bg-brand-espresso text-slate-100 flex flex-col">
       {/* Top sticky header */}
       <header className="page-header-dark">
         <div className="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
@@ -856,6 +874,18 @@ export function BioinformaticsPipelinePage() {
 
       {/* Tab Panels: no padding/margin/border on role="tabpanel" itself */}
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 py-6">
+        {/* ================= TAB 0: FULL PIPELINE RUNNER ================= */}
+        <div
+          role="tabpanel"
+          aria-labelledby="bio-tab-runner"
+          hidden={activeTab !== "runner"}
+        >
+          <FullPipelinePanel
+            onApplyOutputs={applyFullPipelineOutputs}
+            onJumpToTab={(t) => selectTab(t)}
+          />
+        </div>
+
         {/* ================= TAB 1: OVERVIEW ================= */}
         <div
           role="tabpanel"
@@ -1014,18 +1044,31 @@ export function BioinformaticsPipelinePage() {
                       <CopyCommandButton text={s.command} />
                     </div>
 
-                    <div className="flex items-center justify-between pt-1 mt-auto text-[11px]">
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-1 mt-auto text-[11px]">
                       <span className="text-slate-400 font-mono">GH48: {s.gh48Metric}</span>
-                      {s.tabId && (
-                        <button
-                          type="button"
-                          onClick={() => selectTab(s.tabId!)}
-                          className="inline-flex items-center gap-1 font-bold text-brand-orange hover:underline cursor-pointer"
-                        >
-                          Otevřít nástroj
-                          <ArrowRight size={12} />
-                        </button>
-                      )}
+                      <div className="flex items-center gap-3">
+                        {s.externalUrl && (
+                          <a
+                            href={s.externalUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-1 font-semibold text-amber-200 hover:text-brand-orange hover:underline"
+                          >
+                            {s.externalLabel ?? "Externí nástroj"}
+                            <ExternalLink size={11} />
+                          </a>
+                        )}
+                        {s.tabId && (
+                          <button
+                            type="button"
+                            onClick={() => selectTab(s.tabId!)}
+                            className="inline-flex items-center gap-1 font-bold text-brand-orange hover:underline cursor-pointer"
+                          >
+                            Otevřít nástroj
+                            <ArrowRight size={12} />
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ))}

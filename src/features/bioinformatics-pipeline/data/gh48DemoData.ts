@@ -15,6 +15,8 @@ export interface PipelineStepSpec {
   tool: string;
   where: "browser" | "galaxy" | "external";
   tabId?: "fasta" | "hmm" | "mmseqs" | "fimo" | "tree";
+  externalUrl?: string;
+  externalLabel?: string;
   summary: string;
   command: string;
   gh48Metric: string;
@@ -26,6 +28,8 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
     title: "Stažení sekvencí z NCBI Protein",
     tool: "NCBI Entrez / Biopython",
     where: "external",
+    externalUrl: "https://www.ncbi.nlm.nih.gov/protein/",
+    externalLabel: "Otevřít NCBI Protein",
     summary: "Dotaz na proteiny dané rodiny (např. GH48 / PF02011) přes E-utilities nebo webové rozhraní NCBI ve formátu FASTA.",
     command: 'esearch -db protein -query "glycoside hydrolase family 48[All Fields]" | efetch -format fasta > 01_raw.fasta',
     gh48Metric: "2 000 hrubých sekvencí",
@@ -46,6 +50,8 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
     tool: "hmmsearch (Pfam) + HMM ořez v prohlížeči",
     where: "browser",
     tabId: "hmm",
+    externalUrl: "https://www.ebi.ac.uk/Tools/hmmer/search/hmmsearch",
+    externalLabel: "Otevřít EBI HMMER",
     summary: "Vyhledání konzervované domény profilem HMM (např. PF02011) a ořez sekvencí na envelope souřadnice (env_from..env_to) bez signálních peptidů a CBM.",
     command: "hmmsearch --domtblout hmmsearch_report.txt PF02011.hmm 02_filtered.fasta",
     gh48Metric: "Doména PF02011 (~619 aa)",
@@ -53,9 +59,11 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
   {
     step: 4,
     title: "Shlukování redundantních sekvencí",
-    tool: "MMseqs2 easy-cluster (Galaxy / CLI)",
+    tool: "MMseqs2 easy-cluster (nebo lokálně zde)",
     where: "galaxy",
     tabId: "mmseqs",
+    externalUrl: "https://usegalaxy.eu/",
+    externalLabel: "Otevřít UseGalaxy.eu",
     summary: "Redukce redundance na 90 % sekvenční identity při 80 % pokrytí. Soubor adjacency_list mapuje členy klastrů zpět na reprezentanty ve stromu.",
     command: "mmseqs easy-cluster 03_domains.fasta cluster_out tmp --min-seq-id 0.9 -c 0.8",
     gh48Metric: "→ 250 reprezentantů",
@@ -63,17 +71,21 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
   {
     step: 5,
     title: "Mnohonásobné zarovnání (MSA)",
-    tool: "MAFFT L-INS-i (Galaxy / CLI)",
+    tool: "MAFFT L-INS-i (nebo BLOSUM62 MSA zde)",
     where: "galaxy",
-    summary: "Přesné zarovnání doménových sekvencí metodou L-INS-i pro následnou fylogenetickou rekonstrukci.",
+    externalUrl: "https://www.ebi.ac.uk/jdispatcher/msa/mafft",
+    externalLabel: "Otevřít MAFFT Web",
+    summary: "Přesné zarovnání doménových sekvencí metodou L-INS-i pro následnou fylogenetickou rekonstrukci. Výstup přetáhněte zpět do Celé pipeline.",
     command: "mafft --localpair --maxiterate 1000 --thread -1 04_reps.fasta > 05_aligned.fasta",
     gh48Metric: "Zarovnání 250 sekvencí",
   },
   {
     step: 6,
     title: "Ořezání mezer a špatně zarovnaných sloupců",
-    tool: "trimAl (Galaxy / CLI)",
+    tool: "trimAl (nebo lokálně v Celé pipeline)",
     where: "galaxy",
+    externalUrl: "https://usegalaxy.eu/",
+    externalLabel: "Otevřít Galaxy trimAl",
     summary: "Odstranění nespolehlivých pozic zarovnání (např. -automated1 nebo -gt 0.5) pro snížení šumu před stavbou stromu.",
     command: "trimal -in 05_aligned.fasta -out 06_trimmed.fasta -automated1",
     gh48Metric: "448 informativních pozic",
@@ -81,9 +93,11 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
   {
     step: 7,
     title: "Fylogenetický strom metodou maximální věrohodnosti",
-    tool: "IQ-TREE 2 (MFP + UFBoot + SH-aLRT)",
+    tool: "IQ-TREE 2 (nebo NJ + bootstrap zde)",
     where: "galaxy",
     tabId: "tree",
+    externalUrl: "https://iqtree.cibiv.univie.ac.at/",
+    externalLabel: "Otevřít IQ-TREE Web",
     summary: "Automatický výběr substitučního modelu (ModelFinder Plus) a 1000 replikací Ultrafast Bootstrapu + SH-aLRT testu.",
     command: "iqtree2 -s 06_trimmed.fasta -m MFP -B 1000 --alrt 1000 -T AUTO",
     gh48Metric: "250 listů, UFBoot + SH-aLRT",
@@ -91,8 +105,10 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
   {
     step: 8,
     title: "De novo objev konzervovaných motivů",
-    tool: "MEME Suite (Galaxy / meme-suite.org)",
+    tool: "MEME Suite (nebo PWM objev zde)",
     where: "galaxy",
+    externalUrl: "https://meme-suite.org/meme/tools/meme",
+    externalLabel: "Otevřít MEME Web",
     summary: "Nalezení 20–25 sekvenčních motivů délky 8–42 aa na nezarovnaných doménových reprezentantech.",
     command: "meme 04_reps.fasta -protein -nmotifs 25 -minw 8 -maxw 42 -mod zoops -oc 08_meme",
     gh48Metric: "25 motivů (8–42 aa)",
@@ -102,6 +118,8 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
     title: "Porovnání motivů s databází PROSITE",
     tool: "TOMTOM (MEME Suite)",
     where: "external",
+    externalUrl: "https://meme-suite.org/meme/tools/tomtom",
+    externalLabel: "Otevřít TOMTOM",
     summary: "Funkční anotace nalezených motivů proti databázi PROSITE / Pfam (rozlišení katalytického jádra od nových kladových motivů).",
     command: "tomtom -oc 09_tomtom 08_meme/meme.xml prosite2021_04.meme",
     gh48Metric: "Ověření katalytického jádra",
@@ -112,6 +130,8 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
     tool: "FIMO + iTOL analyzátor v prohlížeči",
     where: "browser",
     tabId: "fimo",
+    externalUrl: "https://meme-suite.org/meme/tools/fimo",
+    externalLabel: "Otevřít FIMO Web",
     summary: "Sken všech sekvencí proti profilům MEME, výpočet -log10(p), rozptylu, pokrytí a Fitchova Retention Indexu (RI) přímo na fylogenetickém stromu.",
     command: "fimo --thresh 1e-4 --oc 10_fimo 08_meme/meme.xml 04_reps.fasta",
     gh48Metric: "MEME-23 RI = 0.904 · 7 jádrových motivů",
@@ -122,6 +142,8 @@ export const GH48_PIPELINE_STEPS: PipelineStepSpec[] = [
     tool: "iTOL generátor + χ² test v prohlížeči",
     where: "browser",
     tabId: "tree",
+    externalUrl: "https://itol.embl.de/upload.cgi",
+    externalLabel: "Otevřít iTOL",
     summary: "Mapování experimentálně charakterizovaných enzymů (Direct vs. MMseqs2 Proxy), barevné pruhy NCBI taxonomie a statistický χ² test asociace motiv × kmen.",
     command: "# Přetáhněte vygenerované iTOL soubory (.txt) přímo na strom v itol.embl.de",
     gh48Metric: "HGT Actinomycetota → brouci (Coleoptera)",

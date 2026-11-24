@@ -32,6 +32,13 @@ import {
   generateItolTaxonomyLabels,
   parseTaxonomyTsv,
 } from "./taxonomyStats";
+import { clusterSequencesGreedy } from "./sequenceClustering";
+import { buildCenterStarMsa, isAlignedFasta, trimAlignment } from "./msaAndTrimal";
+import { buildNeighborJoiningTree } from "./njPhylogeny";
+import { discoverAndScanMotifs } from "./motifDiscovery";
+import { classifyUploadedFile } from "./fileRouter";
+import { buildZipBytes } from "./zipExporter";
+import { runFullPipeline } from "./fullPipelineRunner";
 import {
   GH48_DEMO_ADJACENCY,
   GH48_DEMO_CHAR_FASTA,
@@ -238,5 +245,98 @@ describe("taxonomyStats & chi-square", () => {
     const labels = generateItolTaxonomyLabels(tax);
     expect(labels).toContain("LABELS");
     expect(labels).toContain("Gastrophysa atrocyanea");
+  });
+});
+
+describe("full end-to-end pipeline engines", () => {
+  it("clusters near-identical protein sequences and separates divergent ones", () => {
+    const base = "MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAPILSRVGDGTQDNLSGAEKAVQVKVKALPDAQFEVVHSLAKWKRQ";
+    const nearIdent = base.slice(0, 10) + "V" + base.slice(11);
+    const divergent = "WPYFHDQMLCKNGSVATIREWPYFHDQMLCKNGSVATIREWPYFHDQMLCKNGSVATIREWPYFHDQMLCKNGSVATIRE";
+    const recs = parseFasta(
+      `>S1\n${base}\n>S2\n${nearIdent}\n>S3\n${divergent}\n`
+    );
+    const cl = clusterSequencesGreedy(recs, { minSeqId: 0.9, minCoverage: 0.8 });
+    expect(cl.clusterCount).toBe(2);
+    expect(cl.adjacencyTsv).toContain("S1\tS2");
+    expect(cl.adjacencyTsv).toContain("S3\tS3");
+  });
+
+  it("builds BLOSUM62 MSA, trims gappy columns, reconstructs NJ bootstrap tree, and discovers PWM motifs", () => {
+    const core = "NGYFSPEGIPYHSVETLIVEAPDHGHETTSEAYSYWLWLEAMPAGTPTFYGMAYDEQPVYHDPPSNQWFGFQAWSMERVAEYY";
+    const fasta = [
+      `>A1 [Cellulomonas fimi]\n${core}PPGGCEAGPTATGPS`,
+      `>A2 [Cellulomonas flavigena]\n${core.replace("YFS", "YFT")}PPGGCEAGPTATGPS`,
+      `>B1 [Clostridium cellulovorans]\n${core.replace("EGIP", "DGVP").replace("QPVY", "EPVF")}AKSGDTAAKTTAKAL`,
+      `>B2 [Clostridium acetobutylicum]\n${core.replace("EGIP", "DGIP").replace("QPVY", "EPVF")}AKSGDTAAKTTAKAL`,
+    ].join("\n");
+    const recs = parseFasta(fasta);
+    const msa = buildCenterStarMsa(recs);
+    expect(isAlignedFasta(msa.aligned) || msa.aligned.every((r) => r.length === msa.columns)).toBe(true);
+    expect(msa.columns).toBeGreaterThanOrEqual(core.length);
+
+    const tr = trimAlignment(msa.aligned, { maxGapFraction: 0.5 });
+    expect(tr.trimmedColumns).toBeGreaterThan(50);
+
+    const nj = buildNeighborJoiningTree(tr.trimmed, { bootstrapReplicates: 20, seed: 42 });
+    const parsedTree = parseNewick(nj.newick);
+    expect(parsedTree).not.toBeNull();
+    expect(getLeaves(parsedTree!).length).toBe(4);
+
+    const disc = discoverAndScanMotifs(msa.aligned, { numMotifs: 5, motifWidth: 12 });
+    expect(disc.motifsFound).toBeGreaterThanOrEqual(3);
+    const parsedHits = parseFimoTsv(disc.fimoTsv);
+    expect(parsedHits.length).toBeGreaterThan(0);
+  });
+
+  it("auto-classifies every uploaded bioinformatics file format by content", () => {
+    expect(classifyUploadedFile("a.fasta", GH48_DEMO_RAW_FASTA).kind).toBe("raw_fasta");
+    expect(classifyUploadedFile("b.txt", GH48_DEMO_HMM_REPORT).kind).toBe("hmm_domtblout");
+    expect(classifyUploadedFile("c.tab", GH48_DEMO_ADJACENCY).kind).toBe("adjacency_tsv");
+    expect(classifyUploadedFile("d.treefile", GH48_DEMO_NEWICK).kind).toBe("newick");
+    expect(classifyUploadedFile("e.tsv", GH48_DEMO_FIMO).kind).toBe("fimo_tsv");
+    expect(classifyUploadedFile("f.tsv", GH48_DEMO_TAXONOMY).kind).toBe("taxonomy_tsv");
+    expect(classifyUploadedFile("g.fasta", GH48_DEMO_CHAR_FASTA).kind).toBe("characterized_fasta");
+    expect(
+      classifyUploadedFile("h.fa", ">A\nMKT--AY\n>B\nMKTAAAY\n").kind
+    ).toBe("aligned_fasta");
+  });
+
+  it("builds a valid PKZIP archive with local headers and EOCD signature", () => {
+    const zip = buildZipBytes([
+      { name: "01_test.txt", content: "hello GH48" },
+      { name: "02_tree.nwk", content: "(A:0.1,B:0.2);" },
+    ]);
+    // Local file header signature PK\x03\x04
+    expect(zip[0]).toBe(0x50);
+    expect(zip[1]).toBe(0x4b);
+    expect(zip[2]).toBe(0x03);
+    expect(zip[3]).toBe(0x04);
+    // EOCD signature PK\x05\x06 at len - 22
+    const eocdPos = zip.length - 22;
+    expect(zip[eocdPos]).toBe(0x50);
+    expect(zip[eocdPos + 1]).toBe(0x4b);
+    expect(zip[eocdPos + 2]).toBe(0x05);
+    expect(zip[eocdPos + 3]).toBe(0x06);
+  });
+
+  it("runs full end-to-end pipeline from raw FASTA + HMMER alone to all outputs & ZIP report", async () => {
+    const out = await runFullPipeline(
+      {
+        rawFasta: GH48_DEMO_RAW_FASTA,
+        hmmReport: GH48_DEMO_HMM_REPORT,
+      },
+      { njBootstrapReplicates: 15, discoverMotifCount: 6 }
+    );
+
+    expect(out.resolvedTexts.newick).toContain(";");
+    expect(parseNewick(out.resolvedTexts.newick)).not.toBeNull();
+    expect(out.resolvedTexts.fimoTsv).toContain("MEME-1");
+    expect(out.resolvedTexts.taxonomyTsv).toContain("accession");
+    expect(out.artifacts.some((a) => a.name === "07_phylogeny.nwk")).toBe(true);
+    expect(out.artifacts.some((a) => a.name === "11_itol_meme_heatmap.txt")).toBe(true);
+    expect(out.artifacts.some((a) => a.name === "12_pipeline_report.md")).toBe(true);
+    expect(out.stages.find((s) => s.id === "msa")?.origin).toBe("computed");
+    expect(out.stages.find((s) => s.id === "tree")?.origin).toBe("computed");
   });
 });

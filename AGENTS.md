@@ -134,7 +134,7 @@ To ensure AI changes do not cause silent regressions, 14 test suites enforce key
 | `src/features/bioinformatics/content/wikiIntegrity.test.ts` | Asserts all materials in `config.json` exist on disk and ensures no lecture title uses forbidden `Modul <X>` prefix |
 | `src/features/bioinformatics/lib/markdownTransforms.test.ts` | Verifies math syntax underscore protection (including skipping code blocks), vector check/cross replacements, `rehype-sanitize` SVG/YouTube/XSS end-to-end rendering, TOC slug extraction, and full-text search |
 | `src/features/python-analyzer/lib/sequenceAnalyzer.test.ts` | Tests live DNA/RNA FASTA parsing, GC%, $T_m$, reverse complement, 3-frame translation, and ORF detection |
-| `src/features/bioinformatics-pipeline/lib/pipeline.test.ts` | Tests FASTA filtering, HMMER domtblout domain cutting, Newick/NHX parsing & Fitch parsimony RI, FIMO matrix & iTOL exports, MMseqs2 characterized mapping, and exact χ² test |
+| `src/features/bioinformatics-pipeline/lib/pipeline.test.ts` | Tests full end-to-end GH48 pipeline: FASTA filtering, HMMER domtblout cutting, greedy clustering, BLOSUM62 MSA & trimAl, NJ bootstrap phylogeny, PWM motif discovery, Fitch RI, iTOL & PKZIP exports, auto file routing, characterized mapping, and exact χ² test |
 
 ### Env (local)
 
